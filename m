@@ -1,45 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795179334;
-	b=4W9S+R7V2wEL1ImSfLkMy4JEPVN1HsMRqr8C+O4ymDu1LAIuy8GTrmRGCNpvJphWYo3j
-	 VFsQNXCKPxpVsaqLl06iic7IkSv76+aQQsYrCvuVr4qg+jH+RI8Z/txfS/f3dQClzaWru
-	 SRa788D/Id3AYoi6YGyuY+pjzr2/y4EkaP/SXrurwP45X2G7Jq2jPlJo2VA5rxiyLzlSd
-	 SrGBUeh1NMoeWXOVL0SGaflNiPE8cMYmrrCUPE37//3MCaSKzRHpWmvNSEBVDNI+l683F
-	 2KgaSFzDFZG5RJbUJIT7PoZ1jfkw7U7nBelbwRkGkixc6Ic4A7kABLTHag+XtwC0cPg==
+	t=1795179716;
+	b=mQioeNFX9jEhcQpcJ6TZ3nmA1JgBQnNooBfVtXu5EQV+HIzD0tcLkJTEdddHfOZvVu8J
+	 EEzuQGbJJNIzgZxzsBX4ciYi5EqUE5ElqN8aFbxvnk/EhIF8SKP5MniwcpfvJCroVhulU
+	 UgNKRzPFmkDR5raABxqXrV0C73xMRi1IzD/GwZlq/txFo5DXPAP/LVyJQO0+wBGbZpbTG
+	 G39vZ2XnOOnw5VdjBEXSlj/o3PXa0dTkwAI8jsl0d6l4JMAUTydPy4frk/UqdU7SGughd
+	 sW3j8EJqD1ZqjzIdCyblsnjVEGJp4dWh3ae8ihbgbD/DeETTt4QWSeRX77HYEEQV1FA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795179334;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=a9XbVf4FhnzktWS3qGCIKBfurWHFZpTKRrnVlbTItsk=;
-	b=Fix/hX8ICsH82MAo/1OO4ZJdUlFMQnrTIwXOT6DRrS0wQC9q1e2Cg6p4YvSksiGOO5p5
-	 pvrK5/Y5ogGoxLexwFjeE3X9pDH6w2F2sjPb/A5keMdkA2H+SSlzLabvLyyngtGY72Nsy
-	 dbTM+4/JoUnjI4wBy0PFPhFWi3++kvIIoLYn+5nZokIDdLlQwl8SPSrvUeopJYA4OusSW
-	 5hOZjvB1RAEHxXzTP/pbpU9wSlw9fVxbEOYDLAg7O3Xy9vr8r38D7kt3tPsm+sRelklFx
-	 XcWcz2Wz9fl/rpYvop9a5TA9sHs7zHbtiw5NoEsmIlMGfTTbyCPy70rP7IHMBgKNN3w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795179716;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=cYsdqs4y232JPLuAEoAJ25nOUZJElAEMEA3xsIxpxkM=;
+	b=NljDn77F8WUitGG6WP5QLWkqJ26j+qgtGUQHNVyJUa8F3fjrxRaWk8xhiFaIXhDkYEkl
+	 WMuOqibGo7XtXEqTsZQ/1b2vz+Tc56A1JwKFSlqsB8NVyBiz9NHOTKh/+Da5a0vLG2Lpc
+	 YTpajnD0brQzKO0LvK7eWQkoNpJoV+z4KldV2c9M6HYjs2VTMIhpknajZzliM+/3WYYbR
+	 sZVgqOm5Q0B5x/PDUMRHZYMj8j7qks1/KwK1ApgoUsaThz2exM+hWMjnbvQPxCsplVnmO
+	 jLQs7WCfJE3GPtOeGqCXr0eabV1QYd3hlBRTspPTBEQp/hg8rJnaSOzLisjNff1Claw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ierlH+1y;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hs0nlq9C;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D04D9606A325;
-	Fri, 20 Nov 2026 12:55:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id EAFD0606A320;
+	Fri, 20 Nov 2026 13:01:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ierlH+1y
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9AA431F000CF;
-	Fri, 20 Nov 2026 12:55:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Hs0nlq9C
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 472B21F000C6;
+	Fri, 20 Nov 2026 13:01:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795179334;
-	bh=a9XbVf4FhnzktWS3qGCIKBfurWHFZpTKRrnVlbTItsk=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=ierlH+1yaKgOGiKDNN4HpqkZHJDN9nGZ6onn+NykctOULAD1baYA6H8n3s0meIiNB
-	 GGWS5q5X06phVlVO1pXNSbyepQskwvGrCiI4Ube+oV2AfTwYbuIa7ZWyu2g2ZVbfJf
-	 0VQMfsijJ+rlsbA5W8jM09Uwd7H/dv5RLNWr5JdTJGzGXsJ0s7UjbLcdloql+CqNOX
-	 a4W/eg+pNFMGJjjofAgaf0I4xYEvEHF9UsxT1ML7e0QpuOQVv4wR2ADWZQuo4wgsTi
-	 c7rll+4IOSmbhIayxmCmziPaUd3YjqZiO8+tz5F0PfQMzQlHoyAdiHLM/8sRbYgM/g
-	 +wKrsPl/ySjLA==
+	s=k20260515; t=1795179715;
+	bh=cYsdqs4y232JPLuAEoAJ25nOUZJElAEMEA3xsIxpxkM=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=Hs0nlq9CX1tHPc6W09WRShiUTPcfyAvkwJlCfjKI7TYxn+t8Q/aP2TUoCYARmANMA
+	 4BQ87lqlXVv2qruQ0wbMfzyX5DRzA/wACHorYkehbMxMX3vn6Yz7D+shJ0PSm16r7w
+	 K20Wq7agCxBEt3jBRYG4WZmw2siy6zshIwcFZ1dSVeVpvf9d4ahXXeFQFLKMLLL2bH
+	 BHTKa6kYB1e5j5I/FF/ndiR+kewDs/5n2GVda1zNzdPWCY4AXkg23p5al8zvLmZKbF
+	 rGKW9dp15GAXjXGqvVQUJXu/+U7mGfRtYv7UBR0hAZb+HL7kEkMYbdMgVO4Ru3eufC
+	 gSFBulHJbEefg==
+Date: Fri, 20 Nov 2026 15:01:52 +0200
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Jens Wiklander <jenswi@kernel.org>,
+	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
+	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
+	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+	linux-integrity@vger.kernel.org
+Subject: Re: [PATCH v5 0/3] Add TPM support via Qualcomm TEE TPM TA
+Message-ID: <awBEwJf3CIjTvtid@kernel.org>
+References: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -49,83 +60,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 3/3] ASoC: qcom: x1e80100: Allow userspace WSA RX
- chmap override
-From: Mark Brown <broonie@kernel.org>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>, 
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, 
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-3-29e06613115f@oss.qualcomm.com>
-References: <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-0-29e06613115f@oss.qualcomm.com>
- <20261105-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v3-3-29e06613115f@oss.qualcomm.com>
-Date: Fri, 20 Nov 2026 12:55:30 +0000
-Message-Id: <179517933021.6016.6430816550414163668.b4-review@b4>
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1895; i=broonie@kernel.org;
- h=from:subject:message-id; bh=gi4YhkF1nfJuktb0DH/M4fSx8AVY+E8YevyMn12hA+o=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLIZnJ32iqhqTZt1LvnYvZPaD15/fNnuKLg+5WvWWeZF3
- 7b72nDEdZSyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAi1qsZ/pk9/fT8cxXr5YCJ
- mkwytjtdZR02ni/urgq6znL9p7CpyDKG/yW7Wj953rnuqtfbmWF9/fii5JPuwsrWlb0Cq+1SFMO
- m8AIA
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
 
-> The WSA RX slot mapping is currently computed entirely from the channel
-> count in .prepare() and pushed unconditionally via
-> snd_soc_dai_set_channel_map(). Userspace has no way to express a
-> different channel map, so any map defined in UCM is ignored.
+On Fri, Nov 20, 2026 at 04:23:31PM +0530, Kuldeep Singh wrote:
+> Qualcomm platforms with a discrete TPM (dTPM) talked to it directly over
+> a non-secure SPI channel from the kernel. Arm's Base Boot Security
+> Requirements (BBSR) v1.4 require that access to go through TrustZone
+> instead, so on affected Qualcomm platforms the TPM 2.0 instance is now
+> fronted by a Trusted Application (TA) running inside Qualcomm's Trusted
+> Execution Environment (QTEE), which talks to the dTPM (or implements an
+> fTPM) on the kernel's behalf.
+> 
+> This series adds a kernel driver for that TA, built on the QCOMTEE
+> object-IPC transport (drivers/tee/qcomtee/) already used to reach other
+> QTEE services.
+> 
+> This patch series functionally depends on below(first 5 changes specially)
+> for qtee service discovery.
+> - https://lore.kernel.org/lkml/20261105-qcom_uefisecapp_migrate_qcomtee-v6-0-c7d68ce05c51@oss.qualcomm.com/
+> 
+> Tested on Glymur-crd target with tpm2-tools utility.
+> 
+> Validations:
+> - Get capabilities
+> - Random number generator
+> - RSA key creation, encryption and decryption.
+> 
+> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> ---
+> Changes in v5:
+> - Rebase on next-20261119.
+> - Fix qcom_send_command resp_len computation(Amir)
+> - Use dev_err_probe in _probe and return appropriate failures.
+> - Propagate dtpm transfer/end error to callers.
+> - Fix drv_data after tpmm_chip_alloc call.
+> - Link to v4: https://patch.msgid.link/20261019-tpm_qcom_driver-v4-0-6889b9804ba7@oss.qualcomm.com
+> 
+> Changes in v4:
+> - Add new line before goto label(Jarkko).
+> - Link to v3: https://patch.msgid.link/20261015-tpm_qcom_driver-v3-0-247c8e50250e@qti.qualcomm.com
+> 
+> Changes in v3:
+> - Merge tpm_qcom.h into tpm_qcom.c(Amir comments)
+> - Update return values of functions and drop certain error prints.
+> - Define locality_arg as default value.
+> - Add Jarkko's tag on all but drop from 2/3 as significant changes done.
+> - Link to v2: https://patch.msgid.link/20260907-tpm_qcom_driver-v2-0-71a6b1752da8@oss.qualcomm.com
+> 
+> Changes in v2:
+> - Use QCOMTEE_TPM_UID as 81 for service discovery in patch 1.
+> - Use FIELD_GET, zero initialised array and log improvement (Konrad)
+> - Improve commit title and other fixes (Jarkko)
+> - Split MAINTAINERS entry as separate patch.
+> - Link to v1: https://patch.msgid.link/20260831-tpm_qcom_driver-v1-0-6f16fa6924fa@oss.qualcomm.com
+> 
+> To: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>
+> To: Jens Wiklander <jenswi@kernel.org>
+> To: Sumit Garg <sumit.garg@kernel.org>
+> To: Peter Huewe <peterhuewe@gmx.de>
+> To: Jarkko Sakkinen <jarkko@kernel.org>
+> To: Jason Gunthorpe <jgg@ziepe.ca>
+> To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> Cc: linux-arm-msm@vger.kernel.org
+> Cc: op-tee@lists.trustedfirmware.org
+> Cc: linux-kernel@vger.kernel.org
+> Cc: linux-integrity@vger.kernel.org
+> 
+> ---
+> Kuldeep Singh (3):
+>       tee: qcomtee: Register qcom.tz.tpm service for discovery
+>       tpm: Introduce Qualcomm TPM driver
+>       MAINTAINERS: Add Qualcomm TPM driver entry
+> 
+>  MAINTAINERS                       |   6 +
+>  drivers/char/tpm/Kconfig          |   9 +
+>  drivers/char/tpm/Makefile         |   1 +
+>  drivers/char/tpm/tpm_qcom.c       | 410 ++++++++++++++++++++++++++++++++++++++
+>  drivers/tee/qcomtee/call.c        |   4 +-
+>  drivers/tee/qcomtee/qcomtee_msg.h |   2 +
+>  6 files changed, 431 insertions(+), 1 deletion(-)
+> ---
+> base-commit: adcad7f4e6332cff3d6d7165f41584899f598534
+> change-id: 20260831-tpm_qcom_driver-d21c720e73b2
+> prerequisite-change-id: 20260408-qcom_uefisecapp_migrate_qcomtee-13869d45e014:v6
+> prerequisite-patch-id: faf4520d818abf0d7533f71d9c8b9a8aade34626
+> prerequisite-patch-id: b487dfe2fbc076f4815dc6c73b9e68b0b78c961f
+> prerequisite-patch-id: 9f2c4ee37ba173bdc860f253d44974379f2cf125
+> prerequisite-patch-id: e86905ac6289821db30fd9a17f73e276e0a88363
+> prerequisite-patch-id: 09a86ee4de34e0c9cd2e4664c54a6473d7998299
+> prerequisite-patch-id: a940a0624f1e130d1fe5213952965aa469bf9547
+> prerequisite-patch-id: 7be993abea2ca36057d9352381a5890f50996dda
+> 
+> Best regards,
+> --  
+> Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> 
 
-> +
-> +static int x1e80100_wsa_chmap_ctl_get(struct snd_kcontrol *kcontrol,
-> +				      struct snd_ctl_elem_value *ucontrol)
-> +{
-> +	unsigned int *map = x1e80100_wsa_chmap_from_kcontrol(kcontrol);
-> +	int i;
-> +
-> +	if (!map)
-> +		return -EINVAL;
-> +
-> +	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
-> +		ucontrol->value.integer.value[i] = map[i];
 
-Nothing intialises the default maps AFAICT so this will just return 0s
-until the control has been written.
+Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
 
-> +static int x1e80100_wsa_chmap_ctl_put(struct snd_kcontrol *kcontrol,
-> +				      struct snd_ctl_elem_value *ucontrol)
-> +{
-
-> +	for (i = 0; i < X1E80100_WSA_MAX_CHANNELS; i++)
-> +		map[i] = ucontrol->value.integer.value[i];
-> +
-> +	return 1;
-
-This just stores the value but doesn't tell the hardware about it, we
-only write at prepare() time.  Either the writes should take effect or
-we should refuse them while the stream is prepared.
-
-> +static int x1e80100_add_wsa_chmap_ctls(struct snd_soc_pcm_runtime *rtd,
-> +				       const char *name)
-> +{
-
-> +	/*
-> +	 * The core registers a query-only control. Make it writable so that
-> +	 * userspace (UCM) can select the WSA channel map. The card is not yet
-> +	 * registered at this point, so the control is not visible to
-> +	 * userspace while being modified.
-> +	 */
-> +	for (i = 0; i < info->kctl->count; i++)
-> +		info->kctl->vd[i].access |= SNDRV_CTL_ELEM_ACCESS_WRITE;
-> +	info->kctl->get = x1e80100_wsa_chmap_ctl_get;
-> +	info->kctl->put = x1e80100_wsa_chmap_ctl_put;
-
-The TLV should also advertise SNDRV_CTL_TLVT_CHMAP_VAR.
-
--- 
-Mark Brown <broonie@kernel.org>
+Br, Jarkko
