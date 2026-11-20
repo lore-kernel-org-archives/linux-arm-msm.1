@@ -1,47 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.36.144.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795177327;
-	b=3hwv6rBik/KGz4OC8cJ/ggPNLnIbdhgpkIU7lyJgQzOZoDPwLcN+0wwYnkmDzmY38XJs
-	 CQRQrB8v+upMW3G/k0aZDVM1OcxAF5lnpmPKSwJsGMHWt8Yza549oQU/Hm4unyf+6hqSC
-	 kipq8VwhpBjfu9quTCVH018A7Lc8B5F9hN5252EQoLjHdtcGDqGg7X7j2pnO5l2B0Bb+P
-	 GiKhoYlHse3ptBPOtEKFYOVf2Ebu4wTSTqqJJUdOmAbjRPeVe4kNwFAlfAY1Ds+adVaD0
-	 j8SuvGtzgmClUx3Kx5eKPbbpe7IX75rVqb20s5y5F4xRcnZn5c93+Wq1b8dGHvQc4Gw==
+	t=1795177328;
+	b=1B//6LLBh24hW1Y48fGRlBZPyMsTPdeOkPIler9f1fB6QAKul1oufL2wP0k1fINouyLT
+	 QMA0YchcNBg78BZtqrf4/e+KRPX/i4o5tq1SvFJxlIGOtxhwFESsOg8MI9csDiKxV6odn
+	 re8BZLxMxO0kuaV3RIDyKMa2r7p0T7uwnluf7j7MnKR/L6xtZ8jGu8su9k48z3Hu8KzWm
+	 rP8/q6XDjRSQ6t1Iq4DKNBAajAFKlAcmLcrGmHtVqlk9trkT3BZP0nPQQ0tdSmT6m5IrJ
+	 fTDL6UCIShx7LAC8RVeFuw691jwfPVC/VRSTlyjrSIYiB1+pE2z70p/P1uierMSlMrQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795177327;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=ml7R9yJUogO8tVsg6kpY8myL5qxQsdOt4p4BEvqjWJQ=;
-	b=BI1jU57U9hHozPpzu4yOIzsBUWmKENAJ9BUiVFFC4GJw1DSOuB8DH+vqLyG9MO1dKp1y
-	 yCjwMB0y4aMqgOBe3Gn+1cWCYiaVgDH8UABNgzsCg2iFJ/uyJhaMbJYx+EBZO1xJxe0xt
-	 FcVJ718V6QKuwfiXXjtfos8qbdNBf7fR7lW0mfgMpSTF8UMcOpiSdwQZm4xRnYV90zGTa
-	 KOnEfB//ITRuYF/U/dtj0mfYZOPk5yy0VGkFR837rLoQ0SI/oi6/8QWnAezIKCAbvNa7J
-	 SObmsADkhYFd/DrEXO5AyBux6eQWZGfx4c8DlsKmtie0uJqtCpVJn6k279hin74GEoA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795177328;
+	h=DMARC-Filter:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version;
+	bh=mJMykgsXy/IvLDQUJldjSJK+kP6sz76ONtXtW27Eff4=;
+	b=lmCsYVKcdRoJ0tXhMZ8H0E6f9S5f/eD6vXvdZWLI0AtCD2QxBu9Tk0exc1jCMBq/IGmt
+	 C4LYc/BBb7UTMX4d/xYXvUcmkX5PxrUdUzv54iPZGD4n1CHVWP5Fu1c7RMUszRT8zlx9z
+	 gxfPk0W3Q1qRdCwrEbCYC62+mxWvDehyiq3DN3S3NeZOfudCvHYSI74hEy1u38zVNs2ur
+	 WMLRaN9rGbFIAhBAsOwQEh7u0byIbS/NuUQSUVihYq6USnf81kpDWQsqX4HWuS0CwpWTY
+	 rzS2lsX9CmQmBDnEFwjD2KU1whPVLwy9GAa7TeBV68ReRuu7+I0WhFG9iDQ7DYvfTrA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FhdT3Xue;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=yoxcu.de;
+	spf=pass smtp.mailfrom=yoxcu.de;
+	dkim=pass header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=moETzJB9;
+	arc=none smtp.remote-ip=194.36.144.171
+Received: from morty.yoxcu.de (morty.yoxcu.de [194.36.144.171])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 485E0606A320;
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 110C0606A336;
 	Fri, 20 Nov 2026 12:22:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 110C0606A336
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=yoxcu.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yoxcu.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FhdT3Xue
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8BD231F000C6;
-	Fri, 20 Nov 2026 12:22:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795177326;
-	bh=ml7R9yJUogO8tVsg6kpY8myL5qxQsdOt4p4BEvqjWJQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=FhdT3XuemVMz+q+4+Y2P55BxntAvNpdvgPAFqfWF5d3xwrFGJIpRPIAfP3wWt1zNP
-	 w4R7K+Zqx9rfZo1rBlL69JWeVpy3uvKUsBOetOF9aXe1vq6lt6oR90d/hXZECVrmj0
-	 I4m9qF3Dy3+BedfHjffQAByzylN73jIp3FVlB0BXjHG2SnRrd1d+eM43ougPQ86FOV
-	 CQFrmyUJWio68biJ8EBetWBUFtDUaXn24YeL8kebAtAN2k3KObDzHG9vPcTBLcNOHP
-	 6XgDfQM/8dHPTk8fJeLQdmmJoc7Oh8vpUihNAzT4HN2l/lZBRuf+E3co38Nv2JXS3q
-	 FVMaYsh2qHP+Q==
-Message-ID: <6660afd3-ba3a-4206-96d2-21767d7f9892@kernel.org>
-Date: Fri, 20 Nov 2026 13:22:00 +0100
+	dkim=pass (2048-bit key) header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=moETzJB9
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id 9C2991D86DDA;
+	Fri, 20 Nov 2026 13:22:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yoxcu.de; s=dkim;
+	t=1795177325; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=mJMykgsXy/IvLDQUJldjSJK+kP6sz76ONtXtW27Eff4=;
+	b=moETzJB9ktAP1PI/EU9z925wihL+ZmBXgnxdMcoGco3Tpa7Z/4wTWfztsUs9BRhGZLikpM
+	hEySyN5LZ8VglEgJueeqw961IsoZpdJjXtaULGx0bktl4RpY0upAr/idRaR+mpjx42/h4B
+	qtFcc6+nA2SgrEy1NG2tGQ/+P7h4+z+xrizpgvd0EUcy+DJzp75hVDkJR+9UdBV+Aj1nS9
+	PDXhA+ZOrIK8xESS0XPLoCRShBqPRHiqu0LZHgne4A3zvXDrBNFTc2KCZBKg5+6fAc+RB9
+	xZsVriuZN/qe6xOIdk/33tgsbp9QDLKvaOOozUF328hqMszI3Zc+TCt9V1Ge5A==
+From: Michael Auer <mick@yoxcu.de>
+To: Georgi Djakov <djakov@kernel.org>
+Cc: Konrad Dybcio <konradybcio@kernel.org>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Mike Tipton <mike.tipton@oss.qualcomm.com>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Michael Auer <mick@yoxcu.de>
+Subject: [PATCH v2] interconnect: qcom: bcm-voter: Clear the ALC vote left by the bootloader
+Date: Fri, 20 Nov 2026 13:21:52 +0100
+Message-ID: <20261120122152.198114-1-mick@yoxcu.de>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,88 +67,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] dt-bindings: clock: qcom: sm8450-gpucc: Add Molokai
- GPU clock controller
-To: venkat.yadlapati@yahoo.com, Bjorn Andersson <andersson@kernel.org>,
- Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
- Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>,
- Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261116-molokai-gpucc-v1-0-07cb3bf37c78@yahoo.com>
- <20261116-molokai-gpucc-v1-1-07cb3bf37c78@yahoo.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261116-molokai-gpucc-v1-1-07cb3bf37c78@yahoo.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On 15/11/2026 21:19, Venkat Yadlapati via B4 Relay wrote:
-> From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
-> 
-> Document the graphics clock controller of the Qualcomm Molokai (SM8845)
-> SoC. It is the Kaanapali one with a different PLL configuration and three
-> branch clocks at different offsets, so it is not compatible with it.
-> 
-> An LLM was used to help write this commit message.
+The bootloader can leave a vote on the ALC BCM. No icc node maps to
+ALC, so Linux never touches it and the vote stays. On SDM845 this
+keeps DDR out of its sleep state, and the SoC never reaches CX
+collapse or AOSS sleep in suspend.
 
-This does not belong to the commit msg, but to the changelog. Drop.
+Clear the vote when the voter probes: (12, 0) in the active-only set,
+as the downstream kernel does, and (0, 0) in the wake and sleep sets.
 
+Tested on a OnePlus 6 (SDM845). Before, cxsd and aosd in qcom_stats
+stayed at 0. With this change, CX collapse was reached in 139
+suspends over one night, for about 7.6 of 8.9 hours, and the average
+current over the night was about 27 mA. The active-only vote stays
+(12, 0) after suspend and resume, and the awake idle current with the
+display off did not change.
 
-> 
-> Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+Suggested-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Assisted-by: LLM
+Signed-off-by: Michael Auer <mick@yoxcu.de>
+---
+Changes in v2:
+- Drop the dt-bindings change and the dummy ALC node. Clear the vote in
+  bcm-voter at probe instead, with the code Konrad suggested.
+- Link to v1: https://lore.kernel.org/r/20261013202611.3070778-1-mick@yoxcu.de
 
+This runs for every voter on every SoC that has an ALC entry in
+cmd-db. SDM845 only has the apps voter. Should it be limited to the
+apps voter?
 
-With commit msg corrected:
+Ard, the code is different from v1, so I did not keep your Tested-by.
+A retest on the C630 would be great.
 
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+ drivers/interconnect/qcom/bcm-voter.c | 42 +++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
 
-Best regards,
-Krzysztof
+diff --git a/drivers/interconnect/qcom/bcm-voter.c b/drivers/interconnect/qcom/bcm-voter.c
+index 0880a287b0c0..f9d51f3d586d 100644
+--- a/drivers/interconnect/qcom/bcm-voter.c
++++ b/drivers/interconnect/qcom/bcm-voter.c
+@@ -390,6 +390,46 @@ int qcom_icc_bcm_voter_commit(struct bcm_voter *voter)
+ }
+ EXPORT_SYMBOL_GPL(qcom_icc_bcm_voter_commit);
+ 
++/*
++ * ALC is not modeled by any icc node, but the bootloader may leave it voted,
++ * which prevents the SoC from reaching CX collapse and AOSS shutdown.
++ */
++static void bcm_voter_clear_alc(struct bcm_voter *voter)
++{
++	struct tcs_cmd cmd;
++	u32 addr;
++	int ret;
++
++	addr = cmd_db_read_addr("ALC");
++	if (!addr)
++		return;
++
++	tcs_cmd_gen(&cmd, 12, 0, addr, true,
++		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_AMC));
++
++	ret = rpmh_write(voter->dev, RPMH_ACTIVE_ONLY_STATE, &cmd, 1);
++	if (ret) {
++		dev_err(voter->dev, "Error sending ALC AMC RPMH request (%d)\n", ret);
++		return;
++	}
++
++	tcs_cmd_gen(&cmd, 0, 0, addr, true,
++		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_WAKE));
++
++	ret = rpmh_write(voter->dev, RPMH_WAKE_ONLY_STATE, &cmd, 1);
++	if (ret) {
++		dev_err(voter->dev, "Error sending ALC WAKE RPMH request (%d)\n", ret);
++		return;
++	}
++
++	tcs_cmd_gen(&cmd, 0, 0, addr, true,
++		    voter->tcs_wait & BIT(QCOM_ICC_BUCKET_SLEEP));
++
++	ret = rpmh_write(voter->dev, RPMH_SLEEP_STATE, &cmd, 1);
++	if (ret)
++		dev_err(voter->dev, "Error sending ALC SLEEP RPMH request (%d)\n", ret);
++}
++
+ static int qcom_icc_bcm_voter_probe(struct platform_device *pdev)
+ {
+ 	struct device_node *np = pdev->dev.of_node;
+@@ -409,6 +449,8 @@ static int qcom_icc_bcm_voter_probe(struct platform_device *pdev)
+ 	INIT_LIST_HEAD(&voter->commit_list);
+ 	INIT_LIST_HEAD(&voter->ws_list);
+ 
++	bcm_voter_clear_alc(voter);
++
+ 	mutex_lock(&bcm_voter_lock);
+ 	list_add_tail(&voter->voter_node, &bcm_voters);
+ 	mutex_unlock(&bcm_voter_lock);
+
+base-commit: 3fd56a2833c22f62eb84297d0dbd47739632f1a0
+-- 
+2.43.0
+
