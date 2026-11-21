@@ -1,79 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795300705;
-	b=N1GacoWlGs9kBVyKQewZKz2TGLT9h/bsybEMMn6c+X3Fm/cbBBENAr/qQ2OSQkDcrTNy
-	 WSn6Y4zJeFAcIPqlqaoC6+xxQftS+kno7jMn7DUCsEKyxoinT9TUoMppny84+DPHpJb3v
-	 vTGu1qenVcZ+FWgBwns0DKMudqXzUEzVrblFf2u+2iK1k6uUq65WNhYMed39s3CTGbiw6
-	 AyX3yyTxE2KvKbPwTFucCGSMtqrFAb6+3wqRssNA7tdxwGoTccRNn2J2gVCl0+nrd8tLy
-	 9FE6sCX51pmOMmUEYLDZ17ZrVKutFka1Q8sOzYcvwXXn2fKgccJcTUyiWuatQf1mEFQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795300705;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gxun9QDC8DJDeaUi0wrOgcELDuQJNUTtE/AzD7PlJ+A=;
-	b=uTY7rZR+2gz2rP/mNFzmlOOb+3QXeRay+GicD9Klg4f9+Pa1eF4uQWW203wGeXZeaWK7
-	 u6YnmPmI4sie1xGQ0CD4XHAQTVqwwvlRCGn/PbZd/AwtIhZJ4fH/sGlqvgtKJhe8vJjII
-	 H9mEEvN7cRpRN4u9uV7NOcVrNO9s48tOWhm6SkRLF/bSe7soo4DHzaYrxYBZWu76O+AM6
-	 2088HrG4kd4p0qpihFMwhfIL7K1T+rVccWMEY54CU7NmvPw92sZ0bmM8pSxDiTtlEBkon
-	 q9RM3fjpcOTe+MRlexIfRPgTBYccBbyaVxZb0ZuWAxDAHO+7lmTLgZ7cqS0ibih1JFw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="iZx0t6/j";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795302501;
+	b=yTd3etO0gsVH5I+lwn6fSnDiy2kI8Ihy8qClYjD0eetjYJdp/vKeeNWjsBJnubSf8cdO
+	 X1eMlqxJ9pWW+20OX/KlFH4OqN4CccKjyXiWtLZbI59dlTrWD6BF+eMmTjj0eXdpbBBiM
+	 1F2qkJg0QaPunj7cbkBo8MMavEI4MIoq/wQq/7Xpkozy6vP4bZ/I8VYIHiQGBTnvJxOeN
+	 ry4kluIbJPMcaKbGvHoKiwXDfK5TtjvYocPtfgyNxIGl2D6torFWn0ht24UTNIQgttfVY
+	 I6qHuTSSOB3nLqpMgMlRbeTae1VScQDpYYRO84gts3ZbkwOJXK4E+90tHZbIaasSkiw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795302501;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=H/CBwGcnijyRu1LgxwMqIktWt8iJi1924oX4F9L6lNE=;
+	b=cZVDkDQzvy/ETKj+H/g5NgnPpc5XlNwCKexwx7yGc+bptKoudJdgL1t/l+SsoQx4vtzM
+	 QHANHX4gNSvGkU/WHjKbhm5EIEh1CZiVAvorQYeI27mQGzbRejVOr9FjfMSrI+gJR5Sdc
+	 Agut6nb9/+sHfBgDaIntnNzWx9eOKJ3Eegs1LIoxiwgs/keOM9MDXyUoRs+GyZHSQLVPM
+	 YVYMNqO3SUSJwkfl/fqahx4Lrmj92CARW+H8Oa1yWfCyCmiyG3IwOAICFvxsPlCvNlWWk
+	 pqb8YgCEVltNKx6/nwrrfiy9neTT++8FrA0pLOAFiua3ky9qaLoPqDaGcErI68L3+vw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GFcUDguT;
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B01E1606A689;
-	Sat, 21 Nov 2026 22:38:25 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26C07606A330;
+	Sat, 21 Nov 2026 23:08:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=iZx0t6/j
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795300705;
-	b=t94+sJn18nVeQnMiNoiEIBMq9MbqlOOMGX0v5DG7QrHpQm0CSpMeyR1VWTdTnwVyHl8Y
-	 /jKF5h773Z9ZReQTO1cdduUMjuqAYavc8IjraVxZgvR6OOFUTAdmIM3UNf29wLbHY+ujZ
-	 CEuUYUfI6SzGZUcFhDV3jM3xN0nNFJTC0e4UAsdtyJ0pHb7A+/kOpT/z015HCrJV2iCPJ
-	 TFI1JrwmF6FXjl1E6OUSUhJX0GOnqdBbI3kEsW7TbsIQBmr5bz+/5T4hVEqQfUkV+oJ5M
-	 rarNLAi/yUwPKwTTuRgEXh9oGAIqyP0LSGUGL1blr1zCySmkJNO2ghDsMGjLCABtIwQ==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795300705;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gxun9QDC8DJDeaUi0wrOgcELDuQJNUTtE/AzD7PlJ+A=;
-	b=DJGgPxuQ8CzmBJi+y5Ny0e2LG04VTi3knyU2VJqPf41WUXbigvg17/4H/vfSYgh1FdHM
-	 xW6Ehyy10EHCAEPibAhwHyai+fw9pgqLj5Mv0aCDQXZD9YFydzg6HsLV2mUVs3LZVKfyl
-	 s2pVykBR/G/sa0fRTZ6m9zExVGNqoELeuokNMYQD3q4fXouVaBKFG9kSqLma3ygl+W0ya
-	 qo/yN3PuGVtoIE6JtoaH0UAXjcBVLgoJSxBi+67mYbOigG9gg8X4eVkT7jTjJrz0BlcU2
-	 5fNQWPtpwg6mKzyKwLIKz8OUHlSWE6X5W12wn2vtmtIvYe/3/gv8YGoaGEPh4mVTm2Q==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id D40771F000CA;
-	Sat, 21 Nov 2026 22:38:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=GFcUDguT
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CD641F000C0;
+	Sat, 21 Nov 2026 23:08:18 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795300705;
-	bh=gxun9QDC8DJDeaUi0wrOgcELDuQJNUTtE/AzD7PlJ+A=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=iZx0t6/jxdwCrZQUMui4R2MiPpme2CMtqoQMrFNSv7PEzXYD4h8UVXDO3inBVzURE
-	 Oq6A2xsLXqf3wutBtmS3xvkYJBIPHznG2B0Da2EQGcTzxUq0TuoeDxL4auoUMwCCaN
-	 nMB79AWE91yLTRHhtYhZJfVIz0gvgejkn1EIdfgqC8IiJwJ/MUQT7iQ3jX21kBFwtl
-	 m8hWux8INwXGCYVHi9+vP7fiCrdVA2pNRWRTYAMErLiex8ELLnpEA8qqoMVi557/4U
-	 34DhmQ3PS+lxGWfwBxHJYrleJM3LJdYcUZocjDY7S3OIzFi+KRXtIi4BZA1NwK+0nX
-	 hKVtmOnrsU2WQ==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id B31084BE46;
-	Sat, 21 Nov 2026 22:38:21 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Sat, 21 Nov 2026 23:38:03 +0100
-Subject: [PATCH v3 09/12] arm64: dts: qcom: sdm845-shift-axolotl: Enable
- vbus support
+	s=k20260515; t=1795302500;
+	bh=H/CBwGcnijyRu1LgxwMqIktWt8iJi1924oX4F9L6lNE=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=GFcUDguTktk0PmCr+SxS352kExTu+3RpYMZ316Z7fssWn9QGkqHksLFgvSuqfqmIw
+	 bwmVboVY7AfpS4V4E1b6wFwiLC8D8Ufte4kaClWE8OSG/UreoJftDO4dkMUyZ9f1j0
+	 PishGfgZUfoZo7lCQwdCoIFDHRlv5M96dT1UOpJHo9UXnCpieB8M6OUmRGj3gP5mUX
+	 iP53uoChhuI6IXG3dYBvc1gdiQuX8B2BgWxrfoNyJVIl1euoOM7ZKjfLts69Yi/x7M
+	 AbDWdmuE1BBPP1Nnd+2eFF9iTCgzMZn7wFqX4VkUNfenWnVQSeij6wZzYM3rqSiPC7
+	 prFg8McwGpUHw==
+Date: Sat, 21 Nov 2026 23:08:15 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Andy Shevchenko <andriy.shevchenko@intel.com>
+Cc: Lee Jones <lee@kernel.org>, David Lechner <dlechner@baylibre.com>, Nuno
+ =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>,
+ Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+ linux-arm-msm@vger.kernel.org, linux-iio@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH 07/10] iio: adc: qcom-spmi-adc5-gen3: Free TM auxiliary
+ device wrapper in release callback
+Message-ID: <20261121230815.5e49b4fc@jic23-hlaptop>
+In-Reply-To: <av8yO-0PUvvGsQgt@ashevche-desk.local>
+References: <20261119153151.1397003-1-lee@kernel.org>
+	<20261119153151.1397003-8-lee@kernel.org>
+	<av8yO-0PUvvGsQgt@ashevche-desk.local>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,87 +65,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261121-pmi8998-vbus-v3-9-91ba2e61a877@ixit.cz>
-References: <20261121-pmi8998-vbus-v3-0-91ba2e61a877@ixit.cz>
-In-Reply-To: <20261121-pmi8998-vbus-v3-0-91ba2e61a877@ixit.cz>
-To: Abel Vesa <abelvesa@kernel.org>, 
- Alexey Minnekhanov <alexeymin@minlexx.ru>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Casey Connolly <casey.connolly@linaro.org>, 
- Conor Dooley <conor+dt@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>, 
- Markus Rathgeb <maggu2810@mailbox.org>, Rob Herring <robh@kernel.org>, 
- Robin Snyders <robin@snyders.xyz>, Sebastian Reichel <sre@kernel.org>, 
- Wesley Cheng <quic_wcheng@quicinc.com>
-Cc: Richard Acayan <mailingradian@gmail.com>, 
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
- phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=957; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=2lgBmUBK0MaeAv9Oy1xMjAHeZ/2PGxZmYEJJF355C18=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBrAh1b4BJsvRNFa2l8cfLZ4YY1SPxbJVnWYZzzH
- KQxHnJ/Ju+JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCawIdWwAKCRBgAj/E00kg
- cihpD/4vpQ/Ai/GFX6wI1ydBxLKNxq2GZDM14X30jXravqIIUy98BJWgXqgDjpevL58+1ZDPS/m
- qgwh71ivI4xlNmuTy7ajuK5Wnf6xXT3IT0uyfhoO2/+7aWal5goKbuxvOyms5/xP6TpgDNwDAwm
- 6TmH/SJDpGksTNi1o8k3YY+PQPrHu26yR4YYtzYGCh/hJm19Re0vC6HPKKxdqaF1jwsPZ5RCvbv
- E4MN6eHnhAPpERMQz3pYk29PeeFTFJ+RABz7ATKl1RraI0RmeX06tj7mdYhuHSxgtTdTiJMgrFw
- rWZVTJPlKiBMX4Jz5lh21u4lTB/dAWv9VKGyCOBqGTiY/XQkgdqEfLV+nCbVxTgdbL2ucmj3WxZ
- fUDi/53lcCcRNxl/CGEwAultmZcbgHym+XpM5X/z3xVTLa22lPwj0pbPBfq26B495LKZ9VYW7fi
- OIVVgMGpQlP2amkMLGvhOsNLqTatTvyqOTwQjCfMLSaa6pOxids2xcSqE00GSheN717P/RIlj9A
- 7FYRRjsPE+gVHzt6ag9KvmGId1HhltU7sIMoyMg8JSs7I6yncaQ+WJoiDRWk5uKB2/Feg0spHc9
- khoYYy/RDknoyqAMao2S2GPIdT3wghftMvIkiL6m5cDS0t1v8jbXwG2BymMPuyoL9DaMmhXnFJd
- gELXppbGgCiXiZg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-From: David Heidelberg <david@ixit.cz>
+On Thu, 19 Nov 2026 19:30:35 +0200
+Andy Shevchenko <andriy.shevchenko@intel.com> wrote:
 
-Enable the PMI8998 VBUS regulator on SHIFT 6MQ.
+> On Thu, Nov 19, 2026 at 03:30:40PM +0000, Lee Jones wrote:
+> > struct tm5_aux_dev_wrapper embeds a reference-counted struct
+> > auxiliary_device, whose memory must be released from its dev.release
+> > callback once the final device reference is dropped.
+> > 
+> > Allocating the wrapper with devm_kzalloc_obj() on the parent ADC device
+> > and providing an empty adc5_gen3_aux_device_release() causes parent
+> > devres teardown to free the wrapper immediately after
+> > auxiliary_device_uninit(), even if external references to the embedded
+> > struct device are still held.
+> > 
+> > Allocate the wrapper with kzalloc_obj(), release it from
+> > adc5_gen3_aux_device_release(), and unwind cleanly on early error paths
+> > in adc5_gen3_add_aux_tm_device().  
+> 
+> ...
+> 
+> >  #include <linux/platform_device.h>
+> >  #include <linux/property.h>
+> >  #include <linux/regmap.h>
+> > +#include <linux/slab.h>
+> >  #include <linux/types.h>
+> >  #include <linux/unaligned.h>  
+> 
+> > +static void adc5_gen3_aux_device_release(struct device *dev)
+> > +{
+> > +	struct tm5_aux_dev_wrapper *aux_device =
+> > +		container_of(dev, struct tm5_aux_dev_wrapper, aux_dev.dev);  
+> 
+> container_of() is also in a separate header, id est container_of.h.
+> 
+> > +	kfree(aux_device);
+> > +}  
+> 
+> ...
+> 
+> >  	ret = auxiliary_device_add(&aux_device->aux_dev);
+> > -	if (ret)
+> > +	if (ret) {
+> > +		devm_release_action(adc->dev, adc5_gen3_uninit_aux,
+> > +				    &aux_device->aux_dev);  
+> 
+> Oh, this is interesting... Usually the release devm_*() calls point
+> to a misdesign somewhere. But I haven't checked the twisted flow of
+> this code.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts | 7 +++++++
- 1 file changed, 7 insertions(+)
+It's one of those complex / annoying cases where a driver uses devm but
+carries on with a subset of features if a particular bit doesn't work.
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-index 1b0eaeafbd517..124717214edd6 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-+++ b/arch/arm64/boot/dts/qcom/sdm845-shift-axolotl.dts
-@@ -654,16 +654,23 @@ led-1 {
- 		color = <LED_COLOR_ID_YELLOW>;
- 		led-sources = <2>;
- 		led-max-microamp = <100000>;
- 		flash-max-microamp = <1100000>;
- 		flash-max-timeout-us = <1280000>;
- 	};
- };
- 
-+&pmi8998_vbus {
-+	regulator-min-microamp = <500000>;
-+	regulator-max-microamp = <1500000>;
-+
-+	status = "okay";
-+};
-+
- &qup_uart9_rx {
- 	drive-strength = <2>;
- 	bias-pull-up;
- };
- 
- &qup_uart9_tx {
- 	drive-strength = <2>;
- 	bias-disable;
+Right answer here is probably a devres group.
 
--- 
-2.55.0
+That is independent of the handoff dance done here.
 
+I'd move the auxiliary_device_init() earlier, stop messing
+with the memory being devm controlled at all except by adding
+a put_device() in a dev_add_action_or_reset().
+Actually that's already done by the auxiliary_device_uniit.
+
+Anyhow, whilst I haven't looked at this that closely looks
+like right clean answer is a dev_res group for the whole
+function (can be done at the caller if neater). That allows
+either handling the group over to normal devres cleanup on
+success, or cleaning it up on erorr.
+
+That plus the move of the kfree into release as Lee has done.
+Also smells like tm_props lifetime is probably wrong as well
+and should be part of the release rather than devm_kzalloc.
+
+Jonathan
+
+> 
+> >  		return ret;
+> > +	}
+> > +
+> >  	ret = devm_add_action_or_reset(adc->dev, adc5_gen3_delete_aux,
+> >  				       &aux_device->aux_dev);
+> > -	if (ret)
+> > +	if (ret) {
+> > +		devm_release_action(adc->dev, adc5_gen3_uninit_aux,
+> > +				    &aux_device->aux_dev);
+> >  		return ret;
+> > +	}  
+> 
 
