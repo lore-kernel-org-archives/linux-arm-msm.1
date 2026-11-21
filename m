@@ -1,61 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.36.144.171
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795292693;
-	b=JhXazWt3aoTDtartlcRypf4tzyYfK0kkb6rAMynZHFQ2aw7ofu3/Zspt3TXoYVDX11zI
-	 o83dmCCtkYzTsz23sJuf+uEG8VHX8u2blvypJbe/IjjP80VpvMqAAluNytzd3FEDMNRJU
-	 n8kNiHQWXz2bRMFpVBz11G3Gj6Y6yqgEcfR0ve02JyzqFGb3oru5dWZxDrkgCs/N3CPyh
-	 dpVTiKTA1Kp5SioODlq6OEXGev5pdv2VpBBAht8Sf5S4phaYZdZgpuCVxSgJH4D486swB
-	 aW9VOqm/Mx720hw/E4oVpPZU+9EIDrOrQZYqSweoonaBG/YdNrQ/bCh8Rr3XZ7LsYTA==
+	t=1795292842;
+	b=IzhIUzxZxHm08XhmYWLyKdN0fzEzsJHTSd9pyLn5FGeN3P8fr4C31iLxARhbfapQ0D0T
+	 ipf5t70/UPkZogfaSmIXmC98IEqvkfB9jY2qaNw2aWWoxGQkcQHOV9LtSvrO5pO++16JK
+	 e4qF+W5m92KvXROO4BuWAyryLcw/iW+TV6V9LVlaOIE3E965Lr8996lSBIQ0bwXPT/kQa
+	 +h3Gx4euAjbQaGdzF39JkJ3Wb0DoY88zDBaXO/DMKl9+0TcXzkK+Ah+jTgg12GJBdrWZu
+	 rNU07lgg65zGeC2LBerIQ+D8LYUrXss8gf7UeGTTCuCcOL+KCtNwhB0LbPUgoGUmdhg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795292693;
-	h=DMARC-Filter:Received:DKIM-Signature:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-Last-TLS-Session-Version;
-	bh=WQfkT4MrujOO32FCQLaxhFqpRYxXCCbzLiXB97R+hyE=;
-	b=kIPdPamcQ17+pth7oVo6gNXx9b69RunFLkrsR3szeQ0lQJHttl29A+UqtRGgnt9m/mEx
-	 YFhaZW48Uxet1V+l8haYHll9ahRzjZ9KeDaxQ3/IynPwq9RYUg9tVnta4AiT/yfjS6TK9
-	 DspLrrc+fTFbwGqWBGf/tHvX2SqNz1TiEhQ30IEp9qtBtg5NYUqzVSBBIBOymY9oQeKCA
-	 GX+hETohhBVhOSS/L6zoD9nX+Y/h3e4VFAlm8pJB0y1O33K1Zsg5EKxqhwVJFWcKJ+pK/
-	 dgd5Bcy7mNJ7WR6lxWGa22TPy6MAC8umWkXSwQme2fSKmaXrAnO48Xa6ovrm47gRHGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795292842;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=40tejK4FZl5LRGOXaGeE0E1U7AlddvNA/8gzWd64RMk=;
+	b=YLrRfhb5NM9Ez5cs6MYK8RniDAtZBoK6nxwF8YSiY4HbP8bK4lW45zlVVbyUMfcegBOo
+	 zxp46uBxAFeKpXfFXFW2B5gU1A0CZhWUMVzbUXugzc2ZyLHzdp80WN0KuZ7eGbwYCy7Q9
+	 66jzfFaQyL+qDdgGJdBwRB+9uSlBE6XBEvv318Ji8OnsahDBU/kbjZ2XabyACbzktDPVd
+	 Fz56b1uFZoDnXh/BEL5bl+T+GFKrIRPlNovU7jhSniQDrwgiP5Lis/FtjhbahG2nO9HqQ
+	 1Y2koTBDRjigE+x1U7xEDqd7LBRjkJXCjf5Lx58H0f1jadvMXhXtx7txlUFWN+7LBUw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=yoxcu.de;
-	spf=pass smtp.mailfrom=yoxcu.de;
-	dkim=pass header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=i2rD9oCF;
-	arc=none smtp.remote-ip=194.36.144.171
-Received: from morty.yoxcu.de (morty.yoxcu.de [194.36.144.171])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=h2NnCgJS;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F19C606A32A;
-	Sat, 21 Nov 2026 20:24:53 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F19C606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=yoxcu.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yoxcu.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2D658606A320;
+	Sat, 21 Nov 2026 20:27:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=i2rD9oCF
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A9AA41D827A6;
-	Sat, 21 Nov 2026 21:24:50 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yoxcu.de; s=dkim;
-	t=1795292691; h=from:subject:date:message-id:to:cc:mime-version:content-type:
-	 content-transfer-encoding:in-reply-to:references;
-	bh=WQfkT4MrujOO32FCQLaxhFqpRYxXCCbzLiXB97R+hyE=;
-	b=i2rD9oCFeMlS+4JUPFD5ojy4B3Xv2s8WuHWmn+G1KazF2ppPsOtvwUa9YNS6WbrLFeUeqX
-	4Ha1GJePRHxZ5IED+9MRFi7sW0yricCzQfS3qt/fODzyGsoonsUzU5plYZuU5fV01WyUca
-	+yFdBeh6A8bx5E1W7ENxjiiIGiuX/cP8dz9SCBbXXTsJtqhJrGJWV68P9bNsUN+hGy086x
-	AMebUaT3SuJhX3PMPL+oIQug3tH2+M14f0pGLclVAZBYDEh3Thm6K+HeCjF9+L9r/WzwK7
-	TJR7j9mBu+UfKQJkt9BGN4n1YyY1X28L3rzQcUhnDu0F2YY+4/Ak0ZGhg1ZpYg==
-From: Michael Auer <mick@yoxcu.de>
-To: doloers@hotmail.com
-Cc: linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Mark Brown <broonie@kernel.org>
-Subject: Re: [PATCH 0/2] ASoC: codecs: wcd934x: capture clock and SLIM port fixes
-Date: Sat, 21 Nov 2026 21:24:47 +0100
-Message-ID: <20261121202448.841666-1-mick@yoxcu.de>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <TYWP301MB0087A59A3E6B025A3F03E2F4A37A2@TYWP301MB0087.JPNP301.PROD.OUTLOOK.COM>
-References: <TYWP301MB0087A59A3E6B025A3F03E2F4A37A2@TYWP301MB0087.JPNP301.PROD.OUTLOOK.COM>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=h2NnCgJS
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B0C271F000C0;
+	Sat, 21 Nov 2026 20:27:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795292841;
+	bh=40tejK4FZl5LRGOXaGeE0E1U7AlddvNA/8gzWd64RMk=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=h2NnCgJSxklNKvLXaKEdoAr76GOJ4d5ohriu48SW+L9hjft3I254TdHcWVq6n5Bnj
+	 JVGQIHOKR2HaGSr8rvaDrc966smIgn8VusrN0LTH36WvRsh7U98DkEqStRY7piDCfP
+	 QVVQoIRlxpsLhZvLKv0RbJmvWyogzdi9y6MF19+JbOjuNsEzG3tneX++J7NwxTkppd
+	 Q1M2xN8de8h1EuhN6szN6SEF//EMRwM55Anc+1XCUUdum82069PmHAILBkBmsWk79p
+	 cFanWlnwfVG0t8VC8dhFmbO/At/VCotkwtU2he8z9x3HF0rQmSkcRk+qKGOlYmpS64
+	 qFH1bvf7OIjpQ==
+Date: Sat, 21 Nov 2026 20:27:13 +0000
+From: Jonathan Cameron <jic23@kernel.org>
+To: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Cc: David Lechner <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?=
+ <nuno.sa@analog.com>, Andy Shevchenko <andy@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Amit Kucheria <amitk@kernel.org>, Thara Gopinath
+ <thara.gopinath@gmail.com>, "Rafael J. Wysocki" <rafael@kernel.org>, Daniel
+ Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, linux-iio@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, Kamal Wadhwa
+ <kamal.wadhwa@oss.qualcomm.com>, Anjelique Melendez
+ <anjelique.melendez@oss.qualcomm.com>, Manaf Meethalavalappu Pallikunhi
+ <manaf.pallikunhi@oss.qualcomm.com>, Priyansh Jain
+ <priyansh.jain@oss.qualcomm.com>
+Subject: Re: [PATCH v2 1/7] dt-bindings: iio: adc: Add "qcom,adc5-gen4"
+ property for ADC channels
+Message-ID: <20261121202713.15008e5c@jic23-hlaptop>
+In-Reply-To: <20261120-pmic5_gen4_adc-v2-1-94d0e1fd6847@oss.qualcomm.com>
+References: <20261120-pmic5_gen4_adc-v2-0-94d0e1fd6847@oss.qualcomm.com>
+	<20261120-pmic5_gen4_adc-v2-1-94d0e1fd6847@oss.qualcomm.com>
+X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,31 +72,65 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Hi Shen,
+On Fri, 20 Nov 2026 14:49:41 +0530
+Jishnu Prakash <jishnu.prakash@oss.qualcomm.com> wrote:
 
-I tested both patches on a OnePlus 6 (SDM845, WCD9340 over SLIMbus) on
-a 7.1-rc1 based kernel. Without a fix, capture with nothing playing on
-the codec records silence there. With the series, a capture-only
-recording from the handset mic has real signal, and the codec clock
-(LN_BB_CLK2) goes back off a few seconds after the stream stops. A
-VoLTE call works in both directions on the earpiece.
+> PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made for
+> improved performance, mostly at the hardware level. The main differences
+> are increased ratiometric conversion resolution (from 14 bits to 16 bits)
+> and increased bit field width for PMIC SID (to allow communication with an
+> increased number of PMICs, supported on latest SoCs).
+> 
+> In the Gen3 ADC topology, the ADC peripheral on the master PMIC
+> communicates with ADCs on other PMICs. It is possible that some of these
+> other PMICs have ADCs of a different generation and may need to be handled
+> differently (for example, on SM8750, PMK8550 is the master PMIC with Gen3
+> ADC peripheral and it communicates with PMIH0108, which has Gen4 ADC).
+> Add the "qcom,adc5-gen4" ADC channel property to indicate that a channel
+> is of type Gen4 ADC.
+> 
+> Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Hi Jishnu,
 
-Tested-by: Michael Auer <mick@yoxcu.de> # OnePlus 6 (WCD9340)
 
-One thing I noticed: with the series, each capture stop logs
+Minor thing.  Other than one long line, this binding currently keeps to 80
+chars. Hence the new stuff here looks a little out of place.
 
-  wcd934x-codec wcd934x-codec.1.auto: underflow error on TX port 7, value 6
-  wcd934x-codec wcd934x-codec.1.auto: Port Closed TX port 7, value 6
+One small additional comment below.
+> ---
+>  .../devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml          | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+> 
+> diff --git a/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml b/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
+> index 149f4af8f4b8..065b82c41e86 100644
+> --- a/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
+> +++ b/Documentation/devicetree/bindings/iio/adc/qcom,spmi-adc5-gen3.yaml
+> @@ -83,6 +83,14 @@ patternProperties:
+>            This property indicates ADC_TM monitoring is done on this channel.
+>          type: boolean
+>  
+> +      qcom,adc5-gen4:
+> +        description:
+> +          Indicates channel is of type ADC5 Gen4. This may be needed in cases where the
 
-and the end of the call also logged "overflow error on RX port 0". I
-never saw these in three weeks of logs with a local fix that adds MCLK
-as a supply of the AIF capture widgets, so the clock is held until the
-SLIM port is closed. With your 1/2 it hangs off the ADC/DMIC widgets,
-so the clock may stop before the TX port does. Audio is fine, so it is
-only the messages. I did not check this further.
+The 'may' seems confusing as implies there is an alternative.
 
-Michael
+"This is needed in cases where the..." or
+"This is needed when the..."
+
+> +          master PMIC has an ADC peripheral of type Gen3, but some of the other PMICs it
+Is it too loose to refer to a "GEN3 ADC peripheral" ?
+I'm just thinking the text would read better that way.
+
+> +          communicates with have ADC peripherals of type Gen4, so channels of those PMICs
+> +          need to be marked as Gen4 to ensure their conversions are handled correctly.
+> +        type: boolean
+> +
+>  required:
+>    - compatible
+>    - reg
+> 
+
