@@ -1,70 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=194.36.144.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795293001;
-	b=cOYuBSOhbx0Stv3YnGpHdi1nEPregVqXIgHb2RO25Eh0sWC48T4wz8JCqlhSB2HIXCSy
-	 sN3AMmPeYsvdE3tgq/CqO2jWJd6twx9EJwOV0XZNfbK3Gp9/kcw7EX73MmzFwAQmGnbGz
-	 xv5OuH63IbC92vHL67n/pj055E3W933dvChrwTpfxGqU0Iz2PWMCK+et1EeM2x5KKv+Q8
-	 iLz//JCdUqxKnmtgS+fKH7i8ophszLnsCmDVZVAozCJ8bAwTKGm6mI9k5rgmF4ffRnkzm
-	 vDqkAfxWa7jmy36R/w7+/1rE0U6Gf7W8SV4GvcalLTw1YdU5I0guIapR2bZ8viAoXrQ==
+	t=1795293679;
+	b=a1PjYTaOv2a001pw21SihiIHuhMVi4V6W8pKRnhPJ2WG9AbmMrzjuXF5TKWL9xXS3N4W
+	 L70xfnYY6G+YziKkl1dJbV6XDckCOFG7qAD4Mwe4bmARCgoKyU3NBbbkgWxtY7JWg+Z4R
+	 jkSPdn7gbF7eSBPFyRUhiQ+zHoKXQSAL0TPGZmvKLW0F4VqkIuEgUriizoB4en5jmk/kp
+	 0QDnDSd5csRblwH10SCNFP+QrXyhb51OtLSkdgkSB57+wG/whoHjczvJeP8d3NgWk4c+F
+	 zAexiqAG4aHPcpAaBJSiWJUxGiSPsncX4agfZyaVhzXFBTAeegphnjLKzVr2P6qTHyw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795293001;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 In-Reply-To:References:X-Mailer:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=8w3CmoJyPr2BoTXS04qkem+74x63nGIjZeZRqj3Yy9c=;
-	b=iFvzvrpT80LVBoGWKHISFlOpJoOnA/15nvOFtqeBiDIs3LVfTFI8OMS2RoTm1tb+bs5R
-	 jdv2+w7zTBBAtBA8nZimwx5IcvdSmtOCZjsAZ5xF4hPoCElSooJ+KEthORhnNwjeJHmt7
-	 o8McSnPVdXBXl5DPLJk8MeAC5aFKLYuF+r5ZNKZ79ZjLooRCFWBNxSVTij+oa+OxUhGBV
-	 nv01tPIULgzd8KMaHBJsvOBvZzqLSgNk5muBV0a7cs3eLSMKNcztgF0aFGLxz1ID18c8Z
-	 ytx1KBB+GxI1Ah29K8+HhnydBB2M2FSCwqPkhKrtnYbxQ7mCi4Z4kVRE++cHPEvJvGQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795293679;
+	h=DMARC-Filter:Received:DKIM-Signature:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-Last-TLS-Session-Version;
+	bh=fmju87T4Fa2QAGnAL9j5gIorzJmuW3FK3+tNe5lkgEc=;
+	b=HBwiMEO45auRXRc1k0XBbfZnubfGnYJXa6WPp8mjzhnz47868CIF82XkyHsO8uVNndxe
+	 G0k2JHXwEoskCNBS+NZkvBHqzFIEowQP6RtTxNBsqKvBhR1E0tYRpEjosq0W1bA2Eknr5
+	 0yw8NGqubKWcXQH27OuTUYebMWLXIQ97klYxk47o/RcgW9jHpMJkhwrW7mSWuXcC0TOPp
+	 BU21W6Y1PNF7PqsX16dKtxTM5LsMi5DuVQxHGV7fPvOpWKviD97u1Folc/WmhrveByYbC
+	 vzgUh8S2t8HNjtMn8EytPWf2KgGFJaIZQekhs0j+4C15Brs9RnQxdJuDeamvRuk8qxg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="QJDG9PK/";
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=yoxcu.de;
+	spf=pass smtp.mailfrom=yoxcu.de;
+	dkim=pass header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=UK9nEjc5;
+	arc=none smtp.remote-ip=194.36.144.171
+Received: from morty.yoxcu.de (morty.yoxcu.de [194.36.144.171])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35198606A320;
-	Sat, 21 Nov 2026 20:30:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65A94606A333;
+	Sat, 21 Nov 2026 20:41:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 65A94606A333
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=yoxcu.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yoxcu.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QJDG9PK/
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 273C31F000C6;
-	Sat, 21 Nov 2026 20:29:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795293000;
-	bh=8w3CmoJyPr2BoTXS04qkem+74x63nGIjZeZRqj3Yy9c=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References;
-	b=QJDG9PK/u0CJzdH9whCG8QCLfaDnGo/xSx4YgLzGxm/Pc9wcFakN1j5fYgbsTHd5X
-	 6x25+Hqkcyj1jkq/krL2F2mdwNWssf8Dpox3IHDbtYPRzBKbR2C2f+y99BGerYRzB7
-	 3t6PCW+nrc43NqqvJ7A1JevwWybQSRQ6PZGu4A3JT9Kv4aqQxLhWHv1aXihofl1qRk
-	 bXQDX6TlnCxC+wlf4YU2NHWz5lO5B6v2MkseJxM0Fh74GIX7RPCC6rFlUyaNvIAXOh
-	 rxaNPfwBHvqiyk1HBk9SQXwJnWntsJlg0GMj2av4fK/goKTUChJ8CAIw/QipRzqe7g
-	 I/3OwmccvT5Gw==
-Date: Sat, 21 Nov 2026 20:29:50 +0000
-From: Jonathan Cameron <jic23@kernel.org>
-To: Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>, David Lechner
- <dlechner@baylibre.com>, Nuno =?UTF-8?B?U8Oh?= <nuno.sa@analog.com>, Andy
- Shevchenko <andy@kernel.org>, Rob Herring <robh@kernel.org>, Krzysztof
- Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, Amit
- Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>, Daniel Lezcano
- <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, Lukasz Luba
- <lukasz.luba@arm.com>, linux-iio@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, Kamal Wadhwa
- <kamal.wadhwa@oss.qualcomm.com>, Anjelique Melendez
- <anjelique.melendez@oss.qualcomm.com>, Manaf Meethalavalappu Pallikunhi
- <manaf.pallikunhi@oss.qualcomm.com>, Priyansh Jain
- <priyansh.jain@oss.qualcomm.com>
-Subject: Re: [PATCH v2 3/7] iio: adc: qcom-spmi-adc5-gen3: Add support for
- QCOM PMIC5 Gen4 ADC
-Message-ID: <20261121202950.7dc141dd@jic23-hlaptop>
-In-Reply-To: <awAdgHggEZtBnyYK@ashevche-desk.local>
-References: <20261120-pmic5_gen4_adc-v2-0-94d0e1fd6847@oss.qualcomm.com>
-	<20261120-pmic5_gen4_adc-v2-3-94d0e1fd6847@oss.qualcomm.com>
-	<awAdgHggEZtBnyYK@ashevche-desk.local>
-X-Mailer: Claws Mail 4.4.0 (GTK 3.24.52; x86_64-pc-linux-gnu)
+	dkim=pass (2048-bit key, unprotected) header.d=yoxcu.de header.i=@yoxcu.de header.a=rsa-sha256 header.s=dkim header.b=UK9nEjc5
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon) with ESMTPSA id A76CA1D86DDA;
+	Sat, 21 Nov 2026 21:41:15 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yoxcu.de; s=dkim;
+	t=1795293676; h=from:subject:date:message-id:to:cc:mime-version:
+	 content-transfer-encoding; bh=fmju87T4Fa2QAGnAL9j5gIorzJmuW3FK3+tNe5lkgEc=;
+	b=UK9nEjc5E619jyK0d2+Z6h14iQXnoHetD7k+nMyqh5zv0TiN/n7ij2MQP7/3C3pZmz12f1
+	y908r0JuYpGeiMWCHNHPm6zQ7tMYVJYs6XfShhgWx/AVvToFLWX+8VKTcYrg8G0QqgrTU8
+	WRtYqA/pOIr6QCwnj77pqiyfdjxh0aWmkYnSve2kowB4AVaBOYXxgjWrIKbcHLFY11e5rQ
+	UF5f+qMNE+nemY0jmlty3oFTMzb/JGtlepVVRkrB7TF62CzlQJ81x8d2hAtAL6shIwvQYC
+	o52h11kqn52YypZnaPNalQgCdNrZdpadbh0exyd8BT/yh12UMFcLDDRYbEKADw==
+From: Michael Auer <mick@yoxcu.de>
+To: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Cc: linux-input@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Michael Auer <mick@yoxcu.de>
+Subject: [PATCH] Input: pm8941-pwrkey - report wakeup events
+Date: Sat, 21 Nov 2026 21:41:12 +0100
+Message-ID: <20261121204112.847960-1-mick@yoxcu.de>
+X-Mailer: git-send-email 2.55.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -74,116 +62,53 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 
-On Fri, 20 Nov 2026 12:14:24 +0200
-Andy Shevchenko <andriy.shevchenko@intel.com> wrote:
+The power key (and resin, with "wakeup-source") is a wakeup source, but
+the driver never reports a wakeup event. Its wakeup_count in
+/sys/class/wakeup stays 0 even after it woke the system, so user space
+cannot tell a key press from other wakeups. PowerDevil, for example,
+uses the wakeup counts to decide whether to turn the display on after
+resume.
 
-> On Fri, Nov 20, 2026 at 02:49:43PM +0530, Jishnu Prakash wrote:
-> > PMIC5 Gen4 ADC is similar to PMIC5 Gen3 ADC, with several changes made
-> > for improved performance, mostly at the hardware level.
-> > 
-> > One significant software change is that ratiometric conversion resolution
-> > has been increased from 14 bits to 16 bits, so the maximum value of
-> > these measurements needs to be updated for Gen4. Add a new scaling
-> > function for thermistor channels which use this type of conversion.
-> > 
-> > It is possible that the master PMIC has ADC of one generation and it needs
-> > to communicate with another PMIC with ADC of a different generation. For
-> > example, on SM8750, PMK8550 is the master PMIC with Gen3 ADC and it
-> > communicates with PMIH0108, which has Gen4 ADC. Add a new DT property
-> > "qcom,adc5-gen4" to distinguish Gen4 channels under a Gen3 master, to
-> > ensure that their conversions are handled correctly.
-> > 
-> > In the latest PMIC arbiter version (v8), there can be up to 4 buses
-> > under the PMIC arbiter and 32 PMICs under each bus. In order to
-> > support communication between ADC on the master PMIC and ADCs on any
-> > of the other PMICs, a field of width 2 bits is added for bus index
-> > and the bits for SID are extended from 4 to 5 bits, in the SID
-> > register. Add support for this.  
-> 
-> ...
-> 
-> > -	/* Write SID */
-> > -	buf[0] = FIELD_PREP(ADC5_GEN3_SID_MASK, prop->sid);
-> > +	/* Write SID and bus_id*/  
-> 
-> Missed space.
-> 
-> > +	buf[0] = FIELD_PREP(ADC5_GEN4_BUS_INDEX_MASK, prop->bus_index) |
-> > +		 FIELD_PREP(ADC5_GEN4_SID_MASK, prop->sid);  
-> 
-> ...
-> 
-> > -static const struct adc5_data adc5_gen3_data_pmic = {
-> > -	.full_scale_code_volt = 0x70e4,
-> > -	.adc_chans = adc5_gen3_chans_pmic,
-> > -	.info = &adc5_gen3_info,
-> > -	.decimation = (unsigned int [ADC5_DECIMATION_SAMPLES_MAX])
-> > -			   { 85, 340, 1360 },
-> > -	.hw_settle_1 = (unsigned int [VADC_HW_SETTLE_SAMPLES_MAX])
-> > -			   { 15, 100, 200, 300,
-> > -			     400, 500, 600, 700,
-> > -			     1000, 2000, 4000, 8000,
-> > -			     16000, 32000, 64000, 128000 },
-> > -};  
-> 
-> Seems like this is existing piece and you moved it up. Please, split that part
-> to a separate prerequisite patch.
-> 
-> ...
-> 
-> > +static int qcom_adc5_gen4_scale_hw_calib_therm(
-> > +				const struct u32_fract *prescale,
-> > +				const struct adc5_data *data,
-> > +				u16 adc_code, int *result_mdec)  
-> 
-> Even if the rest of the file uses this ugly indentation, correct it for a new code.
-> Not a problem if lines will be a bit longer.
-> 
-> > +{
-> > +	s64 resistance = adc_code;
-> > +	int ret, result;
-> > +
-> > +	if (adc_code >= RATIO_MAX_ADC5_GEN4)
-> > +		return -EINVAL;
-> > +
-> > +	/* (ADC code * R_PULLUP (100Kohm)) / (full_scale_code - ADC code)*/  
-> 
-> Again, missing space.
-> 
-> > +	resistance *= R_PU_100K;
-> > +	resistance = div64_s64(resistance, RATIO_MAX_ADC5_GEN4 - adc_code);  
-> 
-> I would put it like this
-> 
-> 	resistance = div64_s64(adc_code * R_PU_100K, RATIO_MAX_ADC5_GEN4 - adc_code);
-> 
-Good.
+Report a wakeup event from the interrupt handler, as other power key
+drivers do.
 
-> OR this
-> 
-> 	resistance =
-> 		div64_s64(adc_code * R_PU_100K, RATIO_MAX_ADC5_GEN4 - adc_code);
-> 
-> (but it still uses two lines, so I find the previous one slightly better).
-Not good.
+Signed-off-by: Michael Auer <mick@yoxcu.de>
+---
+Tested on a OnePlus 6 (sdm845, PM8998) with an sdm845-mainline 7.1-rc1
+based kernel: a power key wakeup from suspend moves wakeup_count from 0
+to 1. On input/next it was only build tested (W=1, arm64 and x86_64
+allmodconfig).
 
-1st one!  The second option triggers my ugly detector.
-This is definitely a place where slightly long lines make nicer looking
-code.
+The event is reported for every interrupt, press and release. After
+resume the press can be read as a release (the handler then simulates
+the press), so reporting only presses could miss the wakeup.
 
+Tool use: the analysis, the code and the commit messages were
+written with an LLM coding assistant (Claude Code). I reviewed all
+of it and tested it on my phone as described above.
 
-> 
-> > +	ret = qcom_vadc_map_voltage_temp(adcmap7_100k, ARRAY_SIZE(adcmap7_100k),
-> > +					 resistance, &result);
-> > +	if (ret)
-> > +		return ret;
-> > +
-> > +	*result_mdec = result;
-> > +
-> > +	return 0;
-> > +}  
-> 
+ drivers/input/misc/pm8941-pwrkey.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/drivers/input/misc/pm8941-pwrkey.c b/drivers/input/misc/pm8941-pwrkey.c
+index 34b4afbb1984..3827e751297a 100644
+--- a/drivers/input/misc/pm8941-pwrkey.c
++++ b/drivers/input/misc/pm8941-pwrkey.c
+@@ -161,6 +161,9 @@ static irqreturn_t pm8941_pwrkey_irq(int irq, void *_data)
+ 		}
+ 	}
+ 
++	/* Let user space see that the key woke the system */
++	pm_wakeup_event(pwrkey->dev, 0);
++
+ 	err = regmap_read(pwrkey->regmap, pwrkey->baseaddr + PON_RT_STS, &sts);
+ 	if (err)
+ 		return IRQ_HANDLED;
+
+base-commit: ab13b5fc808e043a13f861a7c1c2ba8173c22b84
+-- 
+2.43.0
 
