@@ -1,88 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795221426;
-	b=IgZ5X2FwyfKfFjYOIko9IY7Rl5Lk/EjZmN3XIz7mDIwrwT3WNRrEqjPRIWWTUh0ZEapH
-	 Yaa2P7KaitDsj/CWKWAgmH6fO747FDqdskPOLsL58zrLZW9t9mfBXzfPzkOvtpTcYOzmf
-	 l6jhaFpYiJWf3ScQTxgoEfmrRYVVk1gUMeSeAOUtgZKNeVmRYUIvlhu4/yzAK2FHO0GA3
-	 Ta3QPlh6qVkzhDeEJjm736bVkeXEoM9HLIv8A4fY+arPebJ2O7O5s4XlSlUtPyUOzDTxc
-	 Apkg5lWHdbDAsPtlK/CIdtAXCXUbWVPx14qUFh6LK/AKKpY0tINlhUM2shLZ0iSsyxw==
+	t=1795223831;
+	b=srBavq3Q6cHLoLnQpTlp9uPfNIQFvqjKYtu/dqcVIbDvgCwwGym5WrpeEr298mfvav6D
+	 i/SgL6aKEo9YoGNTHt7iL7i/GsXOAhuw1CdJyVXddC7PBbiMwGfJ7LHbezbFs/+sqnnht
+	 EprhjgsRhzVlxkAMcsP9cyV6NYRGbnVvyttSLeOX1BdIvl4jGAOUeD5ig9NoeKuhBa5el
+	 iik0uveIGL3YIrEMewzKPhdUzLvJs+7cLjTN4Dkz2hmIoMSURxiF40xACUQEjp13UMWXN
+	 ucrWcfpUmK/F9TQEYt9p6n8rjCy88OCr0BKuEoQivxAhDa7vlxyLf2ihth58rCnqM8g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795221426;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key;
-	bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
-	b=pdJqe72aM1YeQKPOhZLj5AWMlZSMDeeYpb9ZpT1OnYM4i3ZrEFaN1r6sQuQ8mfTd3s1j
-	 NU39/TRd+36G8xiZehE8+SpwwuCgtYd34goyT6a/PJJOT5v8ra+PSD+yWxfH2ulHY80/a
-	 QXxNMee533PThLoN/XJkV51MTWMJBLYo7K9h4tZ0/E6ypIwYnIdnlKs/HEjAjpICojP9e
-	 pAKnDMY30pFJhrL3AB3iS/nJkgayOLRBtBARtC2rjHFjwuTZd3RaAbTLNy0zUu9Ma5Stw
-	 bNp6FPgIf3dEC6/cen9we1NnvstJyZUq76gZegDJ4Gs474Ivn/Oq2q6shPIGGL5pYVg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795223831;
+	h=Received:DKIM-Signature:Mime-Version:Content-Transfer-Encoding:
+	 Content-Type:Date:Message-Id:Cc:To:From:Subject:References:
+	 In-Reply-To;
+	bh=QklyuLab+Ko9mnpTo5UeclQww95mzIqhLo3F7I/BQkg=;
+	b=wFVV4gYWrx01cnFSnadL5PevvX3j04xWSPddAXakIWD+eXJLlH0ZIsjFZradl0gada+n
+	 JWzLydX9rKP6CIQV2qLNrY/ZqZ5EMrmfpRIwH1B540gc1VhzEDXMsJteCDMgoC34CYI1f
+	 CzYDVn2+X4WE+Sa04XwHimGmnBk4XJmNdxBfyBVxB5adOkHWqJFerm/lZ8GEw46B00xjo
+	 DPlVj6KH+VTyxJ9o2qucMHz6wvor4wnvxkz44NEur9Prs+VGLzqW5ZhTQk+dn4sTFo413
+	 3DnR9KY3K1+EMFmWNRgAAyR35ktqZd2fCn1lWZoHm43YAe/vDLZosZZjqhdCOBLDO+A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RY31DhA3;
-	arc=none smtp.remote-ip=209.85.221.41
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gm8eJtOH;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDE6E606A6B0
-	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 00:37:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BDE6E606A6B0
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C352606A684;
+	Sat, 21 Nov 2026 01:17:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RY31DhA3
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-491971ac844so1293241f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 16:37:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795221419; x=1795826219; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
-        b=RY31DhA3gi95oT5z4yw4u9QLhWUemT1EP9omO4loJL1T/Yw7egVM3w/xoxkcIespNj
-         uwzsFSC4MtJg2/HtHwoEvCxUyX1JpXHW1+EulR3JLWtPqp3x/lPis7lukdRmCFIwQDH2
-         JFdADIX/KY+TenGN8S6bOCWr1oySky2oi41knT8zod8qCCkh9dH3oywZrrq+2owZ0/zi
-         7g4f3t62XVX+oAeWSAelZ5oHr1TvUNdnPPyVDA1r2vlHHqm2hOtR0K8miwCm/OrQvTbx
-         QKZ2+DAdommIzJCUbVD5633LKH0sXVLQAN3/3arYfWPHmvRFC3AgGNKDJP0KMfyCKmXh
-         9Hvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795221419; x=1795826219;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
-        b=xmw7u15SG976djoBIWd9pTufRqx85QdXsv82Yskkmzh/W8FTikXWzoLcVDBVmCxXI2
-         f0v0ZlEoVeIuDGBjDNTzXCtx91vqYqpMs4JNnuPyIW5zxhrzrs2gkHdMdkRMJprgto2K
-         OhN7csLFY2O24lBnt3XWrhO9wPb0caZap4iuyz5r+GxixpjzrAOJ5TmnyS6YwcRcOnlP
-         dn5ibtFoQhd35OHSOWZiA67YFHBDf1+GIK4eLK9XqvL9W+CmOIPXnDnf49uQi3o4VGJN
-         VgD3CyXB8ZkrzwQhaN0VMZG6vbe933VGTWhRvVl+ow0J6IOBmIgBjX+mZn9ukJbcKqIe
-         RSsg==
-X-Gm-Message-State: APuU4Z8132WTVxTLl6ZHS42f4JysWeX6VwFkMZy1HNeS0z+gpELL0upJ
-	OV2ucW0toxGlsySpcYRuJuKHhXBv1qChVi0SUQ3wF2kIc8PfNDSI4NIJkg5dCsN0X0o=
-X-Gm-Gg: AZFdTZe1ML2zd8XegEqAb3Iw9c/SZh0If52fhpDH8SIEyrWOgARXWs4FWciIOOod3UJ
-	JRd3OO5BSix3fADln1ZGI06Ib/xXVOZTCJ6WGEVPFDBuJg3eCuGugrkcYIXHYO2fDkVZRS9SoVG
-	FEfKctLwJ82t9JTCkjDjVo05W0hFBBedCLUnUaNLSJW4uVdbson+bqna/2Wh6Awm5BD1DFh2AiV
-	inxOyTkfH0cFg85to2wDYofjpGRGPjw+Nh1T08DyGxMT+Kn6wZCOyRMD6X2ugoqoFP9G8Wuhtfb
-	yrS5fl/cj19Pwzx+YITMrZX7FxydbYXH5uyGm8qHy5FIz1mMJbponY6tEOK5ZBDALCfE9ic39jV
-	vGSPkAUVpcCTx9fGvN4uX3+lIdlWL3JBIbLYzHkrBwGKdC9Beb+WCHvHHa0OipVWRMMJnseImnG
-	1Gm8sr/63XWTB0M/w6iHpyBsV7wcmTruPaii9KyEhzqBzpuS/aVVsgEruRVrLZo65TF/nIdADQb
-	IwM7zz5fFyrKE7OpL5HMo0S2CNo8DdajlMeDfc0XPm3MJZBpOhyKBGe0qJX2HG7+hSjaBRduyAw
-	XsnIA+scIUP1A7MQqGWReJi1G9PvvZX2WKpraB2dLulOPoPwiRTOL/LnRTZUqjpojCbYFRX7Q/n
-	zOZ+Y
-X-Received: by 2002:a05:6000:2903:b0:49d:7e8c:e8a2 with SMTP id ffacd0b85a97d-4abb244870cmr11302603f8f.33.1795221419059;
-        Fri, 20 Nov 2026 16:36:59 -0800 (PST)
-Received: from [192.168.1.15] ([185.69.144.65])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a680355sm7203278f8f.27.2026.11.20.16.36.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 16:36:58 -0800 (PST)
-From: Dale Whinham <daleyo@gmail.com>
-Date: Sat, 21 Nov 2026 00:36:50 +0000
-Subject: [PATCH] arm64: dts: qcom: Add X1P64100 dtsi with fused-off cores
- removed
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gm8eJtOH
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AE01B1F000CA;
+	Sat, 21 Nov 2026 01:16:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795223829;
+	bh=QklyuLab+Ko9mnpTo5UeclQww95mzIqhLo3F7I/BQkg=;
+	h=Date:Cc:To:From:Subject:References:In-Reply-To;
+	b=gm8eJtOHhBnaOZe7LwDMFJ8mofPVVmX1YGRFpGCBO2m5hz8UlzXX+WvNJUsq934h9
+	 Gtdb+AerXFQPif6SLfOq2/dWtEgcQTz7bh3I6KV8pXYeGgzuMqRHyjcJnn/Sn8iwhx
+	 YAqVTjTNfeSW2VdEJcGvIBkg4/J19L82jz9PAn9h9IkH5umIAy3FYAYFk2uVRLQd+T
+	 s94/ADqCteDEcqO9mcewjaHUBrR90XdQUJorq/NHZbaKSRZNalAGYYTXYCWvSW+hsc
+	 zi51JiNKnL+ynxLP/WhWXj9KNLrvetlXTYZdQhOtRoJb5Hc2rzkXDPGGzjDTCgK7xr
+	 LOe4azsm+AuJg==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,94 +48,77 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261121-sp11-x1p-10core-v1-1-5fed8ce846c7@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMMQ6DMAxG4asgz1iKU8rQqyAGGn6oO0AUtwgJc
- XcCjN/w3kaGpDB6FRslLGo6TxlSFhQ+3TSCtc8m73wt4oUtivAqkcWFOYER8HCdq+oeT8pVTBh
- 0vY5Ne9v+7y/C79zQvh8775H8cwAAAA==
-X-Change-ID: 20261121-sp11-x1p-10core-ece30a046de5
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795221416; l=2039;
- i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
- bh=ucZh0rrrTKCzMMAKIK2fAxwZBMPKDCo7fqu8jragjJg=;
- b=+2UtxI6xI3S8/4D/sR+VtRDaaRmzJ3sDysyTSjC5UmMk3kr+oosXp17CoTOKEGpcnG8XKi/ER
- KFclw1YrnC9DgTVddb9LX/Y4IKEFZnlQWOfH5w4WtshGxPPBDDfoX5/
-X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
- pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Sat, 21 Nov 2026 02:16:56 +0100
+Message-Id: <DN0HQBTG5VUY.1F40HSFIRRGNQ@kernel.org>
+Cc: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>, "Johan Hovold"
+ <johan@kernel.org>, "Bjorn Helgaas" <bhelgaas@google.com>, "Nipun Gupta"
+ <nipun.gupta@amd.com>, "Nikhil Agarwal" <nikhil.agarwal@amd.com>, "Ioana
+ Ciornei" <ioana.ciornei@nxp.com>, "Longfang Liu" <liulongfang@huawei.com>,
+ "Julian Ruess" <julianr@linux.ibm.com>, "Ankit Agrawal"
+ <ankita@nvidia.com>, "Brett Creeley" <brett.creeley@amd.com>, "Giovanni
+ Cabiddu" <giovanni.cabiddu@intel.com>, =?utf-8?q?Micha=C5=82_Winiarski?=
+ <michal.winiarski@intel.com>, "Eric Auger" <eric.auger@redhat.com>, "Eric
+ Farman" <farman@linux.ibm.com>, "Matthew Rosato" <mjrosato@linux.ibm.com>,
+ "Tony Krowiak" <akrowiak@linux.ibm.com>, "Jason Herne"
+ <jjherne@linux.ibm.com>, "Harald Freudenberger" <freude@linux.ibm.com>,
+ "Holger Dengler" <dengler@linux.ibm.com>, "Haiyang Zhang"
+ <haiyangz@microsoft.com>, "Wei Liu" <wei.liu@kernel.org>, "Dexuan Cui"
+ <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>, "Mark Brown"
+ <broonie@kernel.org>, "Abel Vesa" <abelvesa@kernel.org>, "Stephen Boyd"
+ <sboyd@kernel.org>, "Brian Masney" <bmasney+clk@redhat.com>, "Jerome
+ Brunet" <jbrunet+clk@baylibre.com>, "Bjorn Andersson"
+ <andersson@kernel.org>, "Mathieu Poirier" <mathieu.poirier@linaro.org>,
+ "Srinivas Kandagatla" <srini@kernel.org>, "Sylwester Nawrocki"
+ <s.nawrocki@samsung.com>, "Liam Girdwood" <lgirdwood@gmail.com>, "Jaroslav
+ Kysela" <perex@perex.cz>, "Jonathan Corbet" <corbet@lwn.net>, "Rafael J.
+ Wysocki" <rafael@kernel.org>, "Steven Rostedt" <rostedt@goodmis.org>,
+ "Bradley Morgan" <bradley.morgan@linux.dev>, "Armin Wolf" <W_Armin@gmx.de>,
+ "Masami Hiramatsu" <mhiramat@kernel.org>, <linux-doc@vger.kernel.org>,
+ <driver-core@lists.linux.dev>, <linux-kernel@vger.kernel.org>,
+ <linux-trace-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>, "Alex
+ Williamson" <alex@shazbot.org>, "Mostafa Saleh" <smostafa@google.com>,
+ <kvm@vger.kernel.org>, <qat-linux@intel.com>,
+ <virtualization@lists.linux.dev>, <intel-xe@lists.freedesktop.org>,
+ "Vineeth Vijayan" <vneethv@linux.ibm.com>, "Peter Oberparleiter"
+ <oberpar@linux.ibm.com>, "Heiko Carstens" <hca@linux.ibm.com>, "Vasily
+ Gorbik" <gor@linux.ibm.com>, "Alexander Gordeev" <agordeev@linux.ibm.com>,
+ <linux-s390@vger.kernel.org>, <linux-hyperv@vger.kernel.org>,
+ <linux-spi@vger.kernel.org>, "Frank Li" <Frank.Li@nxp.com>, "Sascha Hauer"
+ <s.hauer@pengutronix.de>, <linux-clk@vger.kernel.org>,
+ <imx@lists.linux.dev>, <linux-arm-kernel@lists.infradead.org>,
+ <linux-remoteproc@vger.kernel.org>, <linux-arm-msm@vger.kernel.org>,
+ <linux-sound@vger.kernel.org>, "Takashi Iwai" <tiwai@suse.com>
+To: =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+From: "Danilo Krummrich" <dakr@kernel.org>
+Subject: Re: [PATCH v2 00/10] driver core: Disable driver overriding by
+ default
+References: <cover.1795171088.git.u.kleine-koenig@baylibre.com>
+In-Reply-To: <cover.1795171088.git.u.kleine-koenig@baylibre.com>
 
-X1P64100 is a 10-core binning of hamoa: the last core of clusters 1 and
-2 (MPIDR 0x10300 and 0x20300) is fused off. The Surface Pro 11 LCD MADT
-marks these two GICC entries as disabled, and booting them via PSCI
-fails:
+On Fri Nov 20, 2026 at 12:11 PM CET, Uwe Kleine-K=C3=B6nig wrote:
+> It is sensible to merge the driver core change (patch #1) together with
+> the individual driver patches setting .support_driver_override because
+> with the driver core change the driver override doesn't work any more
+> for the unmodified drivers (unless the new kernel parameter is provided
+> and a taint is accepted). So I suggest (once there is agreement that the
+> patches are fine) to merge them all in one go and provide a stable
+> branch in case a driver was missed to be adapted. I can create such a
+> branch and ask Greg or Linus to pull it, or Greg can do that.
 
-  psci: failed to boot CPU7 (-22)
-  psci: failed to boot CPU11 (-22)
+I think it should be good enough to just take them all through driver-core.=
+ If
+it turns out in linux-next that we missed a driver we can always add anothe=
+r
+patch to the driver-core tree.
 
-They also show up in the cpufreq policies' related_cpus.
+Those patches only set support_driver_override =3D true, so there shouldn't=
+ be
+interactions with other trees.
 
-Add an x1p64100.dtsi on top of hamoa.dtsi that drops cpu7, cpu11, their
-idle power domains and their cpu-map entries, and use it for the
-Surface Pro 11 LCD.
+So, let's keep it simple. I can pick this up once we have all the ACKs.
 
-Signed-off-by: Dale Whinham <daleyo@gmail.com>
----
- .../boot/dts/qcom/x1p64100-microsoft-denali.dts      |  2 +-
- arch/arm64/boot/dts/qcom/x1p64100.dtsi               | 20 ++++++++++++++++++++
- 2 files changed, 21 insertions(+), 1 deletion(-)
-
-diff --git a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
-index d96202e2afc6..cbe2c1a4adc8 100644
---- a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
-+++ b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
-@@ -5,7 +5,7 @@
- 
- /dts-v1/;
- 
--#include "hamoa.dtsi"
-+#include "x1p64100.dtsi"
- #include "x1-microsoft-denali.dtsi"
- 
- / {
-diff --git a/arch/arm64/boot/dts/qcom/x1p64100.dtsi b/arch/arm64/boot/dts/qcom/x1p64100.dtsi
-new file mode 100644
-index 000000000000..ee6f2f3b6ef8
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/x1p64100.dtsi
-@@ -0,0 +1,20 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 Dale Whinham <daleyo@gmail.com>
-+ */
-+
-+/* X1P64100 is a binned hamoa with the last core of clusters 1 and 2 fused off */
-+#include "hamoa.dtsi"
-+
-+/delete-node/ &cpu7;
-+/delete-node/ &cpu11;
-+/delete-node/ &cpu_pd7;
-+/delete-node/ &cpu_pd11;
-+
-+&{/cpus/cpu-map/cluster1} {
-+	/delete-node/ core3;
-+};
-+
-+&{/cpus/cpu-map/cluster2} {
-+	/delete-node/ core3;
-+};
-
----
-base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
-change-id: 20261121-sp11-x1p-10core-ece30a046de5
-
-Best regards,
---  
-Dale Whinham <daleyo@gmail.com>
-
+Thanks,
+Danilo
