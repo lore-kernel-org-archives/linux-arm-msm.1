@@ -1,57 +1,60 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795252265;
-	b=O2RzzQYMwvavKvepb4YnBY9oKgF5Rbs0nuSQJg19C5dxPR2rwPLDZshadoSoJ5CXngvI
-	 wW9nQi7CtNxyuVZDDUXMHb1mCLkjJx6i6acctwnG5UosjVBzbeSpPN7/DZuaulhPpuamv
-	 hUu1pxippfoFE8fZo/ZAfFrj1PDXk0QywwISzWKmsXocvrbSAi7/lY1seV7Z6L7sxIM5m
-	 Yb9btVfcUt1Vghvc8rGb1JGnOgRaWsHztvLAd7lnZTIDqBr42jKr1PNOmudGphyce89K8
-	 OpH+AjV6rCUTN/xlYmMazBLwvs55FWpsLg1zUP+RYkLC1yjwjkA6Nqi8tSWdEb0nNAg==
+	t=1795253159;
+	b=FSPPxGnG6nQvcVn4wyExT4tNuudxh7vacCrnKitWCc1NfXAFAH1LeisRNLC3KFafXMjZ
+	 oRuhaCsygNGLAOSUXdR5zLiUJ5FEGbiUSTtxvXscUQmthQ9boOIVc7sKpEfkm6mYp4ZK3
+	 UdL3gIzBEKBEDBcR6eWMhTDCPJX25i0VFUasjxtVa5OJeT17HSF/NOohJufFVTAoQULnh
+	 sZcDswrEGvug9GYotJsAESqnZO+8nbOng5SHWe7P1sbSxaqM+s6Ua/CkJ38Adbws/BlxS
+	 7iF18as6V4CDEyX2u1naFYCIWKajBdZ5WCPqfvBOl8RgJKhg65KiRJgwQgJeoyTwaLw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795252265;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795253159;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=GPuPhQPXGjgK63QMd53wWjqm0zkGOhohPPcaOiUA3b4=;
-	b=UTcy6WL2ZXMIgrnEGikygClDMDMoNt3C+RXp8ot5Xby/V5Uo/syOuxGbmuadHJXT2M7h
-	 ODYxmxSWMIfujLzwWXCg4WU9TourIf7oWy5sfIjvLZehMTbUdmKZ6YtzzvP88VHcOJhdc
-	 pXeWbkYSs+2qNTR4k9lbfi7MfNBb12JqeHrx+pJfViWwcdNlmQrxQjJPF+qJhdHE8tVus
-	 N7OhGBXRPhbyXVJbUoCZgUOnabXpvh3mbgnfnyRF9OPjE8s6GMG+s5jn5JF/omb0qT52r
-	 ySLFPcjfz437+BZk23rUeGhpNmpxIHwVquIdUf1BOZgKGJc+q+Z36pLu5rn6cKjousw==
+	bh=GGe9mEPAGguqXCiGCFZaEwnE+NLHS+XgxFJI0lVr/Vg=;
+	b=kPsV9f7tN38UHKMqoTLqbOaRD9MDGGNzzxv5oQfCqIAe1BkUmCsyDM6b2QWLVhGl7Y4g
+	 rw2P9Ze70bI4ZDYkrkcRsFyd7Ab4lQDvH+coYe/vsgVC/ghWh9GziXL3os8MLMsJrPCFL
+	 eqXPim+LsPDZrqfT9hLNkMCTAJ4GvWd3R+bc57LcEtKbdrCcdSnnfLrxrtmg/qSb4sKmE
+	 j/cVk52pMp+ZEWbXFy9Cjk4Q8ZvLPmSyU8TFbahX9GnUJjphbH5ouBbaMunLxeGqDiU7s
+	 lZAbg/+PujTNOkRUW2889uYCCr9ySUK7zJPqiNZIkR4iGTDhcM/A6KPwTxAcV95/yUQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pa+0yiGk;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eCiZVyWJ;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 762B5606A32C;
-	Sat, 21 Nov 2026 09:11:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9459606A320;
+	Sat, 21 Nov 2026 09:25:59 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Pa+0yiGk
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0EDB61F000C4;
-	Sat, 21 Nov 2026 09:11:03 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eCiZVyWJ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71B761F000CA;
+	Sat, 21 Nov 2026 09:25:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795252265;
-	bh=GPuPhQPXGjgK63QMd53wWjqm0zkGOhohPPcaOiUA3b4=;
+	s=k20260515; t=1795253159;
+	bh=GGe9mEPAGguqXCiGCFZaEwnE+NLHS+XgxFJI0lVr/Vg=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Pa+0yiGku2mi2/1RcZ70Ftb27/otW7x99MLxZQc5gSNqudcqz/jfpf7nwRE7AgQ91
-	 UVEvutFahOWa7VRAmQZkDZJg8/jJyD0GY7wYtw3KBaUCz6g0dMVX8xy+LRZesaiNNn
-	 Ty6WSeoaIYq/TcOBXn73L6neKTZXCLqT02Yj65dyzRK1x6+w4VSR9iA0EI9wjRLeFU
-	 0800eq+FTyRPAVrwx/yvQSBc9TrZZxk+YcZ5CleRfRLtpyveqM95ur2ioo4qmC5rXp
-	 /Jir66G3jlDcIdtbJyRofIymNt/a/jHtlKD2tZodW8rNbpR561Z6bDM3h2SnDJM+DZ
-	 dx9mqN/lqeLqQ==
-Date: Sat, 21 Nov 2026 10:11:00 +0100
+	b=eCiZVyWJnJr2011suXHsJ5lXU/ktRYMn4hunFh+A8jCwwHjaqRq59DwMt3HvJoxk3
+	 Oe6kT81d4XtDf8i1+OyK31Vcg1/r942apACJCQ48lLFvAUWYLYfG9qzIXaduLf1goR
+	 JTZ1RbjUkxkkk08btHS0v/0FnIukeLNEm6xmBfWAqFEYAQcQ6GM6AXTd6RNYiKPsDu
+	 QYYh2zRzuVuPcL3iNp5vCQcrDqLh3kpTE3JwMyiqwRFJuiR89lw4aC0BTC9pJ+hZx2
+	 JK/m9OKbV+fyjxrOLNT4msA4pxATuUyER9gbwUhs6TjCvg/HmC2LTB7NIf1VvR7Tme
+	 TcfhFj0+7pP9Q==
+Date: Sat, 21 Nov 2026 10:25:55 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: Thinh.Nguyen@synopsys.com, linux-usb@vger.kernel.org, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v10 1/3] dt-bindings: usb: snps,dwc3: describe two
- connectors on one HS data bus
-Message-ID: <20261121-icy-bright-partridge-afe8de@quoll>
-References: <20261117052137.32833-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261121022104.1507987-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261121022104.1507987-2-xiaqinghuan@mail.ustc.edu.cn>
+To: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Mathieu Poirier <mathieu.poirier@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Bartosz Golaszewski <brgl@kernel.org>, Kumar Patro <bibek.patro@oss.qualcomm.com>, 
+	Jingyi Wang <jingyi.wang@oss.qualcomm.com>, Luca Weiss <luca.weiss@fairphone.com>, 
+	Shawn Guo <shengchao.guo@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org
+Subject: Re: [PATCH v7 2/5] dt-bindings: remoteproc: qcom,shikra-pas: Add
+ iommus constraints
+Message-ID: <20261121-red-chachalaca-of-essence-1ccb7c@quoll>
+References: <20261120-shikra-el2-v7-0-9d9000eb50d4@oss.qualcomm.com>
+ <20261120-shikra-el2-v7-2-9d9000eb50d4@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,41 +66,38 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261121022104.1507987-2-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <20261120-shikra-el2-v7-2-9d9000eb50d4@oss.qualcomm.com>
 
-On Sat, Nov 21, 2026 at 10:21:02AM +0800, Qianhui Xu wrote:
-> Some designs route two USB Type-C receptacles through one High Speed D+/D-
-> pair with a GPIO multiplexer, so only one connector drives the controller
-> at a time.  Each connector needs to be described: which role-switch input
-> belongs to it and which mux state selects it, because the role switch is
-> registered per connector and the driver must know the state to program
-> when that connector asks for a role.
+On Fri, Nov 20, 2026 at 06:50:50PM +0530, Komal Bajaj wrote:
+> The number of IOMMU streams used by a remote processor is not necessarily
+> limited to one. On Shikra, LPAICP uses three streams, while CDSP uses one
+> and MPSS does not use any. The existing single-entry limit therefore cannot
+> describe the LPAICP firmware streams.
 > 
-> Describe the two connectors as the two endpoints of the High Speed port,
-> which is what a mux'ed data stream is in the OF graph: port@0 of "ports"
-> carries endpoint@0 and endpoint@1 under "mux-controls", each with
-> "usb-role-switch" and the "mux-state" that reaches it.  The mux
-> controller is referenced with "mux-controls", so an existing "gpio-mux"
-> controller can be used as is.
+> Increase the maximum number of iommus entries to three and constrain it per
+> compatible: require three entries for qcom,shikra-lpaicp-pas, allow only
+> one for qcom,shikra-cdsp-pas, and disallow the property for
+> qcom,shikra-mpss-pas.
 > 
-> The High Speed port definition itself stays optional: a single-connector
-> controller keeps describing one plain "endpoint", and requiring the two
-> endpoints together with the rule that their mux states differ only
-> applies when "mux-controls" is present.  The two states must be opposite,
-> and the driver rejects a device tree where two connectors claim the same
-> one.
+> Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+> ---
+>  .../bindings/remoteproc/qcom,shikra-pas.yaml       | 24 +++++++++++++++++++++-
+>  1 file changed, 23 insertions(+), 1 deletion(-)
 > 
-> *** AI-assistance disclosure ***
-> This patch was prepared with the help of an LLM coding assistant.  The
-> author reviewed every line and ran the gates quoted in the series notes.
+> diff --git a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+> index 74f83b7ce08d..3b827f2aadb4 100644
+> --- a/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+> +++ b/Documentation/devicetree/bindings/remoteproc/qcom,shikra-pas.yaml
+> @@ -92,7 +92,8 @@ properties:
+>      description:
+>        IOMMU specifiers of the streams used by the remote processor
+>        firmware for its memory accesses.
+> -    maxItems: 1
+> +    minItems: 1
+> +    maxItems: 3
 
-This does not go to commit msg, but changelog.
-
-You keep sending multiple revisions, this one even threaded to other
-posting and still not really responding to feedbacks.
-
-Feedback was waiting for three days and then you send the same. That's
-just wasting our time.
+Review from v4 still applies, you need to list the items, either here
+(if devices share the list) or in if:then: part.
 
 Best regards,
 Krzysztof
