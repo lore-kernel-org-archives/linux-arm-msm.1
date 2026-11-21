@@ -1,47 +1,95 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795260764;
-	b=tMGceOkmd4h2qx6cQsG6xNOzPdlx3XKrhhDwjYbWBXBgP9PPoh3JXymGQTESN94/eASP
-	 biGD7+D1DU25nweUZUw8UaUMKH+PhUFAQm/EjBwlHFb6Hb39rLDjIYmEXUbnun9yrS/QH
-	 RCngBn9Nj8Uuhf4wLFWyKVxwr7Z0JBZ5m3+gfXlFev/m88FQhTmJ1jJhgiwmulaAcQFwX
-	 azJIlq9VYWHTObZErHaL0Swm89hDoAUkRP1qmH0+eXREajH0glpV1+dW7iUHCAEfMeMhi
-	 u2ye3mdQTa+ATBHyUSJ+V0SmhEA82PS7dUryOY5ainFsGk+nPliUWIVXrQ0L1jRAnhA==
+	t=1795260972;
+	b=3vycJIgMRbL00H6fG5TS9xHDI62SEeinoxSbXBzBpqaS07v2RvbT94X72fC0oorrBbtN
+	 8Fl6mIYl+9Lm9qjCREcagu4zwMmC52SCKy5r1/1q9WzWREp3m1u6JqN0X/q8OhzsHdZ8l
+	 03FpgESaRdi5AZUJ+pzLML4fS06O/vp7m6G6QAo5HogrgVjBfincXDFV7/VV0+QKXQqck
+	 46m4LCQNBTTo1hlYRI6mtUx//5Ngs5dKJkjgxRIscS6OQfbplj7/deaeu19EjCN8SI0pt
+	 I9GaOvJ8CIOD7cac1gNQC0DRGfJYFcbqbV2jj8LuCORM2NmOVkACw83UE+ftu/6/Dqg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795260764;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=udx8SVT7V+liskpAQLw+2t29k/7bmiaKmr8jMYA6QnM=;
-	b=Clpl4tSs/10IdYsUzSaGwOQDf058GCwi6GyHgLjYtfIDBV3w6gbsynLiKbnHfI0AFM4I
-	 VcRoRuZE5P80dBtZYz2+n2dYQ3GG2UHTCLMtC95I/x35xSIAIApXE2OLi1QhOwrF649am
-	 mQU0pFINAu0GwOEXRIq1qXE6hbpFuREfKrHlZcXiYgwskka5ItFe9f527Z0HiqLZx67XT
-	 a9eKH/+zz/7UEFGHAHGvIDC6kG/2nHsEEnbJwY3uBlY0afnjm9ElO8XFMqWzYpCHVzdAT
-	 TvRqG7jSOANMa//jqp+6HLdxA6WjMto+MKjF5UxDhOROcD/a+f+UskP22LOQJP3TPiw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795260972;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:User-Agent;
+	bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
+	b=K1GkwV8xmxVQWOdZWbxseXQv/U8h61Q78vAEZFhfaYKy/g3B7Wd0+rdAK+Njvxg0fpZc
+	 jAvPkQRy06W8/JCnpLDJrNtzbXgZ32AqyT8eKU4a8eUiupS/Bw+B8So5VUm0JaBmgmjoC
+	 3UfDsqRbXHhJlf+m8GZABVWXBxNyqCOD8cO2CSeahuxgASs5B0xwfbZY55nndhMtkOJLG
+	 jPiuBlGauyNwasJEEyPDm4tL1fUNystTY7955GnprZul0H+JQ4x2IngDvoAlOU348E+bF
+	 NqwNNJIqfvlnXa506nKdP3W9QmmMGh2cjLdOJWzTg69DgNi610PPqztYnat6mxZEVgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IxjgJO2J;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GWv3LZRE;
+	arc=none smtp.remote-ip=74.125.82.176
+Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CAB05606A325;
-	Sat, 21 Nov 2026 11:32:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E0D4606A32A
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 11:36:11 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0E0D4606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IxjgJO2J
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A2471F000C6;
-	Sat, 21 Nov 2026 11:32:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795260764;
-	bh=udx8SVT7V+liskpAQLw+2t29k/7bmiaKmr8jMYA6QnM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=IxjgJO2JARaXa318wA+5RmQgZb22aIRW76D9ixDXe/vBYQ9SGNddjmzoTteSClmsn
-	 0UbjTTybvvt/+eeGgQdh7bb45vTIhtQTMnrCoVXOGVy3rc4urPMLoD4Tg4N+6blQKU
-	 DvVtaMQ2/vP5r5m2wVE4Q9YJZBnmcaQsWen3cfHY3+5VFEeXVqljNIcs89Wl8zOBe/
-	 uSKFzBXW+Y+I2wx1i7RxxSoYfuDUCbn/xTfF7MP00N9zI4TILqlic3XLxdxencXfB5
-	 r5ixoK2t+CJOwEfwwwyeOglcb95p8dUBv8RzWYg+YoAlcdpFb5o7AnbMvv48fIThbp
-	 LvrX3ArWh+6wg==
-Message-ID: <7818fa09-8f9c-4d42-b746-0ec74ee1aa08@kernel.org>
-Date: Sat, 21 Nov 2026 12:32:34 +0100
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GWv3LZRE
+Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-385d8a00598so2198679eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 03:36:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795260971; x=1795865771; darn=vger.kernel.org;
+        h=user-agent:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
+        b=GWv3LZREavFLjqR8gwxbTur2esUqQGjpWycnNAs/dTuQVKiBzv8ndJGuZyJOebKrIZ
+         u9I9R/4ZlaHfv4SQZgAGh+2wZYBS6db4MlP6ZKlMzWEssZz0Am/hmSfMk2zUruqQju1u
+         lj4K9HRXBZP3C1wLQ9ZiLfiQGjjTLymDs7gv80Cv1njpL0ncfaMk3UslYsHNuHkTbzxd
+         t3kelo8xFVL03g38Mzj+7ua0Uv5FYX6XG3otdBUvFZpcmzzBLqvxAVbmSFOo/pBP8ror
+         3I8LQrFVEiGsFtRiptAm7sZFwwSRegECiwSGibwHgB8YC0yhgG/Ky8q2K/fSVTaHyHHr
+         5zLw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795260971; x=1795865771;
+        h=user-agent:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
+        b=0zphlE19bNsKhZcwhYz5kS/J+yvkmnDCbQaTvhiK0rW1uBh5tc4BcYzJF+6WoHsqN2
+         TNezbXSlsOcJjxIMp5E0yT2ZFQmj05PqY2KbNPNIJHaFZJhe6lxQNLEDAuIb1NB/Q3+d
+         nP3ZgIC28OPFFDhi16/QAIWt+8F5/EPEnDib+kZSGQAQdIBQmqSgJ9q1FiX4SYWnbjLJ
+         fb22VcVsLzIXtFQbRe0TVe/HhW2Ty+BDbKsnCQDAS7DcUf/TPidKuRwmiA4hklxnwJLk
+         EbU3fnIA4TvIn0M7tW0RULYY08UJZrQDalsBvOoyhyvDJHWxzi8AEQfq2VuXrfNSS8K3
+         DwFA==
+X-Forwarded-Encrypted: i=1; AL+hErFIbeFrwNU+YlgZvT2hpYHzrPQnI3Z0qluCthpHpP+T9rXZyXtgmyIhgwF+KH5en7l8ni/x+5uApIbvOCIU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+fCm/38zP4+TONEsETeulNUwGIyc/Dxr4CI0rKOv3TEL7tfwF3
+	c+1hL6hKZFZi06iq8zPwHeHtbWPWNYFfho7zrAPdQNoeGNGnWMXbVZk/
+X-Gm-Gg: AZFdTZcRe4/hoEglwEeSRWhvWMotaTKeHoR0I2az29HudJLrgDs06fyW+4OhNZOio77
+	XHttuWqiA0uAEsUT3PKP0NJqn61n6OA84Tw2DGOVz8lkOA5vMYxgPRiQMUx5qTBKEJmSkJfGbT8
+	32ovbkEQADwKKDfLDsM2KYODHapYm5/wCkucx/J315B5w6HFQ3X1DWKP1cixH6acYCHKm7LUTFk
+	aNS+1KHoTMsDMwx7HszBLNukzqTQZOhML8F5D9m0N1hZc2nPeUSpU1ycKxefl1cSk+X8FfI795d
+	8FnChWRGTemBNt8ZkpXRBANSL2NGff8zBg2TfY/CbER2caQtNW4LppLB9keZwAlKCCFKfxtq6l+
+	0Y7AQTKivCYeO+NzFI1JGLH1PPUHGsH0LN8CmuTPo6mCEGayqzYYJ+jQTQKhICfEAey94o2gvhr
+	FWsJFrajv7sZLhv3q/kwKjQ2S3/zYm1z7V/pUCFimzEWpquJvn0DR+Llmf+WpMgrXH2Z911L6jV
+	Dx7+ywim/EGm2x1+Z3zi0dmJ4zcZSI/qhRZZhSU+fzJphDCuIk6s/FkeamuYsG5/vTphHiwq3wm
+	vrXtg/kvvqM8g47XGvLPKxeJK53GmbKAgzf0S8BA1IZcZXWOEQl7e/5NKQxcWZZ6aEvFoQAKsG8
+	BH+/+T6mTbfogD1j/
+X-Received: by 2002:a05:693c:8951:20b0:384:ce59:5e19 with SMTP id 5a478bee46e88-3856f257bd6mr5663214eec.6.1795260971016;
+        Sat, 21 Nov 2026 03:36:11 -0800 (PST)
+Received: from asus-ux3405ca ([140.213.140.56])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567daaf70sm18512805eec.28.2026.11.21.03.36.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 21 Nov 2026 03:36:10 -0800 (PST)
+Date: Sat, 21 Nov 2026 18:36:05 +0700
+From: Muhammad Huda Nugroho <mhudan21@gmail.com>
+To: Amit Kucheria <amitk@kernel.org>,
+ Thara Gopinath <thara.gopinath@gmail.com>,
+ "Rafael J. Wysocki" <rafael@kernel.org>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>
+Cc: Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
+ linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Subject: [PATCH] thermal/drivers/tsens: Drop __init from functions
+ reachable from probe
+Message-ID: <20261121113605.jDNtw%mhudan21@gmail.com>
+User-Agent: mail v14.9.25
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -50,126 +98,165 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 2/4] soc: qcom: add core driver for the Qualcomm
- Crypto Engine
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>,
- Demi Marie Obenour <demiobenour@gmail.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org,
- linux-arm-kernel@lists.infradead.org,
- Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
- Abel Vesa <abel.vesa@oss.qualcomm.com>
-References: <20261120-qce-fix-self-tests-v12-0-b5a2a44bc5ae@oss.qualcomm.com>
- <20261120-qce-fix-self-tests-v12-2-b5a2a44bc5ae@oss.qualcomm.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261120-qce-fix-self-tests-v12-2-b5a2a44bc5ae@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
-On 20/11/2026 20:34, Bartosz Golaszewski wrote:
-> Add the core driver for the Qualcomm crypto engine. Its task is to bind
-> to the qce DT node, set up runtime PM for interconnect down-scaling and
-> register the auxiliary device using the crypto offloader driver.
+tsens_probe() calls priv->ops->init(priv), and every .init member in
+this driver points at a function marked __init: init_common() in
+tsens.c, init_8952(), init_8956() and init_tsens_v1_no_rpm() in
+tsens-v1.c, init_tsens_v2_no_rpm() in tsens-v2.c, and init_8226(),
+init_8909(), init_8939() and init_9607() in tsens-v0_1.c.
 
-I dislike the "core driver" in the commit msg and subject. It suggests
-there is some core feature or core stuff, but that's not true. You are
-adding STUB driver only to handle Linux RPM things (which have impact on
-interconnects, of course).
+Nothing guarantees that probe runs before the init sections are freed.
+A deferred probe, or a platform where the tsens node is probed late,
+calls into freed text and oopses.
 
-The Kconfig has it nicely explained, but here I see it as confusing.
+Two independent reproductions on unrelated hardware:
 
-> 
-> Tested-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-> Tested-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> ---
->  drivers/soc/qcom/Kconfig    | 11 ++++++
->  drivers/soc/qcom/Makefile   |  1 +
->  drivers/soc/qcom/qce-core.c | 92 +++++++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 104 insertions(+)
-> 
-> diff --git a/drivers/soc/qcom/Kconfig b/drivers/soc/qcom/Kconfig
-> index 535c8619197b3e889e536da072ab89d3bb729804..67d54d5211ff21bae77cd8408fa47af630060949 100644
-> --- a/drivers/soc/qcom/Kconfig
-> +++ b/drivers/soc/qcom/Kconfig
-> @@ -121,6 +121,17 @@ config QCOM_PMIC_GLINK
->  	  Say yes here to support USB-C and battery status on modern Qualcomm
->  	  platforms.
->  
+ - On an IPQ5018 board the machine oopses roughly 9.4 s into boot
+   inside init_tsens_v1_no_rpm(), reliably. The only way to reach
+   userspace was to disable the tsens node in DT, which leaves the SoC
+   with no thermal sensing at all.
 
-...
+ - Reported separately against a Galaxy A5 SD, where the driver is
+   built modular and resumes a deferred probe after its module init
+   section has been freed.
 
-> +
-> +MODULE_LICENSE("GPL");
-> +MODULE_DESCRIPTION("Qualcomm crypto engine core driver");
-> +MODULE_ALIAS("platform:" KBUILD_MODNAME);
+Different triggers, one root cause: callbacks living in an init section
+that is released while the ops table still points at them.
 
-You should not need MODULE_ALIAS() in normal cases. If you need it,
-usually it means your device ID table is wrong (e.g. misses either
-entries or MODULE_DEVICE_TABLE()). MODULE_ALIAS() is not a substitute
-for incomplete ID table.
+Drop the annotation from all nine. Fixing only the entry points is not
+enough while the init_common() they call is still annotated. The
+declaration of init_common() in tsens.h never carried __init, so it
+needs no change.
 
+The brace placement on init_8939() and init_8956() is corrected as
+well, since those lines are being touched anyway and checkpatch wants
+the brace on its own line.
 
-> +MODULE_AUTHOR("Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>");
-> 
+Signed-off-by: Muhammad Huda Nugroho <mhudan21@gmail.com>
+---
+Notes for reviewers, not for the commit message:
 
+Resent: the first attempt was rejected by linux-pm for containing an HTML
+part, so the list never saw it. Apologies to the few of you who got that
+copy directly - this is the same patch, nothing has changed.
 
-Best regards,
-Krzysztof
+Against mainline master as of 2026-11-21. Not tested on the Galaxy A5 SD;
+the IPQ5018 reproduction is mine, and it was on a 6.18 kernel, where eight
+of these nine carry the annotation. init_8952() is newer than that tree and
+is included here because it has the same problem, not because I hit it.
+
+The second reproduction is samcday's, found and fixed independently with
+the same mechanism:
+
+  https://github.com/samcday/linux/pull/13
+
+I have not added a Reported-by: or Co-developed-by: for it, because I have
+neither their address nor their agreement to be listed. If they would like
+a trailer, say so and I will add it in v2 - the prior work is theirs as
+much as mine and I would rather credit it properly than silently.
+
+Neither version appears to have been sent to the list before this.
+
+No Fixes: tag: the annotations predate the ops indirection in several of
+these files and I could not identify a single commit that introduces the
+bug rather than inherits it. Happy to add one if you can point at it.
+
+ drivers/thermal/qcom/tsens.c      |  2 +-
+ drivers/thermal/qcom/tsens-v0_1.c |  9 +++++----
+ drivers/thermal/qcom/tsens-v1.c   |  7 ++++---
+ drivers/thermal/qcom/tsens-v2.c   |  2 +-
+ 4 files changed, 11 insertions(+), 9 deletions(-)
+
+--- a/drivers/thermal/qcom/tsens.c
++++ b/drivers/thermal/qcom/tsens.c
+@@ -929,7 +929,7 @@
+ 	.reg_stride	= 4,
+ };
+ 
+-int __init init_common(struct tsens_priv *priv)
++int init_common(struct tsens_priv *priv)
+ {
+ 	void __iomem *tm_base, *srot_base;
+ 	struct device *dev = priv->dev;
+--- a/drivers/thermal/qcom/tsens-v0_1.c
++++ b/drivers/thermal/qcom/tsens-v0_1.c
+@@ -207,7 +207,7 @@
+ 	return 0;
+ }
+ 
+-static int __init init_8226(struct tsens_priv *priv)
++static int init_8226(struct tsens_priv *priv)
+ {
+ 	priv->sensor[0].slope = 2901;
+ 	priv->sensor[1].slope = 2846;
+@@ -219,7 +219,7 @@
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8909(struct tsens_priv *priv)
++static int init_8909(struct tsens_priv *priv)
+ {
+ 	int i;
+ 
+@@ -240,7 +240,8 @@
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8939(struct tsens_priv *priv) {
++static int init_8939(struct tsens_priv *priv)
++{
+ 	priv->sensor[0].slope = 2911;
+ 	priv->sensor[1].slope = 2789;
+ 	priv->sensor[2].slope = 2906;
+@@ -255,7 +256,7 @@
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_9607(struct tsens_priv *priv)
++static int init_9607(struct tsens_priv *priv)
+ {
+ 	int i;
+ 
+--- a/drivers/thermal/qcom/tsens-v1.c
++++ b/drivers/thermal/qcom/tsens-v1.c
+@@ -145,7 +145,7 @@
+ 	[TRDY] = REG_FIELD(TM_TRDY_OFF, 0, 0),
+ };
+ 
+-static int __init init_8952(struct tsens_priv *priv)
++static int init_8952(struct tsens_priv *priv)
+ {
+ 	priv->sensor[0].p1_calib_offset = 2;
+ 	priv->sensor[0].p2_calib_offset = -1;
+@@ -173,7 +173,8 @@
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_8956(struct tsens_priv *priv) {
++static int init_8956(struct tsens_priv *priv)
++{
+ 	priv->sensor[0].slope = 3313;
+ 	priv->sensor[1].slope = 3275;
+ 	priv->sensor[2].slope = 3320;
+@@ -189,7 +190,7 @@
+ 	return init_common(priv);
+ }
+ 
+-static int __init init_tsens_v1_no_rpm(struct tsens_priv *priv)
++static int init_tsens_v1_no_rpm(struct tsens_priv *priv)
+ {
+ 	int i, ret;
+ 	u32 mask = 0;
+--- a/drivers/thermal/qcom/tsens-v2.c
++++ b/drivers/thermal/qcom/tsens-v2.c
+@@ -220,7 +220,7 @@
+ 	return 0;
+ }
+ 
+-static int __init init_tsens_v2_no_rpm(struct tsens_priv *priv)
++static int init_tsens_v2_no_rpm(struct tsens_priv *priv)
+ {
+ 	struct device *dev = priv->dev;
+ 	int i, ret;
+-- 
+2.51.0
