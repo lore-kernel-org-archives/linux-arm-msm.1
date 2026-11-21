@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795297288;
-	b=DRW1l9MSPtdPppBe0qWDVgjJGbe/nwe+33PR9rOQTHd1sMNiKHZAqg3VtxGqX5RQRqLO
-	 IVE+E6piBIydfReM4bMnEbJvVE4LmnAhvPUBhZPxni/PIaz8G2DiFJCgSfML0/Fq1/fwb
-	 Jr+hAyeCeFbJPGr9i+5Ct0tt6dK+N5FyMP1B1DWq8BwOxnMocaK9MFbMS0JC+RxdlFHHq
-	 7f8JjuMyTwOmCDvZ45vcniPbhxHT8WimtDF+jTHNrInVIzb+kRN84aBRLfXwPeDa6mGRF
-	 Pd5V+kNXCl6SxiZpovS3bOR5PESdYr9BgQn5ALvbuS5VebT9QZIKyu1KBoujehTF2hQ==
+	t=1795297290;
+	b=XC5u4fp08VkxNUqqTV7I733teiI2AWppgcAf/42k+hbk5kUlctG564obnDmODpiSHH62
+	 Sq2z8BXOlGmUUsIPuE1ZVpGdQGgDbyX8KUQZxiFnSK60/cDpsqZpKsu5imLTcB9yO+pU2
+	 8tGPn1UVMA6S7Wtt78cNBRaJzfksLL1sbsXF8WGLtXatZYJScGEEKAlDknKJ5LFBjd8Mz
+	 bdBMw1g63huFlxlyxNoPom7+wCSdBpj8GV5U3bOxC1n/V6nQUmC34l900Azqf/ztJjMVD
+	 OfB2t4PK16Ov0g3rRFQ+WcJMvwxf54SumHDqdKHRnrKxICIMHgY9hWvmj03CmxWQoVw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795297288;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795297290;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=/I60O6m+DFQriN/q4lolCJJt5ab8WOxlO2aTwkK9VZE=;
-	b=k9HtiZ/eybWRwffjqx5lzZFvZO1+hYuSKUeQ0FK47MXm99LkrR7AmlAj0RH2zSZ1YDEU
-	 iPyF8VS6hMsRZjU9qoXkyJwahufyJYSvyIAX6L+HKDNq0TzK8O+mZDwBVMnbklraYiROU
-	 yAhXizlDpMrEKp0lAPyeHFjaRbmMNtkEDsys8O+45X9rpg82EDVrFk+tEHbYIyXXN/UiS
-	 TMgJ4k2QqtLNc683FIrjAF56mueV35QYiIRBfem3XIhn2FZinrkbMPKYWGVIvk93oKjX5
-	 4d+07XF5xUsnDvkdz7k4PUIJTy1x65HtGNeKRD578T7ogMZ1XWKVcyllZ5iyQ+pBRuw==
+	bh=nqAE9KZVqGmI34o9aLpAZb7QLNNzEAOkrz2b8adTiHA=;
+	b=hK0Qv0AXLXTPmQ72ENpM27CzX+QO2ZgoN+lsYpCf9ZOdoe8xNANWnz/Xg6Wd50xxiDMz
+	 XxYcm9lVs2oWzsXOt/gpXHl3tF9SKewkTbEi5TxLEGnB5zMOVXnLhtzk6b6rAB2lMYHTP
+	 uFgyXm6/AnbWRfZsCpWJzHJnh3jVLjCjCVM3Lcei9gQQLp6Zl0qjFnJ0ZsF4aevqPJQ5R
+	 40Ag0Sa3RR78yTS77Z52aYvKmI92Tc/J6oE4O0aWBaWBatKeGuyo+MPrJewbTBI0EHvTs
+	 ikpTJGMEZGTgbN7/cVcX1AJDueFsjVVM88Pw4zSwp0VCwSC+znpzdXX6QL5xzJnzFjg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Uy6YUXOK;
-	arc=none smtp.remote-ip=209.85.128.41
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=IewuJuFG;
+	arc=none smtp.remote-ip=209.85.221.52
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A40C3606A335
-	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 21:41:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A40C3606A335
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D0E1B606A68F
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 21:41:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D0E1B606A68F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Uy6YUXOK
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4a9a8d6cea8so24136405e9.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 13:41:27 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=IewuJuFG
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-490c3ae81d3so1280433f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 13:41:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795297286; x=1795902086; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795297288; x=1795902088; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/I60O6m+DFQriN/q4lolCJJt5ab8WOxlO2aTwkK9VZE=;
-        b=Uy6YUXOKot9d9pujQ/L3tSdPnWAQ6p/To+Ky2j8VKWwF8ITWHGbEAzGXKKtnJzTfGv
-         DV6kmg8QCT1JLHKjA/CUmlXMyD8aK9LdYPkcnE86a6+DuG4rT7amEq5ZRS9DKDhX/bjt
-         Knq1GEY5Pi/dAofXoFYx/174Qe2iMk9REWfLbYoLD98vEfsD1PoRgEgQMzbGJE+25i3o
-         hp17i34Z0mafsDLw1vI4TxDy2dCbe2NdpfyFmLTlbJPj0LHaWY0eCOBvQ2EuvNEDbgiw
-         HqK6ILrk0RHMQmtKCcg0AgnlqfueUKBqoJJ4NRtyzoqIepbLbdmrZJ7n7Cz1lEEblvIZ
-         zmgw==
+        bh=nqAE9KZVqGmI34o9aLpAZb7QLNNzEAOkrz2b8adTiHA=;
+        b=IewuJuFGIB1X0E0CXUO4s4h82dTjoc5m550vygeevXElgFSZrch3CywofO9u8cKZiL
+         LAdrnhFf9y3RdO1t/Zmv3i4G89I3idhivczjSFS8Dguuq+cPubf7LDD5zuKMKSwKOcDx
+         NNZ13x1AVBorh+09VI/mFfrMEKbF+32AiHroVCWnqGmmu5DkK6hNOfg2BHMngX7sbjXp
+         m5REfPUptbBmJB1gSTABkXxe9sy4neET6IPzYDHT3K7bir/YREpH6PUDd2LtAJJ81pbp
+         La2ijPMAuA5TbaDy+To89rCBIoKbxGoYN/QvEEscmU7ByJZRziREFDroE67ZhiOzLbiT
+         XvyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795297286; x=1795902086;
+        d=1e100.net; s=20260707; t=1795297288; x=1795902088;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=/I60O6m+DFQriN/q4lolCJJt5ab8WOxlO2aTwkK9VZE=;
-        b=Vxfry8T9HK3RiUzoNb1iuQQJziNHaFZH5qaTuuSmnjy3m6nWK4N219HJ9O+BuKHfZx
-         lPGU/DUflR83cEVwxyWDNFrnSD30jSg8blTV9pwU/mVaGhkq+99NH4+zzSi1p/rFieIF
-         OgUBYza7F7lH2tFbMXITQLEG91rSaCF7Ge14eoDS4N9osaDP/bJ22qHRNZf/FZk4U0ge
-         HPjQSDuqLjJFkf+WDNGhDnFSVFzexFsKQnpSyIw1lEzeis2rArgXlO6Z9A9UWEyPW44j
-         q98XZDmTMcSiI2Uf8OLo79j03sY8Pywdu3nqXYyx2z/tdNmOWIqzWAPWMNddd8ZAgYCd
-         Cy9w==
-X-Forwarded-Encrypted: i=1; AL+hErGF7M6O3X5gBKo6lXecRNotwvh/mIZ3DIB+MtpRfGfgkenw0se0eA80bNfvW70CXVw1SOy1enfzMp8ds0F0@vger.kernel.org
-X-Gm-Message-State: APuU4Z9/hX5CW6z9yTyicRGUtamv/C/H7bZUbf69XqwzXVsoNAJJrwRD
-	SV7jrRhaGbptNCHyNiGiB2TFyjOaKQ/7dtY4Aw4K8z9l5S/KTZNVqt4=
-X-Gm-Gg: AZFdTZfSDV8CAM9049POhoqmv6HiI1ZnHjwWUGb7bUFGxBl6MBEai0n61rlF/J13I+o
-	AcF+l/mt1cqIu0U477oY79Ps+UD2mKrxYAHMxxcjJuMbZBY8p0YTXcgCyzGjrupPdzb2BVGRmbe
-	hQ91+UWotmAOR3E/KLUp2Fs3gf9IHwJ3iPDaOeomAQo+i/vGUxULs/VWfT3KW7Iwn/c+8P234nV
-	KyPFlfNvAooMfeMuB+7cXdPv/Jn8DSxdKKm732Ojex25CowP606oIOCCAIzSL6AeP+TcSrbqhag
-	BQnP3zRFZgxTlDrlkssHovSdQRipoIloxFPykvsRuz+KFSvRU1QPVbYbuowlG2152axSIuo3Dx2
-	pIFmmgY5/mx5sNKZKbNVC3dqZTpKbil0oUjmJ5hveGpwXL5NVeEzStg58H2VwNZ/8FGYgBZQ/W3
-	o/HsrtLDmc6RbT+k/loQiSHLf01CQt/wA0oFHeAQRPZBWZ2MRoC+VtDQ4FxdaCqRhNvTOU+dOst
-	yB29kaw+isrMPsOvBOkcVuuTHfLg3Z+doXv+GXXIU9ZowogBffw2tQ/gblg4HpIQRmUtwUgmCu2
-	L1CT2Vrg+HT7qakctd/uMbasarvgtdeQCWEib4o=
-X-Received: by 2002:a05:600c:154c:b0:4bb:6a78:7c42 with SMTP id 5b1f17b1804b1-4bb887c3428mr161230565e9.1.1795297285984;
-        Sat, 21 Nov 2026 13:41:25 -0800 (PST)
+        bh=nqAE9KZVqGmI34o9aLpAZb7QLNNzEAOkrz2b8adTiHA=;
+        b=u9ci9Q8hBH0n7HWaVHG3G+GmVPSaOUHUkXJ3hw1mldUtSBBATiB63DynFhbiZ8+98O
+         H1kRt1A7RVl2coOGJqsxgven7BZPlml7wUnQQeaia5N3cJ+kvQ2g5T9czPpySa8Ny1rN
+         2S0EWuBgz3LbGNYylMLak9i66YrR1j78pzbwEXaCvkNCIi4H1X3tgqU2UXRKipO2ScKi
+         LS7KObIwTgw1ZtcXEs+mA16KmSUQAoIMRHzNNPuNO7S8Ues0FU07JHbVzrfZTxogNfHW
+         Pg8ZYtLRaN5Y2HuelvImI4d27X5Hxzx2nJy+RC4+UnzgxfbMFSCpNN++iGfpdQs3yqPq
+         vGkQ==
+X-Forwarded-Encrypted: i=1; AL+hErFX4JG6I9lBYsf0FHsXbzwvOiZ3vGmNboj302M1uW6ccGxoF7q1WrPZaxQVQTWcIA+sP6URTljT0tusd3id@vger.kernel.org
+X-Gm-Message-State: APuU4Z8+nqQVI1ZSJQBDTlqlYPH9JkkHC6h6rb5wxsYH0WOS0hmdD5X3
+	mvDn2u8Z+JJooU2/BKPwkPUCxYDnaSYZWxRl5/h1Msg1O9Fovh8Cn6M=
+X-Gm-Gg: AZFdTZeYl2HT08I6WF41yPFd8EuVO94VxKWQSt38aI238CQv0kpTi4ltawwLg0vUujn
+	kFySyqDEN138LWDJJ0i2BC3UDLCP1PlIWn2glXf8jUdLq6f+eF+LMoXOGtle7OakVuNDyXmZNsZ
+	LqgFF3ogHEKy8qKf7aGvnASSQy57/bAT8/1ieqqaY1qMS5oclylslSMSXF+PfhqsQJW0Yya+ZKa
+	YHGIodboXk3bQS5reELDCyWscUMGyNibp+d4l5p79TVWalpoErOii6oPu9YyMtGkND3hCpbHvkz
+	6vbW4uz4kLUNCkBjwjAJuSGXysHts5sLp0DT1MqmGSO4qXwEAK67cEivUxzzIcLnWxlxVpfhRkB
+	OsNxBp+yApfvzl7VC4yWrUdX4Hj31M2yWCs8NbX0QGSfzZCyAnnSwOvaMVF01ECCbXKb/hzBbYv
+	vhY9LLqQtCB6OBVYWOQDmnjh5e0Ndw9Y9hca1YP31pxCNgdGgF5eoYD8FDjF9Fyd3i32hCEfSOS
+	U1exgfCX7/+OQzSFjN9nfa9nx25vYHUi3BOx4ZoTLFdr0917XACH5TrbCmo2tjwTTUNqGXTmEY/
+	EeWKsd4jNKrFSw7n3/fKCm7BZziC/JunchMcRYsiL16/V6q4KChHJi7N3enD
+X-Received: by 2002:a05:600c:4fc1:b0:4bb:53e4:a7cc with SMTP id 5b1f17b1804b1-4bb88820741mr170496205e9.30.1795297288186;
+        Sat, 21 Nov 2026 13:41:28 -0800 (PST)
 Received: from h7015t.. ([193.207.113.127])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb9067a0e6sm54580645e9.4.2026.11.21.13.41.24
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb9067a0e6sm54580645e9.4.2026.11.21.13.41.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Nov 2026 13:41:25 -0800 (PST)
+        Sat, 21 Nov 2026 13:41:27 -0800 (PST)
 From: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>
@@ -95,9 +95,9 @@ Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
-Subject: [PATCH 4/7] drm/msm/dp: restore source params and reinit video_comp on link maintenance
-Date: Sat, 21 Nov 2026 22:41:02 +0100
-Message-Id: <20261121214105.32596-5-gianfranco.mariotti94@gmail.com>
+Subject: [PATCH 5/7] drm/msm/dp: dispatch native IRQ_HPD directly to msm_dp_irq_hpd_handle()
+Date: Sat, 21 Nov 2026 22:41:03 +0100
+Message-Id: <20261121214105.32596-6-gianfranco.mariotti94@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261121214105.32596-1-gianfranco.mariotti94@gmail.com>
 References: <20261121214105.32596-1-gianfranco.mariotti94@gmail.com>
@@ -112,41 +112,44 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-In msm_dp_ctrl_link_maintenance(), msm_dp_ctrl_setup_main_link() calls
-msm_dp_ctrl_config_ctrl_link(), which resets REG_DP_CONFIGURATION_CTRL
-to 6 bpc without restoring the active stream's BPC and format via
-msm_dp_ctrl_configure_source_params(). In addition, ctrl->video_comp is
-not reinitialized before waiting for video ready.
+msm_dp_display_irq_thread() forwards DP_DP_IRQ_HPD_INT_MASK via
+drm_bridge_hpd_notify(..., connector_status_connected), relying on
+msm_dp_bridge_hpd_notify() to observe ISR_IRQ_HPD_PULSE_COUNT in
+REG_DP_DP_HPD_INT_STATUS[STATE_STATUS].
 
-Reinitialize ctrl->video_comp before retraining the link and restore
-source parameters via msm_dp_ctrl_configure_source_params() before
-switching REG_DP_STATE_CTRL to DP_STATE_CTRL_SEND_VIDEO.
+Because an IRQ_HPD short pulse lasts 0.5-1.0 ms, STATE_STATUS has
+already returned to DP_DP_HPD_STATE_STATUS_CONNECTED by the time the
+threaded IRQ handler runs, misrouting the short pulse to
+msm_dp_hpd_plug_handle() instead of msm_dp_irq_hpd_handle().
 
-Fixes: 0a19867dfb8d ("drm/msm/dp: split link setup from source params")
+Dispatch DP_DP_IRQ_HPD_INT_MASK directly to msm_dp_irq_hpd_handle().
+
+Fixes: 5043357e75ba ("drm/msm/dp: rework HPD handling")
 Signed-off-by: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c | 4 ++++
- 1 file changed, 4 insertions(+)
+Note: Kept separate from the msm_dp_ctrl_link_maintenance() fix so this
+patch can be dropped once Dmitry Baryshkov's and Yongxing Mou's
+in-flight DRM_CONNECTOR_DP_IRQ_HPD series land.
 
-diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index 779f743f9418..0904893bd529 100644
---- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
-+++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -2094,10 +2094,14 @@ static int msm_dp_ctrl_link_maintenance(struct msm_dp_ctrl_private *ctrl,
- 	ctrl->link->phy_params.p_level = 0;
- 	ctrl->link->phy_params.v_level = 0;
+ drivers/gpu/drm/msm/dp/dp_display.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
+index b8373740275b..3a3123dbe417 100644
+--- a/drivers/gpu/drm/msm/dp/dp_display.c
++++ b/drivers/gpu/drm/msm/dp/dp_display.c
+@@ -1015,10 +1015,8 @@ static irqreturn_t msm_dp_display_irq_thread(int irq, void *dev_id)
+ 		drm_bridge_hpd_notify(dp->msm_dp_display.bridge,
+ 				      connector_status_connected);
  
-+	reinit_completion(&ctrl->video_comp);
-+
- 	ret = msm_dp_ctrl_setup_main_link(ctrl, panel, &training_step);
- 	if (ret)
- 		goto end;
+-	/* Send HPD as connected and distinguish it in the notifier */
+ 	if (hpd_isr_status & DP_DP_IRQ_HPD_INT_MASK)
+-		drm_bridge_hpd_notify(dp->msm_dp_display.bridge,
+-				      connector_status_connected);
++		msm_dp_irq_hpd_handle(dp);
  
-+	msm_dp_ctrl_configure_source_params(ctrl, panel);
-+
- 	msm_dp_ctrl_clear_training_pattern(ctrl, panel, DP_PHY_DPRX);
+ 	ret = IRQ_HANDLED;
  
- 	msm_dp_write_link(ctrl, REG_DP_STATE_CTRL, DP_STATE_CTRL_SEND_VIDEO);
 -- 
 2.25.1
 
