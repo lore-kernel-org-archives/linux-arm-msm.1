@@ -1,67 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795278265;
-	b=zMV0zOFIuCnwx5MMD7s1/pY4PC/bQ7bQZ1XmEGHOahgo2fpXzs0ETyOg7uszlv4hp0cu
-	 cRBTC3U6mPBB9lLCNpN2JjwNnmfSRSprF5OUtAOQHZC7y+ddgKFfMn/944CnVHPZ4gbQl
-	 RpKyjX6KWRZ5Hl3HT3CA2dcqMxZadILOBP7gO+YtfFzRZE6wKt+clc9q43XoZbiT/8gkQ
-	 KsebHVMhxdR7OHadv8v1a2MrSBwGyfLAGDWXTQTwNmw3/tThLwDJQ+0sSIa7DHw4x7GrR
-	 qGeUBv/eucwIcL37rPRTQE2CMbdR9gLlHXcaiQP9XmIXrj4uccFx3SwrosY34SmbFQQ==
+	t=1795279497;
+	b=14LJe3L/ukR68QB2PNVBf2c7eJZxkoUQMLBvlauTuEK1gGOtbXKDlB+ND8P9EaNZI47o
+	 D6/iYBgieWJtDP04/M/snL412Q5xF7XojPdi7rlMTFtJz1yZvkhwXWuRHM79Uvah2OCzl
+	 xLL/eq9pHoX0ZTKZqR3oZMj+Rja7ZL/6aeJ4PlahMsoc3/BsK6gemuX2j3/TQrZcm/DD/
+	 d8UCen1gdONQEVj2MM29mYARfO08z55BLelxauGh9Xn3MDom2uSzHxNJmqVAH8ipYmSRz
+	 X3bUIlDIxfySBVT7EWCoHIHJRNPZUOlRpSDGC2b9aiRuKwTmlXydQtNKKbmW4dwcLkw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795278265;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:In-Reply-To:References:
-	 X-Mailer:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:
-	 MIME-Version:Content-Type:Feedback-ID:X-SES-Outgoing;
-	bh=pDT+Kqey1NzfJtY4TrSB1jtxVUMrLURNDrx2AreClww=;
-	b=wXVgd8UizZLyPcC19BpfRDgatjmA/klyAxTbw9KhM6mMX3WGfIy9mNXobahkNOOJdJZH
-	 bwBlLDy46EVeBkCDQMY5U4jE/uYACCKlEk64U8Na521pJTd/LYMeecNn53MjqTB2UHDjp
-	 b6CXLF4Fi+P0vsWKJVYsxXM89KG1ydAQA73y8RlhVEeQwOZTc4utb4Ba49FoKbkTw4r8f
-	 HlKKKPqFg2bZ0kg+/UpGLWF5Rhh+ZOSFaF1qqMA2tscgFFxwoFN/q1TSubN26I15pUCzv
-	 UNt9MwH8zoauKG9YvZqm/S4J3aR5rZLpQHoYwO1LCsR1gb4Jexc7FfVM+FrRbDuHTwg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795279497;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=CxqkyoWUaTTX2T9h8JesIf80SZlF7IaEiUzIJtTzDJk=;
+	b=y843E3SXJ7jsvkAx8uW9txti2u3PaMKTZhZUwIcb95/rL6bflhmCEa0VhDagQ6myv1wK
+	 dm2NuFfj8idfWqbSEKSLgmZqZq1IlKu7IdgypQa3htI+j81PFOxRdfSeQ9nxKVzVVcUvU
+	 KlH1GUTOgR9gN6qc7ID9Zq6Up5fsxooxFuRJZovHa1t3ze8elKNdCEZf7uMHKUxkGY2eq
+	 QKr3yN9LGKrn/3+WQQu65YA+pm6JKP5BNkp1F4Csq5O+q7BbPPCCGAfZgtzSmAtUn9o8z
+	 iXVHubodys3HNFRC2lcXfOnKfmh7oERbqvKFf65/SlC5/mcnLs6o1fZx9YfDKOmCr/w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fqwqf.xyz;
-	spf=pass smtp.mailfrom=send.fqwqf.xyz;
-	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=kGh5lS0r;
-	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=IHAaeuKn;
-	arc=none smtp.remote-ip=23.251.234.52
-Received: from e234-52.smtp-out.ap-northeast-1.amazonses.com (e234-52.smtp-out.ap-northeast-1.amazonses.com [23.251.234.52])
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hz9sT3yV;
+	arc=none smtp.remote-ip=74.125.82.175
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6333B606A320;
-	Sat, 21 Nov 2026 16:24:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6333B606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D40CE606A330
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 16:44:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D40CE606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=kGh5lS0r;
-	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=IHAaeuKn
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
-	d=fqwqf.xyz; t=1795278265;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
-	bh=pDT+Kqey1NzfJtY4TrSB1jtxVUMrLURNDrx2AreClww=;
-	b=kGh5lS0rGhc1l+WXyw3TmGGzlLuoRAmSuvLXuDsdMWeOtp08aQQI/BIWofQTCupm
-	JlhVc65zxzTKYIr1LZCQsRR8+Kcvrkrm11gw2+J7uksQhoThTbgkVlkMATwj/Xv4Ghj
-	1Q9WTCSXFOVk7P1VhN3ZIBQW5o5kbbLXCfVVM+gk=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1795278265;
-	h=In-Reply-To:References:From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
-	bh=pDT+Kqey1NzfJtY4TrSB1jtxVUMrLURNDrx2AreClww=;
-	b=IHAaeuKnPZjl9cmR/z80jSPllNsO6eMD4SbQO0EQ1GWRoVK9zKly913tHEh0X+dq
-	+ALindb/z3+39KjDZpmIVq/9oWfvs57ua52xkSx8vhJF1BAAZkDbaNy+KYlEOuH4AWI
-	TCIrbNKbFrTwsUe8washvcpYZ4BF6Emuf/SShnR4=
-In-Reply-To: <20261111135338.27008-4-allan@fatecpompeia.edu.br>
-References: <20261111135338.27008-4-allan@fatecpompeia.edu.br>
-X-Mailer: git-send-email 2.53.0
-From: Jizhou Tong <fqwqf@fqwqf.xyz>
-To: allan@fatecpompeia.edu.br, xiaqinghuan@mail.ustc.edu.cn, 
-	loic.poulain@oss.qualcomm.com
-Cc: bryan.odonoghue@linaro.org, linux-media@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH v3 3/4] media: qcom: camss: always stop the pipeline in
- stop_streaming
-Message-ID: <010601a1feec5989-7c15d602-3c45-4583-a9d4-9048573b37f0-000000@ap-northeast-1.amazonses.com>
-Content-Transfer-Encoding: quoted-printable
-Date: Sat, 21 Nov 2026 16:24:24 +0000
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=hz9sT3yV
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-3869f03af6aso612314eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 08:44:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795279496; x=1795884296; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=CxqkyoWUaTTX2T9h8JesIf80SZlF7IaEiUzIJtTzDJk=;
+        b=hz9sT3yVPSsdmeXUzzQ/OVC/OtIFzaPMVXX0ckbqhQbtpL+VG+LssjROz4BSKZt9JK
+         cdWDsaKEMuY1lyAqQeaN7+6CYDSclB/TsmEnXzMnrgNaz9GOzouZBF8sakyd5gXyqzsB
+         Etp5/+yHAoTCBrW9dKobmkzg770jwKN9wJGyM2lEp+Y+/4mVArdhuebn5B6ahstfGnbB
+         EXkoTkHe2aAKCiC7P7vcxii9Vt7ef0kwbdY714wM7sUFHW/64uwK3vDHooaZVrOiGdFL
+         eUE/kVmyW9uFt6duKhmvb5w75l6UlHrGCycn3VNVmeMfHJm/TU0RT//F+qH/hDHP0HLa
+         Cfww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795279496; x=1795884296;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=CxqkyoWUaTTX2T9h8JesIf80SZlF7IaEiUzIJtTzDJk=;
+        b=lQf20dIkOAYNUbrBWh6p3bz7GOcOiqTWzltel4cA/4vmIOhDhiSWVNtffFXBERHuxh
+         oHMVOqfa4OFyhf9axwv2WuTKN0oNB2L0XUguPxZJQb58pxL+y9FcAEq78MwgfhlJ7ryE
+         S7k6gG8zbYDr/pDrzf6h6rH4X92WutNW8GobefQe2IDs2D80YNxt3++1sKt3p9oseQLq
+         VyLSfzITqiG1DjZyszi6KZnxeYYkE1X7I/nEXN58G3HXn+1Dp0Z68Ie0+E4BSXReYegr
+         Jdxq7iF+Jg1MEwEao3/UX4CpJR/m8tYluK7skE3zHwHUkDU6N+DI8IGKVkSGOKLBg37/
+         lCzg==
+X-Forwarded-Encrypted: i=1; AL+hErEoD7fM35WELr9i/4acDhsq4n+ceCEIiMRDsVJWvDO8ZXm5lFNgfpCMQ7pAzD9ZOb3C4cA2hA+of4UKClZA@vger.kernel.org
+X-Gm-Message-State: APuU4Z8uRHqUQQbQWyXq2GjDDQbDQzitBQ+V3cMO/VcY0zFbKK7GPipM
+	nvysHaF182eFHFq2c1qXSLl20dq7rIWnufesYRRMll6T3taAfsyx0BS/LsHSRGR0hRg=
+X-Gm-Gg: AZFdTZcAWZ53f0vdYEBeFkT4R13pkGpyw2OK7TNtIRFngxuGf4ViKq/Ab08lUEdg2BP
+	Vh7BqnT2sYRIG4xd91VQZVkaqtObO3vxNijDPX70+UvmbwyLeBUpSaucNv1DO5MSkDsBmf2cdVf
+	kJHTOs2FvOzRaxecxQFlIgNZLQSKvcDD7k+maBo2/NKC5HTW5LuG4sx65Kyub8jaJBTpudXZgwI
+	JKT4gBjwPTvYdIt1vcUIkwfWhqw95wE5artWxQk52jEOpVaJgdyeRJtdtnArZZFNlSdlUfqFFew
+	I8EFdH/kJtYk59We9OlsKWD42uo6CNjmjcc8m6u0tuSD2yLXh3pBuXRoxqbQaR9LspR5qxmxZ/7
+	oty6nQxfr/o7qhI4EucjOBjkgIh4fxKn3VUQGzpTcJRtTnx+k84yfqqDI3frbowtCFVgUDgTD7s
+	nnWbtHO16R3b7KsOGZoaKuIC/FEsycA8SKlGsVkAYzrLbP3vZFaQCATvsPykF3ZP4Ka6Ahhjj2W
+	a7wqtGNMFQ66QahMsfLEhf6DEmdvidPYoz0rHTyteTj7CS7g7Q2OMpGMXSmA1sLmkJfNWdk7rOH
+	L+nbjHpObwiAg6HjD5xJ8L7Ms0V9uHWYgPBHgw==
+X-Received: by 2002:a05:7300:6b0a:b0:382:75b5:e77 with SMTP id 5a478bee46e88-384b4a80eeemr8320187eec.25.1795279495752;
+        Sat, 21 Nov 2026 08:44:55 -0800 (PST)
+Received: from DESKTOP-NM9EKIA ([2001:e60:8509:ba6c:4c23:efbc:89e:50d9])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385672c6f31sm18791440eec.15.2026.11.21.08.44.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 21 Nov 2026 08:44:55 -0800 (PST)
+From: Joonhoe Kim <26rote@gmail.com>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: abelvesa@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	mani@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] arm64: dts: qcom: kaanapali: Describe the UFS MCQ registers
+Date: Sun, 22 Nov 2026 01:44:53 +0900
+Message-ID: <20261121164453.26-1-26rote@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -71,31 +101,49 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
-X-SES-Outgoing: 2026.11.21-23.251.234.52
+Content-Transfer-Encoding: 8bit
 
-Hi Allan, Qianhui, Loic,
+The UFS host on Kaanapali supports Multi-Circular Queue (MCQ) mode, but
+its node only describes the standard register space, so ufshcd falls
+back to the legacy single doorbell.
 
-This covers the normal stream-off case in my =
-earlier follow-up [1].
-Qianhui's shared helper also handles stream-start =
-failure cleanup; it
-needs to continue stopping later subdevices if an =
-earlier stop fails.
-My increment in [1] covers that path too and preserves =
-the original
-start error.
+Describe the MCQ register region and the ITS MSI parent used for Event
+Specific Interrupts (ESI). The region has the same address and size as
+on Eliza, and the ITS device ID 0x60 is taken from the downstream
+device tree.
 
-Could these be combined in Qianhui's next =
-revision, retaining Allan's
-stop-streaming fix? That should avoid two =
-implementations of the same
-cleanup loop.
+On a Lenovo Y700 Gen 5 (TB323FU, Kaanapali) this more than doubles 4k
+random read throughput (fio, 4 jobs, QD32): 186k to 431k IOPS on the
+first run after boot.
 
-[1] https://lore.kernel.=
-org/all/010601a1b1b4c10a-5e87fd76-771d-44aa-9a2e-0755e5e1ff0f-000000@ap-nor=
-theast-1.amazonses.com/
+Signed-off-by: Joonhoe Kim <26rote@gmail.com>
+---
+ arch/arm64/boot/dts/qcom/kaanapali.dtsi | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-Thanks,
-Jizhou
+diff --git a/arch/arm64/boot/dts/qcom/kaanapali.dtsi b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+index 132577d540bf..c841a1e1e1f4 100644
+--- a/arch/arm64/boot/dts/qcom/kaanapali.dtsi
++++ b/arch/arm64/boot/dts/qcom/kaanapali.dtsi
+@@ -2536,10 +2536,15 @@ ufs_mem_hc: ufs@1d84000 {
+ 			compatible = "qcom,kaanapali-ufshc",
+ 				     "qcom,ufshc",
+ 				     "jedec,ufs-2.0";
+-			reg = <0x0 0x01d84000 0x0 0x3000>;
++			reg = <0x0 0x01d84000 0x0 0x3000>,
++			      <0x0 0x01da0000 0x0 0x15000>;
++			reg-names = "std",
++				    "mcq";
+ 
+ 			interrupts = <GIC_SPI 265 IRQ_TYPE_LEVEL_HIGH>;
+ 
++			msi-parent = <&gic_its 0x60>;
++
+ 			clocks = <&gcc GCC_UFS_PHY_AXI_CLK>,
+ 				 <&gcc GCC_AGGRE_UFS_PHY_AXI_CLK>,
+ 				 <&gcc GCC_UFS_PHY_AHB_CLK>,
+
+base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
+-- 
+2.53.0
+
