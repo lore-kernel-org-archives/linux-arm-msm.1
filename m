@@ -1,94 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.176
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795260972;
-	b=3vycJIgMRbL00H6fG5TS9xHDI62SEeinoxSbXBzBpqaS07v2RvbT94X72fC0oorrBbtN
-	 8Fl6mIYl+9Lm9qjCREcagu4zwMmC52SCKy5r1/1q9WzWREp3m1u6JqN0X/q8OhzsHdZ8l
-	 03FpgESaRdi5AZUJ+pzLML4fS06O/vp7m6G6QAo5HogrgVjBfincXDFV7/VV0+QKXQqck
-	 46m4LCQNBTTo1hlYRI6mtUx//5Ngs5dKJkjgxRIscS6OQfbplj7/deaeu19EjCN8SI0pt
-	 I9GaOvJ8CIOD7cac1gNQC0DRGfJYFcbqbV2jj8LuCORM2NmOVkACw83UE+ftu/6/Dqg==
+	t=1795261048;
+	b=DP4GflxO7yqVPYWFuu20wf8eEO7lwfqVQQBYGdvIhXKYLRJw9DKc+8d9lzxbkRkQYJsr
+	 m4WUYY0fyWxpGDksRdLP2cmV4K0PP29nrZE8oF5y1ViD7TFjLfaT+trkw4pu8UcUcsx/a
+	 8yD7XGTLS//ZpFcMVeZ+JqfQ9KwQYZJEYG7p5316hJ+fen07UFcRxxPKn5dVW34uhY1u/
+	 VW7sMABl9nvWYKJpf6gqNW2vhLZYmIEb2Dm1or9pT/MlJa18OtLS7eXTnYmpJhzQv2ECs
+	 A1yen1DoE7pVCSrI/jZM7OCFcGNeXsTQ4xOVNQuSydGCAWYjp+IngtPV1i9/+47IVDQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795260972;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795261048;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Date:From:To:Cc:Subject:Message-ID:User-Agent;
-	bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
-	b=K1GkwV8xmxVQWOdZWbxseXQv/U8h61Q78vAEZFhfaYKy/g3B7Wd0+rdAK+Njvxg0fpZc
-	 jAvPkQRy06W8/JCnpLDJrNtzbXgZ32AqyT8eKU4a8eUiupS/Bw+B8So5VUm0JaBmgmjoC
-	 3UfDsqRbXHhJlf+m8GZABVWXBxNyqCOD8cO2CSeahuxgASs5B0xwfbZY55nndhMtkOJLG
-	 jPiuBlGauyNwasJEEyPDm4tL1fUNystTY7955GnprZul0H+JQ4x2IngDvoAlOU348E+bF
-	 NqwNNJIqfvlnXa506nKdP3W9QmmMGh2cjLdOJWzTg69DgNi610PPqztYnat6mxZEVgA==
+	bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
+	b=iqE8wKbq8XmkLtZPY/K0ppLbsx+Dok1Fj4JW9V5B2epltNPenHAH7PACD67v/WZhGw+M
+	 tjp0b2QOy4sfRI7ZhvNmYBsvfFdHX6wIftwVDV3lnimzXKFYRe5IinE+VWQs3bnjBuWcN
+	 Rsd/8EEM1t20qukqNtJ5Xrs4AeILwaOn0gzDaQogeObgxU1wQywM56tyHfMBEzpqrm19A
+	 Y7PRXt3w5zkOlE8XDYIWU/i0DAr/xmkfOSA9oCPp4DCD5+RGgWfdwRtUbEAvupbEWJzoe
+	 82WeqNOeujNIUdy3P+axM//CkeT4rQl6aksSufFFeuaSQaR0vUSmlS+2PUiN6RG9FsQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GWv3LZRE;
-	arc=none smtp.remote-ip=74.125.82.176
-Received: from mail-dy1-f176.google.com (mail-dy1-f176.google.com [74.125.82.176])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iOFfY2C0;
+	arc=none smtp.remote-ip=74.125.82.52
+Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0E0D4606A32A
-	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 11:36:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0E0D4606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 892EC606A320
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 11:37:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 892EC606A320
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GWv3LZRE
-Received: by mail-dy1-f176.google.com with SMTP id 5a478bee46e88-385d8a00598so2198679eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 03:36:11 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iOFfY2C0
+Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15ea896ddc8so2889908c88.0
+        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 03:37:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795260971; x=1795865771; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795261048; x=1795865848; darn=vger.kernel.org;
         h=user-agent:message-id:subject:cc:to:from:date:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
-        b=GWv3LZREavFLjqR8gwxbTur2esUqQGjpWycnNAs/dTuQVKiBzv8ndJGuZyJOebKrIZ
-         u9I9R/4ZlaHfv4SQZgAGh+2wZYBS6db4MlP6ZKlMzWEssZz0Am/hmSfMk2zUruqQju1u
-         lj4K9HRXBZP3C1wLQ9ZiLfiQGjjTLymDs7gv80Cv1njpL0ncfaMk3UslYsHNuHkTbzxd
-         t3kelo8xFVL03g38Mzj+7ua0Uv5FYX6XG3otdBUvFZpcmzzBLqvxAVbmSFOo/pBP8ror
-         3I8LQrFVEiGsFtRiptAm7sZFwwSRegECiwSGibwHgB8YC0yhgG/Ky8q2K/fSVTaHyHHr
-         5zLw==
+        bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
+        b=iOFfY2C0LlUvyKFJTvFPJcN4Xr9YeXIbalzQaPzIkZr72m+pI2qhhzoCdSvkI9Vk5N
+         MrfXgnYBgdaM5hgm2WpobxmQXFxsK4eeEhM6WPlFxjSl3FT9bqNkd8tWAUmPV2HTf13t
+         fdp3HGnjyL80p3TxPLCUooXon5JGMd3b5G58uoniv6Ux54AlcvhCmNX9iBjXPj1RJI3f
+         ueq9LTqFbRPZbyMo4vl9/KuHRGK/Z7EvfG0+eUPpc5EI3rgIUohgClWWkTb/jk56aeuh
+         /rUlnnsyyJ18RZOtySzvTAkOqYQc3zDZFW3igjvfG8VxE6tErT1oymKvJEWKXkwNneRc
+         dKmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795260971; x=1795865771;
+        d=1e100.net; s=20260707; t=1795261048; x=1795865848;
         h=user-agent:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LKBzOKHK/YHBaF8etDq4KAgni0fdo2bMsyHuAXRHKOk=;
-        b=0zphlE19bNsKhZcwhYz5kS/J+yvkmnDCbQaTvhiK0rW1uBh5tc4BcYzJF+6WoHsqN2
-         TNezbXSlsOcJjxIMp5E0yT2ZFQmj05PqY2KbNPNIJHaFZJhe6lxQNLEDAuIb1NB/Q3+d
-         nP3ZgIC28OPFFDhi16/QAIWt+8F5/EPEnDib+kZSGQAQdIBQmqSgJ9q1FiX4SYWnbjLJ
-         fb22VcVsLzIXtFQbRe0TVe/HhW2Ty+BDbKsnCQDAS7DcUf/TPidKuRwmiA4hklxnwJLk
-         EbU3fnIA4TvIn0M7tW0RULYY08UJZrQDalsBvOoyhyvDJHWxzi8AEQfq2VuXrfNSS8K3
-         DwFA==
-X-Forwarded-Encrypted: i=1; AL+hErFIbeFrwNU+YlgZvT2hpYHzrPQnI3Z0qluCthpHpP+T9rXZyXtgmyIhgwF+KH5en7l8ni/x+5uApIbvOCIU@vger.kernel.org
-X-Gm-Message-State: APuU4Z+fCm/38zP4+TONEsETeulNUwGIyc/Dxr4CI0rKOv3TEL7tfwF3
-	c+1hL6hKZFZi06iq8zPwHeHtbWPWNYFfho7zrAPdQNoeGNGnWMXbVZk/
-X-Gm-Gg: AZFdTZcRe4/hoEglwEeSRWhvWMotaTKeHoR0I2az29HudJLrgDs06fyW+4OhNZOio77
-	XHttuWqiA0uAEsUT3PKP0NJqn61n6OA84Tw2DGOVz8lkOA5vMYxgPRiQMUx5qTBKEJmSkJfGbT8
-	32ovbkEQADwKKDfLDsM2KYODHapYm5/wCkucx/J315B5w6HFQ3X1DWKP1cixH6acYCHKm7LUTFk
-	aNS+1KHoTMsDMwx7HszBLNukzqTQZOhML8F5D9m0N1hZc2nPeUSpU1ycKxefl1cSk+X8FfI795d
-	8FnChWRGTemBNt8ZkpXRBANSL2NGff8zBg2TfY/CbER2caQtNW4LppLB9keZwAlKCCFKfxtq6l+
-	0Y7AQTKivCYeO+NzFI1JGLH1PPUHGsH0LN8CmuTPo6mCEGayqzYYJ+jQTQKhICfEAey94o2gvhr
-	FWsJFrajv7sZLhv3q/kwKjQ2S3/zYm1z7V/pUCFimzEWpquJvn0DR+Llmf+WpMgrXH2Z911L6jV
-	Dx7+ywim/EGm2x1+Z3zi0dmJ4zcZSI/qhRZZhSU+fzJphDCuIk6s/FkeamuYsG5/vTphHiwq3wm
-	vrXtg/kvvqM8g47XGvLPKxeJK53GmbKAgzf0S8BA1IZcZXWOEQl7e/5NKQxcWZZ6aEvFoQAKsG8
-	BH+/+T6mTbfogD1j/
-X-Received: by 2002:a05:693c:8951:20b0:384:ce59:5e19 with SMTP id 5a478bee46e88-3856f257bd6mr5663214eec.6.1795260971016;
-        Sat, 21 Nov 2026 03:36:11 -0800 (PST)
+        bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
+        b=bdU8KGIz5XcguADEmIgIFAynaME5rItZZuPivJpmhPS2BS4h0fLrmX0bGpme60iRkn
+         2vpdhlQIoPGMbN1YbQhlKLcosbzInP8KD6AVMaId9r/ooveN3kwG7z/fXl8fZJvexNYs
+         hI89QKMVw7GKSPTxgL29d71yI0/bEokC0uvCo/BTEJpU0+A09NuTlYFpbHuri3yCO6bm
+         puO0X0N6ZekLZUIgaUFI+FVommY9zquyDaykuQk4AzOqVCN5Fl9VB9J5lRL6e6ofqI0F
+         4/p7tEes5jRf1BpKn+hp8tNmXydsYzM8b4IQX0PMXILoqKsjR7OwisQW80z0Ptf48x0m
+         2bkg==
+X-Forwarded-Encrypted: i=1; AL+hErEiAqL7K6FoAAE49UpmbJheo//Tg3GbR7OmRKaD7i9/IwjQ4f1GZ1k23ixKuIfofAwWCfAZHzt+i8jhWqbZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z98aQMAylnFiHPXtoPriLP3n0ZStD4wb1G5A97TneibJ+2wLuYO
+	6z/UjAqC+K44sNZocV9YsHY6qm25hqtJ233qxZHjnS1gKdkmbRwJRf5Q
+X-Gm-Gg: AZFdTZcqcPJ90XPQMmC84JpVebmXwv7WUEgrccK/r299FP6QQqxBPEdmWbYqXRwSr1T
+	l/H19VqFWi5dz9Beo73BXWVc5xgPMpoW2/jDZZbUchxfI3LLpSXNER7AFoThCKXDZgCT+FMHX9U
+	LH6pBZNtL+G8eL4yNnc5blqmJrqH9XWKbbj6RtpVDo3Bovo1/G70s0rWLQst/BERYKRp1S+wSn7
+	0U7AUBE1af7CxrwkNGK4dtmQ/rhwy9NDw9DnKZyYriGLZ/hlHdpQVjXhTzx/qu5JBJfRd45HYgJ
+	b8rgoTwkJo5LB75Io/eBRsUG+m5dK+hmv52+GFnFmD/7pDh1K/1eILUUdJCt9CKw0N59k/6UIKc
+	KDXy+OT3XC4q6AzIFh5DtI62F3de/tbQfVb3iOguCAl4FP3EL0SQVS/J9/pBBPMVQqKB/LMSHNI
+	uS88Y76TPt0E80BHa1kdWCPSeOBPs6mDSE4NIkotAO9ZZEVTEqBBaiPjyxT/VStSIhSUwpho0kB
+	R8m383kFFofQowFtp7+psN5bByR6OLj+mVJt07jtDVfeAyELGfHg/Hkzwdg0s+PwCVxiR5N11Vf
+	VapGRUSQCCOSFZ+6iNutnoJGsmc4AHmWhSbfKLLievZEird9RGLySP3D9EeLR59W4l58XdYGkSm
+	as9ZdmRnZLDBhd6c=
+X-Received: by 2002:a05:7301:1501:b0:385:1e1c:9ab5 with SMTP id 5a478bee46e88-385701527f3mr5469764eec.20.1795261047398;
+        Sat, 21 Nov 2026 03:37:27 -0800 (PST)
 Received: from asus-ux3405ca ([140.213.140.56])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567daaf70sm18512805eec.28.2026.11.21.03.36.07
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7f59sm17980517eec.6.2026.11.21.03.37.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Nov 2026 03:36:10 -0800 (PST)
-Date: Sat, 21 Nov 2026 18:36:05 +0700
+        Sat, 21 Nov 2026 03:37:27 -0800 (PST)
+Date: Sat, 21 Nov 2026 18:37:21 +0700
 From: Muhammad Huda Nugroho <mhudan21@gmail.com>
-To: Amit Kucheria <amitk@kernel.org>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Daniel Lezcano <daniel.lezcano@kernel.org>
-Cc: Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
- linux-pm@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+To: Manivannan Sadhasivam <mani@kernel.org>,
+ Lorenzo Pieralisi <lpieralisi@kernel.org>,
+ Krzysztof Wilczynski <kwilczynski@kernel.org>,
+ Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  linux-kernel@vger.kernel.org
-Subject: [PATCH] thermal/drivers/tsens: Drop __init from functions
- reachable from probe
-Message-ID: <20261121113605.jDNtw%mhudan21@gmail.com>
+Subject: [PATCH] PCI: qcom: Do not power off a PHY whose power-on
+ failed
+Message-ID: <20261121113721.7OL6u%mhudan21@gmail.com>
 User-Agent: mail v14.9.25
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -99,164 +98,102 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 
-tsens_probe() calls priv->ops->init(priv), and every .init member in
-this driver points at a function marked __init: init_common() in
-tsens.c, init_8952(), init_8956() and init_tsens_v1_no_rpm() in
-tsens-v1.c, init_tsens_v2_no_rpm() in tsens-v2.c, and init_8226(),
-init_8909(), init_8939() and init_9607() in tsens-v0_1.c.
+qcom_pcie_phy_power_on() unwinds a failed phy_power_on() by calling
+qcom_pcie_phy_power_off(), which walks the whole port list - including
+the port that just failed, and every port the loop has not reached yet.
+The phy_set_mode_ext() failure path returns without unwinding at all,
+leaking the ports already powered on.
 
-Nothing guarantees that probe runs before the init sections are freed.
-A deferred probe, or a platform where the tsens node is probed late,
-calls into freed text and oopses.
+The first of those is not a leak but a refcount underflow.
+phy_power_off() decrements phy->power_count unconditionally and invokes
+the provider's ->power_off only at a count of 1, while phy_power_on()
+invokes ->power_on only at a count of 0. Releasing a reference that was
+never acquired therefore drives the count to -1, and the next
+phy_power_on() returns success having silently skipped powering the PHY
+up: no error, no message, just a PHY that is never initialised again.
 
-Two independent reproductions on unrelated hardware:
+The damage outlives the failed attempt, which is what makes it worth
+fixing. On a single-port controller the very first failure is enough to
+reach -1. It is normally invisible because a failed host init at probe
+time is fatal anyway, but it becomes reachable as soon as anything
+retries host init at runtime, as system resume does - at which point the
+controller comes back with a PHY the core believes is already on.
 
- - On an IPQ5018 board the machine oopses roughly 9.4 s into boot
-   inside init_tsens_v1_no_rpm(), reliably. The only way to reach
-   userspace was to disable the tsens node in DT, which leaves the SoC
-   with no thermal sensing at all.
-
- - Reported separately against a Galaxy A5 SD, where the driver is
-   built modular and resumes a deferred probe after its module init
-   section has been freed.
-
-Different triggers, one root cause: callbacks living in an init section
-that is released while the ops table still points at them.
-
-Drop the annotation from all nine. Fixing only the entry points is not
-enough while the init_common() they call is still annotated. The
-declaration of init_common() in tsens.h never carried __init, so it
-needs no change.
-
-The brace placement on init_8939() and init_8956() is corrected as
-well, since those lines are being touched anyway and checkpatch wants
-the brace on its own line.
+Unwind with list_for_each_entry_continue_reverse() so that only the
+ports successfully powered on are powered off, and route the
+phy_set_mode_ext() failure through the same unwind. The PHY core already
+releases the failed acquisition itself, so the failing port must not be
+released here.
 
 Signed-off-by: Muhammad Huda Nugroho <mhudan21@gmail.com>
 ---
 Notes for reviewers, not for the commit message:
 
-Resent: the first attempt was rejected by linux-pm for containing an HTML
-part, so the list never saw it. Apologies to the few of you who got that
-copy directly - this is the same patch, nothing has changed.
+A structurally similar unwind fix for the tegra host bridge was declined in
+August 2026 ("PCI: tegra: Unwind partial PHY ...", Pengpeng Hou) on the
+grounds that a phy_power_on() failure means a broken system that an unwind
+will not save. That reasoning answers a leak argument, and it is fair
+against one - a PHY left powered after a fatal probe failure changes
+nothing. It is not the argument here. The problem in this driver is the
+opposite direction: a reference released that was never taken, leaving
+power_count below zero, so the next phy_power_on() succeeds without
+powering the PHY. That survives the failed attempt and breaks the next
+legitimate one.
 
-Against mainline master as of 2026-11-21. Not tested on the Galaxy A5 SD;
-the IPQ5018 reproduction is mine, and it was on a 6.18 kernel, where eight
-of these nine carry the annotation. init_8952() is newer than that tree and
-is included here because it has the same problem, not because I hit it.
+The same underflow was described by Vladimir Oltean in March 2026 while
+reviewing "scsi: ufs: qcom: Drop the PHY power_count check" - "If 0, the
+power_count would become negative after phy_power_off(), and a subsequent
+phy_power_on() would merely bump it back to 0" - and the ufs patch was
+withdrawn in favour of per-driver state tracking. This patch takes the
+other available route for a consumer that must not inspect power_count:
+only release what it acquired.
 
-The second reproduction is samcday's, found and fixed independently with
-the same mechanism:
+Against mainline master as of 2026-11-21.
 
-  https://github.com/samcday/linux/pull/13
+Found by reading the error path, not by observing it fire. The underflow
+mechanism is from the PHY core's own accounting in phy_power_on() and
+phy_power_off(); no hardware reproduction of the resume case is claimed.
+I would rather say so than imply a bug report I do not have.
 
-I have not added a Reported-by: or Co-developed-by: for it, because I have
-neither their address nor their agreement to be listed. If they would like
-a trailer, say so and I will add it in v2 - the prior work is theirs as
-much as mine and I would rather credit it properly than silently.
+ drivers/pci/controller/dwc/pcie-qcom.c | 23 ++++++++++++++++++-----
+ 1 file changed, 18 insertions(+), 5 deletions(-)
 
-Neither version appears to have been sent to the list before this.
-
-No Fixes: tag: the annotations predate the ops indirection in several of
-these files and I could not identify a single commit that introduces the
-bug rather than inherits it. Happy to add one if you can point at it.
-
- drivers/thermal/qcom/tsens.c      |  2 +-
- drivers/thermal/qcom/tsens-v0_1.c |  9 +++++----
- drivers/thermal/qcom/tsens-v1.c   |  7 ++++---
- drivers/thermal/qcom/tsens-v2.c   |  2 +-
- 4 files changed, 11 insertions(+), 9 deletions(-)
-
---- a/drivers/thermal/qcom/tsens.c
-+++ b/drivers/thermal/qcom/tsens.c
-@@ -929,7 +929,7 @@
- 	.reg_stride	= 4,
- };
+--- a/drivers/pci/controller/dwc/pcie-qcom.c
++++ b/drivers/pci/controller/dwc/pcie-qcom.c
+@@ -1445,16 +1445,29 @@
+ 	list_for_each_entry(port, &pcie->ports, list) {
+ 		ret = phy_set_mode_ext(port->phy, PHY_MODE_PCIE, PHY_MODE_PCIE_RC);
+ 		if (ret)
+-			return ret;
++			goto err_power_off;
  
--int __init init_common(struct tsens_priv *priv)
-+int init_common(struct tsens_priv *priv)
- {
- 	void __iomem *tm_base, *srot_base;
- 	struct device *dev = priv->dev;
---- a/drivers/thermal/qcom/tsens-v0_1.c
-+++ b/drivers/thermal/qcom/tsens-v0_1.c
-@@ -207,7 +207,7 @@
+ 		ret = phy_power_on(port->phy);
+-		if (ret) {
+-			qcom_pcie_phy_power_off(pcie);
+-			return ret;
+-		}
++		if (ret)
++			goto err_power_off;
+ 	}
+ 
  	return 0;
++
++err_power_off:
++	/*
++	 * Only release what was actually acquired. phy_power_off() decrements
++	 * phy->power_count unconditionally and invokes the provider's callback
++	 * only at 1, while phy_power_on() invokes it only at 0, so releasing a
++	 * port whose phy_power_on() failed (or was never reached) drives the
++	 * count negative - after which the next phy_power_on() silently skips
++	 * powering the PHY up at all. The PHY core already unwinds the failed
++	 * acquisition itself.
++	 */
++	list_for_each_entry_continue_reverse(port, &pcie->ports, list)
++		phy_power_off(port->phy);
++
++	return ret;
  }
  
--static int __init init_8226(struct tsens_priv *priv)
-+static int init_8226(struct tsens_priv *priv)
- {
- 	priv->sensor[0].slope = 2901;
- 	priv->sensor[1].slope = 2846;
-@@ -219,7 +219,7 @@
- 	return init_common(priv);
- }
- 
--static int __init init_8909(struct tsens_priv *priv)
-+static int init_8909(struct tsens_priv *priv)
- {
- 	int i;
- 
-@@ -240,7 +240,8 @@
- 	return init_common(priv);
- }
- 
--static int __init init_8939(struct tsens_priv *priv) {
-+static int init_8939(struct tsens_priv *priv)
-+{
- 	priv->sensor[0].slope = 2911;
- 	priv->sensor[1].slope = 2789;
- 	priv->sensor[2].slope = 2906;
-@@ -255,7 +256,7 @@
- 	return init_common(priv);
- }
- 
--static int __init init_9607(struct tsens_priv *priv)
-+static int init_9607(struct tsens_priv *priv)
- {
- 	int i;
- 
---- a/drivers/thermal/qcom/tsens-v1.c
-+++ b/drivers/thermal/qcom/tsens-v1.c
-@@ -145,7 +145,7 @@
- 	[TRDY] = REG_FIELD(TM_TRDY_OFF, 0, 0),
- };
- 
--static int __init init_8952(struct tsens_priv *priv)
-+static int init_8952(struct tsens_priv *priv)
- {
- 	priv->sensor[0].p1_calib_offset = 2;
- 	priv->sensor[0].p2_calib_offset = -1;
-@@ -173,7 +173,8 @@
- 	return init_common(priv);
- }
- 
--static int __init init_8956(struct tsens_priv *priv) {
-+static int init_8956(struct tsens_priv *priv)
-+{
- 	priv->sensor[0].slope = 3313;
- 	priv->sensor[1].slope = 3275;
- 	priv->sensor[2].slope = 3320;
-@@ -189,7 +190,7 @@
- 	return init_common(priv);
- }
- 
--static int __init init_tsens_v1_no_rpm(struct tsens_priv *priv)
-+static int init_tsens_v1_no_rpm(struct tsens_priv *priv)
- {
- 	int i, ret;
- 	u32 mask = 0;
---- a/drivers/thermal/qcom/tsens-v2.c
-+++ b/drivers/thermal/qcom/tsens-v2.c
-@@ -220,7 +220,7 @@
- 	return 0;
- }
- 
--static int __init init_tsens_v2_no_rpm(struct tsens_priv *priv)
-+static int init_tsens_v2_no_rpm(struct tsens_priv *priv)
- {
- 	struct device *dev = priv->dev;
- 	int i, ret;
+ static void qcom_pcie_configure_ports(struct qcom_pcie *pcie)
 -- 
 2.51.0
