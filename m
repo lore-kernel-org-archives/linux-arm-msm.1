@@ -1,101 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795220192;
-	b=mO8VrlSZjutwQ6OWAIZR19WwmzAE8zoEKD3LkP71PqIKEmgsrLHm+yTwBxKwyjpe/01v
-	 liqOoPfGtslYkcy5vmMG+sHAhIIK9wEyKCLbJLDWdE7f0ov2m14YJRdnY4wqscpv3g4XD
-	 G5Ou6nWlnxO/sOxgb8DaiYeDo64k1jthng2LclWPYTWIiu4djy5FxDcl3YzGy4izA1uHV
-	 OkD4vkn0ZlUaZz5pktJD7crhT6nT9pp0bDtjms81pGscOSx7I4wBItUnKBCzZThaYGgq5
-	 0ZXsYS3F61ngTpYbtE5HI+koqT7tNhHhbr1NY08CJr8PAJVpcI4Im+A+0Y7TjbNBobA==
+	t=1795221426;
+	b=IgZ5X2FwyfKfFjYOIko9IY7Rl5Lk/EjZmN3XIz7mDIwrwT3WNRrEqjPRIWWTUh0ZEapH
+	 Yaa2P7KaitDsj/CWKWAgmH6fO747FDqdskPOLsL58zrLZW9t9mfBXzfPzkOvtpTcYOzmf
+	 l6jhaFpYiJWf3ScQTxgoEfmrRYVVk1gUMeSeAOUtgZKNeVmRYUIvlhu4/yzAK2FHO0GA3
+	 Ta3QPlh6qVkzhDeEJjm736bVkeXEoM9HLIv8A4fY+arPebJ2O7O5s4XlSlUtPyUOzDTxc
+	 Apkg5lWHdbDAsPtlK/CIdtAXCXUbWVPx14qUFh6LK/AKKpY0tINlhUM2shLZ0iSsyxw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795220192;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795221426;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
-	b=g3yyhg8uVSTxGgRKBKZzolfZQyr1WxSExcsNe1SqIvipo/+8eQqvnDTMMmiTvnRKlYNP
-	 Csvo0J5p/lDc7jkLeZgx4fVtUg5DOFukUZcJMTUElY96wxypA8o0ueZalblf9c7nYIpOo
-	 OScplgVMMpB9ARK83tCQ69Sxb3zwXtqHb9COPF2gJk5qNutMwuGWdOZ8fZFSzvqWp15K6
-	 jnNMjGsWptLfZ0/fajIbw6nY3vSor7rvw18b3Eb5otmzPYj+6dg9ZCnw7Iz2HpVY/t5V9
-	 LChyLbZ4aYqayVpxSbdi/3fms/jDjh/RBzY1XbSBX2jusXx0LTWGDnq08LRB35S/75Q==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key;
+	bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
+	b=pdJqe72aM1YeQKPOhZLj5AWMlZSMDeeYpb9ZpT1OnYM4i3ZrEFaN1r6sQuQ8mfTd3s1j
+	 NU39/TRd+36G8xiZehE8+SpwwuCgtYd34goyT6a/PJJOT5v8ra+PSD+yWxfH2ulHY80/a
+	 QXxNMee533PThLoN/XJkV51MTWMJBLYo7K9h4tZ0/E6ypIwYnIdnlKs/HEjAjpICojP9e
+	 pAKnDMY30pFJhrL3AB3iS/nJkgayOLRBtBARtC2rjHFjwuTZd3RaAbTLNy0zUu9Ma5Stw
+	 bNp6FPgIf3dEC6/cen9we1NnvstJyZUq76gZegDJ4Gs474Ivn/Oq2q6shPIGGL5pYVg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vsEY7aZL;
-	arc=none smtp.remote-ip=209.85.218.47
-Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RY31DhA3;
+	arc=none smtp.remote-ip=209.85.221.41
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 154E1606A6A9
-	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 00:16:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 154E1606A6A9
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDE6E606A6B0
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 00:37:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BDE6E606A6B0
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vsEY7aZL
-Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c511cdd5a82so185289266b.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 16:16:31 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=RY31DhA3
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-491971ac844so1293241f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 16:37:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795220190; x=1795824990; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
-        b=vsEY7aZLbfG4aR+YOrrvDrHTqcmqaMe2zCRckmgtEst56/mRWDnX9GixIyJYZZ81ll
-         wZoTufJSdYzFDGoaugULowvXnK6Kuw79k7WM94qssKr7pGgNgl13bcYrC2tK93dBZFr4
-         cVCTTmnWeqAJc1sM7zirDtOnNI8x4yrWuiyVS0zyB9g8uHd1EIaK0DFt+w7Ztbb1fOD1
-         X4anmSGfTJzXyxUTxIn0dGE6/xG6IcdVcTq4Vzs6aWnVV3C1ll4FKG5BIvREQK7X77SW
-         Isdt0xmMU0BeZBshzkWVpeRBlY40dzKEE5qWfzTPmL3eKO96E/mIPwta/RvW83VYCySG
-         DVxA==
+        d=gmail.com; s=20260707; t=1795221419; x=1795826219; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
+        b=RY31DhA3gi95oT5z4yw4u9QLhWUemT1EP9omO4loJL1T/Yw7egVM3w/xoxkcIespNj
+         uwzsFSC4MtJg2/HtHwoEvCxUyX1JpXHW1+EulR3JLWtPqp3x/lPis7lukdRmCFIwQDH2
+         JFdADIX/KY+TenGN8S6bOCWr1oySky2oi41knT8zod8qCCkh9dH3oywZrrq+2owZ0/zi
+         7g4f3t62XVX+oAeWSAelZ5oHr1TvUNdnPPyVDA1r2vlHHqm2hOtR0K8miwCm/OrQvTbx
+         QKZ2+DAdommIzJCUbVD5633LKH0sXVLQAN3/3arYfWPHmvRFC3AgGNKDJP0KMfyCKmXh
+         9Hvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795220190; x=1795824990;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
-        b=yTGOmku9jGwHci7aYaBjU9L6ZwZQBhvsX8MKyHkCDqWuiVERwaP1SstKCb44FiMf+9
-         9nXvIIzHSjY1wedNJmwxWLhPd8fCnO071CJOM0asBbQP53AE4DN0HKzdbt0WHDnvoBYR
-         Ja8Gi9bk875LDn7aYCvxKfNtga/9h0VO0CKXDpzQIRKehRnvhVWpE7lY0aOyaLFTVEg6
-         vJfJIi/jlfBWZRtkFOcspZyxEH7JHaiSvT6JWVPK2Y/Ii7t86EFds9CiirohjfQOw5WW
-         x5Uw9XrepzGrdrbJQgMV2Uakt3Z8Vpv0j0syFghCzQIAE4ItgKmBoYH1HZdjflR8R0YD
-         N/Ow==
-X-Forwarded-Encrypted: i=1; AL+hErFEUpSRnJkuAVP2+5p1GS8R/x20TE1FOqS1h+3fCboM3ttCkyytzkRqHimPSQw8aBEhL6Fph3TcB+bMY1z0@vger.kernel.org
-X-Gm-Message-State: APuU4Z/lYLDW32tXeOS9GX/p3w4lfY2BqOHH7g+Y0T8GUoLOuvggKVZZ
-	ZKiZzzicWu6osKpS22C48uvcIIDIIvR202CXaQX6i1iU+UFLHtu7YKk=
-X-Gm-Gg: AZFdTZcedGs1D8UmGGlkL+N6gyZ3klbEh66rb1UzZ9UfXP8SfQwyWI/Lq0kvwlTk2pu
-	cnjLZC7iw3i6b2xThR3vxvPb/pzUt0yGOLvseG7Wdq/TjI4u2Lzh65HnV0xqvrPJiJnj3eABD2p
-	feRZGAoKvATNGRFfUexc+bNdeKG1ur+7hjCfJCfgRhb4Rkb4sGLVpcEdJ0N2hg0gfFClX+Hnxeh
-	70TQbx8NZg2A1f1eMA4v7hSJLgWxjxxfGV7/OZQ+uNHcGO8WJr7v//k4dp30DFmtcCSbq04VUfG
-	Uz1Iep1qFv7AiaWpmxPSPzBoOFysaWoFZhg1LpHeJsGIyKOCGA0feBJu1tv7hqix2xqwAqQR122
-	Ac3EliPHTwDxiV+kK5rrq44d1LPgu9E6j/mWBLl+p9St//JPzVYi8UaTEWo4bFJYRet8STmSnWy
-	jCDl44qDeseWeTfmw7dILwLcAFKr9zREhatKcUTzKGY2cGEAe0RFdZ6MajW1JLwyOGL6bS19Wx3
-	S09430u0oqdzT8Jm8mGXAZrUaQGzH3s3Q0kPlsWvMKMas3W97IhH2ROCfYZGzPon6PIZypt0S4x
-	JzY8e5Qwvl+Sj3boEd7IlwvF1Vws4CALN/bcFjMRj83+hW1Mm9fl2IsLE7xIr7PAk0H4bcmUd+4
-	3NLWmLOQnS0VVSUgBA7ba7vNu6MlZg4cJCT/VRNSkGsiPxg==
-X-Received: by 2002:a17:907:ea94:b0:c50:aa10:d888 with SMTP id a640c23a62f3a-c513acab9d6mr426725766b.40.1795220190364;
-        Fri, 20 Nov 2026 16:16:30 -0800 (PST)
-Received: from sohrab-omarchy.fritz.box (2a02-a44e-4ae7-1-c0e-6d5a-8ae2-915.fixed6.kpn.net. [2a02:a44e:4ae7:1:c0e:6d5a:8ae2:915])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ae6663esm146454466b.21.2026.11.20.16.16.28
+        d=1e100.net; s=20260707; t=1795221419; x=1795826219;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=tABwpsQwrh0QjJ0q1JegOwTwekJ3gPLUER4Cwmf2WjA=;
+        b=xmw7u15SG976djoBIWd9pTufRqx85QdXsv82Yskkmzh/W8FTikXWzoLcVDBVmCxXI2
+         f0v0ZlEoVeIuDGBjDNTzXCtx91vqYqpMs4JNnuPyIW5zxhrzrs2gkHdMdkRMJprgto2K
+         OhN7csLFY2O24lBnt3XWrhO9wPb0caZap4iuyz5r+GxixpjzrAOJ5TmnyS6YwcRcOnlP
+         dn5ibtFoQhd35OHSOWZiA67YFHBDf1+GIK4eLK9XqvL9W+CmOIPXnDnf49uQi3o4VGJN
+         VgD3CyXB8ZkrzwQhaN0VMZG6vbe933VGTWhRvVl+ow0J6IOBmIgBjX+mZn9ukJbcKqIe
+         RSsg==
+X-Gm-Message-State: APuU4Z8132WTVxTLl6ZHS42f4JysWeX6VwFkMZy1HNeS0z+gpELL0upJ
+	OV2ucW0toxGlsySpcYRuJuKHhXBv1qChVi0SUQ3wF2kIc8PfNDSI4NIJkg5dCsN0X0o=
+X-Gm-Gg: AZFdTZe1ML2zd8XegEqAb3Iw9c/SZh0If52fhpDH8SIEyrWOgARXWs4FWciIOOod3UJ
+	JRd3OO5BSix3fADln1ZGI06Ib/xXVOZTCJ6WGEVPFDBuJg3eCuGugrkcYIXHYO2fDkVZRS9SoVG
+	FEfKctLwJ82t9JTCkjDjVo05W0hFBBedCLUnUaNLSJW4uVdbson+bqna/2Wh6Awm5BD1DFh2AiV
+	inxOyTkfH0cFg85to2wDYofjpGRGPjw+Nh1T08DyGxMT+Kn6wZCOyRMD6X2ugoqoFP9G8Wuhtfb
+	yrS5fl/cj19Pwzx+YITMrZX7FxydbYXH5uyGm8qHy5FIz1mMJbponY6tEOK5ZBDALCfE9ic39jV
+	vGSPkAUVpcCTx9fGvN4uX3+lIdlWL3JBIbLYzHkrBwGKdC9Beb+WCHvHHa0OipVWRMMJnseImnG
+	1Gm8sr/63XWTB0M/w6iHpyBsV7wcmTruPaii9KyEhzqBzpuS/aVVsgEruRVrLZo65TF/nIdADQb
+	IwM7zz5fFyrKE7OpL5HMo0S2CNo8DdajlMeDfc0XPm3MJZBpOhyKBGe0qJX2HG7+hSjaBRduyAw
+	XsnIA+scIUP1A7MQqGWReJi1G9PvvZX2WKpraB2dLulOPoPwiRTOL/LnRTZUqjpojCbYFRX7Q/n
+	zOZ+Y
+X-Received: by 2002:a05:6000:2903:b0:49d:7e8c:e8a2 with SMTP id ffacd0b85a97d-4abb244870cmr11302603f8f.33.1795221419059;
+        Fri, 20 Nov 2026 16:36:59 -0800 (PST)
+Received: from [192.168.1.15] ([185.69.144.65])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a680355sm7203278f8f.27.2026.11.20.16.36.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 20 Nov 2026 16:16:29 -0800 (PST)
-From: Majid Hajiheidari <majidhhdri@gmail.com>
-To: Nizat Mikayilli <nacht@dxdmail.cc>,
-	Will Deacon <will@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	Joerg Roedel <joro@8bytes.org>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	iommu@lists.linux.dev,
-	linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] iommu/arm-smmu-qcom: Add SM8550 MDSS compatible
-Date: Sat, 21 Nov 2026 01:16:27 +0100
-Message-ID: <20261121001627.4091340-1-majidhhdri@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <20261107-b4-smmu-sm8550-v1-1-777d0a41170b@dxdmail.cc>
-References: <20261107-b4-smmu-sm8550-v1-1-777d0a41170b@dxdmail.cc>
+        Fri, 20 Nov 2026 16:36:58 -0800 (PST)
+From: Dale Whinham <daleyo@gmail.com>
+Date: Sat, 21 Nov 2026 00:36:50 +0000
+Subject: [PATCH] arm64: dts: qcom: Add X1P64100 dtsi with fused-off cores
+ removed
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -105,23 +92,93 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261121-sp11-x1p-10core-v1-1-5fed8ce846c7@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMMQ6DMAxG4asgz1iKU8rQqyAGGn6oO0AUtwgJc
+ XcCjN/w3kaGpDB6FRslLGo6TxlSFhQ+3TSCtc8m73wt4oUtivAqkcWFOYER8HCdq+oeT8pVTBh
+ 0vY5Ne9v+7y/C79zQvh8775H8cwAAAA==
+X-Change-ID: 20261121-sp11-x1p-10core-ece30a046de5
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, Dale Whinham <daleyo@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795221416; l=2039;
+ i=daleyo@gmail.com; s=20251214; h=from:subject:message-id;
+ bh=ucZh0rrrTKCzMMAKIK2fAxwZBMPKDCo7fqu8jragjJg=;
+ b=+2UtxI6xI3S8/4D/sR+VtRDaaRmzJ3sDysyTSjC5UmMk3kr+oosXp17CoTOKEGpcnG8XKi/ER
+ KFclw1YrnC9DgTVddb9LX/Y4IKEFZnlQWOfH5w4WtshGxPPBDDfoX5/
+X-Developer-Key: i=daleyo@gmail.com; a=ed25519;
+ pk=M4mvgx1TB2TniKaedTDsO3PbLKgFosJuegXRXPbn2Ds=
 
-Hi Nizat,
+X1P64100 is a 10-core binning of hamoa: the last core of clusters 1 and
+2 (MPIDR 0x10300 and 0x20300) is fused off. The Surface Pro 11 LCD MADT
+marks these two GICC entries as disabled, and booting them via PSCI
+fails:
 
-On Sat, 07 Nov 2026 21:00:50 +0100, Nizat Mikayilli wrote:
-> Add the SM8550 MDSS compatible to the clients list, as it also needs an
-> identity domain at boot. Otherwise the scanout of the bootloader's
-> splash screen causes unhandled context faults and the screen goes
-> black.
+  psci: failed to boot CPU7 (-22)
+  psci: failed to boot CPU11 (-22)
 
-Same on a OnePlus 11 (SM8550), booted from the bootloader's splash on
-next-20261120: without this patch there are ten unhandled context faults
-from the MDSS stream (SID 0x1c00) at addresses inside the splash buffer
-before msm takes over; with it there are none, and the panel comes up
-normally.
+They also show up in the cpufreq policies' related_cpus.
 
-Tested-by: Majid Hajiheidari <majidhhdri@gmail.com> # OnePlus 11
+Add an x1p64100.dtsi on top of hamoa.dtsi that drops cpu7, cpu11, their
+idle power domains and their cpu-map entries, and use it for the
+Surface Pro 11 LCD.
 
-Thanks,
-Majid
+Signed-off-by: Dale Whinham <daleyo@gmail.com>
+---
+ .../boot/dts/qcom/x1p64100-microsoft-denali.dts      |  2 +-
+ arch/arm64/boot/dts/qcom/x1p64100.dtsi               | 20 ++++++++++++++++++++
+ 2 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
+index d96202e2afc6..cbe2c1a4adc8 100644
+--- a/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
++++ b/arch/arm64/boot/dts/qcom/x1p64100-microsoft-denali.dts
+@@ -5,7 +5,7 @@
+ 
+ /dts-v1/;
+ 
+-#include "hamoa.dtsi"
++#include "x1p64100.dtsi"
+ #include "x1-microsoft-denali.dtsi"
+ 
+ / {
+diff --git a/arch/arm64/boot/dts/qcom/x1p64100.dtsi b/arch/arm64/boot/dts/qcom/x1p64100.dtsi
+new file mode 100644
+index 000000000000..ee6f2f3b6ef8
+--- /dev/null
++++ b/arch/arm64/boot/dts/qcom/x1p64100.dtsi
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: BSD-3-Clause
++/*
++ * Copyright (c) 2026 Dale Whinham <daleyo@gmail.com>
++ */
++
++/* X1P64100 is a binned hamoa with the last core of clusters 1 and 2 fused off */
++#include "hamoa.dtsi"
++
++/delete-node/ &cpu7;
++/delete-node/ &cpu11;
++/delete-node/ &cpu_pd7;
++/delete-node/ &cpu_pd11;
++
++&{/cpus/cpu-map/cluster1} {
++	/delete-node/ core3;
++};
++
++&{/cpus/cpu-map/cluster2} {
++	/delete-node/ core3;
++};
+
+---
+base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
+change-id: 20261121-sp11-x1p-10core-ece30a046de5
+
+Best regards,
+--  
+Dale Whinham <daleyo@gmail.com>
+
