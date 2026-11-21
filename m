@@ -1,102 +1,101 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795218916;
-	b=5Ek9wXNm5fkz5yfImWNqmkVeqacvjHheZL5kUe6kj5ed6NxoPzmRcMOBJlFkA7XYIBbT
-	 jxm60FW0g6c2bqUVfD9whqL2nQS5nJJ4ZdudU8UfrUqHScBJ5GN/H7yhRmjiKD7/s6Dou
-	 9s6asr5fdIgY1I5ZvkAvbn7iKZjXyLqV1H6qIIz6e/SKGFXYXBzAUorGfnh+91Yt8ncSa
-	 UDmbz0JLJeyAJhW5oGP1ZxsIkruLPOzrCtMX66ilzmFo4bSezytuUedgjS2djDb7+X5Yz
-	 vlPSPuVGp+4YIo1Sy0k5FgbhZZNl/JZj83Sb/bTEy47TivRqLidk1bM7dkZAf+qZ5Fg==
+	t=1795220192;
+	b=mO8VrlSZjutwQ6OWAIZR19WwmzAE8zoEKD3LkP71PqIKEmgsrLHm+yTwBxKwyjpe/01v
+	 liqOoPfGtslYkcy5vmMG+sHAhIIK9wEyKCLbJLDWdE7f0ov2m14YJRdnY4wqscpv3g4XD
+	 G5Ou6nWlnxO/sOxgb8DaiYeDo64k1jthng2LclWPYTWIiu4djy5FxDcl3YzGy4izA1uHV
+	 OkD4vkn0ZlUaZz5pktJD7crhT6nT9pp0bDtjms81pGscOSx7I4wBItUnKBCzZThaYGgq5
+	 0ZXsYS3F61ngTpYbtE5HI+koqT7tNhHhbr1NY08CJr8PAJVpcI4Im+A+0Y7TjbNBobA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795218916;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795220192;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=CVBcvs4NEZacI32sTy9QLmqQIro1hPd0gzRPGIIodS8=;
-	b=Y8mtzG84Ii2O+7oySRseD1tf86sG/qGNguQMXu/Yh7OQH9JmxE2SAqs+2L29f1gpocXs
-	 tEIRBYJAXWuPYpd8+m7bZ/jfJEaIXA82R/i5nmGQCwpO4AKND8G5/VcvTrPysKW5WG3Sw
-	 wCZdr25n/9FZGO3FLWuUDUvFQBsvp32TD+gwrlIxWVIc4xmUSYtC9fhwPxxFqg4CczWA+
-	 GeIVpKSFqELOPtbPWpD22+UB4AvIIwiNpTd+QECx9J8PmRd9gMT1yMwqp3UMWwO1cd0pv
-	 zXjOJVh0FIPt6AwyMXlFbFr78eeMq9YeVJcOs6gqCT0xu9TIyhl34QSoSZ2iTuK5+zg==
+	bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
+	b=g3yyhg8uVSTxGgRKBKZzolfZQyr1WxSExcsNe1SqIvipo/+8eQqvnDTMMmiTvnRKlYNP
+	 Csvo0J5p/lDc7jkLeZgx4fVtUg5DOFukUZcJMTUElY96wxypA8o0ueZalblf9c7nYIpOo
+	 OScplgVMMpB9ARK83tCQ69Sxb3zwXtqHb9COPF2gJk5qNutMwuGWdOZ8fZFSzvqWp15K6
+	 jnNMjGsWptLfZ0/fajIbw6nY3vSor7rvw18b3Eb5otmzPYj+6dg9ZCnw7Iz2HpVY/t5V9
+	 LChyLbZ4aYqayVpxSbdi/3fms/jDjh/RBzY1XbSBX2jusXx0LTWGDnq08LRB35S/75Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lzvQDMQj;
-	arc=none smtp.remote-ip=209.85.219.53
-Received: from mail-qv1-f53.google.com (mail-qv1-f53.google.com [209.85.219.53])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vsEY7aZL;
+	arc=none smtp.remote-ip=209.85.218.47
+Received: from mail-ej1-f47.google.com (mail-ej1-f47.google.com [209.85.218.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85DAC606A699
-	for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 23:55:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 85DAC606A699
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 154E1606A6A9
+	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 00:16:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 154E1606A6A9
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lzvQDMQj
-Received: by mail-qv1-f53.google.com with SMTP id 6a1803df08f44-92123f02faeso11786156d6.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 15:55:15 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=vsEY7aZL
+Received: by mail-ej1-f47.google.com with SMTP id a640c23a62f3a-c511cdd5a82so185289266b.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 20 Nov 2026 16:16:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795218914; x=1795823714; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795220190; x=1795824990; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CVBcvs4NEZacI32sTy9QLmqQIro1hPd0gzRPGIIodS8=;
-        b=lzvQDMQjTaKlnOvN0osh10u1dCW92+LFSqAhxHVdlifH6CkeHuho3jdMSdRsiLbwaV
-         wX08o7Synjp0sr8A48cvdstOBuLGx7U9GHSjHL3E7c6dnT2uw67geq3t0vUjj5LyJ6Tp
-         JE1wUyiIep79eGRURxu8A3Rg5rGw+/KEhyd6VM83IQUrbleNhg6k0DH7avYXJE24l41I
-         WZP2bDd0+qWRwFbh7w+bs7kPffriV3a3vuLlqTNxf3gzTDm73zoYzZZa0AbHfFwFhhqm
-         srZB2N2OPmbT0nC1jIeahzHzGPKfvnnmy1rgv5Ux0Xay4mo7TF3Q1RoanWoX84SMSypW
-         YwRA==
+        bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
+        b=vsEY7aZLbfG4aR+YOrrvDrHTqcmqaMe2zCRckmgtEst56/mRWDnX9GixIyJYZZ81ll
+         wZoTufJSdYzFDGoaugULowvXnK6Kuw79k7WM94qssKr7pGgNgl13bcYrC2tK93dBZFr4
+         cVCTTmnWeqAJc1sM7zirDtOnNI8x4yrWuiyVS0zyB9g8uHd1EIaK0DFt+w7Ztbb1fOD1
+         X4anmSGfTJzXyxUTxIn0dGE6/xG6IcdVcTq4Vzs6aWnVV3C1ll4FKG5BIvREQK7X77SW
+         Isdt0xmMU0BeZBshzkWVpeRBlY40dzKEE5qWfzTPmL3eKO96E/mIPwta/RvW83VYCySG
+         DVxA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795218914; x=1795823714;
+        d=1e100.net; s=20260707; t=1795220190; x=1795824990;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=CVBcvs4NEZacI32sTy9QLmqQIro1hPd0gzRPGIIodS8=;
-        b=0/2HcWtPih00MohT5Uf3RLj8/47KN/9y0JNSV6KTxXdQbrKug1f4gxlj906nN2e+FM
-         LAMVNNgal03jnmwt9ZIkMFfLENxBnhoZliz7ibqQROJcmuya3VMI+dMBbfceOjuRSnfH
-         ywn91DCQtFG+OnUdXbyN6BEh1/hFpXspa8mJFbJF98A6CH6WV67M+SZFTQbBHIdf6yif
-         OeqHTc3FCt2urUxtbI9ihpjNcVaOP8tg9q31f5wMtM8tlqvZpePCvAj0ZXI1Sh6IJm05
-         VXtsCfPZEsUnUfbCnuoZE7dn/yZFmr+ZDuPkQwWgpDd6uQHVcFIev72HK4PTOlfkvzf3
-         0p9g==
-X-Forwarded-Encrypted: i=1; AL+hErENkEnLRm2EWDGGA7mw0u4yP5c7MfVRcB+Bcz+Kl1WCDWdpddzuCy8jzk4rFiTFejJdGvCr/4XajV7iNKws@vger.kernel.org
-X-Gm-Message-State: APuU4Z87dlrynovJPDnu0q3xp7EXfkIHccOOgGO4fOuOqTaCjvFxbKxO
-	EONJK9hb6ob0CpZDhVc07DSxTED+jL7zap0gIy8RLG1Na4a/Zs+NCTdWhGnAXa9hfPkyrQ==
-X-Gm-Gg: AZFdTZcZ52NeKqjs7axtxQSU+mp3ftNdObwo8feqDsliE+hJce+TsrDbs8GJtDLkxkH
-	3hnNZygI+kQko8GIfIKEOkEvqLNsA7VSaDqIm6xs75ei7/IiYELrrKzppJto5Yt5q0Gxei6lQ+G
-	q/JjzZsOuxuEfkr/DcvaeaClsmbPop4jNHwLhrGza29QQ1uzVGr6RFylAUeSz7F3zRIXBiwecxZ
-	4nmKMQnwii5InH4ioXNfB5Z10eR5K8fREc8cWLuIhqovlQ/ftdUcGjHj7Xexd3siqHDg9kwFkr+
-	Aj9OgJFo8ye3LWNsp7L2ehWk7vXiQhmwN9eNsaVuLi2tgmd7iYBwBvEGQwEcTzUr0MuOk2LCFwP
-	QacVELVJZkntfmee3BZwUALrUOOSs+PJtxRSEEAEDbd00tilwnD54fLaQcmLTMSuevAJeadWWry
-	SiOhmG1G6Eu7jovAAgPxIfpHV0HOdGQe4zPKFdlHNSwMn8WWNnQ/ay57h6bvQLl7/fH96zKMaWI
-	DDkgaolSUAZ9K4PD5wKG8M+2MNo4XSnYXeZNa6IB05sHmE5HJNHhucwkIM0A49K1YyyAMCM7+xy
-	a3HG06WjTbFwt0e+xsK+E3l95WoN3G7wTO1xi9I8rEJZeTvYa8PLFgqRs0JE9LTnWfWW/Zd4PeW
-	PX2JCARhI2z3XSNMkmQs4jBkM1DqOsCnQ71aTvbcdBtVCM7zOhftW78IPa4uHvtinpGnTJcVtFV
-	Z4w/pDJWK3nT0IdVmeyWReHWcW2EQunn3B/gcwTDw40oiDpqDaYwovAg4CMtSKvqRg1dnhsK+rM
-	6CjpLk0UF99KyfGRSKtz/2SVhTdh8NqUAOQDhrSPdu2YA==
-X-Received: by 2002:a05:6214:528a:b0:91e:c00c:b7b with SMTP id 6a1803df08f44-92134b28841mr78465516d6.48.1795218914174;
-        Fri, 20 Nov 2026 15:55:14 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:d420:4621:169f:8773])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-921349f8c34sm39973856d6.32.2026.11.20.15.55.13
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Fri, 20 Nov 2026 15:55:13 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: "Gjorgji Rosikopulos (Consultant)" <gjorgji.rosikopulos@oss.qualcomm.com>
-Cc: Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-	Allan Siriani <allan@fatecpompeia.edu.br>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 0/2] media: qcom: camss: Fix the X1E80100 lite CSID paths
-Date: Fri, 20 Nov 2026 18:55:12 -0500
-Message-ID: <20261120235512.1230-1-jesse.casco@gmail.com>
+        bh=74mngtbu0bh2Wb5wAzXvu9Way1o05aGhqD03WL1B//I=;
+        b=yTGOmku9jGwHci7aYaBjU9L6ZwZQBhvsX8MKyHkCDqWuiVERwaP1SstKCb44FiMf+9
+         9nXvIIzHSjY1wedNJmwxWLhPd8fCnO071CJOM0asBbQP53AE4DN0HKzdbt0WHDnvoBYR
+         Ja8Gi9bk875LDn7aYCvxKfNtga/9h0VO0CKXDpzQIRKehRnvhVWpE7lY0aOyaLFTVEg6
+         vJfJIi/jlfBWZRtkFOcspZyxEH7JHaiSvT6JWVPK2Y/Ii7t86EFds9CiirohjfQOw5WW
+         x5Uw9XrepzGrdrbJQgMV2Uakt3Z8Vpv0j0syFghCzQIAE4ItgKmBoYH1HZdjflR8R0YD
+         N/Ow==
+X-Forwarded-Encrypted: i=1; AL+hErFEUpSRnJkuAVP2+5p1GS8R/x20TE1FOqS1h+3fCboM3ttCkyytzkRqHimPSQw8aBEhL6Fph3TcB+bMY1z0@vger.kernel.org
+X-Gm-Message-State: APuU4Z/lYLDW32tXeOS9GX/p3w4lfY2BqOHH7g+Y0T8GUoLOuvggKVZZ
+	ZKiZzzicWu6osKpS22C48uvcIIDIIvR202CXaQX6i1iU+UFLHtu7YKk=
+X-Gm-Gg: AZFdTZcedGs1D8UmGGlkL+N6gyZ3klbEh66rb1UzZ9UfXP8SfQwyWI/Lq0kvwlTk2pu
+	cnjLZC7iw3i6b2xThR3vxvPb/pzUt0yGOLvseG7Wdq/TjI4u2Lzh65HnV0xqvrPJiJnj3eABD2p
+	feRZGAoKvATNGRFfUexc+bNdeKG1ur+7hjCfJCfgRhb4Rkb4sGLVpcEdJ0N2hg0gfFClX+Hnxeh
+	70TQbx8NZg2A1f1eMA4v7hSJLgWxjxxfGV7/OZQ+uNHcGO8WJr7v//k4dp30DFmtcCSbq04VUfG
+	Uz1Iep1qFv7AiaWpmxPSPzBoOFysaWoFZhg1LpHeJsGIyKOCGA0feBJu1tv7hqix2xqwAqQR122
+	Ac3EliPHTwDxiV+kK5rrq44d1LPgu9E6j/mWBLl+p9St//JPzVYi8UaTEWo4bFJYRet8STmSnWy
+	jCDl44qDeseWeTfmw7dILwLcAFKr9zREhatKcUTzKGY2cGEAe0RFdZ6MajW1JLwyOGL6bS19Wx3
+	S09430u0oqdzT8Jm8mGXAZrUaQGzH3s3Q0kPlsWvMKMas3W97IhH2ROCfYZGzPon6PIZypt0S4x
+	JzY8e5Qwvl+Sj3boEd7IlwvF1Vws4CALN/bcFjMRj83+hW1Mm9fl2IsLE7xIr7PAk0H4bcmUd+4
+	3NLWmLOQnS0VVSUgBA7ba7vNu6MlZg4cJCT/VRNSkGsiPxg==
+X-Received: by 2002:a17:907:ea94:b0:c50:aa10:d888 with SMTP id a640c23a62f3a-c513acab9d6mr426725766b.40.1795220190364;
+        Fri, 20 Nov 2026 16:16:30 -0800 (PST)
+Received: from sohrab-omarchy.fritz.box (2a02-a44e-4ae7-1-c0e-6d5a-8ae2-915.fixed6.kpn.net. [2a02:a44e:4ae7:1:c0e:6d5a:8ae2:915])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ae6663esm146454466b.21.2026.11.20.16.16.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 20 Nov 2026 16:16:29 -0800 (PST)
+From: Majid Hajiheidari <majidhhdri@gmail.com>
+To: Nizat Mikayilli <nacht@dxdmail.cc>,
+	Will Deacon <will@kernel.org>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Joerg Roedel <joro@8bytes.org>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	iommu@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] iommu/arm-smmu-qcom: Add SM8550 MDSS compatible
+Date: Sat, 21 Nov 2026 01:16:27 +0100
+Message-ID: <20261121001627.4091340-1-majidhhdri@gmail.com>
 X-Mailer: git-send-email 2.56.0
-In-Reply-To: <5485aa11-386e-4648-b27f-f4090bf90d66@oss.qualcomm.com>
-References: <cover.1795196107.git.jesse.casco@gmail.com> <5485aa11-386e-4648-b27f-f4090bf90d66@oss.qualcomm.com>
+In-Reply-To: <20261107-b4-smmu-sm8550-v1-1-777d0a41170b@dxdmail.cc>
+References: <20261107-b4-smmu-sm8550-v1-1-777d0a41170b@dxdmail.cc>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,14 +107,21 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On 11/20/2026 10:01 PM, Gjorgji Rosikopulos (Consultant) wrote:
-> Just to note that my opinion is that CSID2 shall be removed from the
-> resources since can not be used as of today. But others may share
-> different opinion.
+Hi Nizat,
 
-Hi Gjorgji,
+On Sat, 07 Nov 2026 21:00:50 +0100, Nizat Mikayilli wrote:
+> Add the SM8550 MDSS compatible to the clients list, as it also needs an
+> identity domain at boot. Otherwise the scanout of the bootloader's
+> splash screen causes unhandled context faults and the screen goes
+> black.
 
-Agreed, I'll drop CSID2 in v2. That also makes CSID n -> VFE n hold
-again on X1E80100.
+Same on a OnePlus 11 (SM8550), booted from the bootloader's splash on
+next-20261120: without this patch there are ten unhandled context faults
+from the MDSS stream (SID 0x1c00) at addresses inside the splash buffer
+before msm takes over; with it there are none, and the panel comes up
+normally.
 
-Jesse
+Tested-by: Majid Hajiheidari <majidhhdri@gmail.com> # OnePlus 11
+
+Thanks,
+Majid
