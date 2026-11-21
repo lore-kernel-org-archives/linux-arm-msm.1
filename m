@@ -1,94 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795261048;
-	b=DP4GflxO7yqVPYWFuu20wf8eEO7lwfqVQQBYGdvIhXKYLRJw9DKc+8d9lzxbkRkQYJsr
-	 m4WUYY0fyWxpGDksRdLP2cmV4K0PP29nrZE8oF5y1ViD7TFjLfaT+trkw4pu8UcUcsx/a
-	 8yD7XGTLS//ZpFcMVeZ+JqfQ9KwQYZJEYG7p5316hJ+fen07UFcRxxPKn5dVW34uhY1u/
-	 VW7sMABl9nvWYKJpf6gqNW2vhLZYmIEb2Dm1or9pT/MlJa18OtLS7eXTnYmpJhzQv2ECs
-	 A1yen1DoE7pVCSrI/jZM7OCFcGNeXsTQ4xOVNQuSydGCAWYjp+IngtPV1i9/+47IVDQ==
+	t=1795263765;
+	b=qDUi/++KlPvwncmBoRCJHQO0N7I3hZs+VpD5jf5D5EvOJDIhTuiGLqIESgMNO7vnUonN
+	 ZnVLt54Gv25ltEEPiN00Z3AorSyIWx6cDt5zrZQcXTfe1XsNivZL5ZAwJHRKLtdTLtWLf
+	 PNKpnZXhTPasGKvJWXL7oqpfyxMGpPnDYd7iGxTsg+4EdgZIep2v7uz5eog1pM5ZcwI5K
+	 ofqsLz9B07T8/DvkvGmAHvR5F2wi9D4W2yo+CFaLUaWlDH0j9ZpQxijZR6+1YkOshqUj5
+	 LQ3cMYdRVTAINFvU+AsWG4epCWxw92wp1wS+ZEIT0zG50EzUx4488mZUzdTvs93sUEg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795261048;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:User-Agent;
-	bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
-	b=iqE8wKbq8XmkLtZPY/K0ppLbsx+Dok1Fj4JW9V5B2epltNPenHAH7PACD67v/WZhGw+M
-	 tjp0b2QOy4sfRI7ZhvNmYBsvfFdHX6wIftwVDV3lnimzXKFYRe5IinE+VWQs3bnjBuWcN
-	 Rsd/8EEM1t20qukqNtJ5Xrs4AeILwaOn0gzDaQogeObgxU1wQywM56tyHfMBEzpqrm19A
-	 Y7PRXt3w5zkOlE8XDYIWU/i0DAr/xmkfOSA9oCPp4DCD5+RGgWfdwRtUbEAvupbEWJzoe
-	 82WeqNOeujNIUdy3P+axM//CkeT4rQl6aksSufFFeuaSQaR0vUSmlS+2PUiN6RG9FsQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795263765;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=RTZTkBgGTAVOkbRvUJ8jaCPNtuaObH6Md0Cm1SV1BwY=;
+	b=GY5kbc9eVmCV2reaPuWRDOftf22lk+LSa03uqDlzsC4cEb7POwTlUDZt8aw5x1hnfOib
+	 s3vK/k0tzbvAjPaSAMDvr9Y8oubZtALpjh8zsNnpvD0ryzWe47TwKysy3c85BHlwAZBtz
+	 GdT3B6JhDQw5KdKUz4/Eir4GY861uBb6E7JSEFyhIc2lJhyMYSWHoXf6fBdvwVN/ZqJQM
+	 6cBmHqWdvHDZyBNtNA6G1vVjMkU5vMUNxwvPdrGilaAPzckBvIyQOYQvUO/OLdgwmTIbR
+	 4/lfhmX7IVZnPQDl5FbTrFKZmiTPI15lptGuyEu7TNxztGydSdskpdrMzuv1DfcG7Ng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iOFfY2C0;
-	arc=none smtp.remote-ip=74.125.82.52
-Received: from mail-dl1-f52.google.com (mail-dl1-f52.google.com [74.125.82.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ad0glmQJ;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 892EC606A320
-	for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 11:37:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 892EC606A320
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB575606A320;
+	Sat, 21 Nov 2026 12:22:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=iOFfY2C0
-Received: by mail-dl1-f52.google.com with SMTP id a92af1059eb24-15ea896ddc8so2889908c88.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 03:37:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795261048; x=1795865848; darn=vger.kernel.org;
-        h=user-agent:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
-        b=iOFfY2C0LlUvyKFJTvFPJcN4Xr9YeXIbalzQaPzIkZr72m+pI2qhhzoCdSvkI9Vk5N
-         MrfXgnYBgdaM5hgm2WpobxmQXFxsK4eeEhM6WPlFxjSl3FT9bqNkd8tWAUmPV2HTf13t
-         fdp3HGnjyL80p3TxPLCUooXon5JGMd3b5G58uoniv6Ux54AlcvhCmNX9iBjXPj1RJI3f
-         ueq9LTqFbRPZbyMo4vl9/KuHRGK/Z7EvfG0+eUPpc5EI3rgIUohgClWWkTb/jk56aeuh
-         /rUlnnsyyJ18RZOtySzvTAkOqYQc3zDZFW3igjvfG8VxE6tErT1oymKvJEWKXkwNneRc
-         dKmw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795261048; x=1795865848;
-        h=user-agent:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Z6Fq2OUnRPwkDMt3uy74FQqaHnnZFERerJEl0pXhFq4=;
-        b=bdU8KGIz5XcguADEmIgIFAynaME5rItZZuPivJpmhPS2BS4h0fLrmX0bGpme60iRkn
-         2vpdhlQIoPGMbN1YbQhlKLcosbzInP8KD6AVMaId9r/ooveN3kwG7z/fXl8fZJvexNYs
-         hI89QKMVw7GKSPTxgL29d71yI0/bEokC0uvCo/BTEJpU0+A09NuTlYFpbHuri3yCO6bm
-         puO0X0N6ZekLZUIgaUFI+FVommY9zquyDaykuQk4AzOqVCN5Fl9VB9J5lRL6e6ofqI0F
-         4/p7tEes5jRf1BpKn+hp8tNmXydsYzM8b4IQX0PMXILoqKsjR7OwisQW80z0Ptf48x0m
-         2bkg==
-X-Forwarded-Encrypted: i=1; AL+hErEiAqL7K6FoAAE49UpmbJheo//Tg3GbR7OmRKaD7i9/IwjQ4f1GZ1k23ixKuIfofAwWCfAZHzt+i8jhWqbZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z98aQMAylnFiHPXtoPriLP3n0ZStD4wb1G5A97TneibJ+2wLuYO
-	6z/UjAqC+K44sNZocV9YsHY6qm25hqtJ233qxZHjnS1gKdkmbRwJRf5Q
-X-Gm-Gg: AZFdTZcqcPJ90XPQMmC84JpVebmXwv7WUEgrccK/r299FP6QQqxBPEdmWbYqXRwSr1T
-	l/H19VqFWi5dz9Beo73BXWVc5xgPMpoW2/jDZZbUchxfI3LLpSXNER7AFoThCKXDZgCT+FMHX9U
-	LH6pBZNtL+G8eL4yNnc5blqmJrqH9XWKbbj6RtpVDo3Bovo1/G70s0rWLQst/BERYKRp1S+wSn7
-	0U7AUBE1af7CxrwkNGK4dtmQ/rhwy9NDw9DnKZyYriGLZ/hlHdpQVjXhTzx/qu5JBJfRd45HYgJ
-	b8rgoTwkJo5LB75Io/eBRsUG+m5dK+hmv52+GFnFmD/7pDh1K/1eILUUdJCt9CKw0N59k/6UIKc
-	KDXy+OT3XC4q6AzIFh5DtI62F3de/tbQfVb3iOguCAl4FP3EL0SQVS/J9/pBBPMVQqKB/LMSHNI
-	uS88Y76TPt0E80BHa1kdWCPSeOBPs6mDSE4NIkotAO9ZZEVTEqBBaiPjyxT/VStSIhSUwpho0kB
-	R8m383kFFofQowFtp7+psN5bByR6OLj+mVJt07jtDVfeAyELGfHg/Hkzwdg0s+PwCVxiR5N11Vf
-	VapGRUSQCCOSFZ+6iNutnoJGsmc4AHmWhSbfKLLievZEird9RGLySP3D9EeLR59W4l58XdYGkSm
-	as9ZdmRnZLDBhd6c=
-X-Received: by 2002:a05:7301:1501:b0:385:1e1c:9ab5 with SMTP id 5a478bee46e88-385701527f3mr5469764eec.20.1795261047398;
-        Sat, 21 Nov 2026 03:37:27 -0800 (PST)
-Received: from asus-ux3405ca ([140.213.140.56])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7f59sm17980517eec.6.2026.11.21.03.37.24
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Nov 2026 03:37:27 -0800 (PST)
-Date: Sat, 21 Nov 2026 18:37:21 +0700
-From: Muhammad Huda Nugroho <mhudan21@gmail.com>
-To: Manivannan Sadhasivam <mani@kernel.org>,
- Lorenzo Pieralisi <lpieralisi@kernel.org>,
- Krzysztof Wilczynski <kwilczynski@kernel.org>,
- Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: [PATCH] PCI: qcom: Do not power off a PHY whose power-on
- failed
-Message-ID: <20261121113721.7OL6u%mhudan21@gmail.com>
-User-Agent: mail v14.9.25
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ad0glmQJ
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 04E201F000C0;
+	Sat, 21 Nov 2026 12:22:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795263765;
+	bh=RTZTkBgGTAVOkbRvUJ8jaCPNtuaObH6Md0Cm1SV1BwY=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=ad0glmQJVjeG757nF6Hnno1fRDNpe2skOm05mcTm5k2ixfRHl62GXCH6R0Ux5ua6Z
+	 8exEcpHP04OkqS2etyBhyRTBKEqqn6Rnk4K1tyNFbE5cECf5ltfjcrzNzkIOv6BDUS
+	 c5hu0k9XXo2FYsHThhxrcdf/XpntR7toORCxzFyVNs4GcfzmhkqD3Dd6Q6eMtVKhUL
+	 vAr7XiOno8JAPN3cnloniGBr2+Ak50LKMiQn5rBZffR20m5kDRAorLtPIKbp5BuoCM
+	 dg9/j3dof+oMp+SI8tyUqwxp5KjdEbVuYIWEb92RjvikG74rL2wpx9YPS3pPrapMWs
+	 cZYO+as3mowmA==
+Message-ID: <9faa6fce-594f-4556-b5ab-6aa73330da8d@kernel.org>
+Date: Sat, 21 Nov 2026 13:22:37 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -97,103 +50,88 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v12 3/4] arm64: defconfig: update the Qualcomm Crypto
+ Engine entry
+To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+ Thara Gopinath <thara.gopinath@gmail.com>,
+ Herbert Xu <herbert@gondor.apana.org.au>,
+ "David S. Miller" <davem@davemloft.net>,
+ Stanimir Varbanov <svarbanov@mm-sol.com>,
+ Eneas U de Queiroz <cotequeiroz@gmail.com>,
+ Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
+ Eric Biggers <ebiggers@kernel.org>,
+ Demi Marie Obenour <demiobenour@gmail.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Russell King
+ <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
+Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, brgl@kernel.org,
+ linux-arm-kernel@lists.infradead.org
+References: <20261120-qce-fix-self-tests-v12-0-b5a2a44bc5ae@oss.qualcomm.com>
+ <20261120-qce-fix-self-tests-v12-3-b5a2a44bc5ae@oss.qualcomm.com>
+From: Krzysztof Kozlowski <krzk@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=krzk@kernel.org; keydata=
+ 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
+In-Reply-To: <20261120-qce-fix-self-tests-v12-3-b5a2a44bc5ae@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-qcom_pcie_phy_power_on() unwinds a failed phy_power_on() by calling
-qcom_pcie_phy_power_off(), which walks the whole port list - including
-the port that just failed, and every port the loop has not reached yet.
-The phy_set_mode_ext() failure path returns without unwinding at all,
-leaking the ports already powered on.
+On 20/11/2026 20:34, Bartosz Golaszewski wrote:
+> Most Qualcomm SoCs contain the QCE hardware offloader. The crypto driver
+> for this IP is being split into a smaller core stub that doesn't register
+> the crypto algorithms on its own AND an auxiliary driver than handles
 
-The first of those is not a leak but a refcount underflow.
-phy_power_off() decrements phy->power_count unconditionally and invokes
-the provider's ->power_off only at a count of 1, while phy_power_on()
-invokes ->power_on only at a count of 0. Releasing a reference that was
-never acquired therefore drives the count to -1, and the next
-phy_power_on() returns success having silently skipped powering the PHY
-up: no error, no message, just a PHY that is never initialised again.
+This part is fine...
 
-The damage outlives the failed attempt, which is what makes it worth
-fixing. On a single-port controller the very first failure is enough to
-reach -1. It is normally invisible because a failed host init at probe
-time is fatal anyway, but it becomes reachable as soon as anything
-retries host init at runtime, as system resume does - at which point the
-controller comes back with a PHY the core believes is already on.
+> the crypto part. Update the arm64 defconfig to only build the core part
+> by default and leave the choice of building the crypto part to the user.
 
-Unwind with list_for_each_entry_continue_reverse() so that only the
-ports successfully powered on are powered off, and route the
-phy_set_mode_ext() failure through the same unwind. The PHY core already
-releases the failed acquisition itself, so the failing port must not be
-released here.
+but here you miss answer why. We do want the proper driver, not only the
+stub, no?
 
-Signed-off-by: Muhammad Huda Nugroho <mhudan21@gmail.com>
----
-Notes for reviewers, not for the commit message:
-
-A structurally similar unwind fix for the tegra host bridge was declined in
-August 2026 ("PCI: tegra: Unwind partial PHY ...", Pengpeng Hou) on the
-grounds that a phy_power_on() failure means a broken system that an unwind
-will not save. That reasoning answers a leak argument, and it is fair
-against one - a PHY left powered after a fatal probe failure changes
-nothing. It is not the argument here. The problem in this driver is the
-opposite direction: a reference released that was never taken, leaving
-power_count below zero, so the next phy_power_on() succeeds without
-powering the PHY. That survives the failed attempt and breaks the next
-legitimate one.
-
-The same underflow was described by Vladimir Oltean in March 2026 while
-reviewing "scsi: ufs: qcom: Drop the PHY power_count check" - "If 0, the
-power_count would become negative after phy_power_off(), and a subsequent
-phy_power_on() would merely bump it back to 0" - and the ufs patch was
-withdrawn in favour of per-driver state tracking. This patch takes the
-other available route for a consumer that must not inspect power_count:
-only release what it acquired.
-
-Against mainline master as of 2026-11-21.
-
-Found by reading the error path, not by observing it fire. The underflow
-mechanism is from the PHY core's own accounting in phy_power_on() and
-phy_power_off(); no hardware reproduction of the resume case is claimed.
-I would rather say so than imply a bug report I do not have.
-
- drivers/pci/controller/dwc/pcie-qcom.c | 23 ++++++++++++++++++-----
- 1 file changed, 18 insertions(+), 5 deletions(-)
-
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -1445,16 +1445,29 @@
- 	list_for_each_entry(port, &pcie->ports, list) {
- 		ret = phy_set_mode_ext(port->phy, PHY_MODE_PCIE, PHY_MODE_PCIE_RC);
- 		if (ret)
--			return ret;
-+			goto err_power_off;
- 
- 		ret = phy_power_on(port->phy);
--		if (ret) {
--			qcom_pcie_phy_power_off(pcie);
--			return ret;
--		}
-+		if (ret)
-+			goto err_power_off;
- 	}
- 
- 	return 0;
-+
-+err_power_off:
-+	/*
-+	 * Only release what was actually acquired. phy_power_off() decrements
-+	 * phy->power_count unconditionally and invokes the provider's callback
-+	 * only at 1, while phy_power_on() invokes it only at 0, so releasing a
-+	 * port whose phy_power_on() failed (or was never reached) drives the
-+	 * count negative - after which the next phy_power_on() silently skips
-+	 * powering the PHY up at all. The PHY core already unwinds the failed
-+	 * acquisition itself.
-+	 */
-+	list_for_each_entry_continue_reverse(port, &pcie->ports, list)
-+		phy_power_off(port->phy);
-+
-+	return ret;
- }
- 
- static void qcom_pcie_configure_ports(struct qcom_pcie *pcie)
--- 
-2.51.0
+Best regards,
+Krzysztof
