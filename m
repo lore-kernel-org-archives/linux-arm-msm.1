@@ -1,62 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795361333;
-	b=SQ28balA5jt4T15OJs1JqltBz/anFTCE9rVAlJDl/h9yecTlNlogNJ3yJ5u1DXY6vUCb
-	 aRW7lR9FhsgES34NgtF1g8apiZkoiSBNSTWfbZ0STG2MeLqsgPrNu0M4zQPKAFyLmoG3k
-	 Gt9nceDLKoN3OWfxH6PjNhBgE7u6Gbf0n4DzrIjpKzNG2EissWyYjz8dxOYppatbWpM+R
-	 2ldq58cTu/ByKUZROpVT90g+gMR9g6kOBh6pjXdjoJW9GMNiYWOjX0kS+PtRI0XwbYc9f
-	 L0B1wD20itymdEC6z9MksTqnwztvKUfegwiMS11DzHSOxWoltMzH8qxuzYA9GyKsnjQ==
+	t=1795361340;
+	b=l0bEsolV5+ZnQ6RpTfRfjiRmsdjANlDsI2RtEXHcLk4tWxCEq9mM0AbSna1VvgilZLlr
+	 HTolDLFhW4RF5cU23gEXQ10lc0km+KIeYXiEeGrvlfNbX8pfdRireNAMO90ypiWpSsJEJ
+	 cyMwimzU6UFo65THB8OGR9M93jx5h8V25yW3DKUcwXWArlzoaoTFgLXkBxMWf5iQh+wMe
+	 UjacWmsBZPTPgVy9UlXFuCQOxcxftlhkuFNnTqbzQNsyyKHa9LDYd8eWjlpv+Um50v236
+	 KLQiJApE8hs8mCEPL5mnyM91KF0Mk7gDAvnebYbyvb/LynZSzZC7sQz/w8kRNV9vm4w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795361333;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795361340;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=Gfv7At4jjMFwsxaAXUWVk16GpR4G8IeI7Vs3Zb3cbx0=;
-	b=Jqpy5BzcM7WUUPu8l89eyeou0FV69HsNmnNx0ukA39VHDv0c9ctrMDqquFQiyQ3uh7RJ
-	 6EPY2SVyquj2IQxKL7oEicSQe79zP5SE1zIsaM/lhS82utF/oLFvEEEoFCK6k61mW/rwJ
-	 SGA6LPDElEu2BESdfaR/7bs5I/vXXxPFEvzwQLWt5PN0m0yzFxvIiOLaR0YXO0xoYFQL9
-	 sOqm6YzXlDYdV/Y/WxbXfWiULA8J+5Pc34ZDUH4JwJCDxkZ5ORJPfpsHl+Z1bTblvmNyR
-	 sBVGeDNIKBf7/crnAXrQczIdbi0BndJHiFXTntldhXOCPhp4LbIY31ZhYHqzXbMh16Q==
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=ZF89tkqws706RTsLm88jnbpkVWFxEn2BIz922AiAkF4=;
+	b=hwchPk+E+e9/2/vxHHTCoNEbqOpogeiWFS8jV+Q72RgrP3fkrQ7h61Talp8eSyFFWnZz
+	 79vds4PB0Yxw6Hs7tb+ZxEGvz71Qoipo5ILTAU+HwR5SsnucK+2vRRzkPvHow2M1B8HjA
+	 PdSqelBkMv7ic30QFpFCjgD/3+TtEA52cu9lqfuFGSsgf7zNbPKLa9QaEfzSnbfHhDp9K
+	 2CMWd/wmrySn2cdmb9b0WgztcW/1AyDGuBWWyDHRHJDLux46teMGuM8HlthKGwrxA7EYm
+	 fSfaqtY2HicskEg3FgU35/Xbqsq3MiCzX2MRPrg7p5R+yySAO4JRnaPWb7G14vXYCag==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PevB3Eay;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kvffzmlB;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65B2B606A335;
-	Sun, 22 Nov 2026 15:28:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 480F7606A32C;
+	Sun, 22 Nov 2026 15:29:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=PevB3Eay
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1872F1F000CA;
-	Sun, 22 Nov 2026 15:28:52 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=kvffzmlB
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B27011F000E1;
+	Sun, 22 Nov 2026 15:28:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795361333;
-	bh=Gfv7At4jjMFwsxaAXUWVk16GpR4G8IeI7Vs3Zb3cbx0=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=PevB3EayB2WU0Z12Xn/9X6nSf6oaVcfHm1xavecXyLUGgIlfHKG30DqDXZ1CtviUQ
-	 Sa9care7oznI043Uz0SN098ku0fXyDAPkz+N/u3glNz6mTU5Lq/WcUdtrRv4ioG8zs
-	 3Ms+ohlulC3b5jvf2EqtlnrWm+zx28Zte/z+pi7IoQhy8bHZycuAyHH4vJPoegk7Ch
-	 M1eWrGiQXVgVn1iTi7Ea5Jro67CUw4XC5tF76X8CKbSfy37Fttze2sobxtZO3L1/Hk
-	 DDc/Hzrx01lzJ6dTUSvWtKFYrdl/kO085rYg/AWKpNHPdaHn+H10syI8TR31rEREjc
-	 2u3TcYk688E/Q==
+	s=k20260515; t=1795361339;
+	bh=ZF89tkqws706RTsLm88jnbpkVWFxEn2BIz922AiAkF4=;
+	h=From:To:Cc:Subject:Date;
+	b=kvffzmlBM3UnFqMdU+V0YvxsvAAcjV+vNtBt4DlEb0BbLC0XXLOAyXXQhB6Nbg6Zm
+	 52pwZ1PDRBHrjb665HPFeLgEqMfaBtaxnuwVvHY24+5y9oTLyYFT+uqkHsn7qihcxF
+	 ndrYF59gcd+lSJhIQiR+7kIpDIl9rtFhBnRCrKOSE3t4wHFjB81vd/gG8QyTVkXvGj
+	 KOpyq+C4nvObZtbmUW8SNPJHLBxdGsoKirb34zuZGPxbKGVvFo2chkq0/+WYO7MGjp
+	 VjuXWZjHUscnT+2s4g0YlAz+x/dvyKEI5/JH4TCiv6G2KjqDZhE+5h/TIsWpkCFwBQ
+	 KatUbQfk+c+5Q==
 From: Sasha Levin <sashal@kernel.org>
-To: Nathan Chancellor <nathan@kernel.org>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Sumit Garg <sumit.garg@oss.qualcomm.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	kernel test robot <lkp@intel.com>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Bartosz Golaszewski <brgl@kernel.org>,
+To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Manivannan Sadhasivam <mani@kernel.org>,
+	Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
 	linux-arm-msm@vger.kernel.org,
+	linux-phy@lists.infradead.org,
+	linux-usb@vger.kernel.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] firmware: qcom: scm: Hide QCOM_SCM instead of depending on ARCH_QCOM
-Date: Sun, 22 Nov 2026 10:28:50 -0500
-Message-ID: <20261122152850.1113916-1-sashal@kernel.org>
+Subject: [PATCH] phy: qcom: uniphy-pcie-28lp: Rename the PHY type enum values
+Date: Sun, 22 Nov 2026 10:28:57 -0500
+Message-ID: <20261122152857.1113943-1-sashal@kernel.org>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261122051636.GA2630332@ax162>
-References: <20260913173049.1168963-1-sashal@kernel.org> <20261122051636.GA2630332@ax162>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,30 +65,64 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On Sat, Nov 21, 2026 at 10:16:36PM -0700, Nathan Chancellor wrote:
-> This now allows
->
->   # CONFIG_ARCH_QCOM is not set
->   CONFIG_QCOM_SCM=m
->   CONFIG_QCOM_TZMEM=m
->   # CONFIG_QCOM_TZMEM_MODE_GENERIC is not set
->   CONFIG_QCOM_TZMEM_MODE_SHMBRIDGE=y
->
-> which breaks the build (or install if depmod is postponed until then)
-> for me.
+Commit b28eecc89399 ("include: linux: phy: Add phy attribute "type" and
+associated helpers") makes <linux/phy/phy.h> include <dt-bindings/phy/phy.h>,
+which defines PHY_TYPE_PCIE. That clashes with the driver's own enum, and the
+build fails:
 
-This is older than this patch. v7.3 gives the same config from your
-allno.config and depmod fails the same way.
+  include/dt-bindings/phy/phy.h:15:33: error: expected identifier before numeric constant
+  drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c:127:27: error: 'PHY_TYPE_PCIE_GEN2' undeclared here (not in a function); did you mean 'PHY_TYPE_PCIE'?
+  drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c:135:27: error: 'PHY_TYPE_PCIE_GEN3' undeclared here (not in a function); did you mean 'PHY_TYPE_PCIE'?
 
-With SHM Bridge enabled, qcom_scm and qcom_tzmem call each other, so
-they can't be two separate modules. That goes back to f86c61498a57
-("firmware: qcom: tzmem: enable SHM Bridge support"), and it happens
-with ARCH_QCOM=y too.
+Give the enum values a QCOM_UNIPHY_ prefix.
 
-I sent a patch that builds qcom_tzmem into the qcom-scm module:
+Fixes: b28eecc89399 ("include: linux: phy: Add phy attribute "type" and associated helpers")
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
 
-  [PATCH] firmware: qcom: Build the TrustZone memory allocator into qcom-scm
+Against usb-next. The driver needs ARCH_QCOM and is not in arm64
+defconfig.
 
+ drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c b/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c
+index ef8709ff0e16b..4243de46a1e07 100644
+--- a/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c
++++ b/drivers/phy/qualcomm/phy-qcom-uniphy-pcie-28lp.c
+@@ -44,9 +44,9 @@
+ #define PHY_CFG_GEN3_ALIGN_HOLDOFF_TIME		0x3e8
+ 
+ enum qcom_uniphy_pcie_type {
+-	PHY_TYPE_PCIE = 1,
+-	PHY_TYPE_PCIE_GEN2,
+-	PHY_TYPE_PCIE_GEN3,
++	QCOM_UNIPHY_PCIE = 1,
++	QCOM_UNIPHY_PCIE_GEN2,
++	QCOM_UNIPHY_PCIE_GEN3,
+ };
+ 
+ struct qcom_uniphy_pcie_regs {
+@@ -124,7 +124,7 @@ static const struct qcom_uniphy_pcie_regs ipq5332_regs[] = {
+ 
+ static const struct qcom_uniphy_pcie_data ipq5018_data = {
+ 	.lane_offset	= 0x800,
+-	.phy_type	= PHY_TYPE_PCIE_GEN2,
++	.phy_type	= QCOM_UNIPHY_PCIE_GEN2,
+ 	.init_seq	= ipq5018_regs,
+ 	.init_seq_num	= ARRAY_SIZE(ipq5018_regs),
+ 	.pipe_clk_rate	= 125 * MEGA,
+@@ -132,7 +132,7 @@ static const struct qcom_uniphy_pcie_data ipq5018_data = {
+ 
+ static const struct qcom_uniphy_pcie_data ipq5332_data = {
+ 	.lane_offset	= 0x800,
+-	.phy_type	= PHY_TYPE_PCIE_GEN3,
++	.phy_type	= QCOM_UNIPHY_PCIE_GEN3,
+ 	.init_seq	= ipq5332_regs,
+ 	.init_seq_num	= ARRAY_SIZE(ipq5332_regs),
+ 	.pipe_clk_rate	= 250 * MEGA,
+
+base-commit: 8e31dedb9ad496ea7dd7064d77d6f7d459c1c90f
 -- 
-Thanks,
-Sasha
+2.53.0
+
