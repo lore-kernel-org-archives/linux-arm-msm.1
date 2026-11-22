@@ -1,102 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.172
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795378974;
-	b=4bU6MhFThRZxfFAF40n8CWkQpwdWPzz70A8Ghkq8API9mzIHyUT5wL44WemodSRbEmfg
-	 GKLaywd6KZPlUAuqmbBbwD/r9vk9MdywzEIj85KaWcIGyUS+v7Pd2U6qWQLKrxd3gRrfb
-	 iEZkhuKwT5KIDEw7bEw/BPomK1CProC5AwObuxmXV+KEbCIZvQN6ibwA9C4hrYdnCaAkD
-	 fZtEq44V1ZV0wGUrAOTCzLWUp2Vh5M9epxJboTh9LE3o+Ql9Lfh5pgNiZkoILlNrNFA4V
-	 Cj2wMqsncXBiZPPj3asoNNs/z8qSFRZSC2HNDqM1/j2y1ELcfWznTXb1GDsYWKaMQbQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795378974;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=GpVBtG1ZIUyisjsqs/xpaJk7qYT698fGtTK5Z6O2ZiU=;
-	b=Flge4GJ6PeIHJ5vlJ5pWYSoc1CKLfFTCUgaQjFF3j1HdDkOtymuwV/pTYC/+zNEnwBYG
-	 s5RoilreSJ39F1AkVZV6eVk4/gKQs1PeV2iEGYf+LZSMwNZPVRdqN6ajNVCi9yDZcBpP1
-	 IkbajLYEQ7y6Rqqo5+U3Vsa2QK7pTa2SQdQPm9eSrVUe1l9/A1eYFYz7CXgspNWiKRRO8
-	 Dn/Shsz0l+aESimnHhpJKh7k9hET1v9C2rJHuQXx2NEuCrElM+ASe8NwnLVLUjC3i2Fl6
-	 MilTReEWXT1YlwuYUgDl0zgT2Jfg5F3wIbva7mytHL++XKBkRGkhodNBXcosY4RqqqA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=j9g6nOee;
-	arc=none smtp.remote-ip=209.85.222.172
-Received: from mail-qk1-f172.google.com (mail-qk1-f172.google.com [209.85.222.172])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795379065;
+	b=mUvhKG8LdPGhBJabNCbDuniDzn2LwdosmSkdxXErCqg//zyWTqB1mrcHJbJs7K2AR2jY
+	 Fo1wZLIH+klVIH4vgGVT/yvb+O/9UAeOLQEu5apGWscKDWCuG8Pt87VS1U1pmI+nXrBdD
+	 P63NYX5CT4UnXroLGZDHZplzjyecSGja0hubQqpefRaUj/B2WZ77XbO/nsW9uYjrqv5i2
+	 etQjdR/v2oYShsm7RjzeV727Gvz3iV9jTsD83MBbPKjHqnC1uNaI4of3G1mx8OG52QIoS
+	 2yrfXaA4BR+jrgRHMXlBdJmo8fMNv76nrisd3QKBNvRgHtMN3/dLdIPbNeULzxFV0fA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795379065;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=cshyvm1RGfi9h+MQQ0UCkQXgQEVUysI3Bo9qnIeDWks=;
+	b=oEWdmRUL2Twa2NgyZvqyO6W9I+RTqQndQr6GDk0j1ooJRX/ckynKZEey6+mML9fpOkoC
+	 /WoQmiH87SK2Dl7b9DnBmQO3eFPpO7Jauaxm0alCPzeUj9uI/+vvPMyaGSwLRUuH1iWVC
+	 X3wx1DhMiAgc9Cu8YcarEbzbeyL+nI0ALaRkjbp1vNdFsrdapwoflSmLZhieHr+LlEehe
+	 uefNiFy/ReSeSuHRwnfcB415NjFUwfDPIAHII3fovgNSZL/nYoQ5SSUU+G9kZqeOCB0cl
+	 SzSwPfY581Ilp53tlVlaVOKZj0rWqKoZEYITbvcedaz/wxURYHNHeponxXlXJh5yung==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FxahAm+S;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B51A606A31A;
+	Sun, 22 Nov 2026 20:24:25 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FxahAm+S
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795379065;
+	b=Wjss74g6QV0N+ACGnvymx+sz2dqKiG0IIxnUbqQYBIjqy/Kp6fEZgV1zL3ZxZJsi2Oca
+	 xmhPssiHBn0+Q8BSiAfxVFVSujHExebOSe73P7l5o7I82sAICmfnCia29ygH4IaIe/xDg
+	 +QhZlxseBCKqW3GUXMiopkUhZXPiVr9hK7VBlsu73LjPjK91m8Fs53+KOfMrGDdqgobq/
+	 4upwFW2aI7lolZ3wHo8D2hMq+GONvLdjWcdnyEYaHHR0akJuOlfCWc6n4wueqzkvMG+Ym
+	 MRIh5h/2C23Ii/ty6aeqROyYhgvefNzP5IeONaTE6B70h6Xc7rPkU6xpCAXeIP1d7Ug==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795379065;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=cshyvm1RGfi9h+MQQ0UCkQXgQEVUysI3Bo9qnIeDWks=;
+	b=FJRBq69XzuBzWRDmO5/o79P7e/coSev2JA4rPo/PgiYB/b5fswT+Ip9PRbO4GAz1r60U
+	 zgHyAnESE9PeEVUVeUjXcnavLNR4BwIjrn3JptnoO0CHy/5tstETzdrWar3xQNfEzpvbj
+	 qpFXw2i12jQhloUma/c1mvSYoSyVN3g5WeNjRzT0wuOBDtseAZzo2mdmppPneLEg9wqe5
+	 kDIklDEYibHy7JvwzRRVynZuys0dzVzuycIjVzI2sRNWKkw6xUwnSJ3+WX0hIUPf50Qg2
+	 uRzjtDSnz02HDogjbNKFg64sCIfK5L9H6WGH6Jd1bIgeGWzxtD6d6gJB2kmApIcTt9A==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95B71606A31A
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 20:22:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 95B71606A31A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=j9g6nOee
-Received: by mail-qk1-f172.google.com with SMTP id af79cd13be357-945e6d9ceeaso247815585a.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 12:22:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795378973; x=1795983773; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GpVBtG1ZIUyisjsqs/xpaJk7qYT698fGtTK5Z6O2ZiU=;
-        b=j9g6nOee4xezCjykCdJTlzqCGnpYKG/HoVttPGr1dg4aCHpyOUV7W1OVDSGRh0r5gw
-         ZU5CfTmL+ndhBW/H4RINENI/1vb9S8wkgvI7Ut5Vm/4cTjxk9qWnp3XjyVQCIp6MrA1j
-         Rd1hSAdlM27lKOgBqL5h7J++AY7M7az+62ECtjI6mFsAIotKIuwoida4E139/MIvFIu7
-         Q3DL+4UD2FKzFuGRiAJ6Vv//VxJNxZLjjHkiC/+ALheXM0odNZS4v8LXh10yiRLWKe0O
-         sq0cIw9g6LbZeLG8Wmw/d8UYmSICUrH8STZopRZZeBw/OgjH9Z+yJHrEL11BybPpbAHH
-         yGHQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795378973; x=1795983773;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GpVBtG1ZIUyisjsqs/xpaJk7qYT698fGtTK5Z6O2ZiU=;
-        b=HgbVrDoOe3eybjG3DXkASnS2xka+vSenHteQzey+M+YInxBpL5fWis/et8jIypN2d7
-         Dp1HyluQ1NEFgXDtV9iVlwyh8qwAD3lMq/jYTXLd8b0trzZYigux/wBI35un35EFQ0Be
-         NC9JhGffW8zciiLNUbzoIjCJ6oxFdn6oKGyE5+hxvK2jmAqCalol97MYtjipxr5Vqkyv
-         /CSbYh79m4VITiaA0TUGQObCzjaZxh7d0KM5ZK8myk7FnJsMy0hCtxp3LA0h6+z6b4Z8
-         yQDz46z8TPlP5HfGx8TyV6KaAwrF2+cMK5CK7sFl8iZ15eWYuUz6XFAvAHkG/OhQ82CX
-         5OyQ==
-X-Forwarded-Encrypted: i=1; AL+hErEDZSo1/oaOzxFv/I/Q8EdUHhgYuyncMm54yQtLAyIoysbldELUjO3MQooToLuxCAyN1NF2XzRgs0mWq0aZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z8o549fxhBEanR8FszcjGGPnHrR2zwN8V1LG+X7zKsQk2oRVuWH
-	Bop1aDFxpxLTTkfzoifcioBQ2mhyn5wU1l4+5GFqQLJ5Zknm642M6fCK6zO5N6sWZ4FOWg==
-X-Gm-Gg: AZFdTZfatHw6H5IEegudBicG8NTqWZn06plpu4xl/UaQfFUR/CK9Rs2a+t+oP0GG1We
-	XtO7A+7KiTktgh6kc0pknuVDbbj6Pg+6/UK651z4jrdd2ksBaFAmhxHbB8lIypECCV+iaO3Cr8/
-	Ua7BfXo/C/+T/2T+t76vV2b357Mlr14tZw7/FyUqjFGy/MnPKYTGirlcAddeFEm5cOKkHjsTuHi
-	C2IuDmC0GAOIV2rLj0ivvGL1LvF5Xl7qxWU+S2RL8Q3jxs7CZQc83oLBaa3inxNwoPm3llBCJgx
-	6g/Ovgs2AND6n6DGyABmQe6i8G9dNbHV0w2Pftqe4VSo38rSSng/UqxaAtLn8EmVpc2w0698Pjo
-	I1HoxuvmkGdnoD666XD6MYp5C1awvikValrTv3eqHRERkvrJleVjA1km6iWAZOk8R2z4KIIt2nX
-	tnI+gm+1I7Q3AXFXqtmRJAV5gbKDhYR0AUjD7a87fX8hw0+jD30GfkmIc+yPE8aduc5KKelEC72
-	rZQcALh7zfcGlO5bj7Co5cNSxZmtHxTovw6XJQi4XRiinl5g/WHXH6gcH6aEM+e5LaTxCkpyt3k
-	jCJ5gS9/4QgbLJlQx/qDspAhWfvjk2bzkPUSbLfa/H5pp+5DZHRItDSUbzBRFPjQRSm88Ot8jI3
-	OrV6GqdV3vDR7GPb0KiaKYqRqmUSf2nTZ2tdLdpNnb4yBSMF/ScHe1Rh6QcvVX2A6GhcFUPR1B4
-	XCsO+2te3HXEN3nKbh0DjEEwwPG24kjXn7CAe5RVRcmeobXPZQEUfBA7CGB7u9ZeFE7VbzFYbw9
-	OB1lRSXO/SSqT7XumiReJyoFpmPNUIFqrQjRCmZJLW9jiY3rU11Xeav41IarMzp1A==
-X-Received: by 2002:a05:620a:8395:b0:947:ae4a:ba48 with SMTP id af79cd13be357-949baa0af75mr1570766285a.56.1795378973537;
-        Sun, 22 Nov 2026 12:22:53 -0800 (PST)
-Received: from LRMS.tailf8556c.ts.net ([2600:4041:5024:4b00:3c7e:3a8a:889f:c3d])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-921347a0b6bsm85114916d6.1.2026.11.22.12.22.52
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Sun, 22 Nov 2026 12:22:53 -0800 (PST)
-From: Jesse Casco <jesse.casco@gmail.com>
-To: Bryan O'Donoghue <bod@kernel.org>
-Cc: "Gjorgji Rosikopulos (Consultant)" <gjorgji.rosikopulos@oss.qualcomm.com>,
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-	Loic Poulain <loic.poulain@oss.qualcomm.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-	Allan Siriani <allan@fatecpompeia.edu.br>,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 2/2] media: qcom: camss: Map each CSID to the VFE it feeds
-Date: Sun, 22 Nov 2026 15:22:52 -0500
-Message-ID: <20261122202252.58090-1-jesse.casco@gmail.com>
-X-Mailer: git-send-email 2.56.0
-In-Reply-To: <bdc56ab4-bdfc-4fca-90e9-d062492d5bb4@kernel.org>
-References: <cover.1795196107.git.jesse.casco@gmail.com> <9e5bee0dbc1c116672ba0020013ef0a346385c29.1795196107.git.jesse.casco@gmail.com> <bdc56ab4-bdfc-4fca-90e9-d062492d5bb4@kernel.org>
+	by smtp.kernel.org (Postfix) with ESMTPS id 3ED841F000C4;
+	Sun, 22 Nov 2026 20:24:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795379065;
+	bh=cshyvm1RGfi9h+MQQ0UCkQXgQEVUysI3Bo9qnIeDWks=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=FxahAm+SSqh/1pcAyamkZNfIofSpWuB0P/PgSFCp3U2R6QK9eUK8m1yibMqZprH0z
+	 D2AG0Oxv918BNILlnFkI9eXsQXp0etCyRdeBd4beuBiBM+fv31WSVBrQzZ+6Ap/J70
+	 K2SrADy6lZvTmFLia4KTbT1pIQ/y1NqYs2+6FiByZEPkBOlXjZ2yGhXZfFT3qpLt84
+	 +bEPE9TcG8kYtr4o0jovpgehYMdASmFXTftd+vUVOCtCrQx/VbZeMk6ou5Pqf1yIbY
+	 HnxfH02Ia3Ja7AcdXk8h92pByDtxAb8WAwjkhZkdTnErLapA/Dglh0b6Yhru0FtP+6
+	 jeK0qQzv8ZhHQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id C47594C1F2;
+	Sun, 22 Nov 2026 20:24:20 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Subject: [PATCH v2 0/2] rpmsg: glink: Offer wakeup capabilities
+Date: Sun, 22 Nov 2026 21:24:17 +0100
+Message-Id: <20261122-rpmsg-qcom-glink-v2-0-d60419793095@ixit.cz>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -106,14 +83,95 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/zXMQQ6CMBCF4auQWVvClILgynsYF6VOS2NpcWqMh
+ nB3GxOXf/Let0Em9pThVG3A9PLZp1hCHiows46OhL+VBtnIDhEHweuSnXiYtAgXfLyLQesJm16
+ 21nZQbiuT9e8febmWtlymz5lJ/6G2QTyikgpVPQ7tqHqBwuhAU21SjCmEz7nQmlOd2MG+fwElC
+ 051pgAAAA==
+X-Change-ID: 20251118-rpmsg-qcom-glink-8aab10623ff5
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc: Dylan Van Assche <git@dylanvanassche.be>, 
+ Casey Connolly <casey.connolly@linaro.org>, linux-arm-msm@vger.kernel.org, 
+ linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ phone-devel@vger.kernel.org, David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3470; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=lTm79sP5N4nCYtqwli3hsRaQG2T1k37aH17D2Pp90kM=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBrA09yN87Arpx4zHDSlaRNnlb7QYe663LjdDuCL
+ o27J6X+XTaJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCawNPcgAKCRBgAj/E00kg
+ ch5NEAC566yogcpJwCKgrZkbDk+lgF3bYCcnlCI1Hy52FxHt9HS5kpKbZAzq2iE63yvS+6N0kHm
+ YoCPGSXr2fRRFqp0kKRATDk+qC1+9PrbEVnRmnzwlckERaAH7Lkk25AXHtqNYh+tqjDYgCoTUZS
+ wN8BFhpXqeiTx7iqIHIr3QnOsVgDrDhXVqKDWy3g4e7SEkXdziGukNFVVA2KcaMm9j0Fnh2nh1E
+ ec7Pb3Nf6bC/hjaevCMy1a/p5OB9D2V4BL7MNZbZPNMn+w37Ngof20ZaE0z5Zc7cWk/1OaEcESX
+ owZtougwnAXtLlYhw2anbY/MLGAZWdSXPnOOoBh/XxPbjXml8dpgnKUgR2i1q+UrLEgGrWjh9Sg
+ pC/1DxGYKMMRjzwpYIapUQPNiyeBDzS+urnzjBUQnSBprcy63tSwxLbQ4feRH/59LtJaN6s0e41
+ 4choAag5jPQi8jmKOva/2kxDWHj1YCiqB8bfvSyX6FYKmnEaTzHiEThvnI/EFGdb1sAdwf1EtQF
+ ux0R+bldKNbKpUxgm+8tDlT22QII5SCLQ23Mr7+/5F/NLOIAOLO0x8npNg/Wj+xDtboykNj1a1w
+ xTj4RaudHUCzK4Hx8Tz6Sb/xr6tTFj3Lwpq0MrrR8fRlzHgK0WVw0Q7bR/Sp/bQM3ftqk8+MkFG
+ 6zvmjsxoqjIFoKQ==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
 
-On Sun, Nov 22, 2026 at 02:14:17AM +0000, Bryan O'Donoghue wrote:
-> I'll take patch #1 from your series and skip this one. Dropping CSID2 is
-> IMO the correct path.
+LLM generated summary of the decision chosen here, feel free to skip to
+the changelog.
 
-Hi Bryan and Gjorgji,
+Trade-offs made:
+1. Sysfs power/wakeup switch vs per-socket EPOLLWAKEUP (from v1 review):
+ - Chosen: Device-level sysfs power/wakeup (disabled by default).
+ - Trade-off: Works immediately with existing userspace (ModemManager, sensor daemons, udev rules) without requiring application changes, at the
+cost of channel/endpoint granularity instead of per-socket granularity.
+2. Reporting wakeup only inside if (channel->ept.cb) under channel->recv_lock:
+ - Chosen: Gate wakeup on an active endpoint callback rather than adding extra synchronization around channel->rpdev.
+ - Trade-off: Keeps GLINK locking simple and avoids waking the system for packets that get dropped anyway (no consumer), while holding channel-
+>recv_lock across pm_wakeup_hard_event() (a short spinlock path: dev->power.lock -> ws->lock).
+3. Solving /dev/rpmsg_ctrlX wakeup in rpmsg_char.c (Patch 2) instead of falling back to channel->rpdev in GLINK:
+ - Chosen: Per-endpoint wakeup on /sys/class/rpmsg/rpmsgX/power/wakeup in rpmsg_char.
+ - Trade-off: Transport-independent (works for GLINK, SMD, virtio-rpmsg) and covers locally-initiated endpoints that never have a per-channel
+channel->rpdev, without complicating GLINK's channel->rpdev lifetime. In return, userspace configures /sys/class/rpmsg/rpmsgX/power/wakeup
+after endpoint creation rather than the GLINK bus device, and directly bound rpmsg_chrdev channels expose two independent power/wakeup knobs
+(both off by default).
+4. Immediate hard wakeup (pm_wakeup_hard_event(), msec = 0) vs timed wakeup (pm_wakeup_event(..., msec)):
+ - Chosen: Same as v1 (msec = 0, hard = true).
+ - Trade-off: Immediately aborts suspend / wakes s2idle and bumps wakeup_count without holding the system awake for an arbitrary hardcoded
+timeout, relying on userspace/suspend managers (e.g. via /sys/power/wakeup_count) not to re-suspend before draining the queued message.
+5. Setting wakeup capability after rpmsg_register_device() in GLINK:
+ - Chosen: Kept v1's placement in qcom_glink_rx_open().
+ - Trade-off: Works via wakeup_sysfs_add() + a KOBJ_CHANGE uevent, though udev rules matching only ACTION=="add" could race with power/wakeup
+creation on the GLINK bus device (Patch 2 avoids this for /sys/class/rpmsg/rpmsgX by calling device_set_wakeup_capable() before
+cdev_device_add()).
 
-Sounds good, thanks for taking 1/2. I'll drop 2/2.
+Changes in v2:
+ - Use pm_wakeup_hard_event(&channel->ept.rpdev->dev) inside channel->recv_lock
+and the channel->ept.cb check to fix the NULL pointer dereference,
+dev->power.wakeup/rpdev use-after-free races, and CONFIG_PM_SLEEP=n build.
+ - Fix subject prefix ("rpmsg: glink:") and comment typo.
+ - Add a follow-up patch enabling per-endpoint wakeup on /dev/rpmsgX in
+rpmsg_char so dynamic /dev/rpmsg_ctrlX endpoints can also opt in to wakeup.
+ - Link to v1: https://lore.kernel.org/all/20230117142414.983946-1-caleb.connolly@linaro.org/
 
-Jesse
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+Casey Connolly (1):
+      rpmsg: glink: Support waking up on channel rx
+
+David Heidelberg (1):
+      rpmsg: char: Support waking up on endpoint rx
+
+ drivers/rpmsg/qcom_glink_native.c | 12 ++++++++++++
+ drivers/rpmsg/rpmsg_char.c        |  2 ++
+ 2 files changed, 14 insertions(+)
+---
+base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
+change-id: 20251118-rpmsg-qcom-glink-8aab10623ff5
+
+Best regards,
+--  
+David Heidelberg <david@ixit.cz>
+
+
