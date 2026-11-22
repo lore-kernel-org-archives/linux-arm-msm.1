@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795324420;
-	b=iTVRCk1F9FiboGR2BLMpL+fcYWgfolK81yXMYxAfGkXMB83xTG2DtzHAma+m+7Bdl0FR
-	 Gjb1Ob8L9CP0he2cSmVPuLdu6zYBS7KjcoJSa5dLCaFOPMmVf+wT2md3f40yaA2jg/FhC
-	 T3J7QiWlpZM7qfNeGVoVrJjUSWfbc7Dre+wK8bZSvtoXcnsJPRgWg54mc2FCrQc471Fsh
-	 h364jNlab3dQjWJOMdkSkk6Tn9IYz64vMHoW525hCpDoPFegd3G9NsM8GIizfcUBDzCv0
-	 dgNF/7zmeeeUqVM7UOPoHdsaBQQIwiB7FcmdppNEHfR1biR1TQHtNFsOUWK5cw7SeyQ==
+	t=1795324426;
+	b=sIUZK9pEhkX+AR86GnOWqDGfXtVWNI4Jhe+g9mkmbX/AN+sh19uSh+8DU/Zcuku+qDIS
+	 dVKIg+c519IaRDhRovp/GGP4TJ5tOQPCDMn7PNHA+8TC25pRnSRxRMluXuHbY9Bz+HpHF
+	 Yk143GZ5K4KOCzP8zWoBmF5SznfKz3DtRpQ6EpG8Sfz6ZfwD85uTGxggbeUKqgpK1vXph
+	 Zc6fEld7hYiek2sIHNV2ZVdeKWQGdB+rq3jTJSNxiMaovTgL1II8eR8WZeR1go1ZzVbrS
+	 pFhKPNk5P6IY/tIlAgsT7eSvSEqEnBbnaZGLMO1MlBjvX5YiUBmftdqWoIxd4gL3tOQ==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795324420;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795324426;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
-	b=qtVUpet7ThTB4zqSDKJvWT+9DiSvjdnqT1TmmG3aVCa7vkZFBaN4xD4dcbjMfjPr+Ray
-	 yD8i2HNzvgwRpArt7XA9oAfGzfbmMhHF3Z0/+MRFTw6BwmhqVMNho2cdj4sgU0UwJl2fg
-	 ldt0i5m2+7ixJzZ2KeMc9pJVcgMdVOAKJ107t0d95T1Tv8whwaq1uqWY3o1rEeROutKJB
-	 RNoRtIPRyc9s1RWrkEFAI/RbPVpYadSGHFnE7bLzpFC+rSQx856+HrWd3JNPksK8RM6sA
-	 bZD4VyREp7savV3wDIDDcp4d5cFHCKJVCPLqPrnxohLei8eVt9PqYLTlBxuRflvMQRw==
+	bh=dQj0j7tPM1tfUXlYijiNtQNmFpJoIc5ASgifM+NcoMY=;
+	b=N2exZIH9K3zLX+W/GCvX9AY/xmb1fPvRGqgM0to7sUcJ0X8Ld2CzCPb+zIrHMaZ//Ia8
+	 7NzNbIk3mHDB+T0GgZf5dEWP7dSzaodTuCiFyvzJsPeH/3EQkiBF2mMjWYJbuwovTu5Nq
+	 KXGIEf1xUZlnzeOvlxhTWQdReTAl1NCHq5riSAEI7z/ve7tYDKqkFMbsE1mYGnL3N5/wj
+	 4VLnKnVt5yiPCp6EZB2j8T5+Lr/8WWFte+Oo6D/FBCMx62Ejirej12wpd7MsD6VIiiwdy
+	 sODkZ0wJIQkjvIU051lgWZdR4+Az2kmcBaUOfZRD+iNyYlBasGE5cBjfcKGfmKlShyg==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TiZaCiqf;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z8qB8OBR;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5BC5606A337;
-	Sun, 22 Nov 2026 05:13:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6D696606A331;
+	Sun, 22 Nov 2026 05:13:46 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TiZaCiqf
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Z8qB8OBR
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795324420;
-	b=mkxb6P+u7UJMFw0sp2R8LeNKN3kdabUcQEIh8fhiIfGt8SYYCunudGqxRNwESyYeb5kN
-	 ilHkrxAwKTA10x5Zldj3HaJLRdFuq/vEvTz0CPxacE7ZWviHIHnfubPrVQI37Rv32TtRQ
-	 mxM+yMfaytYtyE2zU2B7rpAshJ6JTW3utkDz5aYZ5ZDJA90cWcwRSXlb6YNvT4m2T5eg5
-	 Leo74f3TeqYvvuioYL8UdEV0TKqtC2Sdel5pfa+iAM9lcEif6CHx2rv00bUGNni3XPtdA
-	 tu6Avxft7roxZj1I5yEA2fYiJDOEVzTrO4LMeW5RH/6zyZd4iEWp8kz/YJJf+ct5oIA==
+	t=1795324426;
+	b=CXgl6fSmms8sGPdzC/vlCtYQKRcP57V5jQvivQQd9dOh2MwzVSdnJQkWs/ymFEB4/1xS
+	 evv4mcD5nmFJic2pRQv5sbAwL3S8JnJNs1VXp9yEapEvv71ytd7Q17G+cYRSAhcbEiGEu
+	 wR+JAJFfg6ToBzdtDfVoONsUQM0zE7E1A0h/FB9e/KAYeVZ4pNlb6kd+m3tIBDz6/eyk8
+	 xk2jpr9t6nyjX2tntT7N9iyyA9CiJ46oX0kNAb4HVUiLyDVFRgqmLbqyHCfo0je7seuRk
+	 V5K59lhFXO04+9BH2LwgCBK7nt+w/nG+R4H78lJXYPM87TZVwDOJUUrb89KrqvhSoZw==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795324420;
+	c=relaxed/relaxed; t=1795324426;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
-	b=WfK/0cZY1tqrSBWjvU6D4qMkbPGCuD3MLUqpzicENjOKIvFmG5PxNTYpjebMZqGUe8f7
-	 GRaHyaKjG106hDLmdE5tH9yE5Yn5D60vlI2iArMowUBlePU3pBQz7jZPHkuvTjZF4Bh0o
-	 VHltFTU1iczUHhLC7+rw1Ec0vWVU/exsp37T/TextNe3GPPbwoFmuCgnGfJXiTkRaGmqi
-	 UTxIc0d4C85ZuO9DxAL/jSO/zMMgd8SdHq+aQk8X1TAOKVCSJ4nmawVZ3i6o+zQwjnmS/
-	 uVYWwqXJYXbJqj6uefiw2AGTYHs972MPcZ939ILguGXt6Ee6sps3TBwV/l/RRf9ItgQ==
+	bh=dQj0j7tPM1tfUXlYijiNtQNmFpJoIc5ASgifM+NcoMY=;
+	b=Juqxx4FwubeYG7aH5tgmCGveCIK3c40ZCoVeIFbs2SIsbmG+uWP9iNGNLQmW32liWNry
+	 er/XAB1uhR2PG3a0oy9WRBr8hUWQSDISseLGDm6RoMBdv2xDUtcuUtn3gGTvlBOb92CUN
+	 W1Gs2S0zfHlVNvgbHYqqgBClb+mFDmx7woVNz6w4e5qC9Ly2Mk/GUiN6TkcJ1CeeDfugv
+	 vySURgI2D5JBna9tCwFvjvEN0VORcjqHv15gtxIWKBsriorrfXArGPJH/Rqdu/u6GdbDY
+	 6NQ2DTRlx4G3Jp6SKRyrCiSE0g39f20ZW6CeACYvG9Pplu6o+T6qWriGmOqf3Zq+mlA==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 070671F000C6;
-	Sun, 22 Nov 2026 05:13:40 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id CC8BB1F000C0;
+	Sun, 22 Nov 2026 05:13:45 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795324420;
-	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
+	s=k20260515; t=1795324426;
+	bh=dQj0j7tPM1tfUXlYijiNtQNmFpJoIc5ASgifM+NcoMY=;
 	h=From:Date:Subject:To:Cc:Reply-To;
-	b=TiZaCiqf+5SO4JL05f20TU+pBaCDWk0EKy1X9V9+22n+LKzcOhv0ySgzaBl7EicrU
-	 VTkAz71dZkG/ocZ6WXcmMbIoO0KIqRvuXbIHRO2tFvXC9GyDRH2Jlgm2eKpFmnYnN5
-	 xDUvG61PaJUC60LTunkHO+sqjbXMspnZePo6jMzYEwtcYYi5nTliX5VUslpT0fPF9l
-	 z387Q6/hYpalphcwFa52x/BJ4STmNWIAE5vDCJ2Tjol81PCEnT5pGlLzs/v6MCkQDo
-	 dcqJwozIwgbXbGY9wtirkxLvEEs8P+d42xUHpXBREONzk8X8cvw6xCgSWFjpJGMvFs
-	 KNHtsGxxcrLaw==
+	b=Z8qB8OBRF7b5zeo7CpxIdHvWnK51rvIuKW0bTaWQU7uxEW1Gdqkh2BtjHHTRWTULD
+	 oz5Z0YvPJkZQXq/u+mceN6z89JGtECvYe+deG5Ui1OD8qsMlEnVKJ1ecl38TsZhUhT
+	 heV4i2I0fjYuttqVMqT1LZvEBJvuClo9N04g6Zx9LmbuffvFIT2M6ZikFAEd3hy+h8
+	 9V7R+3dseb4DFcgZm+KxGY1pSwL/dJQ6tGrnnL0GABPJM+ru4vzJwH2JBPCALeYIOA
+	 UlI0M7e5JjDHl0Uos8v3bDlOW+SG4w0XpJma3kgevzt4wfGIUQaPcS0p816rgBhgTv
+	 LbZPFwn1+Q4Tg==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 8C64E4BF2E;
-	Sun, 22 Nov 2026 05:13:39 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 5DB0A4BF2E;
+	Sun, 22 Nov 2026 05:13:45 +0000 (UTC)
 From: EMCP333 via B4 Relay <devnull+emcp.enser.io@kernel.org>
-Date: Sun, 22 Nov 2026 05:13:31 +0000
-Subject: [PATCH] power: supply: qcom_smbx: Make the float voltage
- adjustable
+Date: Sun, 22 Nov 2026 05:13:43 +0000
+Subject: [PATCH] arm64: dts: qcom: sdm845-oneplus-fajita: Add the battery's
+ design energy
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,23 +84,27 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261122-b4-smbx-ccv-v1-1-0ecc4217b58c@enser.io>
-X-B4-Tracking: v=1; b=H4sIAPp5AmsC/yXMwQ7CIBAE0F9p9uyqECLWX2k8wLJYTETDKmnS9
- N8FPb7JzKwgXBILXIYVCtck6Zkb1G4Aml2+MabQDPqoT0ppjd6gPPyCRBWjtTZEcw5+HKEtXoV
- jWn5v0/Vv+fg707tf9IZ3wuiLyzT3qPNQ7d5gIQ3b9gVBNQZRjwAAAA==
-X-Change-ID: 20261122-b4-smbx-ccv-f777df48db99
-To: Sebastian Reichel <sre@kernel.org>
-Cc: Casey Connolly <casey.connolly@linaro.org>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Robin Snyders <robin@snyders.xyz>, linux-pm@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+Message-Id: <20261122-b4-fajita-battery-energy-v1-1-ce6f0d69947e@enser.io>
+X-B4-Tracking: v=1; b=H4sIAAZ6AmsC/yXMwQ6CMBAE0F8he3aVNi1Gf4V4aMsCy6GabSUSw
+ r/b6vFNZmaHRMKU4N7sILRy4mcsUKcGwuziRMhDMehWd0ppjd7g6BbODr3LmWRDiiTThibojgZ
+ LN9taKPOX0Mif33X/+Du9/UIh17/a8C4RenExzDWqvKzXs0EJGo7jC9YC32ycAAAA
+X-Change-ID: 20261122-b4-fajita-battery-energy-4c26ed5e9505
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, 
+ Rinat Muhamedgaliev <rinat.muhamedgaliev@gmail.com>, 
+ Hex Lindqvist <hex@freenixos.com>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  EMCP333 <emcp@enser.io>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324411; l=5793;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324423; l=2515;
  i=emcp@enser.io; s=ultron; h=from:subject:message-id;
- bh=c81KUHplwWRmxuVs0d0MhXnbVsifOIAU8afoDoBp8fU=;
- b=Ll0mm0xiLTjcmUVG66bC1fcaaIlZ0tYWOeV2SJwrJnvIrAnPltOkPU4a5tL/lJPGGBByyewf8
- GEsQUpAyUvcDD8RViA1zHeMCRlafQHvHKGePNniq3S7YnIr+RdESGeB
+ bh=deghCqiCJANOaAyPTby9MMGyOUPEwGJ7upq4xsrZF8k=;
+ b=MeBE0hwlq1FbKxadWmdNqFHN+TiS9VoPkPHqQK0v2FtkTHR0mpDeSHXr4LRBGn9FA2RmvbnP2
+ sN3XqwSFEZyAhEobm5a+B1u++GX6KT7e4boPANQOKiM58gCFPZIvSsR
 X-Developer-Key: i=emcp@enser.io; a=ed25519;
  pk=5sG48Lul+Vn7OzXu3VZrCWk5uvEFPYMXYnAV0TZR/tY=
 X-Endpoint-Received: by B4 Relay for emcp@enser.io/ultron with auth_id=1598
@@ -110,27 +114,30 @@ Content-Transfer-Encoding: 7bit
 
 From: EMCP333 <emcp@enser.io>
 
-Charging a lithium battery to a lower voltage is the usual way to make
-it last longer, and on PMI8998 and PM660 the float voltage is the
-register that sets that voltage. The driver programs it once at probe
-from the battery data, and userspace cannot change it.
+The fajita battery node has charge-full-design-microamp-hours but no
+energy-full-design-microwatt-hours. bq27xxx writes the design capacity
+and design energy into the bq27411's data memory only when both are
+set, so neither is written, and the driver warns at every probe:
 
-Expose it as POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE, writable, and
-the value probe left as CONSTANT_CHARGE_VOLTAGE_MAX. A write is clamped
-to the range between the lowest setting and that maximum, then rounded
-down to a 7.5 mV step, so userspace can charge the battery less than
-the battery data allows but never more. Without battery data, the
-maximum is whatever the boot firmware set.
+  bq27xxx-battery 10-0055: missing battery:energy-full-design-microwatt-hours
 
-Tested on a OnePlus 6T (PMI8998) on a 6.18-based kernel, with this
-patch and a backport of commit 2a26d260e72a ("power: supply: qcom_smbx:
-fix float voltage selector"). constant_charge_voltage_max reads
-4395000, and writes read back as below, with the selector read through
-regmap debugfs:
+The power supply core also leaves energy_full_design out of sysfs.
 
-  4100000 -> 4095000 (selector 81)
-  4500000 -> 4395000 (selector 121, the maximum)
-  3000000 -> 3487500 (selector 0, the lowest setting)
+Add the design energy. The BLP685 pack is rated 3.85 V, 3700 mAh and
+14.24 Wh typical (3610 mAh and 13.89 Wh minimum); 3700 mAh is the
+capacity the node already uses, and 3700 mAh x 3.85 V = 14245000 uWh.
+
+Some replacement packs carry a bq27541, which has no data memory
+update; on those units the property only adds energy_full_design.
+
+Tested on a OnePlus 6T whose gauge reports DeviceType 0x0421
+(bq27411), with this patch on a 6.18-based kernel. The first boot logs
+"update design-energy to 14245" and no longer warns, and
+energy_full_design reads 14245000. After a power-off, the next boot
+logs "design-energy has 14245". The boot that writes the data memory
+also logs "cfgupdate 0, retries 17": leaving config update took 17
+retries, and the driver warns after 3. The write itself completed, as
+the next boot shows.
 
 The code and this changelog were prepared with the help of an AI coding
 assistant. The submitter has reviewed both and takes responsibility for
@@ -138,125 +145,30 @@ them.
 
 Signed-off-by: EMCP333 <emcp@enser.io>
 ---
-Also ran on v7.4-rc3 on the same phone, as this exact commit, with the
-charge daemon stopped: writing 4100000, 4500000 and 3000000 reads back
-4095000, 4395000 and 3487500 (float voltage selectors 0x51, 0x79 and
-0x00).
+Also ran on v7.4-rc3 on the same phone, as this exact commit: the gauge
+reports DeviceType 0x0421, energy_full_design reads 14245000, and the
+boot logs "design-energy has 14245" (the data memory was written by an
+earlier boot).
 ---
- drivers/power/supply/qcom_smbx.c | 47 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+ arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom_smbx.c
-index 8a2f635a6c..2d30c18671 100644
---- a/drivers/power/supply/qcom_smbx.c
-+++ b/drivers/power/supply/qcom_smbx.c
-@@ -381,6 +381,7 @@ struct smb_init_register {
-  * @base:		Base address for smb registers
-  * @regmap:		Register map
-  * @batt_info:		Battery data from DT
-+ * @float_voltage_max_uv: Highest float voltage userspace may set, in uV
-  * @initial_charge_enable: Charging enable state before hardware setup
-  * @status_change_work: Worker to handle plug/unplug events
-  * @cable_irq:		USB plugin IRQ
-@@ -395,6 +396,7 @@ struct smb_chip {
- 	unsigned int base;
- 	struct regmap *regmap;
- 	struct power_supply_battery_info *batt_info;
-+	int float_voltage_max_uv;
- 	u8 initial_charge_enable;
+diff --git a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
+index e9d1a1c6ac..dc3a7a8f97 100644
+--- a/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
++++ b/arch/arm64/boot/dts/qcom/sdm845-oneplus-fajita.dts
+@@ -16,6 +16,7 @@ battery: battery {
+ 		compatible = "simple-battery";
  
- 	struct delayed_work status_change_work;
-@@ -417,6 +419,8 @@ static enum power_supply_property smb_properties[] = {
- 	POWER_SUPPLY_PROP_HEALTH,
- 	POWER_SUPPLY_PROP_ONLINE,
- 	POWER_SUPPLY_PROP_USB_TYPE,
-+	POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE,
-+	POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE_MAX,
- };
+ 		charge-full-design-microamp-hours = <3700000>;
++		energy-full-design-microwatt-hours = <14245000>;
+ 		voltage-min-design-microvolt = <3400000>;
+ 		voltage-max-design-microvolt = <4400000>;
  
- static int smb_get_prop_usb_online(struct smb_chip *chip, int *val)
-@@ -653,6 +657,32 @@ static int smb_get_prop_health(struct smb_chip *chip, int *val)
- 	return 0;
- }
- 
-+static int smb_get_float_voltage(struct smb_chip *chip, int *val)
-+{
-+	unsigned int sel;
-+	int rc;
-+
-+	rc = regmap_read(chip->regmap, chip->base + FLOAT_VOLTAGE_CFG, &sel);
-+	if (rc < 0)
-+		return rc;
-+
-+	*val = SMB2_FLOAT_VOLTAGE_MIN_UV +
-+	       (sel & FLOAT_VOLTAGE_SETTING_MASK) * SMB2_FLOAT_VOLTAGE_STEP_UV;
-+
-+	return 0;
-+}
-+
-+static int smb_set_float_voltage(struct smb_chip *chip, int val)
-+{
-+	unsigned int sel;
-+
-+	val = clamp(val, SMB2_FLOAT_VOLTAGE_MIN_UV, chip->float_voltage_max_uv);
-+	sel = (val - SMB2_FLOAT_VOLTAGE_MIN_UV) / SMB2_FLOAT_VOLTAGE_STEP_UV;
-+
-+	return regmap_update_bits(chip->regmap, chip->base + FLOAT_VOLTAGE_CFG,
-+				  FLOAT_VOLTAGE_SETTING_MASK, sel);
-+}
-+
- static int smb_get_property(struct power_supply *psy,
- 			     enum power_supply_property psp,
- 			     union power_supply_propval *val)
-@@ -682,6 +712,11 @@ static int smb_get_property(struct power_supply *psy,
- 		return smb_get_prop_health(chip, &val->intval);
- 	case POWER_SUPPLY_PROP_USB_TYPE:
- 		return smb_apsd_get_charger_type(chip, &val->intval);
-+	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
-+		return smb_get_float_voltage(chip, &val->intval);
-+	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE_MAX:
-+		val->intval = chip->float_voltage_max_uv;
-+		return 0;
- 	default:
- 		dev_err(chip->dev, "invalid property: %d\n", psp);
- 		return -EINVAL;
-@@ -700,6 +735,8 @@ static int smb_set_property(struct power_supply *psy,
- 					  USBIN_SUSPEND_BIT, !val->intval);
- 	case POWER_SUPPLY_PROP_CURRENT_MAX:
- 		return smb_set_current_limit(chip, val->intval);
-+	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
-+		return smb_set_float_voltage(chip, val->intval);
- 	default:
- 		dev_err(chip->dev, "No setter for property: %d\n", psp);
- 		return -EINVAL;
-@@ -712,6 +749,7 @@ static int smb_property_is_writable(struct power_supply *psy,
- 	switch (psp) {
- 	case POWER_SUPPLY_PROP_STATUS:
- 	case POWER_SUPPLY_PROP_CURRENT_MAX:
-+	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
- 		return 1;
- 	default:
- 		return 0;
-@@ -1064,6 +1102,15 @@ static int smb_probe(struct platform_device *pdev)
- 		return dev_err_probe(chip->dev, rc, "Couldn't set vbat max\n");
- 
- skip_float_voltage:
-+	/*
-+	 * Userspace may lower the float voltage to charge the battery less,
-+	 * but not raise it above what is set now: the battery's voltage or,
-+	 * without battery data, the boot firmware's setting.
-+	 */
-+	rc = smb_get_float_voltage(chip, &chip->float_voltage_max_uv);
-+	if (rc < 0)
-+		return dev_err_probe(chip->dev, rc, "Couldn't read vbat max\n");
-+
- 	rc = smb_init_irq(chip, &irq, "bat-ov", smb_handle_batt_overvoltage);
- 	if (rc < 0)
- 		return rc;
 
 ---
 base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
-change-id: 20261122-b4-smbx-ccv-f777df48db99
+change-id: 20261122-b4-fajita-battery-energy-4c26ed5e9505
 
 Best regards,
 --  
