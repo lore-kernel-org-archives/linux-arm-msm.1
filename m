@@ -1,78 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795324409;
-	b=GsnaiYPHtFJKR2L1FQWSsJdtJFAuwBSQUMozxz9+uGWO54Tf/PpDJZHG7dmOdvfSLEpt
-	 JcwvapMWZ1SYt08EX8s9H4U7j5+gR/VcU54VeTJJwoY+PLgpYGT28tEjjlP3Z7EdGR25H
-	 wLeIs3J0CNpeG8uLxdjJorp6k/IGvFtu5TV0JFNwVhznfeyIqkE0nQhMnYv+CbeMmq4Y2
-	 iZN8BKUzRWcU3sZBuZ7tBVlMEVS1EXkER0xABxU+yEejuJKjXqN+yYO3K119lycb/8F1H
-	 K6x+nKS6jgxWL2f9rR44p8Uu9LbSAnt4UdW35V7xUEKZuZwQi3wpVZklXF229lLd4Fg==
+	t=1795324401;
+	b=0pHzYRJ23WMZ7xFgXn9FiFgh1RYUuWeYh+794zZTOY/32gj723BQhUrWQ24VlEIrrBiL
+	 amKcY3P48brC5Ctz6ZknRRTbOZDOsNDiUt5G4RTi52kE8/C4a7LFpqe7wiiAMA+5mwOd2
+	 mkWpEvmYhGf26FfOhUPHx51fSkzvF1Z58c4kTJN/Uh54Sfbu++x9iow2E30/mNp2vMV5v
+	 Ws1xT8+MmcbPNdJVNQvGXVNlTjI221nKQaP/eXiEoH9j1qy+xdvkyvvCi8/ge+dM4CMGJ
+	 sG8T+sgYDk8d6X4OVLkBnlKVMM2pWc3h1LtrZ5HbJrTdQqMx22yqWcCezn9B/Bf28Nw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795324409;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=C3jGhSkfDY/pORaPUJcs1Wqc3hDHzljAe9Kie45QYyI=;
-	b=3oIbuVZY2BSiX/oY0EIOI58Du6ZcSYG7z2O6FNy0TjS20mhNe2VZxoUJGIEs72jIikUU
-	 KEogob40MPwDQYCLxqV4zIuSvhb8RWZJibeOHl93nEkM6gawrM+mI4sSWyjDy6W7qnRsi
-	 FX+qsFzmu54ZKkZ2sQqiHWVJ1UAV2rTr24hN2uGd9X4mJOpnWbUH8G/Sds+w/uSVteQm4
-	 UYX2VrlcfqnpzY+Ejv1JsvJMksl2p+PYwi40YlJR3D141JdD3rqGagNXYalvQ82IUfeNy
-	 6ZTKVuedkLaOtHjWfXatM84T44OiK+dZ9CtEIMIQCT4XzQ/KnieX+lAdTHA4hEriRvg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795324401;
+	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=bDf7SaXXZN4Bj/kAPPt2M+ftmRFAu5u0Yw49fk6nP6Y=;
+	b=zdYZu8G5cA9UiugJqmaCX6zvZkzpovK6b2oFccNz+jeB6mdsby2NC6PKyALPe4LLbxwl
+	 53psBUteFkcjaMC+X/6tvQwHAwmD4LD0iIo9xF94qSFSzHjALq74prce0IowErgdfnDy8
+	 L8LHgPsyFWKeHTN5VVf+fmNEfvne4xEfX6+u8Iq2ZzCbvYSYhe4kCwfdbUwIdv8hfuCBS
+	 PEJRQ2CeXMx1ichFOIFYbljwTkiQ7sNlAPAsdreM2OXqIxgqf5VxDyLTq158SQu4cRK1i
+	 DGQB8ayFHM8Z7HkP0uoBlsZGJy7DXPV8TnmNOINJfoe28/dWVMmu4PAAEx6unb6QT6w==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="HiKWrhU/";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="IOIIfaG/";
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 801D0606A68F;
-	Sun, 22 Nov 2026 05:13:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E776A606A320;
+	Sun, 22 Nov 2026 05:13:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HiKWrhU/
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IOIIfaG/
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795324409;
-	b=MIuoa56ChQ50rM0guGsFp2rWJpjHvcltjrLrDvcwJqlRroMboea/vK1nUEeqNQ9FK29a
-	 n03zvvslY4VihVS3OY+M3EPKQp7IstFa7i5Uzsojq9tcmpn2d2mcvLcvD8bizOdhq7m9T
-	 geu/irY/LbF8UM1AY8QETNtWZ8lxnbgU8lwRGiO7Y/w2NIeBAwWz0kCNU/jIPP098MGLC
-	 gVg2m2Ak2SUu6hXQHbbvRMA02u9wH/2bFOXd3Z2GLw/R1DS79ylSWCw2cREJA55jQd21e
-	 JoaiJliohna1u/hzReH1/DtaaSokVqf0JmrFt2Uzf9xvNRydRgZW/I4XEeBDT4Joqqg==
+	t=1795324400;
+	b=medm7ajO6Hge+UZlD6aUTqzA/D7dwCRShiYsceDaqulzq/z6jMiMlzf9IUTER2+rZqrO
+	 eIDw+Mv2+MmTL1heDzuosSgnUi3kCm/B3nhcqGhpxMRMklShsiuZZeayfe9PJGkgnqjOl
+	 hISvQBTsLHT89lanD73M1pZxRbOZX6Nbqg9D0sjeCv8zWW0ye3xt3cfrBiDOjXTPaIMMw
+	 PTke/rMNgpTC+dpZsjFgO53uCeqJyR7mjSBUAJL7XTIvWVvWzBrHaRsc+B0HYi86oOShA
+	 Kp/6jHFZQH6NhKhWWGlDd2HAJ+NrVW1LYNNdMzsTjtqouVGmgTGHV749XGMuvL15Bpw==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795324409;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=C3jGhSkfDY/pORaPUJcs1Wqc3hDHzljAe9Kie45QYyI=;
-	b=VoMv704Ro2KfuEKzd3IJHVyvZn7OM9hscBJ5AluxaTWxxbpcFnadfAYbeB2XMRx1dsCf
-	 zwdUvRAZkK61CNq4DrzFwCaDvRbNwr1N24Hll6Qh3No7bRrcIPAEUq7nuN9X40MoUQres
-	 tk7rI6GbrWYYKi9d4vUpJlNSLVzccO4hpyupLxYIhXPARzDcXDMLQqQH+R5Jr6kVSc2yR
-	 ZwcY4a/TmPtuLSm14t1Amvau/tIvdV707jFIbCdGIdMZgiQttkDqSlowilIvTpMcymDYi
-	 pNzRgZ7p0ZC+rrhIYpLIl8vOByD6HcwcW12fhdSPHQEoEbb+3WnBSiAX3YuE2QH0eSw==
+	c=relaxed/relaxed; t=1795324400;
+	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=bDf7SaXXZN4Bj/kAPPt2M+ftmRFAu5u0Yw49fk6nP6Y=;
+	b=LnMBIbC1Efu3a+sT9CZz4HgJZ+srnyws8+nxGw+I4WRCuk4IdUlILegLoMdZO2zQwRCz
+	 MsM5OWPuQVZQuWbLMT2J3OfSFv042MF63r+ZeokIwBlp5bedSw5ugl0CVUou6+A35C5rx
+	 JZABXklsoYzMGQnzRUE0cY1EsEAa44SAQIygUwleXXArZwiBBAkz8U1E4yfq+nWOC5Ffr
+	 k1DqTyEPB/9fBvWNo2A83baNajXXcj+40izEjZBw0MXYceTV4hwFPghn9S314NN6BpyIH
+	 tDWquNzK6trEeBDIfvrwIgWUvopc7VGkaZY5K2kR2bOLL/gjTzgillVLtfnYrojZu9w==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 5643B1F000C0;
-	Sun, 22 Nov 2026 05:13:28 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 070291F000C4;
+	Sun, 22 Nov 2026 05:13:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795324409;
-	bh=C3jGhSkfDY/pORaPUJcs1Wqc3hDHzljAe9Kie45QYyI=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=HiKWrhU/aldHdXd42RSlUWjv/sB1iJS16ph2KKoKtrY3u+Ey2nNViV6Ykpkw6S1Jl
-	 gJGZA4LskTjWI0bKlNwN9qH3Y728jViyc5lfz5OmR3Ph3zfBVHHl7i5rO7YWxVU+xA
-	 blgwlxyCLqxseL/MgQ4O24OOH/rtP0H6C04WZQ683uE9KRDRqTiBi2Rfk9iTxn/1jr
-	 zTYtM0SN1Yq8KDTFmqJj+ISDagj8PhzS9shTtd7RHAf5IIdQPH2w48jGI9SD2V1LNW
-	 FPJudKVDA5oJk2KA08XmXBU2r0b6r7MVr2tdSIwR+ppsZFGMGQEVzQ3Bk3xKr9V0hn
-	 Jfw0H4FhsbH9A==
+	s=k20260515; t=1795324400;
+	bh=bDf7SaXXZN4Bj/kAPPt2M+ftmRFAu5u0Yw49fk6nP6Y=;
+	h=From:Subject:Date:To:Cc:Reply-To;
+	b=IOIIfaG/m64o8WnC3cezw19w3lTrSjsvSUYFV2qxyJ3gG4yvdlUzOb5t8vofGPkHG
+	 gWadKhcx3GTq3w7qpRnJZFQF7tCXlDprbrQAb2JVsDOXzrSPKSxvgJkc+6rpdFGs+v
+	 4dGlBS+8IxfFYh+bxDw1yVkybvR6/ZyG2fKkDdmjhtejVT4vW529NjoRQFVeRl5Iq0
+	 edtVyPbOU/MmXVY24D75AtSKA5eLVDV4F7vjlMCSHMIG4sSxEZwrO2WODH2InNI6d/
+	 cDNEjUDKFdyvBVZEJ2hmJqzGhfLci9fXMujSlM7NG8L8mVh5Icfwt79lfA539Vjb0F
+	 pz4lOzvjf1vVw==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id D73A24BF4B;
-	Sun, 22 Nov 2026 05:13:27 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 8BF8F4BF37;
+	Sun, 22 Nov 2026 05:13:19 +0000 (UTC)
 From: EMCP333 via B4 Relay <devnull+emcp.enser.io@kernel.org>
-Date: Sun, 22 Nov 2026 05:13:26 +0000
-Subject: [PATCH 3/3] arm64: dts: qcom: sdm845: Add CAMSS interconnects
+Subject: [PATCH 0/2] media: venus: Fix end-of-stream and seeks on SDM845
+Date: Sun, 22 Nov 2026 05:13:15 +0000
+Message-Id: <20261122-b4-venus-eos-seek-v1-0-2e38912c7cf9@enser.io>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,74 +84,74 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261122-b4-camss-sdm845-icc-v1-3-0671ef770fd0@enser.io>
-References: <20261122-b4-camss-sdm845-icc-v1-0-0671ef770fd0@enser.io>
-In-Reply-To: <20261122-b4-camss-sdm845-icc-v1-0-0671ef770fd0@enser.io>
-To: Bryan O'Donoghue <bod@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, Robert Foss <rfoss@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAOt5AmsC/yXMzQrCMBAE4Fcpe3bVhKqtryIe8jO1UUhL1gah9
+ N1N9PgNM7OSIAUIXZuVEnKQMMUCtWvIjSY+wMEXkz7qs1Jas205Iy7CmIQFeLHHoHvVo+v8icp
+ uThjC5/d5u/8ti33CvetRbVgjYJtMdGONKg/5sm85OU3b9gXw/SnqlQAAAA==
+X-Change-ID: 20261122-b4-venus-eos-seek-def2919e88d5
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Hans Verkuil <hverkuil@kernel.org>, 
+ Stanimir Varbanov <stanimir.varbanov@linaro.org>, 
  linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- EMCP333 <emcp@enser.io>
+ linux-kernel@vger.kernel.org, EMCP333 <emcp@enser.io>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324405; l=1474;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324396; l=1979;
  i=emcp@enser.io; s=ultron; h=from:subject:message-id;
- bh=vetqSv1oRjiySBze/nzqgzM3hC1OiU7h99VJ2Cazd+Q=;
- b=u1AUgAtlHUrvXG+9LsYER0zQrszSscsQaEe3WPlwJOB6wRkfpmH2XAU2iH0Nm2Zcy7u6fWyN6
- EsQWtvDccTTAmdVfWcpPiM2StViJusmu+NjH1EvCnFlcqbXR5xuPWEb
+ bh=iP7FYS+EUWbdvN2tGSghCLya/Epnwo8AlsueNNlxKd8=;
+ b=3SJ4nGg5MO7AHbPM4HnJT6atKVij5aE02Xdb7Kp/IFJ/qkQAXViTsx23qxP2PSXXLHUolhcAl
+ AUeItdKTwrcAp2HQV90Me3jveKK77HQ/9l00Y2+DYUs+G+hiUZklaH7
 X-Developer-Key: i=emcp@enser.io; a=ed25519;
  pk=5sG48Lul+Vn7OzXu3VZrCWk5uvEFPYMXYnAV0TZR/tY=
 X-Endpoint-Received: by B4 Relay for emcp@enser.io/ultron with auth_id=1598
 X-Original-From: EMCP333 <emcp@enser.io>
 Reply-To: emcp@enser.io
-Content-Transfer-Encoding: 7bit
 
-From: EMCP333 <emcp@enser.io>
+Two fixes for the Venus decoder and encoder, found on a OnePlus 6T
+(SDM845, firmware VIDEO.VE.5.2-00050-PROD-1) while using it from
+GStreamer, ffmpeg and mpv.
 
-Give CAMSS its four interconnect paths: the AHB config path, and the two
-camnoc HF ports plus the SF port into DDR. Without them CAMSS has no
-bandwidth votes of its own, and capture stalls when the display is off.
+Patch 1 gives the end-of-stream buffer that the STOP commands queue a
+real, mapped address instead of the made-up 0xdeadb000. This firmware
+rejects the made-up address, which leaves the encoder unusable until
+reboot and decoder clients draining forever.
 
-Tested on a OnePlus 6T: with the display off, 10 of 10 1080p captures of
-100 frames complete, with CAMSS voting on both HF ports while streaming.
+Patch 2 makes a CAPTURE STREAMON issued while OUTPUT is stopped for a
+seek take effect when OUTPUT restarts. That is the order GStreamer uses
+for every flushing seek, and without it the seek never completes.
 
-The code and this changelog were prepared with the help of an AI coding
-assistant. The submitter has reviewed both and takes responsibility for
-them.
+Both were tested on the phone with the postmarketOS sdm845 kernel
+(6.18). On v7.4-rc2 the driver builds with W=1 and no warnings.
 
-Signed-off-by: EMCP333 <emcp@enser.io>
+Both also ran on v7.4-rc3: three encodes drained by V4L2_ENC_CMD_STOP
+and decoded back (90 of 90 frames), and three flushing seeks through
+GStreamer completed in 0.02 s each, with no venus errors.
+
+One related problem is not addressed here: from 1280x720 up, the encoder
+bitstream buffer is an eighth of the size used just below 720p, and
+this firmware produces nothing with it. Fixing that properly needs the
+firmware's own buffer requirement rather than a bigger guess, so it is
+left for a separate change.
+
 ---
- arch/arm64/boot/dts/qcom/sdm845.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+EMCP333 (2):
+      media: venus: Signal end-of-stream with a mapped buffer
+      media: venus: vdec: Resume CAPTURE restarted during a seek
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845.dtsi b/arch/arm64/boot/dts/qcom/sdm845.dtsi
-index 844b840bc5..4710556324 100644
---- a/arch/arm64/boot/dts/qcom/sdm845.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sdm845.dtsi
-@@ -4518,6 +4518,16 @@ camss: camss@acb3000 {
- 				"vfe_lite_cphy_rx",
- 				"vfe_lite_src";
- 
-+			interconnects = <&gladiator_noc MASTER_APPSS_PROC 0
-+					 &config_noc SLAVE_CAMERA_CFG 0>,
-+					<&mmss_noc MASTER_CAMNOC_HF0 0 &mem_noc SLAVE_EBI1 0>,
-+					<&mmss_noc MASTER_CAMNOC_HF1 0 &mem_noc SLAVE_EBI1 0>,
-+					<&mmss_noc MASTER_CAMNOC_SF 0 &mem_noc SLAVE_EBI1 0>;
-+			interconnect-names = "ahb",
-+					     "hf_0",
-+					     "hf_1",
-+					     "sf_mnoc";
-+
- 			iommus = <&apps_smmu 0x0808 0x0>,
- 				 <&apps_smmu 0x0810 0x8>,
- 				 <&apps_smmu 0x0c08 0x0>,
+ drivers/media/platform/qcom/venus/core.h    |  7 +++++
+ drivers/media/platform/qcom/venus/helpers.c | 40 +++++++++++++++++++++++++++++
+ drivers/media/platform/qcom/venus/helpers.h |  3 +++
+ drivers/media/platform/qcom/venus/vdec.c    | 33 +++++++++++++++++++++---
+ drivers/media/platform/qcom/venus/venc.c    |  7 ++++-
+ 5 files changed, 85 insertions(+), 5 deletions(-)
+---
+base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
+change-id: 20261122-b4-venus-eos-seek-def2919e88d5
 
--- 
-2.47.3
+Best regards,
+--  
+EMCP333 <emcp@enser.io>
 
 
