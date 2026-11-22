@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795324409;
-	b=5P1aRZo/eO7nW8timB43m7rFFTEadlvNFDOF+TTlBMNyehlMa79WS2aVdeBoouvtXRe7
-	 TwNrLRpbGrh1Ugs7uc/IBaJxKH9hiLP7AZP8DoiA3t6aHgdSCA1AktvbZEwQ2X5MScSf+
-	 iRez6oat8gnNnZY51ZwZ1+8NdsFNUmrsvp+0UB6Py1nzUUOZKi98kgTrRCKpJXL3cUXq8
-	 BhZodi0Ny8ezGt43RPGlHNdAEvcDenCt4r4tfQY/ApPcuMbfpdZADy9iN6ov4LAdhuchT
-	 szsN8lCSn/oDpLYmUn4xo6ovvQ/pNJjmPyn0I57xnRKdrbbTKGjOB5vYYEUT6yAhuvw==
+	t=1795324420;
+	b=iTVRCk1F9FiboGR2BLMpL+fcYWgfolK81yXMYxAfGkXMB83xTG2DtzHAma+m+7Bdl0FR
+	 Gjb1Ob8L9CP0he2cSmVPuLdu6zYBS7KjcoJSa5dLCaFOPMmVf+wT2md3f40yaA2jg/FhC
+	 T3J7QiWlpZM7qfNeGVoVrJjUSWfbc7Dre+wK8bZSvtoXcnsJPRgWg54mc2FCrQc471Fsh
+	 h364jNlab3dQjWJOMdkSkk6Tn9IYz64vMHoW525hCpDoPFegd3G9NsM8GIizfcUBDzCv0
+	 dgNF/7zmeeeUqVM7UOPoHdsaBQQIwiB7FcmdppNEHfR1biR1TQHtNFsOUWK5cw7SeyQ==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795324409;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=D3FHZwdzbc+DzBCXcwAt60rvyFF9oaH2jUzt7UMfw8Q=;
-	b=OxnhTGUF1v3GrEzUulqL7yHryBUE1s17OIJ6WlSxlMkcXWsYiJF/E03V74tk3pABdLKW
-	 6rTfET+2ECH87hU4oPKGQB79Z7xaWvmeSv0EBr6F4JwB6PQyDSfd6RGhoHDhJf89sMllt
-	 4upLXiM8+NptvB1icndDiJ4YF7P9jafeKArZ2PPn8lq6XV0Obvp2yekNV4b5P/VODNs64
-	 78Syyl2XF7IOa4tNvGRZGFdSYANoO6itOK+t4B6y0XoeiHE5w9uYpo5Q+oVo0WoVmRixv
-	 okYMrjlvmL77fjNo5uIWVsj0iKYd56c1Cl91jyyXsQklicpN+q4g+MwBmp8bCi6zskA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795324420;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
+	b=qtVUpet7ThTB4zqSDKJvWT+9DiSvjdnqT1TmmG3aVCa7vkZFBaN4xD4dcbjMfjPr+Ray
+	 yD8i2HNzvgwRpArt7XA9oAfGzfbmMhHF3Z0/+MRFTw6BwmhqVMNho2cdj4sgU0UwJl2fg
+	 ldt0i5m2+7ixJzZ2KeMc9pJVcgMdVOAKJ107t0d95T1Tv8whwaq1uqWY3o1rEeROutKJB
+	 RNoRtIPRyc9s1RWrkEFAI/RbPVpYadSGHFnE7bLzpFC+rSQx856+HrWd3JNPksK8RM6sA
+	 bZD4VyREp7savV3wDIDDcp4d5cFHCKJVCPLqPrnxohLei8eVt9PqYLTlBxuRflvMQRw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TxiBqSJh;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TiZaCiqf;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC7BD606A33D;
-	Sun, 22 Nov 2026 05:13:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5BC5606A337;
+	Sun, 22 Nov 2026 05:13:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TxiBqSJh
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TiZaCiqf
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795324408;
-	b=SbALYnEakLPz5otuk1mj8aveGXfL6zj7/TF7pQSbuFWsQAoJpgnXLiZlT2fTD2i1dzVO
-	 I6L2KvHz6NgDqThJr1uqWtXISGQ3dwalD5msA9XRDN8+hfgArdkMXWgWLFebPpYFakBWi
-	 /PuPlKdEKqJJpi5ZAcAbdzImTRzBmAAmUIa2ZMj2XGjTacpw+zT3IlLqCCR2nYIgq8Y0f
-	 uunxSo/HNSib8P0DLOcVdpSs9wjvHg7Vv1uiuFW/SqhPzf9oRE496Mhzznr6WDonm7tF+
-	 CJ16/Kjtd/KmJyW8Hy92hN78eY2RXhHRb1+UaoFj/G+LPrYD0JcPIaKd19sOW9BuXUQ==
+	t=1795324420;
+	b=mkxb6P+u7UJMFw0sp2R8LeNKN3kdabUcQEIh8fhiIfGt8SYYCunudGqxRNwESyYeb5kN
+	 ilHkrxAwKTA10x5Zldj3HaJLRdFuq/vEvTz0CPxacE7ZWviHIHnfubPrVQI37Rv32TtRQ
+	 mxM+yMfaytYtyE2zU2B7rpAshJ6JTW3utkDz5aYZ5ZDJA90cWcwRSXlb6YNvT4m2T5eg5
+	 Leo74f3TeqYvvuioYL8UdEV0TKqtC2Sdel5pfa+iAM9lcEif6CHx2rv00bUGNni3XPtdA
+	 tu6Avxft7roxZj1I5yEA2fYiJDOEVzTrO4LMeW5RH/6zyZd4iEWp8kz/YJJf+ct5oIA==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795324408;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=D3FHZwdzbc+DzBCXcwAt60rvyFF9oaH2jUzt7UMfw8Q=;
-	b=ZHIlr8hqcRP+VjCTr2Kl45jMdhYJMrRdSIqMflxXIUhB+SB3SLgNtMXcH5t/x0UEXons
-	 b3yERJjUbqjTArSXZ93T+/uvrHzR5HfQu6urwUiDg0vWTVGBPAeJ3fJopA/HJZjcOQHwn
-	 okeSylJojWdA907gIArvxggOl9wE1mfE7r2XRZn+zoRvmJe00O94dxsfaTuIyrlv0g+vv
-	 Odf5xGB09M43uWazPNsyuejpYN9r5cfWT+BilPas6wRgqnsZI/vaBMVpZugA7D0V3Ui19
-	 y8nPWo752zorjgikMYyDjYNE8Dl2xz2KZD03l/pvz08LjFW/uER6D0fFKZriW6h3JKQ==
+	c=relaxed/relaxed; t=1795324420;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
+	b=WfK/0cZY1tqrSBWjvU6D4qMkbPGCuD3MLUqpzicENjOKIvFmG5PxNTYpjebMZqGUe8f7
+	 GRaHyaKjG106hDLmdE5tH9yE5Yn5D60vlI2iArMowUBlePU3pBQz7jZPHkuvTjZF4Bh0o
+	 VHltFTU1iczUHhLC7+rw1Ec0vWVU/exsp37T/TextNe3GPPbwoFmuCgnGfJXiTkRaGmqi
+	 UTxIc0d4C85ZuO9DxAL/jSO/zMMgd8SdHq+aQk8X1TAOKVCSJ4nmawVZ3i6o+zQwjnmS/
+	 uVYWwqXJYXbJqj6uefiw2AGTYHs972MPcZ939ILguGXt6Ee6sps3TBwV/l/RRf9ItgQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 006131F000C6;
-	Sun, 22 Nov 2026 05:13:28 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 070671F000C6;
+	Sun, 22 Nov 2026 05:13:40 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795324408;
-	bh=D3FHZwdzbc+DzBCXcwAt60rvyFF9oaH2jUzt7UMfw8Q=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=TxiBqSJhH55ZWnrZF2Vh00jz3ZZMzoPU2dLMR+ZVKJYQt1rh0bPv8RLpM7LGo533j
-	 CmmLf3hhQ02b9/4BY9Yi+QkIhQXAoX6hhcEol633KPuOg67ukTKyxMKRKsKMCYAmsM
-	 Wfz/H81KIDXDeII3rk3yDbu4BSj5dn6ihn1lQ6mLhm57oN0VzvSeCk/v9kUzJyniJg
-	 2ZAIgftGc7S9H8Q1Ms62O+TcOcvEvBlc2oetvH6HKkqs+XUsyiiUA+cAsYwIXI4wLZ
-	 1u+RfvW6o5thIFTDMnG3svtadHM1W/K27G47kETblWuw8R8VoJ2XNIKQthz8MO13Dm
-	 BIvor3Sd1kMpw==
+	s=k20260515; t=1795324420;
+	bh=DiFLCNWuAguYC7GlMjmHWyzByIH688Zqc4FSeopoDIE=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=TiZaCiqf+5SO4JL05f20TU+pBaCDWk0EKy1X9V9+22n+LKzcOhv0ySgzaBl7EicrU
+	 VTkAz71dZkG/ocZ6WXcmMbIoO0KIqRvuXbIHRO2tFvXC9GyDRH2Jlgm2eKpFmnYnN5
+	 xDUvG61PaJUC60LTunkHO+sqjbXMspnZePo6jMzYEwtcYYi5nTliX5VUslpT0fPF9l
+	 z387Q6/hYpalphcwFa52x/BJ4STmNWIAE5vDCJ2Tjol81PCEnT5pGlLzs/v6MCkQDo
+	 dcqJwozIwgbXbGY9wtirkxLvEEs8P+d42xUHpXBREONzk8X8cvw6xCgSWFjpJGMvFs
+	 KNHtsGxxcrLaw==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 83C574BF37;
-	Sun, 22 Nov 2026 05:13:27 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 8C64E4BF2E;
+	Sun, 22 Nov 2026 05:13:39 +0000 (UTC)
 From: EMCP333 via B4 Relay <devnull+emcp.enser.io@kernel.org>
-Subject: [PATCH 0/3] media: qcom: camss: Interconnect votes for SDM845
-Date: Sun, 22 Nov 2026 05:13:23 +0000
-Message-Id: <20261122-b4-camss-sdm845-icc-v1-0-0671ef770fd0@enser.io>
+Date: Sun, 22 Nov 2026 05:13:31 +0000
+Subject: [PATCH] power: supply: qcom_smbx: Make the float voltage
+ adjustable
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,72 +84,179 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAPN5AmsC/yXMwQ6CMBAE0F8he3bV1irEXzEc2u0qa0IlXSUkh
- H+31eObzMwKyllY4dqskHkWlVcqMLsGaPDpwSixGOzRXoyxFoND8qMqahw7d0YhQhMdxY5OTKa
- Fspwy32X5vd76v/UTnkzvelUbwStjyD7RUKPKw9zuHWaysG1f+uk2bZcAAAA=
-X-Change-ID: 20261122-b4-camss-sdm845-icc-1d4cd8c3ec17
-To: Bryan O'Donoghue <bod@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, Robert Foss <rfoss@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+Message-Id: <20261122-b4-smbx-ccv-v1-1-0ecc4217b58c@enser.io>
+X-B4-Tracking: v=1; b=H4sIAPp5AmsC/yXMwQ7CIBAE0F9p9uyqECLWX2k8wLJYTETDKmnS9
+ N8FPb7JzKwgXBILXIYVCtck6Zkb1G4Aml2+MabQDPqoT0ppjd6gPPyCRBWjtTZEcw5+HKEtXoV
+ jWn5v0/Vv+fg707tf9IZ3wuiLyzT3qPNQ7d5gIQ3b9gVBNQZRjwAAAA==
+X-Change-ID: 20261122-b4-smbx-ccv-f777df48db99
+To: Sebastian Reichel <sre@kernel.org>
+Cc: Casey Connolly <casey.connolly@linaro.org>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Robin Snyders <robin@snyders.xyz>, linux-pm@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
  EMCP333 <emcp@enser.io>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324405; l=1830;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795324411; l=5793;
  i=emcp@enser.io; s=ultron; h=from:subject:message-id;
- bh=0eKhIZ+ChtKI73qyKB4ZI4olHiQz7Q9wrSL2FmVT5UU=;
- b=/jIJzyp9G4JmqAhPZ393/BkZFtZPUci/21USxarhIHV2aEb6kzwHmXVbg00OrikYxV7dz66z1
- J83cxfN9EFyAwqbrmz/kcDcguCUvsJlSZWfb678acfiVWdgKqWzV/qv
+ bh=c81KUHplwWRmxuVs0d0MhXnbVsifOIAU8afoDoBp8fU=;
+ b=Ll0mm0xiLTjcmUVG66bC1fcaaIlZ0tYWOeV2SJwrJnvIrAnPltOkPU4a5tL/lJPGGBByyewf8
+ GEsQUpAyUvcDD8RViA1zHeMCRlafQHvHKGePNniq3S7YnIr+RdESGeB
 X-Developer-Key: i=emcp@enser.io; a=ed25519;
  pk=5sG48Lul+Vn7OzXu3VZrCWk5uvEFPYMXYnAV0TZR/tY=
 X-Endpoint-Received: by B4 Relay for emcp@enser.io/ultron with auth_id=1598
 X-Original-From: EMCP333 <emcp@enser.io>
 Reply-To: emcp@enser.io
+Content-Transfer-Encoding: 7bit
 
-CAMSS on SDM845 declares no interconnect paths, so it never votes for
-memory bandwidth and runs on whatever the display happens to hold. With
-the display off, capture stalls: on a OnePlus 6T, 8 of 10 1080p
-captures stopped after 0-1 frames, against 10 of 10 complete with the
-display on.
+From: EMCP333 <emcp@enser.io>
 
-Patch 1 allows the four paths in the binding, patch 2 gives the driver
-a bandwidth table for SDM845, and patch 3 adds the paths to sdm845.dtsi.
+Charging a lithium battery to a lower voltage is the usual way to make
+it last longer, and on PMI8998 and PM660 the float voltage is the
+register that sets that voltage. The driver programs it once at probe
+from the battery data, and userspace cannot change it.
 
-Patches 1 and 2 are for the media tree and patch 3 for the Qualcomm
-tree. The driver gets a NULL path, and so no votes, from a device tree
-without the paths, so patch 2 is safe on its own; patch 3 needs patch
-1 for dtbs_check.
+Expose it as POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE, writable, and
+the value probe left as CONSTANT_CHARGE_VOLTAGE_MAX. A write is clamped
+to the range between the lowest setting and that maximum, then rounded
+down to a 7.5 mV step, so userspace can charge the battery less than
+the battery data allows but never more. Without battery data, the
+maximum is whatever the boot firmware set.
 
-Tested on the phone with the postmarketOS sdm845 kernel (6.18): with
-the display off, 10 of 10 1080p captures of 100 frames complete, and
-the camnoc HF ports vote while streaming and not when idle. On
-v7.4-rc2, dt_binding_check and dtbs_check are clean and camss builds
-with W=1 and no warnings.
+Tested on a OnePlus 6T (PMI8998) on a 6.18-based kernel, with this
+patch and a backport of commit 2a26d260e72a ("power: supply: qcom_smbx:
+fix float voltage selector"). constant_charge_voltage_max reads
+4395000, and writes read back as below, with the selector read through
+regmap debugfs:
 
-The same three commits also ran on v7.4-rc3: with the display off, 10
-of 10 captures of 100 frames, no camss errors, and the camss bandwidth
-requests go from zero to non-zero while streaming and back to zero
-after.
+  4100000 -> 4095000 (selector 81)
+  4500000 -> 4395000 (selector 121, the maximum)
+  3000000 -> 3487500 (selector 0, the lowest setting)
 
+The code and this changelog were prepared with the help of an AI coding
+assistant. The submitter has reviewed both and takes responsibility for
+them.
+
+Signed-off-by: EMCP333 <emcp@enser.io>
 ---
-EMCP333 (3):
-      dt-bindings: media: qcom,sdm845-camss: Add interconnects
-      media: qcom: camss: Vote interconnect bandwidth on SDM845
-      arm64: dts: qcom: sdm845: Add CAMSS interconnects
+Also ran on v7.4-rc3 on the same phone, as this exact commit, with the
+charge daemon stopped: writing 4100000, 4500000 and 3000000 reads back
+4095000, 4395000 and 3487500 (float voltage selectors 0x51, 0x79 and
+0x00).
+---
+ drivers/power/supply/qcom_smbx.c | 47 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
- .../bindings/media/qcom,sdm845-camss.yaml          | 20 +++++++++++++++++
- arch/arm64/boot/dts/qcom/sdm845.dtsi               | 10 +++++++++
- drivers/media/platform/qcom/camss/camss.c          | 26 ++++++++++++++++++++++
- 3 files changed, 56 insertions(+)
+diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom_smbx.c
+index 8a2f635a6c..2d30c18671 100644
+--- a/drivers/power/supply/qcom_smbx.c
++++ b/drivers/power/supply/qcom_smbx.c
+@@ -381,6 +381,7 @@ struct smb_init_register {
+  * @base:		Base address for smb registers
+  * @regmap:		Register map
+  * @batt_info:		Battery data from DT
++ * @float_voltage_max_uv: Highest float voltage userspace may set, in uV
+  * @initial_charge_enable: Charging enable state before hardware setup
+  * @status_change_work: Worker to handle plug/unplug events
+  * @cable_irq:		USB plugin IRQ
+@@ -395,6 +396,7 @@ struct smb_chip {
+ 	unsigned int base;
+ 	struct regmap *regmap;
+ 	struct power_supply_battery_info *batt_info;
++	int float_voltage_max_uv;
+ 	u8 initial_charge_enable;
+ 
+ 	struct delayed_work status_change_work;
+@@ -417,6 +419,8 @@ static enum power_supply_property smb_properties[] = {
+ 	POWER_SUPPLY_PROP_HEALTH,
+ 	POWER_SUPPLY_PROP_ONLINE,
+ 	POWER_SUPPLY_PROP_USB_TYPE,
++	POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE,
++	POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE_MAX,
+ };
+ 
+ static int smb_get_prop_usb_online(struct smb_chip *chip, int *val)
+@@ -653,6 +657,32 @@ static int smb_get_prop_health(struct smb_chip *chip, int *val)
+ 	return 0;
+ }
+ 
++static int smb_get_float_voltage(struct smb_chip *chip, int *val)
++{
++	unsigned int sel;
++	int rc;
++
++	rc = regmap_read(chip->regmap, chip->base + FLOAT_VOLTAGE_CFG, &sel);
++	if (rc < 0)
++		return rc;
++
++	*val = SMB2_FLOAT_VOLTAGE_MIN_UV +
++	       (sel & FLOAT_VOLTAGE_SETTING_MASK) * SMB2_FLOAT_VOLTAGE_STEP_UV;
++
++	return 0;
++}
++
++static int smb_set_float_voltage(struct smb_chip *chip, int val)
++{
++	unsigned int sel;
++
++	val = clamp(val, SMB2_FLOAT_VOLTAGE_MIN_UV, chip->float_voltage_max_uv);
++	sel = (val - SMB2_FLOAT_VOLTAGE_MIN_UV) / SMB2_FLOAT_VOLTAGE_STEP_UV;
++
++	return regmap_update_bits(chip->regmap, chip->base + FLOAT_VOLTAGE_CFG,
++				  FLOAT_VOLTAGE_SETTING_MASK, sel);
++}
++
+ static int smb_get_property(struct power_supply *psy,
+ 			     enum power_supply_property psp,
+ 			     union power_supply_propval *val)
+@@ -682,6 +712,11 @@ static int smb_get_property(struct power_supply *psy,
+ 		return smb_get_prop_health(chip, &val->intval);
+ 	case POWER_SUPPLY_PROP_USB_TYPE:
+ 		return smb_apsd_get_charger_type(chip, &val->intval);
++	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
++		return smb_get_float_voltage(chip, &val->intval);
++	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE_MAX:
++		val->intval = chip->float_voltage_max_uv;
++		return 0;
+ 	default:
+ 		dev_err(chip->dev, "invalid property: %d\n", psp);
+ 		return -EINVAL;
+@@ -700,6 +735,8 @@ static int smb_set_property(struct power_supply *psy,
+ 					  USBIN_SUSPEND_BIT, !val->intval);
+ 	case POWER_SUPPLY_PROP_CURRENT_MAX:
+ 		return smb_set_current_limit(chip, val->intval);
++	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
++		return smb_set_float_voltage(chip, val->intval);
+ 	default:
+ 		dev_err(chip->dev, "No setter for property: %d\n", psp);
+ 		return -EINVAL;
+@@ -712,6 +749,7 @@ static int smb_property_is_writable(struct power_supply *psy,
+ 	switch (psp) {
+ 	case POWER_SUPPLY_PROP_STATUS:
+ 	case POWER_SUPPLY_PROP_CURRENT_MAX:
++	case POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE:
+ 		return 1;
+ 	default:
+ 		return 0;
+@@ -1064,6 +1102,15 @@ static int smb_probe(struct platform_device *pdev)
+ 		return dev_err_probe(chip->dev, rc, "Couldn't set vbat max\n");
+ 
+ skip_float_voltage:
++	/*
++	 * Userspace may lower the float voltage to charge the battery less,
++	 * but not raise it above what is set now: the battery's voltage or,
++	 * without battery data, the boot firmware's setting.
++	 */
++	rc = smb_get_float_voltage(chip, &chip->float_voltage_max_uv);
++	if (rc < 0)
++		return dev_err_probe(chip->dev, rc, "Couldn't read vbat max\n");
++
+ 	rc = smb_init_irq(chip, &irq, "bat-ov", smb_handle_batt_overvoltage);
+ 	if (rc < 0)
+ 		return rc;
+
 ---
 base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
-change-id: 20261122-b4-camss-sdm845-icc-1d4cd8c3ec17
+change-id: 20261122-b4-smbx-ccv-f777df48db99
 
 Best regards,
 --  
