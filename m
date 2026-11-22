@@ -1,79 +1,101 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795375229;
-	b=3Il9z5HgKji6Vv1yjHkOfULRDNQNP3MCLTZ8B50xFDWBVePmYIT8JWzA1Qx5PALjoEfq
-	 8LQckbACrzPHIocKw32a5E/dJmf1ieihQEqMSnIWuoKHl4jD97UITM8ASIq/7s8i4wS4Z
-	 VimC4Wc2ASLOTkkHN4iYNXJ7v4nIVDHoFxHoyWVpksQbUXNsQ6MJIf5048ACnTAo78Y7T
-	 PgRNYu4SjAYzfdsHAryicrSAkPAJVqnE0VYd9TbrVYgNfbDY9ZB9dZVdWlC+32LQIUeyc
-	 4cBMgP/uLV0d4B2e63ZxkiN87WneLWuHr5eZPsn71cX0NiX0ImUm17NOX4nFrD9evEA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795375229;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=kj+VAGoL2xvIZkBxW6WgEhnADQuyPv28PwMBUs/3KdM=;
-	b=iX9VnC0J2SI35SkZIUA1VB1gRAWsKhtvRwpn88xxDwO4GVo4/3RKmJCXuYpypEUFu1o2
-	 oRRHUTot+z4qZIEwqT6hFSzA6OItND27Ax3ebI5jWRa2Ngu2um/F6I1U1FzKraVRDSj9H
-	 8ZEzCgv/kcBSbMFz6Je2EbxzuLtU1QD2pVWho5r0PMGx4oGsOg/8wL1hmGaaQcmg93JYh
-	 GmxyQujyHc47qc/4haaiZoIrixgr5XguWvW2CcoGMkjIA7XidIPVTiL9PY0Bmw3cLbFnW
-	 vF2AcpjnPQc7iwhLrO0mGo6VXX0ySd0W+LW7NpFCA3TDkSoJISXOvHS218lHCcfyepw==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hebLZs2G;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 278C5606A333;
-	Sun, 22 Nov 2026 19:20:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hebLZs2G
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795375228;
-	b=tLLV4XmCMqEvmQacudwSFq7tiPSPWlrDECVOzJDZoqNjwt5oPZmztCrLyEXHSH/+7R6c
-	 W/gAtdDoPTcYT6xhca2FilQNxG3B1a3UQkPfrvrWtH1ZwSb33r4NSj3UjpFVo6K+cO2YZ
-	 DU5mqBnaNvROfKe4+AbcvZt2McsDt6uu/a8p2W3GRcPJ0qNFH9GmYEy63c/tmA4qFSCDh
-	 qCfHW0YpjA40rhswyi98n/gFQgOShuYv8SJGVpafJTTjQMQVqzojfXx7AFfL0nSxdF85P
-	 pzjqIKT9beymHBdZds/JokS8KCLuEy+XnQes2MAjKXvyGs088KBTpRgdtT5kOypnQrQ==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795375228;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=kj+VAGoL2xvIZkBxW6WgEhnADQuyPv28PwMBUs/3KdM=;
-	b=hziJdL751XCUXv6MlFE8orMN9ZoCQ6epVx6NHk8q+sJV930fsaAn8/IRq53J5aXICugT
-	 Wv3aWmQNVHEgQOYjcovAIbpX2qiLYPfpQ/up2OfTibvIj1pdcPWKjfYlTs46BHlXwIaPC
-	 RVx40drqodHoNYLZxPvsAZcOFjqGWY9D/KnP5vI0MINwfcff23FizxOgbuBTaI4YX7muI
-	 IzfsYqDVcYlYfaF9eNEMIbnkYVAbQKiTOKLueemkfn5nlb9tIwBd1D+f6UqA4NzL2eDdj
-	 P0xwqsULfr1IUnL8TpXQ4CGvi7p09lDVpppT1e3hu7DnvSMPYPw5cJzwjhmAY8o845A==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=106.10.241.210
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795375751;
+	b=WPiqrzETmabSy/HSRbQIsojzTwBxluiab2hbiuwYXpBgKAgz60N12IcrYvjKn1fnK1cI
+	 4bOfMMmTJ8bCTOekpw/MomkBqgCoNzJwCNs6sY9+b5j0gY3gdk6d9fA08FYBcWKHPuGjS
+	 mcXwVCd+4LyYnK/AhDW14YUlePayMSc35oCPfecQa3iGRNjrYsMhHbqHNynvSe1DMdRmE
+	 pFS4a3y6Pfrv9Up/zUq/meS1YSGI+BUkSsRUtgY/E3YtDP3qwb/Y2BdF0XLogz8Pc0nZQ
+	 N7nFgJW7KDF6jKoltCo+ScxDiFkbn7SEp1K++QSmifgRaqRbuAxrrGAzH5l2B+8h9lw==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795375751;
+	h=DMARC-Filter:DKIM-Signature:X-SONIC-DKIM-SIGN:X-YMail-OSG:X-Sonic-MF:
+	 X-Sonic-ID:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=9bKfAWcfi3fcLmMSzFA32EaHtSL2wjxQDRuqCwiDgvU=;
+	b=NJlVIaSZ+cA/FE5kSZHF2XKJwYtW7tMyCJpDWWaLQNJ+akJ2tF1L/HTYLtl4yPed4d4Q
+	 vfhhMobUhH+uVXqfV89zmvPYShQ61RI5ITVyNmnSza2iGSU8GloeSBaeev3X4DDfCL5HL
+	 etNc66l9qZCFaXn6TuXH7D/9LqGYpwvQItnBKpo7c5aEkp2J+KR4lbymKYD2VNhduTMJK
+	 eU0o9lUllQfXfGgCtUDOTYsQ0ve3RWrQEvPNlpzLZwhglG8dwo+kjWV3rKFZd9rQJWoDY
+	 xxT7qzDKpBjv2QSAhsHklXViaJxNhcCIbhKOifutGyl683kLj0Od5pKVTzMrBTyAcpA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=yahoo.com;
+	spf=pass smtp.mailfrom=yahoo.com;
+	dkim=pass header.d=yahoo.com header.i=@yahoo.com header.a=rsa-sha256 header.s=s2048 header.b=d+xMg5xX;
+	arc=none smtp.remote-ip=106.10.241.210
+Received: from sonic308-20.consmr.mail.sg3.yahoo.com (sonic308-20.consmr.mail.sg3.yahoo.com [106.10.241.210])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id E41921F000D0;
-	Sun, 22 Nov 2026 19:20:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795375228;
-	bh=kj+VAGoL2xvIZkBxW6WgEhnADQuyPv28PwMBUs/3KdM=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=hebLZs2GapuH90LUlqhGGJSzJQBF4w/lGY46G3uDTdzY0S/naLLb0Rc98he2EjdU9
-	 10RNNSGljWWiFzaNT6OZSc/dvA2oFk7r1XkHG8mr7IhvDjOxdxWR3y39egwbJBgXlP
-	 pCYhDWyc2DTd6spvDHwlW80DBYiS/4OTnRc8i2+RvTi31SZhwrG9814OJr8qJfqKya
-	 ZnVH7HndfMRo5DecAbUBYgk8mJnJb3NCcZlcVdAmaUGtKetZNTUhQWQikg3rtZbeTv
-	 1DoruB2z2p78Fqn6ox3s7Gg6Y2jNIE8gyB0YFqKnohpzR8SjOEKqWNaPxrxOMSImMg
-	 q0ICOCznwvx6A==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 74FA14C1DD;
-	Sun, 22 Nov 2026 19:20:15 +0000 (UTC)
-From: Venkat Yadlapati via B4 Relay <devnull+venkat.yadlapati.yahoo.com@kernel.org>
-Date: Mon, 23 Nov 2026 00:50:16 +0530
-Subject: [PATCH v2 2/2] power: supply: qcom_battmgr: Don't limit the input
- current of chargers
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8696E606A31D
+	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 19:29:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8696E606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.a=rsa-sha256 header.s=s2048 header.b=d+xMg5xX
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1795375748; bh=9bKfAWcfi3fcLmMSzFA32EaHtSL2wjxQDRuqCwiDgvU=; h=From:To:Cc:Subject:Date:In-Reply-To:References:Content-Type:From:Subject:Reply-To:Content-Type; b=d+xMg5xXDzLDoq+fv27ILki/YiEyWVydKhtXm+LLTkqkH7JDk8NNEQ+poM5fkaM9H3+twAAe05muE07GDRoVFM+cfuHaLzyavq0FGv5R6XK+QrwDLjdbMXTRzHm6tP3BsYM2LX+XJNv2UawHmuQ5RXT7/wpyPhv5Bnd4j100foaqsndjZbMP0Rsln8JoM64d/64qCZpA9+o8NKSctSkL6LdHBhDb5pN33QJOzS07SVOv4gmPnLjSTWGdqAX2OTmKu53rXmy39es6SvtDevrXobau5qgN0AKxEGGeTbHVff/GBF7Re5CckH0ULn2lVzLmPQ1J5Sp19ykh954iy/3sDw==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1795375748; bh=UaeeY3MR4qc3m3TxuZr+/a+X7doxDgYuVi2OQ7/39qj=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=jmTQjBRfDXGgnTNfaXAoNh3NG80/M3M+Tv3++a3fipUhTZE8luIVOj2CkblOLtJBT9/7H5geiZDqVl7gzwq71L6vc7dWrxjSSQo1Fwbshp1ku4oYiBxkaZeSXhXav3j8k3ftNyCyWwN0jZL3nOPQKvPOE6iluNFcTQ4OkO7D8nEq61hBXZs2QOdTHv+B7SVFuRxv6wnHbiC22kekEuu5eqVlxNhOD8r847K6IWXYJYyVjcrxigLOq7MMmIh3wflsMZQjSqvUogxcgqV1BLrC02S9I198k2AaiwRMMWmjoKeRqCWo6VkvandukQf2LspzCoP9T0yARjuRpTDpJR9keQ==
+X-YMail-OSG: LH1xPCkVM1nPiCXt2DJAijST0SFJBjFnbsUAcUEU_5ODiBRmzkZ7FajlS1kZFe3
+ 6QQvwKTnAcs0rWVLEk9JL6Y1ufu_vYYpxPVLwX1IMnf8c_KgItOYZsyTDFOBNsTC3deOXJLQC6A_
+ ja5GZP5yaNxuoiS3IV4GzHOfUITI67GCNpkP9s7YGNg_NBlaiXWkQCCe3whk_fObgePHDptZWQ1x
+ IfNEXH_P3KKSdEO7c0ZMTYiQjsfNdW0yEZdt8Cyn9NOBHYyyCKr7EkG1WIoizKaFBvDkYuGaHQDa
+ FrIR4jOrwFF.IXmZrMU3qXsfeThFAoPxWwWOVLeVKGup7qsE1F8yhQ1J2U1_zwmLiElnSrvGJwbu
+ 97rt0sKoeCPutviQQJ7S1YCmkLc7lZceOIB8conYQJNC1y6BNFQWkT0HX7gj_fHuMxOvTkv01LN5
+ rUNeA3sZN.P0dTfcRhK6SszWwRjYI5tCeS_FEeVevcq9RW89an_iBkVuefnpYc.VWS7RzkV8scCQ
+ MOkLLco_hHPn9rJmgHSOjUEgQjsZhcqChDqUPHMMdL3EwcfvG1bDcbTVthFx7fnKp5.a.BGg4lFu
+ 3WdXGQbys.MimfbkcjgSdbLY6ZFTimk4JH3EwNafwFkhqmLYFaSvcO2BvKqGmcO5CWIUHtublhmD
+ vdxS78F6mqwwCI79S3augQzgf3mYmSsKGx6xrfszaLRnCnR9jj_9pTl.xveaRu26uO08kVWw1DBe
+ 56Ygc1ZFqFbOavbpocagwtknVMK2pScL3d5mtaZKj0zs6_JBw7gWkKJmch.56JoCtdKiS5Opx.jJ
+ c8zfZgOvDQQvR8wrvuTJsIJ4l6Fob1twv2dLexv0VdjaKB2xCDgWzMUyxb2nEOXDN59eKEnmn6hU
+ 60pqv61F_3L5JZJyJxVTg.QhtbLpnP9v6tgQqHLDb2XIm7Xkxz4ju2afnhBOibqIQhkhdod3O6Jh
+ nYtXffzIhQQxZpN9s7OqcdfT.DgoGXOTIrUsdhni.vAK8xXf4RUrIkX7UsQUhf7_kyLotKfM6f6R
+ SmVu9PPZzBLAUxggByugZdML5dH9D6yqIT1C_ll19y6p42ZBy_rYUOm1UjSgsxKTLvllJCwbifOQ
+ hEuItP69WJsiaEuXsEFnZXX3jk.QokBRiInWLG6PHdboktuVbU_nUJFAx2prruoVxajZNQrDYNV.
+ VMuxy3kxqWSh9bU81B6aNeTPyNVJ7pkZ8ITNWzVjVxHy8lUhKZSJ9duaZ0k_v5jLR7cwJFSKzy6Z
+ sWO8uCtZxLMhuEgOcXPyelFn1dxLZyuryu3njBCS3Xi2b1wQL5hRYqwSKX.Di0.1JzPzYBLfaMFs
+ 2A2L7Y8PdvU_BoSX5ZlPL6CMkkIkbFXASf9Q8D8UB0kGwmZk_G8Ek2orxVghVx_zYKmNnS0.LUQN
+ TgLTTkJ0MlHzU9Qrf6mnuWJ6nn1RUVQsTFkwd6E2bMH2.5_2rqTbqzSuGVhHQXeEvJCDEUQWUGd9
+ fH_LsQqMpSrgIuQgxU5DqoHZh8Q5_wM2CTv3esotBYn5Rgz7Hd.G2NRHSA0YeoQ9PV6zu9yLDjaw
+ 1E4My78IHFj4gKUBgrirhz6kSydaWfsgyRJxroKHF48Ab0Hz.TfjPX30IHdeZ7bSjjAIKJIDhcQB
+ XinUQObpW4ocCuFyIiDnrLUS7Rl1rCoOP8PzVwkjvXnQBTRLxnuyY0a9r0LAAonxRizvAguAImaL
+ .4PwttmUM0dkGhId_Syf9H5DY_osdC6C.pmEuLYWZ71XO6PSF2s0KTm6lHfGbyl5vFP0AxZC4lu5
+ tGTTS9c58dn7MnJbBNyvDBcNsV57yi.mr2_5ryYh.otJ3Tlv7Ca1aNdIcEpZHgW01mbiCBvXulUC
+ wUMPP2qJn5.flJWFz3nuu1ebdKgA6zrilMunyPc6bXo.ENmT_SIe4IVGeT_EP7NYRWIaO8y0N82O
+ 7o6Yxny3ezEF3gefj48Z_Wm6dsr1o7Hw6eTSdg5ag19PESXGIo6YAqWxr3NPsBum0HoOU3YR7VyD
+ pJuu2XlKRafULrSOlKNp7VL28h69CTDi8ACp_mbf_8m7veIFSdg0nHWefuqC0kt_QyT760Km4JnM
+ .GbRaZVmw1DRkNh1AlwVi2RVmLpx75lP3hsND6E_UCoDxEV.CP_5sUOjVbc3oKd.uVQJq6TkkM6t
+ 8Oy8B9ctfTh1I7UHX4SNs9Iec1sWqdcNHE4U5OvwvmHVNddUiZgph1obM1ykwKRKjAyV1go9kSXD
+ d5LAIPl6SQij2BHWHS.MRgJe92TA3x5G4VlSjqEwsNrJp51Ri
+X-Sonic-MF: <venkat.yadlapati@yahoo.com>
+X-Sonic-ID: 3bb82e72-e795-4ecd-b31e-ab47782c8089
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic308.consmr.mail.sg3.yahoo.com with HTTP; Sun, 22 Nov 2026 19:29:08 +0000
+Received: by hermes--production-sg3-5ff9d6888d-8v9g8 (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID 0054f2a6f4ae764e46fce762305b29ff;
+          Sun, 22 Nov 2026 19:29:06 +0000 (UTC)
+From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+To: dmitry.baryshkov@oss.qualcomm.com
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Jonathan Marek <jonathan@marek.ca>,
+	Val Packett <val@packett.cool>,
+	Bjorn Andersson <andersson@kernel.org>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Luca Weiss <luca.weiss@fairphone.com>
+Subject: Re: [PATCH] drm/msm/dsi/phy: power up the digital top before starting the 7nm PLL
+Date: Mon, 23 Nov 2026 00:58:58 +0530
+Message-ID: <20261122192858.3550896-1-venkat.yadlapati@yahoo.com>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
+References: <20260924-dsi-7nm-pll-digtop-v1-1-c2b24c8e218d@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,71 +105,39 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261123-vantage-battmgr-v2-2-03a419078d0a@yahoo.com>
-References: <20261123-vantage-battmgr-v2-0-03a419078d0a@yahoo.com>
-In-Reply-To: <20261123-vantage-battmgr-v2-0-03a419078d0a@yahoo.com>
-To: Sebastian Reichel <sre@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Joonhoe Kim <26rote@gmail.com>, 
- phone-devel@vger.kernel.org, Venkat Yadlapati <venkat.yadlapati@yahoo.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795375214; l=1411;
- i=venkat.yadlapati@yahoo.com; s=20261023; h=from:subject:message-id;
- bh=D6CkSLFvs+RdQcscVKpLSyfkBgPa5oeQD51e9q+TG1A=;
- b=HyjNF2dtjBqfc9Ee4iDAPpNooLR6+P9ZUCD6obL1CYuN8Y6xPxkZwKW6MrNvVfT+8Rghzj7Ha
- Vm51iVQ488OCJ5g8bYuDAqpDq5E5+Wpn2sjhfiW3HVOcsXS1wn40Hmw
-X-Developer-Key: i=venkat.yadlapati@yahoo.com; a=ed25519;
- pk=e8KStCtEMvUP1Se/riB/KVnDAQFEVR2Dw2PcuA8/eME=
-X-Endpoint-Received: by B4 Relay for venkat.yadlapati@yahoo.com/20261023
- with auth_id=1303
-X-Original-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
-Reply-To: venkat.yadlapati@yahoo.com
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+On Thu, Sep 24, 2026 at 03:51:03AM +0300, Dmitry Baryshkov wrote:
+> dsi_pll_7nm_vco_prepare() de-asserts PLL_SHUTDOWNB and starts the PLL,
+> but leaves the PHY digital top powered down; only dsi_7nm_phy_enable()
+> sets DIGTOP_PWRDN_B.  The PLL cannot lock in that state.
 
-The input current limit of the USB power supply is meant for the current
-a USB host grants, e.g. after enumeration. Like the downstream driver,
-only apply it to SDP, CDP and USB PD ports, so that a dedicated charger
-is never throttled to what a USB controller reports.
+The same lock failure shows up on Molokai (SM8845, derived from
+Kaanapali) in the Motorola Signature, whose panel is on DSI1, but there
+it is reached through a different path than of_clk_set_defaults():
+msm_mdss resets MDSS at probe, which leaves the DSI1 PHY powered down,
+while the dispcc byte1/pclk1 source muxes (not reset) still select the
+DSI1 PLL. They are orphans until the PHY registers its clocks;
+clk_core_reparent_orphans() then reparents them, and since the
+Kaanapali dispcc driver, which Molokai uses, marks them
+CLK_OPS_PARENT_ENABLE, __clk_set_parent_before() prepares and enables
+the unpowered PLL:
 
-Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
----
- drivers/power/supply/qcom_battmgr.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+  DSI PLL(1) lock failed, status=0x00000000
+  PLL(1) lock failed
+  dsi1_phy_pll_out_dsiclk already disabled
+  WARNING: drivers/clk/clk.c:1259 at clk_core_disable+0xb8/0x220
+  dsi1_phy_pll_out_dsiclk already unprepared
+  WARNING: drivers/clk/clk.c:1119 at clk_core_unprepare+0xe4/0x254
+   ...
+   dsi_phy_driver_probe+0x334/0x364
 
-diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
-index fde9704d0acd..db117cb64a17 100644
---- a/drivers/power/supply/qcom_battmgr.c
-+++ b/drivers/power/supply/qcom_battmgr.c
-@@ -1152,6 +1152,24 @@ static int qcom_battmgr_usb_set_icl(struct qcom_battmgr *battmgr, u32 icl)
- {
- 	int ret;
- 
-+	ret = qcom_battmgr_usb_sm8350_update(battmgr, POWER_SUPPLY_PROP_USB_TYPE);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The limit is meant for the current a USB host grants, e.g. after
-+	 * enumeration, like the downstream driver don't let it throttle
-+	 * dedicated chargers.
-+	 */
-+	switch (battmgr->usb.usb_type) {
-+	case POWER_SUPPLY_USB_TYPE_SDP:
-+	case POWER_SUPPLY_USB_TYPE_CDP:
-+	case POWER_SUPPLY_USB_TYPE_PD:
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
- 	mutex_lock(&battmgr->lock);
- 	ret = qcom_battmgr_request_property(battmgr, BATTMGR_USB_PROPERTY_SET,
- 					    USB_INPUT_CURR_LIMIT, icl);
+On next-20261113 without clk_ignore_unused that is 12 lock failures and
+12 WARNs per boot. With this patch applied there are none, on three
+boots. The panel (DSC command mode) comes up as before, and the
+brightness, a blank/unblank cycle and Phosh all keep working.
 
--- 
-2.56.1
+Tested-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com> # Motorola Signature (Molokai, SM8845)
 
-
+I have no HDMI output to check the SM8350 HDK regression you mentioned.
