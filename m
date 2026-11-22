@@ -1,105 +1,36 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795368956;
-	b=G5NaNvIyG4ytEbvTFAgdTxpIc2wmKnOXTM+MsfdcV8OHGaZNHwf4BrTjH1ni6Ldlv2Fq
-	 KIvzp7+3D5fWkeOunLXLkPDlZ3y2BvtRFe4s+BLZPQgVQ718KMLJE0Tjjrm6J8GnfYwrc
-	 7utJJQ1dQewaxPyV/Y8ZUZQi2Fd7Z6pZewsGa6spa5A1euu/9oJYUh28mmcMB47N2U3PA
-	 2NdNEBI24/PsZER+gOz+x8hSPYE2aVbz7JJR0c+m4QrHW35ZNPO88B/7zR5RxcxGOFvm/
-	 GAGyEth6j3rYyf74py4+5cxx5vmtwQbes1ofCZry7dswXjUJqHi14+GJk8Nf1DlZb2Q==
+	t=1795369589;
+	b=mTHOBWTAtqgAsgt8+kWpf6kSjznq60NH+TDYRK/9qpr2XeqbZWfqV97IAlZx1977jl6m
+	 8tQewTw5bFvNleMcJ3jvKHmQnam/WofHB+v8QO7OKpUzFMdzyd0Sq54tt5OO98fg9BWpg
+	 PzOuzxgCRfwG+os7cFshaMRMqTyXd205PmsvgZ1RpGWXe3vEAfOs7eTzUmp+ewBjH+Thr
+	 JQXqSdDo50cBKr0VIVlmFno9+ahtcfcztYW8uEJsePHk/BdHpIIUCxH2cvw0ZO98A+TeT
+	 6zoDq9LDfd/tfjki6w1T3EbyRW5mKdwUnZKPXKsTgbbK5bO1iGsB5LNTR0L9DvNk2yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795368956;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=t+GouGnPJfECXmIJYX78k/uwgPhvZezU2VNMojKprrM=;
-	b=2ulDSqyZVekGXWT7VYWLenFa5yZpfPUGqTzgyUswHSbq31Q88SW1KO3sZx4grYqDshjQ
-	 8+zd+t7GvxhkQcInqEy1Dr501v7vL8pGMT2f31eEhd4/7BT+RbZ+Qq30AFJE6jiAa4yX0
-	 0TnT0aMx0Z5VBl3S6Ee46b7NFycL+WvDmN+b+7r2zQZpf76/u8iZKamyqT7RyabNJ+wBt
-	 guALmnQw4SjimMTQ4vXECo8OdTj6OAI4EvTfp9zmSvIBIQjJd8zZRDHHTQVau/S4FJw7h
-	 cS0xbcm6GjVnf1MTLP6g+JLj8EK6jSXpHSx2Ch64rvB8dO9sXKvcsBBZNQ7bzhjLUEw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795369589;
+	h=Received:From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=y3ycCPGGbIo/EnpPrpSFCKuZkVql5TAl1Yl4QBkTIU4=;
+	b=wTazR3ruFdsbfjXYHlzH/iObu5c6sF1YqgVMch4ViPrQLI3Js9iXay+7n6VNuDj4Eta0
+	 VaFfUUA8vf79i7zXblUB1Uk6FCNR6o9kHB5odPhKWLScyJWv2nqkoSK0R0w3o0G3zYelO
+	 RtKLSiREO4L24rq7NORF7svOkO9Pu//uc/Qn8iFdA01v1D8B5lJNLLngxNjCXLfgOTrSR
+	 6LZv43D58PXcHkaAzbJTYGaZ3dX6jxqtbfW9wb4ImG/khrXe2QXhCCSOz7Lo6SRlxoaFt
+	 54rDk3TemO9u4a10MpHvfiZtGs502nC0oqFhQUvmjdgWmFNTCoF1I8Xv8w0OrhVhDCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=CCy30Koj;
-	arc=none smtp.remote-ip=74.125.82.46
-Received: from mail-dl1-f46.google.com (mail-dl1-f46.google.com [74.125.82.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B951B606A330
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 17:35:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B951B606A330
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=CCy30Koj
-Received: by mail-dl1-f46.google.com with SMTP id a92af1059eb24-1a2af4c8d00so4562894c88.0
-        for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 09:35:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795368955; x=1795973755; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=t+GouGnPJfECXmIJYX78k/uwgPhvZezU2VNMojKprrM=;
-        b=CCy30Koj3yGMktI7EOf5/TKNz7iYG67TRpkRh4+WyGd767qqOqi2odsV0Kj9RgzdpR
-         0MSArWOqWa+qgM+DG05fmhi9iCLdhsBgQjyWvfKvR6CvHw0Kw1swCXgJC/I/7YZCBFAx
-         RZsTHUXrF++DcIHmfu48ehUSD7lTQd/teBhoG7/svuDH6wVGUUZoRzezr2+ICHNgB+xA
-         7B5kvhbXX+rswGCJVvdZwKkoJksBx01YiTcQfMMqQbNarj8hGRVzKxYKOSZ4BfgjxYel
-         89B5N+j/zhAHZO5DrKcXigl4LPA6/fMZ8gt8HzA39nE2qNvNiOa8oD5wwUHgzPz4oTWv
-         z3xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795368955; x=1795973755;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t+GouGnPJfECXmIJYX78k/uwgPhvZezU2VNMojKprrM=;
-        b=naTSO5QQBWbMGbmPwxSvf4Rs9xcJPwnXFJhEcd7iiONHNWefGvY/CzGoHEIUtAZkcO
-         pYcr2hDCw//ZupYGly52FySINGjOBByWC9iAh6AxWczln9UcqgOQ6M72jExayFhTh063
-         ZUoZ768GLLFMPKWCpwo6SI4cU1kFkLW0jhvzD60CQCG0SrYOIDeZnd3TrzbB9A7EjZVi
-         z6ldFN8u8aEz5HbDNsUvWiJQCbAqLYTo4mtM8MRUulBOSOOgvIvT2jUq1W1q2xmxO5oc
-         jaHN7/mCQKlLWOPmtsg3QLx0mtMfNbvIjlf0J33aET30+nkSyOkpazTox/6tBmYVuwU/
-         QZ9Q==
-X-Forwarded-Encrypted: i=1; AL+hErFdoQlrGq6RQFdW3mCRgDJOF+0duWks8Mm3ZDJ/JA7u4sTxBEWINhUozgWjCyJuZaU8AkTyQAL4N1hZjz2H@vger.kernel.org
-X-Gm-Message-State: APuU4Z8A5+xBuZhFgt4+X5CfOEIVLyG/YaOU5/LQ5SFiEGMVePpJZMrn
-	a16wtJJVJ7IYJ9oYlUlv26bYkfQeYzNkxiP1QCxHHnpKtkUwQ7VbLERW
-X-Gm-Gg: AZFdTZe0zayaJF9dG9bX66ZEPSdM3Yd2tYRyF02mTVT8923UKHgF5U/kYhfGfGq5A6P
-	/OWaPyRwj3NgkuyEwZfNQ94dtM1hmTltpyWovel558/myWbQ7hrw/Ny7HbEOE06aqjsQ1qrtE3+
-	tQQyrJg2mukxL3e5GRfEpZtzlcpfNKbWCZoU7P3ZSiYdsVQTTyI49BCSzofWJ39NsyKoKu17Ysr
-	ztpEfXK+OP3qeW0cGN7dor6mVw5nn5ZJdkkhN49Wf26A5zhSVYRJxAsqtEOMyvt6KSvH1nZfrzj
-	+RThrTl0HukCwoHCfHatG83UREidVocXtcYWWwQGs7Sg+Da/ltne/++/mSRascJnaetV8TIPn6Q
-	flaAD15x5xf4ho+w8kNS0pNiy6ZXCMElTcU7bFTdA6/fHhZ28HYZ8YaElx7xqxxmz4f9IdOKK3D
-	y1TpFLlsLxw1HXIrBv0T17j6NO65uiYeaVJtTYnmdTsxDLqhDINTp/cV802dCFJta4GZHhnGGh3
-	e4CIHvTeHrT4lQOvVxT+Pe6p7RG75fV4n7E5tulC2lLVQW0YG6mv+obXPgGmaIU3gJ4TLjZ5XS4
-	BO0vDxa0yRBZPGDuWlHXJkhscJJCfO9n+JPWz+v8+4BdNDRDcJymg4KOoL6Qr5tUvjigIT26G1n
-	oynjddwKv57m/qsEUg7rI+yg34oaEmtfozVK/eH+01pNOde5X3jLt1qeY+QrjbFr/6w6d6onBQS
-	/RdcjG8lzpdQM/nlhMiGUVM8VkhA==
-X-Received: by 2002:a05:701b:260e:b0:1a9:c52f:655c with SMTP id a92af1059eb24-1b556900476mr10503800c88.36.1795368954863;
-        Sun, 22 Nov 2026 09:35:54 -0800 (PST)
-Received: from suraj-HP-Laptop-15s-fq2xxx.tailee6f87.ts.net ([2402:a00:163:3509:b842:8324:ef7c:136d])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b56ef9fd16sm6419485c88.4.2026.11.22.09.35.50
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 09:35:54 -0800 (PST)
-From: Suraj Sonawane <surajsonawane0215@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-	Linus Walleij <linusw@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org,
-	linux-gpio@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Suraj Sonawane <surajsonawane0215@gmail.com>
-Subject: [PATCH v3 2/2] pinctrl: qcom: sc7280-lpass-lpi: add ext_mclk1_c function
-Date: Sun, 22 Nov 2026 23:04:50 +0530
-Message-Id: <20261122173449.21009-3-surajsonawane0215@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261122173449.21009-1-surajsonawane0215@gmail.com>
-References: <20261122173449.21009-1-surajsonawane0215@gmail.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 540A3606A320;
+	Sun, 22 Nov 2026 17:46:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 44D221F000C4;
+	Sun, 22 Nov 2026 17:46:28 +0000 (UTC)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH 0/2] soc: qcom: socinfo: Drop DT bindings with IDs
+Date: Sun, 22 Nov 2026 18:46:19 +0100
+Message-Id: <20261122-qcom-socinfo-id-dt-bindings-v1-0-eeee0ffa25da@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -109,61 +40,68 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqDMBBA0avIrB0wwYp4ldKFSSZ2Ck7ajC2Ce
+ HdTXT4+/A2UMpPCUG2Q6cfKSQpMXYF/jjIRcigG29jOGGvx49OMmjxLTKVhWNCxBJZJkbpIvbm
+ 5tu0bKId3psjreb8/LuvXvcgv/yXs+wG2wE6JfwAAAA==
+X-Change-ID: 20261122-qcom-socinfo-id-dt-bindings-e6fe815b4480
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
+ Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Ilia Lin <ilia.lin@kernel.org>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Viresh Kumar <viresh.kumar@linaro.org>
+Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-clk@vger.kernel.org, 
+ linux-pm@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1053;
+ i=krzysztof.kozlowski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=WxhspYoNAR70bc12bimxTQE3QbsRIZkWd7XFqAcidbU=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBrAypugRRfyp240hp/kgiOqb8atSODnPIKYPmAo
+ UF1DgCegAWJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCawMqbgAKCRDBN2bmhouD
+ 1483D/9NFT8AtZlMxrWFvkG1ZcbantBMgjT27rPFR1dzhxniSSqx7WX66P7Oia2RzeLUqKCza+C
+ rYmiibo/pVhc+B8oKUwpb3I8bVuDmqkqxYZsyeyp/FJb1P0vQH0hFUhpDaiZNq88iTXXnikcOMS
+ TsxTbkg9FmbLxrTPJCUFw55HReYwAUmNNq05WiehpukzN8BGSeO5CJPBfJ8hHNLj6ZV8l0R6z9b
+ eRIwb6SKDUfdhKYoLHBWhYEeDhBCae1YoK9C0otLnQdGNAOO4cBuM+jWJrfLUgbYdlTH/q2Y+0h
+ qQV0aRMdqRv5Ph2PhtP6KkAMjPkTtMkzUNv/wieZjimXQZtZh+GZ/ojq9H7/P96BTBRNBqwZchx
+ 3L1F30n2PglOftE6Xw8IoXH9449nWssjqjxwczPT/wuzoMqq7OX1XulhSjiHguKSgdQeKZL5mwr
+ HwNscOei87BJQYnZjpVw4Jy2Dq+/KN2YC2Lbpk9Cx7ra1ngfYgJXojBhaW77RXrMtga7it77fA5
+ wpib+iO5LprKnUPMacU6Uo8e0OebjQa7vTDq7GegAJnck1N+dXrtf/vsZuwDrnFq2Yd3rA4MxxH
+ u1sXgb5R0+FLruMpyuvehsjuo1bFuNJOC1moWreD5otfqUow9vTl8ZdBbW7nlobejvLhDJS61cX
+ wL13iNQZsW6uXww==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp;
+ fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 
-LPASS LPI gpio5 can mux EXT_MCLK1_C, but that function slot is left
-unnamed, so a device tree cannot select it. SC8280XP already names the
-same slot ext_mclk1_c.
+It turns out that people add SoC IDs as Devicetree bindings, thus ABI,
+and then want to change them, for example because whatever
+renaming/marketing happened.  Well, that makes little sense - either
+this is ABI and cannot be changed, or is not an ABI and can be changed.
 
-Name the slot on SC7280 and assign it to gpio5. The third slot stays
-empty; on SC8280XP it is qua_mi2s_data.
+https://lore.kernel.org/all/9eda2209-d64a-4a1c-915d-4415ac47df45@kernel.org/
 
-This file also provides the SM8350 LPASS LPI driver, which uses the
-same pin table, so the function becomes available on SM8350 as well.
+Best regards,
+Krzysztof
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: Suraj Sonawane <surajsonawane0215@gmail.com>
 ---
- drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Krzysztof Kozlowski (2):
+      soc: qcom: socinfo: Copy new SoC IDs from bindings
+      dt-bindings: qcom: qcom,ids: Remove unneeded ID constants
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-index a61df10d4..278d5fac8 100644
---- a/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sc7280-lpass-lpi.c
-@@ -34,6 +34,7 @@ enum lpass_lpi_functions {
- 	LPI_MUX_swr_tx_data,
- 	LPI_MUX_wsa_swr_clk,
- 	LPI_MUX_wsa_swr_data,
-+	LPI_MUX_ext_mclk1_c,
- 	LPI_MUX_gpio,
- 	LPI_MUX__,
- };
-@@ -77,6 +78,7 @@ static const char * const i2s1_data_groups[] = { "gpio8", "gpio9" };
- static const char * const wsa_swr_clk_groups[] = { "gpio10" };
- static const char * const wsa_swr_data_groups[] = { "gpio11" };
- static const char * const i2s2_data_groups[] = { "gpio12", "gpio13" };
-+static const char * const ext_mclk1_c_groups[] = { "gpio5" };
- 
- static const struct lpi_pingroup sc7280_groups[] = {
- 	LPI_PINGROUP(0, 0, swr_tx_clk, qua_mi2s_sclk, _, _),
-@@ -84,7 +86,7 @@ static const struct lpi_pingroup sc7280_groups[] = {
- 	LPI_PINGROUP(2, 4, swr_tx_data, qua_mi2s_data, _, _),
- 	LPI_PINGROUP(3, 8, swr_rx_clk, qua_mi2s_data, _, _),
- 	LPI_PINGROUP(4, 10, swr_rx_data, qua_mi2s_data, _, _),
--	LPI_PINGROUP(5, 12, swr_rx_data, _, _, _),
-+	LPI_PINGROUP(5, 12, swr_rx_data, ext_mclk1_c, _, _),
- 	LPI_PINGROUP(6, LPI_NO_SLEW, dmic1_clk, i2s1_clk, _,  _),
- 	LPI_PINGROUP(7, LPI_NO_SLEW, dmic1_data, i2s1_ws, _, _),
- 	LPI_PINGROUP(8, LPI_NO_SLEW, dmic2_clk, i2s1_data, _, _),
-@@ -118,6 +120,7 @@ static const struct lpi_function sc7280_functions[] = {
- 	LPI_FUNCTION(swr_tx_data),
- 	LPI_FUNCTION(wsa_swr_clk),
- 	LPI_FUNCTION(wsa_swr_data),
-+	LPI_FUNCTION(ext_mclk1_c),
- };
- 
- static const struct lpi_pinctrl_variant_data sc7280_lpi_data = {
--- 
-2.34.1
+ drivers/clk/qcom/apss-ipq6018.c      |  2 +-
+ drivers/cpufreq/qcom-cpufreq-nvmem.c |  1 +
+ include/dt-bindings/arm/qcom,ids.h   | 93 +----------------------------------
+ include/linux/soc/qcom/socinfo.h     | 94 ++++++++++++++++++++++++++++++++++++
+ 4 files changed, 97 insertions(+), 93 deletions(-)
+---
+base-commit: 74ceacafec02465d922ad68dce9498c8f50e5f5d
+change-id: 20261122-qcom-socinfo-id-dt-bindings-e6fe815b4480
+
+Best regards,
+--  
+Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
