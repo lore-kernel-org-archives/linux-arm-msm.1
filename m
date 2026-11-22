@@ -1,78 +1,37 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795354597;
-	b=HLv3uFHef5cKG+KfMCu9qwzcCyMeRi1KFSWD8T5S85MdS8DpgxGVN7Ioc/HJ/DU0hIHa
-	 1d5s2Zs8OySqBxtnTrcAIVAh1TcqgqRgwO7iiC4Cs8B0g2QC8NiMm4Af+qJsam7huDlfP
-	 yht6jNvzGzSWuzL882iz4XEzuhpK8/RAJYvOowFlFYua2dr2omy8bq2/sP53kYpJfxsEm
-	 jSGDZgse3l4xs6X3Zbb0h0RG1LGEf2E8suvGvIxImI3RfkwHrOQDG+OllUdGSLg6/9WEN
-	 ssuB4vUuF6rSniyB9eH3ojQ0zKQQaMm1pw7PPgQONtkiYrv8KSd7vVDzD+YK7uuBGVQ==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795354597;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gSrY2znnUbX/BQQhtLE0UHmVPEjfpEtvIoqty3TSWXU=;
-	b=gfsu42uVm3ZhcL2HwtEZZRvmLrUDP/vHQkvELJ4l3dB0gcnNv7M+BBvsOJBfVk9ssrQM
-	 zD/pptHvHQ18oWWaTNLS45iHJyKnm0O/Pv0nic5aObBM/8RA4FvNWX/YTlovVHlho7qam
-	 Y5nqNHhb5FdKwvcgkaEHWDj66VWXjbyN+2VAUEPQAIQKV7FqhSQDKDPo0JIIkMdm/sNQb
-	 5vqaj5164Bmq/Hi8dwFQExv3sYL50sWlAmYLTJZQ4TEyCYcn9Wpwb432VhSEtz7j2gzA1
-	 YXysFruJMSBejqKj869kWYbhKFI/JivdSQXNW86PZrQfJAwW3fQLiRXItXA6ib0Q4QA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="IB7v/xZp";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795355965;
+	b=25dL8L+MeZC8//n6L04ALiN2HflHa2rPbm4mF16JKMVgdS9c1+fso80mu9+qjgQJnIir
+	 7Krtr0CDD7TxXGUrXg+yTXMllKu85H/Oj4Iu+qBOKVMdmh7hfBCeCXgfv4+/Kalnq17iz
+	 UNrx5MH5YzUtJiAnu16Q30Gkx8X4J0OMpJkFzyCa6AlSyF2/dQKMLoa3LRf7UvEWgLaj6
+	 R+AVIwnBX1/wwqhel7MGmj6aA+tEoCErUUHJLkkSiYkjf5f791XCs51WbZijQqhbdyByy
+	 dBPnbpshgUlv7Mblbt4u53E3geZP8DEA0kXTHMFy/KvhulAm9Sva4qoB8etwT3sDnBQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795355965;
+	h=Received:From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=ocvJzz3I0luFfFEJs19uhfhuoj7ggU6qagubIOGU41E=;
+	b=I0R0Cc/N1sa54A4aILcWx/GoTwIVzI9pogEPTYqdFGoev7vSX6KVtECqDRlcf+pLVmBO
+	 ZgqmzeopXC+NQNcR9NyQkYkWPqGQk5KN8zZfITmTdGVUxASvGMYyXET/b7wXerTv0lsm5
+	 Fp5yCHcToPjj1+EEzmzMupVT/TqOfCgmAAOtA7QHC1wBGC41KjvDKekHMZd8idSbJ4IHt
+	 HcRQsDJ1RKfbeqU98AxwYb8BPbnV6nuyhJPBRAGdv3FUnOgJBJd8u4+M40mjbCKFNVez5
+	 SmX4u14gR5bT8pZMhI6cuRtuDCDfgZeQ66zh2JsyGEVZc++xmvCh1rcqBZRFU7ITnAA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE9F4606A32C;
-	Sun, 22 Nov 2026 13:36:37 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IB7v/xZp
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795354597;
-	b=b4EqdxSBDrJxw9dRhn88BAX7vm2hAk5NTbslb5umQ/MFsC/KJf7O63h/c6BWLSrPVhLG
-	 UHZtJzY5I3e5xjkhtmHcB8xvrXCyP+HswfuV5MetR6KfTHBqXNSruOy+1uMoFUvq2oCe7
-	 rc2mgMBbhzvzIFB8Ck+crndobRxIxGJkbfoJ4vYv8OL7c3+IlsiVvkpIBpm2yclVu7xic
-	 6pZ9BMn5dwUrofVS+CyYlgD0nzUjvuEumQjA0wkR4vhPSJOm5IaXvqvfxX6/YnDUVr9UH
-	 5z+asLexrOZ9QIsY5djVaAguAlZ9bvy2F/zcnNBpiDfyY9PKKJYZXLMZwx+AR/QQRXQ==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795354597;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gSrY2znnUbX/BQQhtLE0UHmVPEjfpEtvIoqty3TSWXU=;
-	b=XEIjwRRJ8OgEPOfBDx/iiwNlII74H/EYOdpkr3ZSi+ySKB5CDv4EwZxC8p3GKYOl8YRz
-	 UDfaJ3W8FC5mvBrHKGMakOsN7D21OwpGd5o3yVBcnWh68ot74+fdXKwfKscUZFo/atDH/
-	 rgDXCehRb3U5ddn3QISi80r2vI8Uon844ELwdrRCUBAzXBNMFt0Zrr5T/+/77yxZqeL8L
-	 UdJHgNZNNtq3rDm4GSs9oqmgtpYTcfGo74t0X53sF+O83GKzI5xkzi4+4DmLEES9+0a4F
-	 B0r7//KwC6F0ly7ovbm0GSGNtGbbBwaogeBHneZhb9X5k7or+Xy4kxh6zEI6E9iJT6A==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 842F61F000CA;
-	Sun, 22 Nov 2026 13:36:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795354597;
-	bh=gSrY2znnUbX/BQQhtLE0UHmVPEjfpEtvIoqty3TSWXU=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=IB7v/xZpANWSabAKf83Gbr8VI+wQN6CWYclBpYxIm26WEQhk/h5K0HD//1/qRIQ4b
-	 F1DwhguvpQkpi9zC+7ybtxfs6wjiuiZq3LlVK4kRe5lKqVeprMcyablGbv+1gVEZS0
-	 pqaA1Dh4BHLvLXPLw60j8HELxrHf1RmAX7Cc7//3kTAUCCHO8Pom+iFlynGo0eq3Lj
-	 /l0kxBoUW6Xgj3ZTt0RlPQ840MccQdgYS6VPDUF8XluxMj2gSR/a4FY4Ejd/Qg1ChQ
-	 Eq15FvPnQsTSsdQu6RWvKTwGFtyAA6/aEyfZQedqAn2kQU+XVJt3/fAB/BEslDMAvg
-	 zuMQDCEnoZmsA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 1595F4C0B1;
-	Sun, 22 Nov 2026 13:36:23 +0000 (UTC)
-From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
-Date: Sun, 22 Nov 2026 14:36:21 +0100
-Subject: [PATCH 1/2] remoteproc: qcom: pas: add SC8180X SLPI compatible
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1567B606A320;
+	Sun, 22 Nov 2026 13:59:24 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 66BFD1F000CF;
+	Sun, 22 Nov 2026 13:59:23 +0000 (UTC)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Subject: [PATCH 0/2] interconnect: qcom: Unify KConfig choices between clk,
+ pinctrl and interconnect
+Date: Sun, 22 Nov 2026 14:59:11 +0100
+Message-Id: <20261122-b4-qcom-kconfig-unify-interconnect-v1-0-d5e65c1fbd7d@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,59 +42,56 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261122-sc8180x-slpi-v1-1-345903fafc96@gmail.com>
-References: <20261122-sc8180x-slpi-v1-0-345903fafc96@gmail.com>
-In-Reply-To: <20261122-sc8180x-slpi-v1-0-345903fafc96@gmail.com>
-To: Bjorn Andersson <andersson@kernel.org>, 
- Mathieu Poirier <mathieu.poirier@linaro.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org, 
- devicetree@vger.kernel.org, Robert Ijtsma <robertijtsma@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795354582; l=1360;
- i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
- bh=SeluMMGriinjyNsgC4NIGONS30tI/MuFdGdGq+5z5kM=;
- b=5gk+Vr/ojxgoPSgYD9SuROAunRDBbgWCQ3kVW9T5WEBUMuyAcnoyPS+FnEdqXYpnI+FwVJuLm
- O4/KAD779iPChYwlU5TtOrf1Wj2ZI6oHe+ZaO2FQBdC789zXmjH0RZ2
-X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
- pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
-X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
- auth_id=1604
-X-Original-From: Robert Ijtsma <robertijtsma@gmail.com>
-Reply-To: robertijtsma@gmail.com
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/y2NSw7CMAwFr1J5jSUShYK4CmJBglMMwqH5IFDVu
+ 2Ogy3kazZugUGYqsO8myPTkwkkUzKqDcDnJQMhnZbBr2xtjDXqHY0h3vIUkkQdswvGNLJWyLkK
+ hogveR7Oh3bZ3oKFHpsiv38nh+OfS/FXVb3kxMo1N3+uizfMH1N+26psAAAA=
+X-Change-ID: 20261121-b4-qcom-kconfig-unify-interconnect-4cbbf15e8764
+To: Georgi Djakov <djakov@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=878;
+ i=krzysztof.kozlowski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=TSE6dM6skdSXdNl/trxqn/8RYuODQF72C8KE9D+pHvQ=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBrAvU1QhWY7ZplGcez3UDQAgsEzZGqqoRPGdkVT
+ wwL3QyI/iOJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCawL1NQAKCRDBN2bmhouD
+ 1/VDD/4jlDqxg7/VArGFRZcuwH3qEzcsIHSROD/pAH1giYXnTtlcSdd56TvNv97La605V370oAe
+ WzYafPOSgYs5s8QftaVVHtQuX7cbaHvQzceBXcEgNKvD7vkceV3SLD3DvCMs7hF6PCTbyCYH1Yc
+ ohIvobcoNH0ge1AR/U32kZbknS/+8qRSnz8S26UCndYevx6O4ORmdHC9MLoAeQ81KVzB3uVELdG
+ 7Xlh5E+o0vzMvY5lLl0ltWNvBuMPrK9p+9Hofv8/59BiVWvTVOFEs4shE7nCuUQDNzl1yV0/QjO
+ 7yfbCwDpW2+pJ/pgAar19MWecfH65Pkq+ATpoH8/wqpm5p5fB1QtNRPgpl2aCs4Zk6hgYc77+0Q
+ zd9+Zx0lGdo9zl3QrM3g+hwFEk2P8pvMrEu96ieUPlGh8Mp6uY52c3jo3UlLP8yuX/QEWDVTFEI
+ YTSRV/z58yZKfxEYLcASs8W0+1dGaalpDP9CajwLil9wbsAq512EyRdV96E6phqD34ePD5IviOf
+ bSanrWOPVGp6NIbpSpOWYUKcBLl0B50KOb7tpk9Fx8h//4ITjhQeognMRGiwwjX+l8QN9k01eEP
+ LXtBNJ3Oi1XiNKHmFUllX21DG9ytFHKQAyiVY4TZxCuwBoIdgoQfoIw9cQEGG65FCtTUPRE1B1g
+ d8cLNQdVrS+SC6w==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp;
+ fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 
-From: Robert Ijtsma <robertijtsma@gmail.com>
+Recent commits adding defaults to clock, pinctrl and interconnect
+drivers left a options inconsistent between them, e.g. SDX65 clock
+driver not enabled by default but its pin controller enabled. This
+should be a consistent choice - we want by default all critical drivers
+enabled.
 
-The SC8180X SLPI (Sensors Low-Power Island) shares the same PAS ID (12),
-LCX/LMX power domains, and resource layout as SDM845 and SM8150, and
-the compatible string "qcom,sc8180x-slpi-pas" is already documented in
-Documentation/devicetree/bindings/remoteproc/qcom,sm8150-pas.yaml.
+There will be separate patches for clock and pinctrl.
 
-Add the OF match entry for qcom,sc8180x-slpi-pas reusing
-sdm845_slpi_resource_init.
+Best regards,
+Krzysztof
 
-Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
 ---
- drivers/remoteproc/qcom_q6v5_pas.c | 1 +
- 1 file changed, 1 insertion(+)
+Krzysztof Kozlowski (2):
+      interconnect: qcom: Consistently enable MSM8916, MSM8939 and SDX65
+      interconnect: qcom: Consistently handle MSM8953, MSM8976 and others
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index e7dfad2..21587a9 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -2029,6 +2029,7 @@ static const struct of_device_id qcom_pas_of_match[] = {
- 	{ .compatible = "qcom,sc8180x-adsp-pas", .data = &sm8150_adsp_resource },
- 	{ .compatible = "qcom,sc8180x-cdsp-pas", .data = &sm8150_cdsp_resource },
- 	{ .compatible = "qcom,sc8180x-mpss-pas", .data = &sc8180x_mpss_resource },
-+	{ .compatible = "qcom,sc8180x-slpi-pas", .data = &sdm845_slpi_resource_init },
- 	{ .compatible = "qcom,sc8280xp-adsp-pas", .data = &sm8250_adsp_resource },
- 	{ .compatible = "qcom,sc8280xp-nsp0-pas", .data = &sc8280xp_nsp0_resource },
- 	{ .compatible = "qcom,sc8280xp-nsp1-pas", .data = &sc8280xp_nsp1_resource },
+ drivers/interconnect/qcom/Kconfig | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
+---
+base-commit: d603f3c81d3fa2ae034a858f126d9f35c10d3a97
+change-id: 20261121-b4-qcom-kconfig-unify-interconnect-4cbbf15e8764
 
--- 
-2.56.0
-
+Best regards,
+--  
+Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
