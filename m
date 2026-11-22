@@ -1,57 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=23.251.234.58
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795324601;
-	b=jmsjuggInVKqSy3Yb53fpkjoZxwyoO6/W9NAy8R37z1t/QVZ75+S5iL4/UMsTBpbJM8R
-	 QdhbjDrpN4mNUte5xUQLYaos6M+xQq9cY8ljekqX5DCOdc4RnATUonVDnG32wRlrjvzFL
-	 yv91TrT7gLb+TWn9ZUTzNDjOSYN/Y9Jn5X8LM0fqRQPpFCy3VKU3pBC9ENigbfi0crJVr
-	 xrrBHeqxONZHhIZSp5KnP6+3vwzAiiTow9Ui75e85iF16/GndN+6CuJq5Q6YwR5Ghs93J
-	 FVRgE5hO96Iu7uu1fWiBfp3hF9fEj05/Ktxeh2jtK2nDuJMSElSAldpOYNTuM2fE9eQ==
+	t=1795328707;
+	b=odpEgh/JdeiADn99pqJ8IsPiiHGbAzZy+i1jEUoSHnA7lMf32glYkXigGG0/cTlHjwQB
+	 A7MglcrPLK6JcsvgcBP1cPbPlFuUEzle4LIM9GlHjb2DQKA/kJsWCninzBNl2iNpTDHmt
+	 QSNeGmFQlz7d0ncEo8DPrCnahTFrtZolkMbIWEvgjsabgVmkCbeTk1Ah/xdvWKThrOebj
+	 9RmPEW8TcSTAYqPlR3P139l1xKP35bUsPMUwPeCjFGZyzzNZFXAPqZ96dxwMGpPgb2LQG
+	 1JljuFg2QBkMRxKmu1aMONgVXAplgpkT5chISrsIwPGulgQXwf0QifdLssXouAQDhcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795324601;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=wMqUtbghx+AfUwNzZIx35GF0oZl4GX6WxEfgfxHEO/A=;
-	b=PfQzbYkS6ph5+QEn8ImuV5cBwCDlmqIUVI+QxvqfugSbDIhSyMF2RraaYNJoa7YUx9lV
-	 ApKfQM1Y2rQtgvnwyp3oCpDbUh6qQ/rjDIWGI8/Q/Ekz7T4geUWbcSxTNOoo39PzfH4z5
-	 kKDFpqb7X09OEuXWCx8tO1jlcO5x6nCkFUgTfEnr0fWfrFyaYB9nXWPi1J7wzPmZBLEom
-	 wZVq3b9fXFs1DHd3jv0qTCX7DRRtLZ1sigoWCCU/3NImweQReLXj2MiHbvKt6b5oXuZRx
-	 pNsCdtqRbfLtGA4ktwN/xh+NCTFUQsniNEzKrqA4OExGo/bTFbO8htgGFA24ADiab6Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795328707;
+	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:X-Mailer:From:To:Cc:
+	 Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:
+	 Content-Type:Feedback-ID:X-SES-Outgoing;
+	bh=egq/YthXEw7uEdj++tS8ft/aOA52KcHZKMomtFFnycY=;
+	b=t9qyXxclD3J0Aa6jTaJY4CDiH9pqe8hU7HGfSetH9MCXgl26SGTKU6f9fFAnA8YyX5ym
+	 tFujugb9fQWS1g6LI/NDeKTO9rTFiXPE26iZsijVqGJOId2f/qduHacJss+K6O2Ikimdp
+	 pCDb+bOqxa+ZvqlAU7vYM6g3kR+hy6+AnQBEFXTDT1/XG7Gm5Jq0VsB1qAFISxY6CzTtv
+	 zq/5MvL7uGhTMcQPFwc1oUytejjniUDL/6xUHzqMtr+lHmpxjzjWErKbImzSj8aHEMYj1
+	 q6g1HnvcTiPZJXUG+TZp3NebIC3yz1OKmyHN2CQogMJQls5LA12ZSyOmA+c8GiYKv8A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=afCOKP6R;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=fqwqf.xyz;
+	spf=pass smtp.mailfrom=send.fqwqf.xyz;
+	dkim=pass header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=j6u1dtUl;
+	dkim=pass header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=BdNE+dOO;
+	arc=none smtp.remote-ip=23.251.234.58
+Received: from e234-58.smtp-out.ap-northeast-1.amazonses.com (e234-58.smtp-out.ap-northeast-1.amazonses.com [23.251.234.58])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FCD4606A32A;
-	Sun, 22 Nov 2026 05:16:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77C2A606A320;
+	Sun, 22 Nov 2026 06:25:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 77C2A606A320
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=fqwqf.xyz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=send.fqwqf.xyz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=afCOKP6R
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 38A171F000C0;
-	Sun, 22 Nov 2026 05:16:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795324601;
-	bh=wMqUtbghx+AfUwNzZIx35GF0oZl4GX6WxEfgfxHEO/A=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=afCOKP6R9quPVesuVvAvKr6Ti0miKQn6DY3/Qh1fzBnYgLdWQrUlG5I1J1rdie6I1
-	 moLEWWkUke5whAmi3M2lEk7JeBxgNBaaWgIHbFT+l0cYPc+oz0WRzLeAilmYLXTCee
-	 qtuOk6cstNrjpP1DOuECKEEEug/STTFqQYEaoHVCpiuK5HZXgZfTbkCLJ5qfEV3fNh
-	 bUTJSB7aR+Fy2YMDeie/yZCneE9Gk6J/hL5V+uFD1ZYo6tqAUeGWJ27s1GagrF5mos
-	 O3my0UFj1KIs6XMqtZuWn/7xJ62smBV+irS+k6vpIyvZnNRVwJoRktblyf2miHG8Wa
-	 mDJNitkNFQmLw==
-Date: Sat, 21 Nov 2026 22:16:36 -0700
-From: Nathan Chancellor <nathan@kernel.org>
-To: Sasha Levin <sashal@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: Sumit Garg <sumit.garg@oss.qualcomm.com>,
-	Geert Uytterhoeven <geert+renesas@glider.be>,
-	kernel test robot <lkp@intel.com>, Abel Vesa <abelvesa@kernel.org>,
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] firmware: qcom: scm: Hide QCOM_SCM instead of depending
- on ARCH_QCOM
-Message-ID: <20261122051636.GA2630332@ax162>
-References: <20260913173049.1168963-1-sashal@kernel.org>
+	dkim=pass (1024-bit key, unprotected) header.d=fqwqf.xyz header.i=@fqwqf.xyz header.a=rsa-sha256 header.s=resend header.b=j6u1dtUl;
+	dkim=pass (1024-bit key, unprotected) header.d=amazonses.com header.i=@amazonses.com header.a=rsa-sha256 header.s=zh4gjftm6etwoq6afzugpky45synznly header.b=BdNE+dOO
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple; s=resend;
+	d=fqwqf.xyz; t=1795328705;
+	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type;
+	bh=l0KYrP/RgtTi86VFjNDoRqnX8Rm+Q+YVM8M6VT6IgDQ=;
+	b=j6u1dtUl7dvMULXBBc51gB9uQLOzDPS9UjvjZPxZIWwiBJNB09YxzZbvkMtUvrVg
+	gj/mizKmWF9D7m54y+KD7ho44VOD9JA0CJjlAX2Wbnj34/4G9xlCWuViiV1uQ9moogm
+	h4oThvb0Oh9tll9OPxtaDLgQUqp1a+pEz1zrZK+g=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+	s=zh4gjftm6etwoq6afzugpky45synznly; d=amazonses.com; t=1795328705;
+	h=From:To:Cc:Subject:Message-ID:Content-Transfer-Encoding:Date:MIME-Version:Content-Type:Feedback-ID;
+	bh=l0KYrP/RgtTi86VFjNDoRqnX8Rm+Q+YVM8M6VT6IgDQ=;
+	b=BdNE+dOOStIIr557WomAQuWYopx9YNiklq/DKFXaH1w5ayFoCpv5Fw8NqO5tIZWr
+	sLaqZBVmDNjQQ9zLoN36vH61df+1DBv4XQVTPWnHsob+9kyoyMeOwryCiE98ZhiJX5x
+	k/Y8VjwRwKp8JrOPmtpgrfTuj/LUvlFe7UUxVALY=
+X-Mailer: git-send-email 2.53.0
+From: Jizhou Tong <fqwqf@fqwqf.xyz>
+To: Mark Brown <broonie@kernel.org>
+Cc: srini@kernel.org, lgirdwood@gmail.com, tiwai@suse.com, perex@perex.cz, 
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+	linux-kernel@vger.kernel.org
+Subject: [PATCH] ASoC: codecs: wcd-common: bound interrupt status retries
+Message-ID: <010601a201ee018c-30715d0f-712e-4181-9dea-d1b82b234831-000000@ap-northeast-1.amazonses.com>
+Content-Transfer-Encoding: quoted-printable
+Date: Sun, 22 Nov 2026 06:25:04 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,111 +68,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260913173049.1168963-1-sashal@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Feedback-ID: :1.ap-northeast-1.6BGMgStFQE7EJYq5syaCRzdneEHVt/+DAaGDrqUmDs9QLO4/SllUBZ3fHvnZ8rcAX/3IjUyTRgi5JFZsWrikFHwlPJqCkqEMlxDFM4JXh+ycxH/J5Tudg5bGdz6h4331g1L1EFsGR8kuYNfGLsrxz4Nym4YXoPcZxeVkrHry4Zx21n8vEVLEjc7s+OCM8PU9:1.ap-northeast-1.DTXDV/V9GPBWozcllKo8innbNB2qs2O/3F8XZSzd9ZM=:AmazonSES
+X-SES-Outgoing: 2026.11.22-23.251.234.58
 
-Hi Sasha and qcom folks,
+wcd_interrupt_callback() reads three status registers after dispatching
+the codec interrupt. It ignores read errors, so the loop condition can
+use an uninitialized value or a value from the previous pass. A status
+bit that stays set can also keep the callback looping while SoundWire
+holds sdw_dev_lock.
 
-On Sun, Sep 13, 2026 at 01:30:49PM -0400, Sasha Levin wrote:
-> imx_v6_v7_defconfig fails to link:
-> 
->   arm-linux-gnueabihf-ld: drivers/firmware/qcom/qcom_scm.o: in function
->   `qcom_scm_pas_init_image':
->   qcom_scm.c:(.text+0xecc): undefined reference to `qcom_tzmem_alloc'
->   qcom_scm.c:(.text+0x2b0): undefined reference to `qcom_tzmem_free'
->   qcom_scm.c:(.text+0x1514): undefined reference to `qcom_tzmem_to_phys'
-> 
-> QCOM_SCM gained a "depends on ARCH_QCOM || COMPILE_TEST", but it is
-> selected from 20 places in the tree and several of those are reachable
-> without ARCH_QCOM. DRM_MSM is one of them, via SOC_IMX5, which is how
-> imx_v6_v7_defconfig ends up here:
-> 
->   WARNING: unmet direct dependencies detected for QCOM_SCM
->     Depends on [n]: ARCH_QCOM [=n] || COMPILE_TEST [=n]
->     Selected by [y]:
->     - DRM_MSM [=y] && ... && (ARCH_QCOM [=n] || SOC_IMX5 [=y] ||
->       COMPILE_TEST [=n]) && ...
-> 
-> kconfig still honours the select and sets QCOM_SCM=y, but it does not
-> propagate the selects of a symbol whose own dependencies are unmet, so
-> QCOM_TZMEM is left unset, qcom_tzmem.c is not built, and the
-> unconditional qcom_tzmem_*() calls in qcom_scm.c and qcom_scm-smc.c
-> have nothing to bind to.
-> 
-> The point of the dependency was only to stop asking the user about
-> Qualcomm firmware interfaces when configuring a non-Qualcomm kernel.
-> Express that as a prompt condition, which is what the same commit
-> already did for QCOM_PAS: the symbol stays invisible, but it no longer
-> carries a dependency that silently drops its selects.
-> 
-> Found by KernelCI builds of the linus-next tree.
-> 
-> Fixes: 8fecd3194de3 ("firmware: QCOM interfaces should depend on ARCH_QCOM")
-> Reported-by: kernel test robot <lkp@intel.com>
-> Closes: https://lore.kernel.org/oe-kbuild-all/202609120634.g0HMAp3g-lkp@intel.com/
-> Assisted-by: LLM
-> Signed-off-by: Sasha Levin <sashal@kernel.org>
-> ---
->  drivers/firmware/qcom/Kconfig | 3 +--
->  1 file changed, 1 insertion(+), 2 deletions(-)
-> 
-> diff --git a/drivers/firmware/qcom/Kconfig b/drivers/firmware/qcom/Kconfig
-> index 691db0ded8e8c..b50e1309ced5f 100644
-> --- a/drivers/firmware/qcom/Kconfig
-> +++ b/drivers/firmware/qcom/Kconfig
-> @@ -26,8 +26,7 @@ config QCOM_PAS_TEE
->  	  by the firmware TEE implementation as the backend.
->  
->  config QCOM_SCM
-> -	tristate "Qualcomm PAS SCM interface driver"
-> -	depends on ARCH_QCOM || COMPILE_TEST
-> +	tristate "Qualcomm PAS SCM interface driver" if ARCH_QCOM || COMPILE_TEST
->  	select QCOM_PAS
->  	select QCOM_TZMEM
->  	default y if ARCH_QCOM
+Return on the first failed read. Allow up to ten =
+dispatches for status
+to clear, matching the SoundWire alert handler's =
+retry budget. If a bit
+remains set, log a rate-limited error and return =
+-ETIMEDOUT.
 
-This now allows
+Signed-off-by: Jizhou Tong <fqwqf@fqwqf.xyz>
+---
+Built wcd-common.o with ARCH=3Darm64 W=3D1 on the base below. A userspace
+test of the callback covered injected regmap read errors, status
+clearing on the final pass, and each register remaining pending.
 
-  # CONFIG_ARCH_QCOM is not set
-  CONFIG_QCOM_SCM=m
-  CONFIG_QCOM_TZMEM=m
-  # CONFIG_QCOM_TZMEM_MODE_GENERIC is not set
-  CONFIG_QCOM_TZMEM_MODE_SHMBRIDGE=y
+ sound/soc/codecs/wcd-common.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
-which breaks the build (or install if depmod is postponed until then)
-for me. I ran into this slimming down platform support from my aarch64
-Fedora kernel, as I don't have any Qualcomm platforms.
+diff --git =
+a/sound/soc/codecs/wcd-common.c b/sound/soc/codecs/wcd-common.c
+index 9016e97458..7c2d96ace0 100644
+--- a/sound/soc/codecs/wcd-common.c
++++ b/sound/soc/codecs/wcd-common.c
+@@ -15,6 +15,8 @@
+=20
+ #include "wcd-common.h"
+=20
++#define WCD_IRQ_MAX_RETRIES	10
++
+ #define WCD_MIN_MICBIAS_MV	1000
+ #define WCD_DEF_MICBIAS_MV	1800
+ #define WCD_MAX_MICBIAS_MV	2850
+@@ -127,16 +129,27 @@ int =
+wcd_interrupt_callback(struct sdw_slave *slave, struct irq_domain =
+*slave_irq
+ {
+ 	struct regmap *regmap =3D dev_get_regmap(&slave->dev, =
+NULL);
+ 	u32 sts1, sts2, sts3;
++	int ret, i;
+=20
+-	do {
++	/* A failed read or a stuck status must not hold sdw_dev_lock forever. */
++	for (i =3D 0; i < WCD_IRQ_MAX_RETRIES; i++) {
+ 		handle_nested_irq(irq_fi=
+nd_mapping(slave_irq, 0));
+-		regmap_read(regmap, wcd_intr_status0, &sts1);
+-		regmap_read(regmap, wcd_intr_status1, &sts2);
+-		regmap_read(regmap, =
+wcd_intr_status2, &sts3);
++		ret =3D regmap_read(regmap, wcd_intr_status0, =
+&sts1);
++		if (ret)
++			return ret;
++		ret =3D regmap_read(regmap, =
+wcd_intr_status1, &sts2);
++		if (ret)
++			return ret;
++		ret =3D regmap_read(regmap, wcd_intr_status2, &sts3);
++		if (ret)
++			return ret;
+=20
+-	} while (sts1 || sts2 || sts3);
++		if (!(sts1 || sts2 || sts3))
++			return IRQ_HANDLED;
++	}
+=20
+-	return IRQ_HANDLED;
++	dev_err_ratelimited(&slave->dev, "interrupt status =
+did not clear\n");
++	return -ETIMEDOUT;
+ }
+ EXPORT_SYMBOL_GPL(wcd_interrupt=
+_callback);
+=20
 
-  $ cat allno.config
-  CONFIG_ATH12K=m
-  CONFIG_ATH12K_AHB=y
-  CONFIG_CFG80211=m
-  CONFIG_MAC80211=m
-  CONFIG_MODULES=y
-  CONFIG_NET=y
-  CONFIG_NETDEVICES=y
-  CONFIG_PCI=y
-  CONFIG_QCOM_TZMEM_MODE_GENERIC=n
-  CONFIG_QCOM_TZMEM_MODE_SHMBRIDGE=y
-  CONFIG_REMOTEPROC=y
-  CONFIG_WLAN=y
-  CONFIG_WLAN_VENDOR_ATH=y
-
-  $ make -skj"$(nproc)" \
-         ARCH=arm64 \
-         CROSS_COMPILE=aarch64-linux-gnu- \
-         KCONFIG_ALLCONFIG=1 \
-         INSTALL_MOD_PATH=$PWD/rootfs \
-         clean allnoconfig all modules_install
-  depmod: ERROR: Cycle detected: qcom_scm -> qcom_tzmem -> qcom_scm
-  depmod: ERROR: Found 2 modules in dependency cycles!
-
-One way around this is turning CONFIG_QCOM_SCM into a bool but that
-would end up building more code into the kernel image that may or may
-not run. The proper solution is probably doing what Geert suggested and
-only selecting these symbols with ARCH_QCOM but I did not explore this.
-
--- 
-Cheers,
-Nathan
+base-commit: 7884221ca9857a317bf4bd81ac3bf5528f266feb
