@@ -1,112 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795316214;
-	b=P60OO7E3KQqsRIb+4vc4oKeco0m/W4oD892nhwE0cxQ22HpEJyLprY2E31i9PuZzwnfV
-	 kWs60fEkenTkuqcLbRJdAXMS3ALu10qW9RYMSnpdTykg6tojgy2OGSD+/ieVSdb9U8sIe
-	 AQCzsgIE77zNs3LiG04Bngm0IsSM3hE6ej627Z9mMJEEhvogUABAnrFR2PD8eWtAhNmp8
-	 +p1LLcMdg1YrlxAtD1e5AFaMfHyMZiXrUj7ymTpAMX7hJA9pZ0qsvcExKpqme1E5TNaj/
-	 YY+jCUusx7VGRmT/32qPyMIwmuMDSESlelDN0BLczmTMbyYpGH06huhS37OA3GSvZkw==
+	t=1795316222;
+	b=DOsMuMmpWd860cXpjFsF2Bv7i20wjGRyOq82JWFGfCLAxOIkWUAfp672WKEY5Xzc1yVJ
+	 o/1YaRVpC5OBGhLEuzVaRTl3gfBqO+HbhupOYKc4Z07sgaHcTpFknfxqqxMWXs5PyS60K
+	 xpYs4rk3FEihS7psW3KcP1Yljnu8a943CiafpksuPpUlsXQ9bG077R/APMl9oJb8yZ7SC
+	 7FkWaFSPk6Gq2PQ7KtMKWpooMQ3egUHX8ZVVaBbCYblY+okQ3OOSfxOTWMEFoSiirO1ZC
+	 4Z5WHmaeEZnMMq4/NIBtt+l3AbMGMSG7Cqv/ZHZTdbt1aIZRh0tRKzOYPzC+1JZNv4w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795316214;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795316222;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
 	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=hNOKzPAn7+pXWluGC2/bHKGOVozO2Ky26vVL4ckdzBo=;
-	b=iftLVvg8okLs/3Xokw6W0c+s1XO3DAOaRCNwCqEFxTxUTNaU06dviH8vta7UF4CEG0gg
-	 q2va03iEJNpOw3RNpPFULUiL6ZduKK2bC/rJXR+AlkdyT4Z2Xm3S6OXCIEBOOU0kmqCxn
-	 t//cpoLLWc4lmFpvf61MPVxDrt5s5Qk6LAD09RlvZIKOqqwjf/bIhwu2K7x9HpCqxmKB6
-	 Vcf2dfAHJzy0U4ueDBDCXrfLQw+ZvxilVNVCqKuksyD/McU0Lp/AlvxB1HCsakI7r1qDy
-	 IF2ps1DnAXGO+Vz53/80yOWWBN/G34XhOqkEL0vwoEecYCDraIpFVI5EsfKXffL/PxQ==
+	bh=RpNdZRCvOUqczt/I6p/62SfdiYMe0geYQBIESrCqGvM=;
+	b=H8I3lHcmTp6rB3hTovE0PdlQHvWhVPv+ubd3USC8gUITRqNwh9WUVdhOAqb6NP5VZc8C
+	 9G0GHcLkGFsqdlc4E7gdVdhNwLK7ZFcGDW8vvEvMp1nUJ5ZceCAIWnRqKgl+rhFXqr+Es
+	 uhNZ1EPdRA9L9y/UV9jPRuEYg68rYK+PdEjI7M4yLQdqZWCsS1C3KpOQ0z4dG/mUkFrTw
+	 KHRCapV0Qj+TxkGGkQBNA7ckexLZ0bfAWO8+2+94rL4bz1DLKF/LqUQZj3niSfpAmyqjK
+	 wmIZ6nEpfkPfW+FaWA5ncRsV7af2dzGPh0tm2RF7XGTVr4oM3HwcKEtY24b6o5l7vSw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hqWur2w8;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=O+MO6Cfz;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K71w6Paw;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Nq6ghdv8;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 76343606A320
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:56:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 76343606A320
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AFF8D606A331
+	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:57:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AFF8D606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hqWur2w8;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=O+MO6Cfz
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AM07mJE1032702
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:56:54 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=K71w6Paw;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Nq6ghdv8
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AM099rT3598739
+	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:57:00 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hNOKzPAn7+pXWluGC2/bHKGOVozO2Ky26vVL4ckdzBo=; b=hqWur2w8W55NOte0
-	25+pYAciUDWJ6ENxlF9RXINK4LY/WDrdolJH+Gf7l0EpY2OB+vvE4kH9G8WRejTp
-	MKeNetcdLc65tshrOleXckPJbR95hqM8UtaQ22Wp3dCHPnwSUEKAH72qEPERq/lG
-	0WPiM4EVzMxsBpvIpTGv5wUABviXAIzloOwdlQKs9xDuiyrTwzbSUyy/KedHYFFZ
-	FnfltOlw7BEgQ03SBlkWiGCa604MP78dPZxWAEJ1j9AkbxUs4CSyHPfxzws7ccYd
-	fDQXRW6mRmAnCtX8oRHL5jVeh8AxPVV90rYb3/KlFOLS3iE9sn1S1BzfI+piiZqK
-	iZipBA==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j34ka2cth-1
+	RpNdZRCvOUqczt/I6p/62SfdiYMe0geYQBIESrCqGvM=; b=K71w6PawdporSph0
+	dnKuzUY4F29USvSCrf86yHj625sjEf14XoUba8J3V2lF1Jio/iZSLyE4RW2A5yUf
+	PxRYAEkNM+mz2tiZ63EvyUC9At1Pl0PT6iJonVfQNJro4WxQ7Q6Hehu7XaoJA0HF
+	tvr/AvbScps78NkPhtQsg6JKhuq1wXzVf0tp8pFadlU49zsFyEISoEqjNWyM/cqe
+	p4IgsWcbjHjx9VlA3cajuYFZsoYMyktl96jPYtgvdgXqanrwyftNhOM90NqejHjs
+	eBAJEXT5l05FJH5Fh8uQKUF0COBCkWxyDsUtkBJeGOiMypg7DCaTeCDt5zriihmI
+	kalV0A==
+Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j32w02k62-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:56:53 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso3056422eec.1
-        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 18:56:53 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:57:00 +0000 (GMT)
+Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-33c35f5ca6cso3056484eec.1
+        for <linux-arm-msm@vger.kernel.org>; Sat, 21 Nov 2026 18:57:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795316213; x=1795921013; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795316220; x=1795921020; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hNOKzPAn7+pXWluGC2/bHKGOVozO2Ky26vVL4ckdzBo=;
-        b=O+MO6CfzRd22Ejnb5oN/Mokz+T5twyuVLgaUGEhnxLY71B2c7V92agB8q2GlyQCLZj
-         eHy1is3X4AIJes27bQy8G8+Tg923OYiJg8An27OHAIN3ge/EF8BvCHTWGbnRZyRAmJqA
-         3B4Y4fYHvA0Ma+6dqZsvDK6lrw/8G6trtYQ46oHpcZs9ao20yBVftIkaZtGfzFMDOuby
-         xOcCNytCGecsTZnmZ0Qjsb5fNZoQj8p4lRIViaLcUJqdfHQWjNbCeNo6NM9mP+IiESk6
-         W9KYoYYNfqyJ1+u86eR4s/0hmlaV5+Dbmm2BWn+yu5Yi5J2TcgBvwfopxbX6WyT4jfZJ
-         gUlQ==
+        bh=RpNdZRCvOUqczt/I6p/62SfdiYMe0geYQBIESrCqGvM=;
+        b=Nq6ghdv8MvY7aj7tfhoUEUAlZ5do7jEfscF4NkgVUuGFBs/MjxvLD7WQb7mMUSxsDl
+         N/wAbQclsc/vxW/YpziH2bJhSkyvzjbEzkHm3YJ8rY/Gpd8b/KkPfylI1qMSh2hRWlNZ
+         J01q/HBfQYo6xiyKbRLe+fOhBD1KUqJpOFZ2xbXw0hwvrN5lrPKE6kYpSz4Q8AJFkGd7
+         uNu/jPH/cfX+aHZJz1jZf3mC1EsHWiBSiP2uYGNrARY/Fclql4LQk6IZ2E4XkSYupvne
+         NpyBIDSEGtIp4r5e/X0mxeI6xuJ2uGV3E1fcrHna1kZqnLxQdcEaCeB4NM4CCRVouGi3
+         670g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795316213; x=1795921013;
+        d=1e100.net; s=20260707; t=1795316220; x=1795921020;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hNOKzPAn7+pXWluGC2/bHKGOVozO2Ky26vVL4ckdzBo=;
-        b=dq64K/W3sLq80CnpQzcv+QE9LSpKmOYsyUHlo9BO1ARn98eCzInIx2j8zZc5Pzm6l8
-         k91z++cpcIzmuFpkTRG/1RSCpLJ6Vrv26Ozttqdrqiy41nOV8Bv6Don10wK93r46O1hK
-         IGVrz6aEA/mjNG5YG0u9QpoYruDZHD7jlqVvS0XxkX/K9CQKWx1UNfmLeIiQny9yzEQ1
-         sArTtrg88RtWycPzAUgIdEpFvy5cIYtrO0DbShvscfR5gIs98wOwzP2UnAbDkBqziQkW
-         +7Eb81CDc8mJrZcxiBh7ss8iK/8a2ukhzIyVDk87U4S+ZRL1I4DAERM9q9TW7N8FWLcb
-         aHMw==
-X-Forwarded-Encrypted: i=1; AL+hErFoqxw8X+SO8e03bfE/0sgYldymxMLVKqMFuo5mdIcUcqNGg3nxP/sbnyUrZxQ06D5VQ8ZyXQhdf7JPnr34@vger.kernel.org
-X-Gm-Message-State: APuU4Z9FstJlh6zD+JAW/QZMH7R2YtIvoPAiNfrwUOTDZlX1ixYdjR01
-	/FPJvfCPcy/AqEj5bNihrjorTcwud0tRUWcHiyu+GeQQxyNnoEMwiF9frDmKaG7662vB5+Z+Rs5
-	iWZVaTFKfu680S2sUBePBXE4mnmnlD71+fphSzPX1hbM57KNRh+19LkY3mkp7GYRNwp1q
-X-Gm-Gg: AZFdTZeAQOp8hxz9lEtnhoj3rorP8XGAfhRUtiPQUlyHXHw3u+U731369+3k1QYNBtA
-	zAVZgYmAFvPhrHBZA0u8xuP3VbOyX7UZUhaNwEReDfo2i18YbdRHnWsG7DpfVDaF4xP2GLscrVn
-	6MyoO2KZaXihRKO4O/z5A2xmIrV87Zh8OLQhDRDM/YL5v00utbYCHxsP28Q5JGQ7XiehHbXaqyV
-	IQSTkiFW8q+2QLp9wKjOoryzUFOoAjkVehSUc3JPO8yUsSjhTkQn6kxSOW71ImtmB2lpR+r24aP
-	IxNpoqnNWKs2LAvCowqPbEQmKLG60IDhgsoZgRxrtj/0PmgsxxrED6RcumyDo2BAz+TEYda2FXm
-	YGbNT60wUlJ6P03FWH+ePp6pQAKF81Qu0CpfhRdza2qVCn3YZfrbA8VHwu5oyaLz2QzcxXPK3Ut
-	gMemV8UV+l
-X-Received: by 2002:a05:7300:e9ce:10b0:385:2564:c509 with SMTP id 5a478bee46e88-385700541a6mr9071439eec.24.1795316213030;
-        Sat, 21 Nov 2026 18:56:53 -0800 (PST)
-X-Received: by 2002:a05:7300:e9ce:10b0:385:2564:c509 with SMTP id 5a478bee46e88-385700541a6mr9071403eec.24.1795316212484;
-        Sat, 21 Nov 2026 18:56:52 -0800 (PST)
+        bh=RpNdZRCvOUqczt/I6p/62SfdiYMe0geYQBIESrCqGvM=;
+        b=N0xqj0ygqifT8rNtHdLajBciZAeSPXRZOZrK2bNRGiTsAMBlAPwg67uz4TJT+rlwqw
+         drH6UsqB6PeBx6Lp2CgZG9+DeOkBa6aR0iK3wsXtGkIufVFKVB23rW6TDc/mnhy8hla5
+         ez6dEKvspVKkKXumsEJzB1IU6QMra0Ky5k75a3N1onwW9/1rKbTjbTBnrFoOz8z1hDVG
+         s0OpJZ0dfJhMNk090wTIKybK/t62rLvBv/64rqhdMlQzcW7oWMzVOYNrubHh2/4F6g50
+         8PlKKq8tZemsn17T7oxteBfzh+ZwMm4lo4bI6cmVoBY7lgpUf3HOuZCmL3xefpRRqI88
+         sp1w==
+X-Forwarded-Encrypted: i=1; AL+hErHLAdrQdKVwC+B0bF16HlZIxD6bw3TuHkwxUxuEcSkvXuV96h2yv3f7ruoUadrxlcK1KoPjiRUrz66lS9pZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z+kktyVeo0SAQ22nogeIuKQlTxLaZxpzVTcf+XXbZsJOm6Rl0Ig
+	t61bNQNZuoXPC2GhuUj1mRfWl5V3+maLRPdti4nqvu+Ocj7ILc8QNbMfrwi0YFg7eLI7X0gqfq5
+	QssslpiyJI/njx7IXMX4ZA3n3ppGRZUZQWcqgMoqNZq6VMgfiX/8UmNMA48H8d0t2nrDA
+X-Gm-Gg: AZFdTZfSSXWbPm/jruC3FnqqVV7LlvjKYmcUoFj3+r5GQG3g3Z2Q9iZO9x2B51gOQor
+	czB/lWCnxKur52gFId/UST+6ircrdTK6nhOTAEw6LWuL55eqNQNdToocPnp4kV7tjiQFfgiNype
+	vr7DD9yG6NIHsNhmatPJFCCAya0dxckN1sJl7V5yHad6FESVyhBPOw6zV7MPymM+0df5Khrc4iT
+	NNoA7BxTmy149fbNQR2RnFrmIADVb0GC4B+C/MXYvNWi0pFt3S9QVjd8qe9XiVPTgITCRmYEP2x
+	5sBd76mLW6Ub7lTNaiHAHlYA0Sm0N+kwVyP5ftTKIo9KxHnVYUQZe3J3sixZ9Z/hAF1Ei2I2+TE
+	AsLEwtUmG3pk/UdnJvmmwQ2NCKObFGJAUnOiHavd+eWJYiavs6b88YecptO1XaI/WVDgaGHjEi9
+	m5NKOaJoHh
+X-Received: by 2002:a05:693c:6010:b0:385:2057:eb95 with SMTP id 5a478bee46e88-3857073f2a3mr10087777eec.31.1795316219711;
+        Sat, 21 Nov 2026 18:56:59 -0800 (PST)
+X-Received: by 2002:a05:693c:6010:b0:385:2057:eb95 with SMTP id 5a478bee46e88-3857073f2a3mr10087748eec.31.1795316219213;
+        Sat, 21 Nov 2026 18:56:59 -0800 (PST)
 Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386aaae4960sm312044eec.18.2026.11.21.18.56.45
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386aaae4960sm312044eec.18.2026.11.21.18.56.52
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 21 Nov 2026 18:56:52 -0800 (PST)
+        Sat, 21 Nov 2026 18:56:58 -0800 (PST)
 From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Sun, 22 Nov 2026 08:26:16 +0530
-Subject: [PATCH 03/11] PCI: epf-mhi: Add MSI-X support
+Date: Sun, 22 Nov 2026 08:26:17 +0530
+Subject: [PATCH 04/11] PCI: dwc: Preserve glue-provided eDMA HDMA channel
+ separation
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +119,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261122-nord_ep-v1-3-6d8839ffa9aa@oss.qualcomm.com>
+Message-Id: <20261122-nord_ep-v1-4-6d8839ffa9aa@oss.qualcomm.com>
 References: <20261122-nord_ep-v1-0-6d8839ffa9aa@oss.qualcomm.com>
 In-Reply-To: <20261122-nord_ep-v1-0-6d8839ffa9aa@oss.qualcomm.com>
 To: Manivannan Sadhasivam <mani@kernel.org>,
@@ -139,205 +140,73 @@ To: Manivannan Sadhasivam <mani@kernel.org>,
 Cc: mhi@lists.linux.dev, linux-arm-msm@vger.kernel.org,
         linux-pci@vger.kernel.org, devicetree@vger.kernel.org,
         linux-phy@lists.infradead.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Anvita T <anvita.t@oss.qualcomm.com>
+        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795316183; l=5864;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795316183; l=1310;
  i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=7QjmuTlVRoKXrIZssiDHzu7/1X+z/zLg7WzPuVHICII=;
- b=A+SSmX+nlmQiS0zohEwoQRgbuhdqSdqltmeiJRJ4cuV6hvQdHXPdssILPJFHnDIKWCA7pMPvW
- lmYm2D9QhSWB0lAbIJnkZ+p401ZCAT36i2ymGTzuXi+p2JBNrfdJLcM
+ bh=rD9zOfPOcAYlNN684/JsuvviV/gb5ok1TJTsrxdDyck=;
+ b=/lOwFB1qjP7iTr8eSfhVpDz71Nc9Af2j4lHx6UdjaMj/dm9tVfScEt2jnKrs8S68TXY5KV5yF
+ KEyzdXp8En6Dfq8cCoXNyUl6qyeeiGruxZavENr+qcudrrjvKu9e4aG
 X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
  pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIyMDAxMSBTYWx0ZWRfX3D/xw7TDZ0Lf
- hG6dAG74wFB2Ixtd+tcdKsFBktdtYJg0P40fg/6DOrigmssnOrL3U6KtTvNkeag694HpYiWdAiv
- fhUnp8Pp03c5VYDATfT0c3WFPJSFUNN+AQkOyLUFEZ0dT5J9zvhEKk0aWhh+BNWXKF7sEF0zTcb
- anCt4n8ZEbSX566yytVANOYALPye2YerTvANUXOayNNuodXzZzKtaPIcJH4Jkj8XWkTBR+4g6Vu
- Ed+YAZ71AyqXSWN1c2dbSXhw+hjcaZ5VMZlbaaGV5tlRNhoaNy/N9pxrbDe0NdiJoy1hg4tFu+I
- NdZIb7rRMn2vPW3ytm94nJZr+ndInk85DqdJexjBcSre5oXZmJ1kZ7fBd23rpUUV5Crg6aBsY7k
- cL9noZNIeKF3n2eRBIsqzCTQ8dItU726NOBJxxH4v2ruBGDNp1zZZsPmac4gISoZcFav3l4rrA3
- 8pMUp1yqUkJPv+GGXFg==
-X-Authority-Analysis: v=2.4 cv=RJEmjIi+ c=1 sm=1 tr=0 ts=6b0259f5 cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIyMDAxMSBTYWx0ZWRfX5wGCoMdqfFfB
+ WfTP4Q4e4YNZHbdyTK34Oi7n8eDxGFGMXQOtLzGfqVWPS292DBcLUDOeakrNGtpSPtULVB+gH9S
+ 9umeIFnTJrxYc9AiN77ku0LWD5bjtWgTLk21jWb6xnOivHexOArSLsJqm+XsVi5RlTNRDoMnWpf
+ oZujCe8A+f6tvTCRjzjHBYrIUlliqwrm6KQkD00D4wA8O81LteyH1Uls/DhbJ8jVkfs6my7ks4h
+ nuFJc8KbTEox0wEr3X0ZB8JyJCiywr35sEzsLTVbG8YW4PJ0IRSWuqO0rwP0yxknQDtBlZU0JQP
+ inh/c6d18Yg3brUr/Odkzn1P827qzwsaoSD7Z82FfF7AbJbHtIJTnztIAI82Lulk1ErrVjRMzSX
+ 36Xtw6pltjv5l0tpsuezZeH055UUmD+f52ehpDb89xd+RWFpM7R0vXJjMxTs2cEZMqu0Qwys9jS
+ nxZcJt2t2JbJPRsjrgQ==
+X-Proofpoint-ORIG-GUID: t_789MueqYdwjAsU5rA2FnQd7cZQy_NR
+X-Proofpoint-GUID: t_789MueqYdwjAsU5rA2FnQd7cZQy_NR
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIyMDAxMSBTYWx0ZWRfX9rmSdnIw3aPO
+ pAaQ/ouOUHMK2zjn7rcC74GjYX+PvLmd56nxAIqY0tWtQEUQEQcHw79Q7Ghf1BjKIk8mjx8pb9f
+ waVCZgOeEo7W7n9Z0g8n+VXMuiHkMRI=
+X-Authority-Analysis: v=2.4 cv=S+dMU4sP c=1 sm=1 tr=0 ts=6b0259fc cx=c_pps
+ a=Uww141gWH0fZj/3QKPojxA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=aWPhZf5PStJQkATrKZ4A:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-GUID: 62Q7KV2FeN5_AFZ3cbja6uJ3VMYTzxmV
-X-Proofpoint-ORIG-GUID: 62Q7KV2FeN5_AFZ3cbja6uJ3VMYTzxmV
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIyMDAxMSBTYWx0ZWRfX9zymkFhFjHSC
- uJGngTtB62V05+c6YW5hAf9DR3VaMbjItzZsFo71Ln3OP5VfpiNjYF7PgfHrn4InkoQNOn1bRps
- 6k2DRz5JX+pT4R7qyiHzwffp0KYjurc=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=EUspDBNiAAAA:8 a=Py5lcOcq67Lbq8UMOfUA:9 a=QEXdDO2ut3YA:10
+ a=PxkB5W3o20Ba91AHUih5:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-21_06,2026-11-19_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 bulkscore=0 impostorscore=0 spamscore=0 suspectscore=0
- phishscore=0 lowpriorityscore=0 priorityscore=1501 malwarescore=0
- adultscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611220011
+ priorityscore=1501 impostorscore=0 bulkscore=0 clxscore=1015 malwarescore=0
+ lowpriorityscore=0 spamscore=0 adultscore=0 suspectscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611220011
 
-From: Anvita T <anvita.t@oss.qualcomm.com>
+dw_pcie_edma_init_data() unconditionally programs the HDMA channel
+register space size (ch_space_sz) to 256 bytes. Some controllers space
+their per-channel HDMA register blocks further apart, and a glue driver
+knows the correct separation for its hardware.
 
-Allow the MHI endpoint function to signal interrupts using MSI-X when the
-endpoint controller supports it. On controllers whose epc_features
-advertise msix_capable, set up a dedicated MSI-X BAR (BAR_0) from a
-"msix" memory region supplied by the platform and program the MSI-X
-configuration.
+Only apply the 256-byte default when the glue driver has not already set
+ch_space_sz, so a glue-provided value is preserved. No functional change
+for existing drivers, which do not set it.
 
-The "msix" resource is optional and only looked up during bind; it is
-required only when the controller reports MSI-X capability. At interrupt
-time, select PCI_IRQ_MSIX over PCI_IRQ_MSI based on whether MSI-X has
-been enabled by the host.
-
-Fetch epc_features earlier in epc_init() so the MSI-X capability can be
-checked before setting up the BARs.
-
-Signed-off-by: Anvita T <anvita.t@oss.qualcomm.com>
 Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
 ---
- drivers/pci/endpoint/functions/pci-epf-mhi.c | 54 +++++++++++++++++++++++++---
- 1 file changed, 49 insertions(+), 5 deletions(-)
+ drivers/pci/controller/dwc/pcie-designware.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/pci/endpoint/functions/pci-epf-mhi.c b/drivers/pci/endpoint/functions/pci-epf-mhi.c
-index 52cfffcfd5ca..a8765beffe06 100644
---- a/drivers/pci/endpoint/functions/pci-epf-mhi.c
-+++ b/drivers/pci/endpoint/functions/pci-epf-mhi.c
-@@ -148,6 +148,7 @@ struct pci_epf_mhi {
- 	struct mutex lock;
- 	void __iomem *mmio;
- 	resource_size_t mmio_phys;
-+	resource_size_t msix_phys;
- 	struct dma_chan *dma_chan_tx;
- 	struct dma_chan *dma_chan_rx;
- 	struct workqueue_struct *dma_wq;
-@@ -155,6 +156,7 @@ struct pci_epf_mhi {
- 	struct list_head dma_list;
- 	spinlock_t list_lock;
- 	u32 mmio_size;
-+	u32 msix_size;
- 	int irq;
- };
+diff --git a/drivers/pci/controller/dwc/pcie-designware.c b/drivers/pci/controller/dwc/pcie-designware.c
+index 12f102f48d5d..d55d4213be33 100644
+--- a/drivers/pci/controller/dwc/pcie-designware.c
++++ b/drivers/pci/controller/dwc/pcie-designware.c
+@@ -1041,7 +1041,10 @@ static void dw_pcie_edma_init_data(struct dw_pcie *pci)
+ 		pci->edma.ops = &dw_pcie_edma_ops;
  
-@@ -230,12 +232,16 @@ static void pci_epf_mhi_raise_irq(struct mhi_ep_cntrl *mhi_cntrl, u32 vector)
- 	struct pci_epf_mhi *epf_mhi = to_epf_mhi(mhi_cntrl);
- 	struct pci_epf *epf = epf_mhi->epf;
- 	struct pci_epc *epc = epf->epc;
-+	unsigned int type = PCI_IRQ_MSI;
+ 	pci->edma.flags |= DW_EDMA_CHIP_LOCAL;
+-	pci->edma.ch_space_sz = 256;
 +
-+	if (pci_epc_get_msix(epc, epf->func_no, epf->vfunc_no) > 0)
-+		type = PCI_IRQ_MSIX;
- 
- 	/*
- 	 * MHI supplies 0 based MSI vectors but the API expects the vector
- 	 * number to start from 1, so we need to increment the vector by 1.
- 	 */
--	pci_epc_raise_irq(epc, epf->func_no, epf->vfunc_no, PCI_IRQ_MSI,
-+	pci_epc_raise_irq(epc, epf->func_no, epf->vfunc_no, type,
- 			  vector + 1);
++	/* Default unless a glue driver programmed a different separation */
++	if (!pci->edma.ch_space_sz)
++		pci->edma.ch_space_sz = 256;
  }
  
-@@ -714,11 +720,40 @@ static int pci_epf_mhi_epc_init(struct pci_epf *epf)
- {
- 	struct pci_epf_mhi *epf_mhi = epf_get_drvdata(epf);
- 	const struct pci_epf_mhi_ep_info *info = epf_mhi->info;
-+	struct pci_epf_bar *msix_bar = &epf->bar[BAR_0];
- 	struct pci_epf_bar *epf_bar = &epf->bar[info->bar_num];
- 	struct pci_epc *epc = epf->epc;
- 	struct device *dev = &epf->dev;
- 	int ret;
- 
-+	epf_mhi->epc_features = pci_epc_get_features(epc, epf->func_no, epf->vfunc_no);
-+	if (!epf_mhi->epc_features)
-+		return -ENODATA;
-+
-+	if (epf_mhi->epc_features->msix_capable) {
-+		if (!epf_mhi->msix_phys) {
-+			dev_err(dev, "MSI-X BAR address not configured in DT\n");
-+			return -EINVAL;
-+		}
-+
-+		msix_bar->phys_addr = epf_mhi->msix_phys;
-+		msix_bar->size = epf_mhi->msix_size;
-+		msix_bar->barno = BAR_0;
-+		msix_bar->flags = info->epf_flags;
-+		ret = pci_epc_set_bar(epc, epf->func_no, epf->vfunc_no, msix_bar);
-+		if (ret) {
-+			dev_err(dev, "Failed to set MSI-X BAR: %d\n", ret);
-+			return ret;
-+		}
-+
-+		ret = pci_epc_set_msix(epc, epf->func_no, epf->vfunc_no,
-+				       info->msi_count, BAR_0, 0);
-+		if (ret) {
-+			dev_err(dev, "Failed to set MSI-X configuration: %d\n", ret);
-+			return ret;
-+		}
-+	}
-+
- 	epf_bar->phys_addr = epf_mhi->mmio_phys;
- 	epf_bar->size = epf_mhi->mmio_size;
- 	epf_bar->barno = info->bar_num;
-@@ -743,10 +778,6 @@ static int pci_epf_mhi_epc_init(struct pci_epf *epf)
- 		return ret;
- 	}
- 
--	epf_mhi->epc_features = pci_epc_get_features(epc, epf->func_no, epf->vfunc_no);
--	if (!epf_mhi->epc_features)
--		return -ENODATA;
--
- 	if (info->flags & MHI_EPF_USE_DMA) {
- 		ret = pci_epf_mhi_dma_init(epf_mhi);
- 		if (ret) {
-@@ -763,6 +794,7 @@ static void pci_epf_mhi_epc_deinit(struct pci_epf *epf)
- 	struct pci_epf_mhi *epf_mhi = epf_get_drvdata(epf);
- 	const struct pci_epf_mhi_ep_info *info = epf_mhi->info;
- 	struct pci_epf_bar *epf_bar = &epf->bar[info->bar_num];
-+	struct pci_epf_bar *msix_bar = &epf->bar[BAR_0];
- 	struct mhi_ep_cntrl *mhi_cntrl = &epf_mhi->mhi_cntrl;
- 	struct pci_epc *epc = epf->epc;
- 
-@@ -773,6 +805,8 @@ static void pci_epf_mhi_epc_deinit(struct pci_epf *epf)
- 		mhi_ep_unregister_controller(mhi_cntrl);
- 	}
- 
-+	if (epf_mhi->epc_features && epf_mhi->epc_features->msix_capable)
-+		pci_epc_clear_bar(epc, epf->func_no, epf->vfunc_no, msix_bar);
- 	pci_epc_clear_bar(epc, epf->func_no, epf->vfunc_no, epf_bar);
- }
- 
-@@ -880,6 +914,13 @@ static int pci_epf_mhi_bind(struct pci_epf *epf)
- 	if (!epf_mhi->mmio)
- 		return -ENOMEM;
- 
-+	/* MSI-X BAR address is optional; only present on EPCs that support MSI-X */
-+	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "msix");
-+	if (res) {
-+		epf_mhi->msix_phys = res->start;
-+		epf_mhi->msix_size = resource_size(res);
-+	}
-+
- 	ret = platform_get_irq_byname(pdev, "doorbell");
- 	if (ret < 0) {
- 		iounmap(epf_mhi->mmio);
-@@ -896,6 +937,7 @@ static void pci_epf_mhi_unbind(struct pci_epf *epf)
- 	struct pci_epf_mhi *epf_mhi = epf_get_drvdata(epf);
- 	const struct pci_epf_mhi_ep_info *info = epf_mhi->info;
- 	struct pci_epf_bar *epf_bar = &epf->bar[info->bar_num];
-+	struct pci_epf_bar *msix_bar = &epf->bar[BAR_0];
- 	struct mhi_ep_cntrl *mhi_cntrl = &epf_mhi->mhi_cntrl;
- 	struct pci_epc *epc = epf->epc;
- 
-@@ -912,6 +954,8 @@ static void pci_epf_mhi_unbind(struct pci_epf *epf)
- 	}
- 
- 	iounmap(epf_mhi->mmio);
-+	if (epf_mhi->epc_features && epf_mhi->epc_features->msix_capable)
-+		pci_epc_clear_bar(epc, epf->func_no, epf->vfunc_no, msix_bar);
- 	pci_epc_clear_bar(epc, epf->func_no, epf->vfunc_no, epf_bar);
- }
- 
+ static int dw_pcie_edma_find_mf(struct dw_pcie *pci)
 
 -- 
 2.34.1
