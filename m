@@ -1,99 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.175
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795341833;
-	b=3j9zSpPY2Q13DgVku1azfrquBCDbnUnE6TyFcUdkgJJEFbdqW3GBinklp+tQEwDDM+AB
-	 5ZsIsYc0+G4BGDh16exfl8H2TKR+ixhZaYoDM9/djHwcs51LXV2hVg7OPOChuxnTSwO2e
-	 r4OKRFhD66TCHn7uVinmPtRfIC6apdPTx+ZPQkCywo5z2elOtAKLjkleS5NGuCObd5h/k
-	 DGTJaPFOJcBxNkRRSLYCBYq2IgZEVsZT3eVqZK6ds5SpMBJ9QP1ogedwOfEzpAD4vWNNE
-	 0fpRgVjq6AhHNi30pTLMsdYyJIoO912Q8GdChph+KBPQeYDftaLqy0fHg+FRLEcb+LQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795341833;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=Kx+CcY0AoSPVkezXa3vLWUzHo20k6i0oHhJXWDP3uek=;
-	b=AwW7Qv/Cwt51MPrxAv6wW9TiDVUy75KuBjPr0yCL0o+NvxU+7jD7NVVBGstH4q6v8+rd
-	 tx4NgX4yXq2meRLDae4ONelnCEwgeKHDKATXJHeBtmqih253drGC/S/o1fydXXnx1XOe6
-	 zQSX5XmfGBwrRtrJL63OOyui5/CB97Ts0et7Y3Xl++BJp9cxqtjdr/dgHJzg2VMrs/1pO
-	 Ar/FDbv7ylFVA3zcZgMggEUXAPcv47Yn+L+4Zuolt60mQ5zybv68lSc980BA0d+WgW7Sk
-	 qQfKhAJZ/bKzrZaVjLNlWA9r6XXa+b/E24VTyzQt28FcUkF56D90GLdm2vqQugPPqyA==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qRMIX9Fs;
-	arc=none smtp.remote-ip=209.85.208.175
-Received: from mail-lj1-f175.google.com (mail-lj1-f175.google.com [209.85.208.175])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795342314;
+	b=FcFeG8vn20GN70/KqG46Kdmt9oQA5qb/Z/43hGvaL6Covc1285F2Z01vpFGArwa9WLIY
+	 hIA6BGHOihyuGPgtZWT31WY02HhT+2HyyeQsNKDnPh6b+pR63XYP6Hfhasx0yl92JtiRx
+	 bxwT7kVMpWJCJayBbNyzU7UWhvRJPj55fu6i5kafKBX71VFx/d8PTf15ge5YlhTZTbapa
+	 XoK4hXj03icg48Q1WmKVBdwQFcFJbJZqZoZ6Ny7HZNoiQXSgxT4iI5H721uSjnvjGH81O
+	 eOk6VRztoci0Jh6DudMh+QIpUGcqHo5yxdfw190nXKX8A1ilfw1rx9AB3jBEAkuZ8CA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795342314;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Endpoint-Received:X-Original-From:Reply-To;
+	bh=DUFGSuQcmGXTXP29qSBzVDw0B0OLNCLEBlu9W81RI20=;
+	b=G6g2z8ycuT/XP+Pv2iKHHJsN8irLykGAOPM3WYWM2t3JRMWbssJAPJqm4WV5CMnNW+3D
+	 2ztPgwSOVyTJjIeOiZjQ+Cfl6o3XW8UbfcjVp0oFMkdUCGdv+YgF+4Y2dbqshqBoSKlHa
+	 7RjokSQwXwQ4B+uxTOsi7FMoKd2ZbaKtoZSsBnUDcKUAczSe6oen6Mi1uZz2HibZD0CzP
+	 oXN+MoG9E1Uu8yBoCGVky+jn6QQMTJCZa3ilsSlDeLSTWtmxPxuH84qJdU246eW6B3ZJy
+	 H7zEO4OLMU7fh84nX3NKTJpzdd7aa0d/B/KIIZAOk3EhQNFy5hKY320TaX7SPkYWe+A==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k4neDRH1;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 821F0606A320;
+	Sun, 22 Nov 2026 10:11:54 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k4neDRH1
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795342314;
+	b=iBwskpfAiRJWSRoErak97eSGASWza6UsIf9wzI6eO0/HsrPMo/JORfSMfnFesroUiJua
+	 oyex9OYTI7G5ROCqAc3kHm8T3Gwq0Z4bQAdAZQhuXGwvE2B5nKEm7ry+JKb/Dm6nZf7SG
+	 74R4QjiOTARY3Vu7z8vd8n5G8CtEHOsv50Cy6ZlRDbb8YymAq0t4wf5/j/KqB90IbA1iH
+	 XlOyIKK6PSoJdTalkjxeHOY9LGOFA0hzXpqcd96ISUfOOoWbsxhk+7WGMr1shMdN8LTHq
+	 k1Ho/UlOU58cBvVUpUaBdoFsfpkn0Rl6z9wnEVHe5Xn8TIrqtxW9wsZKtVYRbbD8uKg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795342314;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To;
+	bh=DUFGSuQcmGXTXP29qSBzVDw0B0OLNCLEBlu9W81RI20=;
+	b=g4s2CoYZ0HCVSS8S1l6KG0sJvk4Bn3ZeKJBXpqt5iaClPYBmzRCnHD/QCZ/wQyN9+nks
+	 VyaIElOvzSgl3DStLEQNMR94/iZLcooISC0dcz50YrCfxCqdD7BF2unhH4kWwrj7xpI6u
+	 CbYw1oY3YxtX/UtuBzD89QwkNLYlxWs+LoX8uAzuorK+iL5HUIk3tkkqObBdV0jJmDvXt
+	 j+CJzSvjdk25Ia+VL30mIgdccz1gFqBQmpWTLWYkgu+w6xZzybobzvC2KfQbn5zBpubj5
+	 REgdtoBVdxp4eZIpt3l4uz48Q+2YXMa3urvXvwbrP/OxC32eKoob7VN8uyl0mXrctdQ==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6BFD606A32C
-	for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 10:03:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D6BFD606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qRMIX9Fs
-Received: by mail-lj1-f175.google.com with SMTP id 38308e7fff4ca-3ab30d04674so3030031fa.2
-        for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 02:03:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795341831; x=1795946631; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id
-         :references:in-reply-to:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=Kx+CcY0AoSPVkezXa3vLWUzHo20k6i0oHhJXWDP3uek=;
-        b=qRMIX9Fse1q9rgE+hsN3rqYn28MkIBOjp9Z1P3GlJ19eu6CSdU3bVhVg+riMplID2T
-         MsrzKHjY9yAuyeunBzQ0iuNLRKSre/z6fBX1yifAL/HhgIR1cY7a6bt9IU9jrblmZdXa
-         jTOAXe+Xnq+myUzRIx0cehqNFRZBS9Fkb7kZwuSaBLcWqUBuuO1oT45RdJlnhg4gPNvL
-         V0PTHgEYpK7sTjiLPa9zpxf1e0v0EvE9zeQUrTaBOMPArIe7mIOJYYOPgcDvUtD5old+
-         jv9fkGTv5TLsrGx3eXDM34K35gy7GFnlTJjfQwv4Rcv+Qw0dj2avsHWLDIMEuEMBEbhX
-         eGfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795341831; x=1795946631;
-        h=content-transfer-encoding:content-type:mime-version:message-id
-         :references:in-reply-to:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Kx+CcY0AoSPVkezXa3vLWUzHo20k6i0oHhJXWDP3uek=;
-        b=iCkzZHAPOY3BW4n9p/csAt6pbeX1pNugQTVMeBTWNgS1GlORJlO6B4Q4BqQ8O73FGP
-         XsEqNfPqPvi63AH+c/ZV2wIQKhWhoQrjSmOEFpDHzwWU/4Nv9T0YS+c1QZOTKcOrCAyP
-         bmUcmsMsbAiMu7YGufzfWgiIratdEqKd1oKHP6b2HHe1299ekdU3sTENBtQ5qmlEtBKI
-         PgEqrXUl1LctF9NNbhqqbbfaAwF+z+1eleWLPwc+ZTZ4tVNGWsQZfUGXkgPPCajZc3yh
-         MM9FSlrg8/xHt6GjZATWIoBh7J9yijabE7dGR4gysqD06WMehDJTF/soE9fIQHZyzaJl
-         r0NQ==
-X-Forwarded-Encrypted: i=1; AL+hErHBo2EATGx8TShXiw1iLYlm5U0ttyhdBguf7DLkGrdPMnr2Kaxfk3cfeNMGKUYdntE81cdh3dBfBjRZUwcq@vger.kernel.org
-X-Gm-Message-State: APuU4Z88RI0AECghdiAMsRbkuYJKu5eJiu09CMCOUjgfbku58KIuaEhz
-	RM+snohiHBWH/geMJHC5/Bdp+da5kpDP/y38k2y8Z/ELcr1Yvwl/jhcp
-X-Gm-Gg: AZFdTZe1IBT8S5FENYDmDhvQHE8OGjiOngrCAjIvqsN9JGzsf1gR039mNjd/ENFsy4M
-	8IjGASM2nIqn2+w38LxcozZk7R091C7QSWy0zK1aYml46BSF2UO+JhAIav9EZLrt+9bQTEu8bcO
-	5+TQo1DhzDT/UGyCdFGq2r+LWfRG+WuosNwieGnvmYJ+9q6xylcSivtEH/EqGRRQs1gwisAslrj
-	5sve3wVygYuN1/zr88qQ+IiB7wsNcK6yWWWEozjcqol2Jr7oC9+oDL0k8iTWm1VFxQVQwLNibnR
-	ILxT5vgZkEOzqsI5HHRcZfXxww6fVv5vcTw64hM0/rPwoFOj8mFr7fK7UDxyo6ZoojSFIUKVuaf
-	qKRj7PykLnbZPlI+fUvJxxB3ksFN26MkYy82t0eHQ1NymwZhI85QVuiVuMJnQUKmHdLLjeOwHvQ
-	z+ZtPW6340s1GgtvGA8wF7ywHAYTaSQ3i6RQdtarbrBdsgQWA1rSHa7AM+Y+wr6uZYVG8PgHfhv
-	FTvVtItGRjJvR4EOX+enYTXvhRodvR6PW16RAEVNbH2GMBW7lnm5+wTlPwIKV9RyTOUaKKoSwAg
-	d3AvlnVa0NDx5TAXo79W/WC/4cx7p5Q0slMzSkInvHLG4ASdevUjT3JDvhYp0MHvDTNyOOGyGBI
-	vKZzL/oyqcXUd74AsoRmxv6HL6vEOU7gKK0rLaZl4
-X-Received: by 2002:a05:6512:12c7:b0:5bf:a48b:7827 with SMTP id 2adb3069b0e04-5c1bc6bf385mr2679661e87.2.1795341830712;
-        Sun, 22 Nov 2026 02:03:50 -0800 (PST)
-Received: from localhost ([178.150.68.2])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae804ee97csm23390751fa.13.2026.11.22.02.03.49
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 22 Nov 2026 02:03:49 -0800 (PST)
-Date: Sun, 22 Nov 2026 12:03:48 +0200
-From: Ivan Verbovoy <ivanverbovoy@gmail.com>
-To: Vinod Koul <vkoul@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
- Bard Liao <yung-chuan.liao@linux.intel.com>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
- Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>,
- linux-arm-msm@vger.kernel.org,
- linux-sound@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] soundwire: qcom: enable CPU interrupts only for MMIO controllers
-In-Reply-To: <20261109-swrm-mmio-irq-v1-1-570fc05f22d7@gmail.com>
-References: <20261109-swrm-mmio-irq-v1-1-570fc05f22d7@gmail.com>
-Message-ID: <20261122-swrm-mmio-irq-ping-f2926d22952d@gmail.com>
+	by smtp.kernel.org (Postfix) with ESMTPS id AA41A1F000C0;
+	Sun, 22 Nov 2026 10:11:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795342314;
+	bh=DUFGSuQcmGXTXP29qSBzVDw0B0OLNCLEBlu9W81RI20=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=k4neDRH1RSfUCf70KfROzFinXSzg+oPHczgZBJEwAYkQi2wI5XYuCvHbt1HLqRA43
+	 R9t/SmrzrIg1dXSkjxx8G3ATn2CzK3V7mNrvLFInCMUrUSxQSELme7AbkXjvtO5OEJ
+	 EDPm7nGZU2bowrNBVwlvEgR4b/h0tHw6mZIR8j0BR6K55ahmizit9F3BWnpHskJ1Mh
+	 V/ZDE+Y2Kh+mBemwRUmyIglhcWleGSPYGSyYn0QWAvd0uAXjnDkHS+tQj7BthovU0r
+	 G1mgM357UFLMrR7QVLe3ZQ2SLZNiVLydwT3doz2iZjzKVZzo2xF1G/ORKlsjCuzpjW
+	 BEPDmyvdilO0w==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 0B7EA4BFE9;
+	Sun, 22 Nov 2026 10:11:53 +0000 (UTC)
+From: Suyuan Wang via B4 Relay <devnull+shyckless.gmail.com@kernel.org>
+Date: Sun, 22 Nov 2026 10:11:52 +0000
+Subject: [PATCH] iommu/qcom: Disable clocks if restoring the secure config
+ fails
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,14 +83,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261122-qcom-iommu-v1-1-ecb20a28871f@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAOe/AmsC/yXMTQ5AMBBA4avIrDXR8RtXEQtqMJIqLSIRd1csv
+ 8V7FziyTA7K4AJLBzs2s4cMA1BjMw8kuPMGjDCTElGsymjBRutdYJLHqsAO0xTBB4ulns9vVtW
+ /3d5OpLb3APf9AM6McwVuAAAA
+X-Change-ID: 20261122-qcom-iommu-2473c82d2552
+To: joro@8bytes.org, will@kernel.org, robin.clark@oss.qualcomm.com
+Cc: iommu@lists.linux.dev, robin.murphy@arm.com, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795342312; l=1475;
+ i=shyckless@gmail.com; s=default; h=from:subject:message-id;
+ bh=1Eskb3u6fGizPUm16aNFvrkib/eJ2zFG+/IzmSV4X/Y=;
+ b=ZOGKdTHhmGOSbeG4MiNOD9O4UG/bQnmgXpNcWMIuhzXL6CbNW60fDSSxuqAPYbf+CxdaRHuqT
+ bUCoNBgV+eAA5fWSVT4jLwsfiqxAeW3ig/BT3bfrHFybV/AwxRrQ6hQ
+X-Developer-Key: i=shyckless@gmail.com; a=ed25519;
+ pk=pMtccVGiWES3bV+7YBFuBclkvq2n2HBHQ5azaBrK2lY=
+X-Endpoint-Received: by B4 Relay for shyckless@gmail.com/default with
+ auth_id=1498
+X-Original-From: Suyuan Wang <shyckless@gmail.com>
+Reply-To: shyckless@gmail.com
 
-Hi Vinod,
+From: Suyuan Wang <stevewong@hust.edu.cn>
 
-A gentle ping on this one. It fixes a regression from b27be5a85ed3,
-which is in v7.4-rc1, so it would be good to have it in the fixes
-for 7.4.
+qcom_iommu_resume() enables the clocks and then, for an IOMMU with a
+power domain, calls qcom_scm_restore_sec_cfg(). If that call fails, the
+error is returned but the clocks stay enabled. The PM core then treats
+the device as still suspended, so qcom_iommu_suspend() will not run to
+turn them off.
 
-Thanks,
-Ivan
+Disable the clocks again when qcom_scm_restore_sec_cfg() fails.
+
+Found with a static analysis tool and checked by hand.
+
+Fixes: 268dd4edb748 ("iommu/qcom: restore IOMMU state if needed")
+Cc: stable@vger.kernel.org
+Co-developed-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+Signed-off-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+Signed-off-by: Suyuan Wang <stevewong@hust.edu.cn>
+---
+Compile tested on arm64 (W=1). I don't have the hardware.
+---
+ drivers/iommu/arm/arm-smmu/qcom_iommu.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/iommu/arm/arm-smmu/qcom_iommu.c b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+index 96903cd9cfc2..52bcb8cf46b1 100644
+--- a/drivers/iommu/arm/arm-smmu/qcom_iommu.c
++++ b/drivers/iommu/arm/arm-smmu/qcom_iommu.c
+@@ -898,8 +898,11 @@ static int __maybe_unused qcom_iommu_resume(struct device *dev)
+ 	if (ret < 0)
+ 		return ret;
+ 
+-	if (dev->pm_domain)
+-		return qcom_scm_restore_sec_cfg(qcom_iommu->sec_id, 0);
++	if (dev->pm_domain) {
++		ret = qcom_scm_restore_sec_cfg(qcom_iommu->sec_id, 0);
++		if (ret)
++			clk_bulk_disable_unprepare(CLK_NUM, qcom_iommu->clks);
++	}
+ 
+ 	return ret;
+ }
+
+
+
+
