@@ -1,59 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795367171;
-	b=t9zFvtaBs88EzJW5NMq6nK7gjmsZP27iI4YD6BeT3apqhTdGizTfjYIz+BHw6SwTr61H
-	 C3QQl/7yTjjiPXVoY6C0wsa0KGD05GSYJK4cRABpcFiaYXEKWmEvTDIvAjDzrqcUJiyvy
-	 4c4Uyhok5xTPXorvVKLbTVCP0k8V6aqAZWcQNUv1SITMkrnfMGHILpH9Mr3JF8LhWcteC
-	 9hZI3iNQvYkgbZGl0z7XEU6QXreE04GVHugRSgqUAlh2/CesAS/pumB1L1oWQt6/EM0wO
-	 y49D3zIMK9+nFkL9KMNW4nCJeOK9IK7VIXyfLNcndrWDUIFtQWtfsH/+4AEZmsnnTDQ==
+	t=1795367645;
+	b=PqPARHq59+40+XgbWnS0MGtTso6hITLOXGJtNq2yt7h+CuCs2MmBH+PkMLJdVELqLZ44
+	 n91Ny/D0gpmwHjahB/W6mfbg3i0to/OOvoK6lfonBJZPWprYQygmudXpKDRBdHEykJ6Ez
+	 NTvwtgSC2fnDhbpYg9g4IzxIOwtHnFSAyf+gE5hOHTgsX7VQIUeatPqTtwleH0ms3PQ9U
+	 FO8/tFvRBEayg421ANVG8FukXYAzQcZfuO5cgEqgZUvKPSnMUBUYAAuUUwHO6VftginbS
+	 yWdgWLP6IReVt7fBrWMWFnkcq4nlaESltGBflDNMq/gzgzcSXno9lZ+ubo8uERtabDg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795367171;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795367645;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=6KZpeDJvFmZFTAOYbgotULxo1IDD82xdkWrbRNG+0VE=;
-	b=p9kX3RfWrH13K/1mqYD2jMyyN4+gXVg0hisIey5Z3bvDaNbuN0QRWCUlL7PfM5tJVmk4
-	 ru9BFXiD5YUOlJCNSUhOMT5d9dSN5kzb1n/nXcSK58xxuyKtaN32lI7uw+STWvUWAXqkf
-	 GURo8IaEGgSK7BQoPvH07l7nohqDrk4QJKMP010nzwV81JLRJgwau45AbcFGwxTR3VudG
-	 OwvGypnPnmpTOZ0bt6t5UcVcC+REGw/1taborakrvVcEsJBExnEs83ttdZxOV97gp5K4h
-	 r8kTGwJBQGMAkDW8/j5AL7XFm5zBhXCztB/KOoLf619b5zL924t5yWtweAUlku9F/7w==
+	bh=hg3EGrM+MAlMXj1qcbGlUCJV4XKVDtZwSUpQN2HkElQ=;
+	b=aYiCGJfwH4MJvlDYgdo/6M6NrK1f1Q5eaRrX6XbCvvbFPb2DUj+wzgmhjll4zFCzdGTv
+	 UzhGGcIdlpdJkKbE2bM4js1xXvLNh9UKrpqag5uiZBKXgz2foDq7zk5jVF1/W9c741ppA
+	 XIwqpYPAc9KerGKui9dSgoa4NwD0xvDwevbGm6onJ+Nr6OS4j7OI4I/ru2xtvcSvE8zoT
+	 bEizgIQ4I9nyk1GEOgkTv4Rm1aloEQoh++YKWW3k4ZzXtliZ1puUzTuAgkBGUOXrDBEg7
+	 Zjp3nhByurdZ/+3/kVImOunrSlYj1s8e5MH3JflVjAkTfdKsfUhuhhqnvdunfoXnT7Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KQdr1TaQ;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JOIJYPzv;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6D23606A32A;
-	Sun, 22 Nov 2026 17:06:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E99CF606A337;
+	Sun, 22 Nov 2026 17:14:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=KQdr1TaQ
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEB551F000C0;
-	Sun, 22 Nov 2026 17:06:10 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JOIJYPzv
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24C9E1F000CA;
+	Sun, 22 Nov 2026 17:14:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795367171;
-	bh=6KZpeDJvFmZFTAOYbgotULxo1IDD82xdkWrbRNG+0VE=;
+	s=k20260515; t=1795367644;
+	bh=hg3EGrM+MAlMXj1qcbGlUCJV4XKVDtZwSUpQN2HkElQ=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=KQdr1TaQSbS0MGIFvMWuB3zok+qvUnfERKIxScBxDysP0kr68q8lhJ0/2wmpJaGlE
-	 ewmL2Jctq7QnUapazQE2uFwlvsIeu5A2P+tr5HlYiJBwJLPyIVr8eLNrQUBoWO8nrw
-	 5TWdsE8J+Yg+IS1BDpd2n/LunfQIFXnT34oA6TP+YtT/XELlYhAB+I982kkKdXhqR5
-	 LEPfUcon2t38MDGC8b7SrYHNoBUWfnxnnI2gWSEKKiQa6mWSw/QhvPXwycLJEGwU1s
-	 Cty+Ga7aQUKqGSqZVua8zLMOWQWWPm0KcroGe1rSx+NvtB3Viej2Jliy47uycazUoa
-	 9sVbRNuP1PvXw==
-Date: Sun, 22 Nov 2026 18:06:07 +0100
+	b=JOIJYPzvZc+Pc5UeH2+kXswJkhhWyLTmKaNiCEOv8wGr6VUZOMPNxg2B2qHeKqSrl
+	 /jhr9hrrueyftxxQaxw6uThIeBky/G9IVSZZOBL5fh+xktSwnLI/jDEWp2/9f4rn3Q
+	 tELOQktKkhlI1eJbiFNGebS+CyNSixufaIFaQ0jGeQAeb1aYbTrszuNpK4U8giEWQ2
+	 +FYqpLUGWG7KemOCZQq4UHAg+EPm4N0FhPH7e1mCIVCuG/RGrCgWsDWRwuDML41sMB
+	 L/summMWf8NxAjpfbdwXxkPx/sb7TotX35rJ1cv1dlvzhY+PUGsSrWxkap5cs1LUxp
+	 PcHPYKi0clLoQ==
+Date: Sun, 22 Nov 2026 18:14:00 +0100
 From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>, 
-	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, Loic Poulain <loic.poulain@oss.qualcomm.com>, 
-	Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
+To: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
 	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	Suresh Vankadara <svankada@qti.qualcomm.com>, Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-Subject: Re: [PATCH v3 1/2] dt-bindings: media: qcom,glymur-camss: Use linear
- CSI ports
-Message-ID: <20261122-jumping-slim-wolf-aa3e9f@quoll>
-References: <20261119-glymur_camss-v3-0-71ab966c41c9@oss.qualcomm.com>
- <20261119-glymur_camss-v3-1-71ab966c41c9@oss.qualcomm.com>
+	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Kees Cook <kees@kernel.org>, 
+	Tony Luck <tony.luck@intel.com>, "Guilherme G. Piccoli" <gpiccoli@igalia.com>, 
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	phone-devel@vger.kernel.org
+Subject: Re: [PATCH v3 01/11] dt-bindings: arm: qcom,ids: Add SoC ID for
+ SM8845
+Message-ID: <20261122-convivial-electronic-stingray-5afda6@quoll>
+References: <20261120-molokai-soc-v3-0-403d763685d9@yahoo.com>
+ <20261120-molokai-soc-v3-1-403d763685d9@yahoo.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,25 +65,22 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261119-glymur_camss-v3-1-71ab966c41c9@oss.qualcomm.com>
+In-Reply-To: <20261120-molokai-soc-v3-1-403d763685d9@yahoo.com>
 
-On Thu, Nov 19, 2026 at 08:34:22PM +0530, Nihal Kumar Gupta wrote:
-> Glymur has three CSI2 PHY connections: CSIPHY0, CSIPHY1 and CSIPHY4.
-> The existing ABI used port@3 for CSIPHY4 because the driver reused the
-> X1E80100 CSIPHY table, where entry 3 maps to hardware PHY id 4.
+On Fri, Nov 20, 2026 at 09:23:03PM +0530, Venkat Yadlapati wrote:
+> Add the ID of the Qualcomm SM8845 (Molokai), a variant of the SM8850
+> (Kaanapali), as the Motorola Signature reports it in SMEM. socinfo uses
+> it to report the SoC by name.
 > 
-> Use linear graph ports 0-2 by replacing port@3 with port@2 for the third
-> CSI2 PHY connection. The matching Glymur driver data maps port@2 to
-> hardware PHY id 4, and there are no in-tree users of the old port@3 ABI
-> yet.
+> Signed-off-by: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+> ---
+>  include/dt-bindings/arm/qcom,ids.h | 1 +
+>  1 file changed, 1 insertion(+)
+> 
 
-There is in-tree user - I clearly see camss.c. Your next patch even
-changes that user!
-
-This is just not correct :/
-
-Anyway, mark it as fixes and be explicit that you target CURRENT RC. Or
-was this already a released ABI?
+Some folks started changing the bindings here, so how about stop growing
+this ABI. Add a header for socinfo directly. Let me prepare a proof of
+work for that.
 
 Best regards,
 Krzysztof
