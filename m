@@ -1,112 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795437897;
-	b=DpJgJRxdVObTAu40s5ex+xu7AnKg7WTBlL9xTRewl4Ytc1skw6+dVHHpUI3YxGexb1qd
-	 91/QlMvBP5xOV8urWKrZo1TFL/uuKBtZDWonlUY8Zbk1puGk4uFb9zLmz//Xgg58U/rkd
-	 Ea3EUoI9lMGxJOWf6baOBW0F+8s+mV0aQqPqTvc3Xg2pHkeziDcCzIuAhcNv44CRIVm3e
-	 0Q64k8Go+un9DeCEn+AVmQEg2EbUmtzaH+bthHrnU1/G13hUG1koC5/jVpprul2poD5Po
-	 nMLAlIW01EmQTsf0UX4+zcuiFhdMPFjJeTFfAXnI0eZmFTlh4fOqW6cFzBGUrMiEIbQ==
+	t=1795438948;
+	b=MEc0KWIe1WbkBiI4TBKeAut1bDrcV9S5Y9DDMgkt1yp2z2O4Q3D/kEbYqA6DU1RG2jWG
+	 R5nJM7jQvX2CPpd/+zusRmpLYY1pUIje5tZvj32EcQZg/GBgN8XjkHReLORzppeXOkYTx
+	 ggd7oLWjclbEbOeIR86IUOkXrqRNh9+7s3ib//WpB7FN5GOIWpn0qdMvLchaiSoYndsww
+	 i/MHWRAXujCD/iB8/4jFqYWLvtb0L+E0v0L6hSxatLgBQdoD362uMUQFflEHKT3pt+UzQ
+	 mUMnBqAnIu3E0iGu6s8pEDdFLZqEgSX0P7xXnfgN3wR2u9Uw5DvWEWAEZ9gWbCrNJPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795437897;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=HVNW92KPaOSF54gmCgO2UWmCU5MAh/fhPfGmPOmNVdM=;
-	b=OC42ScFluwO7AhQE3cOx2iSgjO5sW1vnsnoXIuTX1CyhtJs6uklCLxZuY9QNcBf/teK+
-	 3bci2ZGgCULXEG/notaSTaDtBY37PV7Aw2gmNLis4R3R/J34LG0ST5mbByw7gO/RfxrEN
-	 Y/wnSzFCsfhVkSLG6Kcg6D/s5N4aDF8lIN64xoe/35Q5AO4NTFSG78DtYKh597gfyIChu
-	 zlJCH/bpAaJ6iPvuGL0RNsBhGWGZYW23+w2cQp1zRNqhVYPbmYfo0ujPFLk2YU5hYUOtE
-	 Nfpn78II5TTdxyNDySLXJoyQwcsYldxpAa9cxXzzMLI97rW29GYJ2pfbMwFdpPWoKow==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795438948;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
+	bh=cKQuTWajHqDgBUzh5m680n1boH4vOLK3j00Iq2JfKIk=;
+	b=pxMFG654c0YWero2vgJjjKseC4wnmptSowPyrmaMxJTcFXb51VzWdqB8Z5K5gX1U8fEf
+	 4NsRMICWB/+lwkGAWbXUulqXrOtpn2vz3cGqK3u6tj9pKdI6RmFuuMIxobYIIxtD8sAdV
+	 ZWAAFDYIMAu50BIxI/llYBV1B52lFnPKwL3AGShwlhdqANcFWTRmxYFcbc3D08ZqeKHXz
+	 SPL0ps8uvwuJM0TWC8ROlkHbLfjZK6V8AD1fi1jjMK1fZVME7EVf089JElXmajsTuH4pl
+	 xjjYTv3opw25PBKASGzvvhIxc4OADpNB4yS5s/awDr4F8qsu30beuFAW/mgzqYSndrQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E+2DxMlQ;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XfpjXfd0;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=I+93h+Nj;
+	arc=none smtp.remote-ip=209.85.218.53
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5D383606A68D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:44:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5D383606A68D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E65E606A31E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 13:02:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4E65E606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E+2DxMlQ;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XfpjXfd0
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANCGHQO2478698
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:44:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	HVNW92KPaOSF54gmCgO2UWmCU5MAh/fhPfGmPOmNVdM=; b=E+2DxMlQiTKhQiN1
-	41OzyP7xhWGVGVxjWdpo+hIAfh4dLb07feSmAW6laX/x4c8Vu42oMSK38nYeq5dA
-	aVcT7R9/1ZuDuTLehc0rqhR8rDKA+fxRH5koAgFPzDNmOERlCO8e8a+uLFAk/cZm
-	cEYtdWzySBfPx7ylEjNX7pA1CtDD8tKxwEgIexM6S1U0RVE3J3G99x8T7VUF/mdu
-	OlHwKfxcB/sLV+Zjwbqhi8sbQYx9CizQ4BtCxrbE0cb8lF4ReZ1c0jf5X3sVF6sp
-	CfaLtqkzRVAwPNaEIDTCCY/OagsWKbBoW1W+1mOmerZpKpp10awHlJ3iJkHfF3xq
-	0ECb7Q==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4g1p9djc-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:44:55 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9495a1f5e47so535087685a.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 04:44:55 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=I+93h+Nj
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c5127c7abd5so517670366b.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 05:02:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795437895; x=1796042695; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HVNW92KPaOSF54gmCgO2UWmCU5MAh/fhPfGmPOmNVdM=;
-        b=XfpjXfd0b84MMtDf8vvVTdP6bAmVrpD8ezrOe8TOeT/oaUHDlMYF+WKT2p6cF8UEr1
-         KYsGS4mkXvUjkRJz1pHhdF2wI8bMHVXXOcF9QALYS5UfW34QP/BmKXEc70+TpAeaEtMj
-         xJgT6d8a8yLRtXr/VjGKfLx6ii0m7HxmCptfQ1U0NnJ2rt73LCsqt1gnyUzcu6zl1+Km
-         hgPGPJcrHq2UDvFN6+9oVY4fIra/UDulfj20Pb9DhGyj8Y7cYr9jM6hdxdwih24aZpDy
-         2MdMzttMc+9Q+KKg71fjN9eJzz8K6Ta1sH8D/paU1A92nBU8MQa0Ij5dn3dyaC3Y9Kyo
-         QF+w==
+        d=gmail.com; s=20260707; t=1795438946; x=1796043746; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=cKQuTWajHqDgBUzh5m680n1boH4vOLK3j00Iq2JfKIk=;
+        b=I+93h+NjMVPVj9yGSCa9Yr9/aLoxakDF33sxW0hA4Me2ZHmBigmgD3nvRHdVyy6Czf
+         TA/CH/xVRgsZgVksQ6GlXxKXQMyND+oozcSLvV7DsUdVi2By+27y/9qKXG+i+00JbPRH
+         2+KHo13vwZdmzbaFnGRiyzihcwP27TD3RrfomFbXAZorz6bUacz43tU99G3ycQ0LAORs
+         T60Xd0qBHSzRgz5ln+D3CnLdPNMxPAqcmxpmoswe1W2kkMfVhTW3bEmWuelr475lx/Cd
+         SwZybLGNsQNPoVMmgOulEj9ahnKNw9Jy0lOnJOUQ5mE9UAHbofILR8xJYb6M7RFc5kXY
+         0THw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795437895; x=1796042695;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HVNW92KPaOSF54gmCgO2UWmCU5MAh/fhPfGmPOmNVdM=;
-        b=iCio9zwWb1TMtjTE/WnqnxIIKkZCNjmv58fwT17ySduMeiHqS4JSYbyy6R9x24kJuf
-         UBjgMdS1yKs5Q4k9hkARvTYLlS0g6QKkgkPOPAy1sV3Xn9FxnshL6PlgqVQEq7U3ZDRJ
-         beB2tQ5F/JnuG61p9SpFaxTAXfQWYtsvk6LDX/sUroyJvbgRtqWhnrHwMpTexvDZWdMu
-         8jXFDuzK4y1vPGQdqNM4b7DLR7He+fWLfRKRwbd8OUxJBe/h9Q4uKvaNvp5iKNeg3pg9
-         /YWTDUZwLP+/abTJJd7EAFtnYUrbIPFmKK1NtuvlBIKhJTo5o6KxYNE4ZJy2pIpJ5EtL
-         eJFA==
-X-Forwarded-Encrypted: i=1; AL+hErEkFcKrevSQmfqKEv3+wrxr0/vrzSs+T3H8AqA6Vver15k+BM7eFtVqq99czLeTawkvSJaQ+WH6Oy4h7HWd@vger.kernel.org
-X-Gm-Message-State: APuU4Z+shrp1yB+evbhfQ7Rmv+kz9ecn8WLM/AlBRhSKqf2argqaFbv6
-	Ne6hT1Owim1zfhTw3EVxIsfor8INO0fRN5A5Csq0C+nJwkPjcDfl8YeoD3xf428fhvffQQFRdo4
-	PsnhnAHVnmwxth+1653jatSjOGpF72Rp8bQ0ub8+IQza//IE/AOsDEDbBmxWiOXW3/D/C
-X-Gm-Gg: AZFdTZefaE9nKynBEQiQFqEhWn068cRucz4cxFsS0LPPlUgfTk9ld47iHisqqA776F+
-	k6hNuACwcjajSubYgeCPQ9e0AfjTjntV/sDjWwjxucPd0W7XaqCn4Vu1GkOssJLG6wCe1oGNEAu
-	0HakkbHo9ctuhqHO+yjQzSesj9l/ShJGnfydUVdaDO27rMevoAU7YjeNsaFcJQ39Qd9gPjqBZtx
-	c59iMLbDtLtKs60dzlbX6v2i8OjZNL/gnN0rbpJVVsrPYHkBhDq4BMosoRq3jc1gvcKE1nlPHOu
-	ltV0ScOGKKwRfogWAY5taSyWls0GPeyGUstHusZZUMD1M63gekjvQDAqzUv2uWQSBp69sA0AGui
-	ZLTgl2979yKioDQW8s9lk0EAhoQH2FXDzxKMW8eg89bhcK1St2dUD9/GVx/Ilk7S6b6rDphbAgK
-	Uc4Is9LyQODoG7Zt7RhwOxjEhhE8QPquKrGpUVkEhria+RQq1ljTSRCyfUKn7Bq0BoOF6TAv16U
-	N45YRA3eLEAAF5snrqRvSHn67wm
-X-Received: by 2002:a05:620a:460e:b0:949:7792:1106 with SMTP id af79cd13be357-949ba823b70mr1899685285a.1.1795437894327;
-        Mon, 23 Nov 2026 04:44:54 -0800 (PST)
-X-Received: by 2002:a05:620a:460e:b0:949:7792:1106 with SMTP id af79cd13be357-949ba823b70mr1899679785a.1.1795437893752;
-        Mon, 23 Nov 2026 04:44:53 -0800 (PST)
-Received: from QCOM-eG0v1AUPpu.na.qualcomm.com ([2a01:e0a:830:450:6c6b:1e5a:79dd:a527])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8538b09bsm649355875e9.4.2026.11.23.04.44.51
+        d=1e100.net; s=20260707; t=1795438946; x=1796043746;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=cKQuTWajHqDgBUzh5m680n1boH4vOLK3j00Iq2JfKIk=;
+        b=C5KqYNREiJgL9/bvqYqqB/OGPTeeYCQyFX8KrKTch2BFZMDRF/6VwtEQ4uYmV126oc
+         aa7oHVxHkbjac8vagJnYCLWKcmvt+rLLeo6CoVIXijsgMYmuF/GEdvzcNn3OSso4WQGY
+         SmFipEwIOEg61CFeeGGpsSXVYrCLmTv01K2nueta/hlykbDAyb2+Ij/7kwbWlAKpZ3hw
+         nGnKeyYDGAOOKt7ARlxn2uCiNG/c9FJ7ayFJKo/Q15dnUiXWxi4VDHIheRklrpDOn92J
+         dGRDMAMZVXYY5F79UYjHTxY9vXdBkXnHQt3kFPfP0ADSHR1Y6A66BiUFN2cGZNzzszh1
+         FNyQ==
+X-Gm-Message-State: APuU4Z9IsvRKEiO+9fngG64NCUWhjKxuurUqlsof8Clq8xAp36Uar38z
+	CCjp5OHMD27uA67JfQeeE9IwSzht0d7u1eXCPlwDhwHthTeiv0gsfdX4
+X-Gm-Gg: AZFdTZevrLyTTKNWokEC4ZRtYatIzyIRTWBaMhew15bm7k8roEVPAaQ3CHl/jkWS5Z/
+	XfKxbqjPkVL/kWu4sDmQV/FZbLFllLVXaQt6F7bCtp7g7WOpn0zbBsr++jZaU9xzROOAQSU9wtG
+	d+WVmeVQodNkMvg58us2vihUyZYU3xYyZarGkW31GdHzhmbNsCJ3oT5HUlj8OU2wDVdRTHflVnL
+	LRfftQzrxf0xesKPxDpeRjCwTpliKtPmeKpjjx3DCL5TFWZLlGj875+JnlmUCcDFTT6xaq4UvgZ
+	SFtisCQciLUL6Yf52bS3L6jU7Rl4/U25+xjQqyspyYBdP3rSU4RKFi6sESCyr6aqt6GKzOPKqai
+	WSD+tD/9BTyx7xRDKmFx8pLukHa/myOK0bxdilsr5jFF03uaYEzdokqK6xliKMaiJe2s7ik2kI4
+	Ap9BrhN24IQ0CyrtQxz7/0hbKn31pyEI/R6V0uDEHNhlcGcoJZqF1b5BwaOHVDt8G/Djr685CYS
+	JPD4IQtBJdBipjoy38peNSoubGAFs7O1hwVFDITkRkgYQ297bkBNPyTz+8tVqzQDnHh5ffc+0GG
+	0xXRkNTZTE6WTvlyLeUj3ocRYVJ1WzYn3DxS75H+0gQw
+X-Received: by 2002:a17:907:9584:b0:c34:e9fe:82ed with SMTP id a640c23a62f3a-c513a88223amr879508266b.28.1795438945419;
+        Mon, 23 Nov 2026 05:02:25 -0800 (PST)
+Received: from crispy-cucumber.local ([79.133.247.80])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ae688f8sm412660366b.25.2026.11.23.05.02.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 04:44:53 -0800 (PST)
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 13:44:45 +0100
-Subject: [PATCH v13 2/2] block: implement NVMEM provider
+        Mon, 23 Nov 2026 05:02:24 -0800 (PST)
+From: Erikas Bitovtas <erikas99876@gmail.com>
+Date: Mon, 23 Nov 2026 15:02:12 +0200
+Subject: [PATCH] arm64: dts: qcom: sm7125-samsung: add fuel gauge
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,437 +91,147 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-block-as-nvmem-v13-2-96ffe1f59332@oss.qualcomm.com>
-References: <20261123-block-as-nvmem-v13-0-96ffe1f59332@oss.qualcomm.com>
-In-Reply-To: <20261123-block-as-nvmem-v13-0-96ffe1f59332@oss.qualcomm.com>
-To: Ulf Hansson <ulfh@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Jens Axboe <axboe@kernel.dk>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Jeff Johnson <jjohnson@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Marcel Holtmann <marcel@holtmann.org>,
-        Luiz Augusto von Dentz <luiz.dentz@gmail.com>,
-        Balakrishna Godavarthi <quic_bgodavar@quicinc.com>,
-        Rocky Liao <quic_rjliao@quicinc.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
-        Simon Horman <horms@kernel.org>,
-        Srinivas Kandagatla <srini@kernel.org>, Andrew Lunn <andrew@lunn.ch>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Saravana Kannan <saravanak@kernel.org>,
-        Christian Marangi <ansuelsmth@gmail.com>,
-        Eric Dumazet <edumazet@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Eric Dumazet <edumazet@kernel.org>
-Cc: linux-mmc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-wireless@vger.kernel.org,
-        ath10k@lists.infradead.org, linux-bluetooth@vger.kernel.org,
-        netdev@vger.kernel.org, daniel@makrotopia.org,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Christoph Hellwig <hch@lst.de>
-X-Mailer: b4 0.14.2
-X-Proofpoint-GUID: YG9tK6MDsFXVSVq9HCNNetyjLYNaW9JB
-X-Authority-Analysis: v=2.4 cv=K+O3jCWI c=1 sm=1 tr=0 ts=6b043547 cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
- a=VT4XjZGOAAAA:8 a=PlhdpwwxGme58_HcCFAA:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22 a=6CpsfURP9XNmmWg3j1mJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1MCBTYWx0ZWRfX2+qNVXrJfSUy
- OYSqgByQI0j4DSt7Q0064ySrucLhj1fbpDpqd0h7DAsX6GyOxUM/uBRRKqad8AjYMTFxsmaz8pz
- Mo7lI30NkjoPS28zyoETerf4nEp+9L0=
-X-Proofpoint-ORIG-GUID: YG9tK6MDsFXVSVq9HCNNetyjLYNaW9JB
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1MCBTYWx0ZWRfX/k/i5Hrz9XMM
- cF0giGlQx6ZX/40hybgOp5zy4lqkDJO56VsXmgjqqeBR0jO5Qn96eMLdORruGvZn2P1Q8FaBFBy
- G7a3+ylvxjI+nkIeczM+xeXMr5DHdWZYmG8jN7cCdu0yb6YtEaGjNe5JmX4VQzo1r6+UJgP2unG
- EDo4X0cbhhr2wNx8N+3R3V6COCigxY3Ci1nkw98k/xoRmqsSns33U/DzZ/eMWuZh40BMUkEiBPb
- m1hl92GpQmdwQdiLVjYtCv71aONQxjEefUktdPa7tUxIq9JP5e+GXvyCiOrBlQlwTZWuVPHeRI0
- 1bE2U7VaDvh5YMWSaeUa42wi1fHXbZOgQF2NTWUCOnHaAXHawLybR7YgoukApzGVBAt3kDV0SfL
- Gq5JA/QEe0bP02Q099iiiwvG5P7005HjDoFFQwnAmMxgoLaOErnvepvKGv8cx5uLaIybeus8rhB
- iTSR/bcuIy9awwEshlQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-23_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 malwarescore=0 spamscore=0 adultscore=0 clxscore=1015
- lowpriorityscore=0 priorityscore=1501 bulkscore=0 suspectscore=0
- impostorscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611230050
+Message-Id: <20261123-sm7125-samsung-fuelgauge-v1-1-edcdef00a6ef@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/0WOQQqDMBBFryJZd8CxmFSvUlzEcUxTGm0TI4J49
+ 8YqdPnhzXuzisDechB1tgrPsw12HNLASybooQfDYLu0RZEXErFACE5hUULQLsTBQB/5ZXRMnC4
+ VSZ1ThZJEOn977u3yU9+bY4fYPpmm3XcSnj8xNacD+yfr7AhiCpLCWw7mbaFzGrRSlbx2FSNRP
+ ePuaXVgoNE5O9XZwMsE57e5aLbtC13hJprjAAAA
+X-Change-ID: 20261121-sm7125-samsung-fuelgauge-a57c6a0c916c
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
+ ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org, 
+ Erikas Bitovtas <erikas99876@gmail.com>
+X-Mailer: b4 0.15.2
 
-On embedded devices using an eMMC it is common that one or more partitions
-on the eMMC are used to store MAC addresses and Wi-Fi calibration EEPROM
-data. Allow referencing the partition in device tree for the kernel and
-Wi-Fi drivers accessing it via the NVMEM layer.
+Samsung Galaxy A52 and A72 use Silicon Mitus SM5714 interface PMIC,
+which includes a fuel gauge as one of its features. Enable GPI DMA and
+I2C controllers, add battery bindings and enable the interface PMIC fuel
+gauge.
 
-NVMEM is registered for a block device whose OF node describes an NVMEM
-layout, either via an "nvmem-layout" child or by being a "fixed-layout"
-node itself (e.g. an eMMC boot partition associated through its mmc-card
-node).
-
-The NVMEM device is a read-only side channel onto a block device.
-Each read opens the block device with BLK_OPEN_EXCL to keep other
-exclusive openers away for the duration of the access.
-
-Both the registration and the removal of the NVMEM device are deferred to
-an ordered workqueue, because they may run from under disk->open_mutex
-(add_partition(), drop_partition()) while:
-
- - nvmem_register() can read the device through ->reg_read() to let a
-   layout driver populate its cells, and
- - nvmem_unregister() waits for the in-flight readers to drain.
-
-As ->reg_read() opens the block device, and thus takes disk->open_mutex
-itself, registering synchronously would self-deadlock, and unregistering
-synchronously would deadlock against a reader blocked on disk->open_mutex
-while holding the NVMEM SRCU read lock.
-
-Keeping the queue ordered guarantees that, for a given block device, the
-registration has completed before the removal starts, and that the removal
-of a partition completes before the registration of its replacement, which
-otherwise would clash on the NVMEM device name when a partition table is
-re-read.
-
-Consumers looking up a cell before the provider shows up get -EPROBE_DEFER
-from the NVMEM core and retry later.
-
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Signed-off-by: Erikas Bitovtas <erikas99876@gmail.com>
 ---
- block/Kconfig             |  11 +++
- block/Makefile            |   1 +
- block/blk-nvmem.c         | 197 ++++++++++++++++++++++++++++++++++++++++++++++
- block/blk.h               |   8 ++
- block/genhd.c             |   4 +
- block/partitions/core.c   |   5 ++
- include/linux/blk_types.h |   4 +
- 7 files changed, 230 insertions(+)
+Samsung Galaxy A52 and A72 use Silicon Mitus SM5714 interface PMIC which
+includes a fuel gauge to measure battery state of charge. Add device
+tree bindings for their lithium-ion 4,500 and 5,000 mAh batteries
+respectfully, enable GPI DMA and I2C controllers and enable the SM5714
+fuel gauge.
 
-diff --git a/block/Kconfig b/block/Kconfig
-index 70e4a66d941ff66ecb0ec34f4f7eff7fd1e4be40..4899ad572c71ffdbb62460d57623216254893ddc 100644
---- a/block/Kconfig
-+++ b/block/Kconfig
-@@ -209,6 +209,17 @@ config BLK_INLINE_ENCRYPTION_FALLBACK
- 	  by falling back to the kernel crypto API when inline
- 	  encryption hardware is not present.
+Tested on Samsung Galaxy A72. The driver reports the same SoC and energy
+as on Android.
+
+This patch depends on a currently unmerged series for SC7180 GPI DMA:
+https://lore.kernel.org/all/20261112-sc7180-gpi-dma-v1-0-2a8eceb49563@gmail.com/
+---
+ arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts   |  4 +++
+ arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts   |  4 +++
+ .../arm64/boot/dts/qcom/sm7125-samsung-common.dtsi | 38 ++++++++++++++++++++++
+ 3 files changed, 46 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts b/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts
+index ecba5be8164e..cd58f1449290 100644
+--- a/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts
++++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-a52q.dts
+@@ -15,6 +15,10 @@ / {
+ 	qcom,board-id = <0x22 0x6>;
+ };
  
-+config BLK_NVMEM
-+	bool "Block device NVMEM provider"
-+	depends on OF
-+	depends on NVMEM
-+	help
-+	  Allow block devices (or partitions) to act as NVMEM providers,
-+	  exposing factory-provisioned data such as MAC addresses or Wi-Fi
-+	  calibration blobs to the drivers that consume them. This is
-+	  typically used on embedded devices where such data is stored in a
-+	  dedicated area of an eMMC, instead of a separate EEPROM or OTP.
-+
- source "block/partitions/Kconfig"
- 
- config BLK_PM
-diff --git a/block/Makefile b/block/Makefile
-index e7bd320e3d6971a8abf584f5de42776bb54e8216..8200297fbcbab304beb4239d0c33da07011c3ed9 100644
---- a/block/Makefile
-+++ b/block/Makefile
-@@ -39,3 +39,4 @@ obj-$(CONFIG_BLK_INLINE_ENCRYPTION)	+= blk-crypto.o blk-crypto-profile.o \
- 					   blk-crypto-sysfs.o
- obj-$(CONFIG_BLK_INLINE_ENCRYPTION_FALLBACK)	+= blk-crypto-fallback.o
- obj-$(CONFIG_BLOCK_HOLDER_DEPRECATED)	+= holder.o
-+obj-$(CONFIG_BLK_NVMEM)                += blk-nvmem.o
-diff --git a/block/blk-nvmem.c b/block/blk-nvmem.c
-new file mode 100644
-index 0000000000000000000000000000000000000000..628681f6b747b865100bcaec18ea650b08c6972f
---- /dev/null
-+++ b/block/blk-nvmem.c
-@@ -0,0 +1,197 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * block device NVMEM provider
-+ *
-+ * Copyright (c) 2024 Daniel Golle <daniel@makrotopia.org>
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ *
-+ * Useful on devices using a whole disk or a partition (e.g. an eMMC boot
-+ * partition) to store MAC addresses, Bluetooth addresses or Wi-Fi
-+ * calibration EEPROM data.
-+ *
-+ * The NVMEM device is a side channel onto a block device that stays fully
-+ * usable. This is somewhat mitigated by opening the device exclusively.
-+ */
-+
-+#include <linux/device.h>
-+#include <linux/file.h>
-+#include <linux/fs.h>
-+#include <linux/nvmem-provider.h>
-+#include <linux/nvmem-consumer.h>
-+#include <linux/of.h>
-+#include <linux/property.h>
-+#include <linux/slab.h>
-+#include <linux/workqueue.h>
-+
-+#include "blk.h"
-+
-+/**
-+ * struct blk_nvmem - NVMEM registration state of a block device
-+ * @bdev: block device backing the NVMEM device
-+ * @nvmem: registered NVMEM device, only accessed from the work items
-+ * @size: size of @bdev in bytes, sampled when the registration is queued
-+ * @add_work: work item registering @nvmem
-+ * @del_work: work item unregistering @nvmem and freeing this structure
-+ */
-+struct blk_nvmem {
-+	struct block_device	*bdev;
-+	struct nvmem_device	*nvmem;
-+	loff_t			size;
-+	struct work_struct	add_work;
-+	struct work_struct	del_work;
++&battery {
++	charge-full-design-microamp-hours = <4500000>;
 +};
 +
-+/*
-+ * The queue must stay ordered: it is what guarantees that the removal of a
-+ * block device completes before the registration of its replacement, which
-+ * otherwise would clash on the NVMEM device name, e.g. when re-reading a
-+ * partition table.
-+ */
-+static struct workqueue_struct *blk_nvmem_wq;
+ &rmtfs_mem {
+ 	reg = <0x0 0xf4f00000 0x0 0x202000>;
+ };
+diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts b/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts
+index f18d03de1585..73a1c3b7facc 100644
+--- a/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts
++++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-a72q.dts
+@@ -15,6 +15,10 @@ / {
+ 	qcom,board-id = <0x22 0x5>;
+ };
+ 
++&battery {
++	charge-full-design-microamp-hours = <5000000>;
++};
 +
-+static int blk_nvmem_reg_read(void *priv, unsigned int from,
-+			      void *val, size_t bytes)
-+{
-+	struct block_device *bdev = priv;
-+	struct file *bdev_file;
-+	loff_t pos = from;
-+	ssize_t ret;
-+
-+	/* open and prevent other exclusive openers */
-+	bdev_file = bdev_file_open_by_dev(bdev->bd_dev,
-+					  BLK_OPEN_READ | BLK_OPEN_EXCL,
-+					  blk_nvmem_reg_read, NULL);
-+	if (IS_ERR(bdev_file))
-+		return PTR_ERR(bdev_file);
-+
-+	/* the minor may have been recycled since the NVMEM was registered */
-+	if (file_bdev(bdev_file) != bdev) {
-+		bdev_fput(bdev_file);
-+		return -ENODEV;
-+	}
-+
-+	ret = kernel_read(bdev_file, val, bytes, &pos);
-+
-+	/* yield the claim synchronously, the file release is deferred */
-+	bdev_fput(bdev_file);
-+
-+	if (ret < 0)
-+		return ret;
-+	if (ret != bytes)
-+		return -EIO;
-+	return 0;
-+}
-+
-+static void blk_nvmem_add_work(struct work_struct *work)
-+{
-+	struct blk_nvmem *bn = container_of(work, struct blk_nvmem, add_work);
-+	struct block_device *bdev = bn->bdev;
-+	struct device *dev = &bdev->bd_device;
-+	struct nvmem_config config = {
-+		.id		= NVMEM_DEVID_NONE,
-+		.owner		= THIS_MODULE,
-+		.word_size	= 1,
-+		.stride		= 1,
-+		.read_only	= true,
-+		.root_only	= true,
-+		.ignore_wp	= true,
-+		.dev		= dev,
-+		.name		= dev_name(dev),
-+		.of_node	= dev_of_node(dev),
-+		.priv		= bdev,
-+		.reg_read	= blk_nvmem_reg_read,
-+		.size		= bn->size,
+ &rmtfs_mem {
+ 	reg = <0x0 0xf3700000 0x0 0x202000>;
+ };
+diff --git a/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi b/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi
+index 59ef4921f31e..5d854a76bb21 100644
+--- a/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm7125-samsung-common.dtsi
+@@ -22,6 +22,11 @@ / {
+ 
+ 	qcom,msm-id = <QCOM_ID_SM7125 0x0>;
+ 
++	battery: battery {
++		compatible = "simple-battery";
++		device-chemistry = "lithium-ion";
 +	};
-+	struct nvmem_device *nvmem;
 +
-+	nvmem = nvmem_register(&config);
-+	if (IS_ERR(nvmem)) {
-+		dev_err_probe(dev, PTR_ERR(nvmem),
-+			      "Failed to register NVMEM device\n");
-+		return;
-+	}
-+
-+	bn->nvmem = nvmem;
-+}
-+
-+static void blk_nvmem_del_work(struct work_struct *work)
-+{
-+	struct blk_nvmem *bn = container_of(work, struct blk_nvmem, del_work);
-+
-+	nvmem_unregister(bn->nvmem);
-+	put_device(&bn->bdev->bd_device);
-+	kfree(bn);
-+}
-+
-+void blk_nvmem_add(struct block_device *bdev)
-+{
-+	struct device *dev = &bdev->bd_device;
-+	struct device_node *np = dev_of_node(dev);
-+	struct blk_nvmem *bn;
-+	struct device_node *child;
-+	loff_t size;
-+
-+	/* skip devices which do not have a device tree node */
-+	if (!np)
-+		return;
-+
-+	/*
-+	 * The layout is described either by an "nvmem-layout" child node or
-+	 * by the device node itself being a "fixed-layout" container.
-+	 */
-+	child = of_get_child_by_name(np, "nvmem-layout");
-+	if (child)
-+		of_node_put(child);
-+	else if (!of_device_is_compatible(np, "fixed-layout"))
-+		return;
-+
-+	/*
-+	 * Sample the size here so that the value validated against the
-+	 * nvmem_config.size type is the one actually handed to the NVMEM core,
-+	 * even if the device is resized before the registration runs.
-+	 */
-+	size = bdev_nr_bytes(bdev);
-+	if (size > INT_MAX) {
-+		dev_warn(dev, "block device too large to be an NVMEM\n");
-+		return;
-+	}
-+
-+	if (!blk_nvmem_wq)
-+		return;
-+
-+	bn = kzalloc_obj(*bn);
-+	if (!bn)
-+		return;
-+
-+	bn->bdev = bdev;
-+	bn->size = size;
-+	INIT_WORK(&bn->add_work, blk_nvmem_add_work);
-+	INIT_WORK(&bn->del_work, blk_nvmem_del_work);
-+
-+	get_device(dev);
-+	bdev->bd_nvmem = bn;
-+
-+	queue_work(blk_nvmem_wq, &bn->add_work);
-+}
-+
-+void blk_nvmem_del(struct block_device *bdev)
-+{
-+	struct blk_nvmem *bn = bdev->bd_nvmem;
-+
-+	if (!bn)
-+		return;
-+
-+	bdev->bd_nvmem = NULL;
-+
-+	queue_work(blk_nvmem_wq, &bn->del_work);
-+}
-+
-+static int __init blk_nvmem_init(void)
-+{
-+	blk_nvmem_wq = alloc_ordered_workqueue("blk_nvmem", 0);
-+	if (!blk_nvmem_wq)
-+		return -ENOMEM;
-+
-+	return 0;
-+}
-+subsys_initcall(blk_nvmem_init);
-diff --git a/block/blk.h b/block/blk.h
-index 105fff157bfbd453ae4cfa993e8971ceb36d916e..0920afd23e9a701842f522243c246c75bbd49f54 100644
---- a/block/blk.h
-+++ b/block/blk.h
-@@ -839,4 +839,12 @@ static inline void blk_debugfs_unlock(struct request_queue *q,
- 	memalloc_noio_restore(memflags);
- }
+ 	chosen {
+ 		#address-cells = <2>;
+ 		#size-cells = <2>;
+@@ -379,6 +384,25 @@ &dispcc {
+ 	status = "disabled";
+ };
  
-+#ifdef CONFIG_BLK_NVMEM
-+void blk_nvmem_add(struct block_device *bdev);
-+void blk_nvmem_del(struct block_device *bdev);
-+#else
-+static inline void blk_nvmem_add(struct block_device *bdev) {}
-+static inline void blk_nvmem_del(struct block_device *bdev) {}
-+#endif
++&gpi_dma0 {
++	status = "okay";
++};
 +
- #endif /* BLK_INTERNAL_H */
-diff --git a/block/genhd.c b/block/genhd.c
-index 69204d44adae11eb8bccf5db8d5d5eaa0fa186a8..39adc6f5e44cf736161c67e63602249a32b42751 100644
---- a/block/genhd.c
-+++ b/block/genhd.c
-@@ -417,6 +417,8 @@ static void add_disk_final(struct gendisk *disk)
- 		 */
- 		dev_set_uevent_suppress(ddev, 0);
- 		disk_uevent(disk, KOBJ_ADD);
++&gpi_dma1 {
++	status = "okay";
++};
 +
-+		blk_nvmem_add(disk->part0);
- 	}
++&i2c4 {
++	status = "okay";
++
++	fuel-gauge@71 {
++		compatible = "siliconmitus,sm5714-fuel-gauge";
++		reg = <0x71>;
++
++		monitored-battery = <&battery>;
++	};
++};
++
+ &pm6150l_gpios {
+ 	key_vol_up_default: key-vol-up-default-state {
+ 		pins = "gpio8";
+@@ -421,6 +445,20 @@ &qfprom {
+ 	vcc-supply = <&vreg_l11a_1p8>;
+ };
  
- 	blk_apply_bdi_limits(disk->bdi, &disk->queue->limits);
-@@ -708,6 +710,8 @@ static void __del_gendisk(struct gendisk *disk)
- 
- 	disk_del_events(disk);
- 
-+	blk_nvmem_del(disk->part0);
++/* External pull-up */
++&qup_i2c4_default {
++	drive-strength = <2>;
++	bias-disable;
++};
 +
- 	/*
- 	 * Prevent new openers by unlinked the bdev inode.
- 	 */
-diff --git a/block/partitions/core.c b/block/partitions/core.c
-index eee954df1ac6ef7dd4f02ad5c9d49aed778bf015..c83227710584a6feb25c8abae3b319cfae9cce5b 100644
---- a/block/partitions/core.c
-+++ b/block/partitions/core.c
-@@ -289,6 +289,8 @@ void drop_partition(struct block_device *part)
- 	xa_erase(&part->bd_disk->part_tbl, bdev_partno(part));
- 	kobject_put(part->bd_holder_dir);
- 
-+	blk_nvmem_del(part);
++&qupv3_id_0 {
++	status = "okay";
++};
 +
- 	device_del(&part->bd_device);
- 	put_device(&part->bd_device);
- }
-@@ -406,6 +408,9 @@ static struct block_device *add_partition(struct gendisk *disk, int partno,
- 	/* suppress uevent if the disk suppresses it */
- 	if (!dev_get_uevent_suppress(ddev))
- 		kobject_uevent(&pdev->kobj, KOBJ_ADD);
++&qupv3_id_1 {
++	status = "okay";
++};
 +
-+	blk_nvmem_add(bdev);
-+
- 	return bdev;
- 
- out_del:
-diff --git a/include/linux/blk_types.h b/include/linux/blk_types.h
-index 644b9528f2749f82df4d014adc0149dc42c986a8..8f2708e4075e7390ed58ef764ddd4684d4bc1458 100644
---- a/include/linux/blk_types.h
-+++ b/include/linux/blk_types.h
-@@ -15,6 +15,7 @@
- struct bio_set;
- struct bio;
- struct bio_integrity_payload;
-+struct blk_nvmem;
- struct page;
- struct io_context;
- struct cgroup_subsys_state;
-@@ -74,6 +75,9 @@ struct block_device {
- 	int			bd_writers;
- #ifdef CONFIG_SECURITY
- 	void			*bd_security;
-+#endif
-+#ifdef CONFIG_BLK_NVMEM
-+	struct blk_nvmem	*bd_nvmem;
- #endif
- 	/*
- 	 * keep this out-of-line as it's both big and not needed in the fast
+ &sdhc_2 {
+ 	vmmc-supply = <&vreg_l9c_2p95>;
+ 	vqmmc-supply = <&vreg_l6c_3p0>;
 
--- 
-2.34.1
+---
+base-commit: 2c0da72bad5631bda9c70dcfbe3497a0ebd9f936
+change-id: 20261121-sm7125-samsung-fuelgauge-a57c6a0c916c
+prerequisite-change-id: 20261111-sc7180-gpi-dma-a77963d9e1cc:v1
+prerequisite-patch-id: 70dc64e33232cae6744eeb11e8f53e099eb49c1f
+prerequisite-patch-id: 1ba00e1d0ffd80fa49f64e8b627ab07ce9478e74
+
+Best regards,
+--  
+Erikas Bitovtas <erikas99876@gmail.com>
 
