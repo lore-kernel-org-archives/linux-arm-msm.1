@@ -1,59 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795420526;
-	b=gcMtF17l8fTOyDqPBqfHXGSAArkxGf3Dgu9Pc6hyJykLlmE3WwUNiRrq1CJGwHnt9RMf
-	 vhDVb99odlCeObggV+0rBgmC+vcJC4P97OY+FVZdLmtW0zZH3GL5WsPe/Z8TVw1K3U6RL
-	 B6x1lpdSR2oqZjNKus91yDE6q9p6KTJf6Tdy0dvyQ8nAaIHP6pTMt7hVWKkJvbMyZOF6c
-	 yEsWhbUUTlpOE7Z755SNarC3093JGO0VnWV1sgI7jOYbJmVRBqaj4aUjOtkXkLzM4I9cn
-	 uT4t4MMO5W/wAYohhmeqmH6Kd4vBlgsvqJxQxvsUHpmxdR/NP1nsOZFPzQaikYTrYHA==
+	t=1795420571;
+	b=T0U4hmzfnqEabQQQaGeCpW2vvfRtQqa5Q6mFQqYmmPrFxcT8IsjCZvI/hyE5v20PefIF
+	 G0FmX7MdQkFDaTp2d06j00paSYm6waaZKewbF1VvlQmz++m610zTuUzwyINdVDlXZHjjl
+	 M+AR8mpjSsii7pIOYF4B7+LHFjjhcg6jIvhxHAIS6jN05tZdKtgbiDPrLtpL3NOXDliVp
+	 zakYsPKSTrjG7TDC9Wl/bYhFoE12WamuLlwJnA+sGCS5SgBAOd+ghQUV/dBHZu+pj50hJ
+	 QIxyq/4fDwjg3FYZqWguzUGJSpC4TAewnj5T0CNqZR6e2t0pbbadZ6WUNCkLXBFxdEQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795420526;
-	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=kRuttRtAXghKQw9JQDeJ35r5iBaZC3tabdn1xUwMZh8=;
-	b=kSv1KZxfhIviLzSYW5Xj0Rk8HTi9CIHr8vrrS22LTUZVoRNLCcxQoCGTPOrV+d6Jr3Na
-	 Zy4PkuMDZlZgADgpnW3jURffEk+kW2WrmZDpFIIpm7buwqD4Ax+CEfzdmKroQrMbkyNiy
-	 S6zsnaULaLpUcZMORVQlNaNGXe8zw6YRmpjHjI3lnA30/liIdEyi01EBWmbVYtrzTupZ8
-	 MEhWctamxSmyEm0yYSVQi5Twp4/GI7PfVPSyjRxBrrQtlBONkFIMg47trOKGPU6EyOGkp
-	 U632cuxqosJsdA5D/+NCfNJC7M1EcWuVAITiW0wv1SGHdMGw67azV8u6lNwbor/ziUQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795420571;
+	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+	bh=xIvWT2gnfP5T3OT4//6KuPbQPQynD1bwik32TvuqPnY=;
+	b=NRT9kkzuA+/1INl3UoAg90WpybghkNirkyiAZwuKcIwj9r5fCa4FKg9k3M6uyCi08erm
+	 pT/YWVndKcA7iHCvb6As9llSh4jCXWEQRi/wYtCJcT9c3nxoTQqg6ka7pWEHhitNzpILg
+	 S+kuaG8+I32SGesyvgPJ3tUw5uHz3HvbHGYREJoi+D6f3xw7uS99U/3QMzu7vrzUkTeIf
+	 9ReK0x3F4m7TtJXhxB+AiZ4GNvcNGRghCumQ4bU4vyPFyJaa1P7iFr6acEqgNGoof6z7I
+	 toWGne6B63sVeNJ8xHGATMN7hrHg4NhKUD+qqTlUkyS0WbJda6k4eYzWXhotVsZ1ZCg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="X/z8j5j8";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DaR6jJVS;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C13D4606A31A;
-	Mon, 23 Nov 2026 07:55:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C8E2D606A31A;
+	Mon, 23 Nov 2026 07:56:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=X/z8j5j8
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83ECA1F000C4;
-	Mon, 23 Nov 2026 07:55:24 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DaR6jJVS
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D5A671F000C6;
+	Mon, 23 Nov 2026 07:56:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795420526;
-	bh=kRuttRtAXghKQw9JQDeJ35r5iBaZC3tabdn1xUwMZh8=;
-	h=From:To:Cc:Subject:Date;
-	b=X/z8j5j83NXsy219rlE97U1ZwCvA9m3UCwjOWy+p+d0uN9nB9+KI1kXbt14FWjv9D
-	 HOMmBpP2slCUJFb1Dw+/B8S5w9KD1Ho6d5rYvwxrlHUyMIhcXCmBhCoqAaY+64zSSt
-	 f8O57Z8QV/arQlbWP8q1ZEQfxdB/ChWHIWebEKuf7RDgOwpX9apFo3cS2ALV1903Di
-	 5lFxDXzY5xyH/uKkqke0OMto2MH8CD5tMzEKkexcwfCsdZbb5iLx7xDEdvwZ+y024F
-	 OY83nY1POMDxiEWCrUJ3hbuIFO+zgdRLbW5G3zAvzq5iYXCM4JxrREziWbUz8DmZA+
-	 KN6cJVgwb9H4A==
+	s=k20260515; t=1795420571;
+	bh=xIvWT2gnfP5T3OT4//6KuPbQPQynD1bwik32TvuqPnY=;
+	h=From:To:Subject:Date:In-Reply-To:References;
+	b=DaR6jJVSlhvlluCZ6HZ5F5Jbkd3To/Xw6Qp0fcm9VVGWVVPN4L+LmO71W6PGLNI3y
+	 dO1Kt0lM9d5ueKWesK+X0jfSQoayJy5hFKaHDn3Zwu/gGHoPYTbRQI5BeM6X8SUDfu
+	 ga84xD4VLghXV60REhiK/dqr1xndfkrGW5m16Vgf48fhnK94xFUAiYQFi39gI9Bl8/
+	 uottdR+MgQWMqVJYjIXUVHDMW1f5eo6bc0XwSBX9GhxrgfBwG4QFvK+TvOhaXBggcI
+	 0Pi+onJNBG1kf3YVd9olz1ve5OKbe2Fd1uKb5sMVjXnulJ2ytLDIdZgCrSeUAS9/ys
+	 wyl4bbFrZ+jvw==
 From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org
-Cc: linux-kernel@vger.kernel.org,
+To: lee@kernel.org,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>,
 	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Charles Keepax <ckeepax@opensource.cirrus.com>,
-	HyeongJun An <sammiee5311@gmail.com>,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
 	linux-arm-msm@vger.kernel.org,
 	linux-sound@vger.kernel.org,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>
-Subject: [PATCH v3 00/10] soundwire: Fix Critical and High issues reported by Sashiko
-Date: Mon, 23 Nov 2026 07:54:21 +0000
-Message-ID: <20261123075522.405347-1-lee@kernel.org>
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v3 06/10] soundwire: qcom: Prevent pconfig buffer overflow in qcom_swrm_stream_alloc_ports()
+Date: Mon, 23 Nov 2026 07:54:27 +0000
+Message-ID: <20261123075522.405347-7-lee@kernel.org>
 X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
+In-Reply-To: <20261123075522.405347-1-lee@kernel.org>
+References: <20261123075522.405347-1-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,62 +63,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-These issues were reported by Sashiko.
+qcom_swrm_stream_alloc_ports() allocates the pconfig array with
+ctrl->nports elements, but only checks that the assigned port number pn
+is below maxport.  When multiple slave ports map to the same master port
+via m_port_map or the stream requests more slave ports than
+ctrl->nports, nports increments past ctrl->nports and writes out of
+bounds of pconfig.
 
-Patches 1-3 have been hardware-tested on Intel Tiger Lake / Cirrus Logic
-systems by HyeongJun An and Charles Keepax; the remaining patches have
-been build-tested only.
+Verify that nports is less than maxport before writing to
+pconfig[nports], and clear only the port_mask bits newly allocated
+during the loop before returning -EBUSY.
+
+Closes: https://sashiko.dev/#/bug/linux-543ea0c0-a6e5-4b03-a041-ea0a760802c1
+Signed-off-by: Lee Jones <lee@kernel.org>
+---
 
 v2 => v3:
- - Rebase onto soundwire/next
- - Collect Reviewed-by and Tested-by tags on patches 1-3 (Charles,
-   HyeongJun)
- - stream: Validate slave port configuration and stream parameters
-   before mutating runtime or stream state on error paths
- - qcom: Track newly allocated port_mask bits in a local bitmap so error
-   rollback in qcom_swrm_stream_alloc_ports() never clears pre-existing
-   ports
+ - Track newly allocated port_mask bits in a local bitmap so error
+   rollback never clears pre-existing ports
 
-v2: https://lore.kernel.org/all/20261103095445.81414-1-lee@kernel.org/
-v1: https://lore.kernel.org/all/20261030104840.3361217-1-lee@kernel.org/
+v1 => v2:
+ - Drop Fixes and Stable tags
 
-Cc: Bard Liao <yung-chuan.liao@linux.intel.com>
-Cc: Charles Keepax <ckeepax@opensource.cirrus.com>
-Cc: HyeongJun An <sammiee5311@gmail.com>
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-sound@vger.kernel.org
-Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: Srinivas Kandagatla <srini@kernel.org>
-Cc: Vinod Koul <vkoul@kernel.org>
+ drivers/soundwire/qcom.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
 
-Lee Jones (10):
-  soundwire: bus: Hold bus_lock when looking up slave devices
-  soundwire: sysfs: Use sysfs_emit_at() in array show callbacks
-  soundwire: stream: Prevent m_rt_count underflow in
-    sdw_stream_remove_master()
-  soundwire: stream: Clean up allocated runtime resources on config
-    failure
-  soundwire: intel_ace2x: Protect bus.bpt_stream with bus_lock
-  soundwire: qcom: Prevent pconfig buffer overflow in
-    qcom_swrm_stream_alloc_ports()
-  soundwire: qcom: Disable runtime PM and avoid clock underflow in
-    qcom_swrm_remove()
-  soundwire: qcom: Check clk_prepare_enable() return value
-  soundwire: qcom: Serialise ctrl->intr_mask updates
-  soundwire: qcom: Prevent stale broadcast IRQ from completing
-    subsequent command
-
- drivers/soundwire/bus.c             |   6 +-
- drivers/soundwire/intel_ace2x.c     |  20 ++++--
- drivers/soundwire/qcom.c            | 100 +++++++++++++++++++++++-----
- drivers/soundwire/stream.c          |  96 ++++++++++++++++++--------
- drivers/soundwire/sysfs_slave.c     |   6 +-
- drivers/soundwire/sysfs_slave_dpn.c |   8 +--
- 6 files changed, 174 insertions(+), 62 deletions(-)
-
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index 6e0c5fb10efa..16ad86912e51 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -1306,7 +1306,7 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 	struct sdw_slave_runtime *s_rt;
+ 	struct sdw_port_runtime *p_rt;
+ 	struct sdw_slave *slave;
+-	unsigned long *port_mask;
++	unsigned long *port_mask, allocated = 0;
+ 	int maxport, pn, nports = 0;
+ 	unsigned int m_port;
+ 	struct sdw_port_config *pconfig __free(kfree) = kzalloc_objs(*pconfig,
+@@ -1350,11 +1350,13 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+ 				else
+ 					pn = find_first_zero_bit(port_mask, maxport);
+ 
+-				if (pn >= maxport) {
++				if (pn >= maxport || nports >= maxport) {
+ 					dev_err(ctrl->dev, "All ports busy\n");
++					*port_mask &= ~allocated;
+ 					return -EBUSY;
+ 				}
+-				set_bit(pn, port_mask);
++				if (!test_and_set_bit(pn, port_mask))
++					__set_bit(pn, &allocated);
+ 				pconfig[nports].num = pn;
+ 				pconfig[nports].ch_mask = p_rt->ch_mask;
+ 				nports++;
 -- 
 2.56.1.750.gf70dc682cf-goog
 
