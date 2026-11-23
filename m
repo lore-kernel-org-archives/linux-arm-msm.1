@@ -1,59 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795443304;
-	b=VkLjIQVatnOisgk5mLPhKSJwxUTioZ6iUg6izj830pTbR5AKuvuFf2spyaE4edmmbLQ9
-	 bfGGuG23oVvWMzuHPOG3kflHXv/O89IMWwLsix8z7215vhML3sQphBzbXhAJlzdOY5uFP
-	 edkuvIZj93ItaQbeO+Px5tfKj8hMx0rBf7pgq0AbbpkVR0GMwPTWVzAn+zEM7I9N45yWY
-	 9JjfoYZ6CtFqdfyFbQInrGCsV42wkSXoVM5Rs4Gb02TDh/YYRujaFXhwXzVMf5/grBvZf
-	 G9kIsZyHNi7+1781M5KGLCvDZzyx5T0pXfRSGM6KNLtLEnpZaH0jac1MzbJkTCfaxoA==
+	t=1795443498;
+	b=j3PWODGMdGR3x+wZ3iq//nzcvRAwhcJeSOBrDVo04zxtN2bCS7VVcaIiOkp/sqOaEQlj
+	 oeoI0qSYiHK6RYqbDDws60lRE2Vk+eJKqRxv5TRy43xRKqUg06WU8ihTnkx4Mf1ejRuRx
+	 FewgAmb7eOGcwm6JfcR5Kp2WozxTBfcoL3wKhJaT5N97iPPwQXMbdhgTZrk8qjjMtx5Pa
+	 J/hqmVN+K1zU/wlGD+mrNDhU+SLdb+I1Ek6KWq/PmEpQpcglzrde67/yGfpAkIPW+X+a/
+	 KpWcGaZkg1FqSpAMnoLN7hLDGfg0ZwBqOSmpysECw+i2I2UvTeaocAteZ6wwXb3fqlA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795443304;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795443498;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=vMS5GsT+FQIMrcDcIClkix4yuVqpJWj2FVwp1tBqdZA=;
-	b=YrWXvcrno8IrecyF59c7D5RSMDiqisysNss8i/ekYhTiR9ZoO8HIsNTOgEB9wrB0DFp1
-	 lt3fQIOfAX6bX4v0FXsuiBKgebJRsnDGxJIKH9B+6ObGzHGFEhJPY89Sox+ZgfFvSVzMn
-	 eMzPXX6gzFhFE73BKpBNFhOUwp1IZbomkNrsizXPo22vs09nYlVcwKmBfwVgtV741wQ1a
-	 aBFGtUKxcZYEltMQsfJIHuDwkFQ/H3S+llGPyOCpKh2l0npPwOP1Ltf/PgheJDDy/bszL
-	 Ppv8PyD5GVDbxnXhgDvLsqis3z+uZ0ZKZ6/i8UQdMpWjS8R6DWBqUBjSEmOTtXrQliw==
+	bh=PUVqmxnQ7HR4VrpZewYNYzB53YPHv8jMakK6f/4a78o=;
+	b=2JfHcN6R7RUN4F6zyexsC5xTp8xNFe7Cte1paC8+Prb8Km8qpadeTZ2bb3zCd6zfSxZa
+	 azGYd9TSqUqTG9nYCACMqaolvRVhb1oFObVbupL+E3MV+5tHTsFknVFLF3Or5LugfuTsk
+	 Pf2pJqdt9XGp0Rr9ZpVwmjmmWu79kw0h1wfNbMIU7hbzRW0Lhx/0S3nvwaASw81dRL0si
+	 93hQjzHxZRPYbF0eLV+YThsEKamJIxVIv++GdkKc5+tkrqIq917+VZd+v2ck2oSdlNX6l
+	 IZFgqVZMYBSsVL6nJpAIGvlPbpz/z1p9Shp5KBm5YQ1+gEDUAEQqixkfG3MNvZOZ/Pg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dKoeBY5r;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bhI6uYpj;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 19634606A331;
-	Mon, 23 Nov 2026 14:15:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 6C2FD606A327;
+	Mon, 23 Nov 2026 14:18:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dKoeBY5r
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id BC8631F000C4;
-	Mon, 23 Nov 2026 14:15:02 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=bhI6uYpj
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id E50F91F000F2;
+	Mon, 23 Nov 2026 14:18:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795443303;
-	bh=vMS5GsT+FQIMrcDcIClkix4yuVqpJWj2FVwp1tBqdZA=;
+	s=k20260515; t=1795443497;
+	bh=PUVqmxnQ7HR4VrpZewYNYzB53YPHv8jMakK6f/4a78o=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=dKoeBY5rW4/ez1gkQEIBPsXto3zTNST7Hs3HdUbeUStHoba6+w1E+izU8jVnvbNs2
-	 NxvLViQRf5OBc/LnIxO1n9fvsQpDGeD2PQV/jGWnjBg5tOeP5jQiBkd6mersZmA52/
-	 UsHwDV98N9gC3yEONBBA5lPH7bWA/JkHiamZexhcy9MmRxeILmQ/FYhj/yCMhTRMCC
-	 JzJ8s0pcvf3msUyXP9LH96oqk+TISc0wL1ixY0X7xn/Af55lEQshol+0MFP0EkLpcu
-	 BNDQOQlIkPh0Hon7/omAmIwIMvCLhj4QpT//m3fj0MBDGrQK1QpBiGb/LOzglXxBRu
-	 7HbYnrvwF3+7Q==
-Date: Mon, 23 Nov 2026 15:14:56 +0100
+	b=bhI6uYpj92B2HRLotp3qq7BEhf1dlKmsLgXqayXudlX4v1xwg4daM/JIJV8odiD+4
+	 KvWUI+jVPPVJUs0JnVPydTR6Yg8KW34H1+Q8fQtM61CP36HMmefVR1yxDZA+UcKSAn
+	 wCWLsc8tAw7xKPFWr0N0iAyuJMcP+QVV9w5UIjFDbCXKpDesMGxvL6YVH52aNlot0Z
+	 yb0v7Qo/5jD+NBbqIqKnur2HQkQ5dzLBn6pfLBqt1bzgEFEy4vy5X8byQQWfPfxHep
+	 Z4j7DNs6u9lswZjhFf+kpDAsrOqVsHJ5xfdG18NyK160IfpKd5DyhElph8oRXVcNe7
+	 ltolFeDk9oAwQ==
+Date: Mon, 23 Nov 2026 15:18:14 +0100
 From: Bartosz Golaszewski <brgl@kernel.org>
-To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
-Cc: Herbert Xu <herbert@gondor.apana.org.au>, 
-	"David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>, 
-	linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
-	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, Wenjia Zhang <wenjia.zhang@oss.qualcomm.com>
-Subject: Re: [PATCH v4 2/2] arm64: dts: qcom: shikra: Correct QCE node
- configuration
-Message-ID: <x5s55d47l5wi3ai476f57mkwlgsbup33mo4gsgoblaqirqasll@qrer3w2a5xmk>
-References: <20261120-shikra_qce_fix-v4-0-5249e31394ce@oss.qualcomm.com>
- <20261120-shikra_qce_fix-v4-2-5249e31394ce@oss.qualcomm.com>
+To: Sasha Levin <sashal@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Julian Braha <julianbraha@gmail.com>, 
+	Arnd Bergmann <arnd@arndb.de>, Sumit Garg <sumit.garg@oss.qualcomm.com>, 
+	Geert Uytterhoeven <geert+renesas@glider.be>, linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] firmware: qcom: Build the TrustZone memory allocator
+ into qcom-scm
+Message-ID: <5opm5625cla4yamlhadvmmel2t4ilzfu2x3fta32fge2z2fiui@rfifnhocq6dy>
+References: <20261122152843.1113882-1-sashal@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,19 +62,32 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261120-shikra_qce_fix-v4-2-5249e31394ce@oss.qualcomm.com>
+In-Reply-To: <20261122152843.1113882-1-sashal@kernel.org>
 
-On Fri, Nov 20, 2026 at 04:59:53PM +0530, Kuldeep Singh wrote:
-> Shikra QCE requires an explicit core clock, which is missing from the
-> current configuration. Adjust fallback compatible to "qcom,ipq4019-qce"
-> and specify core clock to match updated binding description.
+On Sun, Nov 22, 2026 at 10:28:43AM -0500, Sasha Levin wrote:
+> With QCOM_TZMEM_MODE_SHMBRIDGE=y, qcom_tzmem.ko calls
+> qcom_scm_shm_bridge_enable(), qcom_scm_shm_bridge_create() and
+> qcom_scm_shm_bridge_delete() in qcom-scm.ko, and qcom-scm.ko calls
+> qcom_tzmem_alloc() and friends. With QCOM_SCM=m the two modules depend
+> on each other, neither can be loaded first, and modules_install fails:
 > 
-> Cryptobam is controlled remotely and its clocks are therefore managed by
-> remote crypto subsystem.
+>   depmod: ERROR: Cycle detected: qcom_scm -> qcom_tzmem -> qcom_scm
+>   depmod: ERROR: Found 2 modules in dependency cycles!
 > 
-> Fixes: 099cd05d200b ("arm64: dts: qcom: shikra: Add ICE, TRNG and QCE nodes")
-> Tested-by: Wenjia Zhang <wenjia.zhang@oss.qualcomm.com> #on shikra device
-> Signed-off-by: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+> This has been possible since SHM Bridge mode was added. Since commit
+> 35abc3cd8ab6 ("tee: remove TZMEM_MODE_GENERIC") it also happens for
+> every QCOMTEE=m build with QCOM_SCM=m, because QCOMTEE's select of
+> QCOM_TZMEM_MODE_SHMBRIDGE now takes effect.
+> 
+> QCOM_TZMEM is selected only by QCOM_SCM, so the two always have the
+> same value. Build qcom_tzmem.o into qcom-scm.ko, and drop the
+> MODULE_DESCRIPTION() and MODULE_LICENSE() that qcom-scm already has.
+> 
+> Fixes: f86c61498a57 ("firmware: qcom: tzmem: enable SHM Bridge support")
+> Reported-by: Nathan Chancellor <nathan@kernel.org>
+> Closes: https://lore.kernel.org/all/20261122051636.GA2630332@ax162/
+> Signed-off-by: Sasha Levin <sashal@kernel.org>
 > ---
+>
 
-Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com> 
+Acked-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
