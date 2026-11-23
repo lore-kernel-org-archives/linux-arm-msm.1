@@ -1,61 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795420346;
-	b=u0ZWoUaMm8XDWQJ20uucaeabmXtOBCFaV96zmY9S2Mho88+Sj75u92OVbW+XNa5AUyp0
-	 a3bCk41f3/Vx2DEyaCZhkVfoCWtxljVM61Ikxa7SYojeOBkQRXevooesjSbk+jGrtQIls
-	 9mt41GH4PHbUTzy2PG2SXbDI2IhXgU2IvoDd0nUUS5yvqrSbYpDoP4Iffq2o8x2F6uP7Q
-	 5GbCmU3ZrULbA3jEur3GHNDRtzj7IXcC677AMISOaKqEQrLWmMk6W85CtIhoKqTdTHZ+Y
-	 ARsI/hjGgvZ2Z0SoDj/ZPUEuUzRMpqto2eX+uOjwvNz1wCLKnLcEZJV3dW5HLoHb1fw==
+	t=1795420526;
+	b=gcMtF17l8fTOyDqPBqfHXGSAArkxGf3Dgu9Pc6hyJykLlmE3WwUNiRrq1CJGwHnt9RMf
+	 vhDVb99odlCeObggV+0rBgmC+vcJC4P97OY+FVZdLmtW0zZH3GL5WsPe/Z8TVw1K3U6RL
+	 B6x1lpdSR2oqZjNKus91yDE6q9p6KTJf6Tdy0dvyQ8nAaIHP6pTMt7hVWKkJvbMyZOF6c
+	 yEsWhbUUTlpOE7Z755SNarC3093JGO0VnWV1sgI7jOYbJmVRBqaj4aUjOtkXkLzM4I9cn
+	 uT4t4MMO5W/wAYohhmeqmH6Kd4vBlgsvqJxQxvsUHpmxdR/NP1nsOZFPzQaikYTrYHA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795420346;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795420526;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=pzBruCLqcjTUf993fFO1zsE6F8+uGYlxYUHOWN/SV4U=;
-	b=l4qTaN+UJ7krpWEml4yvrxSKi5hj+nAayB7sy8tPUydSMdEBrBhhZ/kMG8A37QGUwNKN
-	 D7unE/CSldC2JUafH+8gWmw/CcAgXUOmcnQz/aOVwla+U2g1SwDFCpispFklXscNFBKja
-	 T64yTSa00eox0T+q8dKkfMqEQILgE+Qz7HV8elap45gILSZGbNiWbF/mxxrAtuD3zCCEA
-	 jPbb3JVBeugs/1hJy6WnVPRVdTClQq0Xb5rr28P4/prQohFu4W94LRbcfBy+Jl9/dqBQ1
-	 +9ABTz/N4qCgbbX5c5cdW1mI8O9S/HLM9E6o/KmzZb19aaewyKJ5ptRTtw9a+YJxvtw==
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=kRuttRtAXghKQw9JQDeJ35r5iBaZC3tabdn1xUwMZh8=;
+	b=kSv1KZxfhIviLzSYW5Xj0Rk8HTi9CIHr8vrrS22LTUZVoRNLCcxQoCGTPOrV+d6Jr3Na
+	 Zy4PkuMDZlZgADgpnW3jURffEk+kW2WrmZDpFIIpm7buwqD4Ax+CEfzdmKroQrMbkyNiy
+	 S6zsnaULaLpUcZMORVQlNaNGXe8zw6YRmpjHjI3lnA30/liIdEyi01EBWmbVYtrzTupZ8
+	 MEhWctamxSmyEm0yYSVQi5Twp4/GI7PfVPSyjRxBrrQtlBONkFIMg47trOKGPU6EyOGkp
+	 U632cuxqosJsdA5D/+NCfNJC7M1EcWuVAITiW0wv1SGHdMGw67azV8u6lNwbor/ziUQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T8WAQKBS;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="X/z8j5j8";
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 725FC606A688;
-	Mon, 23 Nov 2026 07:52:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C13D4606A31A;
+	Mon, 23 Nov 2026 07:55:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T8WAQKBS
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id ACC7F1F000D0;
-	Mon, 23 Nov 2026 07:52:24 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=X/z8j5j8
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 83ECA1F000C4;
+	Mon, 23 Nov 2026 07:55:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795420346;
-	bh=pzBruCLqcjTUf993fFO1zsE6F8+uGYlxYUHOWN/SV4U=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=T8WAQKBSFSa+AYF4ma/3QxzVEqIGxhTDeaBYC5fDApUW6Q2MnCu8CQ8g0alJZ/FsG
-	 8EEYKMcowfWLHZ86+Md4g7SXs3auULNQWpi+vTU5+UZTEiHzYXYmk7VbxUZ4e5jK4D
-	 2YP04mQQp00xj1ZIFKESyZbmRiRLdwXs6rPXSWszuYU6Pt0r2qsKJ9xCuoklgl5mCo
-	 8R6xeF98wltDir9AcX4DZ0LdVKco+nhMiYm0NSqNpBY+8KqsREbkKEY93iln0rvOsR
-	 byYRTJX4jFA8xCUGB5kWpAYj5Och0Pqn/HOUX4mfDlI7CWMvKcEShCr4r/gpE40Y1k
-	 8G2d6d6K81v4Q==
+	s=k20260515; t=1795420526;
+	bh=kRuttRtAXghKQw9JQDeJ35r5iBaZC3tabdn1xUwMZh8=;
+	h=From:To:Cc:Subject:Date;
+	b=X/z8j5j83NXsy219rlE97U1ZwCvA9m3UCwjOWy+p+d0uN9nB9+KI1kXbt14FWjv9D
+	 HOMmBpP2slCUJFb1Dw+/B8S5w9KD1Ho6d5rYvwxrlHUyMIhcXCmBhCoqAaY+64zSSt
+	 f8O57Z8QV/arQlbWP8q1ZEQfxdB/ChWHIWebEKuf7RDgOwpX9apFo3cS2ALV1903Di
+	 5lFxDXzY5xyH/uKkqke0OMto2MH8CD5tMzEKkexcwfCsdZbb5iLx7xDEdvwZ+y024F
+	 OY83nY1POMDxiEWCrUJ3hbuIFO+zgdRLbW5G3zAvzq5iYXCM4JxrREziWbUz8DmZA+
+	 KN6cJVgwb9H4A==
 From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	Jonathan Cameron <jic23@kernel.org>,
-	David Lechner <dlechner@baylibre.com>,
-	=?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>,
-	Andy Shevchenko <andy@kernel.org>,
-	Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>,
+To: lee@kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	Bard Liao <yung-chuan.liao@linux.intel.com>,
+	Charles Keepax <ckeepax@opensource.cirrus.com>,
+	HyeongJun An <sammiee5311@gmail.com>,
 	linux-arm-msm@vger.kernel.org,
-	linux-iio@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Subject: [PATCH v2 6/7] iio: adc: qcom-spmi-adc5-gen3: Reject empty reg property in probe
-Date: Mon, 23 Nov 2026 07:50:32 +0000
-Message-ID: <20261123075122.373060-7-lee@kernel.org>
+	linux-sound@vger.kernel.org,
+	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
+	Srinivas Kandagatla <srini@kernel.org>,
+	Vinod Koul <vkoul@kernel.org>
+Subject: [PATCH v3 00/10] soundwire: Fix Critical and High issues reported by Sashiko
+Date: Mon, 23 Nov 2026 07:54:21 +0000
+Message-ID: <20261123075522.405347-1-lee@kernel.org>
 X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-In-Reply-To: <20261123075122.373060-1-lee@kernel.org>
-References: <20261123075122.373060-1-lee@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -65,42 +63,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-If a firmware node supplies an empty reg property,
-device_property_count_u32() returns 0, which passes the negative error
-check in adc5_gen3_probe() and leaves num_sdams set to 0.  Subsequent
-zero-length allocations return ZERO_SIZE_PTR, which is then dereferenced
-when requesting the VADC SDAM interrupt, and num_sdams * 8 - 1 wraps in
-unsigned comparisons when counting TM channels.
+These issues were reported by Sashiko.
 
-Return -ENOENT when device_property_count_u32() reports zero elements.
+Patches 1-3 have been hardware-tested on Intel Tiger Lake / Cirrus Logic
+systems by HyeongJun An and Charles Keepax; the remaining patches have
+been build-tested only.
 
-Fixes: baff45179e90 ("iio: adc: Add support for QCOM PMIC5 Gen3 ADC")
-Closes: https://sashiko.dev/#/bug/linux-d8ad5868-82f5-4c97-bc67-84ceebb10a1a
-Cc: stable@vger.kernel.org
-Signed-off-by: Lee Jones <lee@kernel.org>
----
+v2 => v3:
+ - Rebase onto soundwire/next
+ - Collect Reviewed-by and Tested-by tags on patches 1-3 (Charles,
+   HyeongJun)
+ - stream: Validate slave port configuration and stream parameters
+   before mutating runtime or stream state on error paths
+ - qcom: Track newly allocated port_mask bits in a local bitmap so error
+   rollback in qcom_swrm_stream_alloc_ports() never clears pre-existing
+   ports
 
-v1 => v2:
- - Return -ENOENT instead of -EINVAL when reg is empty (Andy)
+v2: https://lore.kernel.org/all/20261103095445.81414-1-lee@kernel.org/
+v1: https://lore.kernel.org/all/20261030104840.3361217-1-lee@kernel.org/
 
- drivers/iio/adc/qcom-spmi-adc5-gen3.c | 2 ++
- 1 file changed, 2 insertions(+)
+Cc: Bard Liao <yung-chuan.liao@linux.intel.com>
+Cc: Charles Keepax <ckeepax@opensource.cirrus.com>
+Cc: HyeongJun An <sammiee5311@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-sound@vger.kernel.org
+Cc: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: Srinivas Kandagatla <srini@kernel.org>
+Cc: Vinod Koul <vkoul@kernel.org>
 
-diff --git a/drivers/iio/adc/qcom-spmi-adc5-gen3.c b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-index 85450aa37e65..8e316aa88f48 100644
---- a/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-+++ b/drivers/iio/adc/qcom-spmi-adc5-gen3.c
-@@ -736,6 +736,8 @@ static int adc5_gen3_probe(struct platform_device *pdev)
- 	ret = device_property_count_u32(dev, "reg");
- 	if (ret < 0)
- 		return ret;
-+	if (!ret)
-+		return -ENOENT;
- 
- 	adc->dev_data.num_sdams = ret;
- 
+Lee Jones (10):
+  soundwire: bus: Hold bus_lock when looking up slave devices
+  soundwire: sysfs: Use sysfs_emit_at() in array show callbacks
+  soundwire: stream: Prevent m_rt_count underflow in
+    sdw_stream_remove_master()
+  soundwire: stream: Clean up allocated runtime resources on config
+    failure
+  soundwire: intel_ace2x: Protect bus.bpt_stream with bus_lock
+  soundwire: qcom: Prevent pconfig buffer overflow in
+    qcom_swrm_stream_alloc_ports()
+  soundwire: qcom: Disable runtime PM and avoid clock underflow in
+    qcom_swrm_remove()
+  soundwire: qcom: Check clk_prepare_enable() return value
+  soundwire: qcom: Serialise ctrl->intr_mask updates
+  soundwire: qcom: Prevent stale broadcast IRQ from completing
+    subsequent command
+
+ drivers/soundwire/bus.c             |   6 +-
+ drivers/soundwire/intel_ace2x.c     |  20 ++++--
+ drivers/soundwire/qcom.c            | 100 +++++++++++++++++++++++-----
+ drivers/soundwire/stream.c          |  96 ++++++++++++++++++--------
+ drivers/soundwire/sysfs_slave.c     |   6 +-
+ drivers/soundwire/sysfs_slave_dpn.c |   8 +--
+ 6 files changed, 174 insertions(+), 62 deletions(-)
+
 -- 
 2.56.1.750.gf70dc682cf-goog
 
