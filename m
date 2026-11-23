@@ -1,72 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=156.67.10.101
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795465793;
-	b=Fh1HUJZrjCuop6XhySRcgrwZCfNcIS7eS31YG25lMQ223H1hBdZr9eXIadAvKSyGAc8x
-	 plibaixW/RBtsUfBF7mzrblXaiC8H1cCq7a4dvyreOytjadXnZPtlJBhu0a0qkNf2Qwbs
-	 ezR3O9Yx9EByz6xMe/PaXDP9Vlhw0pKH6ZNt76puZQu4srgV5CFp+A1ZhC/ZQdDjMAM0S
-	 qu8G4x//6GvlD+tfnDtoJmQZdPbRnIsKopUNwuhqnXd+BVO/lodjdcbaIzZlBtGXiGlr9
-	 NVl17KOUWQSP1I7Xi7gdq31jHJRcdJanJeo6plGkXFFy+PSUGCMIfTjxCTRkdzvwTGA==
+	t=1795466050;
+	b=oq+ByIj8pu1/qi5HPdQ2YKGSvMkYWQcvHpGyRMWIaPixF74FskQPu5DG+0PP+O/AE6Fe
+	 /jbV9puvFrYP6+QyCWI7BKnr4vqT/SiUGrA4ARBSakAWQ6igWEeAFf4f8ad/1z+VaZJLJ
+	 kHgNP96Lgf8MszB5l2sTvq7sV99tHEoNGi0+pBxM/LcdLPHGnX33cyW0yOfz84PYVHcRR
+	 8gYpTiL9DiGB84jjIbUW0PVgFBQDW7ZUwANSSZL05hybjYNycQ5dCCa3nEqLw88FNZDqD
+	 diAhfvii5CfiYZ5I8HXzKEho/4bs/4airnwHO9aekQ/D8IrbtMM4yt6oaoB3LcJHfKA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795465793;
-	h=DMARC-Filter:DKIM-Signature:Received:Date:From:To:Cc:Subject:
-	 Message-ID:References:MIME-Version:Content-Type:Content-Disposition:
-	 In-Reply-To;
-	bh=wlC+kjkiKSHVW+PSqiaF4f2pjwKQhRHfb2cKIphdn9U=;
-	b=jlteo48+ODBOwFFF+TdW7xRccRTQ3QdjTju2ZK2mLeW/OmDZiW4ErdguR5ImqH3JC562
-	 VPldZ9ivTInAIgCpMhM14mQrWHv55rdrVNB3Nz6a5jQA00C8jS8V0Dbd9PopQkXmDBXII
-	 Dv2aEkcIGBbRA5fYi1mbMe6c6yC3RY16143j9SNu9ERCEtvgJtKJ4H+yc56qqvegAg0Fv
-	 64ZHEiM+DoY8bIB90OywRZKgblBqGlPeuy86kwZRkLWitbmYnsAZHbETO40eY+TSMT8ZI
-	 QqEXuudxPj50DSg9zX5JY/pBwYgiMxO05a6VbGALt3+mIFRrJnYnCXODvsYYOOb35LA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795466050;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=e2HIsCv1tN4Vi7S2Bt6sM0bBboMl+JYL9mFDX5CB8EU=;
+	b=JDxCEsGGQ8Mhhz1xSZ2CD1ZMWblWZXwUNBV/9ytpaTS42a3dQQTx7n9vq8qzbPMzfd+h
+	 TzZIT8AwKpu4sI/Uizn7GV2C+0bd1usoWIzhKoopc23WCpi159etoC6OFkgMiEiyPoJ1l
+	 cL2nbmONmZ723Oxb/dVnG9uorfdZ/wS/QYrRXbw50/RC+RibmFSIq5ETqnbOjty/OqlSw
+	 D7GX3v7RGlqkI7qLE0/cOj21nDXqaDsLuZApBd0vANCaFah4ZHA3QrlY/8kJbKPMX+7Yx
+	 +JuJmxW6Ln2kX7JwIOyXm+8RoUgCuW5lYUWqLQulsgCYUXjmSaiCr+thxBQ1mXZ6Uvw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=lunn.ch;
-	spf=pass smtp.mailfrom=lunn.ch;
-	dkim=pass header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=FmrHYrXJ;
-	arc=none smtp.remote-ip=156.67.10.101
-Received: from vps0.lunn.ch (vps0.lunn.ch [156.67.10.101])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Z0dkIdz1;
+	arc=none smtp.remote-ip=209.85.128.42
+Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFB02606A31E;
-	Mon, 23 Nov 2026 20:29:52 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DFB02606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=lunn.ch
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=lunn.ch
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EA2D606A32A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:34:09 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1EA2D606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=lunn.ch header.i=@lunn.ch header.a=rsa-sha256 header.s=20171124 header.b=FmrHYrXJ
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
-	s=20171124; h=In-Reply-To:Content-Disposition:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date:From:Sender:Reply-To:Subject:
-	Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	Content-ID:Content-Description:Content-Disposition:In-Reply-To:References;
-	bh=wlC+kjkiKSHVW+PSqiaF4f2pjwKQhRHfb2cKIphdn9U=; b=FmrHYrXJEadrjDC2BS5JbOp5t3
-	B7SVsyoKFsu4SvjCcqhTH5RYDSnT6C8rFGUj2pA2WcChqvykaqqWLgbmSHt1N+bGoHYCc+6IPGevD
-	K1JnGIwbiD9PAB2AumRd7HJAeycyLksDJKm/Gj6xzsTXzrRgPc55gOBm9e4AkJbNiLa0=;
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94.2)
-	(envelope-from <andrew@lunn.ch>)
-	id 1xVafd-000t0Q-PH; Mon, 23 Nov 2026 21:29:49 +0100
-Date: Mon, 23 Nov 2026 21:29:49 +0100
-From: Andrew Lunn <andrew@lunn.ch>
-To: Gopikishan Thawre <gopikishan.thawre@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Richard Cochran <richardcochran@gmail.com>,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-	Vishnu Saini <vishnu.saini@oss.qualcomm.com>,
-	Khalid Faisal Ansari <khalid.ansari@oss.qualcomm.com>,
-	Ajinkya Inchure <ainchure@qti.qualcomm.com>,
-	Anuj Tripathi <anuj.tripathi@oss.qualcomm.com>,
-	Sushrut Shree Trivedi <sushrut.trivedi@oss.qualcomm.com>,
-	Wei Deng <wei.deng@oss.qualcomm.com>,
-	Karthik S <karthik.s@oss.qualcomm.com>
-Subject: Re: [PATCH v4 3/3] arm64: dts: qcom: lemans: Add LeMans Draco EVK
- board
-Message-ID: <609ea06d-10c5-4727-a9db-8d42e526befb@lunn.ch>
-References: <20261123-lemans-draco-final-changes-bringup-v4-0-dbfc15cd0883@oss.qualcomm.com>
- <20261123-lemans-draco-final-changes-bringup-v4-3-dbfc15cd0883@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Z0dkIdz1
+Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4bb6c7b6dbdso34921615e9.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:34:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795466048; x=1796070848; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=e2HIsCv1tN4Vi7S2Bt6sM0bBboMl+JYL9mFDX5CB8EU=;
+        b=Z0dkIdz1roQI0bhGJaA9+OHdDJUb11pyWR1I0jClrb25KvbgqdbiUJpTQ/2I5gSBa1
+         ox35HBBCOO/04aN+1/A2xtOItH+b2YFK3uEiKdSjLNqcUXt7OWClMQuHYnWIlhzNABdT
+         8JGr7lszt+hrHB3P1lnIuYM3IuSJLMBfr4IQKPq8lfbOhRi5Z5Bqc+XiAZlqJLcfqu6F
+         Tex4oD/W46mqnR5WWtm149Ey8O/ke4KvGBV89JhJiqn7Z5DGI3EvTQeTBtsgnr6oNDYH
+         CBKE3gbHgR6HixF4//gzTiEUrZxUyfLt/Bi5nmrzEfR3RtbNbrsgZkb0JjKoZTjb6IMA
+         s4aA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795466048; x=1796070848;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=e2HIsCv1tN4Vi7S2Bt6sM0bBboMl+JYL9mFDX5CB8EU=;
+        b=pOr1jcHJV1TWyQIoMYfE3d+tB8nblkAon/P5InmQV/vgwXbGqeEMsVrxEvGYOGADeU
+         PJHd6rG6qVzFk9TDa2iaTOyuTPbpFwtLv/yjo/bfkRDscCuHn073kTn4zhBz3qpbhQPY
+         N+u3wUUyqCQSgcc7ABqEZBP/B8XUTKjbiUnAG/RHIIC2pZEjh1G/7k1hg2OlY6xqV2jP
+         mhx5GYJw6UVZc4HAH5ABTq95A8TX8WpuAyVCbPlQOP3LYA3H5TDboR277tZT0R9FBHGq
+         Q3gi1+fFOerfJpH+crHZ8TFxeW9QH5pkZANU0QaPNCw9ePVJNqEUJ9x/HMmJoagkajyW
+         +xDg==
+X-Forwarded-Encrypted: i=1; AL+hErFFHYln8bqDZAau1kQFGMYn0t9dk4Qxwqyb3QAuG4Jm5ylyDlUoCpIzlJc5M0ajKvhtQqhyI39pFexon8l/@vger.kernel.org
+X-Gm-Message-State: APuU4Z8p3daGx4C3th1YHXqPZgy+LmQ9Yw9/VI19oG9KKInAXYtM6vS3
+	7IKCAejud4rbHdYnPv6rayi1Iq4D5avHA7xwk0waiLU7hRZ7FtXiM7s/
+X-Gm-Gg: AZFdTZfhHSbCHaFBq06ujHXnS1/MwOAV9J74GzJ09064/ySkd829clujju+SAxwNfPp
+	hKzOeT6BRlwG8I1fkwb0/jSbzJD9mAAgCbu9NybbrO9SYe+Rttv5qD0CoI0tFycUl4AiR1nU8BK
+	RIEn2ZIlCi9lZ3CFdPsIdAv23Joo+VsAiFQmBuiHMEQYKM8i44Gh/D4gNGB77mbtXoYRP8Jb55D
+	TidymiqcQzl+xibtXNxp8BhsaLRsuFWnzn+TEWI9drvAhrfOcNueoUAMGPcVV5pp1NRlS+BIZpP
+	GsUZNW4J/j2Q62h2bEKv2p3d6JvhC/XfS5YVpxhv3zuHPU4WwNrWGZt/bL1CWQtjxNY9Y+utriA
+	HAGUl/A6Lsu7l8Si4mriKFazTJ/oRGpmorJiouvIwutuSRYthHZ0d7pnEqAJqgD7r2AH4EaNtQL
+	6LCN3z23Tm162jzqXwZIYKsfhX0Skmunb9MMukfP2WgfAj1h10/sKJeMzfMd2H7PIavIthSZ/jv
+	zT18Er6vHyDMTnDspq6ZnHqWCho1QhK/45x0fkHF8PPpduBlGbCpbeV8JpBPFFP2OcYhGi0lOmS
+	EJ0edG0FDv08InKW5AGfmzn/gBg2dg==
+X-Received: by 2002:a05:600c:64c8:b0:4bb:6848:d433 with SMTP id 5b1f17b1804b1-4bb8881d141mr251247305e9.26.1795466048254;
+        Mon, 23 Nov 2026 12:34:08 -0800 (PST)
+Received: from unknown.local ([151.34.53.154])
+        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb884b7515sm515946805e9.13.2026.11.23.12.34.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Nov 2026 12:34:07 -0800 (PST)
+From: Gianluca Boiano <morf3089@gmail.com>
+Subject: [PATCH 0/5] media: qcom: camss, ccs: Sony IMX376 on SDM660 using
+ the MIPI CCS driver
+Date: Mon, 23 Nov 2026 21:33:52 +0100
+Message-Id: <20261123-b4-ccs-imx376-v1-0-2b26850a6f11@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -76,16 +93,105 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261123-lemans-draco-final-changes-bringup-v4-3-dbfc15cd0883@oss.qualcomm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMTQ5EQBBA4atIrVWiy99kriIWuhVKwky6EIm4u
+ 8byW7x3gLIXVvhGB3jeROU3B5g4Ajc0c88obTBQQoUxRGgzdE5Rpj0tC0zStqGcyk+XWwjN33M
+ n+/Or6te62pHdck/gPC+R5DbtcQAAAA==
+X-Change-ID: 20261122-b4-ccs-imx376-03da25278f5b
+To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Sakari Ailus <sakari.ailus@linux.intel.com>, 
+ Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>, Gianluca Boiano <morf3089@gmail.com>, 
+ stable@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795466045; l=3605;
+ i=morf3089@gmail.com; s=20240402; h=from:subject:message-id;
+ bh=Ux1jAIk65UvpQG9eUkT9o3z3KHkRuAwplFQDfWVP5dU=;
+ b=Vskrd5wcS4R1Anr5d6Nyalh7iBdzMn/H73Qb2lS95hRFgbE9FGaCuvQ9ikd9Hacqt/V2wzhXR
+ 6U9YRMIlS/oAOkvr6vMQ5bzaJ2s+MkhuOnvS0jFNeEWgPI1e7GDTjVa
+X-Developer-Key: i=morf3089@gmail.com; a=ed25519;
+ pk=HsGrEQ3ia8BGGGO8/nUM2K2UX9JKvRPV+nbrVDGrYhA=
 
-> +&ethernet0 {
-> +	phy-handle = <&hsgmii_phy0>;
-> +	phy-mode = "2500base-x";
+Hi,
 
-> +		hsgmii_phy0: ethernet-phy@1c {
+These make the Sony IMX376 work with the mainline MIPI CCS driver behind
+the Qualcomm CAMSS on SDM660. Nothing specific to the sensor is added to
+the driver: the DT node uses "mipi-ccs-1.1", and the manufacturer specific
+register settings come from CCS static data (sensors/sony,imx376.yaml,
+https://github.com/M0Rf30/ccs-static-data/pull/1, to be submitted to
+ccs-static-data).
 
-Same here. Broken 2500BaseX? Or properly functioning 2500baseX?
+Tested on a Xiaomi Mi A2 (SDM660, rear IMX376, 4 lanes, link frequencies
+500 and 864 MHz):
 
-     Andrew
+  - 2592x1940 (2x2 binned), 36 fps at 500 MHz
+  - 5184x3880, 29 fps at 864 MHz
+  - switching between the two repeatedly
+  - cropping the pixel array (4096x3000 binned to 2048x1500)
+  - the front IMX376 and the IMX486, which use dedicated drivers, still
+    stream
+
+Patches:
+
+1: CAMSS calls s_stream on every sub-device from the video node up to the
+   sensor. For a sensor with several sub-devices (CCS has a pixel array, a
+   binner and a scaler) that includes the pixel array, whose s_stream
+   fails with -EINVAL as only the CSI-2 source pad can be enabled. Stop at
+   the sub-device that is bound to CAMSS, as the other CSI-2 receiver
+   drivers do (ipu3-cio2, rkisp1, ti-cal, ipu6, rcar-vin): that
+   sub-device is responsible for starting what is upstream of it. This
+   touches the loops that Qianhui Xu's "media: camss: video: factor
+   pipeline stream on/off into a helper" also changes; I'm happy to
+   rebase on top of it.
+
+2: The link frequency and the pixel clock were looked up from the pixel
+   array of a CCS sensor, whose pixel rate is not the one on the CSI-2
+   bus. Use the sub-device bound to CAMSS instead.
+
+3, 4: Two CCS bugs found while doing the above, both regressions from the
+   switch to sub-device active state: the format set on a sink pad is not
+   stored, and the format of a source pad does not follow the crop
+   rectangle. Link validation fails with -EPIPE for anything but the
+   native size.
+
+5: CCS static data can carry manufacturer register blocks conditional on
+   sensor register values (rules); the driver parses them but never
+   writes them. Apply the matching blocks at stream start. The IMX376
+   needs this for its full resolution mode, which uses different
+   readout registers than the binned one.
+
+The pipeline is configured the usual way, from the pixel array to the
+source of the CSI-2 bus (here the scaler), setting the binning with the
+compose rectangle of the binner and then the size of the sink pad of the
+scaler:
+
+  media-ctl -V '"ccs binner 2-001a":0[fmt:SRGGB12_1X12/5184x3880 compose:(0,0)/2592x1940]'
+  media-ctl -V '"ccs scaler 2-001a":0[fmt:SRGGB12_1X12/2592x1940 crop:(0,0)/2592x1940 compose:(0,0)/2592x1940]'
+  media-ctl -V '"ccs scaler 2-001a":1[fmt:SRGGB10_1X10/2592x1940]'
+
+---
+Gianluca Boiano (5):
+      media: qcom: camss: Don't stream sub-devices upstream of the sensor
+      media: qcom: camss: Look up link frequency from the sub-device on the CSI-2 link
+      media: ccs: Store the format set on a sink pad
+      media: ccs: Make the source pad format follow the crop rectangle
+      media: ccs: Apply rule-based manufacturer register blocks at stream start
+
+ drivers/media/i2c/ccs/ccs-core.c                | 106 +++++++++++++++++++++---
+ drivers/media/platform/qcom/camss/camss-video.c |  28 +++++++
+ drivers/media/platform/qcom/camss/camss.c       |   6 +-
+ 3 files changed, 129 insertions(+), 11 deletions(-)
+---
+base-commit: aa0f4c41d4870a18e65772a1817af16427200371
+change-id: 20261122-b4-ccs-imx376-03da25278f5b
+
+Best regards,
+--  
+Gianluca Boiano <morf3089@gmail.com>
+
