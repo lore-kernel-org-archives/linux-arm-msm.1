@@ -1,91 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795476523;
-	b=hyDNKqqEQMGlVIMbMjSbAXfV7c72Ws+47Jn5nTmyROPDA05l8Pojjk28M0Laqz2nD4T2
-	 LK5+bf+ODi/ut+hlSlZuAQl4p2EyxlR9P8ejG5hba1H5vMdDW+s19767YltQ0zuPYJETL
-	 1DkVfZRbJ/qlEeeDzYhtRZ80ffMVQ0h1i7Fj0b70yAcv54V0oArJTVg7BKZBZpqL21uOg
-	 JoYN8jTAduVkA68U3oj/U5wir8QvfbbWQdq4WMXe7mBZd8iU97LeG2zFRJZpxI46IVRZw
-	 UIR/qir91x8ujMC8FpwIetq5ApncYz3YhJ7Cbzyqx3fB1isx1r3j3XMqGWc7/Apaq+w==
+	t=1795476529;
+	b=sNk8LVdQ/RtB28FhGSbHr58nmkwOQv2BGvonfvWOLk1CjwjwXcdepeJw1wGjN0xyPZCn
+	 8C0tL5iIY9grruUr7BVPZFmpQlvRbtJRwhGt8DsKfz/osevHE5QnkO6tJ+hA02Uo++Pbi
+	 Iss5Ty4qKGuEcIY3mBMKhkVNrsHA60MFtMf17VUJHGHoG9i/NmiXHDDzVutO9qHUkoRLW
+	 j4mlRE4ChuMA2vLnvfqL1/v2n7PRrySY4QhjQc9NTjEEp2AJtWI2LXsk5HvGIBFYGLVvE
+	 AJQo72WQIQ1a7qb8z9Pla1levn+drXjVS/r2CiHhI3qG14uKPsKFsafx3ujvD04M+bA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795476523;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795476529;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Received:X-Forwarded-Encrypted:X-Received:MIME-Version:References:
 	 In-Reply-To:From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:
 	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
-	bh=L9JyOQCk4ptyu6RbQxU+dboohfD5AUMkdLfi1iuTleU=;
-	b=TVyCKpapriGP4ETv9A6zGBG8hF7mFjwh9VTT4g2K+nh9MD7f+1zSkULN+csh+5KXblTi
-	 5IQtFrF/AWKAqy/pv+6jYvKknDvcl37nKDKxgPHkuAbyeee7DlZP0jpuqhmi61/xaaEdi
-	 rWro8H6AgiGwVT+FHraQI7LRYW1KQ3H6PQ7J/QWWlrpnzjMO8KU7uOJKLQJhhUDx8DSCT
-	 xSbk59VfY8OBccaWpm6mRFH0ZBlvw6Y492nZeCacEtSxqkSI90CPOR5QXBUnosV95T4sI
-	 N29LzhhwdcYbGxtRI3+WPCteZkSZCfB1c8nvER7pd6X6IbC0S6Y9dMJFRaHnFktyycw==
+	bh=FwJrm1ZM1aehEhc2izkgjrLKRPEQAGiya3xImxW3kxg=;
+	b=irIdICJKE2478QxiN7qQ4UqKxNj8zl5YzAml1dH8HfavuXsgvq0I/LDj/aHDFr1D7GuM
+	 R0AXdJ+uPiZ58zHJZTnwGf9q8gri+PfqovOzR+0NsZ+NATZj61Otl80ROrS8tnr4u41sE
+	 4cUYGjGkoDXqulIjQ6Ou1rY3n69g/8USw3mf+vQOsoyrHgrg/JGZE5vb5TyXu9eMob34k
+	 Istu7tHVOX2ZASrfTLGWzU0z0ZMRbvo9HtjMHfm6bgjA3dPskHJjbGeHqQkqjVlr+Q7jF
+	 fTjhDAb8MNchqp1auiN0/YcdW7FmZeTxP5TDYqtdZzavpKMexr2i8e1uvPWqPqDJZmw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=chromium.org;
 	spf=pass smtp.mailfrom=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=DaM0vGy5;
-	arc=none smtp.remote-ip=209.85.208.47
-Received: from mail-ed1-f47.google.com (mail-ed1-f47.google.com [209.85.208.47])
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=nAJlelzV;
+	arc=none smtp.remote-ip=209.85.218.53
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93F90606A321
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 23:28:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 93F90606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 691DB606A31E
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 23:28:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 691DB606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=DaM0vGy5
-Received: by mail-ed1-f47.google.com with SMTP id 4fb4d7f45d1cf-6a642495d81so6201391a12.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 15:28:42 -0800 (PST)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=nAJlelzV
+Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c505b2e1cb9so726160966b.2
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 15:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1795476521; x=1796081321; darn=vger.kernel.org;
+        d=chromium.org; s=google; t=1795476528; x=1796081328; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:from:to:cc:subject
          :date:message-id:reply-to:content-type;
-        bh=L9JyOQCk4ptyu6RbQxU+dboohfD5AUMkdLfi1iuTleU=;
-        b=DaM0vGy5teEoXFpFxJnj0el7sOopE/UtgSxsoV0X+63o68kaJuglNXwnm++mQfUv/A
-         Zblix92qflJ0fs4v7zSiMnsdAVFDY2WIVjxOraOEmFwXzinBBKZmNUQuxkEyZ/xQbBDs
-         lu6boBaLdELBJWmNzkdR2maTjISux6/ldn9X4=
+        bh=FwJrm1ZM1aehEhc2izkgjrLKRPEQAGiya3xImxW3kxg=;
+        b=nAJlelzV0W3bFHx1nGZMeGZf3y/OlXVcMa/J8vDvS2w6VWGcot66X8UINPIPB8tBuQ
+         GmQjfzIWAwjz8+VDCIPqbsgcos9UcuSo7As81vg5OTC2Xxbhemto71gX3I13isNm6KVw
+         ueG/2Geai9otTFoOviDwOK+kaj6BliZMYsp7c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795476521; x=1796081321;
+        d=1e100.net; s=20260707; t=1795476528; x=1796081328;
         h=content-transfer-encoding:content-type:cc:to:subject:message-id
          :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=L9JyOQCk4ptyu6RbQxU+dboohfD5AUMkdLfi1iuTleU=;
-        b=U7HyP/FdOTpocsloCE5tcTrhtT2mV/Ei5xeoQqh579txYCN2KhJOCa93MeziHkMqtY
-         bsujWHwi5oKT9uj2+D0d3X4HnSkcS0/FfU/iqqiTv9bhabxsT5zqScpqKTnQKO2Jrlqu
-         0bzIja0fKUSrSr5RcsHyjvAiv0PqOfkdLuNG2amJyf+xRC68EFq5aUSgAFNEW/5B2mVe
-         +sobE5krCjqzabFr5kDZaqkirR9Jc8OsXETN07bguvV8DZ/Y6Mw4Ch/otAx7SpIDyE20
-         mbOIAWefyRyJ/uFOp0IDbQz5oIfScouuWjAP75vPKczCNJ1GZepYv9EvznLbcVQwbyNG
-         91BQ==
-X-Forwarded-Encrypted: i=1; AL+hErHUXnRQy3/ClNl+1km+eQCI7Ml5NCvolNVa7kNXLOgThpid/6KPB2wKtett1ntIjyeiwnXnKxubFtwbA4Gm@vger.kernel.org
-X-Gm-Message-State: APuU4Z/0DFxBGqtTubwNIUzR/HKd787gZJ8NFoq4QqGy16CXm9uR2Wn2
-	GUfaTtiDWazhaRD9qV/3rf/t1jSenklujhgsR7nYAOzh17mIAPqfPWo8g1HUZp3A3T5kaJIszml
-	bg1lhDQsc
-X-Gm-Gg: AZFdTZdja9HymBmvBztyqy6fWthFxGBgLtaXIXEpNr/aLoF7FUEefbXYokMOjA6pFM3
-	SmZLWIUxdPAHRJ7wPYV8Fxae1aRo7pSyyqTcRkrvaraPwivB2RXQRMUWf/aG+7qRNWjZgQvucRN
-	SlEA1T4QuY4O2VRee9IU9So46mzbwsMDjkOJPKM3kG1hBuJNA9e1I9e3Bch05YvebPQl7foP6uP
-	1JJBhbQCPUrtfQp6xr8qLNxcxv7vKbPIa0cAbY/sJSIRXLAUrjsMExZoaBXRliH7cAI7/GSPN0w
-	qUoalsSDJOVltMFQzAeH7R3N5DGezgjQJBz5Mm4Pr8dD/ELXK6qoDtdKIsZ72UIFIAm/oaCCh3a
-	DXKsJ59Gkm43mvo/JN5x5b+3GDfP4JR34947IJfQ8CrgTAxjsx1zVnL2/3JtbIJEM1PEBOU/hdK
-	LmD7tZ2lE53Jxxu5nFxIu4e4dw/XTCUaiHl8OKfh+7zvej9r1zn1fr2f0BGw1bGfV8K2sjigiB2
-	Vdrl4QFZGzvw8SMIDEfP8zydVs0RDq366lS7SAD3lrjZ8/+dzs7ZHNG2oA2pReiA86agmh3c69J
-	fOEj1+/1IfAXgb0r22G33X6OpeHKUEPC427WCTqUh/4c5ZE5MZIehHEYVzM1FpbhYSj6egkavR/
-	JGDLkGkzfy9Rj/Jo=
-X-Received: by 2002:aa7:d94b:0:b0:6b7:df0c:18bc with SMTP id 4fb4d7f45d1cf-6ba37d3b56bmr6860833a12.17.1795476520973;
-        Mon, 23 Nov 2026 15:28:40 -0800 (PST)
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com. [209.85.128.52])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ba36e355easm5785817a12.3.2026.11.23.15.28.39
+        bh=FwJrm1ZM1aehEhc2izkgjrLKRPEQAGiya3xImxW3kxg=;
+        b=E7kGKE7zho/mRnY5JU941qiSs4dD5beHOUCebrGmZtr0wzxQYzlBlb/qvoBW9C2FJh
+         /aQlqGf1m2mmn2FHBUYTb9koNDicrhcaoTu6GWWfcnqEp5QMnL11iRg/bywCFht5PFyZ
+         sVtwJ0bV5+r8+AzJn959+U2841ym8grHzUzGBudVTLixSncNSuuP7gtG2njslUGIOn8w
+         D5sRw5CPCzMasWKjdyOrmNYv6Q/L0ZzUfCFdZP76pk9+AUU+EOL8TQP0NTYRKij+FLtc
+         cBnZdZkwXb3tRXshGdy/i/lEVcqUwfr0NM9qw4rGflIHLNxLP6B8apj3kyDbT1DKwuzD
+         1B9g==
+X-Forwarded-Encrypted: i=1; AL+hErFqZhLBLqDugbG0rwww9hdAluBZ+qfE97kYWaavbnwq/xf/pBSkGNytxANt05mj3OrBCqsvquUIi1092ZoB@vger.kernel.org
+X-Gm-Message-State: APuU4Z9jvefDPDGIcC8fmcv9y9h2cKnjSD5Bvq3zqo1w+A58sMyvnK1G
+	z2r2ulpiJ9jJCX90MR8/oEg+o86YAMSHk2qAUI8KNWDwjk2xZMeRhDmAmZ+p4JQ627IqNrUGSuQ
+	pKqjNyQS8
+X-Gm-Gg: AZFdTZdpBYUZUmpVvkiW2BCClwL1mYng5uWmPvZBmts0X/UFRRa3GAgHonwbw4VPCXn
+	mnqvBBL7qgzGFoznJxaWj7SS++1j7QNNaniDeMoYvotMPZNBFlFSvp3hqKas3JgtY9PvWY/KxlB
+	lok6aERk6fK2g30qebLJ55SFK1O95zh/QqwmfLZE/CDIsKPStxQwRmMdSmn7BAYeBEKMlVFqxos
+	7zIJqE20bJGF1cu7mfvAQXYpdRa7KNqZ2qKByCyZptJE/JkguM3TGehyl3OOzW2sAY83VReNe0a
+	eUyg0OsBIMJq8MCXD/rJBl2jtAIDo0pi6JA+9ItWJBI4GV9qagX/mw9JFu2NwNP0PWYO3XnLJYV
+	hsHw58hl1n4/6sowRxNIpdntH10Se00Yir+7q10FKh1/c8wpL3KbsUxTY/539We0KdjzgwYw9BD
+	YXBUZPSTK7t+ei7inwpfO/KUCWDS0mke7yjztkPCrBi2iyent0uMCR9NSuyxlkZHQrnZCrCtypb
+	qXOaxmZixz6gQx6A7c85rD0jsZPHFC/zL10COkmZ2EGAj3BR2/uTtIV/suBO1VbzBJGERu3OaBq
+	10y5OjRyPfv9L0Agr1pHpoSGaQE74eKvb0tmsZhd6B2u8IVH3LwaRWSQZ6yOWINOW0XWWQ==
+X-Received: by 2002:a17:906:1103:b0:c41:1e13:4ba9 with SMTP id a640c23a62f3a-c513a52dc83mr751536966b.6.1795476527866;
+        Mon, 23 Nov 2026 15:28:47 -0800 (PST)
+Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com. [209.85.221.42])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513afca58asm440862466b.65.2026.11.23.15.28.45
         for <linux-arm-msm@vger.kernel.org>
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Nov 2026 15:28:39 -0800 (PST)
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4bb70074ab2so41103045e9.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 15:28:39 -0800 (PST)
-X-Forwarded-Encrypted: i=1; AL+hErF7yVQogbL/Blf2jR+USReGz15ebIdZtqMrJXgTbzvk1L5xCDR7E0P6aflXsI8N4izok3+6S6zJT+H0SgSW@vger.kernel.org
-X-Received: by 2002:a05:600c:1c1c:b0:4a2:1364:252b with SMTP id
- 5b1f17b1804b1-4bb8892ac4amr288126295e9.35.1795476518196; Mon, 23 Nov 2026
- 15:28:38 -0800 (PST)
+        Mon, 23 Nov 2026 15:28:45 -0800 (PST)
+Received: by mail-wr1-f42.google.com with SMTP id ffacd0b85a97d-4a68190a2a7so3210811f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 15:28:45 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErFDoxfPFSqlUkGDqGPVUlC47iIIiPHB2hzchLcPXbEUOGbZylScpszJUY6OyMTZk76bWlM6FQa6TQjPI71A@vger.kernel.org
+X-Received: by 2002:a05:6000:26ca:b0:4a7:8406:1e6f with SMTP id
+ ffacd0b85a97d-4abb0c5d691mr23431674f8f.17.1795476524227; Mon, 23 Nov 2026
+ 15:28:44 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,14 +94,14 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261112031629.396819-1-mrungta@google.com> <20261112031629.396819-3-mrungta@google.com>
-In-Reply-To: <20261112031629.396819-3-mrungta@google.com>
+References: <20261112031629.396819-1-mrungta@google.com> <20261112031629.396819-4-mrungta@google.com>
+In-Reply-To: <20261112031629.396819-4-mrungta@google.com>
 From: Doug Anderson <dianders@chromium.org>
-Date: Mon, 23 Nov 2026 15:28:26 -0800
-X-Gmail-Original-Message-ID: <CAD=FV=WfqqTp8Bue35bfnHXiegqVbHxtDf0UPjg1JnXF_o_3ZQ@mail.gmail.com>
-X-Gm-Features: Aa3M54rsKLWqkESys1duLI-KqFGibQ4RK6Ckuh_aN7G37_7JSHexELC5Pm6FEBc
-Message-ID: <CAD=FV=WfqqTp8Bue35bfnHXiegqVbHxtDf0UPjg1JnXF_o_3ZQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/7] genirq: Allow global interrupts in request_nmi()
+Date: Mon, 23 Nov 2026 15:28:32 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=WosKh8Rxh1J1cJDaWOEfS-pYneBmjd8FzOV3oyv0HgdQ@mail.gmail.com>
+X-Gm-Features: Aa3M54rF-cDwPhWxLgyNjBG3mfbaET9nDbSRqTDaBh2OJu2DLtMaENnnVT7qQnE
+Message-ID: <CAD=FV=WosKh8Rxh1J1cJDaWOEfS-pYneBmjd8FzOV3oyv0HgdQ@mail.gmail.com>
+Subject: Re: [PATCH v4 3/7] genirq: Implement synchronous disable_nmi()
 To: Mayank Rungta <mrungta@google.com>
 Cc: Wim Van Sebroeck <wim@linux-watchdog.org>, Guenter Roeck <linux@roeck-us.net>, 
 	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Marc Zyngier <maz@kernel.org>, 
@@ -117,24 +116,19 @@ Hi,
 On Wed, Nov 11, 2026 at 7:16=E2=80=AFPM Mayank Rungta <mrungta@google.com> =
 wrote:
 >
-> request_nmi() currently requires IRQF_PERCPU and forces
-> IRQF_NOBALANCING. For global system-wide interrupts (such as watchdog
-> pretimeout SPIs), forcing IRQF_PERCPU sets IRQD_PER_CPU and prevents CPU
-> hotplug teardown (migrate_one_irq()) from migrating the interrupt off an
-> offline CPU.
+> Currently, disable_nmi_nosync() is the only interface to disable an NMI
+> line. Drivers stopping their devices need a synchronous variant that
+> guarantees any running instance of the NMI handler has completed on other
+> CPUs before returning.
 >
-> Now that in-flight NMI handlers are synchronized via
-> __synchronize_nmi(), drop the mandatory IRQF_PERCPU check and stop
-> forcing IRQF_NOBALANCING in request_nmi() (existing per-CPU callers
-> already pass both flags explicitly). Also check irq_is_nmi(desc) in
-> irq_seq_show() (matching kstat_irqs_desc() from commit c09cb1293523
-> ("genirq: Update irq stats from NMI handlers")) so /proc/interrupts
-> emits per-CPU counts for non-IRQF_PERCPU NMIs.
+> Implement disable_nmi() by validating the descriptor, disabling the line
+> via __disable_irq_nosync(), and synchronizing in-flight NMI handlers via
+> __synchronize_nmi().
 >
 > Signed-off-by: Mayank Rungta <mrungta@google.com>
 > ---
->  kernel/irq/manage.c | 9 +++------
->  kernel/irq/proc.c   | 6 ++++--
->  2 files changed, 7 insertions(+), 8 deletions(-)
+>  include/linux/interrupt.h |  1 +
+>  kernel/irq/manage.c       | 24 ++++++++++++++++++++++++
+>  2 files changed, 25 insertions(+)
 
 Reviewed-by: Douglas Anderson <dianders@chromium.org>
