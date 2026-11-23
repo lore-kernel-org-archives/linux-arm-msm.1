@@ -1,59 +1,55 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795421590;
-	b=DE3bfiKvOldx73CiodMxIHQQP0XjnnhdVOL0Fa0V/uFXgL8kN3ZpHFBooOgtLL9TTqm3
-	 111jpA+G8muPLw9JdnLQ+gkgBSB4OmZ5BedDxTYBiyyEXiFQeEufGMTH3zb4Bqtmp4cv3
-	 2i7dp94e2xDHDQZMx0XQvLxcTwd5qiNN6w0TKj2Wd0ItG1VhrsO/R+Ox9mMiqMWfQb9Iv
-	 8ZRoLqe0jFd012eH3vVf/Vsm3CB9go6NvqscJ3sTvCId4KelWD1pL6aPOdWgA/WqUeewd
-	 TFTB5RTm7vw344uCzeRc5/+EaNIEn4x7u2GsDLzWTBt4cbUZg60vho/IO2nJzp+HQ6g==
+	t=1795422039;
+	b=z9NiaScHHFA4Ltz3r2bngDuh7L+SG5JvYI45tdk/SsAosGQXHkvbvhZ/fOD6SQyxuzqR
+	 CiZ7YI2O+7TIBUUGNaP9ujFPyOREE9+dKD30uuglrlsVKGOIzyKVXtwKvg4FbIVMcGr8c
+	 CZ6cCto9TRnb66GviuE2irmg1gL4DBLhvd390QTQF3/dRk/gyqQkD9dV6DWorrQ/EfHS6
+	 2uBHTM3/G1VNjmu7Z4wzVcCx2Ex7Lmw1eBXD1h0YusdFa3Ax1mTkhPrCsHGrjpysUwbWo
+	 Wt3tb82p6824EFcxsWO9L1ZUdWvP7XreygLdRO13CeOcEIBWEhRhZBODc0P1FTPe6Nw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795421590;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795422039;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=dcJLIJFhaCRxzOyphj2FZicgjNkLAYFkmuaB9/+QDmI=;
-	b=Za7b8L4MTyTkwBFgajioF9rs76qFVNoR1Tqw2EyClmqNJGrOIYOaSb9H3tDflV7PgTug
-	 ehhhrB64Q6Zex1zixFBqO4YLxk+JvcczXxR9sg6EkPmdGeqCID8qTM3exXJNEduF7RPGc
-	 uQccmigkpWVsR5Vs0xu+ejGhs7OhoOAZaGAVSMdwze0BmbgxR3osi8EiFW91PY3MNIE9e
-	 TvTejiZIqt+V4e6JpCSJR98HG0IHHTmuJGQJyrlWNgLquzOMdRcWT95QeHn5RY0zZp0C0
-	 twyk3o4dx4eHCyLVIeihxoCNOJdQg7Y8ozk1qGH3EgLNLADvHog6y2dbbXQiXjH0dOA==
+	bh=hMB8mVGYkbYkUiCO7PHPPXPE3XB7m8R85nAtHHeNgEk=;
+	b=wEw8tWxPtaOgUFeH7ns3xqOhArVlAzW6cmBV5Mm5aM+Or7UOkMriE1ohWh+i9l/wP4IO
+	 rLrLX1urcnS9KW1hhV4i4ylh8HcT9av+gzTCNy760dS6YYc4k8sSfycXI/59AUoAi1QE6
+	 Kt4NKmK36uvlspVqW2F9dC4MWNTTgdzB47jmViokKyz/GBbZvu1TtVykChPire9QBQQXD
+	 nScCa66NUrLbSpXPbMBScxSZSYMQjEmq9BWlbo2l+Eh4wOq2aWmSc0u5Pm8DimOwiHQE6
+	 jpF98f+zmx6Tbrh/McIvoVgUa9VWH0MPp4LjudIUjMfgdD/y5+D5tGW8aSpho1G467Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g0Grzwr1;
+	dkim=pass header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=Gada8yR6;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 293D1606A31F;
-	Mon, 23 Nov 2026 08:13:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84D1606A31A;
+	Mon, 23 Nov 2026 08:20:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g0Grzwr1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75D8B1F000CA;
-	Mon, 23 Nov 2026 08:13:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795421589;
-	bh=dcJLIJFhaCRxzOyphj2FZicgjNkLAYFkmuaB9/+QDmI=;
+	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=Gada8yR6
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EBBB1F000C4;
+	Mon, 23 Nov 2026 08:20:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
+	s=korg; t=1795422039;
+	bh=hMB8mVGYkbYkUiCO7PHPPXPE3XB7m8R85nAtHHeNgEk=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=g0Grzwr15lHuTQzQeCA2q7yoGzGsMYuhUtPdApQK8P9BkKfvoHeEjoFcak9SB+5dN
-	 eD3Y1Gxd9Ew5SamgNjRALPBQ3c/AUILEDzl4TKVx0giZeBNrIAuDx1hz519wI+4ahU
-	 NgXLIw3nPnPL6dohHxKyytxe/sZ3dzONSDRXumFfAK7/iySdIgCwF7/eb6LJFda3wk
-	 BCn733fDxjZP+DzPjRIfRkrJRq3HYfKNkHWXNrZNhufsmdcFW//mBLbWGEUx1Xd5bx
-	 bk9bCuPZpC3N8o1MKmZlPZdcXLo8qz65JEO8qqEdkKhzRENv0oRrNfMR99D2XFmUIi
-	 w32lXMrj+NOzQ==
-Date: Mon, 23 Nov 2026 09:13:03 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
-	Maxime Chevallier <maxime.chevallier@bootlin.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] dt-bindings: phy: qcom,qusb2: Add support for remote
- endpoints
-Message-ID: <20261123-international-healthy-peccary-ddcded@quoll>
-References: <20261111-shikra-qusb2-charger-det-v1-0-5a9d919c66b5@oss.qualcomm.com>
- <20261111-shikra-qusb2-charger-det-v1-1-5a9d919c66b5@oss.qualcomm.com>
+	b=Gada8yR69H9OA3TpAwCI47hOJVTIHaekKqvgqEzMSgW3nKtd2To7yUt0THJxCsVsp
+	 cDq66i9LoN2lsXUX3rgsV07igby8OCzuk4GVpDZTGiRtnLfRYlm0agYlhMT3l0K8S9
+	 fsyaE8tzn4mYGbKJ+TOU4BX3wq8PfJZvq+cAEFIA=
+Date: Mon, 23 Nov 2026 09:20:36 +0100
+From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>, linux-usb@vger.kernel.org,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v11 3/3] usb: dwc3: select the shared HS data bus with a
+ mux controller
+Message-ID: <2026112313-skied-crock-7374@gregkh>
+References: <20261121022104.1507987-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261121132029.2379449-1-xiaqinghuan@mail.ustc.edu.cn>
+ <20261121132029.2379449-4-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,45 +59,52 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261111-shikra-qusb2-charger-det-v1-1-5a9d919c66b5@oss.qualcomm.com>
+In-Reply-To: <20261121132029.2379449-4-xiaqinghuan@mail.ustc.edu.cn>
 
-On Wed, Nov 11, 2026 at 11:01:26PM +0530, Krishna Kurapati wrote:
-> QUSB2 Phy HW is capable of doing BC.1.2 charger detection. On most of the
-> platforms, the charger detection is done by PMIC. But on Shikra CQM/CQS
-> platforms, the PM4125 doesn't have ability to do charger detection and
-> that responsibility is delegated to QUSB2 Phy which acts on the DP/DM
-> lines in its control to get the job done.
+On Sat, Nov 21, 2026 at 09:20:29PM +0800, Qianhui Xu wrote:
+> Two connectors can share one High Speed D+/D- pair only if a multiplexer
+> selects which receptacle drives the controller, and that selection has to
+> follow the USB mode: leaving it to a board level GPIO means the controller
+> can end up driving the data lines of the connector that is not in use, and
+> a host or gadget instance cannot be torn down while its own lines are still
+> selected.
 > 
-> During process of charger detection, if the controller is supposed to
-> enter device mode, the charger is detected as SDP/CDP/DCP. The controller
-> must enter device mode only if the detected charger is SDP/CDP. In case of
-> DCP, the phy can be turned off after detection. If the controller must
-> enter host mode, charger detection can be skipped and hence the phy must
-> know the role before the controller so that appropriate decision can be
-> taken whether the controller must enter device/host mode or not.
+> A mux controller cannot be read back, so the connector in use at boot
+> cannot be detected: the first mode request claims the mux for state 0
+> instead.  A move of the data path to the other connector is a mode
+> switch even when the role does not change, which is why it goes through
+> the same worker.
 > 
-> Intention of adding remote endpoints and usb-role-switch property binding
-> support is as follows:
+> mux_control_select() sleeps while waiting for the controller and
+> mux_control_deselect() may sleep as well, so both are only called from
+> __dwc3_set_mode() on system_freezable_wq and from dwc3_drd_exit() after the
+> mode work has been drained; the role-switch set() callback keeps recording
+> the request and never touches the mux.  The mux stays selected between
+> switches, since the controller always drives exactly one of the two
+> connectors, and it is deselected on unbind.  The arbitration,
+> publication ordering and teardown rules of the per-connector role switches
+> are unchanged.
 > 
-> a) The DP/DM lines do go through the phy to the controller i.e., the phy
-> exists between connector and controller. Hence adding remote endpoints
-> depicting the same.
+> *** AI-assistance disclosure ***
+> This patch was prepared with the help of an LLM coding assistant.  The
+> author reviewed every line and ran the gates quoted in the series notes.
 > 
-> b) Although the usb2 phy is not the entity doing role switching, it still
-> does need to decide which mode the controller must move into and hence
-> adding usb-role-switch property to allow role notifications from charger
-> to go to controller via phy.
-> 
-> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
 > ---
->  .../devicetree/bindings/phy/qcom,qusb2-phy.yaml    | 23 ++++++++++++++++++++++
->  1 file changed, 23 insertions(+)
 > 
+> Changes since v10:
+>  - deselect the mux in dwc3_drd_exit() after the active role has been torn
+>    down instead of before: mux_control_deselect() switches the shared High
+>    Speed lines back to the mux' idle state, so deselecting first cuts the
+>    data path off underneath a host or gadget instance that is still
+>    running.  This is the order __dwc3_set_mode() already used: role exit,
+>    then the data path switch.
 
-Dropping from DT patchwork.
+What about all the previous versions?  Please always include them all,
+right?
 
-Best regards,
-Krzysztof
+thanks,
 
+greg k-h
