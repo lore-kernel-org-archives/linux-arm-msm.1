@@ -1,85 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795425445;
-	b=HrRIsba6Ld1Zt164X9IhJkD2qep7H5jNxutTH7OhBilz1C1kSKeYdRG3JVQtxpFQB4g0
-	 xnjt0oPxO5gHOt/cYlDRUiT5fId/eDbXD8Ist5UgybjXviyPMmDezyr3ZcpzetvnxZirM
-	 waDTYkUfeP+nVp62afnoCNRt9Yd//fJ1G7LMPexuFdcD/+JnbEdCPLtSxi/ox3ar2bsvr
-	 FHDAjVH8wjcuUn4+Ywop9Z3zvO2kgK/zkbvosUXEMyjnA95zxWOErw3wz4h2nobYn3uO+
-	 4bJavhh4oJJN34OLOAyF8aOrSUzh92LArdltrEnldhhOmV382+oGMMGIdIUJKtVF2QA==
+	t=1795425504;
+	b=lbnlwpslDVpOU5/11iVpVnDj9PHFiQe3L+CS9G6rVSw1igyViyGp5Ox6NeBRs8NBmW2/
+	 6QA4GDcZWgGy2UQlh/PFnUnLqkCRQ+WCG3fd5hpRm7s20JYMHZRnon4ihnR1s9ELJBqvn
+	 P8yciQaeFoGJGQeFv0fvqvUaZCP1VRdx/oo4WhJJlIW9zTdCvUr5XmsCuVDqnzjKDwZRT
+	 N1ImSTvFT+FQVLAjB6Flfjtwfe4QOD9i+NfCtIIjSWYqq1EhyXh2pA4y26758hqbMRqZO
+	 8zpym904Jh/0+QWWgKN06SUcMAO4Fg3567m2QzZ3WsKtA1UgMlnG2ShUvDe76hL0oLA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795425445;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Mime-Version:Content-Transfer-Encoding:Content-Type:Date:Message-Id:
-	 Cc:Subject:From:To:X-Mailer:References:In-Reply-To;
-	bh=bfZwdrHDy1GNoA44s3G+1XzXoMHIKEYDGfkc9JfB56s=;
-	b=YNfuxd2tq6DqdIVyYgpY95pr+1z0R6WCVBTZDkOv6o1DSAcF+IQGMPW+E+VTjkU7GiKQ
-	 U39QfRQlEwcqGck8DzdnoJTVvO6uL5uQ1Eb9110uuS9h6bIQ6BeMOjOSzi/sVpPTYx/O2
-	 Q5sHVX6pjOu626no5/+YI0KRVx+K31UsXc9ooC3iEJrB+LD4BHNdkBUL0mx3OG+EmPjEa
-	 M6UO8QrTlh//Sf6JJbiPKfYtVpWt5Vawkqe8MJkaFTe1H0s5G27jW8oTSGjuJLwG1ZnV3
-	 h18j+iS636Lhkbxvov3EqLOHweXP9D7BFdQnEVzW01ANH5+R99uLg1zbmfGVd7+glhQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795425504;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=mSzMQRsg+yqrEBzUwipXKM/+0J/rVsVGfEXY3Vx7ICc=;
+	b=HJG9xTPPrHjojIzC5lSaeR/hBBrti4hOd54LrnlnrYV7yIxz4P0FZeY1aG3DJvXlyThp
+	 NeT05+68/2eySUPzaT9YSV8buIRyjraT/BRY1cKos1iQbwriVijIRzjwd0yR9Etp4QYrH
+	 jH3VxqrKuFm19usia/tO+nc4hmb/M0nbCWezngFyASAJyUWIRyUGTiOVzL8JIpHZW+tG8
+	 LSCq+91+edEvfOtYZTGsiUY2xdcV/l/oOOoAWu2wsxGGD/TZDR2bPHESnd4vOIJj1oo0C
+	 NxQK3/KOhDQeI0tIE8lOw4ix1MwLOkvcQtz/aQsTW2LaowGVlw/QkOGlXokWNnqZkNA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fairphone.com;
-	spf=pass smtp.mailfrom=fairphone.com;
-	dkim=pass header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=mRpGJUoU;
-	arc=none smtp.remote-ip=209.85.218.53
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com [209.85.218.53])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Xg1unES9;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SXSmv38J;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D769E606A31E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 09:17:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D769E606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=fairphone.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fairphone.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55E28606A32C
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 09:18:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 55E28606A32C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=fairphone.com header.i=@fairphone.com header.a=rsa-sha256 header.s=fair header.b=mRpGJUoU
-Received: by mail-ej1-f53.google.com with SMTP id a640c23a62f3a-c4d581da0aaso392249166b.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 01:17:23 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Xg1unES9;
+	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SXSmv38J
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AN9Fx6V917180
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 09:18:23 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	mSzMQRsg+yqrEBzUwipXKM/+0J/rVsVGfEXY3Vx7ICc=; b=Xg1unES9jsmRSZyK
+	HTGRTKLWVi8KzqJYZAb0udLqpQqOHo101z4Zb/hMrylrs4gj1UJyLPqVKcJZW2L5
+	VHmFZvw0g9iEJRrddx4zxpqE0xU0BFzwHj5ic48N09PqyT9UNfGFJy4lkA8ni9DR
+	mTLW9qgjJr7YoolBgiNEziKbgmS1Nt+5GVHxyxZiiHmBKCmrIIPZWrCn3WFNwSI6
+	c3Flfq3SgAaGlMNyXZaCb24wZ69W7Qw1pOEMLRtxLXaZqB6fE1KWciK77m5kcvKX
+	KT8KoeYt3QtTGPeykiAMNcoibkzoHlVLFcFWXom+FDmk0BSjfOPnPkTlFjsZWCKr
+	9lHkHQ==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4g9a0ks5-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 09:18:23 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b0a13ae043so3334962a91.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 01:18:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=fairphone.com; s=fair; t=1795425442; x=1796030242; darn=vger.kernel.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=bfZwdrHDy1GNoA44s3G+1XzXoMHIKEYDGfkc9JfB56s=;
-        b=mRpGJUoU5NoqyhwJ0w8OwZQIUnCDN/5fpynpyGn9jzsx1jYEwfaQR/bW/LIbuTv4FP
-         HtCOvcQfOBTtQbUygTRXF6/17BZUC/CCtQwrLOvg9292Pv6dsoD7zDbaCvIJT/zRcRxO
-         MbIKHbJ1QOBg8Wys2xzfQCj1lY6QfqsTffezatDUGaY2lnhxi2IxR+XFTONEr778NfoU
-         UyNZzn7nVB5bVPZcpv2HM9L62dtivuQJ2UJ2jenxhlPTqevL0prFen/4YMwDGWNGpHSx
-         IowKIORJ7A0BzCLXZe3ybGG6jO1ZdM8muAingKU/H0QnXL7koAD1dNCNemRlfty9Q4Df
-         o5dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795425442; x=1796030242;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1795425503; x=1796030303; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=bfZwdrHDy1GNoA44s3G+1XzXoMHIKEYDGfkc9JfB56s=;
-        b=UIhWogfPr9LjZGOpTq7JJUP+LhGlfzY/It8VQ7NTAH0TTbkeIrIBzq+3xBuEaWMst6
-         7b4ys2K7sVd5EPWM4z9YdoNghcZMTGTxcwvfp0mfr6npYhZ1iE9+xm+vaKcMv0eGP7ih
-         7Bp1CI0pdspPtI15ZnxCfOa0kFH1eivBNRIZQyyV14x+FyKlkPRjdwK0jM+nCaPn0GQV
-         4ttmXqn1fQ0Z7gs5wD+D9c7SGQYW2XJkwyyKFC+rcbBpEqUPIfttail9qaX2ZOmvSb7j
-         SeNJ9RCJTDmkhW5zRXQB8qtOM6qEQSpJbcUqBBmBBT0/u20yNjsGS2yVqWhrw9LDrhzR
-         ecgw==
-X-Forwarded-Encrypted: i=1; AL+hErGQBq+3i5XqmnqkzhANgPU2thhcUIGP6xIFTc6fIUCu8+wparJjrtU95WVVBzIMizrGyPkL4y9pTx4lLkVr@vger.kernel.org
-X-Gm-Message-State: APuU4Z+DkapgSQAHuZDaXOZyLHLY15wApBbA7BqdrLjCbMfVaCG9xK5V
-	kAXn/8Gf3Fdy4wTSGsIcjwB0FvlSkbKnkzUd00fqzZjnAPiScelTR51h05Vf6Ic1Ocg=
-X-Gm-Gg: AZFdTZdn8IWwy1EMVQvZCzlnDuncmiEFvZ7ASqp2whiU13C13r4Y3/7XkvBj1dqLZO7
-	hC/DRb0SVUbNP/o8Lua/BZhBUnQ0ASItW4lfSVt8wLUagfcZo5LCt4MkF2J54w2dPT0DCiSE5gF
-	zjbbC7yk0IIKQe0DsEH7sqTEeEn+e/X1Jac8baIE0Bv3aaTnmX8Tm3dQLI1Y15tj/duy+/JBw0H
-	02Cjy2NnzdZila6qDWEROpLk9OgZdYGDieH2hPuQ9aF7hVJ4+3Zd2g/nabzvm914uQK6IFzjZBN
-	NOOxp8aOVEQ4HlcX6uaIHjygXX8JhQQw6AdfV7MMIF4jH7CWT9RUmr8seTV8WFO2mVzm76tJT5g
-	FIf2kcTxbAw0j3lRyDZmR1UIAvgIlvQF2PVqoMzp3laROE7yFTWssTmyPWedmZfOSiWlaP2sGa2
-	Kfe3N2UQNcr+wi4A5RW064XQORLI+4+3BKbN/inUitizzZvtysM5LlS3Z2GweV/8ivII1o+TE9x
-	t+bi0Yf/pJoGrIWBi59tm5lHOg9ha3iaaFdDp7DJ4+gzXb73rKz00rs9qp6CsFz3VCmvYkpPWkw
-	5smRbhZn+qFFbItlkeQcNkQa49dfS7SpotbLtg71vHLA2iqxODQDxRO6tX/rpRSCWidBgC89AQ=
-	=
-X-Received: by 2002:a17:907:3cc7:b0:c2e:2d8c:4585 with SMTP id a640c23a62f3a-c513ab4cd0dmr859651666b.36.1795425442222;
-        Mon, 23 Nov 2026 01:17:22 -0800 (PST)
-Received: from localhost (144-178-202-142.static.ef-service.nl. [144.178.202.142])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513afca58asm371207466b.65.2026.11.23.01.17.21
+        bh=mSzMQRsg+yqrEBzUwipXKM/+0J/rVsVGfEXY3Vx7ICc=;
+        b=SXSmv38JqmEdnmaKjPzoHspZ4j1KgXye2tSGNsa58Eu03qy09fIlbqg925bJ1QOXfj
+         X/WR7dOykR41g8MU3jLgLYVohDzxQOlGXlxiMr0rAGYS2ipKTCUSn8ukd/SrFjjPTF6J
+         FZRaxxfTgWNBNFybRCm6Fi3UQ26Py9YK9sbwo82Acmxza5frbjNX47E1U/G6S6HHmWqD
+         gJJj87dONd3Y5tdG1UI2jVaFGMj4vrBc0zkotCCgMPUnoT91+moKeH5KXzeuZoRBm53s
+         TGMpS/g1/vqlgpkVT83VGG+bakmolZ1gwVhDzhdIAqxZ5Qzojkmmmt770q1dX0xZgRjM
+         fFig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795425503; x=1796030303;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=mSzMQRsg+yqrEBzUwipXKM/+0J/rVsVGfEXY3Vx7ICc=;
+        b=GF1ebAerSJqjBvv5pzPGXTlQxzoIym1sYt22tJsB5uCPnAIlQY16EQOVMQCk/hF08b
+         ThTPMg2QLI4rRPEBszEeYz9sYhuj7hU0xxDhPELGxP+RWxb5Vp9VbEv1BALnOadtWyzC
+         Fd8NeOOJQNJuKI2WGxOelSF/MqKse9LKf+LYmR+Ekt4hoXNmAU2mensWzeYsQI52Awy7
+         s146J7xdChks2+RJK6VXaP8Xjc44OpGl3F+GW9AoSMVCqbR4HFvITO0k4LC0tOL4Hfsj
+         GZ06k+guPqhHVctlPnU6FEc0ay5Y7XgWdr2G1lEL3ptcNGEkZ7iSwK7J6+cD7v1HiJAI
+         IDLw==
+X-Forwarded-Encrypted: i=1; AL+hErFgxFcTlrwR7+Z/RinyKJulhXbSyXcC790LyvAqqn0UtT9hkVXv2QRiu81qtye8ZVzkaTEJ2EBb/wNjvDxH@vger.kernel.org
+X-Gm-Message-State: APuU4Z/pV0SEPCwq9dBw7wGdpHvwCr1t+yZt1JrXTkjLXli7gIqxfoNQ
+	p0mOiafoJhWVlI2wTgnc14kDXuOzqjrJtgIQ924ZvnaQx5wjGkOlrHQhL5Bn3iijclNZboQPIF8
+	gcYvphtG59FGcYOWVeFf4086yRDrYHZrSzyRWel02xutCiFQE3i3r74RR4ihgZ5V1bpVC
+X-Gm-Gg: AZFdTZfKJE16+3hHnkCM04RrvvIRp1S7Ol3whuv8eeViXl39PTumbzLIgUw6BLsEZQY
+	gJiexfpjFhDb02CjjmGV7lCPsmqJk6Oh+yBIHXsvNoad4cVWDT0L168+5GzdtWFg/ZRlDwjgJM+
+	2DvP+OJp5q/FVqwQXusTr/rib7W3ornRQbkcBH5hbUi5bOFXWe6MI93yaqtIVaaU/zEhHF5J6Ik
+	gdx1fSj1RhtHU/3rx7mDGPLixLDaQ/913pONSoP/L2V0IG6ELdFdhsjd3ugz3I3HUjh7eUlXuXN
+	zAqxdTot7C+V1LBaW1VEuX9xS2TzlrEz7VlltmL0hPalKiAw3YqXCaf1m/wnFJ+I36h6RkF7ME8
+	d3ick56qvcyLjMjXxJsPYfKqFcF2wP+qE/1ry3bc+DKdH5yuJIOBPc75ODYhNa+9d1sVpMT0ogr
+	jiHhXj
+X-Received: by 2002:a17:90b:2648:b0:3ac:da41:ef7e with SMTP id 98e67ed59e1d1-3b41c95b67fmr9470998a91.52.1795425503032;
+        Mon, 23 Nov 2026 01:18:23 -0800 (PST)
+X-Received: by 2002:a17:90b:2648:b0:3ac:da41:ef7e with SMTP id 98e67ed59e1d1-3b41c95b67fmr9470981a91.52.1795425502450;
+        Mon, 23 Nov 2026 01:18:22 -0800 (PST)
+Received: from [10.218.31.125] ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b41ad0b2c4sm16839831a91.4.2026.11.23.01.18.18
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Nov 2026 01:17:21 -0800 (PST)
+        Mon, 23 Nov 2026 01:18:22 -0800 (PST)
+Message-ID: <8aed0815-685d-41b3-af2e-0055bc6ad920@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 14:48:17 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,167 +115,82 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/3] tpm: Introduce Qualcomm TPM driver
+To: Jarkko Sakkinen <jarkko@kernel.org>
+Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+        Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+        Peter Huewe <peterhuewe@gmx.de>, Jason Gunthorpe <jgg@ziepe.ca>,
+        linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+        linux-kernel@vger.kernel.org, linux-integrity@vger.kernel.org
+References: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
+ <20261120-tpm_qcom_driver-v5-2-3d9321ace107@oss.qualcomm.com>
+ <awGtGoxtker8a9kG@kernel.org>
+Content-Language: en-US
+From: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+In-Reply-To: <awGtGoxtker8a9kG@kernel.org>
 Content-Type: text/plain; charset=UTF-8
-Date: Mon, 23 Nov 2026 10:17:21 +0100
-Message-Id: <DN2H797ASILD.3P89IOZH1IU1H@fairphone.com>
-Cc: "David Lechner" <dlechner@baylibre.com>, =?utf-8?q?Nuno_S=C3=A1?=
- <nuno.sa@analog.com>, "Andy Shevchenko" <andy@kernel.org>, "Rafael J.
- Wysocki" <rafael@kernel.org>, "Zhang Rui" <rui.zhang@intel.com>, "Lukasz
- Luba" <lukasz.luba@arm.com>, "Rob Herring" <robh@kernel.org>, "Krzysztof
- Kozlowski" <krzk+dt@kernel.org>, "Conor Dooley" <conor+dt@kernel.org>,
- "Laxman Dewangan" <ldewangan@nvidia.com>, "Bjorn Andersson"
- <andersson@kernel.org>, "Konrad Dybcio" <konradybcio@kernel.org>, "Hans de
- Goede" <hansg@kernel.org>, "Jens Reidel" <adrian@mainlining.org>, "Casey
- Connolly" <casey.connolly@linaro.org>, "Val Packett" <val@packett.cool>,
- "Daniel Lezcano" <daniel.lezcano@kernel.org>,
- <~postmarketos/upstreaming@lists.sr.ht>, <phone-devel@vger.kernel.org>,
- <linux-arm-msm@vger.kernel.org>, <linux-iio@vger.kernel.org>,
- <linux-kernel@vger.kernel.org>, <linux-pm@vger.kernel.org>,
- <devicetree@vger.kernel.org>
-Subject: Re: [PATCH v4 1/5] iio: adc: qcom-spmi-adc5: Add battery thermal
- channels
-From: "Luca Weiss" <luca.weiss@fairphone.com>
-To: "Jonathan Cameron" <jic23@kernel.org>, "Luca Weiss"
- <luca.weiss@fairphone.com>
-X-Mailer: aerc 0.22.0-0-gc2f86b7abde3-dirty
-References: <20261117-bat-temp-adc-v4-0-14d5d309ebfa@fairphone.com>
- <20261117-bat-temp-adc-v4-1-14d5d309ebfa@fairphone.com>
- <20261122031305.0fdc69cd@jic23-hlaptop>
-In-Reply-To: <20261122031305.0fdc69cd@jic23-hlaptop>
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDAzNiBTYWx0ZWRfX5oDFjXZjdG3I
+ y9VT5WyUqbxoNyM7u3QPNhF72VOXVdaLFwGHyvI8G6JFFBFNb3JwYf2ELRDlEAOAb9HoHLjnMMX
+ RIFSDDEy2JVeCXyEHI1Q5Sm0fvEq3f0=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDAzNiBTYWx0ZWRfX+zXoEg1DIDuJ
+ lsQMpeLDwH8yEHi/mBgFLiIhH98WzrVl/wxttRPq17wCfOIDXpOZVzaNMcGBqNk8grsbzOgFdq0
+ /erydGqw4lbuejxfzbYL8PACarckVgrz9FjFSa0QvQEVTNEgrDyIZiZTa/viJrO7CStm/eASEwi
+ 8COdT8bjuUm+6yp2t+OAYjlCSQ0JPqZu5siQNmGijCU8LaZfGI2gULxVzpqeuc5DP+2rycwj1Tf
+ BkB6w6Ghzvn4qlzhLpC+xblz17Y2MkoasgsCVK8CnIXI+rpnruBG0jchhvuH03clJEpw46V/gAh
+ so8BKlPZXqu7Lf7tiEtyeo/sSx+oRGYneNj0ikhTf2/WAQTgpDpZbPQFkZfT23gMG+oRbwi1FlG
+ W4zDx3rfBf7I8WGf54QNL81nryPTh4erInX37JrYVMtBw26WsV0dvkPiDwCCCcdgXGTuFEnitIF
+ RViIaqJHD/IQEb+x7TQ==
+X-Proofpoint-ORIG-GUID: xrdJFMivcZ48jlgjQTXGehUSONxXtccC
+X-Authority-Analysis: v=2.4 cv=cYJHPXDM c=1 sm=1 tr=0 ts=6b0404df cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=VwQbUJbxAAAA:8 a=V7dZqg2nRoFFyRf2opcA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-GUID: xrdJFMivcZ48jlgjQTXGehUSONxXtccC
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-23_02,2026-11-22_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 clxscore=1015 malwarescore=0 spamscore=0 bulkscore=0
+ priorityscore=1501 adultscore=0 suspectscore=0 impostorscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611230036
 
-Hi Jonathan,
+>> +module_tee_client_driver(tpm_qcom_driver);
+>> +
+>> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
+>> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
+> 
+> MODULE_AUTHOR() field is not that useful and nobody keeps it up to
+> date, so you never can rely on it. Not NAK, but just underlining
+> how litte it is worth :-)
+> 
+> Copyright and authorship is anyhow recorded by Git and
+> MAINTAINERS document.
 
-On Sun Nov 22, 2026 at 4:13 AM CET, Jonathan Cameron wrote:
-> On Tue, 17 Nov 2026 09:23:11 +0100
-> Luca Weiss <luca.weiss@fairphone.com> wrote:
->
->> Add the BAT_THERM channels with millivolt as output, which can then be
->> used along with information regarding the NTC in the battery, to get the
->> actual battery temperature.
->>=20
->> A static lookup table in the ADC driver won't work since different
->> devices have different Ohm and Beta values in their battery NTCs, for
->> example a NTC can be 10kOhm & B=3D3435K.
->>=20
->> Signed-off-by: Luca Weiss <luca.weiss@fairphone.com>
-> Given this is independent of the following elements other than
-> the dtsi changes, do you want me to pick it up now?
->
-> You may need to use numeric values in dtsi until the header
-> catches up then chase with a patch flipping to the defines next cycle.
-> That's how we normally avoid that dependency slowing things down.
+Ahh, I noticed couple of other drivers doing it so took it as reference
+and adapted here. Seems MAINTAINERS is updated correctly so folks can
+rightly reach out to me for any dsicussion/issues later on.
 
-Sounds good from my side. Thank you!
+Btw thanks for mentioning. Will keep a note for the next time!!
 
-I think realistically, there's no other option than what's implemented
-in this patch, even if PATCH 2/5 (dt-bindings change for generic-adc) is
-not reviewed yet. But I hope the dt maintainers will be okay with that
-as well.
+> 
+>> +MODULE_LICENSE("GPL");
+>>
+>> -- 
+>> 2.34.1
+> 
+> 
+>>
+> Reviewed-by: Jarkko Sakkinen <jarkko@kernel.org>
+Thanks!!
 
+-- 
 Regards
-Luca
-
->
-> Thanks,
->
-> Jonathan
->
->> ---
->>  drivers/iio/adc/qcom-spmi-adc5.c         |  6 ++++++
->>  drivers/iio/adc/qcom-vadc-common.c       | 16 ++++++++++++++++
->>  include/linux/iio/adc/qcom-vadc-common.h |  3 +++
->>  3 files changed, 25 insertions(+)
->>=20
->> diff --git a/drivers/iio/adc/qcom-spmi-adc5.c b/drivers/iio/adc/qcom-spm=
-i-adc5.c
->> index d57ba8526e0c..24ac84580570 100644
->> --- a/drivers/iio/adc/qcom-spmi-adc5.c
->> +++ b/drivers/iio/adc/qcom-spmi-adc5.c
->> @@ -542,6 +542,12 @@ static const struct adc5_channels adc5_chans_pmic[A=
-DC5_MAX_CHANNEL] =3D {
->>  					SCALE_HW_CALIB_DEFAULT)
->>  	[ADC5_XO_THERM_100K_PU]	=3D ADC5_CHAN_TEMP("xo_therm", 0,
->>  					SCALE_HW_CALIB_XOTHERM)
->> +	[ADC5_BAT_THERM_30K_PU]	=3D ADC5_CHAN_VOLT("bat_therm_30k_pu", 0,
->> +					SCALE_HW_CALIB_THERM_VOLT)
->> +	[ADC5_BAT_THERM_100K_PU] =3D ADC5_CHAN_VOLT("bat_therm_100k_pu", 0,
->> +					SCALE_HW_CALIB_THERM_VOLT)
->> +	[ADC5_BAT_THERM_400K_PU] =3D ADC5_CHAN_VOLT("bat_therm_400k_pu", 0,
->> +					SCALE_HW_CALIB_THERM_VOLT)
->>  	[ADC5_BAT_ID_100K_PU]	=3D ADC5_CHAN_TEMP("bat_id", 0,
->>  					SCALE_HW_CALIB_DEFAULT)
->>  	[ADC5_AMUX_THM1_100K_PU] =3D ADC5_CHAN_TEMP("amux_thm1_100k_pu", 0,
->> diff --git a/drivers/iio/adc/qcom-vadc-common.c b/drivers/iio/adc/qcom-v=
-adc-common.c
->> index b03cf584b165..101b3c724f8d 100644
->> --- a/drivers/iio/adc/qcom-vadc-common.c
->> +++ b/drivers/iio/adc/qcom-vadc-common.c
->> @@ -309,6 +309,10 @@ static int qcom_vadc_scale_hw_calib_therm(
->>  				const struct u32_fract *prescale,
->>  				const struct adc5_data *data,
->>  				u16 adc_code, int *result_mdec);
->> +static int qcom_vadc_scale_hw_calib_therm_volt(
->> +				const struct u32_fract *prescale,
->> +				const struct adc5_data *data,
->> +				u16 adc_code, int *result_mV);
->>  static int qcom_vadc7_scale_hw_calib_therm(
->>  				const struct u32_fract *prescale,
->>  				const struct adc5_data *data,
->> @@ -333,6 +337,7 @@ static int qcom_vadc7_scale_hw_calib_die_temp(
->>  static const struct qcom_adc5_scale_type scale_adc5_fn[] =3D {
->>  	[SCALE_HW_CALIB_DEFAULT] =3D {qcom_vadc_scale_hw_calib_volt},
->>  	[SCALE_HW_CALIB_THERM_100K_PULLUP] =3D {qcom_vadc_scale_hw_calib_therm=
-},
->> +	[SCALE_HW_CALIB_THERM_VOLT] =3D {qcom_vadc_scale_hw_calib_therm_volt},
->>  	[SCALE_HW_CALIB_XOTHERM] =3D {qcom_vadc_scale_hw_calib_therm},
->>  	[SCALE_HW_CALIB_THERM_100K_PU_PM7] =3D {
->>  					qcom_vadc7_scale_hw_calib_therm},
->> @@ -583,6 +588,17 @@ static int qcom_vadc_scale_hw_calib_therm(
->>  				 voltage, result_mdec);
->>  }
->> =20
->> +static int qcom_vadc_scale_hw_calib_therm_volt(
->> +				const struct u32_fract *prescale,
->> +				const struct adc5_data *data,
->> +				u16 adc_code, int *result_mV)
->> +{
->> +	*result_mV =3D qcom_vadc_scale_code_voltage_factor(adc_code,
->> +				prescale, data, MICRO / MILLI);
->> +
->> +	return 0;
->> +}
->> +
->>  static int qcom_vadc_scale_hw_calib_die_temp(
->>  				const struct u32_fract *prescale,
->>  				const struct adc5_data *data,
->> diff --git a/include/linux/iio/adc/qcom-vadc-common.h b/include/linux/ii=
-o/adc/qcom-vadc-common.h
->> index 3bf4c49726a7..7586016ff14d 100644
->> --- a/include/linux/iio/adc/qcom-vadc-common.h
->> +++ b/include/linux/iio/adc/qcom-vadc-common.h
->> @@ -93,6 +93,8 @@ struct vadc_linear_graph {
->>   *	voltage (uV) with hardware applied offset/slope values to adc code.
->>   * @SCALE_HW_CALIB_THERM_100K_PULLUP: Returns temperature in millidegC =
-using
->>   *	lookup table. The hardware applies offset/slope to adc code.
->> + * @SCALE_HW_CALIB_THERM_VOLT: Returns voltage in mV of a temperature c=
-hannel.
->> + *	The hardware applies offset/slope to adc code.
->>   * @SCALE_HW_CALIB_XOTHERM: Returns XO thermistor voltage in millidegC =
-using
->>   *	100k pullup. The hardware applies offset/slope to adc code.
->>   * @SCALE_HW_CALIB_THERM_100K_PU_PM7: Returns temperature in millidegC =
-using
->> @@ -114,6 +116,7 @@ enum vadc_scale_fn_type {
->>  	SCALE_PMI_CHG_TEMP,
->>  	SCALE_HW_CALIB_DEFAULT,
->>  	SCALE_HW_CALIB_THERM_100K_PULLUP,
->> +	SCALE_HW_CALIB_THERM_VOLT,
->>  	SCALE_HW_CALIB_XOTHERM,
->>  	SCALE_HW_CALIB_THERM_100K_PU_PM7,
->>  	SCALE_HW_CALIB_PMIC_THERM,
->>=20
-
+Kuldeep
 
