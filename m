@@ -1,47 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795472138;
-	b=o0eAZbvAHbl/FsT/iKK8I1W1xzwsCNyXF+BP0w1wHsI5pA/mGQxD9iizZMSOJK2G+h3r
-	 0ASTuUBZluU4OocUO+4ZQUH5fwyA2yd91SB3ftn5MIHFD6yYjlP1enqlGSC+1Btuz2R19
-	 ZSyVgtN5zGWxUz6h+AHWV9drzCPtuENQcXxeNDhUBqVlleENmDjL5xE8umOYZOWj58jBF
-	 qaYIeKKJztMVbCd+qMEEXR2a4qD2xa4RWFrckLqINs23Ew8LhDE6VMJrDKYa+lFlKqdma
-	 jHfJqEcTUzEuG0kvuUuzWeC+fFc0jxkwTw8CZGz0hFyw7B40SAIxXqtKbM51ZVeyJxg==
+	t=1795472739;
+	b=cU3Vos2+/i5th07KM02BOF1oQeFREOMAqlfA/YXh7S80EJoZKpWfljqY/Fupayqwe1do
+	 v0kJD9ZM97CjIDNkoNnD2S4ukL/GMgtCtFEFTOPyRBEHx+6CHgzgTuW+UkpLsuBRxK1vc
+	 akYJDdhBkWlOUYTVAC6098U2hGqtrVqorfAX1yg0r9Cv0SPmeU51M1HRwdKIH8cKgQIjN
+	 xVYbx1++gSnAyXQVvJ+kHfg9Z2yKNYOmiBBiPQWbzAWGUXAA/1wkYhO+RIJaxcie5pnKC
+	 5e9muzk5hdyhyUjw+zy6XXTCIoE91lyAYTCivPL56sPQNizKnv9Q7sYSzRfq76cIz3g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795472138;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=zZOr86x6Nbcrswj0/CdPx/id2jV0MiHrJmrhX/el+Dk=;
-	b=0jTyjyfP9O1mXrCri60oej//HSMu0XvGP2CNIx9VRlghqZIeRLBfhm3AJKIDqTLoRQFq
-	 doxeIVudMzuiyLGuiBezLVl9sAzGoYPObIWME61ZcWtw4XY9GS+wFUCtx2ZbgSgbC0CC0
-	 zf8EzvBEW4bax+j2CBJpVlzv5aNV75Z6tdXevrSLqkOJkRsbZ96SeHJXVl3tAmwFRTsEo
-	 x5fBw1f9vtUYWKSzdcC4PaRT8z6ViMw38MhEaLy+DyXE86kwILy2ToiHP71Ud7aItBmEd
-	 ovJamY5BE64gFC9tCBGKT4GoJhZrx1KIyg9QPKZ0yXMBYte+kuzUsp/PRyMobUH415w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795472739;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
+	b=p3yjEKRjkcdbwvITKhMs0+4TUVoyZQqzklX8kzFfdFYJd4ZKuZSY9MJKKPA8iNN+vXtD
+	 wIbtVT88yFzt0BAtBSgnWwVouwfQ8gMER7Fq9bp58t/YWPv0GPASbW0VYCaxW399TRQUj
+	 U8MWI2+0MkXwcRaF6tV91VlyYwoev5bGLgCE5wRW6hUScj7YT03PDr6ZAw5fJkze1XVtx
+	 kXf0z4Hv0BH2iJXTz31XJUc1nZ4jEkRdufDZ+PYpK2KTv8VdF6vtmJTUJPrNOAmKF3QId
+	 ZqUgVsUCp/uVWOGGouLC46tgR6kdnRKPa/qRUPXwgu0b7D4HBJtq+MyM2ids/pM+vDA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IUfnCFTe;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=riscstar.com;
+	spf=pass smtp.mailfrom=riscstar.com;
+	dkim=pass header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=6LEkh1Wz;
+	arc=none smtp.remote-ip=209.85.161.46
+Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com [209.85.161.46])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A33D6606A322;
-	Mon, 23 Nov 2026 22:15:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5ABD606A326
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 22:25:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B5ABD606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=IUfnCFTe
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 71A6B1F000C0;
-	Mon, 23 Nov 2026 22:15:22 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795472138;
-	bh=zZOr86x6Nbcrswj0/CdPx/id2jV0MiHrJmrhX/el+Dk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=IUfnCFTe+dBvsPU7O06E2fZSVhth+KzFXsodtvncGuI0ZJrIUURRRNuTzOpaaXs8w
-	 Yx9tfQxFf0bhkud/FZpgu8M5GraijG/vUGk9+qgLWv+yC4PuuWis9FcdtnPM2p8/tG
-	 NklJrEq+wTwwduRL6DBLbHPZLz+aXeAy3qLhhsEFf9ixKzUsda7LHBGm13m+YJOsTj
-	 +gWPX2J9lF6u1D3o3sYOKIey0FJQdYR9Jjzcr3TUQ/YuUOZy6BswMLeTvEZxX29xaW
-	 Gu+Kppy1E9Sp1P5RVB5zVWQpcZkzx78goOMCIq4LogvU6xwyAC4c4KQGNxt064WKP0
-	 npRyr50ofJOxw==
-Message-ID: <356dfc79-1918-4024-b40a-57a8cb05418d@kernel.org>
-Date: Mon, 23 Nov 2026 23:15:19 +0100
+	dkim=pass (2048-bit key) header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=6LEkh1Wz
+Received: by mail-oo1-f46.google.com with SMTP id 006d021491bc7-71ab5e64742so2343758eaf.3
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:25:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=riscstar.com; s=google; t=1795472737; x=1796077537; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
+        b=6LEkh1WzWlOSIoIIHWHHvGGe8ls6F5uMHZ1h/oA0Mfj/yUszyLlz328XQa9sRllh0p
+         tVUeWXGJcqXx9ToqGSMoiqIXv1E7puZXYIJTrpse7wiOimDRxg1VWeA9864K5z7DuTPa
+         iDKLedXwVP1geqUl+GNOhRu11khMsxrj3SrIfw0k2lxgSTTsR5qEBPlQsbzZzVqnOoyp
+         64/NqX3sCgdpxbp7WX7Cx1QzlVVorxFLiiLf2bE72H+3UlP6o4AQCaJn0Ru4kBM/y6Iz
+         /V/6jfXFmv49jLvEo9diYhTSYIrK3tnOyQodcRn6CIPXedblij46nG12w6shkcsVS0g1
+         UZAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795472737; x=1796077537;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
+        b=QtGkbDzGRyFs24gcF0L1U1doV0f4KS5fEbCb6ugl3/kuZLjmVdELNBbMgK0lZWEX1y
+         BzMSMwAj3JNF9dAnQh6v6QMHICDBZh10BxhoShLJrDH0bGBWPiQNBJLgPulm7RDz+Qoz
+         a37Su+/x36YAIiGkjTRQMDb8+BTtLarFjrXzmc2FzyAQuKpIAA2rdEpwdF3jQLAZv3/G
+         SPGB1h9Dqodqa8HfWisL9UzWcpsJX0LAuc0UQfwTSGN80rJK6wtODzaEEEYVSnggbt9H
+         5JpAQJJEOR+3xe4htfxOdwXgPDVHO1dHmBvLcEpeUeu356mEZTlyv4D/L8hiQuL7fcJD
+         u/+w==
+X-Forwarded-Encrypted: i=1; AL+hErG5+CvO4QLKMxvIiTVsGZiNKvQ7ugU+/sE1BEu7KPChEH+MTnGaWmjjhtRmU6BYO03LfQnPPiTcpP+KoZg6@vger.kernel.org
+X-Gm-Message-State: APuU4Z/NzDqHH2O7j+LgPa1hH+ypPVMZO0xgQojwOg64sxfYs01m0wy2
+	065Kb6eD9qB9l5oOyaVCf0tPULwiwo9OPTa37JBBGNrve/uqZYU205PHXQHd7qi9oZQ=
+X-Gm-Gg: AZFdTZd8Zcq2+ZErDzVZ9kxzqHzY0TS2cWCFW46naiDmLGf2p0fRqQWZJfwUO6ao/o/
+	qgIjkMw0LmOpViz1OxBUxrrnhA4MYKVRIFBUhonpcf6ONQ8iFcGvKdmDyfeneSGx4I8QB6vWHeW
+	M2N1kRKkV/JlE7Y/JXTnIJ6Rnn+WZEUcxznNgqzfQKbamrC176Cgh39Nh7j87oNPOm+SImZC5o7
+	IR7mNcGr672/c6fNsG3StYO2vtw+hgHXFukMG3bRTUR0sAcjsRyOGKroSN6ge/QhvXnOb2QLpLQ
+	MqQlXq7/NkU73GMDwLA08ME0CZHZn+u1SkH3rXvB3/KYTNU+UaDx2q2YTTfSA3H+oAPr83VA0G9
+	TlG1I71dXfHPygPiuo7Tu1PYv3kD8mw0gf+g62HYti2viL9vor2i1B80mmMo0P1CU3ZrSqsy3Qp
+	PV7yJuhv8srVUwuyM5MY8Iao1RghgZXWZ+SC2oPFvW4m3Dj09K1PI6pa9dyrqiVEwDR2xPgE3uc
+	XNsg+rTV2NXubbb4EWWASookvnN8DC6GCQj6pbiBHbXFTBad/1xpsmt8+sx0nB4wKfAoqmLcgJe
+	yWACtxaVzWrCW73IEgzPFDQraUhkVIcF
+X-Received: by 2002:a05:6820:1391:b0:71a:dd93:2974 with SMTP id 006d021491bc7-71b39039602mr10599042eaf.0.1795472737591;
+        Mon, 23 Nov 2026 14:25:37 -0800 (PST)
+Received: from [172.22.22.28] ([76.156.233.211])
+        by smtp.gmail.com with ESMTPSA id 006d021491bc7-71b380e4a6dsm8511306eaf.13.2026.11.23.14.25.36
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 23 Nov 2026 14:25:37 -0800 (PST)
+Message-ID: <ca6115bb-1c45-408a-be55-68b74977a380@riscstar.com>
+Date: Mon, 23 Nov 2026 16:25:36 -0600
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,103 +93,63 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 13/16] dt-bindings: arm: qcom,ids: Add SoC ID for
- SXR2250P
-To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Robert Marko <robimarko@gmail.com>,
- Guru Das Srinagesh <linux@gurudas.dev>, Thomas Gleixner <tglx@kernel.org>,
- Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>,
- Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>,
- "Joerg Roedel (AMD)" <joro@8bytes.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Manivannan Sadhasivam <mani@kernel.org>,
- Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>,
- Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- "Rafael J. Wysocki" <rafael@kernel.org>,
- Viresh Kumar <viresh.kumar@linaro.org>, Amit Kucheria <amitk@kernel.org>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>,
- Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, mfd@lists.linux.dev,
- linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev,
- linux-usb@vger.kernel.org, linux-phy@lists.infradead.org,
- linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org,
- linux-pm@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-References: <20261116-halliday-dts-v2-0-2c92438c6c46@gmail.com>
- <20261116-halliday-dts-v2-13-2c92438c6c46@gmail.com>
- <20261123-pastel-barracuda-of-rain-bce8ac@quoll>
- <20261123211723.1065310-1-lightofmysoul@gmail.com>
-From: Krzysztof Kozlowski <krzk@kernel.org>
+Subject: Re: [PATCH 08/10] remoteproc: qcom: Skip unregistering uninitialised
+ SSR subdevice
+To: Lee Jones <lee@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Mathieu Poirier <mathieu.poirier@linaro.org>,
+ Rishabh Bhatnagar <rishabhb@codeaurora.org>,
+ Siddharth Gupta <sidgup@codeaurora.org>, Alex Elder <elder@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
+ linux-kernel@vger.kernel.org
+Cc: stable@vger.kernel.org
+References: <20261123172140.3547896-1-lee@kernel.org>
+ <20261123172140.3547896-9-lee@kernel.org>
 Content-Language: en-US
-Autocrypt: addr=krzk@kernel.org; keydata=
- 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
-In-Reply-To: <20261123211723.1065310-1-lightofmysoul@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <20261123172140.3547896-9-lee@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 23/11/2026 22:17, Stanislav Aleksandrov wrote:
-> On Mon, Nov 23, 2026 at 01:09:26PM +0100, Krzysztof Kozlowski wrote:
->> This should be rebased on my patch removing the IDs.
-> 
-> Thanks for review. I will rebase it, but I am not sure about
-> the order, could you please clarify?
-> 
-> 1. Should I wait for sending v3 until your patch is applied?
-> or
-> 2. Should I apply your patch locally and then send v3 based on it?
-> (but if something changes in your patch a v4 might be needed)
+On 11/23/26 11:20 AM, Lee Jones wrote:
+> If qcom_ssr_get_subsys() fails in qcom_add_ssr_subdev(), the function
+> logs an error and returns early without calling rproc_add_subdev(),
+> leaving ssr->info NULL and ssr->subdev.node uninitialised.  When driver
+> probe unwinds or the device is later removed, qcom_remove_ssr_subdev()
+> unconditionally calls rproc_remove_subdev(), dereferencing a NULL list
+> pointer in list_del().
 
-I suggest rebasing on top of my set, so the (2).
+At first I thought a failure seen in qcom_add_ssr_subdev() should
+mean that qcom_remove_ssr_subdev() never gets called.  But now
+I see that doesn't return any error, hence the check for a null
+ssr->info pointer is necessary here.
 
-Best regards,
-Krzysztof
+So... this looks good to me.
+
+Reviewed-by: Alex Elder <elder@riscstar.com>
+
+> Guard qcom_remove_ssr_subdev() on ssr->info being non-NULL, matching the
+> GLINK and SMD subdevice teardown helpers.
+> 
+> Fixes: 5abfe5cf0b83 ("remoteproc: qcom: Add per subsystem SSR notification")
+> Closes: https://sashiko.dev/#/bug/linux-5594c348-0c41-4482-b001-481878256d30
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Lee Jones <lee@kernel.org>
+> ---
+>   drivers/remoteproc/qcom_common.c | 3 +++
+>   1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/remoteproc/qcom_common.c b/drivers/remoteproc/qcom_common.c
+> index c53190f0c537..6fd92c33392b 100644
+> --- a/drivers/remoteproc/qcom_common.c
+> +++ b/drivers/remoteproc/qcom_common.c
+> @@ -537,6 +537,9 @@ EXPORT_SYMBOL_GPL(qcom_add_ssr_subdev);
+>    */
+>   void qcom_remove_ssr_subdev(struct rproc *rproc, struct qcom_rproc_ssr *ssr)
+>   {
+> +	if (!ssr->info)
+> +		return;
+> +
+>   	rproc_remove_subdev(rproc, &ssr->subdev);
+>   	ssr->info = NULL;
+>   }
+
