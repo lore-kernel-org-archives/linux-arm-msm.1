@@ -1,59 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795420598;
-	b=h5QTJ9H4241yzYvDdozaojPxmYeMEbZUXv2saFxM0AWqL8Bl0VMMjY6szthniH9hv8GW
-	 lloT1yYnZkBqWCC36Xe1F4zyfKkVtOQI5iTm+okJHS9nB0Nz1q2qe17H+RHSWcyk67+qM
-	 xcpK5qjMDkPTJseuJDuoMzMPbwUDek08kWLt4pcS/3c+ozeotrPldmscm/++oPIals0lO
-	 W01x18cgNiYM8nzg2GnKlTVVWt7hxFQHJeBodAD9u9aZ8WRAAgDHMdCJlWiPbptjkI636
-	 /jVcx6MJArtchmRusYWy1hsfpimKxHbNBwhVjhtUSOq3yC/3/rAM8H5zXrc3g5OQQfA==
+	t=1795421590;
+	b=DE3bfiKvOldx73CiodMxIHQQP0XjnnhdVOL0Fa0V/uFXgL8kN3ZpHFBooOgtLL9TTqm3
+	 111jpA+G8muPLw9JdnLQ+gkgBSB4OmZ5BedDxTYBiyyEXiFQeEufGMTH3zb4Bqtmp4cv3
+	 2i7dp94e2xDHDQZMx0XQvLxcTwd5qiNN6w0TKj2Wd0ItG1VhrsO/R+Ox9mMiqMWfQb9Iv
+	 8ZRoLqe0jFd012eH3vVf/Vsm3CB9go6NvqscJ3sTvCId4KelWD1pL6aPOdWgA/WqUeewd
+	 TFTB5RTm7vw344uCzeRc5/+EaNIEn4x7u2GsDLzWTBt4cbUZg60vho/IO2nJzp+HQ6g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795420598;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=wdAgCFFdw0rSMXALw4gmM4sUmyE/cmBQLiHptzW8uy0=;
-	b=Rlt8uVE7CLKtvmF9TWus51iCfLk9+Ddqd8Kl/Lh7FXsEHPgQ4uAhiXGh07K640TcNDvJ
-	 OzHbnb/RiaiG83mHZVM2WQDusvlsbG7B1TT0Hf+EK0Gcjp8XJZAiLS8+JDF5CuBDgXMLV
-	 SWDN8oW0Lmalw+sn2PSMpS+Kqiq2lXmDUts/xaV3yY2jw8CAiUxGzdUHMFLdzAwhIRtNN
-	 W71JwDPmjxcNuK6jH7mgbgKn1cMd4vWLFSmIUnCEtsjtt11KTHQ82OadR5mpevbCxtYhe
-	 uxK0+vCp/YjPjaIfGyRvfuVTm1zpi0wCSfwsq4x/DyAfWt9hwLEFPo1ObXVmMD56Qgw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795421590;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=dcJLIJFhaCRxzOyphj2FZicgjNkLAYFkmuaB9/+QDmI=;
+	b=Za7b8L4MTyTkwBFgajioF9rs76qFVNoR1Tqw2EyClmqNJGrOIYOaSb9H3tDflV7PgTug
+	 ehhhrB64Q6Zex1zixFBqO4YLxk+JvcczXxR9sg6EkPmdGeqCID8qTM3exXJNEduF7RPGc
+	 uQccmigkpWVsR5Vs0xu+ejGhs7OhoOAZaGAVSMdwze0BmbgxR3osi8EiFW91PY3MNIE9e
+	 TvTejiZIqt+V4e6JpCSJR98HG0IHHTmuJGQJyrlWNgLquzOMdRcWT95QeHn5RY0zZp0C0
+	 twyk3o4dx4eHCyLVIeihxoCNOJdQg7Y8ozk1qGH3EgLNLADvHog6y2dbbXQiXjH0dOA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eosNcEyq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g0Grzwr1;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2F36606A31F;
-	Mon, 23 Nov 2026 07:56:38 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 293D1606A31F;
+	Mon, 23 Nov 2026 08:13:10 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eosNcEyq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D8F1A1F000CA;
-	Mon, 23 Nov 2026 07:56:36 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g0Grzwr1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 75D8B1F000CA;
+	Mon, 23 Nov 2026 08:13:08 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795420598;
-	bh=wdAgCFFdw0rSMXALw4gmM4sUmyE/cmBQLiHptzW8uy0=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=eosNcEyq2V5Ib/i4MLgRyKQ63uu99YCbFJU900Cxk1w/T6U7GeojNUAtnfb4zUB2R
-	 l0Qa+9hB4yiRR4K5KIV8XOkM5UM+z+gtV38w2yaisjbxReztO8tG6MIkPnsscosI49
-	 s0qEDdl5PKXDhVTIe0/o8IshrmyK8yiyVk6hYZq2SNLpdqF6zBqaHke9Zmjxunhl/y
-	 2wSt9q7O5PYp5YpnWQ63Re8EeRYV3pekFhVOOSE2l6hdEPOc3JnoS9HY8OVttjBjFf
-	 w7cxmN/qqUZlBResQyJskd4MwAqCWqLkEKha3NrkQ55RQoUSWeGYiT+TANXYhjuvGS
-	 leqLrc6RYOPNA==
-From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
+	s=k20260515; t=1795421589;
+	bh=dcJLIJFhaCRxzOyphj2FZicgjNkLAYFkmuaB9/+QDmI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=g0Grzwr15lHuTQzQeCA2q7yoGzGsMYuhUtPdApQK8P9BkKfvoHeEjoFcak9SB+5dN
+	 eD3Y1Gxd9Ew5SamgNjRALPBQ3c/AUILEDzl4TKVx0giZeBNrIAuDx1hz519wI+4ahU
+	 NgXLIw3nPnPL6dohHxKyytxe/sZ3dzONSDRXumFfAK7/iySdIgCwF7/eb6LJFda3wk
+	 BCn733fDxjZP+DzPjRIfRkrJRq3HYfKNkHWXNrZNhufsmdcFW//mBLbWGEUx1Xd5bx
+	 bk9bCuPZpC3N8o1MKmZlPZdcXLo8qz65JEO8qqEdkKhzRENv0oRrNfMR99D2XFmUIi
+	 w32lXMrj+NOzQ==
+Date: Mon, 23 Nov 2026 09:13:03 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+	Conor Dooley <conor+dt@kernel.org>, Wesley Cheng <quic_wcheng@quicinc.com>, 
+	Maxime Chevallier <maxime.chevallier@bootlin.com>, Philipp Zabel <p.zabel@pengutronix.de>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
 	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 10/10] soundwire: qcom: Prevent stale broadcast IRQ from completing subsequent command
-Date: Mon, 23 Nov 2026 07:54:31 +0000
-Message-ID: <20261123075522.405347-11-lee@kernel.org>
-X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-In-Reply-To: <20261123075522.405347-1-lee@kernel.org>
-References: <20261123075522.405347-1-lee@kernel.org>
+Subject: Re: [PATCH 1/2] dt-bindings: phy: qcom,qusb2: Add support for remote
+ endpoints
+Message-ID: <20261123-international-healthy-peccary-ddcded@quoll>
+References: <20261111-shikra-qusb2-charger-det-v1-0-5a9d919c66b5@oss.qualcomm.com>
+ <20261111-shikra-qusb2-charger-det-v1-1-5a9d919c66b5@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,113 +63,45 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261111-shikra-qusb2-charger-det-v1-1-5a9d919c66b5@oss.qualcomm.com>
 
-When wait_for_completion_timeout() expires for a broadcast command in
-qcom_swrm_cmd_fifo_wr_cmd(), any late
-SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED interrupt from the
-timed-out command can fire concurrently with a subsequent broadcast
-command after reinit_completion(&ctrl->broadcast), prematurely
-completing the new command.
+On Wed, Nov 11, 2026 at 11:01:26PM +0530, Krishna Kurapati wrote:
+> QUSB2 Phy HW is capable of doing BC.1.2 charger detection. On most of the
+> platforms, the charger detection is done by PMIC. But on Shikra CQM/CQS
+> platforms, the PM4125 doesn't have ability to do charger detection and
+> that responsibility is delegated to QUSB2 Phy which acts on the DP/DM
+> lines in its control to get the job done.
+> 
+> During process of charger detection, if the controller is supposed to
+> enter device mode, the charger is detected as SDP/CDP/DCP. The controller
+> must enter device mode only if the detected charger is SDP/CDP. In case of
+> DCP, the phy can be turned off after detection. If the controller must
+> enter host mode, charger detection can be skipped and hence the phy must
+> know the role before the controller so that appropriate decision can be
+> taken whether the controller must enter device/host mode or not.
+> 
+> Intention of adding remote endpoints and usb-role-switch property binding
+> support is as follows:
+> 
+> a) The DP/DM lines do go through the phy to the controller i.e., the phy
+> exists between connector and controller. Hence adding remote endpoints
+> depicting the same.
+> 
+> b) Although the usb2 phy is not the entity doing role switching, it still
+> does need to decide which mode the controller must move into and hence
+> adding usb-role-switch property to allow role notifications from charger
+> to go to controller via phy.
+> 
+> Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+> ---
+>  .../devicetree/bindings/phy/qcom,qusb2-phy.yaml    | 23 ++++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+> 
 
-Clear any pending special command completion interrupt and reinitialise
-ctrl->broadcast before issuing a broadcast command under
-ctrl->intr_lock, clear the interrupt on timeout, and verify that the
-interrupt status bit is still asserted under ctrl->intr_lock before
-signalling ctrl->broadcast.
+Dropping from DT patchwork.
 
-Closes: https://sashiko.dev/#/bug/linux-fa1aa3a1-f9c7-4e8a-bdfc-49a559353546
-Signed-off-by: Lee Jones <lee@kernel.org>
----
-
-v2 => v3:
- - No changes
-
-v1 => v2:
- - Drop Fixes and Stable tags
-
- drivers/soundwire/qcom.c | 44 +++++++++++++++++++++++++++++++++-------
- 1 file changed, 37 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 648260a1dac6..8c75cc4302c2 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -554,11 +554,18 @@ static int qcom_swrm_cmd_fifo_wr_cmd(struct qcom_swrm_ctrl *ctrl, u8 cmd_data,
- 	if (swrm_wait_for_wr_fifo_avail(ctrl))
- 		return SDW_CMD_FAIL_OTHER;
- 
--	if (cmd_id == SWR_BROADCAST_CMD_ID)
-+	if (cmd_id == SWR_BROADCAST_CMD_ID) {
-+		mutex_lock(&ctrl->intr_lock);
-+		ctrl->reg_write(ctrl,
-+				ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
-+				SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED);
- 		reinit_completion(&ctrl->broadcast);
--
--	/* Its assumed that write is okay as we do not get any status back */
--	ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_CMD_FIFO_WR_CMD], val);
-+		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_CMD_FIFO_WR_CMD], val);
-+		mutex_unlock(&ctrl->intr_lock);
-+	} else {
-+		/* Its assumed that write is okay as we do not get any status back */
-+		ctrl->reg_write(ctrl, ctrl->reg_layout[SWRM_REG_CMD_FIFO_WR_CMD], val);
-+	}
- 
- 	if (ctrl->version <= SWRM_VERSION_1_3_0)
- 		usleep_range(150, 155);
-@@ -571,10 +578,16 @@ static int qcom_swrm_cmd_fifo_wr_cmd(struct qcom_swrm_ctrl *ctrl, u8 cmd_data,
- 		 */
- 		ret = wait_for_completion_timeout(&ctrl->broadcast,
- 						  msecs_to_jiffies(TIMEOUT_MS));
--		if (!ret)
-+		if (!ret) {
-+			mutex_lock(&ctrl->intr_lock);
-+			ctrl->reg_write(ctrl,
-+					ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
-+					SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED);
-+			mutex_unlock(&ctrl->intr_lock);
- 			ret = SDW_CMD_IGNORED;
--		else
-+		} else {
- 			ret = SDW_CMD_OK;
-+		}
- 
- 	} else {
- 		ret = SDW_CMD_OK;
-@@ -773,6 +786,22 @@ static irqreturn_t qcom_swrm_wake_irq_handler(int irq, void *dev_id)
- 	return IRQ_HANDLED;
- }
- 
-+static void qcom_swrm_complete_broadcast(struct qcom_swrm_ctrl *ctrl)
-+{
-+	u32 status;
-+
-+	guard(mutex)(&ctrl->intr_lock);
-+
-+	ctrl->reg_read(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_STATUS],
-+		       &status);
-+	if (status & SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED) {
-+		ctrl->reg_write(ctrl,
-+				ctrl->reg_layout[SWRM_REG_INTERRUPT_CLEAR],
-+				SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED);
-+		complete(&ctrl->broadcast);
-+	}
-+}
-+
- static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- {
- 	struct qcom_swrm_ctrl *ctrl = dev_id;
-@@ -889,7 +918,8 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 				mutex_unlock(&ctrl->intr_lock);
- 				break;
- 			case SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED:
--				complete(&ctrl->broadcast);
-+				qcom_swrm_complete_broadcast(ctrl);
-+				intr_sts &= ~SWRM_INTERRUPT_STATUS_SPECIAL_CMD_ID_FINISHED;
- 				break;
- 			case SWRM_INTERRUPT_STATUS_BUS_RESET_FINISHED_V2:
- 				break;
--- 
-2.56.1.750.gf70dc682cf-goog
+Best regards,
+Krzysztof
 
