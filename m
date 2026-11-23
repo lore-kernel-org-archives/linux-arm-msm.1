@@ -1,124 +1,157 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795428307;
-	b=X4LWpZcd10/rlXtSkS9VRDkBo+BblzGBN7h6kXROmMiThn14pHJV5Dd06aDLJaVkGurK
-	 2yYKacEErmOKZ6AkErEmP41x36ZpdgZ13Dt+MIB6oEw7LVJ0BSuk7uW4/jbKevFr4uUFw
-	 OItcQTbscD0Zf6qAeUrIVuI8xukqJdakoP/WBHt04lyfArtZFOlbOKObmQ9D/EGdK3Ta2
-	 V42AH1rNjJvYWw5xAqKLh3sPlip9ZYBJe9WcdKYjQnVhMXhl188ai+n/i7rcIZ5Cfx5F9
-	 kn9VYFwBoZuup7+kYlrOSt1E0znTySPoExdx9cFWnQDT/4QO3o4H+rvLHV5b1Imr+tA==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795428307;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=kWiJR4pBZBXTbej9EtlDLugM1ciJ8WwcZGMDzpqWUiA=;
-	b=vq3KDgv29b3IWRAMa9/Z9JC+5vtTXYK1F1NWiT1pdtLY+RjcTmEQ5mTaZe0OmsFRpZhQ
-	 tFZlQkO2kl0aHRQ2gk6ypCPDpviHfDLhrsSoSaMoN9G6p4+GJuLSG85Rv7fr83q0gLWdb
-	 B9oHDjw8FPfVP1ZUMpjXFoNwS+4jyTUACWn05hjQpDdsA3gOaQ0HKOFksMikR7fieVdj9
-	 Gie5t0UiWUUSodmuvwKD3he0DfUpystjw+8Sl8U35tfu9cUAlWtSE9x3CgW7AWGpjDAiL
-	 zgLtZrXj6WZXAgoBopr+ijyLeazie4QlrxJR6TiMsSdckYpa3xVCeVGjY76EK4CZ09g==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pH98vKFH;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AGnWdkMH;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795428688;
+	b=YY+cZR/mlj+j5WrprgRpVDF/rfwuJjmd4NvICT3uLzx6Jr8+1L9HCMLMxplyck/WJfhH
+	 idV2f2c6cPbtetgwrNMpQoboPbtSHkx8D3nxe/tgPrLCyPMBjtvLq+Rc4n/3qlkp0moZV
+	 +xiuWgz1U7FCuGsdsHudqv4Tq43vbKWtha+Zgbz06Ai54BEJw566N2SChUkS4uAmale8F
+	 1nbJgC24Y4mQuGStirJwscZ0aQ2cVigvDE5m/YzYadBKMPP5RktADKzpUVfGaGzXw0vPc
+	 i0PrQahie7c22UmW+qbfHFOw9YTWugjMFNBrsgueP7eiV8WCKQ+tJiX89jF36atOZDg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795428688;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=rDFRLPy40I79JiGWrVFkLz2U4fAoPpBfu86dL+TJWTw=;
+	b=wF09ddiZSJOCZSpZuYWULsNgnWNyEA13/d0WOXLKPQ3G6GYKr9fKP0AN9ukVPozF8vxg
+	 H2UdjocQLh/GcI6ypJGSmCH+bJ5nJmwDQJOQJJRGfL5IB1dP/JOmpiCJ+Izx/jpE1KA05
+	 0rE56Lxi1Eccw6v5L8Ym9VBo8KvvTS96nyBq7Z+4kcsbB26GqJ2ls9AlXkJ46zzmxVVb2
+	 ZAZyD1YpPeqiUcS4u20aWDe6OfwGO1JmwYXAt9M7hvK3T6AMU7F8JQZ/3dggB3LQTOQnb
+	 CJeSP25XmrH1cajEcVEGlOPZSSLS4VZltqBVzSGe3WdKZqCSNVe6tWXI0rW6NJ/RmkQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EQv8DoiR;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBBF6606A31E
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 10:05:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DBBF6606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B836D606A331;
+	Mon, 23 Nov 2026 10:11:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pH98vKFH;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=AGnWdkMH
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AN9G3Si2528377
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 10:05:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	kWiJR4pBZBXTbej9EtlDLugM1ciJ8WwcZGMDzpqWUiA=; b=pH98vKFHVs+7bIMn
-	wTFuEJrt3xNrSlWJc5ufbvTEsB6nhu3QWQ03fgL/LCbpbcLE69qbFKAhOjjpTB5I
-	BDtcmnCmPmFP3Ke2rgEB7NUln8hhtGP29BaZht3rtBAN9dbctbLjr10MYdXRipa0
-	cBKIBu9z/qVWY/hO7fCnKQBlJIo4a5wUYpKFWr9eRUQejO+77AYioI+FOk7mgSMj
-	7pbvn/wWxhY0/Jvf7g1LcQX4s1pwj5NoQ9FlMdXQ72lqAa1jD17U2YSuWPEv9Fk7
-	JgbpKqRGJkLffAE5h5maUP/PURvQdEV0+U+2irkKgQoXOlrD9J1bPQKoPw2agXc3
-	VkcQzQ==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4hn7rfhw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 10:05:05 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-944138ed63fso444794885a.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 02:05:05 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795428305; cv=none;
-        d=google.com; s=arc-20260327;
-        b=qBVctRm+xCXxw9qeb/vbu0CIqhZ7Lmsi8nQOkcKEfb7EZNH1kLZNcOYy76ndzQqmHP
-         wQuKI0i7pz8ZHIpqcenltqATNI/Z5Fa2al0p8lrk43sAnYGDbTkuevY3KIe1DY58EMME
-         5+2keUiEdSI0PNn1b2zjMZGzThawtBNvTsjJ8jyJQdHvoHtxgBvnfGfEiVUUggQ+T16W
-         H3nSZAMW6rADYchMspwZw/pkoH4TVHXCXB8W8Q/JRiOgq4G8PxEpiYPg63EnNuzQPn2n
-         KPsrB8hQ9+SNvofIzwnw2F/4k/HHMuZU7+VqRxmpSf68sRKs2FxHsDCyG4/E8AmWAu6N
-         6pKg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=kWiJR4pBZBXTbej9EtlDLugM1ciJ8WwcZGMDzpqWUiA=;
-        fh=3M7J8jT+8TVXbJIT8s0MaZrnn/MM8hTQcOD08B9u4Qo=;
-        b=U8RaLxmoOWLzE3mE/TMMCkAaKfyx7xRj5DcMirik5sSBuYMMhc30t4KyOhDQ/N/Mkg
-         +mJ/hHWURF9eMEvxnRoqJWr/feA6FHH00ZNS/AhTGUHAUyP0ZHgOv6msoNZOJ5yFvUvg
-         cFSwNALlQFQIX/u38fGbixiPllYwI/59E/JuV0EX/MKLDnQmITEaZzMjVQNrgf+XBIw1
-         jzTi52jMBvk4NZbfOsd4ldGCG9lA1jbJMFxWqOHOpLeY0746oApIvg+lDnIlKqaxjtTK
-         klhNo8cn5RqfuN3NPXFJuVJUjLJHtXvSRrLCF/i1Ql4+53csjvOtTNeUTuuWOGRnm2cy
-         0Vcw==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795428305; x=1796033105; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=kWiJR4pBZBXTbej9EtlDLugM1ciJ8WwcZGMDzpqWUiA=;
-        b=AGnWdkMH21N8On/EIdZBkpluKf4MDgPTS/4PWdBc5dIJjqj9dtqyMBuz8QvIrAkTfs
-         sn7Gl9a1o1oVEOk34QMGfRKsJpwigQ2O0vI2fY1IQ1u2kCYVVctGm0yoOBQq7Pfgd/+P
-         SG7p52RrexkxxrDLyfNbD+7+0G7f+3VxA73Ya8AGtH0ke6myKShllObyCnXutKXI81mq
-         j0EtC6CYqw8fO9oRe6SdALMRlAZHzvpwpgiWTtkH1betI4eU2kkSakVaHFp5xPnplQcz
-         8y01bUJ14kXzJr0ahBYzYZj67yD6qMQpmp0J5YKi48KFqSS8hV5JedpvqyCxXZUQJs34
-         8Jww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795428305; x=1796033105;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=kWiJR4pBZBXTbej9EtlDLugM1ciJ8WwcZGMDzpqWUiA=;
-        b=2JGK1ya8frgdgjz1H8ciIf+DjMuIQ39ObGlxaItWbCLp3vBvAoQR936Td4aSJ7skhf
-         ssHPUr+GybMHihm3TN2I7z+iALZRZP91egSxfL9g0M1ziri9aj1PCrEQWBFjf+fVL5FS
-         rYDIssveNjYs54undR89pM3bI48imJ4aYyjh/DGgITSrhYfiDv4P4yyrjfGIuZMng4+n
-         U1GKraO7nlt7WZfvHMRRDbS3/kacnpuvw+9EvA6YjYMhb9+z2VfBx8hEEoaqmpKigda0
-         uLMSVTmAxLAyFJyBQhyEwR79305t8n8k9skoe8i6Kzy2gvmYTGDRIcdECWqNnSQb2MfJ
-         QC6Q==
-X-Forwarded-Encrypted: i=1; AL+hErEABECpw5Nj8BXRmbgEim0vxIKOo+ktbJm80aUDFveYLheCznSq89LMr/KzMTuGa3b2zzZYa12EDOZUyG8d@vger.kernel.org
-X-Gm-Message-State: APuU4Z/Z4qxypUqPrA4joClf4r3liSwRiApslZYKyO7SoZ34FaBKLgQo
-	PcJquNGmtPjNDmkOLw3JszFUVW1PE4VEVxhUNcy36j4t87KWji83lqcyITQKOQw2XcdWtDWYMth
-	Rm27vWd+W6hMP8sFPqs1Do5M2IEb+X0HPJJzLSpbrELfYgZYRGwbuUJfOBY7JNSvOFeslU1Ky+f
-	H53W2u0OlfEHRCWIJIIyWYjvtKm4pczcA70pilBCy7CEg=
-X-Gm-Gg: AZFdTZd7Td2eJSaNGjox86HYKZHSOG9EtPPd3PaCxTzD2tnW48Gvr+UICIfXHw/i2U6
-	tGkjX9N78XNPZcm7E7sy1YUFPu+X6eHOv02dG3vUj3crxDPdSuFfzsXbLAb3VxnMjBXEtRCvWr+
-	Ljpo9hFszkRTgJbkBr2kAeF+LFHp8XAb7DmbwGdS77JAu98wVnvX2Ye8YZgQBTJYvbxBwSk/MGl
-	ASO/MADftsWk6EIYzUNTI4vUy+YG80/QgyozBS9UdQZZgyxPp2YllmY9KSdr+I0vaM3sP3zwdi3
-X-Received: by 2002:a05:620a:170d:b0:949:67ff:56c9 with SMTP id af79cd13be357-949bab4e414mr1844866185a.70.1795428304971;
-        Mon, 23 Nov 2026 02:05:04 -0800 (PST)
-X-Received: by 2002:a05:620a:170d:b0:949:67ff:56c9 with SMTP id
- af79cd13be357-949bab4e414mr1844863585a.70.1795428304496; Mon, 23 Nov 2026
- 02:05:04 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=EQv8DoiR
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DC1141F000EF;
+	Mon, 23 Nov 2026 10:11:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795428688;
+	bh=rDFRLPy40I79JiGWrVFkLz2U4fAoPpBfu86dL+TJWTw=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=EQv8DoiRck3gy8xgpS3BEeZCIVXlC+5twIrYuAJPvxyh+T6hLul9ehLPpI0/H8Ena
+	 EoHPb6kv2Z1NRHkQj923ovInemiLOUPSnbRP19n0hmOl3DYyi/0U2zQnqNlsdAYgQX
+	 yfIeKn1+n9OIoTJRvbp7rjlMj4wIsTr/xKlt8/kIiAVX5xbKrEtXbYSnqm7V+dLOrM
+	 VyoI9JSIUfP6xwxXeJf8XGivEo78xSGLAZFRbS/S+K2EDg0EQWkh2mc7W/lQNIsXSv
+	 CCH9QPsnErU7JRjGcCJBhGjJ2f+Q+uo3Lw7ckrw1kCFyKD4FZnZKjrPIy1KnGsdlwY
+	 rf74RydNSb3kw==
+From: Maxime Ripard <mripard@kernel.org>
+To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+	Thomas Zimmermann <tzimmermann@suse.de>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Maxime Ripard <mripard@kernel.org>
+Cc: dri-devel@lists.freedesktop.org,
+	Janne Grunau <j@jannau.net>,
+	Sasha Finkelstein <k@chaosmail.tech>,
+	asahi@lists.linux.dev,
+	=?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+	Alex Deucher <alexander.deucher@amd.com>,
+	amd-gfx@lists.freedesktop.org,
+	sashiko-bot@kernel.org,
+	Liviu Dudau <liviu.dudau@arm.com>,
+	Russell King <linux@armlinux.org.uk>,
+	Dave Airlie <airlied@redhat.com>,
+	Jocelyn Falempe <jfalempe@redhat.com>,
+	Alim Akhtar <alim.akhtar@samsung.com>,
+	Inki Dae <inki.dae@samsung.com>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Kyungmin Park <kyungmin.park@samsung.com>,
+	Peter Griffin <peter.griffin@linaro.org>,
+	Seung-Woo Kim <sw0312.kim@samsung.com>,
+	linux-samsung-soc@vger.kernel.org,
+	Alison Wang <alison.wang@nxp.com>,
+	Stefan Agner <stefan@agner.ch>,
+	Tian Tao <tiantao6@hisilicon.com>,
+	Xinwei Kong <kong.kongxinwei@hisilicon.com>,
+	Yongbang Shi <shiyongbang@huawei.com>,
+	Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>,
+	Saurabh Sengar <ssengar@linux.microsoft.com>,
+	linux-hyperv@vger.kernel.org,
+	Fabio Estevam <festevam@gmail.com>,
+	Frank Li <Frank.Li@nxp.com>,
+	Pengutronix Kernel Team <kernel@pengutronix.de>,
+	Philipp Zabel <p.zabel@pengutronix.de>,
+	Sascha Hauer <s.hauer@pengutronix.de>,
+	imx@lists.linux.dev,
+	Paul Cercueil <paul@crapouillou.net>,
+	linux-mips@vger.kernel.org,
+	Anitha Chrisanthus <anitha.chrisanthus@intel.com>,
+	Paul Kocialkowski <paulk@sys-base.io>,
+	Huacai Chen <chenhuacai@kernel.org>,
+	Icenowy Zheng <zhengxingda@iscas.ac.cn>,
+	Jianmin Lv <lvjianmin@loongson.cn>,
+	Mingcong Bai <jeffbai@aosc.io>,
+	Qianhai Wu <wuqianhai@loongson.cn>,
+	Xi Ruoyao <xry111@xry111.site>,
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
+	Chun-Kuang Hu <chunkuang.hu@kernel.org>,
+	Matthias Brugger <matthias.bgg@gmail.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	Rob Clark <robin.clark@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	freedreno@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org,
+	Danilo Krummrich <dakr@kernel.org>,
+	Lyude Paul <lyude@redhat.com>,
+	nouveau@lists.freedesktop.org,
+	Tomi Valkeinen <tomi.valkeinen@ideasonboard.com>,
+	Gerd Hoffmann <kraxel@redhat.com>,
+	spice-devel@lists.freedesktop.org,
+	virtualization@lists.linux.dev,
+	Geert Uytterhoeven <geert+renesas@glider.be>,
+	Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>,
+	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
+	Magnus Damm <magnus.damm@gmail.com>,
+	Tomi Valkeinen <tomi.valkeinen+renesas@ideasonboard.com>,
+	linux-renesas-soc@vger.kernel.org,
+	Biju Das <biju.das.jz@bp.renesas.com>,
+	Marcus Folkesson <marcus.folkesson@gmail.com>,
+	David Lechner <david@lechnology.com>,
+	Iker Pedrosa <ikerpedrosam@gmail.com>,
+	Baolin Wang <baolin.wang@linux.alibaba.com>,
+	Chunyan Zhang <zhang.lyra@gmail.com>,
+	Orson Zhai <orsonzhai@gmail.com>,
+	Alexandre Torgue <alexandre.torgue@foss.st.com>,
+	Maxime Coquelin <mcoquelin.stm32@gmail.com>,
+	Philippe Cornu <philippe.cornu@foss.st.com>,
+	Raphael Gallais-Pou <raphael.gallais-pou@foss.st.com>,
+	Yannick Fertre <yannick.fertre@foss.st.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Samuel Holland <samuel@sholland.org>,
+	linux-sunxi@lists.linux.dev,
+	Jonathan Hunter <jonathanh@nvidia.com>,
+	Mikko Perttunen <mperttunen@nvidia.com>,
+	Thierry Reding <thierry.reding@kernel.org>,
+	linux-tegra@vger.kernel.org,
+	Jyri Sarha <jyri.sarha@iki.fi>,
+	Alexey Brodkin <abrodkin@synopsys.com>,
+	Hans de Goede <hansg@kernel.org>,
+	Kamlesh Gurudasani <kamlesh.gurudasani@gmail.com>,
+	Alex Lanzano <lanzano.alex@gmail.com>,
+	LiangCheng Wang <zaq14760@gmail.com>,
+	Chia-I Wu <olvaffe@gmail.com>,
+	Dmitry Osipenko <dmitry.osipenko@collabora.com>,
+	Gurchetan Singh <gurchetansingh@chromium.org>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Zack Rusin <zack.rusin@broadcom.com>,
+	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+	Michal Simek <michal.simek@amd.com>
+Subject: Re: (subset) [PATCH v2 00/64] drm: Switch drivers to drm_mode_config_create_initial_state
+Date: Mon, 23 Nov 2026 11:11:22 +0100
+Message-ID: <179542861006.1136573.1196433498269800463.b4-ty@kernel.org>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <20261116-drm-no-more-config-reset-v2-0-0bb471f4d1e0@kernel.org>
+References: <20261116-drm-no-more-config-reset-v2-0-0bb471f4d1e0@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -128,134 +161,125 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261122-camss-fixes-v1-0-9df4deb87ea2@gmail.com> <20261122-camss-fixes-v1-5-9df4deb87ea2@gmail.com>
-In-Reply-To: <20261122-camss-fixes-v1-5-9df4deb87ea2@gmail.com>
-From: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Date: Mon, 23 Nov 2026 11:04:52 +0100
-X-Gm-Features: Aa3M54odtvdCdAgjn0TOtpSBIOP_UI5zPF3v3UJWEKMPAcgomYZEvssdXYfJed4
-Message-ID: <CAFEp6-04oyWYxuQfXt=0WsrMe_tTa3pNpsLaEh53V7QqExOZvA@mail.gmail.com>
-Subject: Re: [PATCH 5/5] media: qcom: camss: video: stop started subdevs on
- start_streaming failure
-To: robertijtsma@gmail.com
-Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
-        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Authority-Analysis: v=2.4 cv=Ls0HWXdc c=1 sm=1 tr=0 ts=6b040fd1 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8 a=pGLkceISAAAA:8
- a=8Ls76JZ0y08s941VHScA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDAzOSBTYWx0ZWRfX7npBKaFSP1vA
- eymmxz4h4xI+9GOoER/sEbARTfM3N3z8aFjJCmGRbbVLTcIblsfEnkS+b6w7pajKVbic65D3VLd
- oSgR0vpthltvPy427k8mBkV87jvepp1w84n+6xUdgcvuK4mUSyLUPJwO5H85nDiT/ibJegcBsLl
- BiCrO0J1HFPcQXb7pIyCs0cCOKKzmk/p2L4SoHr5KkCKYJ/FgTwu7zvJ+qSu+sIZZKMnn3I2+ut
- u3nTkSB9c+8xZngpgynlwaRdqUcr0+GFppO8WCyorXmXoWUAmQwvu68xjWyPJDa1WgnrDXP3nYX
- 9AicLkhGeej+hsrBzNXzPR1d8unEt8jnygFBbqLKGLIpeljP+Hyy7+cd6KZmoQonCLwreH3yIT6
- ps7Rj7dgu8RWV6CCA4QsaPkFxmDcKY8C8c9suZSp/0o3U2XOONku7fs3aj9OHzkWdI/H7XYv4Z1
- 3wZZAPc44fjUlzrgbRg==
-X-Proofpoint-GUID: tEdbF2YR-T2GMgh0HddYkfRUoTWnUfnm
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDAzOSBTYWx0ZWRfXyJLLgMJjDBll
- v91cFOier8pNpkdMJtBhJKbRltWb5RAlsPN39pAMoFGJF2YOTblO4xSYL5MhT//aDcdllgWWGkH
- l6VKqGqdp5lXrWlCYXBoP3Vr8xA3XNE=
-X-Proofpoint-ORIG-GUID: tEdbF2YR-T2GMgh0HddYkfRUoTWnUfnm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-23_02,2026-11-22_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611230039
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-On Sun, Nov 22, 2026 at 2:36=E2=80=AFPM Robert Ijtsma via B4 Relay
-<devnull+robertijtsma.gmail.com@kernel.org> wrote:
->
-> From: Robert Ijtsma <robertijtsma@gmail.com>
->
-> If a subdevice fails s_stream(1) partway through video_start_streaming(),
-> previously started subdevices earlier in the pipeline (such as the VFE
-> and CSID) are never stopped. This leaks VFE stream counts and write
-> master reservations, leaving the pipeline stuck on subsequent stream
-> attempts.
->
-> Walk the pipeline from the video device up to the failing entity and
-> call s_stream(0) on each already-started subdevice before stopping the
-> media pipeline and flushing buffers.
+On Mon, 16 Nov 2026 11:30:16 +0100, Maxime Ripard wrote:
+> drm_mode_config_reset() has a dual role: it creates the initial KMS
+> state at probe time, and resets hardware and software state during
+> suspend/resume cycles. However, the two roles need different
+> behaviors, notably for objects like drm_private_obj that must persist
+> across suspend/resume and are excluded from drm_mode_config_reset()
+> by design.
+> 
+> [...]
 
-I saw at least three similar patches recently, can you look at this one:
-https://lore.kernel.org/all/20261031041154.308030-3-xiaqinghuan@mail.ustc.e=
-du.cn/
+Applied to misc/kernel.git (drm-misc-next)
 
-What would be nice is to build on the above change and address the
-reported points/issues, as I haven't seen any follow-up from Qianhui.
+[01/64] drm/adp: Switch to drm_mode_config_create_initial_state
+        commit: d636d17d3b8ecda8a3db6a77874e652aabac4eb2
+[02/64] drm/amdgpu: Switch to drm_mode_config_create_initial_state
+        commit: 064bc83ffc6eb72ec8af2973517f130d81bcd9bb
+[04/64] drm/hdlcd: Switch to drm_mode_config_create_initial_state
+        commit: 18becfe9b42cb828fc7fcf9703319d34675cd9f1
+[05/64] drm/armada: Switch to drm_mode_config_create_initial_state
+        commit: 69cecb2d921b7ae098c2800cbfa67590c436c3c4
+[06/64] drm/ast: Switch to drm_mode_config_create_initial_state
+        commit: 76dacf729a8dd4a954a5a8457ca49b221055d346
+[07/64] drm/exynos: Switch to drm_mode_config_create_initial_state
+        commit: cbe6da900d937f0de4c73eb574c409c9e2f4a7e8
+[08/64] drm/fsl-dcu: Switch to drm_mode_config_create_initial_state
+        commit: 6a294a6bf06ed0d71a505998bd0fd3abe1e9ea87
+[09/64] drm/hisilicon/hibmc: Remove hibmc_unload() from the load error path
+        commit: f830550f85cd0f5bd955d5b9abdb795f95a25ff8
+[10/64] drm/hisilicon/hibmc: Switch to drm_mode_config_create_initial_state
+        commit: f935c8d2f8c6de0c4b95c5f63874ced18efe1de6
+[12/64] drm/imx/ipuv3: Switch to drm_mode_config_create_initial_state
+        commit: 8799786a618d2a56b8e3dc998b64fb28cb648ca6
+[13/64] drm/ingenic: Move the private object creation before the reset
+        commit: 5cc203c0dcd3352196d8ede54531afc2175193b0
+[14/64] drm/ingenic: Switch to drm_mode_config_create_initial_state
+        commit: 8636f44eb77f5f738708423a104ee2f225f84b97
+[15/64] drm/kmb: Switch to drm_mode_config_create_initial_state
+        commit: f4f4fd2ae13175ef7aa851cdeaa08bf29a0f38b1
+[16/64] drm/logicvc: Switch to drm_mode_config_create_initial_state
+        commit: 7f84f99fa2d9b068e4a51514df0e1f32ad3247aa
+[18/64] drm/mediatek: Switch to drm_mode_config_create_initial_state
+        commit: 333cf2d79ee32c5590787eeb6df1c3c1a9ad6a48
+[19/64] drm/mgag200: Switch to drm_mode_config_create_initial_state
+        commit: 2fb1383d1aed812e4830aec34b890547fe8d496e
+[20/64] drm/msm: Switch to drm_mode_config_create_initial_state
+        commit: 53556096b6e5e07a8c58fe19cfdf5f3d4e1197ab
+[21/64] drm/nouveau: Switch to drm_mode_config_create_initial_state
+        commit: 960f6b7c64cb9536c37e7995262fd465f2fc623b
+[22/64] drm/omap: Switch to drm_mode_config_create_initial_state
+        commit: cf34a54e91f99b80623fee78ad334871a7f39858
+[23/64] drm/qxl: Destroy the monitors object on the modeset init error path
+        commit: bf50dc68880788f9ad85f4411f2d3fa575139ceb
+[24/64] drm/qxl: Switch to drm_mode_config_create_initial_state
+        commit: f364abef006d3867174f9defa5f79c4c6585cead
+[26/64] drm/rz-du: Switch to drm_mode_config_create_initial_state
+        commit: 938dfe76a15263c5fac77ea1f99c265848c219f8
+[27/64] drm/shmobile: Switch to drm_mode_config_create_initial_state
+        commit: 588132787e6df07f0267983881f437990d56c5e8
+[28/64] drm/st7571: Switch to drm_mode_config_create_initial_state
+        commit: e03927d29003912052c64aad83df169243d43484
+[32/64] drm/sprd: Switch to drm_mode_config_create_initial_state
+        commit: 1af982780216d568a4e8ff6790b87de29e52ab90
+[33/64] drm/sti: Fix drm_atomic_helper_shutdown() on the bind error paths
+        commit: d3047688f4bc35ca827ee2994a014c81898d73cc
+[34/64] drm/sti: Move drm_mode_config_create_initial_state() before drm_dev_register()
+        commit: 2798c8d86bf4e4853cbc1b3e2a248d55e714a649
+[36/64] drm/sun4i: Switch to drm_mode_config_create_initial_state
+        commit: ad5e714a08a6d5f6fa39b589a438b40aaac9e2bf
+[38/64] drm/tests: drm_atomic_state_test: Switch to drm_mode_config_create_initial_state
+        commit: 019bfdeb119dc616303a173323fd69853fe99858
+[39/64] drm/tests: drm_atomic_test: Switch to drm_mode_config_create_initial_state
+        commit: 53f0931d45c029f97c611837b8f853c9fad7a82c
+[40/64] drm/tests: drm_bridge_test: Switch to drm_mode_config_create_initial_state
+        commit: 45472c059ac76f982e31f67ef87f9db3caef1f88
+[41/64] drm/tests: drm_hdmi_state_helper_test: Switch to drm_mode_config_create_initial_state
+        commit: 3db9197bbe3fc859fd5b7521d1f4cedd9d62cb8c
+[42/64] drm/tidss: Switch to drm_mode_config_create_initial_state
+        commit: d771b7c8577c0b847d401a22f49a6abc18680ed3
+[44/64] drm/arcpgu: Switch to drm_mode_config_create_initial_state
+        commit: 620165b05363bea94b72970884f6f27ccf7cee3f
+[45/64] drm/bochs: Switch to drm_mode_config_create_initial_state
+        commit: c67548948d8c5ebb422fa03fb5dd89e44e458f20
+[46/64] drm/cirrus-qemu: Switch to drm_mode_config_create_initial_state
+        commit: 10e37ab94f0f10a7fd729a063c26bf1a94e7f2b0
+[47/64] drm/gm12u320: Switch to drm_mode_config_create_initial_state
+        commit: ce7e27979d41b94bb9a1ed66b6957a300a5a8c0a
+[48/64] drm/hx8357d: Switch to drm_mode_config_create_initial_state
+        commit: d9abdda3a6bd4903af87a1ed6d02c1897035cf4e
+[49/64] drm/ili9163: Switch to drm_mode_config_create_initial_state
+        commit: 6fc964d0567e8303cf72adc45dad29e9415fe76c
+[51/64] drm/ili9341: Switch to drm_mode_config_create_initial_state
+        commit: 75269393962354820792fddfe3da359b3be85ca3
+[52/64] drm/ili9486: Switch to drm_mode_config_create_initial_state
+        commit: c4f2890c815c5ac8d68668a072806edf4f466a7e
+[53/64] drm/mi0283qt: Switch to drm_mode_config_create_initial_state
+        commit: dfa078305c262eae2b0449814392e429b6bd58ee
+[54/64] drm/panel-mipi-dbi: Switch to drm_mode_config_create_initial_state
+        commit: 38b37ce4bc5fc406f1e93a90ce9b2b8531c6f5cb
+[55/64] drm/pixpaper: Switch to drm_mode_config_create_initial_state
+        commit: d3cb39a976745195d2d388b5b9194d47bfd2eb41
+[56/64] drm/repaper: Switch to drm_mode_config_create_initial_state
+        commit: ce380404a74260b6bb178b24dfd4125a591e1069
+[57/64] drm/sharp-memory: Switch to drm_mode_config_create_initial_state
+        commit: d4b8b6e920779d568a085eb611c75dc4bb5805a8
+[58/64] drm/udl: Switch to drm_mode_config_create_initial_state
+        commit: 6358c0da712b0170a3f1470c5eb75ec95340875c
+[59/64] drm/vboxvideo: Switch to drm_mode_config_create_initial_state
+        commit: a932fa029dad6b23b4ff5b7fdb44e5819c098b6e
+[60/64] drm/verisilicon: Switch to drm_mode_config_create_initial_state
+        commit: f3b23268607094ff4461119d623a235a2bdc8608
+[61/64] drm/virtio: Switch to drm_mode_config_create_initial_state
+        commit: eb2c77198187b0283f12be28bdb770703da59dca
+[63/64] drm/xen: Switch to drm_mode_config_create_initial_state
+        commit: 51b3e01a42db6100976907b95d224636e6551c98
+[64/64] drm/xlnx: Switch to drm_mode_config_create_initial_state
+        commit: bb8391a1a8d00b11661ab692313a991456d391dd
 
->
-> Fixes: 0ac2586c410f ("media: camss: Add files which handle the video devi=
-ce nodes")
-> Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
-> ---
->  drivers/media/platform/qcom/camss/camss-video.c | 27 +++++++++++++++++++=
-+++---
->  1 file changed, 24 insertions(+), 3 deletions(-)
->
-> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/me=
-dia/platform/qcom/camss/camss-video.c
-> index 0852eb6..6f7b9f3 100644
-> --- a/drivers/media/platform/qcom/camss/camss-video.c
-> +++ b/drivers/media/platform/qcom/camss/camss-video.c
-> @@ -253,7 +253,7 @@ static int video_start_streaming(struct vb2_queue *q,=
- unsigned int count)
->  {
->         struct camss_video *video =3D vb2_get_drv_priv(q);
->         struct video_device *vdev =3D &video->vdev;
-> -       struct media_entity *entity;
-> +       struct media_entity *entity, *failed_entity;
->         struct media_pad *pad;
->         struct v4l2_subdev *subdev;
->         int ret;
-> @@ -282,12 +282,33 @@ static int video_start_streaming(struct vb2_queue *=
-q, unsigned int count)
->                 subdev =3D media_entity_to_v4l2_subdev(entity);
->
->                 ret =3D v4l2_subdev_call(subdev, video, s_stream, 1);
-> -               if (ret < 0 && ret !=3D -ENOIOCTLCMD)
-> -                       goto error;
-> +               if (ret < 0 && ret !=3D -ENOIOCTLCMD) {
-> +                       failed_entity =3D entity;
-> +                       goto error_stop_subdevs;
-> +               }
->         }
->
->         return 0;
->
-> +error_stop_subdevs:
-> +       entity =3D &vdev->entity;
-> +       while (1) {
-> +               pad =3D &entity->pads[0];
-> +               if (!(pad->flags & MEDIA_PAD_FL_SINK))
-> +                       break;
-> +
-> +               pad =3D media_pad_remote_pad_first(pad);
-> +               if (!pad || !is_media_entity_v4l2_subdev(pad->entity))
-> +                       break;
-> +
-> +               entity =3D pad->entity;
-> +               if (entity =3D=3D failed_entity)
-> +                       break;
-> +
-> +               subdev =3D media_entity_to_v4l2_subdev(entity);
-> +               v4l2_subdev_call(subdev, video, s_stream, 0);
-> +       }
-> +
->  error:
->         video_device_pipeline_stop(vdev);
->
->
-> --
-> 2.56.0
->
->
+Thanks!
+Maxime
