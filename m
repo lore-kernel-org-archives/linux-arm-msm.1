@@ -1,57 +1,100 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795446042;
-	b=jb35Kk51Rm6oopMOFt/4KL39ot/eh/ei94UNSh+quBIEjddUhUseMllQTYt3z4JW08Qf
-	 A4pXSkyvlu2mV3RXmXxEZRTZoFjG24idMyHIEHEizZI7DZeVRITKeYVMdqwZONNnZ5xBC
-	 SbkQWPJNZs1GarVk/gN7cHh/R1j+ZcUaKM3VhDEEvN7UePunjharKyiZl9bWUM6E5m3Ra
-	 pmU9R6lk4UeXMmyfElA/weQqXgCvcDv/v2EUeIjaKtnW/ANfNuIP43dWTmWtnYD3sA39h
-	 UUAIQBs8iU31ewGazwz9ZMs6nQ4AFEKZSfKprvIyTqNhiqE/TL15mOyu2GUJdyLAgXA==
+	t=1795446665;
+	b=Qito3PJJtqiHQJxkHeO97r4F0zlsp0pJ31kL/g3LJGRDwl2vBoQ5VwZUzqsrWIjhGEmB
+	 N3YBAWSJd7O5oaa142qHOQWAaAO+SZHRrXmSaTne/eu7IbaPULSI7ro6QyUGoc5cxPt6b
+	 T9POu6zHzxD784sFzbC5itfIvjFSOZy44bcyXgdF28rg/UQEVqolKiCAceLixcGdFvr57
+	 5XkJPcBNQ9MmmErFZKqV3dJNtFT/p0mRNybc9Pe1ZMF/QYEX85gR/qxpsqA2jAWjRUBeK
+	 wulHE6rWRNhHVSzoYZB3bE91TLUbYO7FxaFP8rQ2Z/iPUsIpgSojOWXUcTT1gjNMkoA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795446042;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=wozrLB8v+QNNPQYvspRVXg8TraIKj4aiVMZRAUF+EYM=;
-	b=kZz1jqX8fpeY1j0KOVsO4oECkn0kkctkyS8HZCFpyjt2721HdXYEWPEIGKoO9fScKkBB
-	 fdDWsbpKKcHD+G1l1WqGOSNoYpoDxL13D4evb+5NW8vwSAsfJap5hPqPXuc4Wa6jT9nuF
-	 rvye27XLV6cLJ1lCPJHYe9XypQudpA/hnV7D1C7Q/e5NojAOWda0Z/cFdE8Eyhxttp0G4
-	 K1bYMznyrOVg0KIts5E4xMYFAGvGueYv2LeuCUG53qPGLBe0WrMreF3bQtlkYwsEraIDt
-	 t3v7UzMjM15/c6RQ1mNT0Iyp4TO9N6sz8qCATszJ3Y5pdrqbZ8adBiQhzAW/9ms0hvw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795446665;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=2rXwqdKcXils5ZX0aUJ4kLahSvMQRVDM5PZVEx1DXik=;
+	b=U3ovmN7HmPYhyQ/ncwi1k9KjWQOtVl1UHXeN3SHpHdBz2+WNCDHGSLjIA7fRvrbauftd
+	 2YO7A+9Eot8lo6xBa6BGWkHzPMoF9ybaEcAxb1rAX4c/z4YRNk6+jTKQLHIz3DyQBcOKL
+	 iG+zkUS28a2cyexzGyA6iLEKRXrINuirSMr2t+zG7ah+4MJ7W+rX3CmWmamH9fhZ+Hijr
+	 SvMaxeI0gI5QQL7ogk5iEoYylICyH3LI+STKDn0eBCRqFf620RkXNrIxRdXauNAmEOHsd
+	 K0vPnztjICpB85NNgPjr9G2+87f1oQJhgRip4so3BYWhh7xH6f4Fcj//PZ6Bym9g2Mg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="oaBih/EA";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Vk93L+Dt;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 19003606A32E;
-	Mon, 23 Nov 2026 15:00:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF4A8606A31A;
+	Mon, 23 Nov 2026 15:11:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oaBih/EA
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 41C3D1F000EB;
-	Mon, 23 Nov 2026 15:00:39 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Vk93L+Dt
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5906A1F000D2;
+	Mon, 23 Nov 2026 15:10:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795446041;
-	bh=wozrLB8v+QNNPQYvspRVXg8TraIKj4aiVMZRAUF+EYM=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=oaBih/EAHNjA5vGr1S/JB9Li0DUscBiWVZh6dmsbyIfp7pIwmefQ8coBqL4YabvlV
-	 Q/O1M3TLh6sbZZ0KxOLUWU7fChxrCgF32+/ZDjVPoDZg16VPXXJbT5sIB3DmhRov+G
-	 xgtxcOMxif/7vZE3Ppd9Dm/O8F7NRUJy7xTI39cTwUuoeiS5jCBcuLM8JzGWb+nYXn
-	 zVOUNvGy+8dF3LyJzrdTrJ1hKZQWlwX+PjaMfaIY/CbOUp4RDp1A/SVfZftWuvBE2w
-	 qAY/P0GkeVzcBALmQS220smmIngaZmvvbmeYxQw3k6PXr4zlSBdj5S6i2zwZS1fyN5
-	 uia/Ziy3U1pbA==
-Date: Mon, 23 Nov 2026 16:00:37 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org, 
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] arm64: dts: qcom: nord: Fix GPI DMA wiring of QUP SPI
- engines
-Message-ID: <lwcooapssolrhg26ktztgu77l5ed4c4bwnlfhv6yrmkbde6okz@4ijci4uvqnqa>
-References: <20261118112407.103412-1-shengchao.guo@oss.qualcomm.com>
- <5poepxkppbiyfxz2dxkjm7p7xiq4ndoltsnnbqlp5rdasbvrxr@p2ocx5b3kubj>
- <av8WIZjPgnS8qWNt@QCOM-aGQu4IUr3Y.na.qualcomm.com>
+	s=k20260515; t=1795446665;
+	bh=2rXwqdKcXils5ZX0aUJ4kLahSvMQRVDM5PZVEx1DXik=;
+	h=From:To:Cc:Subject:Date;
+	b=Vk93L+Dt9YLMBXzvXYfSpC+H3lffXA2iZOKJX2mWjUeIaeUHbBaqwNoa5LUcMB6lC
+	 JfWNJXpQxz1SBDTRWQGOikzJIMIbAB/RORvCqKOBB5G8dP0T7z/v8TERi9xkaGAtTP
+	 i/qTJZHV3ue2mzAkVJz6r0ecPZwLtyJNsWjW0ciNe8zX9EEQBVbnR4zAiGXI35M6Lc
+	 XPRdP/r12xXxidCz58UwmLi6cuT0gObPoQw96fM9tMr1jvlk+CL6VV44kNCS4nV8un
+	 ZhcPhVMQ5QpqHxKmRiROaRwQswAgRC1oWqN45oCedzrzy2erJ0kxIHoMmWX3AgLV8d
+	 mtMQtwbFYf9Mg==
+From: Lee Jones <lee@kernel.org>
+To: lee@kernel.org
+Cc: linux-kernel@vger.kernel.org,
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+	"David S. Miller" <davem@davemloft.net>,
+	=?UTF-8?q?Horia=20Geant=C4=83?= <horia.geanta@nxp.com>,
+	"Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+	Aleksander Jan Bajkowski <olek2@wp.pl>,
+	Alexandre Belloni <alexandre.belloni@bootlin.com>,
+	Antoine Tenart <atenart@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Bharat Bhushan <bbhushan2@marvell.com>,
+	bui duc phuc <phucduc.bui@gmail.com>,
+	Bulent Abali <abali@us.ibm.com>,
+	Chen-Yu Tsai <wens@kernel.org>,
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>,
+	Corentin Labbe <clabbe.montjoie@gmail.com>,
+	Dan Streetman <ddstreet@ieee.org>,
+	Evgeniy Polyakov <johnpol@2ka.mipt.ru>,
+	Haren Myneni <haren@us.ibm.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Jernej Skrabec <jernej.skrabec@gmail.com>,
+	Kim Phillips <kim.phillips@freescale.com>,
+	linux-arm-kernel@lists.infradead.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-sunxi@lists.linux.dev,
+	linuxppc-dev@lists.ozlabs.org,
+	Longfang Liu <liulongfang@huawei.com>,
+	Madhavan Srinivasan <maddy@linux.ibm.com>,
+	Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>,
+	Meng Yu <yumeng18@huawei.com>,
+	Michael Ellerman <mpe@ellerman.id.au>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Nicolas Ferre <nicolas.ferre@microchip.com>,
+	Nicolas Royer <nicolas@eukrea.com>,
+	Pankaj Gupta <pankaj.gupta@nxp.com>,
+	Pascal van Leeuwen <pvanleeuwen@insidesecure.com>,
+	Paul Louvel <paul.louvel@bootlin.com>,
+	Robert Jennings <rcj@linux.vnet.ibm.com>,
+	Sahil Malhotra <sahil.malhotra@nxp.com>,
+	Samuel Holland <samuel@sholland.org>,
+	Seth Jennings <sjenning@linux.vnet.ibm.com>,
+	Shrikanth Hegde <sshegde@linux.ibm.com>,
+	Srujana Challa <schalla@marvell.com>,
+	Stanimir Varbanov <svarbanov@mm-sol.com>,
+	Steffen Trumtrar <kernel@pengutronix.de>,
+	Thorsten Blum <blum@kernel.org>,
+	Tudor Ambarus <tudor.ambarus@linaro.org>,
+	Weili Qian <qianweili@huawei.com>,
+	Zaibo Xu <xuzaibo@huawei.com>,
+	Zhiqi Song <songzhiqi1@huawei.com>
+Subject: [PATCH 00/10] crypto: Assorted bug fixes across crypto drivers
+Date: Mon, 23 Nov 2026 15:09:51 +0000
+Message-ID: <20261123151055.2533735-1-lee@kernel.org>
+X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,37 +104,88 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <av8WIZjPgnS8qWNt@QCOM-aGQu4IUr3Y.na.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Nov 19, 2026 at 04:30:41PM +0100, Shawn Guo wrote:
-> On Thu, Nov 19, 2026 at 03:04:11PM +0100, Bartosz Golaszewski wrote:
-> > On Wed, Nov 18, 2026 at 12:24:07PM +0100, Shawn Guo wrote:
-> > > Commit d8005dd04efc ("arm64: dts: qcom: nord: wire up GPI DMA for QUP
-> > > I2C/SPI engines") put the QCOM_GPI_SPI channels of SE 0-3, 7, 8, 11
-> > > and 12 into the uartN nodes instead of their spiN siblings, and left
-> > > spi4 and spi14..spi19 without any. The UART nodes now carry dmas
-> > > properties the GENI UART binding doesn't allow, and 15 of 18 SPI
-> > > engines can't use GPI DMA.
-> > > 
-> > > Move the channels from the UART nodes to the SPI nodes, and add the
-> > > missing ones for spi4 and spi14..spi19.
-> > > 
-> > > Fixes: d8005dd04efc ("arm64: dts: qcom: nord: wire up GPI DMA for QUP I2C/SPI engines")
-> > > Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> > > ---
-> > 
-> > Eek! Thanks. I think the comment from sashiko needs to be addresed
-> > though.
-> 
-> I think sashiko got confused, no?
->
+These issues were reported by Sashiko.
 
-Yep, I looked with my human eyes and it's fine, all hunks are labeled
-uartX.
+None of these changes have been tested on physical hardware.
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>
+Cc: "David S. Miller" <davem@davemloft.net>
+Cc: "Horia Geantă" <horia.geanta@nxp.com>
+Cc: "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>
+Cc: Aleksander Jan Bajkowski <olek2@wp.pl>
+Cc: Alexandre Belloni <alexandre.belloni@bootlin.com>
+Cc: Antoine Tenart <atenart@kernel.org>
+Cc: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bharat Bhushan <bbhushan2@marvell.com>
+Cc: bui duc phuc <phucduc.bui@gmail.com>
+Cc: Bulent Abali <abali@us.ibm.com>
+Cc: Chen-Yu Tsai <wens@kernel.org>
+Cc: Claudiu Beznea <claudiu.beznea@tuxon.dev>
+Cc: Corentin Labbe <clabbe.montjoie@gmail.com>
+Cc: Dan Streetman <ddstreet@ieee.org>
+Cc: Evgeniy Polyakov <johnpol@2ka.mipt.ru>
+Cc: Haren Myneni <haren@us.ibm.com>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: Jernej Skrabec <jernej.skrabec@gmail.com>
+Cc: Kim Phillips <kim.phillips@freescale.com>
+Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-arm-msm@vger.kernel.org
+Cc: linux-crypto@vger.kernel.org
+Cc: linux-sunxi@lists.linux.dev
+Cc: linuxppc-dev@lists.ozlabs.org
+Cc: Longfang Liu <liulongfang@huawei.com>
+Cc: Madhavan Srinivasan <maddy@linux.ibm.com>
+Cc: Meenakshi Aggarwal <meenakshi.aggarwal@nxp.com>
+Cc: Meng Yu <yumeng18@huawei.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Nicholas Piggin <npiggin@gmail.com>
+Cc: Nicolas Ferre <nicolas.ferre@microchip.com>
+Cc: Nicolas Royer <nicolas@eukrea.com>
+Cc: Pankaj Gupta <pankaj.gupta@nxp.com>
+Cc: Pascal van Leeuwen <pvanleeuwen@insidesecure.com>
+Cc: Paul Louvel <paul.louvel@bootlin.com>
+Cc: Robert Jennings <rcj@linux.vnet.ibm.com>
+Cc: Sahil Malhotra <sahil.malhotra@nxp.com>
+Cc: Samuel Holland <samuel@sholland.org>
+Cc: Seth Jennings <sjenning@linux.vnet.ibm.com>
+Cc: Shrikanth Hegde <sshegde@linux.ibm.com>
+Cc: Srujana Challa <schalla@marvell.com>
+Cc: Stanimir Varbanov <svarbanov@mm-sol.com>
+Cc: Steffen Trumtrar <kernel@pengutronix.de>
+Cc: Thorsten Blum <blum@kernel.org>
+Cc: Tudor Ambarus <tudor.ambarus@linaro.org>
+Cc: Weili Qian <qianweili@huawei.com>
+Cc: Zaibo Xu <xuzaibo@huawei.com>
+Cc: Zhiqi Song <songzhiqi1@huawei.com>
 
-Thanks,
-Bartosz
+Lee Jones (10):
+  crypto: caam - Fix descriptor buffer overflow in caam_process_blob()
+  crypto: marvell - Fix AEAD key buffer overflow for SHA-384/512 HMAC
+  crypto: nx - Fix bounce buffer copy overflow in decompress()
+  crypto: sun8i-ss - Fix scatterlist array overflow for HMAC requests
+  crypto: hisilicon/hpre - Fix buffer overflow on odd ECDH input size
+  crypto: talitos - Remove duplicate IV unmap in AEAD encrypt path
+  crypto: safexcel - Check scatterlist errors before max() for in-place
+  crypto: qce - Pass mapped scatterlist count to qce_dma_prep_sgs()
+  crypto: qce - Terminate RX DMA channel if TX preparation fails
+  crypto: atmel-tdes - Update output IV before clearing busy flag
+
+ drivers/crypto/allwinner/sun8i-ss/sun8i-ss-hash.c  |  7 +++++--
+ drivers/crypto/atmel-tdes.c                        |  7 +++++--
+ drivers/crypto/caam/blob_gen.c                     | 12 ++++++++----
+ drivers/crypto/hisilicon/hpre/hpre_crypto.c        |  5 +++--
+ drivers/crypto/inside-secure/safexcel_cipher.c     |  7 +++----
+ drivers/crypto/marvell/octeontx/otx_cptvf_algs.h   |  2 +-
+ drivers/crypto/marvell/octeontx2/otx2_cptvf_algs.h |  2 +-
+ drivers/crypto/nx/nx-842.c                         |  5 ++++-
+ drivers/crypto/qce/dma.c                           |  8 ++++++--
+ drivers/crypto/qce/sha.c                           |  9 +++++----
+ drivers/crypto/talitos.c                           |  4 ----
+ 11 files changed, 41 insertions(+), 27 deletions(-)
+
+-- 
+2.56.1.750.gf70dc682cf-goog
+
