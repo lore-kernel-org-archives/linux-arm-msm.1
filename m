@@ -1,111 +1,113 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795467310;
-	b=S8+tzx5NF3gUUwE2C5zNZbGJfIFPJsYxvxmbtjSow592xKBTQYuKMiMLB1j6idCGkphc
-	 ah0ZlLHxTLxuPbI1G7njKC6vPZaCqgsUdrJYgrw368OKgVIC0Asvrv0nyREEoZXYbRX7I
-	 WZcNTzlvKra3QLu5mLr30UvgatEzeFx9Bbof1aJRGgRAuJY5iXW1TJami4y3ybQC64bcR
-	 g31+y0k0sAunBa0wQj46iLLjVvO0BvEWxRwSnLEnGnNV4bwvX5JJxCLmRLACk3ikiVdyX
-	 0Yxcx0gg5y307op9RHADyqICYeYLL+IjtQSchWmd+el8K4OWW8HYerA5cEBB9KFOIyQ==
+	t=1795467315;
+	b=5BOI5gZl/bj8uwtPa+7pM0XUE3j/BL2gN39NFD6UEyIjFFKLxdIwAwHorURRw3H97y6E
+	 opIMMiZhLf9+Ub8B4/4bPkbXu/5Nz7sLUbArEmO5w5Kt8D4yGfdV3daXmHSPnFW+LRZ5M
+	 fpDCDhSt2oRf44Z+KTRAHgt5H7BW/npANc6/ekz9Szb44sBNlhRT/ZlJ5S0LBEfbtoQGB
+	 LNBexPMq0COJohP5grJ0dQKgzEhrQB8udgafJgs0nqSHss/ZzLms74exh0URKpFb3wv7e
+	 aXuCJnml8T6ggBtAtIKE1SEqkInwYPrx2qechqdmfgFKtPjJY8YPXWpcy/mqVqPWwfQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795467310;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795467315;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
-	b=sPFRncKNWImr5E2gi9MCijw+ccYcFzZO6VnGjbJaCvg3NMoRA5y1QtOqSc5/7qY1xVSR
-	 +jd0fboX+bkN9V5fO9es7RnVncg+jp6IPtqwWRLW63jkWOIirlmgYsFTB6rrbGMOIC+5W
-	 E/GraPDJwXIlmH4q0kuwhg73r1uyr+wxoIHgYLLisO/qUmBsiHgH37LXhgCzllQscdIMx
-	 c21ahIoAtmiKV/Q9EcfzVbF/WY0Fk70WryT5WalvHtVHjI04JK1wRcV/mj6n+ewkN51Qf
-	 oKvWjoVaLOWzqAUZcivr0CrDZKcXRH7WqidysEZbmTKj057X9blu5PGfnFXh0TaotOw==
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-ORIG-GUID:X-Authority-Analysis:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=hZa6xQX6xlTYdwDzFzhntlqX7xZbBxURFfm+Q4ccyBs=;
+	b=2xEKFhQRjSiK2u627wBIeqJQjD658KVJXmdCvbJsPo8KikiXBx5S2YNaFwwDctx9blw/
+	 y5MFKyzHFZAlMfFYGTmexyarS8knSAzvjaLhKpFanhHqvKgyaRqo2iw6EgXpefHfrGNEr
+	 HsQDiqJAAFdhJgRAfYnNnXImL1mOX6wPVSfw1AQhdIb8Hxrn5eWLgJcmKSmVsUJeKuXBS
+	 qbhYkX2xRtvAR0rhRaGSvHmZ+pNCTPR/b/TosZr0bL34VwLYRu3QxhxxMtoGFTue9xM25
+	 8Yg8dDkE5iLM6q5Fa7t9tME9qmtZ5wz4wH+7sO1c51UTWp4pWwsGHbWrFieBQDrEBIg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="hwmXy8/w";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="XJ/FQT36";
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QXiNt9oM;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Hr9Of4zj;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E31CE606A32D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E31CE606A32D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA442606A331
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EA442606A331
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hwmXy8/w;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XJ/FQT36
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANJuhiu3962852
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:08 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=QXiNt9oM;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Hr9Of4zj
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANJub9o2973633
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:13 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=m4Gg0S5k6435INA1ZtBPlY
-	q70/Y86dn1eAS2yd6Cy3c=; b=hwmXy8/wPTp5CxnVneTEj6McBvUmtL2HplTUmQ
-	KOSDj8eW2Z+pdtKSj0XDQX9qSwXwkDwnAD+xXZmtqiRnEQF6h2/QGjLrfhsP6BFK
-	bsQ4Ii4KG6pzIx6yICi0DDWj5wOM/L0aPmpPyQ2c1RcfkfUFlJPfdzyKm6MGP/Y2
-	4l2ZnsZsqudO47Q2qZPW5X2tMrQxgoLsBdVwgOvDb2o8Yrpg6LaerbFWDVWzVEs1
-	kJf6pHLNqIa1SMqD0Me8MZCNuY9CHvB0nMoZWQK3INxNqmxDx5+JlQqdQIBld4B0
-	O1EaFMoh4xdizyreNK+hTA/ilzGZPMoa/wtikNZZwQDRvnRw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4hn7u30s-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	hZa6xQX6xlTYdwDzFzhntlqX7xZbBxURFfm+Q4ccyBs=; b=QXiNt9oMEj0pLkFN
+	L0LOpDZDLGuObJIIrJ81O2FypGASQAIhqE81QVk8MT4wMNfn1PxLkL2Ag45cxaww
+	tTTA3gNkYE5icDZJELAyeK+pzfjnqVr1E3OoCcv2oj3drHg4vCKGSitTWenLP5qK
+	eL+6yUKW5pMwr7kpL5IY7fXPDf8LXw0B2vqnTLi4guQ+XzDncp7kW40xq4lNrm4+
+	UwM5Zqji16ndZS7cg1BJqwPZXPHUK64mnz9bpYLaDRGYJBY2mEuCCrCm7fXIW1Ou
+	DzH8Qj39TtoWGvEMY1KXz+0BKGKXUtOdybtW+64XoWgVe+etecormu5eYCZoeuVd
+	UW9DsA==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fy03f7g-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:07 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-386a0f79047so3426425eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:55:07 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:13 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-3854627c1c8so5564645eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:55:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795467307; x=1796072107; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
-        b=XJ/FQT36EQpG2+1jpOlgiMUVwPMU8PbPqT0WAOEfnVkBM6YqbQjHIQSdOMfIRXPyRi
-         ZeSe6EBRBndn5zmBIOsY4EcdO3dQLzv+7Pm5gZMENVF/S9YSr6TZVbqvSLhFWQsZrAL/
-         lFsoGfN1wET2cjAOXJME2Jlrp15z7UB5e2HZgR5ISINYunWzv8Sf85wV0GluVNyhGGtZ
-         TtGhPytbdch5jxwGUBqGmcOjQxfV7KQfi+a2pt2LGhYafkIIQKZqBvVIgaGhJvL3NDbe
-         4DJtFpmhDQI12Ja5YcNsif4xmtGopbFf+v/DlbsN93CarDj66Dns+FTwd2dqhkTyEVU7
-         tCwQ==
+        d=oss.qualcomm.com; s=google; t=1795467312; x=1796072112; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hZa6xQX6xlTYdwDzFzhntlqX7xZbBxURFfm+Q4ccyBs=;
+        b=Hr9Of4zj6hwzbOyeC3D3Ej4l+Xj419Obf9WP4PMkArdguHwS0i745R7N6SFXmRJwGK
+         /dPWxYu3SeYExpTQll0kXqMGMuvS1AJAcGIEDYZhzCi3koq7m6SVPmXNkS0czZk4hBuT
+         yDSZ3QGeB//OoxAcUrMoeNLqDSqq9US6ejZ3tlLPGjULSCCXBd614a7sjW02MhkJEzMA
+         z44YbEw19aYunlVxuGbraAxYbs/128+CqgHcll4fixzFS5ZTC/8waGEzXWPXkiLEyDEv
+         KkxzI/c6cgrmsEK/hLEC3iB8Ou/1ziJnOkpOVq2YtVTv/FtzkV9NUKnhXqI00Ud8mEr+
+         Rd/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795467307; x=1796072107;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
-        b=IJpzaOXv5rRZZ1BlLV8p1FoNppFj1GgmvHTD7wKfzZBvl2ATijLnuS2fQpN4bD6pcb
-         WXjg0btJNQstf+78R9+JW68DenjPJ5OBpqUGd47TDcdePdZQXkCi+oJBudia5WMcfCY8
-         9eV8cOP5rPOlxzaKdd09ZhFz4MuPXwX0Lyz4DXJhbydpXlozQEqZeNo09ldXNjQJ6Lwk
-         iNCxeaxvbiJn2fESuasofs7rpsxgJBDONWleuPU8tbR9JwKJTWd8oe4VwDFjZcaY0xm2
-         O4ChUvsXh9QSz+g+NfFT2UPDgP66vTe944K84lVPgrkJMLDTfWATTLFc70zR1kAQgnpg
-         SpfA==
-X-Forwarded-Encrypted: i=1; AL+hErHDISTf8j9nOBfQ4nOMtsDKjKkf3vIxJuT4PdR5bkWKeBHTxvRnL45kzIiGQNRvQNCUnzWeuTmmKKy6KXIx@vger.kernel.org
-X-Gm-Message-State: APuU4Z+eFNXJSrxYcUzLMhrPQ+UuZs6Ke9itgCi9dRju5QXDorc6IRNI
-	mHmEodPA4srRBnCdZKzcGpgy2/OJIFKrkDBr+nqe+9TeVOzT+QcO56QoZOuvBA4FiqEf7T5nnjg
-	JbC4RxmSXljZKHgNnjWvn9PXjYL8VGXYvwcXqIrA9a7rxrIoHipLA2fmjZ1JtrJ94diLo
-X-Gm-Gg: AZFdTZfmMz/gp+nemsncwFiheVLfpALs7Do0MgrDqbTPKR0yXrHQZuiHFHcC+zdSNgG
-	P75ptuqPNy6O855b8KSxwWmJHLS2f9zzujhqslbKR4usCIabr7CDPHF52guwJrLt0JOgsGRsY+z
-	jhBMoOSrCYYiJ1By1lyiIGqPlS4NF6+RiaCT1B8yAetPMnT5u48iRDCrEQXARkNK6eyre5pKHiA
-	6zI9sfoVPydWl8N7TExV6UX+FUFCdleMJ1eZWH99ew5wIyuQwK8DMv9MfhrHhhBkpDdvK9YO7et
-	wj5hDAQnrXZi7aOanoF7h28pN1MDoBRw6KM0OCwnU7NoGFzkR5Dd/rhUL5HR8hKTB2OoFF2D29x
-	qHP2IbBLq9RJK5kg71nR2qoowKnuTCx7GG17Q0h3XgMfNKLTqcqrqgGR2UaF0jaMaKl8oWcjWYu
-	DLMiCdh/U8
-X-Received: by 2002:a05:7300:6da7:b0:376:77e6:a66 with SMTP id 5a478bee46e88-385704509cdmr18417412eec.16.1795467306508;
-        Mon, 23 Nov 2026 12:55:06 -0800 (PST)
-X-Received: by 2002:a05:7300:6da7:b0:376:77e6:a66 with SMTP id 5a478bee46e88-385704509cdmr18417375eec.16.1795467305833;
-        Mon, 23 Nov 2026 12:55:05 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795467312; x=1796072112;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hZa6xQX6xlTYdwDzFzhntlqX7xZbBxURFfm+Q4ccyBs=;
+        b=Zi+FhFqMHmh/KInYEiFW0/kvsZfj0w5YpBP9ELKVuqsuc8ACmdX3p+rSdHog/AWGwy
+         W0pEEWCk28m6AgcSpJyRpZkK6orHTLMd0wfDYeIWllwS8JN1B9kLcWLmVMOJR5V5AhPT
+         LER5V6eC0a9Rf1HcsTYMSv3RAY7TxnzNOsxWpxN4bcC9+bXsTLa36wQjMEuptGpe/LFn
+         cG9Mvnc84G13fwj5iTb7Bt97jfemfhK9arLN3dfNr4tcBxTo+GboHxWkP1HY6rPjG+Cr
+         8GRnqa1n8+KoCE+PXlwCMKTz++hyyIPxwfWKlH9G5FyuCCfhFLyD0884tdMSgEkQM3RM
+         Ke3g==
+X-Forwarded-Encrypted: i=1; AL+hErEDEAloTi/cAslbCN4CBBQrDNwpgvSVR8rR/192g+OzfjaliHYXJjKMsu7uhaHX+VkFvXLlns8wuTkZJi6j@vger.kernel.org
+X-Gm-Message-State: APuU4Z9QuJvV1DMYAEzX1TSAMupyfefBy0cRynegXwZ4oSCAns+a2By2
+	omIQO7Ha/+AsiWDUcdxOGweKNWJf+KKkjbDgAiFISNkvjDae3YP9OqI3cFcaXvowzncEy8n/7gJ
+	/hQEctfnHZpgcY4LAk83f2thrBiIxE9Vq5MrxEzA736RhhUrJS53EV2mQMQKgVsS6CPGn
+X-Gm-Gg: AZFdTZfs30h8rDqJnL7mHm0IFJUC9poZu4maVhvyrb10w6U/8kmkxUe5RH4iJQOAQV5
+	dohonDahg9YYCihRBTy9D/hyLJgRV470g5Kw9r9Mp28R2VL3WBUXlopEU4aaYPIKJZ7h6sOk2iO
+	601ZbhLS+XU8QpRuBLldxC/92i6wbA+fpf4AaL7Fk/Ik60837hHU+goXN8ie507cKlMtsCrL8es
+	AHrkqj4cgllnNuazEiuztO1V+h9Zm1zPx1ISbzRyK1LIhAhTRQ0/AEKBBXKFICPYu17cJl+mpMB
+	3bBKgRYTqj/Z/V+TsMlGfUPwfyudwKsc3V9Pvi0OxIjY1nx59jB5j2D47URbIj+jZQopfdzEHMg
+	MkAdlpQw10sWdaTFv4boZkALqbbLLjf0GxccLrzIvg6kLvHl4MMtlKxPBkje0okSu7huAw0/+55
+	Q1tYwiTF8l
+X-Received: by 2002:a05:7301:7107:b0:386:b494:8642 with SMTP id 5a478bee46e88-386b494879amr3280335eec.13.1795467312429;
+        Mon, 23 Nov 2026 12:55:12 -0800 (PST)
+X-Received: by 2002:a05:7301:7107:b0:386:b494:8642 with SMTP id 5a478bee46e88-386b494879amr3280297eec.13.1795467311875;
+        Mon, 23 Nov 2026 12:55:11 -0800 (PST)
 Received: from hu-manafm-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm44209077eec.26.2026.11.23.12.54.59
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm44209077eec.26.2026.11.23.12.55.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 12:55:05 -0800 (PST)
+        Mon, 23 Nov 2026 12:55:11 -0800 (PST)
 From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
-Subject: [PATCH v5 00/12] hwmon: Add Qualcomm SPMI BCL driver
-Date: Tue, 24 Nov 2026 02:24:40 +0530
-Message-Id: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 02:24:41 +0530
+Subject: [PATCH v5 01/12] dt-bindings: hwmon: Describe Qualcomm BCL
+ hardware
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,12 +119,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIABCoBGsC/3XPwW7DIAwG4FepOJfKOBBgp73HtANQ0yA1YQ1bt
- qnKu5fk0ErLerH0W78/yVdWaExU2MvuykaaUkl5qEHtdyx0bjgRT8eaGQK2QgjJLyH33Icz777
- 7PPCjCdZCJLAoWT36GCmmnxV8e6+5S+Uzj7+rP4llu1KA0P6lJsGBay+xjeC1duI1l3K4fLlz7
- fWHOtgiTvhQNOJGwapE8oQGFAntnyjNQ7FoN0qzKCo4AGNsiPqJIu+KAFAbRVZFgbfOBN3Up/5
- R5nm+ARgqmruFAQAA
-X-Change-ID: 20261114-qcom-bcl-hwmon-d8c990fe0924
+Message-Id: <20261124-qcom-bcl-hwmon-v5-1-747d5383d538@oss.qualcomm.com>
+References: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
+In-Reply-To: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
 To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
@@ -136,186 +135,176 @@ To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
 Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         mfd@lists.linux.dev, linux-doc@vger.kernel.org,
-        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795467299; l=7797;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795467299; l=4396;
  i=manaf.pallikunhi@oss.qualcomm.com; s=20260206; h=from:subject:message-id;
- bh=amOVXlt0YgK5m/43XjRUS8Xc2xOI+q2KY954dScqRz0=;
- b=Imkgrw9lFccnrFBrzh1D6sSYSh0t3MbbpQ+u72dSeOnIDbFpQbei+BJAAuy+4eRuBeLM3J5VF
- v8ybA+m78A9B9MdL151875/hFZ0JFCH8xzNUYe8XHSJI5g/3QGAIuNt
+ bh=Gu1GpC+38HITi2Er9kUG2koMItBv0WwtKRBZ8DxvpQ4=;
+ b=Spbejpz/DzxBNIumdqXhcY1cns0HOwt8l9EmATBgk7HpDuClz1ZxfP6Z0Wp2ogKQtV1Mpm8qu
+ bWYnfeY2/GYANhoiYy9eR9GYJ4/X6rJA8hCPhbhF11cKueaKOJapzMA
 X-Developer-Key: i=manaf.pallikunhi@oss.qualcomm.com; a=ed25519;
  pk=oZ3x9jh+FDyPwxHmCbyzEMQHMzKqrH6hUbbL7dEBe2g=
-X-Authority-Analysis: v=2.4 cv=Ls0HWXdc c=1 sm=1 tr=0 ts=6b04a82b cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfX7AyIfmcq9ZWD
+ Dol0U8qYhj7G5ZgobSogmGUdsC4KihzrCs8PgvuXobbWdMzyv31l0zlruNaGxXx+0Byo1LHbLnr
+ c2v8ORgZFcNOAY7CoRTN7XR5OgWkHXahgsiWmH/eZ7hnpCbVoZfeX5Dc0lzdo6o/24p0NRd2a3V
+ 3FEHVA47Es25W4RDEszO109Y6ZnhxElZ9ahaPq8hYAmYGDcYAVcTnRFgyF4BhjvJKo/X1inJ060
+ UVQ6wOqEu9GkDdcFJu9RjkvXmNQ2xc7So21EWIOQxsp9K9wevGiP+3wOkltGYYUY7+YVHU8GB9x
+ CYfFP3+lcRddkXKcw/wpu7hOmYfIXBJQb8URSzHERsPzObVL/cPHE6N0MaFF2hE7gBhuJTmO2jS
+ RjbDBuA89+tmT2eBhG2WTR8rgV89UAcPYxiMiq+7/2Wbz2IQ8QsDJuqAqeEi/J/moLtAsWsSoTv
+ 1fj4AcQTdH1NP6OTuhg==
+X-Proofpoint-ORIG-GUID: Tu0uB5IPfU3vf63-hgEyDd4YyUVSIG45
+X-Authority-Analysis: v=2.4 cv=QrXLTlyd c=1 sm=1 tr=0 ts=6b04a831 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=VwQbUJbxAAAA:8 a=_jlGtV7tAAAA:8 a=EUspDBNiAAAA:8 a=jZPNHtCe3420C_rECVwA:9
- a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22 a=nlm17XC03S6CtCLSeiRr:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfXzA/dh1iyVYmI
- HdKjfVMCAiQN5j7l68N/9z1gr+UtdN39OrMYv+K6NF2F2+Y4j9PC+KFTzUvRTD5GVkSmicSb+89
- fUTac7a7Y8RSiM6CE4Q42bTp/NT8BajOrG0L7MdBbNTM7BMM/H0J+Qu7gX3nqwxcXLpx/PcRGF/
- BRX0ouyKEj5RddLlhpaDi69iuWhOQy1H1s/8grxvda6b0z+xWKT0tahprp1fmwbA7Qy0/xEf2pb
- 5sZtqenEbyWAPR9u+3SFkOuReIKsopYC2R8UAvXyy4/Nx9DMW2HU+LNGLk25gTFrvvx+Kj0/x/X
- qP5BafE1JG5x4sTiRbs3C9srmznIc2/1gNGQVhd6GwQrY2MkZ9tCrm9DXlljaFauwRC4ATtmkLk
- 1NWFlZ+1/2e5mMLmYZM+bZMW4cUv+Zpd7YJK4+m6KN4rwnDLdMVeknMKFh+6qlbGMksWTdxOZSJ
- Sc3CwfmzoeF/SSn7Kew==
-X-Proofpoint-GUID: V9AZ-bXVoB3hp_f6eM4AUE4HjKnBzI0l
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfXwCnTNLUIBPX8
- dezZ9UA4qEuBPSwVcIqti7CXNgTToLR8M/z2aSlRI/5HkSC+6g8dQE8dMZ1ddkIh0IGwW0/MvU6
- 8XlJ4fW/BYL50+31FJ6Klt10YDNCtsA=
-X-Proofpoint-ORIG-GUID: V9AZ-bXVoB3hp_f6eM4AUE4HjKnBzI0l
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=gEfo2CItAAAA:8 a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=fehuZy28kGTF_x16HkYA:9
+ a=QEXdDO2ut3YA:10 a=bBxd6f-gb0O0v-kibOvt:22 a=sptkURWiP4Gy88Gu7hUp:22
+X-Proofpoint-GUID: Tu0uB5IPfU3vf63-hgEyDd4YyUVSIG45
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfX0SfmW+Kl4fJX
+ i06f2ZNeHt20A2vVMPr/ML1gPumzWsqbbgkq/7mSgf6+/Bcbi6BoyYp7yHPRxnVHHjROG9DhB1M
+ E6mwYyKgIE8+4CoS2INbDWmauTTbRLM=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-23_05,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0
- priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
- bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611230083
+ priorityscore=1501 impostorscore=0 suspectscore=0 phishscore=0 spamscore=0
+ lowpriorityscore=0 adultscore=0 clxscore=1015 malwarescore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230083
 
-This series introduces support for the Qualcomm SPMI PMIC Battery Current
-Limiting (BCL) hardware monitor present in various Qualcomm PMICs.
+Qualcomm SPMI PMIC BCL (Battery Current Limiting) is a safety feature
+that monitors battery or system voltage and current to alert system
+for overcurrent or undervoltage conditions.
 
-The BCL hardware ensures robust battery protection by monitoring battery
-conditions in real time and triggering interrupts when predefined
-thresholds are crossed. These alerts allow the system to respond
-proactively, preventing battery degradation and preserving system
-reliability under adverse power conditions.
+It provides:
+- Real-time voltage and current monitoring
+- Configurable thresholds per channel
+- Hardware interrupts when thresholds are violated
 
-The driver integrates with the standard hwmon subsystem, exposing battery
-measurements and configurable alarm thresholds. This design enables
-seamless integration with existing system monitoring tools and thermal
-management frameworks.
+Add a devicetree binding to describe the BCL on Qualcomm's PMICs.
 
-Key features:
-- Battery/system under voltage and over current monitoring support
-- Real-time voltage and current readings support
-- Configurable threshold-based alarms (warning, critical and emergency)
-- Interrupt-driven notifications for threshold violations
-- Automatic threshold management with polling-based recovery
-- Hardware-specific scaling factors and threshold representations
+Add sensor type to SPMI device list for BCL device.
 
-Voltage and current monitoring can be independently enabled/disabled
-by firmware, and the driver automatically detects the enabled features
-at probe time.
-
-Dependencies:
-- This series depends on the following patch, which is currently present
-in linux-next but is not yet in the mainline tree:
-https://lore.kernel.org/all/20260813211433.879638-1-linux@roeck-us.net/
-
+Reviewed-by: Rob Herring (Arm) <robh@kernel.org>
 Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
 ---
-Changes in v5:
-- Fixed a use-after-free on driver unbind: consolidated two separate
-  devm cleanup actions into one bcl_alarm_cleanup_action.(Sashiko)
-- Fixed a missed-edge race in bcl_alarm_enable_poll(): after enable_irq(),
-  the alarm status is now re-read before notifying. (Sashiko)
-- Fixed a missed-edge race in bcl_alarm_enable_poll()
-- Widened the threshold scaling-factor math from u32 to u64 with a WARN_ON
-  guard against a zero scaling factor. (Sashiko)
-- Deduplicated bcl_in_thresh_write()/bcl_curr_thresh_write() and the
-  matching read helpers into single function.(Konrad)
-- Replaced the three separate in_mon_enabled/in_input_enabled/curr_mon_enabled
-  bools with a single features bitmask. (Daniel)
-- Merged the separate IRQ-name/hwmon-attr lookup tables into one bcl_lvl_info[]
-  struct table. (Daniel)
-- Removed the now-unused bcl_get_version_major()/bcl_get_version_minor() helpers.(Konrad)
-- Dropped the qcom,pm7550-bcl entry from the of_device_id match table. (Konrad)
-- Widened bcl_device.base from u16 to u32.
-- Dt-binding: Reworked the compatible property so qcom,pm7550-bcl requires
-  a qcom,pm8550-bcl fallback compatible.(Konrad)
-- Added hwmon sysfs ABI doc for the driver, including the full compatible-string
-  list and sysfs attribute table.
-- Link to v4: https://lore.kernel.org/r/20261005-qcom-bcl-hwmon-v4-0-50b9a8c730b7@oss.qualcomm.com
+ .../bindings/hwmon/qcom,pm7250b-bcl.yaml           | 72 ++++++++++++++++++++++
+ .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |  4 ++
+ MAINTAINERS                                        |  7 +++
+ 3 files changed, 83 insertions(+)
 
-Changes in v4:
-- Dropped empty line from pm8350c devicetree change (Abel Vesa)
-- Fixed use-after-free in delayed work in tear down path (Sashiko)
-- Updated DIV_S64_ROUND_CLOSEST instead of the biased add-500000-then-truncate pattern (Sashiko)
-- Updated regmap_bulk_read() for the 16-bit LSB/MSB pair (Sashiko)
-- Removed dead code after above fixes
-- Link to v3: https://lore.kernel.org/r/20260929-qcom-bcl-hwmon-v3-0-f5ca00889cf7@oss.qualcomm.com
+diff --git a/Documentation/devicetree/bindings/hwmon/qcom,pm7250b-bcl.yaml b/Documentation/devicetree/bindings/hwmon/qcom,pm7250b-bcl.yaml
+new file mode 100644
+index 000000000000..2bbeb35f207a
+--- /dev/null
++++ b/Documentation/devicetree/bindings/hwmon/qcom,pm7250b-bcl.yaml
+@@ -0,0 +1,72 @@
++# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/hwmon/qcom,pm7250b-bcl.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Qualcomm SPMI PMIC Battery Current Limiting (BCL) Hardware Monitor
++
++maintainers:
++  - Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
++
++description:
++  SPMI PMIC Battery Current Limiting (BCL) hardware provides monitoring and
++  alarm functionality for battery overcurrent and battery or system under
++  voltage conditions. It monitors battery voltage and current, and
++  can trigger interrupts when configurable thresholds are exceeded.
++
++properties:
++  compatible:
++    oneOf:
++      - enum:
++          - qcom,pm7250b-bcl
++          - qcom,pm7550ba-bcl
++          - qcom,pm8350c-bcl
++          - qcom,pm8550-bcl
++          - qcom,pmh0101-bcl
++          - qcom,pmih0108-bcl
++          - qcom,smb2360-bcl
++          - qcom,smb2370-bcl
++      - items:
++          - const: qcom,pm7550-bcl
++          - const: qcom,pm8550-bcl
++
++  reg:
++    maxItems: 1
++
++  interrupts:
++    maxItems: 3
++
++  interrupt-names:
++    items:
++      - const: max-min
++      - const: critical
++      - const: emergency
++
++required:
++  - compatible
++  - reg
++  - interrupts
++  - interrupt-names
++
++additionalProperties: false
++
++examples:
++  - |
++    #include <dt-bindings/interrupt-controller/irq.h>
++
++    pmic {
++        #address-cells = <1>;
++        #size-cells = <0>;
++
++        sensor@1d00 {
++            compatible = "qcom,pm7250b-bcl";
++            reg = <0x1d00>;
++            interrupts = <0x2 0x1d 0x0 IRQ_TYPE_EDGE_RISING>,
++                         <0x2 0x1d 0x1 IRQ_TYPE_EDGE_RISING>,
++                         <0x2 0x1d 0x2 IRQ_TYPE_EDGE_RISING>;
++            interrupt-names = "max-min",
++                              "critical",
++                              "emergency";
++        };
++    };
+diff --git a/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml b/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
+index 7a889d888383..2c3b60437982 100644
+--- a/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
++++ b/Documentation/devicetree/bindings/mfd/qcom,spmi-pmic.yaml
+@@ -197,6 +197,10 @@ patternProperties:
+     type: object
+     $ref: /schemas/rtc/qcom-pm8xxx-rtc.yaml#
+ 
++  "^sensor@[0-9a-f]+$":
++    type: object
++    $ref: /schemas/hwmon/qcom,pm7250b-bcl.yaml#
++
+   "^temp-alarm@[0-9a-f]+$":
+     type: object
+     $ref: /schemas/thermal/qcom,spmi-temp-alarm.yaml#
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9cd098f0d91f..36a470c859a7 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -23080,6 +23080,13 @@ S:	Maintained
+ F:	Documentation/devicetree/bindings/net/qcom,bam-dmux.yaml
+ F:	drivers/net/wwan/qcom_bam_dmux.c
+ 
++QUALCOMM BCL HARDWARE MONITOR DRIVER
++M:	Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
++L:	linux-hwmon@vger.kernel.org
++L:	linux-arm-msm@vger.kernel.org
++S:	Maintained
++F:	Documentation/devicetree/bindings/hwmon/qcom,pm7250b-bcl.yaml
++
+ QUALCOMM BLUETOOTH DRIVER
+ M:	Bartosz Golaszewski <brgl@kernel.org>
+ L:	linux-arm-msm@vger.kernel.org
 
-Changes in v3:
-- Rebased series and added 3rd alarm (emergency limit alarm) support for all PMICs
-- Used static hwmon info building instead of dynamic info (Guenter)
-- Removed unnecessary generic labels sysfs (Guenter)
-- Renamed struct bcl_channel_cfg fields with _mu suffix for clarity
-- Removed linux/mod_devicetable.h include (Uwe)
-- Fixed uninitialized cache timestamps (sashiko ai)
-- Fixed Integer truncation in threshold writes(sashiko ai)
-- Fixed Missing data_field_bits_size in pmh0101_data (sashiko ai)
-- Fixed DIV_ROUND_CLOSEST 32-bit architecture issue (sashiko ai)
-- Fixed CHANNEL_CURR max_mu values using correct formula
-- Fixed critical teardown race conditions
-- Added device tree nodes for PM7550 and PM7550BA on Eliza platform
-- Link to v2: https://lore.kernel.org/r/20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com
-
-Changes in v2:
-- Reworked the binding from the generic qcom,bcl-hwmon.yaml schema to a
-  PMIC-specific qcom,pm7250b-bcl.yaml schema using exact compatible strings.(Krzysztof)
-- Dropped the DT-configured overcurrent-thresholds-milliamp property.(Konrad)
-- Renamed interrupt names from "bcl-max-min"/"bcl-critical" to
-  "max-min"/"critical".(Krzysztof)
-- Limited the binding and driver match table to the supported PMICs:
-  PM7250B, PM8350C, PM8550, PMH0101, PMIH0108, SMB2360 and SMB2370.(Daniel)
-- Folded qcom-bcl-hwmon.h into qcom-bcl-hwmon.c and removed the
-  macro-generated alarm mapping helpers.(Krzysztof/Bjorn/Daniel)
-- Reworked the driver around per-PMIC register descriptors instead of
-  generic BCL generation/mode descriptors.(Krzysztof/Bjorn)
-- Added support for 16-bit voltage/current input registers and
-  SMB2360/SMB2370 2S/3S battery configuration based scaling.
-- Build hwmon channel information dynamically from hardware enable state
-  instead of registering static voltage/current channel sets.(Daniel)
-- Improved alarm IRQ handling with per-alarm locking, wake state tracking,
-  shutdown guards, and explicit delayed-work cleanup.
-- Switched probe/error paths to dev_err_probe() and tightened BCL enable,
-  regmap-field, and hwmon registration handling.
-- Link to v1: https://lore.kernel.org/r/20260206-qcom-bcl-hwmon-v1-0-7b426f0b77a1@oss.qualcomm.com
-
----
-Manaf Meethalavalappu Pallikunhi (12):
-      dt-bindings: hwmon: Describe Qualcomm BCL hardware
-      hwmon: Add Qualcomm PMIC BCL driver
-      arm64: dts: qcom: hamoa-pmic: Enable BCL sensor node
-      arm64: dts: qcom: pm7250b: Enable BCL sensor node
-      arm64: dts: qcom: pm7550-eliza: Enable BCL sensor node
-      arm64: dts: qcom: pm7550ba-eliza: Enable BCL sensor node
-      arm64: dts: qcom: pm8350c: Enable BCL sensor node
-      arm64: dts: qcom: pm8550: Enable BCL sensor node
-      arm64: dts: qcom: pmh0101: Enable BCL sensor node
-      arm64: dts: qcom: pmih0108-kaanapali: Enable BCL sensor node
-      arm64: dts: qcom: pmih0108: Enable BCL sensor node
-      arm64: dts: qcom: smb2370: Enable BCL sensor node
-
- .../bindings/hwmon/qcom,pm7250b-bcl.yaml           |   72 +
- .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |    4 +
- Documentation/hwmon/index.rst                      |    1 +
- Documentation/hwmon/qcom-bcl-hwmon.rst             |   67 +
- MAINTAINERS                                        |    9 +
- arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi          |   22 +
- arch/arm64/boot/dts/qcom/pm7250b.dtsi              |   11 +
- arch/arm64/boot/dts/qcom/pm7550-eliza.dtsi         |   11 +
- arch/arm64/boot/dts/qcom/pm7550ba-eliza.dtsi       |   11 +
- arch/arm64/boot/dts/qcom/pm8350c.dtsi              |   11 +
- arch/arm64/boot/dts/qcom/pm8550.dtsi               |   11 +
- arch/arm64/boot/dts/qcom/pmh0101.dtsi              |   11 +
- arch/arm64/boot/dts/qcom/pmih0108-kaanapali.dtsi   |   11 +
- arch/arm64/boot/dts/qcom/pmih0108.dtsi             |   11 +
- arch/arm64/boot/dts/qcom/smb2370.dtsi              |   11 +
- drivers/hwmon/Kconfig                              |   12 +
- drivers/hwmon/Makefile                             |    1 +
- drivers/hwmon/qcom-bcl-hwmon.c                     | 1434 ++++++++++++++++++++
- 18 files changed, 1721 insertions(+)
----
-base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
-change-id: 20261114-qcom-bcl-hwmon-d8c990fe0924
-
-Best regards,
 -- 
-Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+2.43.0
 
