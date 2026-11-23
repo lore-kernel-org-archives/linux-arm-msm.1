@@ -1,54 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=91.218.175.88
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795442405;
-	b=hl8UAHCvP8+PdXD89B2jEHhBnQeFC9yzEch0iL+d4UibfZjHWlFt5qAi6x9S1lwyrxMC
-	 NZCDRFaoPP457GkhMcMFvcyKAa6kB5nkCl7JpD4saMiYr7o0EeEMAWOcYNOvTnrq18T80
-	 4CLYMVeJU6iJ7OCPpAL/DeX38C09GuxTBrgxSsCA9BRXf1N5OQhKTCA7doup2263u3wlA
-	 Ho4ldc6qMvROYeHscNKbcGi6ClFOMb6yhMXtA6r7+rnQq/LSS23cECLLHsgvH8ATKJQRC
-	 89q3sny1VjoGxWnA8zYJGcnX6tarKn8XwRJ/6ws/sVVTf78Ezt5ZBzEd1usQYaMhQew==
+	t=1795443156;
+	b=TOzKFbpxeYPW6M9WgOaq2BXGGAxQWaPAOaayjR5mB4lvD8mqW+MQJrWZEHoiySMNaACp
+	 3j+hBWdDE1X0J/nlnf2qO1LOhf0mPzkq1vrjO684sQkmRPlXtSwY5Peg0fRf557pd+vWr
+	 VtnQoLfIXtNXl17RWDowzT03bYqYbFWetMY5x7u/KfrFU7UPDUuTlltGUmos3trMQ+0fx
+	 b2ivlpCH5xn07ojEX2S/dhtVnxAlD2YZJm6Ev/LkndQ0//PbJKoulprjlgi4ZWK3rRHjM
+	 iIeugsKJjuQ/TTcd5QruJNZpj1uORVb2FGUxRB7LblCkYaxzkL3PedM0xO5OS5oWiTA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795442405;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=KTNFFpQ3kER92nljtjnxslEg2HatMNO3Pm/4eF+/uVo=;
-	b=CQj573HkrAudFF/uBiMQH2ALVyhmN9Gz5fGZ01orfbyfwOWZb6zmtcHSYXK+BHdehTXe
-	 xfevpHBymdq5yGsSSDOQL4mc11bjFTZIT141xGJynFgKDUL68jCeIbpnmeSynf9WNsAbC
-	 bu+G2/torHgGEUjjh4RijjWArGVJVCWT9etuL2tB4RShqXGXGEgD5gah5epBdwVNs1rg3
-	 HQflhnrAyoyEpxPhcdIPyPDFHhytvyGbqyYBqZI1DMafj+uBGjC3l6/OeH7WlUDujl1La
-	 X3KHD02zAwnj8u65AM2jmSGNj9qC9FzARyK8KXFO1LokBXcP4sjgfZfii8nrYSg49Tg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795443156;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=fq75inYXxrYikV0Ezj7Q8lFn8dabO3zvGhweT2/V8MA=;
+	b=LcoFaBn2oD7AAlmnCwcP83kCrBEYfnLscbfRd+2gY4/OWwTa/MmzPGMPB/J1UBJ8bM2n
+	 GD5clYt9IalBNpWHR+6K7Jj42ZS47D83VUDXe+0n/0OxE1F8x9iLgD4hOQ2Gf3K68CfSq
+	 am1H3DIBzAk7mLaPjntpFE/hvHhr8gm1phrI4NMtU12a+ZKK5+qOWqcZ8yhhwvZOIDkH1
+	 IscEL76Qx2O8hI3RZzCw02zbZYfDL6E+EgUZ+GG9K+n3zzHlxc8/7YD9bGon62GXp/z39
+	 jgwTDZKef7ZXPucPihlLtzqiyF/LhnMk9pWxRuukz9OGEOPEzbnoxn9smuPJbx8ABEw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linux.dev;
-	spf=pass smtp.mailfrom=linux.dev;
-	dkim=pass header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=HSaCR1P4;
-	arc=none smtp.remote-ip=91.218.175.88
-Received: from mta0.migadu.com (out-88.mta0.migadu.com [91.218.175.88])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZKocMOYx;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SHMSnGwT;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 32039606A32D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:00:04 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 32039606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.dev
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EFBF606A32A
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:12:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 1EFBF606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=linux.dev header.i=@linux.dev header.a=rsa-sha256 header.s=key1 header.b=HSaCR1P4
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=Q+a6mEtr7v7r3AOnn5SeGdS5lSXCWUahw75AjJpOxjY=;
- c=simple/simple; d=linux.dev;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1795442403; v=1; x=1796047203;
- b=HSaCR1P4legPkF6kIb5xXNUX70+TzNIKQiy91SGabZEsMrUkIJDPKchokqE2YZdH2OIu8tMe
- nf40zv1YulwKl+13ksCphNkK2UZI3JfcIMS203PCxciZzTg6WV+IOyro/yK90jcTKw5WJvJlmdi
- DgLethbld3AEN4cUFrJ9KvO8=
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id e58aebc7aa3e4872;
-	Mon, 23 Nov 2026 14:00:01 +0000
-X-Mizu-Trace-ID: e58aebc7aa3e4872
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <062359fb-c169-4253-aade-07cba63a279e@linux.dev>
-Date: Mon, 23 Nov 2026 14:58:23 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ZKocMOYx;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SHMSnGwT
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANDKuk33329308
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:12:35 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	fq75inYXxrYikV0Ezj7Q8lFn8dabO3zvGhweT2/V8MA=; b=ZKocMOYxmja2LYus
+	uJysaQFVhq0gXn7bdilgo+wb7nKzGltb5swiYoYEic8DI71pOM33oYFP+/wwYi6E
+	xQjcf8zNZ/cm5Y1Ncfnb0GnnsHdHoQ9m9vZwJTpO4RM/z7NLrquIjRREQf0G/c48
+	AKV8Frjrale8Z1dHRie5em5v+Cyb4aZTMarxhNG7sd+pUoGuG5eSGCLDqkhbPcAX
+	4legnvQlpS/6/IPix8KBRzNPjWLSLZE5faBMbKsyYrzQhq24hWa8WSaRNd1EpQlt
+	b3hIL5Umt9GsLT1tx4Q2PIgeVLj17rgEqAPvbSWIY92FoAZZ4lT+WnxzZkTwLBYt
+	OE+YQg==
+Received: from mail-vk1-f200.google.com (mail-vk1-f200.google.com [209.85.221.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4fyd1rdq-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:12:35 +0000 (GMT)
+Received: by mail-vk1-f200.google.com with SMTP id 71dfb90a1353d-5ecf0967947so81960e0c.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 06:12:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795443154; x=1796047954; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fq75inYXxrYikV0Ezj7Q8lFn8dabO3zvGhweT2/V8MA=;
+        b=SHMSnGwTOnxggiRKitcgnBYeAevLrf8cxCOiDJdVwq02PZDCKZr1VUW6BynTpvosNi
+         eSiuhBHAPF22cTQgeD13FsONftVknHPz0sWH8o8tYAx2m+HWWf0nczPvGZDURpc+F1VO
+         ggkVgMPuQYKM04e+bmNSr7O2WLZXzjmziqwF7kGRqsklxU18rN9bv1tPRl5tll0NdyGj
+         AuxMtNyoyjHJmBybiIZ833YQXaYPQySxe4kSHhXKOcM4fiM5cDS9R0Q6o5+In7h07BVF
+         1DU7ldH6FdQrwTfjjIPvL5PisnfI/APB0EgTb1ChtXEayrntmv5THyCVR/puKqN/DWXt
+         cSFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795443154; x=1796047954;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fq75inYXxrYikV0Ezj7Q8lFn8dabO3zvGhweT2/V8MA=;
+        b=y+XNgaR54lr1cv6uThiYZQB/56t8DuvD8rnWWyBGDvks10lg+dBufKohkOCSL6m34K
+         vp3yrNAAATvZa4dfa6AOxKpleKgfagN5dgB/Icz22P2Yq8u8T5if0BCCT53L5CUg7Ad0
+         RU2gYMpMiq/sFFLsfn3BxblD3807RRpDu3/wWQIja2QH21krdMUOxVdh3TdckMtYqvSv
+         P1xiM2ixX/5JcwsX9J89rF7XmAMcT8cs7YjdCrOW7Ik3YPaKU/WEUo6lYmwBIe8c66qF
+         82SRnUs5zRsXPZtE86/rsKlNKkverkKjTeYAC9lgzoP35G49+hS4XEpvipCX6pdU/2r1
+         dY7A==
+X-Forwarded-Encrypted: i=1; AL+hErFN4p4jQh+p3oyRBod98j7gj5cMzRNG6vcRIiU7J8lcek9DgxkTXPplEw8mRATOyFJKJ0X9uKeZ0wxiUHnd@vger.kernel.org
+X-Gm-Message-State: APuU4Z91c/F43YdWjjZKRrwXucMG1GUUxGBi+GLrETOJ8CVwkmgRKPrj
+	j1p3Ksh6bpywuUkDq9hPtobH6Hk+Mn/tnHKZa3cf7uZ79mZhrVvJpBsosQgLFnpIAxHHNZxCge4
+	MteHPBTv43G46xhZGOGclcRLR8xEUt8xbYFeRZqKXGDuh/jHOdX4E7bFx6w0Y58NPkum1
+X-Gm-Gg: AZFdTZebwVt1OcgkD/275sx6gDTtMPb1QS/HxYQGJck8glUogLJG/1tom3JyPavsAPF
+	cJ5HROQxKkcrv8QboUr6fJsvpfJWOGwV1TiLShqspuo88HnX2RVV+7rBhzEIaQxk7GZ+k93SIPn
+	Wj1yJ2uWyS0aFNJm9wLToJoiFiZ2mmLimaukM3jM38o9Bkq3NFnGor1qvAba3+Xv+jCf/+DnOVP
+	E3KPX1gwO9pwEZ5c+y1hpkbqUHEGUtAqElL/RQLjR2XN11dnWkeJed+j6Zb2IlkGJtdBGCcVf1e
+	wCKKzC4vEnpCncfhpioIY1K8jpnJ7dZOMhE3WNEzqHHwOsfose6kfygERWG2AfenGGNVDN/6xns
+	VbqiwM95wdosZ2v0TeDiXgnPBl1RBm4ECsmm+xCL/eELWvfzs3WfM5Cn4x5Q7PoWV+1Ydfb0=
+X-Received: by 2002:a05:6122:c20f:b0:5ec:b681:f4ca with SMTP id 71dfb90a1353d-5ee8afd6c93mr6901108e0c.4.1795443154173;
+        Mon, 23 Nov 2026 06:12:34 -0800 (PST)
+X-Received: by 2002:a05:6122:c20f:b0:5ec:b681:f4ca with SMTP id 71dfb90a1353d-5ee8afd6c93mr6901052e0c.4.1795443153673;
+        Mon, 23 Nov 2026 06:12:33 -0800 (PST)
+Received: from [192.168.226.72] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513afc73d3sm409929066b.64.2026.11.23.06.12.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 23 Nov 2026 06:12:32 -0800 (PST)
+Message-ID: <f151aad4-4642-4e71-aa25-3811d29052cb@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 15:12:31 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,93 +116,54 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/24] ASoC: soc-pcm: add multi_direction_codecs link
- flag
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Mark Brown <broonie@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: Srinivas Kandagatla <srini@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Jonathan Corbet <corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
- Randy Dunlap <rdunlap@infradead.org>, linux-sound@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
- linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261023171433.820092-1-srinivas.kandagatla@oss.qualcomm.com>
- <20261122161437.5994-3-srinivas.kandagatla@oss.qualcomm.com>
- <b3df76ad-e002-4ec0-a1a6-812d22b51432@linux.dev>
- <e10e701e-b478-4fe5-a62a-2365507e5d8c@oss.qualcomm.com>
+Subject: Re: [PATCH] MAINTAINERS: Drop David as Qualcomm SPMI PMIC Arbiter
+ co-maintainer
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>, Stephen Boyd <sboyd@kernel.org>
+Cc: David Collins <david.collins@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261123-spmi-pmic-arb-drop-david-v1-1-c6be14d9d22d@oss.qualcomm.com>
 Content-Language: en-US
-From: Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-In-Reply-To: <e10e701e-b478-4fe5-a62a-2365507e5d8c@oss.qualcomm.com>
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261123-spmi-pmic-arb-drop-david-v1-1-c6be14d9d22d@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: AM5NOb_YvIETuZos2-SaI2bCTRnK6jA5
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA1NiBTYWx0ZWRfX4n+eGFt3D+IT
+ I1XN9a3SPVASottI/6qh21COCkttTfS2ePzQVFXtnm1EHr2aewSgiehGsi/7k++GTkksdxtmMD7
+ 6IqpdfVET437YBSASO0hDdPQo8DP3JWikHgJYMkHChSomOj3qwyrv03CRfpBl4lECrBkzqvD8DM
+ Aw/48IUsBia+FCaUKl0xtWKXz39CbxeoZsLcoQfC0uHXKQkY3Idth5y7fo1HLLYcDTs+waebucZ
+ CsDz6xc18NtxXy+3j1GFkLJoHhvFVH9PcPq9FKon7w27UGRkalAxMVGnotAzR7OzhIxeruMB/xw
+ /FO+5Tm4+0CPFCpeQpCUV6MCzrNjt+MvKCqaJSkr8GhiJQKRe1MLUMxs1q9aikvsSnp5PzKtvM/
+ zwrdnMBpRFgHnN5Yu16QDw2WZryoFbhPHNDKjHGge5g0CmU1U7EyZwbvgpI+M3K+H33e2+rL9Ov
+ UsSfrSdoow5Ob3Kb5Tw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA1NiBTYWx0ZWRfXw0TtBOhZOmbm
+ zWv6AZMYiS9yXlntqixfuu+JQmcOJz4JByDrPLZIogktzYlhCk0kJm/1tc19fExqMiN7qcRPHlB
+ szKjvXol0CfTF8Qkg5XT30IAiSdF20A=
+X-Proofpoint-GUID: AM5NOb_YvIETuZos2-SaI2bCTRnK6jA5
+X-Authority-Analysis: v=2.4 cv=Aol7T+9P c=1 sm=1 tr=0 ts=6b0449d3 cx=c_pps
+ a=wuOIiItHwq1biOnFUQQHKA==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=q1OLuhYBDE6bPA1skz0A:9 a=QEXdDO2ut3YA:10
+ a=XD7yVLdPMpWraOa8Un9W:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-23_03,2026-11-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ spamscore=0 bulkscore=0 malwarescore=0 priorityscore=1501 impostorscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230056
 
-
->>> +Typical use case: a smart-amp speaker protection link where the CPU
->>> +side is a playback-only DMA (e.g. ``WSA_CODEC_DMA_RX_0`` on Qualcomm
->>> +AudioReach), but the codec side exposes both a playback SPKR DAI and a
->>> +companion capture V/I-sense DAI on the same SoundWire bus.  Opening the
->>> +playback FE should bring up both the amplifier output chain *and* its
->>> +V/I feedback capture chain atomically, without userspace having to open
->>> +a secondary PCM.
->>
->> This is a valid use case that has been problematic for some time on
->> other platform as well.
->>
->> What puzzles me in your approach is that the codec-side will be
->> configured/started, but *something* will need to grab/process the
->> feedback IV data generated by the codec DAI. That part seems to be
->> completely hidden in your approach, is this intentional? How would a
->> capture DAI be configured on the CPU side so that the data is provided
+On 11/23/26 9:37 AM, Abel Vesa wrote:
+> David has expressed his intention of stepping down as co-maintainer of
+> the Qualcomm SPMI PMIC Arbiter driver.
 > 
-> In this setup there is no capture codec cpu dai. The capture data is
-> never seen by the userspace. VI Feeback data is directly feed into
-> Speaker Protection module within the DSP using the codec-to-codec setup.
-
-Humm, even if there's no user-space visibility, don't you have a
-SoundWire capture port? How would that be configured? At the very least
-it should be prepared and enabled.
-
-> Host only drives the playback data and the VI feedback path is entirely
-> with-in the DSP.
+> Remove his email from the entry.
 > 
->> to a DSP? Some of the patches, e.g. 11/24, mention a capture dai but I
->> can't connect the dots with the suggested codec-dai changes.
->>
->> In addition the feedback loop can be made of not only I/V sense but may
->> also carry an echo reference, and that may have to go all the way to
->> userspace depending on where the processing is handled, possibly with a
->> split between IV sense and echo reference making the topology even more
->> complex.
-> 
-> multi_direction_flag is really agnostic to driving data(VI or echo
-> reference)
-> All this flag is doing is setting up the codec which are configured in
-> opposite direction.
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> ---
 
-but the configuration of the capture part is missing entirely, no?
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
->> And last the SoundWire core exposes a concept of 'stream' that is single
->> direction, and so far we've used a 1:1 mapping between dailinks and
->> streams. If part of the dailink is dual-direction, don't we have a
->> problem on the SoundWire side?
-> 
-> 04 patch addresses this, we create two separate runtime streams per
-> direction instead of one.
-ok, that should be made clearer in the introduction, which mentions
-codec dais but omits the gory details of SoundWire management.
-
-I have mixed feelings about having 2 streams. It 'works' but it's not
-optimal. Maybe it's time to revisit and extend this concept to deal with
-data that's closely related to the regular PCM data but flowing to
-another direction and used for a specific purpose.
-
-There's the case of the IV sense, but also the companion amp which may
-require a device-to-device communication scheme. It would be much better
-if all the prepare was done in one shot for all the direction/ports used
-for a given use case, and likewise the enable should be done with a
-single bank switch. Not to mention that this sort of solution should be
-handled at the SoundWire core level, so that we don't have to implement
-this dual-stream implementation for every platform.
+Konrad
