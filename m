@@ -1,79 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795467256;
-	b=uYOcTd8aXIRNcpe4hFkJP32PadbIShntRxqHTivrS7v2tK7ddCGsj8UEXPlGz6OSNl2B
-	 CRLdLSS2gc7fO4mtzzxMkNAkS6Qd2M0iXs60wp3YkuCma/pmQm4nQS0cUCSMvNKKnVkRA
-	 mn2EQe+h3NgozrM58vLyxAfpIKMaEFerbRAKn3TpILoKE7pOFcBRLR1+iD9kKgI9j/2XV
-	 zGbLHi4bxAGMEU6gtHcOQzy2OwnHBpFhhKm3BPduOjzBexRPwFt9TnHevn06e8Q4wTO0T
-	 XdfyQTmCPX54FCP58HbPQTL71tQarznm18UT4RXDk0Arv0FUV+/y4eDNWjkcejI/C3g==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795467256;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
-	b=W6hhNlTOUB9DIGSsnveE7IGGb/jUe2nwXv4VpObwrH1FQaiZcnQDUz2DZ83ocGxnIjn1
-	 F3x08m2g0QHdhiRTGG1JxH/TjVgCRpGKjDTV/ex80OI5VB5hL+mESiRB+9jHfOO5SaLtn
-	 uUdryg7ZvvgQVlWu5k0OQv2gNdXoxAcbstLf/r41d750kpsbg9yGRRRYR/Jh4Lh+BED8/
-	 beHDohp1rk0byuWtLkBVYe+Woi5M5ZKRI+kvoj0psW/+NgctijYGy4DOhLqlJZcGwi4ke
-	 jPt0h/smPGPSd8iFPD7qOkggOv4hHWGg7DiieP/ZJaP2OjFv+rk9zsWoZOCqdp3HujQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i+L0acfG;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14185606A321;
-	Mon, 23 Nov 2026 20:54:15 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i+L0acfG
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795467255;
-	b=co+AZ4U4TgOkOAoJikeprMyXxOJqdTq5Tv/q8T8whM2XuMTGq2SLAd1oAfvCkjiU7v00
-	 kFUk2oepOR8gZ46WC26sAHevUxeynxV44OzThkB/YHuOE6GdwXNsvZlZSJw0anV1oocY1
-	 7w9B6PvqI+7fD5CX6htjB1Zc+piqyljHxRAhR04cxG0yuan8GyHN8adOlqUShdGxkdTdE
-	 MIZ2fPD0kMRyf8EZpFJHlWvFsOlCpAPOfpVXeUbki29U9iccPFCl8T5jGt1KkwW3/o4ij
-	 pH/ncpbsuvS/lgJeZ5anXq2KPK9C7ZwzAC2XUiyggvIdw2g1LlB07GR7wL5UggieF9g==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795467255;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
-	b=uKQknbmAFivG4I7KB162w9BRUdqLWhwaXLHIHHRNpt/uTmZFBC8msMFfLOWXDcFni5nO
-	 LGKiMaNBhYR/a6prpSIC7JZhV99RsIfo4xGycaIeNJVTWp79cTmbShYWNdZM9HSYMie0g
-	 7oKCScMmT3kpt56I1xojeCLuYuOcBfEw5aLi/1YG0YKNA3Qtp0liC8GtkKWYxo3m9ik4y
-	 jkludZMHIA+smu36ddo+3wuTwJiXQZY78RG4hyrZc0khXSc+bNaipOOI4a1DLT9tX3knq
-	 StaHAbQgoS8Ug9C/HFKtrPwY+MsXjGqh7kvIlf4WqIPEfDvc7kBjkd1sHL7AAPzDvBw==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795467310;
+	b=S8+tzx5NF3gUUwE2C5zNZbGJfIFPJsYxvxmbtjSow592xKBTQYuKMiMLB1j6idCGkphc
+	 ah0ZlLHxTLxuPbI1G7njKC6vPZaCqgsUdrJYgrw368OKgVIC0Asvrv0nyREEoZXYbRX7I
+	 WZcNTzlvKra3QLu5mLr30UvgatEzeFx9Bbof1aJRGgRAuJY5iXW1TJami4y3ybQC64bcR
+	 g31+y0k0sAunBa0wQj46iLLjVvO0BvEWxRwSnLEnGnNV4bwvX5JJxCLmRLACk3ikiVdyX
+	 0Yxcx0gg5y307op9RHADyqICYeYLL+IjtQSchWmd+el8K4OWW8HYerA5cEBB9KFOIyQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795467310;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
+	b=sPFRncKNWImr5E2gi9MCijw+ccYcFzZO6VnGjbJaCvg3NMoRA5y1QtOqSc5/7qY1xVSR
+	 +jd0fboX+bkN9V5fO9es7RnVncg+jp6IPtqwWRLW63jkWOIirlmgYsFTB6rrbGMOIC+5W
+	 E/GraPDJwXIlmH4q0kuwhg73r1uyr+wxoIHgYLLisO/qUmBsiHgH37LXhgCzllQscdIMx
+	 c21ahIoAtmiKV/Q9EcfzVbF/WY0Fk70WryT5WalvHtVHjI04JK1wRcV/mj6n+ewkN51Qf
+	 oKvWjoVaLOWzqAUZcivr0CrDZKcXRH7WqidysEZbmTKj057X9blu5PGfnFXh0TaotOw==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="hwmXy8/w";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="XJ/FQT36";
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id E99191F000CF;
-	Mon, 23 Nov 2026 20:54:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795467255;
-	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=i+L0acfGGMyfiyesw9NGEn0zQ7m9p3qSJ3Xn3W0ZBGVbwKFRmjf3AlHLznYCWDa0K
-	 u4ZRFPYX1kZ7Pxz4JL5Ize6Ss9hAJj2K5rCimn7lmELI9lY7h2QLN+n3DgZnAW3yp/
-	 tRkDCjb7vRcdli0bd+Fc6OqV6vcmQLj00v9rfHaD4n5Y44C+6CXw3pqcWVjBk/3NM7
-	 DDr/Ns+aK2fqZvEGZaJDHdnnAiDMBbo7AH+tmbgU78R5lvskUj0mE8/LI3oIlg/0G9
-	 VihIcqVmsoXbUuPtQpa7/K9ndB5cDUXX91ObPtqDEy0HkhjugCPvCgsKqiqGzeVq5+
-	 NIKcT1yv3nRiw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 7E2304C72D;
-	Mon, 23 Nov 2026 20:54:03 +0000 (UTC)
-From: Stoicoci Mihaita via B4 Relay <devnull+stoicoci.mihaita.gmail.com@kernel.org>
-Date: Mon, 23 Nov 2026 22:54:03 +0200
-Subject: [PATCH] arm64: dts: qcom: sm8250: Make the ADSP fastrpc remote
- heap no-map
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E31CE606A32D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:08 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E31CE606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=hwmXy8/w;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XJ/FQT36
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANJuhiu3962852
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:08 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=m4Gg0S5k6435INA1ZtBPlY
+	q70/Y86dn1eAS2yd6Cy3c=; b=hwmXy8/wPTp5CxnVneTEj6McBvUmtL2HplTUmQ
+	KOSDj8eW2Z+pdtKSj0XDQX9qSwXwkDwnAD+xXZmtqiRnEQF6h2/QGjLrfhsP6BFK
+	bsQ4Ii4KG6pzIx6yICi0DDWj5wOM/L0aPmpPyQ2c1RcfkfUFlJPfdzyKm6MGP/Y2
+	4l2ZnsZsqudO47Q2qZPW5X2tMrQxgoLsBdVwgOvDb2o8Yrpg6LaerbFWDVWzVEs1
+	kJf6pHLNqIa1SMqD0Me8MZCNuY9CHvB0nMoZWQK3INxNqmxDx5+JlQqdQIBld4B0
+	O1EaFMoh4xdizyreNK+hTA/ilzGZPMoa/wtikNZZwQDRvnRw==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4hn7u30s-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:55:07 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-386a0f79047so3426425eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:55:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795467307; x=1796072107; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
+        b=XJ/FQT36EQpG2+1jpOlgiMUVwPMU8PbPqT0WAOEfnVkBM6YqbQjHIQSdOMfIRXPyRi
+         ZeSe6EBRBndn5zmBIOsY4EcdO3dQLzv+7Pm5gZMENVF/S9YSr6TZVbqvSLhFWQsZrAL/
+         lFsoGfN1wET2cjAOXJME2Jlrp15z7UB5e2HZgR5ISINYunWzv8Sf85wV0GluVNyhGGtZ
+         TtGhPytbdch5jxwGUBqGmcOjQxfV7KQfi+a2pt2LGhYafkIIQKZqBvVIgaGhJvL3NDbe
+         4DJtFpmhDQI12Ja5YcNsif4xmtGopbFf+v/DlbsN93CarDj66Dns+FTwd2dqhkTyEVU7
+         tCwQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795467307; x=1796072107;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=m4Gg0S5k6435INA1ZtBPlYq70/Y86dn1eAS2yd6Cy3c=;
+        b=IJpzaOXv5rRZZ1BlLV8p1FoNppFj1GgmvHTD7wKfzZBvl2ATijLnuS2fQpN4bD6pcb
+         WXjg0btJNQstf+78R9+JW68DenjPJ5OBpqUGd47TDcdePdZQXkCi+oJBudia5WMcfCY8
+         9eV8cOP5rPOlxzaKdd09ZhFz4MuPXwX0Lyz4DXJhbydpXlozQEqZeNo09ldXNjQJ6Lwk
+         iNCxeaxvbiJn2fESuasofs7rpsxgJBDONWleuPU8tbR9JwKJTWd8oe4VwDFjZcaY0xm2
+         O4ChUvsXh9QSz+g+NfFT2UPDgP66vTe944K84lVPgrkJMLDTfWATTLFc70zR1kAQgnpg
+         SpfA==
+X-Forwarded-Encrypted: i=1; AL+hErHDISTf8j9nOBfQ4nOMtsDKjKkf3vIxJuT4PdR5bkWKeBHTxvRnL45kzIiGQNRvQNCUnzWeuTmmKKy6KXIx@vger.kernel.org
+X-Gm-Message-State: APuU4Z+eFNXJSrxYcUzLMhrPQ+UuZs6Ke9itgCi9dRju5QXDorc6IRNI
+	mHmEodPA4srRBnCdZKzcGpgy2/OJIFKrkDBr+nqe+9TeVOzT+QcO56QoZOuvBA4FiqEf7T5nnjg
+	JbC4RxmSXljZKHgNnjWvn9PXjYL8VGXYvwcXqIrA9a7rxrIoHipLA2fmjZ1JtrJ94diLo
+X-Gm-Gg: AZFdTZfmMz/gp+nemsncwFiheVLfpALs7Do0MgrDqbTPKR0yXrHQZuiHFHcC+zdSNgG
+	P75ptuqPNy6O855b8KSxwWmJHLS2f9zzujhqslbKR4usCIabr7CDPHF52guwJrLt0JOgsGRsY+z
+	jhBMoOSrCYYiJ1By1lyiIGqPlS4NF6+RiaCT1B8yAetPMnT5u48iRDCrEQXARkNK6eyre5pKHiA
+	6zI9sfoVPydWl8N7TExV6UX+FUFCdleMJ1eZWH99ew5wIyuQwK8DMv9MfhrHhhBkpDdvK9YO7et
+	wj5hDAQnrXZi7aOanoF7h28pN1MDoBRw6KM0OCwnU7NoGFzkR5Dd/rhUL5HR8hKTB2OoFF2D29x
+	qHP2IbBLq9RJK5kg71nR2qoowKnuTCx7GG17Q0h3XgMfNKLTqcqrqgGR2UaF0jaMaKl8oWcjWYu
+	DLMiCdh/U8
+X-Received: by 2002:a05:7300:6da7:b0:376:77e6:a66 with SMTP id 5a478bee46e88-385704509cdmr18417412eec.16.1795467306508;
+        Mon, 23 Nov 2026 12:55:06 -0800 (PST)
+X-Received: by 2002:a05:7300:6da7:b0:376:77e6:a66 with SMTP id 5a478bee46e88-385704509cdmr18417375eec.16.1795467305833;
+        Mon, 23 Nov 2026 12:55:05 -0800 (PST)
+Received: from hu-manafm-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm44209077eec.26.2026.11.23.12.54.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Nov 2026 12:55:05 -0800 (PST)
+From: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
+Subject: [PATCH v5 00/12] hwmon: Add Qualcomm SPMI BCL driver
+Date: Tue, 24 Nov 2026 02:24:40 +0530
+Message-Id: <20261124-qcom-bcl-hwmon-v5-0-747d5383d538@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,82 +116,206 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261123-sm8250-fastrpc-remote-heap-no-map-v1-1-68ce6470e82c@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAOqnBGsC/yXNywrCMBCF4Vcps3YgifYSX0VcpHFqI+TCTBSh9
- N2Nujp8m/9sIMSBBM7dBkyvICGnBn3owK8u3QnDrRmMMoPW5ogSJ9MrXJxULh6ZYq6EK7mCKWN
- so/tB2Xk62XG00DqFaQnv38fl+rc85wf5+g3Dvn8A3JS6OoUAAAA=
-X-Change-ID: 20261123-sm8250-fastrpc-remote-heap-no-map-15609b849779
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795467242; l=2085;
- i=stoicoci.mihaita@gmail.com; s=20261123; h=from:subject:message-id;
- bh=VgzMi36Z50siaVxASdbNIrQSmm9qWWzg4SVyaAuqVHI=;
- b=6ctYusPoF2jBunbjDfr+/dJviQ2SO/k2DaeqdPTPcV16l9vtYBClJWpOIOyuWQxSI4QPOnb5Y
- y9SZG+LbUOSBYCMhECL8HBurSLymKNTOpo0U03H6E8alrM7ZtbEEVR5
-X-Developer-Key: i=stoicoci.mihaita@gmail.com; a=ed25519;
- pk=IZ3PTCsOlRAC9RPQEB2Kk12DHzDz+pP3FWH8V6OqGto=
-X-Endpoint-Received: by B4 Relay for stoicoci.mihaita@gmail.com/20261123
- with auth_id=1623
-X-Original-From: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
-Reply-To: stoicoci.mihaita@gmail.com
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABCoBGsC/3XPwW7DIAwG4FepOJfKOBBgp73HtANQ0yA1YQ1bt
+ qnKu5fk0ErLerH0W78/yVdWaExU2MvuykaaUkl5qEHtdyx0bjgRT8eaGQK2QgjJLyH33Icz777
+ 7PPCjCdZCJLAoWT36GCmmnxV8e6+5S+Uzj7+rP4llu1KA0P6lJsGBay+xjeC1duI1l3K4fLlz7
+ fWHOtgiTvhQNOJGwapE8oQGFAntnyjNQ7FoN0qzKCo4AGNsiPqJIu+KAFAbRVZFgbfOBN3Up/5
+ R5nm+ARgqmruFAQAA
+X-Change-ID: 20261114-qcom-bcl-hwmon-d8c990fe0924
+To: Guenter Roeck <linux@roeck-us.net>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Lee Jones <lee@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
+        Abel Vesa <abelvesa@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Cc: linux-hwmon@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mfd@lists.linux.dev, linux-doc@vger.kernel.org,
+        Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>,
+        Abel Vesa <abel.vesa@oss.qualcomm.com>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+X-Mailer: b4 0.14.3
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795467299; l=7797;
+ i=manaf.pallikunhi@oss.qualcomm.com; s=20260206; h=from:subject:message-id;
+ bh=amOVXlt0YgK5m/43XjRUS8Xc2xOI+q2KY954dScqRz0=;
+ b=Imkgrw9lFccnrFBrzh1D6sSYSh0t3MbbpQ+u72dSeOnIDbFpQbei+BJAAuy+4eRuBeLM3J5VF
+ v8ybA+m78A9B9MdL151875/hFZ0JFCH8xzNUYe8XHSJI5g/3QGAIuNt
+X-Developer-Key: i=manaf.pallikunhi@oss.qualcomm.com; a=ed25519;
+ pk=oZ3x9jh+FDyPwxHmCbyzEMQHMzKqrH6hUbbL7dEBe2g=
+X-Authority-Analysis: v=2.4 cv=Ls0HWXdc c=1 sm=1 tr=0 ts=6b04a82b cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
+ a=VwQbUJbxAAAA:8 a=_jlGtV7tAAAA:8 a=EUspDBNiAAAA:8 a=jZPNHtCe3420C_rECVwA:9
+ a=QEXdDO2ut3YA:10 a=scEy_gLbYbu1JhEsrz4S:22 a=nlm17XC03S6CtCLSeiRr:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfXzA/dh1iyVYmI
+ HdKjfVMCAiQN5j7l68N/9z1gr+UtdN39OrMYv+K6NF2F2+Y4j9PC+KFTzUvRTD5GVkSmicSb+89
+ fUTac7a7Y8RSiM6CE4Q42bTp/NT8BajOrG0L7MdBbNTM7BMM/H0J+Qu7gX3nqwxcXLpx/PcRGF/
+ BRX0ouyKEj5RddLlhpaDi69iuWhOQy1H1s/8grxvda6b0z+xWKT0tahprp1fmwbA7Qy0/xEf2pb
+ 5sZtqenEbyWAPR9u+3SFkOuReIKsopYC2R8UAvXyy4/Nx9DMW2HU+LNGLk25gTFrvvx+Kj0/x/X
+ qP5BafE1JG5x4sTiRbs3C9srmznIc2/1gNGQVhd6GwQrY2MkZ9tCrm9DXlljaFauwRC4ATtmkLk
+ 1NWFlZ+1/2e5mMLmYZM+bZMW4cUv+Zpd7YJK4+m6KN4rwnDLdMVeknMKFh+6qlbGMksWTdxOZSJ
+ Sc3CwfmzoeF/SSn7Kew==
+X-Proofpoint-GUID: V9AZ-bXVoB3hp_f6eM4AUE4HjKnBzI0l
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA4MyBTYWx0ZWRfXwCnTNLUIBPX8
+ dezZ9UA4qEuBPSwVcIqti7CXNgTToLR8M/z2aSlRI/5HkSC+6g8dQE8dMZ1ddkIh0IGwW0/MvU6
+ 8XlJ4fW/BYL50+31FJ6Klt10YDNCtsA=
+X-Proofpoint-ORIG-GUID: V9AZ-bXVoB3hp_f6eM4AUE4HjKnBzI0l
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-23_05,2026-11-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 malwarescore=0 suspectscore=0
+ priorityscore=1501 spamscore=0 phishscore=0 lowpriorityscore=0 adultscore=0
+ bulkscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
+ adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
+ definitions=main-2611230083
 
-From: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
+This series introduces support for the Qualcomm SPMI PMIC Battery Current
+Limiting (BCL) hardware monitor present in various Qualcomm PMICs.
 
-The ADSP fastrpc node hands the whole adsp-rpc-remote-heap region to the
-DSP when it probes: fastrpc_rpmsg_probe() calls qcom_scm_assign_mem()
-with the qcom,vmids list (LPASS and ADSP_HEAP), which does not include
-HLOS.
+The BCL hardware ensures robust battery protection by monitoring battery
+conditions in real time and triggering interrupts when predefined
+thresholds are crossed. These alerts allow the system to respond
+proactively, preventing battery degradation and preserving system
+reliability under adverse power conditions.
 
-The region is declared reusable, so it is a CMA area and its pages are
-still lent to movable allocations (page cache, anonymous memory). Under
-memory pressure the kernel then touches pages that the hypervisor no
-longer maps for HLOS. On a Lenovo Tab P12 Pro (TB-Q706F, SM8250) this
-reset the device within a few minutes of heavy use (browser video,
-Flatpak installs). Nothing reached the kernel log or pstore, the PMIC
-reported a PS_HOLD reset, and the TZ diagnostic area showed a fatal SGI
-on a different CPU each time just before the reset.
+The driver integrates with the standard hwmon subsystem, exposing battery
+measurements and configurable alarm thresholds. This design enables
+seamless integration with existing system monitoring tools and thermal
+management frameworks.
 
-Mark the region no-map so it is never handed to the page allocator. With
-this change the same workload ran with the CMA area fully used and no
-reset.
+Key features:
+- Battery/system under voltage and over current monitoring support
+- Real-time voltage and current readings support
+- Configurable threshold-based alarms (warning, critical and emergency)
+- Interrupt-driven notifications for threshold violations
+- Automatic threshold management with polling-based recovery
+- Hardware-specific scaling factors and threshold representations
 
-Fixes: 531ce288b6dd ("arm64: dts: qcom: sm8250: Add memory-region for audio PD")
-Signed-off-by: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
+Voltage and current monitoring can be independently enabled/disabled
+by firmware, and the driver automatically detects the enabled features
+at probe time.
+
+Dependencies:
+- This series depends on the following patch, which is currently present
+in linux-next but is not yet in the mainline tree:
+https://lore.kernel.org/all/20260813211433.879638-1-linux@roeck-us.net/
+
+Signed-off-by: Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
 ---
-The same reusable remote heap without an HLOS VMID was added for other
-SoCs as well (glymur, agatti, talos, kodiak, sm8750). I can only test
-SM8250, so this patch changes sm8250.dtsi only.
----
- arch/arm64/boot/dts/qcom/sm8250.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v5:
+- Fixed a use-after-free on driver unbind: consolidated two separate
+  devm cleanup actions into one bcl_alarm_cleanup_action.(Sashiko)
+- Fixed a missed-edge race in bcl_alarm_enable_poll(): after enable_irq(),
+  the alarm status is now re-read before notifying. (Sashiko)
+- Fixed a missed-edge race in bcl_alarm_enable_poll()
+- Widened the threshold scaling-factor math from u32 to u64 with a WARN_ON
+  guard against a zero scaling factor. (Sashiko)
+- Deduplicated bcl_in_thresh_write()/bcl_curr_thresh_write() and the
+  matching read helpers into single function.(Konrad)
+- Replaced the three separate in_mon_enabled/in_input_enabled/curr_mon_enabled
+  bools with a single features bitmask. (Daniel)
+- Merged the separate IRQ-name/hwmon-attr lookup tables into one bcl_lvl_info[]
+  struct table. (Daniel)
+- Removed the now-unused bcl_get_version_major()/bcl_get_version_minor() helpers.(Konrad)
+- Dropped the qcom,pm7550-bcl entry from the of_device_id match table. (Konrad)
+- Widened bcl_device.base from u16 to u32.
+- Dt-binding: Reworked the compatible property so qcom,pm7550-bcl requires
+  a qcom,pm8550-bcl fallback compatible.(Konrad)
+- Added hwmon sysfs ABI doc for the driver, including the full compatible-string
+  list and sysfs attribute table.
+- Link to v4: https://lore.kernel.org/r/20261005-qcom-bcl-hwmon-v4-0-50b9a8c730b7@oss.qualcomm.com
 
-diff --git a/arch/arm64/boot/dts/qcom/sm8250.dtsi b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-index f975c2183..f415da478 100644
---- a/arch/arm64/boot/dts/qcom/sm8250.dtsi
-+++ b/arch/arm64/boot/dts/qcom/sm8250.dtsi
-@@ -867,7 +867,7 @@ cdsp_secure_heap: memory@8bf00000 {
- 		adsp_rpc_remote_heap_mem: adsp-rpc-remote-heap {
- 			compatible = "shared-dma-pool";
- 			alloc-ranges = <0x0 0x80000000 0x0 0x80000000>;
--			reusable;
-+			no-map;
- 			alignment = <0x0 0x400000>;
- 			size = <0x0 0x800000>;
- 		};
+Changes in v4:
+- Dropped empty line from pm8350c devicetree change (Abel Vesa)
+- Fixed use-after-free in delayed work in tear down path (Sashiko)
+- Updated DIV_S64_ROUND_CLOSEST instead of the biased add-500000-then-truncate pattern (Sashiko)
+- Updated regmap_bulk_read() for the 16-bit LSB/MSB pair (Sashiko)
+- Removed dead code after above fixes
+- Link to v3: https://lore.kernel.org/r/20260929-qcom-bcl-hwmon-v3-0-f5ca00889cf7@oss.qualcomm.com
+
+Changes in v3:
+- Rebased series and added 3rd alarm (emergency limit alarm) support for all PMICs
+- Used static hwmon info building instead of dynamic info (Guenter)
+- Removed unnecessary generic labels sysfs (Guenter)
+- Renamed struct bcl_channel_cfg fields with _mu suffix for clarity
+- Removed linux/mod_devicetable.h include (Uwe)
+- Fixed uninitialized cache timestamps (sashiko ai)
+- Fixed Integer truncation in threshold writes(sashiko ai)
+- Fixed Missing data_field_bits_size in pmh0101_data (sashiko ai)
+- Fixed DIV_ROUND_CLOSEST 32-bit architecture issue (sashiko ai)
+- Fixed CHANNEL_CURR max_mu values using correct formula
+- Fixed critical teardown race conditions
+- Added device tree nodes for PM7550 and PM7550BA on Eliza platform
+- Link to v2: https://lore.kernel.org/r/20260722-qcom-bcl-hwmon-v2-0-febe2805e17b@oss.qualcomm.com
+
+Changes in v2:
+- Reworked the binding from the generic qcom,bcl-hwmon.yaml schema to a
+  PMIC-specific qcom,pm7250b-bcl.yaml schema using exact compatible strings.(Krzysztof)
+- Dropped the DT-configured overcurrent-thresholds-milliamp property.(Konrad)
+- Renamed interrupt names from "bcl-max-min"/"bcl-critical" to
+  "max-min"/"critical".(Krzysztof)
+- Limited the binding and driver match table to the supported PMICs:
+  PM7250B, PM8350C, PM8550, PMH0101, PMIH0108, SMB2360 and SMB2370.(Daniel)
+- Folded qcom-bcl-hwmon.h into qcom-bcl-hwmon.c and removed the
+  macro-generated alarm mapping helpers.(Krzysztof/Bjorn/Daniel)
+- Reworked the driver around per-PMIC register descriptors instead of
+  generic BCL generation/mode descriptors.(Krzysztof/Bjorn)
+- Added support for 16-bit voltage/current input registers and
+  SMB2360/SMB2370 2S/3S battery configuration based scaling.
+- Build hwmon channel information dynamically from hardware enable state
+  instead of registering static voltage/current channel sets.(Daniel)
+- Improved alarm IRQ handling with per-alarm locking, wake state tracking,
+  shutdown guards, and explicit delayed-work cleanup.
+- Switched probe/error paths to dev_err_probe() and tightened BCL enable,
+  regmap-field, and hwmon registration handling.
+- Link to v1: https://lore.kernel.org/r/20260206-qcom-bcl-hwmon-v1-0-7b426f0b77a1@oss.qualcomm.com
 
 ---
-base-commit: b6a9fa34ce4187cb69d3c588a4bbffc31ce5db8f
-change-id: 20261123-sm8250-fastrpc-remote-heap-no-map-15609b849779
+Manaf Meethalavalappu Pallikunhi (12):
+      dt-bindings: hwmon: Describe Qualcomm BCL hardware
+      hwmon: Add Qualcomm PMIC BCL driver
+      arm64: dts: qcom: hamoa-pmic: Enable BCL sensor node
+      arm64: dts: qcom: pm7250b: Enable BCL sensor node
+      arm64: dts: qcom: pm7550-eliza: Enable BCL sensor node
+      arm64: dts: qcom: pm7550ba-eliza: Enable BCL sensor node
+      arm64: dts: qcom: pm8350c: Enable BCL sensor node
+      arm64: dts: qcom: pm8550: Enable BCL sensor node
+      arm64: dts: qcom: pmh0101: Enable BCL sensor node
+      arm64: dts: qcom: pmih0108-kaanapali: Enable BCL sensor node
+      arm64: dts: qcom: pmih0108: Enable BCL sensor node
+      arm64: dts: qcom: smb2370: Enable BCL sensor node
+
+ .../bindings/hwmon/qcom,pm7250b-bcl.yaml           |   72 +
+ .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |    4 +
+ Documentation/hwmon/index.rst                      |    1 +
+ Documentation/hwmon/qcom-bcl-hwmon.rst             |   67 +
+ MAINTAINERS                                        |    9 +
+ arch/arm64/boot/dts/qcom/hamoa-pmics.dtsi          |   22 +
+ arch/arm64/boot/dts/qcom/pm7250b.dtsi              |   11 +
+ arch/arm64/boot/dts/qcom/pm7550-eliza.dtsi         |   11 +
+ arch/arm64/boot/dts/qcom/pm7550ba-eliza.dtsi       |   11 +
+ arch/arm64/boot/dts/qcom/pm8350c.dtsi              |   11 +
+ arch/arm64/boot/dts/qcom/pm8550.dtsi               |   11 +
+ arch/arm64/boot/dts/qcom/pmh0101.dtsi              |   11 +
+ arch/arm64/boot/dts/qcom/pmih0108-kaanapali.dtsi   |   11 +
+ arch/arm64/boot/dts/qcom/pmih0108.dtsi             |   11 +
+ arch/arm64/boot/dts/qcom/smb2370.dtsi              |   11 +
+ drivers/hwmon/Kconfig                              |   12 +
+ drivers/hwmon/Makefile                             |    1 +
+ drivers/hwmon/qcom-bcl-hwmon.c                     | 1434 ++++++++++++++++++++
+ 18 files changed, 1721 insertions(+)
+---
+base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
+change-id: 20261114-qcom-bcl-hwmon-d8c990fe0924
 
 Best regards,
---  
-Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
-
+-- 
+Manaf Meethalavalappu Pallikunhi <manaf.pallikunhi@oss.qualcomm.com>
 
