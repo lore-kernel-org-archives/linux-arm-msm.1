@@ -1,48 +1,49 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795458888;
-	b=Vlq2DOC5ogpBl7OQnfdkvYdkdQTmN2Ijr1R+MMkwth9uL4rTROBb8a+0TxMwDIDRMRoY
-	 OC+G5b+HalFOwGgngBYyUmGJxZYZY1oaIPj+bo7CiWpFQp7IKqnZ0OExJU4bOYR5YbyzQ
-	 nQil4Y1R4JgvrYgsBo3aoljwK5mZqcYaYsm41iW3uFL+KOqzoBvZ1TR5yjk7fNcEBZCcR
-	 Bnb0ju5oz//oDixU5gJ4GMww5QYb0MlQyisatGgI0y+W5CbgK3cZxsi9lZEFDHVNrXYgb
-	 UqXl0hz1GrdwKhfD773Y2KOH/PKy1GkALRx6SMK0TueqGfeEgucZH/ooJgiy51WB37Q==
+	t=1795458896;
+	b=MggizoQlduMLfzanIQhagbxysCY9HC0XLgaVG9EBgQEihAJ1MB1NelwYNcBy6GzRYXS3
+	 KOGIz6nU4UxeUrT79f9JV6eY1yqwCOWdJBZgrW3p0MljiScjTCLvErrC29088XfRXrauf
+	 CDpKfnHDa4uv4pxK3jfAx6ZZuXaijHE2aCfl+VMHM3wG89U8ntyuhVwCEY9c4IrlmuwFu
+	 kvCaB74Lt5xThC4f0tD4lHr8ZQlJK5YlepOrJH2LtscIATa5dz7DxteJB0yWpx2HfBIAR
+	 ZjfauHsocRLDJhIsWeaJgY3lsusBo5E986jxXIWLnhGpf2dbc5gUxC2/EAz1WXjNGYg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795458888;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795458896;
 	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
 	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=gPvR/SydOXELSen+DZKOokMch7WuhXuCoz6EDtyY2P4=;
-	b=Ux7mQaRvK/zdCyf39/agRbBejjwC0QPngR4yu5vJOX47vbMvW9UqiHl8kDC1Q9IJpjcO
-	 5ovvAyN9yzDCWCLLU9UkC3Is1q+L8yu0uTmvsVjtG73d/HgAfwyHlJiOiRZZMEypfZxtU
-	 n2tk4HTT8oM6Se7D8ku47dtkRsD+TW3pxlNLex9W6bN9KZpt1HJNYGxue/i/I9nxAlrfW
-	 +ymV7wuAQw72ehFwuWE3ZSU7OzOcE1KAEkMVk6ETO1Oaljv88o6J5XVuWF+PIFeDpR/qJ
-	 w/rMeW4RRzSDg5c7IJeqp47z9ywXQwcbNP0eb4feaQj2mOWBt57rxpNWFh/BuUsKAfg==
+	bh=cXJf4DiiFh6FPS7q8TcETpIQClk56ctGCe/j5Oo2rgc=;
+	b=5Q5sBra5z/t7gSPh2NtDZstO7gVR2Rwk3/wTGjMMVZqDjJKs8iM4i/PyOaQ/P5eguPlN
+	 8oy5nkkSrWfuZYznam7e6KIDS87An80ASlNw/yxrcGjePtesKwbuwlpy6nBVSBSNIIpHc
+	 qIorrmU98Hugp533lmE9T+2FXtqPxkE/4H3iBxzRCR0+9agpN5xnnIRWkQvWL42ExXZT2
+	 6dLY3j7cC0c5txqHNwk202iHucBpXbKtzW6ofisWsyJwBkh2vpZ6I61LRw6lFMQupLSHi
+	 iOSyzIYk6BdrLcxhbO+3z8ya6tT958TpoYDTOMI9YDk+GOP9pH8+1+DjWdgkwp/PwKw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M8j1Jgrh;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEBKS016;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74DE7606A31A;
-	Mon, 23 Nov 2026 18:34:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DC3CB606A31E;
+	Mon, 23 Nov 2026 18:34:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=M8j1Jgrh
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B832B1F000D2;
-	Mon, 23 Nov 2026 18:34:44 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gEBKS016
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E435B1F000E0;
+	Mon, 23 Nov 2026 18:34:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795458888;
-	bh=gPvR/SydOXELSen+DZKOokMch7WuhXuCoz6EDtyY2P4=;
+	s=k20260515; t=1795458896;
+	bh=cXJf4DiiFh6FPS7q8TcETpIQClk56ctGCe/j5Oo2rgc=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=M8j1JgrhTV6qwYI4rX5M25Mj3Gf/37Qi1vZILEiB3ebPU+L8DHnfTsjiA6SukGvjJ
-	 6WryZRD+nytjQV/4yz0OyMf6Z9hrY1yDzcL1Ue6Wn7+ilT++5Xm0B7dMxAN6zDIhbV
-	 5NU3ZB6mqJbVpdmqJGmktIV+XAxuUxYQJc8ahKt6ONXT1TCLh33iYtVtKvEoCDHis6
-	 mvXXf9NzJgX6bzs6cVBdI6rJvTfKB1Z82K92hkfP62LGo1FVOWTe/6Zq0c/VnHp+Rc
-	 svmme6F7e+NYjV105vhvIsNPHBrv4Wh9RWvMPMhceknsrIOaINrF/YC9rvIQ7los2E
-	 JoL15ec2wd0Mw==
+	b=gEBKS016GnPSuPfVY+woL2aKH8v5gtehnI4ZhKKfpNElp0876ZGrujrC5d/QFFydE
+	 ZBBichychjOquH5hTv6Lyn6qikeM+2gEM+sTUj0vY47pfWZ5fX3TAByLDzqrFdiVsF
+	 72CHaEnT8nXeQc+UZncy8IcWjqPppkC1PJN1uTcldgPb2LgHE7CPtTfRWtVrURVgHG
+	 cElwvbT+fNVFQ8qPZOu3vfy3tQvMio9u0h/se5Qk+4N3zu54dRj8rOKJWSyNB2PgRP
+	 QAXArL2YRDLaZR7hsJ0EaxqHpS4ggPcFyxtL6T1wN3hnCg9Ei8DaIJ6GesryeqR2gs
+	 IpZlza+EnvMzg==
 From: Konrad Dybcio <konradybcio@kernel.org>
-Date: Mon, 23 Nov 2026 19:34:32 +0100
-Subject: [PATCH 2/4] clk: qcom: gcc-glymur: Add missing USB4 resets
+Date: Mon, 23 Nov 2026 19:34:34 +0100
+Subject: [PATCH 4/4] clk: qcom: gcc-glymur: Convert USB4 clocks to use
+ phymux ops
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -54,7 +55,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-topic-usb4_clks-v1-2-531ab5635c03@oss.qualcomm.com>
+Message-Id: <20261123-topic-usb4_clks-v1-4-531ab5635c03@oss.qualcomm.com>
 References: <20261123-topic-usb4_clks-v1-0-531ab5635c03@oss.qualcomm.com>
 In-Reply-To: <20261123-topic-usb4_clks-v1-0-531ab5635c03@oss.qualcomm.com>
 To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
@@ -68,72 +69,263 @@ Cc: usb4-upstream@oss.qualcomm.com, linux-arm-msm@vger.kernel.org,
  linux-clk@vger.kernel.org, devicetree@vger.kernel.org, 
  Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795458875; l=3214;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795458875; l=7871;
  i=konrad.dybcio@oss.qualcomm.com; s=20230215; h=from:subject:message-id;
- bh=SVDinAvXHfIJXUvc/22sXe3+0oOFryRS8/eUHWTnFUg=;
- b=1g5Hq3jcPKh+eidbB3djS8x6pkDIz6+Mh0NBaj+F4FGOYwe3DgvqctuJpdivJQ5VvvNBK50nF
- VsZo3iqpwuWBDbpxpdlZxifyjqylrrjjD4TvmP2G+LXIYiRzYSAdYQW
+ bh=5lwTrE0u9s5yxegiq0nD0VYPKaJbMe2vvMBhIPbp4Uo=;
+ b=1spTgCJpCEjGAFoXdC0cI3cKBEs1RLBsIEqYLuSTfwo1x4qvromuDp7/O3lxRd/MfaOPK2E/R
+ sls3uSFNl6nAGqrbjGEnZ7zhSgZJpYpRqYtnwxo42pIRJrUzqFzRyG5
 X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
  pk=iclgkYvtl2w05SSXO5EjjSYlhFKsJ+5OSZBjOkQuEms=
 
 From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-A number of the USB4-related resets were left undescribed. Plumb them
-in.
+Almost all of the USB4 clocks fall into the "phymux" category, with a
+glitch-free mux switching between an XO source and the "fast clock"
+derived from one of the connected PHY's outputs. That allows for
+running the downstream devices (at reduced capacity) even without the
+PHY being oneline.
+
+Convert such USB4 clocks over.
 
 Fixes: efe504300a17 ("clk: qcom: gcc: Add support for Global Clock Controller")
 Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- drivers/clk/qcom/gcc-glymur.c | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+ drivers/clk/qcom/gcc-glymur.c | 144 +++++++++++-------------------------------
+ 1 file changed, 36 insertions(+), 108 deletions(-)
 
 diff --git a/drivers/clk/qcom/gcc-glymur.c b/drivers/clk/qcom/gcc-glymur.c
-index d8d33eff419e..031ed806a38e 100644
+index 96d1c07348bc..186c779e3084 100644
 --- a/drivers/clk/qcom/gcc-glymur.c
 +++ b/drivers/clk/qcom/gcc-glymur.c
-@@ -8432,6 +8432,42 @@ static const struct qcom_reset_map gcc_glymur_resets[] = {
- 	[GCC_USB4_0_DP0_PHY_PRIM_BCR] = { 0xdb010 },
- 	[GCC_USB4_1_BCR] = { 0x2d004 },
- 	[GCC_USB4_2_BCR] = { 0xe0004 },
-+	[GCC_USB4_0_MISC_USB4_SYS_BCR] = { .reg = 0x600c0, .bit = 0 },
-+	[GCC_USB4_0_MISC_RX_CLK_0_BCR] = { .reg = 0x600c0, .bit = 1 },
-+	[GCC_USB4_0_MISC_RX_CLK_1_BCR] = { .reg = 0x600c0, .bit = 2 },
-+	[GCC_USB4_0_MISC_USB_PIPE_BCR] = { .reg = 0x600c0, .bit = 3 },
-+	[GCC_USB4_0_MISC_PCIE_PIPE_BCR] = { .reg = 0x600c0, .bit = 4 },
-+	[GCC_USB4_0_MISC_TMU_BCR] = { .reg = 0x600c0, .bit = 5 },
-+	[GCC_USB4_0_MISC_SB_IF_BCR] = { .reg = 0x600c0, .bit = 6 },
-+	[GCC_USB4_0_MISC_HIA_MSTR_BCR] = { .reg = 0x600c0, .bit = 7 },
-+	[GCC_USB4_0_MISC_AHB_BCR] = { .reg = 0x600c0, .bit = 8 },
-+	[GCC_USB4_0_MISC_DP0_MAX_PCLK_BCR] = { .reg = 0x600c0, .bit = 9 },
-+	[GCC_USB4_0_MISC_DP1_MAX_PCLK_BCR] = { .reg = 0x600c0, .bit = 10 },
-+	[GCC_USB4_0_MISC_HRR_BCR] = { .reg = 0x600c0, .bit = 11 },
-+	[GCC_USB4_1_MISC_USB4_SYS_BCR] = { .reg = 0x600ac, .bit = 0 },
-+	[GCC_USB4_1_MISC_RX_CLK_0_BCR] = { .reg = 0x600ac, .bit = 1 },
-+	[GCC_USB4_1_MISC_RX_CLK_1_BCR] = { .reg = 0x600ac, .bit = 2 },
-+	[GCC_USB4_1_MISC_USB_PIPE_BCR] = { .reg = 0x600ac, .bit = 3 },
-+	[GCC_USB4_1_MISC_PCIE_PIPE_BCR] = { .reg = 0x600ac, .bit = 4 },
-+	[GCC_USB4_1_MISC_TMU_BCR] = { .reg = 0x600ac, .bit = 5 },
-+	[GCC_USB4_1_MISC_SB_IF_BCR] = { .reg = 0x600ac, .bit = 6 },
-+	[GCC_USB4_1_MISC_HIA_MSTR_BCR] = { .reg = 0x600ac, .bit = 7 },
-+	[GCC_USB4_1_MISC_AHB_BCR] = { .reg = 0x600ac, .bit = 8 },
-+	[GCC_USB4_1_MISC_DP0_MAX_PCLK_BCR] = { .reg = 0x600ac, .bit = 9 },
-+	[GCC_USB4_1_MISC_DP1_MAX_PCLK_BCR] = { .reg = 0x600ac, .bit = 10 },
-+	[GCC_USB4_1_MISC_HRR_BCR] = { .reg = 0x600ac, .bit = 11 },
-+	[GCC_USB4_2_MISC_USB4_SYS_BCR] = { .reg = 0x600c4, .bit = 0 },
-+	[GCC_USB4_2_MISC_RX_CLK_0_BCR] = { .reg = 0x600c4, .bit = 1 },
-+	[GCC_USB4_2_MISC_RX_CLK_1_BCR] = { .reg = 0x600c4, .bit = 2 },
-+	[GCC_USB4_2_MISC_USB_PIPE_BCR] = { .reg = 0x600c4, .bit = 3 },
-+	[GCC_USB4_2_MISC_PCIE_PIPE_BCR] = { .reg = 0x600c4, .bit = 4 },
-+	[GCC_USB4_2_MISC_TMU_BCR] = { .reg = 0x600c4, .bit = 5 },
-+	[GCC_USB4_2_MISC_SB_IF_BCR] = { .reg = 0x600c4, .bit = 6 },
-+	[GCC_USB4_2_MISC_HIA_MSTR_BCR] = { .reg = 0x600c4, .bit = 7 },
-+	[GCC_USB4_2_MISC_AHB_BCR] = { .reg = 0x600c4, .bit = 8 },
-+	[GCC_USB4_2_MISC_DP0_MAX_PCLK_BCR] = { .reg = 0x600c4, .bit = 9 },
-+	[GCC_USB4_2_MISC_DP1_MAX_PCLK_BCR] = { .reg = 0x600c4, .bit = 10 },
-+	[GCC_USB4_2_MISC_HRR_BCR] = { .reg = 0x600c4, .bit = 11 },
- 	[GCC_USB_0_PHY_BCR] = { 0xdb020 },
- 	[GCC_USB_1_PHY_BCR] = { 0x2c020 },
- 	[GCC_USB_2_PHY_BCR] = { 0xbe020 },
+@@ -104,12 +104,6 @@ enum {
+ 	P_PCIE_4_PIPE_CLK,
+ 	P_PCIE_5_PIPE_CLK,
+ 	P_PCIE_6_PIPE_CLK,
+-	P_QUSB4PHY_0_GCC_USB4_RX0_CLK,
+-	P_QUSB4PHY_0_GCC_USB4_RX1_CLK,
+-	P_QUSB4PHY_1_GCC_USB4_RX0_CLK,
+-	P_QUSB4PHY_1_GCC_USB4_RX1_CLK,
+-	P_QUSB4PHY_2_GCC_USB4_RX0_CLK,
+-	P_QUSB4PHY_2_GCC_USB4_RX1_CLK,
+ 	P_SLEEP_CLK,
+ 	P_UFS_PHY_RX_SYMBOL_0_CLK,
+ 	P_UFS_PHY_RX_SYMBOL_1_CLK,
+@@ -623,26 +617,6 @@ static const struct clk_parent_data gcc_parent_data_33[] = {
+ 	{ .index = DT_USB4_0_PHY_GCC_USB4_PCIE_PIPE_CLK },
+ };
+ 
+-static const struct parent_map gcc_parent_map_34[] = {
+-	{ P_QUSB4PHY_0_GCC_USB4_RX0_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_34[] = {
+-	{ .index = DT_QUSB4PHY_0_GCC_USB4_RX0_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+-static const struct parent_map gcc_parent_map_35[] = {
+-	{ P_QUSB4PHY_0_GCC_USB4_RX1_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_35[] = {
+-	{ .index = DT_QUSB4PHY_0_GCC_USB4_RX1_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+ static const struct parent_map gcc_parent_map_36[] = {
+ 	{ P_GCC_USB4_0_PHY_SYS_PIPEGMUX_CLK_SRC, 0 },
+ 	{ P_USB4_0_PHY_GCC_USB4_PCIE_PIPE_CLK, 2 },
+@@ -707,26 +681,6 @@ static const struct clk_parent_data gcc_parent_data_41[] = {
+ 	{ .hw = &gcc_gpll0_out_even.clkr.hw },
+ };
+ 
+-static const struct parent_map gcc_parent_map_42[] = {
+-	{ P_QUSB4PHY_1_GCC_USB4_RX0_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_42[] = {
+-	{ .index = DT_QUSB4PHY_1_GCC_USB4_RX0_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+-static const struct parent_map gcc_parent_map_43[] = {
+-	{ P_QUSB4PHY_1_GCC_USB4_RX1_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_43[] = {
+-	{ .index = DT_QUSB4PHY_1_GCC_USB4_RX1_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+ static const struct parent_map gcc_parent_map_44[] = {
+ 	{ P_GCC_USB4_1_PHY_SYS_PIPEGMUX_CLK_SRC, 0 },
+ 	{ P_USB4_1_PHY_GCC_USB4_PCIE_PIPE_CLK, 2 },
+@@ -777,26 +731,6 @@ static const struct clk_parent_data gcc_parent_data_48[] = {
+ 	{ .index = DT_USB4_2_PHY_GCC_USB4_PCIE_PIPE_CLK },
+ };
+ 
+-static const struct parent_map gcc_parent_map_49[] = {
+-	{ P_QUSB4PHY_2_GCC_USB4_RX0_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_49[] = {
+-	{ .index = DT_QUSB4PHY_2_GCC_USB4_RX0_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+-static const struct parent_map gcc_parent_map_50[] = {
+-	{ P_QUSB4PHY_2_GCC_USB4_RX1_CLK, 0 },
+-	{ P_BI_TCXO, 2 },
+-};
+-
+-static const struct clk_parent_data gcc_parent_data_50[] = {
+-	{ .index = DT_QUSB4PHY_2_GCC_USB4_RX1_CLK },
+-	{ .index = DT_BI_TCXO },
+-};
+-
+ static const struct parent_map gcc_parent_map_51[] = {
+ 	{ P_GCC_USB4_2_PHY_SYS_PIPEGMUX_CLK_SRC, 0 },
+ 	{ P_USB4_2_PHY_GCC_USB4_PCIE_PIPE_CLK, 2 },
+@@ -1099,32 +1033,30 @@ static struct clk_regmap_mux gcc_usb4_0_phy_pcie_pipe_mux_clk_src = {
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_0_phy_rx0_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_0_phy_rx0_clk_src = {
+ 	.reg = 0x2b0c0,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_34,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_0_phy_rx0_clk_src",
+-			.parent_data = gcc_parent_data_34,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_34),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_0_GCC_USB4_RX0_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_0_phy_rx1_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_0_phy_rx1_clk_src = {
+ 	.reg = 0x2b0d4,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_35,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_0_phy_rx1_clk_src",
+-			.parent_data = gcc_parent_data_35,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_35),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_0_GCC_USB4_RX1_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
+@@ -1204,32 +1136,30 @@ static struct clk_regmap_mux gcc_usb4_1_phy_pcie_pipe_mux_clk_src = {
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_1_phy_rx0_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_1_phy_rx0_clk_src = {
+ 	.reg = 0x2d0e4,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_42,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_1_phy_rx0_clk_src",
+-			.parent_data = gcc_parent_data_42,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_42),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_1_GCC_USB4_RX0_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_1_phy_rx1_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_1_phy_rx1_clk_src = {
+ 	.reg = 0x2d0f8,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_43,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_1_phy_rx1_clk_src",
+-			.parent_data = gcc_parent_data_43,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_43),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_1_GCC_USB4_RX1_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
+@@ -1309,32 +1239,30 @@ static struct clk_regmap_mux gcc_usb4_2_phy_pcie_pipe_mux_clk_src = {
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_2_phy_rx0_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_2_phy_rx0_clk_src = {
+ 	.reg = 0xe00c4,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_49,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_2_phy_rx0_clk_src",
+-			.parent_data = gcc_parent_data_49,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_49),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_2_GCC_USB4_RX0_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
+ 
+-static struct clk_regmap_mux gcc_usb4_2_phy_rx1_clk_src = {
++static struct clk_regmap_phy_mux gcc_usb4_2_phy_rx1_clk_src = {
+ 	.reg = 0xe00d8,
+-	.shift = 0,
+-	.width = 2,
+-	.parent_map = gcc_parent_map_50,
+ 	.clkr = {
+ 		.hw.init = &(const struct clk_init_data) {
+ 			.name = "gcc_usb4_2_phy_rx1_clk_src",
+-			.parent_data = gcc_parent_data_50,
+-			.num_parents = ARRAY_SIZE(gcc_parent_data_50),
+-			.ops = &clk_regmap_mux_closest_ops,
++			.parent_data = &(const struct clk_parent_data){
++				.index = DT_QUSB4PHY_2_GCC_USB4_RX1_CLK,
++			},
++			.num_parents = 1,
++			.ops = &clk_regmap_phy_mux_ops,
+ 		},
+ 	},
+ };
 
 -- 
 2.56.1
