@@ -1,99 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.125.188.123
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795466924;
-	b=r3K7lm+MUrvMEpCdUdvmgWYKa88dlc/1+4SXXuuULuXJ6gb7SBxsyHS4dpJbMv5UfsPb
-	 dnrH2ibLg8vNqHpdxOrhD0biT7Cks0Bhc2tKx5sMlMNNFh20jI32aEjm4TNiVmCH9p00X
-	 K4e4NIlGz6deqdJQst5PmUC5QodNSLJwqOomv6/+83G73nqs+6i9yF8/0jxfRi4TB9Rbo
-	 vsUC7SONAGEaNQ/ia7htnFlnrflsydDcCKSHPkXPxAT3/WgUp2mw8Bh+xhLCahoq6Rlzy
-	 x4J5LpvGKiqtAmfWoXy/uChtllXrw1G6xDTNbXCeo3AebFi+CGtVptAiEYzaoOolH8A==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795466924;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:
-	 X-Google-DKIM-Signature:X-Forwarded-Encrypted:X-Gm-Message-State:
-	 X-Gm-Gg:X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=x5ghMqZTOOiioeCpMjP1/MdXHwlwiqoLln7wLLITyxI=;
-	b=zullbgOnWYJCCwxLxyanihN0qAI6SHogPUkJCOkAdm5xEg9yTFhitkhowlC8d07nq50C
-	 SOJUhPy4BWvHakZuVnw7pd0j7cuT8ZLIFycT5RxP5yjssgS/HWhEVAgu9eyVEiQ97fCEl
-	 M/QFy03Et+biXo2UfLAH8JeC2Dw8bsgH6SJmC9niYukfiJFAvfRoS/6NrvTcT4SkQD+2V
-	 YaVODlHC1zI3oQWg6lgOpVsAsolZekjs2rvpixWPnCxZ1lU2cPHhkDMs0plNw0oAr64sa
-	 O3XFz4K4iTqWO9s4JkmPLfd7gQuh2O+/sSEG9lvCcx1tsvHitzB7dtiB6XQhZOEsFOQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=canonical.com;
-	spf=pass smtp.mailfrom=canonical.com;
-	dkim=pass header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=KtkCGgvP;
-	arc=none smtp.remote-ip=185.125.188.123
-Received: from smtp-relay-internal-1.canonical.com (smtp-relay-internal-1.canonical.com [185.125.188.123])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795467256;
+	b=uYOcTd8aXIRNcpe4hFkJP32PadbIShntRxqHTivrS7v2tK7ddCGsj8UEXPlGz6OSNl2B
+	 CRLdLSS2gc7fO4mtzzxMkNAkS6Qd2M0iXs60wp3YkuCma/pmQm4nQS0cUCSMvNKKnVkRA
+	 mn2EQe+h3NgozrM58vLyxAfpIKMaEFerbRAKn3TpILoKE7pOFcBRLR1+iD9kKgI9j/2XV
+	 zGbLHi4bxAGMEU6gtHcOQzy2OwnHBpFhhKm3BPduOjzBexRPwFt9TnHevn06e8Q4wTO0T
+	 XdfyQTmCPX54FCP58HbPQTL71tQarznm18UT4RXDk0Arv0FUV+/y4eDNWjkcejI/C3g==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795467256;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
+	b=W6hhNlTOUB9DIGSsnveE7IGGb/jUe2nwXv4VpObwrH1FQaiZcnQDUz2DZ83ocGxnIjn1
+	 F3x08m2g0QHdhiRTGG1JxH/TjVgCRpGKjDTV/ex80OI5VB5hL+mESiRB+9jHfOO5SaLtn
+	 uUdryg7ZvvgQVlWu5k0OQv2gNdXoxAcbstLf/r41d750kpsbg9yGRRRYR/Jh4Lh+BED8/
+	 beHDohp1rk0byuWtLkBVYe+Woi5M5ZKRI+kvoj0psW/+NgctijYGy4DOhLqlJZcGwi4ke
+	 jPt0h/smPGPSd8iFPD7qOkggOv4hHWGg7DiieP/ZJaP2OjFv+rk9zsWoZOCqdp3HujQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i+L0acfG;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14185606A321;
+	Mon, 23 Nov 2026 20:54:15 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=i+L0acfG
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795467255;
+	b=co+AZ4U4TgOkOAoJikeprMyXxOJqdTq5Tv/q8T8whM2XuMTGq2SLAd1oAfvCkjiU7v00
+	 kFUk2oepOR8gZ46WC26sAHevUxeynxV44OzThkB/YHuOE6GdwXNsvZlZSJw0anV1oocY1
+	 7w9B6PvqI+7fD5CX6htjB1Zc+piqyljHxRAhR04cxG0yuan8GyHN8adOlqUShdGxkdTdE
+	 MIZ2fPD0kMRyf8EZpFJHlWvFsOlCpAPOfpVXeUbki29U9iccPFCl8T5jGt1KkwW3/o4ij
+	 pH/ncpbsuvS/lgJeZ5anXq2KPK9C7ZwzAC2XUiyggvIdw2g1LlB07GR7wL5UggieF9g==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795467255;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
+	b=uKQknbmAFivG4I7KB162w9BRUdqLWhwaXLHIHHRNpt/uTmZFBC8msMFfLOWXDcFni5nO
+	 LGKiMaNBhYR/a6prpSIC7JZhV99RsIfo4xGycaIeNJVTWp79cTmbShYWNdZM9HSYMie0g
+	 7oKCScMmT3kpt56I1xojeCLuYuOcBfEw5aLi/1YG0YKNA3Qtp0liC8GtkKWYxo3m9ik4y
+	 jkludZMHIA+smu36ddo+3wuTwJiXQZY78RG4hyrZc0khXSc+bNaipOOI4a1DLT9tX3knq
+	 StaHAbQgoS8Ug9C/HFKtrPwY+MsXjGqh7kvIlf4WqIPEfDvc7kBjkd1sHL7AAPzDvBw==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8B702606A321
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:48:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8B702606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=canonical.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=canonical.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (4096-bit key, unprotected) header.d=canonical.com header.i=@canonical.com header.a=rsa-sha256 header.s=20251003 header.b=KtkCGgvP
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com [209.85.128.69])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A5DC73F32D
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:48:41 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
-	s=20251003; t=1795466921;
-	bh=x5ghMqZTOOiioeCpMjP1/MdXHwlwiqoLln7wLLITyxI=;
-	h=From:Date:Subject:MIME-Version:Content-Type:Message-Id:To:Cc;
-	b=KtkCGgvP8v6eC8KoD9sJf6Hrem89jSXeLuXqevgORWc345ztX39bLlbMACe62613Z
-	 xzxju1uhOdOP6wqW+fhdqIGqclj7ZEeghl8FG/JpARy2QTWzNSSqGOjDHuVY+aNOtV
-	 lf6Vgfb9dBEB2L2eN6QEHSdZQhwvHcChR2CCSGJsAwF6Vxl2n3a/ASmkD9nDxYN5Y1
-	 3+yLSO3TEPiU50t2peJMN93jPlv0AiT5QmFGKwzXzJfhZzveQpYkEo+Qo1J1uNOtp0
-	 dJRDsNlhDtCqE551aJL9wV8OajBiY+QRzFLwXgGZ5hS/7byGcGk71vA6zJXQYij1nh
-	 80tjCXCKCObhwBfWdwh0GE8/Updtih662p46kqpo63THr2qZ6QL1ah3c3rDgJc0CcT
-	 Vy1RzrRc53EdHB1SbfZz+LrpkcGKEqvkg9VAh60r/uKX3MsUqZtpJipO8ZiaZW7ARl
-	 c30xequW0SFf1yGAWn7UxHEhBShVCEbl0hiJT5sRYcYYzwpZXt6CJ9iO1pvEBOZNzn
-	 L+SHLr3aDbgciDICG2lCJMwYaEq5p/46XIYOw9BmBEWlnF3LUwDwzeU1kYvT7mRXmw
-	 3uKOEqaLr49cO9TrMi4aJ4vAfaD/RPf3a858S6DqNgn3XogEdXH4bK4oGQ7JMTHdO5
-	 gvammTPfFzLDfhMqFE177q3Y=
-Received: by mail-wm1-f69.google.com with SMTP id 5b1f17b1804b1-4a35db2d6b3so24900265e9.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:48:41 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795466921; x=1796071721;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=x5ghMqZTOOiioeCpMjP1/MdXHwlwiqoLln7wLLITyxI=;
-        b=bJg2BLG+p+uoo3zB2IxSz8EI+AdtDFiLdlBxju9KH9o1ydOowFlep3Gg+w15l1jdWf
-         32PhLg5WeFQPAUX6ZzIt0FrXySRmNoMw0p4a/R3m8E3ryV4zFMyq/vIx7K382Z0gC/3C
-         +MsyzPE8ftGE8FL7vXs9rG7rzdu3GS6c0xFKxmocQ3b504Hh4CAr69OrpKTdXi7iVYGb
-         hcEBPbGPQvARC1DWTCO+myNRwW3q3osGZFXPNuKz1QJW72Oe+fztmfZOifr1IoRsOTZC
-         Bx7RLVZwpv1FvweOQNH8xK/5LRunY5BCIYpCJ7s/QRhaKWVWvlvZ88pL2YPEkw/nvC/M
-         wmjg==
-X-Forwarded-Encrypted: i=1; AL+hErEi5uCCpXkVsqb81g4K0lTu1k36zJtWaOwwnAo6M+IJdryrUZrKlt7Oll+Kdtwr5qDD+1mFPb2s6Or1MNVb@vger.kernel.org
-X-Gm-Message-State: APuU4Z/M0KBgzbLtine8llH4uqo5UYqFYfiZ/CCr8huBP9HJS3CxK92E
-	rTleyAb6hg2fjdPeCpcl2JhNN/2bcYkQ3tEvguIwoiU+IU6O5AfflnpAOS8/vEXFpLR4qO5+oWQ
-	PFbxsNzFSZXNgt51piznQa9m3JiDdwF8aFv0DtaJY9ZbDEk6MSkCXyqdoOp4Lh2lvc/Ro/3ENLl
-	uzgzww2Yg=
-X-Gm-Gg: AZFdTZcPLVN5L8q+dJgg+Md3dyDrpDuHoaPXRxUNVvzceew6uN83MUXGmbnWP3E2JMO
-	P82l8ium5Q0uIFd0QsjbMZUUylDtTFCgw7qQxgY1SRiRaRpmfsC7KejcqXuRKMH524aTyFX6pj8
-	iZ0jsS09O/UpbDf9O5dH5+uG7B/GBk5Hxy4Uy1tjMp+AyokApOCCGcYWHouv+6JH9+BwJ5X45yj
-	LpXHMug8gM1kZpjpzArCJnsOBbXuQYGXX8DcxE6w7q9IWekvWWQSgP4HQ78f3K2Dtt5NcYK/bcM
-	B8MoLa4KEXNRbU4TJ+QfJxOHJacR8d9UGDiJjDL7qP1yNpOqya7RyfPCNt/tZzxbf3cXr1FWCbY
-	e3y5Wuvns3gTnXvru5WWB0fGvKBWP6/UakrQwvyDLRY/o4lf1sSsVrz7dXyBG4IGLJsrW5v1CiJ
-	w/r7z/cTIzYPKcVeHL0jA55KmujJI=
-X-Received: by 2002:a05:600c:6218:b0:4a0:1b14:e283 with SMTP id 5b1f17b1804b1-4bb887c341dmr281648925e9.1.1795466921274;
-        Mon, 23 Nov 2026 12:48:41 -0800 (PST)
-X-Received: by 2002:a05:600c:6218:b0:4a0:1b14:e283 with SMTP id 5b1f17b1804b1-4bb887c341dmr281648705e9.1.1795466921012;
-        Mon, 23 Nov 2026 12:48:41 -0800 (PST)
-Received: from [127.0.0.1] (ppp-93-104-174-36.dynamic.mnet-online.de. [93.104.174.36])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb884ab091sm540134265e9.11.2026.11.23.12.48.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 12:48:40 -0800 (PST)
-From: Tobias Heider <tobias.heider@canonical.com>
-Date: Mon, 23 Nov 2026 21:48:29 +0100
-Subject: [PATCH] clk: qcom: glymur-dispcc: Stop mdss_mdp and mdss_ahb
- clk_src from getting parked
+	by smtp.kernel.org (Postfix) with ESMTPS id E99191F000CF;
+	Mon, 23 Nov 2026 20:54:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795467255;
+	bh=gSJCBCLnxHeJ75ccVtGN789ctKkAr6SO8Z8c5EVxU9w=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=i+L0acfGGMyfiyesw9NGEn0zQ7m9p3qSJ3Xn3W0ZBGVbwKFRmjf3AlHLznYCWDa0K
+	 u4ZRFPYX1kZ7Pxz4JL5Ize6Ss9hAJj2K5rCimn7lmELI9lY7h2QLN+n3DgZnAW3yp/
+	 tRkDCjb7vRcdli0bd+Fc6OqV6vcmQLj00v9rfHaD4n5Y44C+6CXw3pqcWVjBk/3NM7
+	 DDr/Ns+aK2fqZvEGZaJDHdnnAiDMBbo7AH+tmbgU78R5lvskUj0mE8/LI3oIlg/0G9
+	 VihIcqVmsoXbUuPtQpa7/K9ndB5cDUXX91ObPtqDEy0HkhjugCPvCgsKqiqGzeVq5+
+	 NIKcT1yv3nRiw==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 7E2304C72D;
+	Mon, 23 Nov 2026 20:54:03 +0000 (UTC)
+From: Stoicoci Mihaita via B4 Relay <devnull+stoicoci.mihaita.gmail.com@kernel.org>
+Date: Mon, 23 Nov 2026 22:54:03 +0200
+Subject: [PATCH] arm64: dts: qcom: sm8250: Make the ADSP fastrpc remote
+ heap no-map
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,89 +84,82 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261123-sm8250-fastrpc-remote-heap-no-map-v1-1-68ce6470e82c@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAOqnBGsC/yXNywrCMBCF4Vcps3YgifYSX0VcpHFqI+TCTBSh9
+ N2Nujp8m/9sIMSBBM7dBkyvICGnBn3owK8u3QnDrRmMMoPW5ogSJ9MrXJxULh6ZYq6EK7mCKWN
+ so/tB2Xk62XG00DqFaQnv38fl+rc85wf5+g3Dvn8A3JS6OoUAAAA=
+X-Change-ID: 20261123-sm8250-fastrpc-remote-heap-no-map-15609b849779
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795467242; l=2085;
+ i=stoicoci.mihaita@gmail.com; s=20261123; h=from:subject:message-id;
+ bh=VgzMi36Z50siaVxASdbNIrQSmm9qWWzg4SVyaAuqVHI=;
+ b=6ctYusPoF2jBunbjDfr+/dJviQ2SO/k2DaeqdPTPcV16l9vtYBClJWpOIOyuWQxSI4QPOnb5Y
+ y9SZG+LbUOSBYCMhECL8HBurSLymKNTOpo0U03H6E8alrM7ZtbEEVR5
+X-Developer-Key: i=stoicoci.mihaita@gmail.com; a=ed25519;
+ pk=IZ3PTCsOlRAC9RPQEB2Kk12DHzDz+pP3FWH8V6OqGto=
+X-Endpoint-Received: by B4 Relay for stoicoci.mihaita@gmail.com/20261123
+ with auth_id=1623
+X-Original-From: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
+Reply-To: stoicoci.mihaita@gmail.com
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-glymur-dispcc-park-v1-1-d636ef8e04f6@canonical.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQyNj3fScytzSIt2UzOKC5GTdgsSibF1T4yRzMxOj5BQzIzMloMaCotS
- 0zAqwodGxtbUAg7jpo2QAAAA=
-X-Change-ID: 20261123-glymur-dispcc-park-53b7642cd626
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>
-Cc: Hans de Goede <johannes.goede@oss.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- Tobias Heider <tobias.heider@canonical.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2123;
- i=tobias.heider@canonical.com; h=from:subject:message-id;
- bh=xnIq7SFYHmKw/VHi208Ii5oLDBvNGsgiV58IDhnk/Tk=;
- b=owEBbQKS/ZANAwAKARNJjwMsz+naAcsmYgBrBKan+lkxyhGb/2S8YU7Ft793UHYnPyw/i3qFj
- xgfkmqzl5mJAjMEAAEKAB0WIQSbaT10QIAuim/4A94TSY8DLM/p2gUCawSmpwAKCRATSY8DLM/p
- 2l5uEADJdpop5EtkZCehx8BbnZ0uQirbAwD4uaYeKv9e3Nno8sgcFaNx4XYoS/ZYyGquVVoN+OP
- WzKiz+nng2s53tafhNyVPXz9KT6GezI8q+Sxlb2fRYzEUJxksOR9jy8xqAHKl3w55FUTEbwDti2
- zWVRQg4m9nojYMZP7yj1+s6osbVgTRPkRjRwAZhmGUuO1LCR4pjuoal+eeSv/DWWMH6toNEYqmb
- ai2f0B2rmV4S/XLDrDZoKNSkTjZwhFmtlIpQC/Z166A/k6wQ1UjxorOCvS7/UYMqYBxb+Fez14F
- mx3HvJBScXZqs+qKu5nWLtY4mEFQY5ld5etyQGEU9JIZ+LlVbF/dvaVyfZ7XkyS5KTc1c9n8ABR
- sibOwukphKEQ0rpSvyTbRv1D5me3FMrh7jVGXfn6yT6p/1/HusZVXPuGclolrvaxRrOP/sZ8HPy
- BLTdokiOmjFdaidpPKQfL3EV6USTnChbAHCjfpk0abqpZLqfHaJ3gGKaO9G7+0KVokIw94erwHG
- e9e/p58PX3UmhDEhqJf50NCuuPY5wluJoc5wyaFEEMGxLPS8VsU5Rl/fmlDvsdC49yCWs9aOsLp
- Q//hh/NUOqEg4tyW+8dgezKl/Zmx7S4AOd6pOhrgDW7KQKue0YH/ZOg4m3vmvH8aVbT63hc8Yoe
- oaBX8FavqNaMiuw==
-X-Developer-Key: i=tobias.heider@canonical.com; a=openpgp;
- fpr=9B693D7440802E8A6FF803DE13498F032CCFE9DA
 
-Parking disp_cc_mdss_mdp_clk_src and disp_cc_mdss_ahb_clk_src at 19.2MHz
-kills the EFI GOP framebuffer. The EFI GOP framebuffer should keep working
-until the msm display driver loads, to help with boot debugging and to
-ensure display output when the msm module is not in the initramfs.
+From: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
 
-Switch both disp_cc_mdss_mdp_clk_src and disp_cc_mdss_ahb_clk_src over
-to clk_rcg2_shared_no_init_park_ops to keep the EFI framebuffer working
-after binding the glymur-dispcc driver, following the
-precedent of commit bc27dbefae6e ("clk: qcom: x1e80100-dispcc: Stop
-disp_cc_mdss_mdp_clk_src from getting parked") and
-commit 5285b0467578 ("clk: qcom: dispcc-sc8280xp: Don't park mdp_clk_src
-at registration time")'
+The ADSP fastrpc node hands the whole adsp-rpc-remote-heap region to the
+DSP when it probes: fastrpc_rpmsg_probe() calls qcom_scm_assign_mem()
+with the qcom,vmids list (LPASS and ADSP_HEAP), which does not include
+HLOS.
 
-Unlike x1e80100, where mdss_ahb is never parked, glymur's ahb also
-gets parked. Unparking disp_cc_mdss_mdp_clk_src alone was tested
-on the HP EliteBook X G2q and is not sufficient: the EFI GOP still
-dies unless disp_cc_mdss_ahb_clk_src is left un-parked as well.
+The region is declared reusable, so it is a CMA area and its pages are
+still lent to movable allocations (page cache, anonymous memory). Under
+memory pressure the kernel then touches pages that the hypervisor no
+longer maps for HLOS. On a Lenovo Tab P12 Pro (TB-Q706F, SM8250) this
+reset the device within a few minutes of heavy use (browser video,
+Flatpak installs). Nothing reached the kernel log or pstore, the PMIC
+reported a PS_HOLD reset, and the TZ diagnostic area showed a fatal SGI
+on a different CPU each time just before the reset.
 
-Signed-off-by: Tobias Heider <tobias.heider@canonical.com>
+Mark the region no-map so it is never handed to the page allocator. With
+this change the same workload ran with the CMA area fully used and no
+reset.
+
+Fixes: 531ce288b6dd ("arm64: dts: qcom: sm8250: Add memory-region for audio PD")
+Signed-off-by: Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
 ---
- drivers/clk/qcom/dispcc-glymur.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+The same reusable remote heap without an HLOS VMID was added for other
+SoCs as well (glymur, agatti, talos, kodiak, sm8750). I can only test
+SM8250, so this patch changes sm8250.dtsi only.
+---
+ arch/arm64/boot/dts/qcom/sm8250.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/clk/qcom/dispcc-glymur.c b/drivers/clk/qcom/dispcc-glymur.c
-index 32cc5226b4de7..6eb4ca8b3e771 100644
---- a/drivers/clk/qcom/dispcc-glymur.c
-+++ b/drivers/clk/qcom/dispcc-glymur.c
-@@ -312,7 +312,7 @@ static struct clk_rcg2 disp_cc_mdss_ahb_clk_src = {
- 		.parent_data = disp_cc_parent_data_6,
- 		.num_parents = ARRAY_SIZE(disp_cc_parent_data_6),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_shared_ops,
-+		.ops = &clk_rcg2_shared_no_init_park_ops,
- 	},
- };
- 
-@@ -623,7 +623,7 @@ static struct clk_rcg2 disp_cc_mdss_mdp_clk_src = {
- 		.parent_data = disp_cc_parent_data_7,
- 		.num_parents = ARRAY_SIZE(disp_cc_parent_data_7),
- 		.flags = CLK_SET_RATE_PARENT,
--		.ops = &clk_rcg2_shared_ops,
-+		.ops = &clk_rcg2_shared_no_init_park_ops,
- 	},
- };
- 
+diff --git a/arch/arm64/boot/dts/qcom/sm8250.dtsi b/arch/arm64/boot/dts/qcom/sm8250.dtsi
+index f975c2183..f415da478 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm8250.dtsi
+@@ -867,7 +867,7 @@ cdsp_secure_heap: memory@8bf00000 {
+ 		adsp_rpc_remote_heap_mem: adsp-rpc-remote-heap {
+ 			compatible = "shared-dma-pool";
+ 			alloc-ranges = <0x0 0x80000000 0x0 0x80000000>;
+-			reusable;
++			no-map;
+ 			alignment = <0x0 0x400000>;
+ 			size = <0x0 0x800000>;
+ 		};
 
 ---
-base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
-change-id: 20261123-glymur-dispcc-park-53b7642cd626
+base-commit: b6a9fa34ce4187cb69d3c588a4bbffc31ce5db8f
+change-id: 20261123-sm8250-fastrpc-remote-heap-no-map-15609b849779
 
 Best regards,
--- 
-Tobias Heider <tobias.heider@canonical.com>
+--  
+Stoicoci Mihaita <stoicoci.mihaita@gmail.com>
+
 
