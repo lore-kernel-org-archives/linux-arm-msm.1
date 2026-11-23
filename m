@@ -1,59 +1,36 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795420585;
-	b=2Asf4HP1scboAbCEp9D3ZMj+NtXYwIsJ+jl4nX4MfhZ1Gm5mFROoOebqILgqQtMfdGe7
-	 97SJ1jNWwjG5MT1+r1I8HwJ1WrMyhFX59gteSZ4fzztnU8jAAQYUU+b3LQeuLEzPo8DpH
-	 gzXlN9PORKHB0LK5uwl+sr7DVYb6BEEjnfOi3/qjilTQJnXCQq3gi+vP/iO7K6ydueJ4R
-	 G5wr/0mFcgpC6HVok80DtNLP/QDSdPeesDC5ypNPo3X8sZ++BTHWXDswbF4oZbFgFKTDS
-	 9pzZK+/JkelW8vI0ZjWPl9pHRrVdA9YzAJ1u+3diYxXwIoc0+mhW9JZ/XnKasYw666w==
+	t=1795420588;
+	b=2lYyB4fY5N1YfpZiw4+u+VBHxrN2J8PNTbZO2g+b8N0Axwd0+j9C66r+tSzNxey8E+Zm
+	 RPFLymGrxh69aLJLbl+E4IZDSdEwwt3nWAC2ycncZk8Z2mwrR/CzQh4C0wo3cMilzdLub
+	 ybpumkzA6QM7+0VRsrzh9zXlhX7lJyGYxmuUpJWxy2e8h+0XDfrsWWCrEiaqmUPrZYlqH
+	 Gg+16gJwE9POt4uJ7PWxWmx18RPG3WBxO+1A/Dn4v4+uNbpcA3b1erxA1jTyzIAOeW+n4
+	 Wl1L8i6dDLNSoJ6+OcPCUe/Ef/L8AU5v/7aTK98AGMukDvNugILxAz7Q4e+tlVBpdDA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795420585;
-	h=Received:DKIM-Signature:From:To:Subject:Date:Message-ID:X-Mailer:
-	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=NiYRB965QyMjahqN2h1lQRElGOPuwhMdnpU8Xt7TG2U=;
-	b=4mblYNPhZLZx4E8JWhBHb/KvLo18cKKyf0xLIw0FiVhOnGHoQF0LmzOEXlboXmIw/X9B
-	 yJbVuBEfC5wwTUPc4CsfaszjQahdjGj6pNwYFfYjzAvyp6V//GwSqezMjYS2PZv9jkkCS
-	 CxcaqGJGxyUXC+lrQTwChqnix1xGxfX/PxrEtd1X5H8c4xVe5HWN+DaNtSU4MMgPrws4D
-	 JgSt6/n0DKJLDgEYy6qZ7th7oMAnaeZIk9XwmnfVS6bsshhCKN+82yGv04zOLr2ycso3Q
-	 7fAXfd5XEH/zUgqHNaUnJEQgevE6RuHsMBQOY0ztpWx4ZEtytTwEmgBXHh5C7apVqUQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795420588;
+	h=Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=FAqlgXzrPgvz39IQUH9LPoXp2YywYov87eDHsyT3IrA=;
+	b=yU49WcCQlpUJk9lo3uGQT1EmJUvJ9yWCQUolPpoYb72FGua53uUFCmiy5dIgJcA8R6Aa
+	 PR95nAekDciNooAEkdmwpI6PnjsJvqdakWTnJe+ya04LdNJMnVodM0f7BXyBJWH1k48v8
+	 CdJv6Inkt4qPlJbmOVzFYG30frOTcFDFfGH72xVa+tpoIWV0KUtMkqenaAHQX0eYNpdui
+	 ywbAPIqXL0HNJdL8t7flK/zkGYBqgdZiiBase1KjENurC7qtuk7ZlcNufnquc7FqodkxR
+	 EgD6PH3fqCr9FKpKcbSDqlZCQsiSjkSCR05EDJE6qvhDzfCrT1KeZsdXnwqGY8VlnEQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nAqN5FFP;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01067606A31F;
-	Mon, 23 Nov 2026 07:56:24 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nAqN5FFP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2D1161F000C6;
-	Mon, 23 Nov 2026 07:56:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795420584;
-	bh=NiYRB965QyMjahqN2h1lQRElGOPuwhMdnpU8Xt7TG2U=;
-	h=From:To:Subject:Date:In-Reply-To:References;
-	b=nAqN5FFPZUeSNyPFGPJlQiZB6IhzuoA2HRqJyeWOVSn2w71SsiHJ2e/6nHwVYwsOp
-	 jUj2u6tm46+nERCwyC44mjwxCqPj2R1Y3iNPzq6wOCHej2Pe9SSmbCup8pxEtBqsxU
-	 XCfXLkKL3LvnbNq4LkwlOxxvr5KpoC3cy29jHCEydICYm/NyvCwaaKmquT62Yp9Wxc
-	 h0IUax4zkh5q9hzpachHQTArCQvh/DsP15NuY3T2y1HujgLVu1Qg7s64cbDnm3EIKg
-	 OjaaMfCGoWQzje15At0s/ZtN7zfzri1/hCHc8dPvydKWMEJRE1qgEGuHiVfVyyUnn7
-	 DHFQXrZPETUgA==
-From: Lee Jones <lee@kernel.org>
-To: lee@kernel.org,
-	Srinivas Kandagatla <srini@kernel.org>,
-	Vinod Koul <vkoul@kernel.org>,
-	Bard Liao <yung-chuan.liao@linux.intel.com>,
-	Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-	linux-arm-msm@vger.kernel.org,
-	linux-sound@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v3 08/10] soundwire: qcom: Check clk_prepare_enable() return value
-Date: Mon, 23 Nov 2026 07:54:29 +0000
-Message-ID: <20261123075522.405347-9-lee@kernel.org>
-X-Mailer: git-send-email 2.56.1.750.gf70dc682cf-goog
-In-Reply-To: <20261123075522.405347-1-lee@kernel.org>
-References: <20261123075522.405347-1-lee@kernel.org>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 38588606A31E;
+	Mon, 23 Nov 2026 07:56:28 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C131C1F000D1;
+	Mon, 23 Nov 2026 07:56:26 +0000 (UTC)
+From: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Date: Mon, 23 Nov 2026 08:56:17 +0100
+Subject: [PATCH v2 1/2] interconnect: qcom: Consistently enable MSM8916,
+ MSM8939 and SDX65
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -63,83 +40,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261123-b4-qcom-kconfig-unify-interconnect-v2-1-99b282e87d40@oss.qualcomm.com>
+References: <20261123-b4-qcom-kconfig-unify-interconnect-v2-0-99b282e87d40@oss.qualcomm.com>
+In-Reply-To: <20261123-b4-qcom-kconfig-unify-interconnect-v2-0-99b282e87d40@oss.qualcomm.com>
+To: Georgi Djakov <djakov@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1437;
+ i=krzysztof.kozlowski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=Rx0AZ4Fj+0lgGR2cyWrTgoIUSS3bMe2fz11jfRihIpk=;
+ b=owEBbQKS/ZANAwAKAcE3ZuaGi4PXAcsmYgBrA/GifzFcs01K/UvhQdPcDFn46WISZ/TAQkdxx
+ pEJf+Ru0MeJAjMEAAEKAB0WIQTd0mIoPREbIztuuKjBN2bmhouD1wUCawPxogAKCRDBN2bmhouD
+ 1/2sD/4k4aQvVwUUN1G/+iyGlpqfTYvXj0iNPzdguGTgK59TdxlaUUifLhJ4CcZyEuA0m0zCD7X
+ FCDcgUvGXbdmjKFvXKZpqK1uc9k8MZBO88IJuxecJP5ejp02vdkcAhT/MzGs1HKsILrdrbPuIUa
+ V0V8xOG5PIGpzJZaZnTeOZ1owovdeMTY+wmu0ZAfm3wlrQJZ2lljzSG/2nr6stZxkY0qL3zioji
+ PXsrWIg3SmwXtSsh8h1X7Zkwh7Q1kwggv4L7v262Hqj66fOcakY/m4cci/GA2dYy1CvSHeMVoa9
+ j2F7lEBVqBYG7X52yVMwgOHa0tp4Rfq5Sa0XKXQaIHdTGwKBSb4kEAcn3qNdwiIzDQNOb0U0fCt
+ Hh3u/OfitSO6/FtQiapzGBq2H/quiilF5fK/ZM36Vn/6Q4mlsIK0eU0qapCAzRPu6g01oqjpbO0
+ OQHpBTxXPaW1pfGCvn2oMSlVV4EoAwFU82KQDaPeb43W/W0ed02CO54RKoVMCgxPwZqrQvtkvaG
+ BcUy/iVMqOI4GYqK6jsL1qC6YjUGFiQsANBJsioFtgw6FiW1gvb70u6pYwwm8d0PRKL4mT83ZaC
+ 3gegBWToykeB4uV4HNpQcz3kmol+fFSfoKnrUk/hYLi6kT+52tk5JowhV17aCsAorQQgZGgqCVR
+ DKJdI+NpqXvuNVQ==
+X-Developer-Key: i=krzysztof.kozlowski@oss.qualcomm.com; a=openpgp;
+ fpr=9BD07E0E0C51F8D59677B7541B93437D3B41629B
 
-qcom_swrm_probe(), qcom_swrm_irq_handler(), and swrm_runtime_resume()
-ignore the return value of clk_prepare_enable(ctrl->hclk) and proceed
-to access controller registers even when enabling the interface clock
-fails.  Also jump to err_clk when requesting the wake IRQ fails in
-qcom_swrm_probe() so ctrl->hclk is disabled on error.
+Critical drivers for MSM8916, MSM8939 and SDX65, like clock and pin
+controllers, are already enabled by default (MSM8916 for both ARM and
+ARM64), so should be the interconnect drivers as well.
 
-Check the return value of clk_prepare_enable() in all three callers and
-abort register access on failure.
-
-Closes: https://sashiko.dev/#/bug/linux-f65cddc9-08ff-4531-9acf-76981d74d914
-Signed-off-by: Lee Jones <lee@kernel.org>
+Signed-off-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 ---
+ drivers/interconnect/qcom/Kconfig | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-v2 => v3:
- - No changes
+diff --git a/drivers/interconnect/qcom/Kconfig b/drivers/interconnect/qcom/Kconfig
+index 7f3a977e8f10..110789a2d232 100644
+--- a/drivers/interconnect/qcom/Kconfig
++++ b/drivers/interconnect/qcom/Kconfig
+@@ -92,7 +92,7 @@ config INTERCONNECT_QCOM_MSM8916
+ 	depends on INTERCONNECT_QCOM
+ 	depends on QCOM_SMD_RPM
+ 	select INTERCONNECT_QCOM_SMD_RPM
+-	default ARCH_QCOM if ARM64
++	default ARCH_QCOM
+ 	help
+ 	  This is a driver for the Qualcomm Network-on-Chip on msm8916-based
+ 	  platforms.
+@@ -111,6 +111,7 @@ config INTERCONNECT_QCOM_MSM8939
+ 	depends on INTERCONNECT_QCOM
+ 	depends on QCOM_SMD_RPM
+ 	select INTERCONNECT_QCOM_SMD_RPM
++	default ARCH_QCOM if ARM64
+ 	help
+ 	  This is a driver for the Qualcomm Network-on-Chip on msm8939-based
+ 	  platforms.
+@@ -367,6 +368,7 @@ config INTERCONNECT_QCOM_SDX65
+ 	depends on ARM || COMPILE_TEST
+ 	select INTERCONNECT_QCOM_RPMH
+ 	select INTERCONNECT_QCOM_BCM_VOTER
++	default ARCH_QCOM
+ 	help
+ 	  This is a driver for the Qualcomm Network-on-Chip on sdx65-based
+ 	  platforms.
 
-v1 => v2:
- - Drop Fixes and Stable tags
-
- drivers/soundwire/qcom.c | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
-
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index 191f13a0bdc2..307be1ec3d68 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -778,7 +778,9 @@ static irqreturn_t qcom_swrm_irq_handler(int irq, void *dev_id)
- 	u32 i;
- 	int devnum;
- 	int ret = IRQ_HANDLED;
--	clk_prepare_enable(ctrl->hclk);
-+
-+	if (clk_prepare_enable(ctrl->hclk))
-+		return IRQ_NONE;
- 
- 	ctrl->reg_read(ctrl, ctrl->reg_layout[SWRM_REG_INTERRUPT_STATUS],
- 		       &intr_sts);
-@@ -1677,7 +1679,9 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 		goto err_init;
- 	}
- 
--	clk_prepare_enable(ctrl->hclk);
-+	ret = clk_prepare_enable(ctrl->hclk);
-+	if (ret)
-+		goto err_init;
- 
- 	ctrl->dev = dev;
- 	dev_set_drvdata(&pdev->dev, ctrl);
-@@ -1733,7 +1737,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
- 						"swr_wake_irq", ctrl);
- 		if (ret) {
- 			dev_err(dev, "Failed to request soundwire wake irq\n");
--			goto err_init;
-+			goto err_clk;
- 		}
- 	}
- 
-@@ -1802,13 +1806,15 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 	struct qcom_swrm_ctrl *ctrl = dev_get_drvdata(dev);
- 	int ret;
- 
-+	ret = clk_prepare_enable(ctrl->hclk);
-+	if (ret)
-+		return ret;
-+
- 	if (ctrl->wake_irq > 0) {
- 		if (!irqd_irq_disabled(irq_get_irq_data(ctrl->wake_irq)))
- 			disable_irq_nosync(ctrl->wake_irq);
- 	}
- 
--	clk_prepare_enable(ctrl->hclk);
--
- 	if (ctrl->clock_stop_not_supported) {
- 		reinit_completion(&ctrl->enumeration);
- 		ctrl->reg_write(ctrl, SWRM_COMP_SW_RESET, 0x01);
 -- 
-2.56.1.750.gf70dc682cf-goog
+2.53.0
 
