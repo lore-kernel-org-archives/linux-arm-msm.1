@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.180
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.175
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795437399;
-	b=GYSNAdIHnqNb4ZPU+hhoa/QYtJF1Nnszq7smjS8GdjoXDDl+ZvAxROG8NlwdgyXUQKiX
-	 tKJcFk3xQ0eZpFLj4GOQwfygJCW6dlnOg4yCLTWZZwXasPPKxOrlkaA1nsp07NUdjfO3C
-	 ezLU8su3lrlw2CuAD+POyHHU6b7wWuOevTbtQz4UvzYAR5nTSsnkjRW7qTU2PzsSK7tzv
-	 rLWDSjQHwJnq7zFrN5bz206ptkmOeEwrt6VVMPXftDm8tbG5/70cr6bEZVQaYPDf9tltM
-	 E+G5OJOvJIZzJJnHEXRWghFKuzgnc7/p+tnlgNEIJwAiBW9mqWKDJNf/SIGp1cnmPJQ==
+	t=1795437407;
+	b=vWieHvtbOooM7YBPiDAqVLA4jN0kE2klQTDEjfFFuiNgjXcWPwivreuHVf+4lzHE5C9t
+	 UoRutjCArz9IPgCM/JnCOXxf23qEvDIy3tJ2zv5B13qyUKgyASoq1nNgNOUWpdSI6MlqB
+	 jtH81kCzYMWdL1qeR+9QWgQ7woiRLJRPLdcRTcHx6Wosfq/1CQJ1ypt9BI063gWT0Zy3r
+	 xNgP715+6oLTtCLje8MOkpHJ9mUIcmEg61mepEtT3XBhJfjOFHHedpDj0g+x0drrU1ott
+	 fuOOJ/GmAWfLWkWSf5EBNo43fiUzpEs+jWyZ7NnLtjqlM9gKKm7nbC9LreHBJk5DyOw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795437399;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795437407;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=WWOU0iP3SeVqsec/eIN2jpvmWs801fi3504yYJIcgxc=;
-	b=2d0CopIazZB/E65h1wy6Bx9d8z0qf6GIaMc8qpoNgsseACmtP0oaQoY1UKowHCQ05HV2
-	 XIQeumnB5JPCzC1K++iORWP9/a3D+OwuKNoO2g48JsZWUAo6mOfaA7J1NveZI7TpTZ4IH
-	 Sgghc2aJ2v3iKzF3hyq1FJkM8Yxx0g4rxbB8P2Y+StM7Tgyxy5HyGykNURRdu6GSsdTKa
-	 cEibeX3dPGw4AYS5bGawX84o6GRkcH3Z2A9kkig69v9YMsAvg4RpIRQ0ELoNfVMqPK4RE
-	 Tbb7Duhitoa0RypWtbc+sQGvqiG2ncDJeppVmP9uneXIBmV0b0lHQspjEqcNnWIdXkA==
+	bh=ZZRwBHNibaWlFnpiuuEMtUB0YA/t47H+l2X5jKIQ1Dw=;
+	b=zhLz9w/CK/ucjLvJU97MgmZHAtxXRwosA0auwotutsx6CSc+YrEbY8rmt4g9pz2VPSrc
+	 es9qWNqryulmtQRdYdGaDR/RS88JbDt4SFrdDFmLtxqec4OmisjKcIRFKBVyOoF4jJvqi
+	 +iXxWBs5LohV8ZCLvXy5J3DiXaB7+p2G9WiQ8uTfpUN1cIkKVJ21FElXpGgjXPxMcRAqP
+	 IFN1HYqCES1GL65G78FvdxzXloem/0PzFI2TmJB4HBkTKLnmXMTw+gZ4LDECOWKGIT5Of
+	 O1aJK7JO92fy2Td+olvuSMY5+y7Y+R9my/EI5aq8NbMf2SDHuTqcdkU3Np+sgM2OohA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=oYNRImbY;
-	arc=none smtp.remote-ip=74.125.82.180
-Received: from mail-dy1-f180.google.com (mail-dy1-f180.google.com [74.125.82.180])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=atlI4xhW;
+	arc=none smtp.remote-ip=74.125.82.175
+Received: from mail-dy1-f175.google.com (mail-dy1-f175.google.com [74.125.82.175])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 381B8606A69B
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:36:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 381B8606A69B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B40FD60A2611
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:36:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B40FD60A2611
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=oYNRImbY
-Received: by mail-dy1-f180.google.com with SMTP id 5a478bee46e88-3282db206d3so9687991eec.0
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 04:36:39 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=atlI4xhW
+Received: by mail-dy1-f175.google.com with SMTP id 5a478bee46e88-38190551625so6720306eec.1
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 04:36:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795437398; x=1796042198; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795437406; x=1796042206; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WWOU0iP3SeVqsec/eIN2jpvmWs801fi3504yYJIcgxc=;
-        b=oYNRImbY2PEyG/MEIRUM+wGvHKT6IKmNRD79HvBJeSn3KtzKkgAZkIxfMa5PfscSTR
-         4hOkxRJqfCWnkIr1FGL4CQXvkfDcOjG79fPVfgbjkEfXO9JZILRtpdMIB3v1g72QQWYL
-         6ds2MiqdVYRb76D8Mn64jSbSIAdJnQ3MVQo+sSP/4FDnKRCJzvfME0WeFID9frzlkWDa
-         LZt5hI/Qd7MkburAy8cBGVXdGewDxYcMTYfS4+bybq5X5MIkI4/dE//ohZUYlU6cl3oc
-         6/T4j8h8SyM2vA1Tgxl8AbtXUsdRe8nBS//My2K35rCgExd0LtvazXnzC//Hr6mFgYEA
-         BjTg==
+        bh=ZZRwBHNibaWlFnpiuuEMtUB0YA/t47H+l2X5jKIQ1Dw=;
+        b=atlI4xhWUQnHPQ9nkYx3mQO8Swph4K/bleOIqj2B5EWCD+vbxo7zUlwusUjhC8SBMI
+         74SAW8d+AsGsQPS49KlhZ3wmObfzg3i8k6bjnLML1v3xvmi93htAIrRa3G5Mt47kUkbg
+         8WPcf+BlbVDglyiG/AoRiiYZEv/QbipWZYqJLn/H5MvLp3vLv/WGzFZS8cZZUREwIitt
+         q0EFaL7AhpJcMNbXN/xAKAu5BF0Ucd6YxQBsWhUGBV0e0YZUYNlHBOa0Xb/jU4GhT689
+         kH9CLaUi8j8aRI+IOBYW7nODAPcyglZclBG0+lvwv1k4+VVdcc2GJXQFBiHF+2emdk/p
+         nl4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795437398; x=1796042198;
+        d=1e100.net; s=20260707; t=1795437406; x=1796042206;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WWOU0iP3SeVqsec/eIN2jpvmWs801fi3504yYJIcgxc=;
-        b=RXqFLQ1yyRkHKq6HNJ9DHKFTwueoztJDjRf690ad1B50/0zu0kLscJtsKtbHvDoUtv
-         E0iS3lSMBXx4ZLbv/QEaQ6+f7cSryh/VGB9qeUTxjE225fxcNCYwz0lgAkgk0Z5Y08yC
-         IF4sDITGPI494rR9QeTGyhPw7mAuZSwV4/rhTf3lN5572ZIArqVe6cyIllrh53lW/Ozb
-         oFccttaGX5My5V6+WE91dpp7rB3N3AeumzJnFgvJO5ZhcnbXvL1gadveTBtzbGSncISF
-         lqCYL4ngmG32Ya0POZGuvLd8y3mgM+32HU9j8C18xvJKlXQ8M+x2bkbkQIx+/PDeqm0N
-         rEng==
-X-Forwarded-Encrypted: i=1; AL+hErHYZU5O1sDjDImKetWIfh8+yNjl4hq9m/ht2sTsgPR34yZFfVq8IuALfB3hom2TsS48zW51ZzPBMqzChrGq@vger.kernel.org
-X-Gm-Message-State: APuU4Z+bRiYI7b//5kiLIWYNO7u5KuFLcpuPpVa5qGjNuok+T3t7XjJV
-	UIH7WzOz+UHWW3p48Kawn9Lid4pNTDAz69/yQWgObd4EGsPgIQSGkbnMrAvOfwnaJL8=
-X-Gm-Gg: AZFdTZfXzA8z+qNVINkuaJE1bSqIAZlEYCTfkM1Mk7UxQES/hFriaeTOPEyorDLkfAA
-	4B36e0+8pRspPSxDAmKwhC3ujChdTn2PqI288Xv+ho6jUAEu36QaxMoi1Y8p7I3P2qWtKJ9b9X3
-	s5sNB9j28+xoDmrBHPxWLfyz6rZoxW8kCUeHZ51zEg/2l3QMLm3LP8OedQGGrRQvM6LN1Ikvt34
-	oTLs//16q2NRAuzIwd2rYarZ/i4Bz5BjufWL28qwgQNgTT2k9sE004CGsFEkOH0saBuz7ClWVyl
-	oY5tEWa+NpJOY5yBzKkke2Eyd98E1qiAtHCzXyvYEtEUgvTl1FcS0OH1zeeyqTpw+XXYpTxSL8E
-	0wxUadZQqvU5Aj5RS/RMqmrdYt4e4EgqKlSgs4x9D4sLhvN3gbk7AeU30OssHiFw6UBhPKqgxaK
-	DfyE+21bsow3KdA/2TSPIXfgA6Ok14rLemuV9L+0dbGY4i01RxfysAmKhE1GHCcCx9t5U29iEsh
-	ow+hhL6k/G09A7INKlTqe2oSsnC+5hq+LH5c22kFuVNj56yaJ5y9hkImrfjuzaQXP0551YaYHoI
-	Xd4tvWfl2XETK3l4viy4OcCAHvTB3pUcHBtI6VgsTu0HxqE=
-X-Received: by 2002:a05:7301:fd16:b0:385:8744:658f with SMTP id 5a478bee46e88-3858753a876mr11826804eec.28.1795437398385;
-        Mon, 23 Nov 2026 04:36:38 -0800 (PST)
+        bh=ZZRwBHNibaWlFnpiuuEMtUB0YA/t47H+l2X5jKIQ1Dw=;
+        b=DuEP0XHdkWQ7xWGCrNeh43V0Zy5Vo7xCWJwDskVb+IhOxGZD+S1DI8niSPLwV3l196
+         PMUgb6XP4jm6APnEqxdmQgPnoFjwUZJgwVKgcp8MQOYi59+nOyGqbaRN+uP4drcE2ePd
+         E4TFyVM3bk6CjOoy7kuj9Ep6WtbGKx9zPMbZ4qyxhG27j1YlAynGqCW05+nyc1eFhrU0
+         p6aaBjrJ4dbEb3L0ksn6CJ6FqHwIwxYbD5e5DR3c9sYKPwGN9y5J+4bfeSocud51yqYu
+         o8g12SjDouzMvQqW6b2ih4EGpy3hV785BRip1UGSCPd1TX0o+AP5vXgNWIXqL+s11Sv1
+         L1vg==
+X-Forwarded-Encrypted: i=1; AL+hErEx0QcQiEN3xONTQv5NMvV9hTkGAQ/wy1YEx9j4X/Q0qxKUFRv1ddDYertAmqPhXIbpCuAdVzdiAN0Ccejf@vger.kernel.org
+X-Gm-Message-State: APuU4Z+hfciSTOr1mR+k95PVBXrtAXKZBii3mh3LfoVZnXkyzcOb+rGO
+	q7EtMzMWZh0veCZXZekukGMq7A+EBoRs/E/aawfdYdebdb0srKk7AwWq
+X-Gm-Gg: AZFdTZeXoYr2tQwr7y6Z9nzfwfhMOGTeBlWzKpnUeKSQCsfQqDCgEFcKwgSErZG747p
+	rjhjrE8DQ1tjjuGAJ08SbxTIG+iJhvZ5p8dDav6Jm6vLzYJpkn5MH7nuHb25prZujNHTCWOzNIo
+	nxauP7OqkLUTLPMQahf26C0hGvXGv5p5GAJHInQe1j5bIVQvY0rVMKn1OHHJ8GEnUvQVpSiN8Hm
+	pAJxa0PczZEIFI0I9dGtmEYgXdyKaprfklxsJxTDwVpdn+lF6pCfOFSpSAQNxGDfkXg+T64tvv9
+	j9RB/daMxR5JeDbtsIdbVZzNyma7YEqU71e+j/rAMLv5RK5ABWcX9FOfDwf2hWkg+PydZYdRdMw
+	ITq9tfdB0ic5GJIY20+ALEKvYWgbpiSMuHEsn65zkv3HFyTzR9nw7M2YfAaOfvtu5U3oO4Prmkx
+	OwjqvxD00GAZKuXSGEQNDc/VIaIdrOJcVeeYQFYyhThRgLf9ltwrAdn83xRp1RDHbx7hz5VX+J4
+	iSMcy95JV5UWGATJILarjxbLHg54De9oVyHAvYIFBFwC8/Kak7cQNPc9Mmhjb04PK0DMOAJGjA8
+	fsbXTqjjX8O4RyJl/F7/mb7yBykmSqG3OwLyZ2V8xbi3IpuJ08XaS1K+6uDK4Z8wOUw=
+X-Received: by 2002:a05:693c:8209:b0:36a:4a68:84e5 with SMTP id 5a478bee46e88-3856f14bcfbmr12986753eec.8.1795437405845;
+        Mon, 23 Nov 2026 04:36:45 -0800 (PST)
 Received: from localhost.localdomain ([2404:c0:aa07:12b3:e89:dfdd:d14b:d911])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385f68bc0adsm32854353eec.13.2026.11.23.04.36.33
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385f68bc0adsm32854353eec.13.2026.11.23.04.36.38
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 04:36:37 -0800 (PST)
+        Mon, 23 Nov 2026 04:36:45 -0800 (PST)
 From: Hikmah Gumelar <hikmahgumelar@gmail.com>
 To: Mauro Carvalho Chehab <mchehab@kernel.org>,
 	Rob Herring <robh@kernel.org>,
@@ -96,9 +96,9 @@ Cc: Hikmah Gumelar <hikmahgumelar@gmail.com>,
 	linux-kernel@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	linux-clk@vger.kernel.org
-Subject: [PATCH v2 6/7] arm64: dts: qcom: msm8953: add CAMSS node and MCLK pinctrl states
-Date: Mon, 23 Nov 2026 19:35:45 +0700
-Message-ID: <20261123123546.152162-7-hikmahgumelar@gmail.com>
+Subject: [PATCH v2 7/7] arm64: dts: qcom: msm8953-xiaomi-tissot: enable front and rear cameras
+Date: Mon, 23 Nov 2026 19:35:46 +0700
+Message-ID: <20261123123546.152162-8-hikmahgumelar@gmail.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261123123546.152162-1-hikmahgumelar@gmail.com>
 References: <20261123110805.119610-1-hikmahgumelar@gmail.com>
@@ -114,187 +114,143 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Add the camera subsystem (CAMSS) node and MCLK0/1/2 pin control states
-to the Qualcomm MSM8953 SoC Devicetree.
+Enable the CAMSS, CCI, CSIPHY0/CSIPHY2 ports, and the OmniVision OV12A10
+rear camera and Samsung S5K5E8 front camera on Xiaomi Mi A1 (tissot).
 
 Signed-off-by: Hikmah Gumelar <hikmahgumelar@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/msm8953.dtsi | 155 ++++++++++++++++++++++++++
- 1 file changed, 155 insertions(+)
+ .../boot/dts/qcom/msm8953-xiaomi-tissot.dts   | 114 ++++++++++++++++++
+ 1 file changed, 114 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8953.dtsi b/arch/arm64/boot/dts/qcom/msm8953.dtsi
-index 753167c3f861..2e64fb8bbb2e 100644
---- a/arch/arm64/boot/dts/qcom/msm8953.dtsi
-+++ b/arch/arm64/boot/dts/qcom/msm8953.dtsi
-@@ -902,6 +902,27 @@ sdc1_cmd_off: sdc1-cmd-off-state {
- 				drive-strength = <2>;
- 			};
+diff --git a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
+index fccb9c4360ca..5d4fd7f42042 100644
+--- a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
++++ b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
+@@ -308,6 +308,20 @@ ts_int_default: ts-int-default-state {
+ 		drive-strength = <2>;
+ 		bias-pull-up;
+ 	};
++
++	cam_sensor_rear_default: cam-sensor-rear-default-state {
++		pins = "gpio33", "gpio39", "gpio62";
++		function = "gpio";
++		bias-disable;
++		drive-strength = <2>;
++	};
++
++	cam_sensor_front_default: cam-sensor-front-default-state {
++		pins = "gpio129";
++		function = "gpio";
++		bias-disable;
++		drive-strength = <2>;
++	};
+ };
  
-+			camss_mclk0_default: camss-mclk0-default-state {
-+				pins = "gpio26";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
+ &uart_0 {
+@@ -325,3 +339,103 @@ &usb3_dwc3 {
+ 	/delete-property/ usb-role-switch;
+ 	dr_mode = "peripheral";
+ };
 +
-+			camss_mclk1_default: camss-mclk1-default-state {
-+				pins = "gpio27";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
++&camss {
++	status = "okay";
++	vdda-supply = <&pm8953_s3>;
 +
-+			camss_mclk2_default: camss-mclk2-default-state {
-+				pins = "gpio28";
-+				function = "cam_mclk";
-+				drive-strength = <2>;
-+				bias-disable;
-+			};
-+
- 			sdc1_data_on: sdc1-data-on-state {
- 				pins = "sdc1_data";
- 				bias-pull-up;
-@@ -1257,6 +1278,140 @@ cci_i2c1: i2c-bus@1 {
- 			};
- 		};
- 
-+		camss: camss@1b00020 {
-+			compatible = "qcom,msm8953-camss";
-+
-+			reg = <0x1b00020 0x10>,
-+			      <0x1b30000 0x100>,
-+			      <0x1b30400 0x100>,
-+			      <0x1b30800 0x100>,
-+			      <0x1b34000 0x1000>,
-+			      <0x1b00030 0x4>,
-+			      <0x1b35000 0x1000>,
-+			      <0x1b00038 0x4>,
-+			      <0x1b36000 0x1000>,
-+			      <0x1b00040 0x4>,
-+			      <0x1b31000 0x500>,
-+			      <0x1b10000 0x1000>,
-+			      <0x1b14000 0x1000>;
-+			reg-names = "csi_clk_mux",
-+				    "csid0",
-+				    "csid1",
-+				    "csid2",
-+				    "csiphy0",
-+				    "csiphy0_clk_mux",
-+				    "csiphy1",
-+				    "csiphy1_clk_mux",
-+				    "csiphy2",
-+				    "csiphy2_clk_mux",
-+				    "ispif",
-+				    "vfe0",
-+				    "vfe1";
-+
-+			clocks = <&gcc GCC_CAMSS_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0PHY_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0PIX_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0RDI_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1PHY_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1PIX_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1RDI_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2PHY_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2PIX_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2RDI_CLK>,
-+				 <&gcc GCC_CAMSS_CSI_VFE0_CLK>,
-+				 <&gcc GCC_CAMSS_CSI_VFE1_CLK>,
-+				 <&gcc GCC_CAMSS_CSI0PHYTIMER_CLK>,
-+				 <&gcc GCC_CAMSS_CSI1PHYTIMER_CLK>,
-+				 <&gcc GCC_CAMSS_CSI2PHYTIMER_CLK>,
-+				 <&gcc GCC_CAMSS_ISPIF_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_MICRO_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_TOP_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_VFE0_CLK>,
-+				 <&gcc GCC_CAMSS_VFE0_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_VFE0_AXI_CLK>,
-+				 <&gcc GCC_CAMSS_VFE1_CLK>,
-+				 <&gcc GCC_CAMSS_VFE1_AHB_CLK>,
-+				 <&gcc GCC_CAMSS_VFE1_AXI_CLK>;
-+			clock-names = "ahb",
-+				      "csi0",
-+				      "csi0_ahb",
-+				      "csi0_phy",
-+				      "csi0_pix",
-+				      "csi0_rdi",
-+				      "csi1",
-+				      "csi1_ahb",
-+				      "csi1_phy",
-+				      "csi1_pix",
-+				      "csi1_rdi",
-+				      "csi2",
-+				      "csi2_ahb",
-+				      "csi2_phy",
-+				      "csi2_pix",
-+				      "csi2_rdi",
-+				      "csi_vfe0",
-+				      "csi_vfe1",
-+				      "csiphy0_timer",
-+				      "csiphy1_timer",
-+				      "csiphy2_timer",
-+				      "ispif_ahb",
-+				      "micro_ahb",
-+				      "top_ahb",
-+				      "vfe0",
-+				      "vfe0_ahb",
-+				      "vfe0_axi",
-+				      "vfe1",
-+				      "vfe1_ahb",
-+				      "vfe1_axi";
-+
-+			interrupts = <GIC_SPI 51 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 52 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 153 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 78 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 79 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 315 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 55 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 57 IRQ_TYPE_EDGE_RISING>,
-+				     <GIC_SPI 29 IRQ_TYPE_EDGE_RISING>;
-+			interrupt-names = "csid0",
-+					  "csid1",
-+					  "csid2",
-+					  "csiphy0",
-+					  "csiphy1",
-+					  "csiphy2",
-+					  "ispif",
-+					  "vfe0",
-+					  "vfe1";
-+
-+			iommus = <&apps_iommu 0x14>;
-+
-+			interconnects = <&snoc_mm MAS_VFE0 RPM_ACTIVE_TAG
-+					 &bimc SLV_EBI RPM_ACTIVE_TAG>,
-+					<&snoc_mm MAS_VFE1 RPM_ACTIVE_TAG
-+					 &bimc SLV_EBI RPM_ACTIVE_TAG>,
-+					<&bimc MAS_APPS_PROC RPM_ACTIVE_TAG
-+					 &pcnoc SLV_CAMERA_SS_CFG RPM_ACTIVE_TAG>;
-+			interconnect-names = "cam_vfe0_mem",
-+					     "cam_vfe1_mem",
-+					     "cam_ahb";
-+
-+			power-domains = <&gcc VFE0_GDSC>,
-+					<&gcc VFE1_GDSC>;
-+			power-domain-names = "vfe0", "vfe1";
-+
-+			status = "disabled";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
++	ports {
++		port@0 {
++			reg = <0>;
++			csiphy0_ep: endpoint {
++				clock-lanes = <7>;
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&rear_cam_ep>;
 +			};
 +		};
 +
- 		gpu: gpu@1c00000 {
- 			compatible = "qcom,adreno-506.0", "qcom,adreno";
- 			reg = <0x01c00000 0x40000>;
++		port@2 {
++			reg = <2>;
++			csiphy2_ep: endpoint {
++				clock-lanes = <7>;
++				data-lanes = <0 1>;
++				remote-endpoint = <&front_cam_ep>;
++			};
++		};
++	};
++};
++
++&cci {
++	pinctrl-names = "default";
++	pinctrl-0 = <&cci0_default>,
++		    <&cci1_default>,
++		    <&camss_mclk0_default>,
++		    <&camss_mclk1_default>,
++		    <&camss_mclk2_default>;
++
++	status = "okay";
++};
++
++&cci_i2c0 {
++	camera-sensor@10 {
++		compatible = "ovti,ov12a10";
++		reg = <0x10>;
++		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
++		pinctrl-0 = <&cam_sensor_rear_default>;
++		pinctrl-names = "default";
++		reset-gpios = <&tlmm 33 GPIO_ACTIVE_LOW>;
++		pwdn-gpios = <&tlmm 39 GPIO_ACTIVE_LOW>;
++		vana-gpios = <&tlmm 62 GPIO_ACTIVE_HIGH>;
++		avdd-supply = <&pm8953_l22>;
++		dvdd-supply = <&pm8953_l2>;
++		dovdd-supply = <&pm8953_l6>;
++		rotation = <270>;
++		orientation = <1>;
++		status = "okay";
++		port {
++			rear_cam_ep: endpoint {
++				data-lanes = <0 1 2 3>;
++				remote-endpoint = <&csiphy0_ep>;
++				link-frequencies = /bits/ 64 <216000000>;
++			};
++		};
++	};
++};
++
++&cci_i2c1 {
++	camera-sensor@2d {
++		compatible = "samsung,s5k5e8";
++		reg = <0x2d>;
++
++		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
++		pinctrl-0 = <&cam_sensor_front_default>;
++		pinctrl-names = "default";
++
++		reset-gpios = <&tlmm 129 GPIO_ACTIVE_LOW>;
++
++		avdd-supply = <&pm8953_l22>;
++		dvdd-supply = <&pm8953_l23>;
++		dovdd-supply = <&pm8953_l6>;
++		rotation = <90>;
++		orientation = <0>;
++
++		status = "okay";
++
++		port {
++			front_cam_ep: endpoint {
++				data-lanes = <0 1>;
++				remote-endpoint = <&csiphy2_ep>;
++				link-frequencies = /bits/ 64 <418000000>;
++			};
++		};
++	};
++};
++
++&pm8953_l23 {
++	regulator-min-microvolt = <1200000>;
++};
++
++&pm8953_l2 {
++	regulator-min-microvolt = <1200000>;
++	regulator-max-microvolt = <1225000>;
++};
 -- 
 2.47.3
 
