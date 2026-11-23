@@ -1,79 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795396914;
-	b=sCHBduKK14Kj/BdSIrMl7T0OJzM4YtcJZD0sS9yB/XELMRipbryZk1AJCnErTPA+tM6+
-	 aB2MZ0anAHCPMveE090IDbeI+nKOCQBoZzOZPKfuVBPa1f1XR+i1XStK1DX7o87D/Scr6
-	 TlpT5yA15KWXZSDOU/sZ64I3LwfNxpIE08/yfH1qbeVLW8Zpux4Xze3gZ/7qma9HPGuss
-	 JYbTEAeVN/AjrttIQfXNmbhGg+9A0p7BEO82FwcM88wJA/3veuokqHo/+1OswYeZsNMMi
-	 GEu67zAkhj9nW0z1NdXOg6duCZrujy0+8PvZd3qJda3MtBh2uxboj7itlRemxwj+4nw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795396914;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=CWigIpPVsSLso/LPVQlnZ8yKOycJwVSRyTPiWiXdq8g=;
-	b=rZB36vBCdA2c2ujxb0dXQF4IAxIpJZuXG5cnbtPh25QV+dMih6qxbzO9X8kWa6ObeXNg
-	 s1+Rn0ycClepFalQl7K+YWq6VdyIbjACOQ9+mR3Y88uTMMqwtGOdQ0jIOlNhOQwyt0Kzr
-	 LCZ1PvdObPUMf4ZX/VMvcsIdI9YBf3/Pb+wFRPHwViR1ceGBBsCRh6x4XNG9YQMcyfMA/
-	 fF7nU+ST9gec/Xf+/T79+aR433Co/4dXzkK/GHRWqd5A4dN9V/X4Y9I0rt1Qmm5RQybRT
-	 IEzGZJbZFxwBNx+6J82T28nI0arvgI/tmY+L1sEgKaRWvep/qwbBVCzmUsken4mnEHg==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T9zc+RpN;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0E46606A334;
-	Mon, 23 Nov 2026 01:21:54 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=T9zc+RpN
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795396914;
-	b=KHRW1GKKb9IK040vukuVyzi0y1yOL7v5NgKbeT7/z+i7ycH/K7Slc0+jCWZgyNHvGgpk
-	 xFq6NyTaNY9Ou4oHgMlbt2SkZ39hR/OQAx0OZ2um3R4MqZFaiyXNs+bzIDLNwDLyHc+6s
-	 eP9xlhaTZDOAVdOpz9uizKVbTHA/XBSctPCl6WXOnrJpsSL497VzE8eb3AIZBusaMpqvP
-	 y6qMms6BLSlI7gpddivkRoNNLp5lj4dWzv0PCA9Cy0vKR1MQ9OM6WehChr8gMqk+gxQWx
-	 6TGF5ie02JBsh4eeeW4DTW5WG22QbVnI4cw3gnXTKQXa5wyHsZEZkvWggld8/aYVw9w==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795396914;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=CWigIpPVsSLso/LPVQlnZ8yKOycJwVSRyTPiWiXdq8g=;
-	b=fGl84biGzCcuNphPd1dTVJWj5hCnMU8OYCnS8cY1ShY7h1mgiRIu7GrY/FxRDudZNrT+
-	 dUj273QznqBztih060v9sIwz1uHHMGu1tVY2ZIvm67D+s18xd+KlPR4MP59U5uEQVo54o
-	 37TheNNP/enZSR94cQK1fZ08XQxP+qLTu4I3nr4HGi2Rz5qU3EEqwaq9tDupbGLN/bI5R
-	 eEoY09l9Ko5SV88ICKZyUkc2cGkLH3f3ugCyxToio4i0do+LbR3TIzDRfAvIaM/0s2Wnu
-	 kdyyHpLXBGRPAT4cchhQnLiQgl0QrzaTALu34VyGoADF0oULPdl8Igi6HovbriPDsVw==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795398400;
+	b=ILU+Mr035VXCOvF97WncNES8qrh53za0oJC6NUV7bnquEC/UPIKsbB19rwJ8+OFekUU4
+	 1HTadjvObmMAVlTjZg/jVMZdJo47zDo7nwN1U0/lK8mfAiz2v+URKhdQ9qWfBXpedbh8N
+	 /PnkJ9u8lVEdRCRfSBYwoYjYHiZ7KG1UO+U6JkrTlG6FvX8dY6GDK8M3DbdjM/hH6vRbv
+	 HutBQEjsy0LzJPaM4PqX8dnsdIyPB5PcJf1O+rOd+st7xmLyVZJetiRDYpI8N/vDLzs10
+	 BReNfLp+ngMsC8EEEpzL2KLpmN2hjCHfjgpqHhgN0Iz+p8WaFKYctVjNB/sSs/f0Hkg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795398400;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=J7SM8IJEkihEJUb+/6O+/CyfvEJC1DOUd1MAPDV9+/g=;
+	b=FBwbCQQxk1YMzSqjFpyL+dYozUOMtHvhW+wt6LOd5H4VhsTdmm/ptOgkuImNjiYVGBQR
+	 boIhzaovunTJsUlvU+7XcG9r/TkBpZQHX4Fbogc/cfw7KIOqH5NwOGh/UiGGM9Au5HdyI
+	 sSpBUUqHN+xn670HhrwoSgDU9sqpSkn5IXsApBs0a5RmMnFB0ONpwSY65A1gmzBGEfSie
+	 LaIXyLI/Zx8D6cxAZTC5m6ogYbpPhLwk125ykWJeJyR4qPnhy/nq+nHL2HXL46MxhRLGl
+	 3/hDwXMns8X96RN+DC8gGZbfA3hBFeR35RlIfTanbT6cBMJuGZ41wrS7a6RXoj4IdGg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=hyMUp7qt;
+	arc=none smtp.remote-ip=209.85.128.43
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 6C3C91F000C6;
-	Mon, 23 Nov 2026 01:21:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795396914;
-	bh=CWigIpPVsSLso/LPVQlnZ8yKOycJwVSRyTPiWiXdq8g=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=T9zc+RpNDrfCMyEjapWz8OvBuBnlBtbO8fzsblCq8Niugev6JsLgkw7BnSZ14Jyfz
-	 u+YfeJyLMK8OdDhLPS+/6kdhuPUWaFRGRBCYDylW4bNHjFMi+od3XKJjwLv0FfqGT5
-	 G/YWlEQzi++TKw2aHM/7n4A0/OhgrBrIvNzkSjZP22PiAtqa7dSL4JC/kNI8rJZZEK
-	 Qy5IE0oxAYBg/vquxn2vAU6jTsL0JrBeZ3Ee+sDiLCm0EuYx/03twone2JelGlbM/1
-	 SMMZ5EIao9i18dzSBRZsZY/Fn8PyuOybrJ6B1LZUSC4c5EA6OuT0i0OvRjfIdWUZbK
-	 pA91HEjUM5JsA==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id ECFA44C2B8;
-	Mon, 23 Nov 2026 01:21:52 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Mon, 23 Nov 2026 02:21:47 +0100
-Subject: [PATCH 2/3] media: dt-bindings: mipi-ccs: Support IMX371 and
- IMX376K
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E0441606A31D
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 01:46:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E0441606A31D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=hyMUp7qt
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4bb702a7548so20244145e9.1
+        for <linux-arm-msm@vger.kernel.org>; Sun, 22 Nov 2026 17:46:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1795398398; x=1796003198; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=J7SM8IJEkihEJUb+/6O+/CyfvEJC1DOUd1MAPDV9+/g=;
+        b=hyMUp7qtXScGFjw5VJWtC8lxSVW/noa4jMYKoldsEQMVJJfY+9Sq7WvD/3a9YtO61f
+         t7q73AZbrv9pio+/1SqXRSNyPPVXOdXN2qLGCeDhkhj/M3o545TMI5DNs+JMIU+rn+59
+         hQrSx7HzWfe0FYJUWv1i66v/qdPGNjWAH94Kc2y60LmwbXqAu3pTLwEt0Y7VXZjulDd9
+         f3R3R90rtf+JjUpCnn3Nh06DQxr5tSV1hu2FtYCgas7hwt3CSBFvmT4DcRzxL4qqo/kh
+         7rMae1m40aaJN7SgoLmnR8MmEkIAzWHJuJwoMP16c+cMpV4AmIJUpPaareUMzlnzz8mQ
+         ZWmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795398398; x=1796003198;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=J7SM8IJEkihEJUb+/6O+/CyfvEJC1DOUd1MAPDV9+/g=;
+        b=Qa/ZUAErCTsUCAFdyipZ3SA0ZuFP2/OTYd9qMfQmmSxswm/qtu0SjaHD0VRsFGGdAN
+         OmWuwC7PPhpRqHYUf8dVfWpEA1vFP8GBRS0GDofomrT4zBAK6rtHoaQPXnPVFlTeSofk
+         pIZ6Db2ttflEOMRg3ld3/JpIFuc0pOGAOldmAVCZ7lTn05WlzBGsvI9ab8G3lWM28V0Y
+         7sk1920pACEolCDrZmbXoll70NwUomNTNoAAIb/JPtmfWl88MF35rYzPsT/Fcn6cOBkx
+         pYYT5DEwt5oLy0+2BtTgNjPI6uD0mx9Xk/3A+eynehvkINcn6sUUPkEE/DjJAassQejO
+         5Kag==
+X-Gm-Message-State: APuU4Z/1G349P/YbxrnojMrWAlgZKbwyLynKKEVD0Fyh/TOR7ObHwvNI
+	sDYP4pUuF3sETwiWx6lBJF0hX+PvCMk9v42oWENps5rrrR3fkhywXDtril+Npx5STlI=
+X-Gm-Gg: AZFdTZc5mRY+OzMQX3m/DdxYGzIaFvYsPY2cCI0+8N2nmVjb/RB8juCTpDUbLECplAZ
+	ELHiOG9wwK1iTIQlPoT5Sb7x+MteZfSFBw4NIR3LOIi7uoEKF218F5wd6BZoP8ehCt36MvrZsd1
+	ZcX7yh9/FtWdm5WtEUmEhJaMxGWXO6zjvrJ/DWVy4qJvNLDNScaX02d9+D7FYXJgc8LndkXOseZ
+	f+f6Oxx7MyL61erQo4oDVQEv/7iSUhV9Ov9dJ6nYWEGChDzggAsjaUoChCPlRLXv2LPnCDAFxh6
+	c8j8EDQFsYRAnJ/CHSKm/pIoPJQ5ncu4A7MlDmbBpOjUtP266J5WtadveXvHsg0kjNVPIVOZ4lT
+	v05zqq4/2end2bq+7mXUteaZxVGAv8pbCzTXNFM16zBt2KhD6ja7bIZEdC2ZWEgmUk1TtBuIov8
+	u5LNLJYC9uPL450P3FYZIyF4lE5eGmuinfXU1I4QgS6QbfOWLTNTkTbPsJPH5uJkEKvV5606oxB
+	tWzJkXZmQMB1r9NYs7FIF6pKjlu9dRA4uoZ03Gmccrgble+u7AlRaI3LAv5z7txtOGh2frqdjYH
+	lR9SVZLpDKAdPY4GyvGmp4DR6qm/R/c50XrYWgSsGQ==
+X-Received: by 2002:a05:600c:840d:b0:4bb:6814:738c with SMTP id 5b1f17b1804b1-4bb88820cedmr210403515e9.22.1795398398283;
+        Sun, 22 Nov 2026 17:46:38 -0800 (PST)
+Received: from [192.168.0.167] ([109.77.88.117])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853a1e8bsm264872155e9.9.2026.11.22.17.46.37
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 22 Nov 2026 17:46:37 -0800 (PST)
+Message-ID: <e707a3ce-7e3f-480f-9166-3f048b02e7e3@linaro.org>
+Date: Mon, 23 Nov 2026 01:46:36 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,81 +89,45 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261123-op6-upstream-cameras-v1-2-234fb3b7bb18@ixit.cz>
-References: <20261123-op6-upstream-cameras-v1-0-234fb3b7bb18@ixit.cz>
-In-Reply-To: <20261123-op6-upstream-cameras-v1-0-234fb3b7bb18@ixit.cz>
-To: Sakari Ailus <sakari.ailus@linux.intel.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, devicetree@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, 
- Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
- David Heidelberg <david@ixit.cz>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1078; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=WONKLUZwZONG/1eyGGSAmyn63j+1WD61eX0aPYZ8HQ8=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBrA5UvO124MmbWZgkQIqSWbuKBfOconQnBGfhXU
- ZTwfcG+M0SJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCawOVLwAKCRBgAj/E00kg
- cu5hEAC1mEhErZKfCsK25+A4L7ozBWptF2uhmM9e7vVEplZi7u4q7P5z+YwlKgdqJheZ2DmvVJt
- c3ojF+bKgNZjGaO+1KC7JrG8J6w72Fph2hMXxEcS6CxABoeGoF01joildOyOSbI9i0tHhDIpj3j
- lPupEmXQJmBUmM70WgWGMLd+/LYTWWRou7rItmr/T6Jpqn8DqwWvuKRDM9ygDSs1EoeDYVx0JYZ
- tFz74UvE5m1ZWgmODZ4VV7cZiCjhhGuzKJg9VASZgxoZkUpIe0HdbysxAxzizBuLjkBUCalhdzy
- OaPy90Z6ksC63xNfLnhar3NuqZkznvPIJ5Z8t8h6VfgBuan+8kuBoPnGXQhI/jWYMr8l4vVdbOn
- HlGTtfqHlNmHm5EYwQsKqAQsNBNo8t0tV/xTk+7jHs4qMeAAnXHs7V7p0lnUJ8VxId241auGCQM
- 7seQd2ShCtlXY7pXa0ioCPbUNp+hZ5nCq47ovdNbj3Lim5EPJPG37/GuQBeSbzmnmbLYkzEo5R1
- wvLg0LbU1e4/GCxnnDIfG9eX0SYzmlGSRRoE2coEevfw7ojbgU8C/iwVOmBiQRnCkYZxli1xr8L
- gLZakxtdZVlKqCpizAo5BB9CglYyxkfeG9dFLFkAlpE5P93j8P9z31p4xlgvgYxfcySvHujVpC1
- 77O1SsLbIqVi7fg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] media: qcom: camss: Add Glymur-specific resources
+To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Suresh Vankadara <svankada@qti.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>
+References: <20261119-glymur_camss-v3-0-71ab966c41c9@oss.qualcomm.com>
+ <20261119-glymur_camss-v3-2-71ab966c41c9@oss.qualcomm.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <20261119-glymur_camss-v3-2-71ab966c41c9@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
-From: David Heidelberg <david@ixit.cz>
+On 19/11/2026 15:04, Nihal Kumar Gupta wrote:
+> Glymur previously reused the X1E80100 CAMSS resources, where port@3
+> selected CSIPHY4 through x1e80100 csiphy_res[3].csiphy.id.
+> 
+> Add Glymur-specific CSIPHY resources so ports 0, 1 and 2 map to hardware
+> PHY ids 0, 1 and 4. The remaining CAMSS resources continue to reuse the
+> X1E80100 CAMSS resources.
+> 
+> Signed-off-by: Nihal Kumar Gupta<nihal.gupta@oss.qualcomm.com>
 
-Extend compatible list with these now supported sensors.
+I mean this is a bit of a convoluted way of describing this.
 
-Signed-off-by: David Heidelberg <david@ixit.cz>
+You have one less CSIPHY Hamoa has four Glymur has three according to 
+this patch.
+
+=> Fixes: tag
+=> A commit log that says this
+
+Talking about the ports doesn't really describe what this patch is doing.
+
 ---
- Documentation/devicetree/bindings/media/i2c/mipi-ccs.yaml | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/Documentation/devicetree/bindings/media/i2c/mipi-ccs.yaml b/Documentation/devicetree/bindings/media/i2c/mipi-ccs.yaml
-index 44faa2f613f37..049eaee31175a 100644
---- a/Documentation/devicetree/bindings/media/i2c/mipi-ccs.yaml
-+++ b/Documentation/devicetree/bindings/media/i2c/mipi-ccs.yaml
-@@ -31,16 +31,22 @@ properties:
-     oneOf:
-       - items:
-           - const: mipi-ccs-1.1
-           - const: mipi-ccs
-       - items:
-           - const: mipi-ccs-1.0
-           - const: mipi-ccs
-       - const: nokia,smia
-+      - items:
-+          - const: sony,imx371
-+          - const: mipi-ccs
-+      - items:
-+          - const: sony,imx376k
-+          - const: mipi-ccs
- 
-   reg:
-     maxItems: 1
- 
-   vana-supply:
-     description: Analogue voltage supply (VANA), sensor dependent.
- 
-   vcore-supply:
-
--- 
-2.55.0
-
-
+bod
