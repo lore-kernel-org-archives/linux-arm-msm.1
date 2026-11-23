@@ -1,73 +1,59 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795435770;
-	b=XXhLloZaaJBAt9wcFOaSnDiNidoz9X2K1volD3gl8nzH9fgJ3ud3k9Kc9b9sRUCF5DrK
-	 SRNqBoIHASJvLd592zw2yokq7b91toG5rbcgpc7XmhTpOdP2pplsrNjUgm4rtTwgqkfGx
-	 TnfrGfS7ZZVQ87v9YukJcNTpYxzDNVH0Spp7qx9yXoKSbtCgQ6/Ol/4bqmJ8ysg6kWlwh
-	 oc1LFUgoHNEbqyy9i4kUrCdKkqaHIwqgCyRdGXbpEl569oLbPp1t79+X4lM/aSoJmzBq3
-	 naGIRQG8/0KrpPLrXDgbEhIgIhTTTSKPqeKN4SJDHybZ1S3LYlScdxmJISZCAAJ/VJg==
+	t=1795435877;
+	b=dBmY9niqhfDRPyx1L3Y4lZgqzJvAFrbds8Z6mE6zPx0pZcDapuqwNYb33lR8ZZaktQtD
+	 1Q2lInaG5us+B90Pd3CKTpzBh4ZY4cU7vHDhz6KOeMmLF1ybq9zPUWm05Cl9U0ryYQKxr
+	 2klC39T/EyN33AbzgLUN/dFAst54o/xus+NsP0axTstpCwEgFpNCb0ct77/+rN/eXSt7W
+	 0mq+C5T8tKJ+mh0Nszo1RJDVUQ6geyak9qSkKZOvHEozb5SP8B0zCJ3VN1mmdL3ijeNec
+	 U4ZVCmYGe4mPzz4ePh4RyPYd3qHFrffWFfJl+Zbv8IeaKlptUbq5g99QQooM97YcRnA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795435770;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795435877;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=EBAlgyArUaIDoaFWbczuSy+qeFGqGHKDwrHB/xbYHXM=;
-	b=To38sXSAfvBcWj2zMr3YjT3s862vzv3l7NyaoaoyFcdux6p76hlN3Agjnx1IyA/sPS+4
-	 gr8nEWpA8KGqbNR0YghKeSig+dIt6a8rvny/hE6KS+WuZFvSU5/BYU2Wh51RVfsu7zdcL
-	 k1EwcKHBnx6esgLWnxG76073u7af6FYEzbC/nXdt6IivQWEqG/pHlJB0P+CpQWOvsUogf
-	 GizDIQ4GqbREOYBNmtdatxH68MhT9WPE7KzOFcdmYKhP40gcp4nErylx/o6nfHJwpr7AU
-	 mAB2OdeleyXEAjy9/aH+moQzLX6+TZAKUQG9klSaC4h6aiqoMT6bWUaVZtxcVcRxj6Q==
+	bh=3Eh7AtJFr/uR9z6jF6Gx5kvJFnPR9rDrn/UUs08sdns=;
+	b=L5nDFKkr8VCvUnLDom5iFLcJ4Q8hhin//+D1ZdOiq5El1gbLthqAuLZcQ8Fio8/1ski4
+	 dWXwVU1L/j7ik6TlypTSpIDz2G1BB9tS1iKlrGLOwMvsYEDYR5N5p4Sda3/jkZHIZ85uD
+	 Ej99uX54V87QyDNA67DULT4LUu/kRr5JymcsFHjxItDPlmiSBjPjDQZcAAFHyUusG5KBr
+	 SRC8/NkdDACfikJ5/dg0LGldhaNE7piJMdzuAZr0i5pi03mEM2cgI/kLh/oMtUPeHl8tz
+	 vLrjA/4cvph7lwbo0SiHqKnaZemT2ss6jGFK3TwdKlNTXOMZWI/VUB8HlUep81PDFZg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="E+6H/6oP";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQamuCjA;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C75B7606A31A;
-	Mon, 23 Nov 2026 12:09:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 68795606A31A;
+	Mon, 23 Nov 2026 12:11:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=E+6H/6oP
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 296FD1F000D3;
-	Mon, 23 Nov 2026 12:09:29 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hQamuCjA
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 2ACD51F000C4;
+	Mon, 23 Nov 2026 12:11:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795435770;
-	bh=EBAlgyArUaIDoaFWbczuSy+qeFGqGHKDwrHB/xbYHXM=;
+	s=k20260515; t=1795435876;
+	bh=3Eh7AtJFr/uR9z6jF6Gx5kvJFnPR9rDrn/UUs08sdns=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=E+6H/6oP8nLnOr4iihKZsT5mFLOzHyhwUMzMxmC6pmAe+pt5ais3/kGYPwi8oF5zr
-	 GjAUPCdau77AfYr2a7Mpi/s9QIus/zoxYa14PAqfbidqxzxwPdaC4msn8xdwhGgYbY
-	 nrWqf+M6Mn+OtAJyvAriYXzms38kkQbkOj2aCC5vFExcHvLJrAW61nRLiv+esgmheb
-	 hmdZLQDBBvmHVNc3/BLfmVLqfolD+YZt5NvD63SBFtb0XhEPrhJcH4DKSycDVALgmF
-	 Vepzp38JoPHLXSbuUbw56Yo0Q2S6VCXBAySB6aIOmtu9udEKeBIynyCXinbFCiTHjE
-	 1yVG1ElUOlkmw==
-Date: Mon, 23 Nov 2026 13:09:26 +0100
-From: Krzysztof Kozlowski <krzk@kernel.org>
-To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-Cc: Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
-	Thomas Gleixner <tglx@kernel.org>, Radu Rendec <radu@rendec.net>, Lee Jones <lee@kernel.org>, 
-	Will Deacon <will@kernel.org>, Robin Murphy <robin.murphy@arm.com>, 
-	"Joerg Roedel (AMD)" <joro@8bytes.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
-	Wesley Cheng <wesley.cheng@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Alim Akhtar <alim.akhtar@samsung.com>, Bart Van Assche <bvanassche@acm.org>, 
-	Bean Huo <beanhuo@micron.com>, Stanley Jhu <stanleyjhu@google.com>, 
-	Herbert Xu <herbert@gondor.apana.org.au>, "David S. Miller" <davem@davemloft.net>, 
-	"Rafael J. Wysocki" <rafael@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>, 
-	Amit Kucheria <amitk@kernel.org>, Thara Gopinath <thara.gopinath@gmail.com>, 
-	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
-	Lukasz Luba <lukasz.luba@arm.com>, Georgi Djakov <djakov@kernel.org>, 
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Ulf Hansson <ulfh@kernel.org>, linux-arm-msm@vger.kernel.org, 
-	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, mfd@lists.linux.dev, 
-	linux-arm-kernel@lists.infradead.org, iommu@lists.linux.dev, linux-usb@vger.kernel.org, 
-	linux-phy@lists.infradead.org, linux-scsi@vger.kernel.org, linux-crypto@vger.kernel.org, 
-	linux-pm@vger.kernel.org, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Subject: Re: [PATCH v2 13/16] dt-bindings: arm: qcom,ids: Add SoC ID for
- SXR2250P
-Message-ID: <20261123-pastel-barracuda-of-rain-bce8ac@quoll>
-References: <20261116-halliday-dts-v2-0-2c92438c6c46@gmail.com>
- <20261116-halliday-dts-v2-13-2c92438c6c46@gmail.com>
+	b=hQamuCjAL00ho8wuAS/xxVYieoyQgKpz3vy0va43FUKk/hFwrbG6HzxETV4CPonrt
+	 k6jRu1ZOOtEWQhRCEvXtWxedbA8rH8OmH5G9Y+BVpuIHAGJk91cXf0mLNnnojRcdUj
+	 qSaXcxSIYXF49xIPCkBP8y3ijLUXYm9PmxXpVMjadfNtsJhik07hKDBj6ZsYokPsHx
+	 Rcc4cnD2AigMAxeskn6n0WGYBuUUq0kFKMe8Dt6a6ijFzvVBvp9CvR9Yd4LBFa/l1R
+	 qi5fkN6MIlAIbUe+StU8kBx84vegQRFf4wZ6C5FKplP1e/LEdlfU5TiCBE1BhkDXC4
+	 kA0JmqcFgg8tQ==
+Date: Mon, 23 Nov 2026 14:11:12 +0200
+From: Jarkko Sakkinen <jarkko@kernel.org>
+To: Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: Amirreza Zarrabi <amirreza.zarrabi@oss.qualcomm.com>,
+	Jens Wiklander <jenswi@kernel.org>,
+	Sumit Garg <sumit.garg@kernel.org>, Peter Huewe <peterhuewe@gmx.de>,
+	Jason Gunthorpe <jgg@ziepe.ca>, linux-arm-msm@vger.kernel.org,
+	op-tee@lists.trustedfirmware.org, linux-kernel@vger.kernel.org,
+	linux-integrity@vger.kernel.org
+Subject: Re: [PATCH v5 2/3] tpm: Introduce Qualcomm TPM driver
+Message-ID: <awQtYP7tFjTN1Mm0@kernel.org>
+References: <20261120-tpm_qcom_driver-v5-0-3d9321ace107@oss.qualcomm.com>
+ <20261120-tpm_qcom_driver-v5-2-3d9321ace107@oss.qualcomm.com>
+ <awGtGoxtker8a9kG@kernel.org>
+ <8aed0815-685d-41b3-af2e-0055bc6ad920@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -77,20 +63,32 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261116-halliday-dts-v2-13-2c92438c6c46@gmail.com>
+In-Reply-To: <8aed0815-685d-41b3-af2e-0055bc6ad920@oss.qualcomm.com>
 
-On Mon, Nov 16, 2026 at 09:26:29PM +0000, Stanislav Aleksandrov wrote:
-> Add the ID for the Qualcomm SXR2250P (Snapdragon XR2+ Gen 2) SoC.
+On Mon, Nov 23, 2026 at 02:48:17PM +0530, Kuldeep Singh wrote:
+> >> +module_tee_client_driver(tpm_qcom_driver);
+> >> +
+> >> +MODULE_DESCRIPTION("TPM driver for Qualcomm TPM TA");
+> >> +MODULE_AUTHOR("Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>");
+> > 
+> > MODULE_AUTHOR() field is not that useful and nobody keeps it up to
+> > date, so you never can rely on it. Not NAK, but just underlining
+> > how litte it is worth :-)
+> > 
+> > Copyright and authorship is anyhow recorded by Git and
+> > MAINTAINERS document.
 > 
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-> Signed-off-by: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-> ---
->  include/dt-bindings/arm/qcom,ids.h | 1 +
+> Ahh, I noticed couple of other drivers doing it so took it as reference
+> and adapted here. Seems MAINTAINERS is updated correctly so folks can
+> rightly reach out to me for any dsicussion/issues later on.
+> 
+> Btw thanks for mentioning. Will keep a note for the next time!!
 
-This should be rebased on my patch removing the IDs.
+Yeah, there could not be more copyright- and authorship-focus project
+than Linux. I mean even this discussion is recorded to lore, and can be
+used against me in court ;-) Probably most corporate-safe project in the
+world when you think of it.
 
-Best regards,
-Krzysztof
-
+Br, Jarkko
