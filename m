@@ -1,55 +1,61 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795422039;
-	b=z9NiaScHHFA4Ltz3r2bngDuh7L+SG5JvYI45tdk/SsAosGQXHkvbvhZ/fOD6SQyxuzqR
-	 CiZ7YI2O+7TIBUUGNaP9ujFPyOREE9+dKD30uuglrlsVKGOIzyKVXtwKvg4FbIVMcGr8c
-	 CZ6cCto9TRnb66GviuE2irmg1gL4DBLhvd390QTQF3/dRk/gyqQkD9dV6DWorrQ/EfHS6
-	 2uBHTM3/G1VNjmu7Z4wzVcCx2Ex7Lmw1eBXD1h0YusdFa3Ax1mTkhPrCsHGrjpysUwbWo
-	 Wt3tb82p6824EFcxsWO9L1ZUdWvP7XreygLdRO13CeOcEIBWEhRhZBODc0P1FTPe6Nw==
+	t=1795422057;
+	b=JHhHruSt/g3+xiQMZA5tqwYBYFXgZ3YEhoHcHdbX0Nra6KqSFdfzYGUNxRbC8CsDZFVz
+	 H7rhMvL2e+P+gIucTXFU+zYmsNG9ihqNZ8Lr06M3cKOPwjjoa6JRpA7RJv2DZPpxqYLyi
+	 Gq3NvHmo7yRuDWJtjNSs2pLE7BSfQrEGsCuchTx3aTHQxxKRkR4quj1IryhA/tgRqPFkw
+	 WSaCsO6XZK7p3I+dHi/AAlJSrqglyeOCl8n463dDtbfO2umcKCyWcw6COmJHsQTiXC/8L
+	 jpMsOB5M0QVl0KTVCj+BDtTP6ZR2qxPj2AhEsh4NyZwwslNBNt2+YuJZkgsOePkUe0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795422039;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795422057;
 	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
 	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=hMB8mVGYkbYkUiCO7PHPPXPE3XB7m8R85nAtHHeNgEk=;
-	b=wEw8tWxPtaOgUFeH7ns3xqOhArVlAzW6cmBV5Mm5aM+Or7UOkMriE1ohWh+i9l/wP4IO
-	 rLrLX1urcnS9KW1hhV4i4ylh8HcT9av+gzTCNy760dS6YYc4k8sSfycXI/59AUoAi1QE6
-	 Kt4NKmK36uvlspVqW2F9dC4MWNTTgdzB47jmViokKyz/GBbZvu1TtVykChPire9QBQQXD
-	 nScCa66NUrLbSpXPbMBScxSZSYMQjEmq9BWlbo2l+Eh4wOq2aWmSc0u5Pm8DimOwiHQE6
-	 jpF98f+zmx6Tbrh/McIvoVgUa9VWH0MPp4LjudIUjMfgdD/y5+D5tGW8aSpho1G467Q==
+	bh=sQ2JsQyaGnkqNYmLSeY9DfK22ASO/J7meMW4se4AFjs=;
+	b=hOYfs4snKlp8JP1DIca3n6zpd0uVaYsXnRoSvNmlZPEdOsLNfbcRL3ELtzJoscY3JMF2
+	 WkIHmpnODQo84qD6ajD2MdgGK+E1HgalDhZuIoqViSCMpQ0gnssneCTVxheNfxHDonzDq
+	 KFwxXJIET0FMkTy1VBwPu2+8LK5IrwXfJ/dSR14XRJ3lIbOa16w4hK8FVnYlJHlUlfx++
+	 H9u/iLUt/Eh0+ulupUy7PfD6quyEGZtq3M5fYjZKP4qoKdV2WNZYE6CbINShX2lq3em4B
+	 d7Yss6m3pVg9bK/O18KuGg5F96EuU0RT837J1KIVQvfoMN3BgJUF1aXHktgdOMrBCUw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=Gada8yR6;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=icoSr60A;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C84D1606A31A;
-	Mon, 23 Nov 2026 08:20:39 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61ADB606A32A;
+	Mon, 23 Nov 2026 08:20:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=Gada8yR6
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6EBBB1F000C4;
-	Mon, 23 Nov 2026 08:20:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
-	s=korg; t=1795422039;
-	bh=hMB8mVGYkbYkUiCO7PHPPXPE3XB7m8R85nAtHHeNgEk=;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=icoSr60A
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9529A1F000EB;
+	Mon, 23 Nov 2026 08:20:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795422056;
+	bh=sQ2JsQyaGnkqNYmLSeY9DfK22ASO/J7meMW4se4AFjs=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Gada8yR69H9OA3TpAwCI47hOJVTIHaekKqvgqEzMSgW3nKtd2To7yUt0THJxCsVsp
-	 cDq66i9LoN2lsXUX3rgsV07igby8OCzuk4GVpDZTGiRtnLfRYlm0agYlhMT3l0K8S9
-	 fsyaE8tzn4mYGbKJ+TOU4BX3wq8PfJZvq+cAEFIA=
-Date: Mon, 23 Nov 2026 09:20:36 +0100
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: Thinh Nguyen <Thinh.Nguyen@synopsys.com>, linux-usb@vger.kernel.org,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v11 3/3] usb: dwc3: select the shared HS data bus with a
- mux controller
-Message-ID: <2026112313-skied-crock-7374@gregkh>
-References: <20261121022104.1507987-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261121132029.2379449-1-xiaqinghuan@mail.ustc.edu.cn>
- <20261121132029.2379449-4-xiaqinghuan@mail.ustc.edu.cn>
+	b=icoSr60AnKmsiMso2redWQXWDBZWee0lAtzPTvF+Zasu4N7Gj94As+/uUIRE1xWPr
+	 aUPBxUo7njNGQJqg2dQMCYshuymDYaxkOx94gvzCgwwkSOcZKGkfh7T+iWGF7/OqNQ
+	 NZJ42alF7jObBRQM/dP4wxcYcMDGMNmMg8umysd4UT3ZBEIZTjPsRmeVsxPNy7OEKu
+	 I7r25UbiTTPN2ljo3gSBRT1gE0CTOtXZ+5O8+Ir8S4Q04ncvK09PatANUMO177CCo2
+	 Nz7wZYJtbsiIlPNGlnUwIe0wmgwjEjR008QTCYW7RgAtygaWymbjfgdHHndnkK84j6
+	 fT9ynBq4EjKVw==
+Date: Mon, 23 Nov 2026 09:20:53 +0100
+From: Krzysztof Kozlowski <krzk@kernel.org>
+To: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Ulf Hansson <ulfh@kernel.org>, "Rafael J. Wysocki" <rafael@kernel.org>, 
+	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org, 
+	linux-arm-msm@vger.kernel.org, Kevin Hilman <khilman@baylibre.com>
+Subject: Re: [PATCH v2 1/3] dt-bindings: power: domain-idle-state: Add
+ system-state
+Message-ID: <20261123-humble-native-ibex-7d2f72@quoll>
+References: <20261113-s2idle_state-v2-0-ad604182e7e7@oss.qualcomm.com>
+ <20261113-s2idle_state-v2-1-ad604182e7e7@oss.qualcomm.com>
+ <20261116-icy-free-lionfish-c3eed8@quoll>
+ <d3060950-04ea-4f9b-b160-0e068946e623@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,52 +65,30 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20261121132029.2379449-4-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <d3060950-04ea-4f9b-b160-0e068946e623@oss.qualcomm.com>
 
-On Sat, Nov 21, 2026 at 09:20:29PM +0800, Qianhui Xu wrote:
-> Two connectors can share one High Speed D+/D- pair only if a multiplexer
-> selects which receptacle drives the controller, and that selection has to
-> follow the USB mode: leaving it to a board level GPIO means the controller
-> can end up driving the data lines of the connector that is not in use, and
-> a host or gadget instance cannot be torn down while its own lines are still
-> selected.
+On Tue, Nov 17, 2026 at 10:34:52AM +0530, Maulik Shah wrote:
 > 
-> A mux controller cannot be read back, so the connector in use at boot
-> cannot be detected: the first mode request claims the mux for state 0
-> instead.  A move of the data path to the other connector is a mode
-> switch even when the role does not change, which is why it goes through
-> the same worker.
 > 
-> mux_control_select() sleeps while waiting for the controller and
-> mux_control_deselect() may sleep as well, so both are only called from
-> __dwc3_set_mode() on system_freezable_wq and from dwc3_drd_exit() after the
-> mode work has been drained; the role-switch set() callback keeps recording
-> the request and never touches the mux.  The mux stays selected between
-> switches, since the controller always drives exactly one of the two
-> connectors, and it is deselected on unbind.  The arbitration,
-> publication ordering and teardown rules of the per-connector role switches
-> are unchanged.
+> On 16-11-2026 17:28, Krzysztof Kozlowski wrote:
+> > On Fri, Nov 13, 2026 at 10:25:25AM +0530, Maulik Shah wrote:
+> >> Some domain idle states require system-wide coordination and are not
+> >> applicable while the platform is up and running.
+> > You repeated the property description. Say something more. Why they are
+> > not applicable when platform is running? So if not running, when are
+> > they applicable? Why?
 > 
-> *** AI-assistance disclosure ***
-> This patch was prepared with the help of an LLM coding assistant.  The
-> author reviewed every line and ran the gates quoted in the series notes.
+> On certain platforms CPU subsystem deepest idle state requires co-ordination with SAIL subsystem
+> such that both must be powered down in coordinated sequence. During wakeup SAIL subsystem must
+> be powered up before CPU can resume. The wakeup can take a second or more.
 > 
-> Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-> ---
-> 
-> Changes since v10:
->  - deselect the mux in dwc3_drd_exit() after the active role has been torn
->    down instead of before: mux_control_deselect() switches the shared High
->    Speed lines back to the mux' idle state, so deselecting first cuts the
->    data path off underneath a host or gadget instance that is still
->    running.  This is the order __dwc3_set_mode() already used: role exit,
->    then the data path switch.
+> Selecting this state during opportunistic CPU idle can therefore cause substantial wakeup delays and
+> repeatedly interrupt SAIL operation whenever the CPUs become idle.
 
-What about all the previous versions?  Please always include them all,
-right?
+The idle state latency times define that. No need for a new property.
 
-thanks,
+Best regards,
+Krzysztof
 
-greg k-h
