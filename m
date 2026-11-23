@@ -1,89 +1,122 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795466057;
-	b=Fxr0mTmvaAyzcZ/UcM9vEsV3aq+kRbAF8M3GyTHkJYK7ji+MoCuhLymy519+K1pVKffP
-	 ORM4FGXq3w3CGdG154pnNx5epFXWlAsS0xwiYYiVhUFJV6VNp/RS0M8N9Ndc8HPch/nZ9
-	 nb6SeLeWtU99mSu9h4X63TWkwdJhHHMdHfS7ufDXWxqJmaaeFm2OpoC9T457Gzcblp5gi
-	 42PKQOgSUNdvNjVNvHqTyWnrbhKeeulHrJUKreln7bylzPwxhjMZfbMxMZ1/rioRR/yxQ
-	 9uAoMGM1Wqqq5bfjRONd92gB5v75nzG5PwAT5X7etTy4hbpW455u4smk1CiPgytcFPQ==
+	t=1795466413;
+	b=Kh8IHHdYEPTK9v8U3TF2K52eejPp8sl9CQJ67cwDid6VhXt40wG0T2/WSwiaCLrPX9Wz
+	 m8wqOBpvAQ3Pd4zYBcv+6Ys6XwFtiqoxAW76DNAQmZGMcisoQB2FVqop7nX2KXgTiXlYk
+	 4Bzu7zcOLVXKoRmiaGRsA9IarDVjYXKfVg8gZLM8mwUnyF6elE/pTntkeo0gqlAaYvVsS
+	 Oad+he09a5B2zMNIfioqXk86LTLFbWs5+pswTlxOP5BrfBUajf6eLhfP2JyVaVbuhnMM8
+	 BuHijMdoJxwNKGOS7qRdYrltiogClmxrFZHPpH/eZwXRriZlilieO0Ryyn2EkPsA9TA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795466057;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key;
-	bh=hPT/ypmWmLMxLtJbyhU72b/6yrEAVjSw6rFwMDxvsHg=;
-	b=wm3Wq4NVsVhM4NG9Xw5QGbA0tf0y3UyLgCHlrSZlJbXRUHdnDs6G7E1APTieS3lYl8wJ
-	 +7FJy4RUHY+mqDXbadPPs8OJ2gx0aKYgfwtV/FbGq9ToMI1YIlqBlVclcdZepZymfY4Z+
-	 6sQbWtHGwaRaaJrbjSU8CWBYJZf99qjDGPiDi1AtxFO97t7Npz7u7H8bMjHfh5MNkcTjn
-	 dNKx1jMt7cKRiEI9oo0ePlEinsnRgRf9RLAEevk8RtvsgV/k5h1W1l0qfKg3jq6TsDwqr
-	 UUwQibnnbWiBeMlSMcm5dmWj3h5exZowiqmwDUMXmCE1h0AbVSbaG4bTBw4z4SsFByg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795466413;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=h7PuijnsQ8tBYoL70IAxVi7XWsD7KOhH4OGNYUBfaVU=;
+	b=cdAKlCtHA7Ym/qwPAV78ooIt+j+CrDOFCb8FTqVepXLQlitL1aMWs0JRGlSfiXRlwNEq
+	 6BgYzV1+adqMdzXhk3NrcRCiicXPzOkfQhk/R04GUlVAzbEFsCm9QB70a+OYclR8skNA+
+	 J1oh59VQ+apywseRbXIUdbjR3SXUFdxFqWeh8j7IC+vp2H3BZ3wptQ4zYP/6DgyIMGk8T
+	 LXQLQGUw+NwOmqb17QuuocXNb+ZIvrVZmQ96A3n3AGOV50JGGoDQmBcS5VyiWUPGO0ws6
+	 c9PvsPa+PX/0hWpFjFpc9hdAgWdAf7b/290Knu1YmO9cakb1WrXdhCvMEdwJnEiYKmg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VNYlOwFm;
-	arc=none smtp.remote-ip=209.85.128.45
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WnBgJwOg;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xw3scgOn;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 19C8160A262C
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:34:17 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 19C8160A262C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F0ED606A321
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:40:13 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F0ED606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=VNYlOwFm
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a35d5d4a20so37040535e9.2
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:34:16 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=WnBgJwOg;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Xw3scgOn
+Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANJuUMe720774
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:40:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=h7PuijnsQ8tBYoL70IAxVi7X
+	WsD7KOhH4OGNYUBfaVU=; b=WnBgJwOg453GEJCWBKdoHeY/cF+Hj++nt8m85ZPK
+	a9DPmCxom/SwOl5iZlfu4N4iQ8JcAmmQbrZj50iiGtqv3vAtbnpbd4JvqhJXdCeq
+	k9yxSbNa5IQUw1L23wrgtVIdydR6WhFvRhUzePb4+MbiTZiT7eZysKIncseC1djV
+	Ch0SqkDenUsZJFeFIFMBzoJH3F2j8cKoF17ITmCMtzT5wCyfCDqeEtEZH7jZhVaD
+	LYe68wLptLJ0+xameSioi79K3WKWsjhDkoGN5IxVUY72ikDmMyJJlQ8ol0l4k4+J
+	uPKq68Rh617/0MtAHEau+JuOdR70YS+Q8OvyTY8GOCAHIQ==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4ukqg8yt-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 20:40:12 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f5844cb60so680748785a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 12:40:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795466055; x=1796070855; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hPT/ypmWmLMxLtJbyhU72b/6yrEAVjSw6rFwMDxvsHg=;
-        b=VNYlOwFmrm+wLhEGoOMDJnlhb33JACLnJI2PJY6WoDx/+lw/0L8iwubY+Fe1T5seGq
-         uZOpHDJ8XNVSvY0CRcJTzls5ESPF9EJEteQRXiQCQXzG5DSRDqmPkOfoqugitUOKR8ti
-         h88EGkLgbTcUZz5hMLVudh2rLEHCHdcx2s0zsG6oPyJk/ijyqvJBXe0CJGxMIoIKJsXv
-         ucw/jA1j/R0pu+1/mT5GuEZdh23/cy6/Hp8C50+7ByE2ZlF3+vtEl340GDeE5NaXFKfS
-         wCVXj4rqIfT7XGkND+GsqDdX1A8i8BuGw5pjL+cury/90Nswk4eah2cqRYyqMffqhhpi
-         mh+g==
+        d=oss.qualcomm.com; s=google; t=1795466411; x=1796071211; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=h7PuijnsQ8tBYoL70IAxVi7XWsD7KOhH4OGNYUBfaVU=;
+        b=Xw3scgOnUzJdR/+OGgiguVjvKwtfvPz89tK/AtRGR/M7GYbDd2AqfNsgjGlpXrafTl
+         FjvLGyKUjYHaWYLlnwL5cdH8Kgu7K1vs8Ymq/ck0odRTgR3b9byFmtZwIKwO+iZNJBug
+         PgyiY4dFEUZHOaiBcBmZsMBAFrjctHqHl+D6RFml8JsOplcAg2LmZ0c1ChjXeJA9FXT+
+         CAaWOGOlkbcA+1Up5BMwC4o5JyrY6fZOR5hfsOdv938tBlLd04+mfev31wMBwEjSqTM/
+         TTngJsgvkdPV2SHUavVtyermhABPAegu/w5T89D39U2dIWv19k40TrOiQM3494GCcttv
+         +/bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795466055; x=1796070855;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1795466411; x=1796071211;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hPT/ypmWmLMxLtJbyhU72b/6yrEAVjSw6rFwMDxvsHg=;
-        b=E284eSxc3/9ztV8jAc0pRFM12suljb+iKg9bBAHwMy6cjpgIriNnc0tQRwRj6jakKh
-         ctd0w0OeEI2t4qmySM6eu3B4pyl3rkYJPpaCzMT+fkWfsXWIryY+Zxf4WVSOC3dltmhw
-         7Rnww9nuycvge8TAXY+PQAyB3vM/tT/eX2+dREsFxCYxmdk31RCf+mfOrzPUduWp4NE0
-         JP5ehVkTMzb56Lq35BFbuPbdqj+E3cw2pPKO1ZUAzNmcWOYbdYkzrNDSj6dEDhBMZXEu
-         mEgLdFVnW/mECRQfoEzZnEb8xAhoEIF9hordbsMWE2wP1UY14HboY4+suAvnylDD31Zf
-         EnoQ==
-X-Forwarded-Encrypted: i=1; AL+hErEcTlzDpPIzR/X1gD5E/OBwspl7hVf3LM/qDYOtHSSyP4YllTRVeHDw3FwoAqu4Wm0VsEXZ1XDQ5bkbbutd@vger.kernel.org
-X-Gm-Message-State: APuU4Z8qfQO6+5k/CdksjefcuD90zaqY9CDW9cBeiZtI8XTkYnvSJ/gi
-	ul0WRJIwwFxphhHF3iXtc0R4HVFzl7oK0Q4vPdMvD3QMkFDj2n5YUfuR
-X-Gm-Gg: AZFdTZfJ0a0krGFkGZMa4hVTA2ZdR/JBlf1PYeuRdBxSQFuAQknAXqo/uL5Q6oln9A4
-	VjNiNuNE7T8Qx2QwY7fWKe7GnwT2AzKqohms38acPM4g5aUT0+7s1NfegOdY3yhPJf/BXF3DTre
-	gxjhe3SddDI4vkvek7vWrAvdDMlUSu8waaqQ0v1WVPDoD32tOcWvqxL7yPdx88w7WxBGTicu+CT
-	SB/AVp3QdJBjMWEI9Hz9+mMUsRXuKNhMgsecYlGEWs2YnfMm7zlYTpcDnZLDUxXnuOSwm5bwftu
-	elVcY36DS0KghOvad9VnGvgcU1xjj1Kt/4S7Yrg7DGFeQK5SzO7vr9TElgkHEwF8wC/M69pCJUA
-	mhiVI+rl+5+HW0CYN6HP+QgGCgsRMRJ1WgctMlUEdWCID/b3tWoIO5dhHT8VKJvIpqCvlJCoatZ
-	FcLvhMloJ+fbyc8MZxZK91jCHBtTUeJJQ2AgymrpOaVMZw1iNKZ+F6FaJvfRj1YfEq/8cHtd8V8
-	150aXBraGgXM8fOoCdRrgcxd1WIq4xKl+yBqJ3t3iopbl/hEcXUusZyN7pzAfEfRsTikYldlRr/
-	FBZ6RLyKy+k0iOhhIR/Pt5S3oXs+zw==
-X-Received: by 2002:a05:600c:4e0b:b0:49f:e772:6ddf with SMTP id 5b1f17b1804b1-4bb8881ae90mr271461095e9.32.1795466055465;
-        Mon, 23 Nov 2026 12:34:15 -0800 (PST)
-Received: from unknown.local ([151.34.53.154])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb884b7515sm515946805e9.13.2026.11.23.12.34.14
+        bh=h7PuijnsQ8tBYoL70IAxVi7XWsD7KOhH4OGNYUBfaVU=;
+        b=gvq4ENuNRMCPbrWs7PIexB9x9SiJNDCg0OqCLL9faMnjBAsqTF4OFIXx0D35lf5P4b
+         L3OPl0qHLXfIPYEIBEfnlvtygeui9QqeBgqu5Ue+JyGvcXqWuZ0xWbItvu8ZccfaKyro
+         yOsnqYgsBhkIKGC4mqJkk/LbSYSaD/59dUM6vUUzYhk3wF3puKI78CNLhqNEvbzifOtE
+         hNEl62+DGf5wB8NQdkfABT9gW/wBTZN9dw7WJOfrZDLvjeo6lU0eKxPD57nnZqdOY0QJ
+         y1PPqGkquC/KlA8BVgIcsuoUaLgDtr4lETKHPWwFj9fboto+2YDXs67abG6vpumpNgtE
+         PkxA==
+X-Forwarded-Encrypted: i=1; AL+hErG++idA7YINIKikNV6PIJ36sd+EY2btOTzXy9gn1LMT3E5pyM+ZdmTiNEEowguuvRKS2uTaxOSbJZFE0bjZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z/n3zV9Z4/gV06RWHgxu/8mXnoxPu5hUJn8x6dIwGCYeymBLgji
+	3faIFF1ZTTc5BiLAGkqR+gooG8hG8LExAf8AN2triF7UPc5UUiQHPCzAm3RvqRkThivNpKRtLVe
+	UG7BIBWpJPQhEOtsDEv9CWnTFeBguJiEZ3I9YXfjaZhJzp1ok9l6TS0QqL7Rz9M/F7lYo
+X-Gm-Gg: AZFdTZeYozAD8V5DTeXpG4DHJ3hNCWTWBL2pGAHtX0AYDRr03Slq7uR7tYFr4GqX+qI
+	fMQ/NtwHNQVlGar7GKSq1kkVQ06x+9XnzYZaIZIbdjCv1/cA1uFkkQLV8+IwJlIVc4eTVME8Smt
+	nUqhyaQPbZLQH7zGXRVugbzYlG36tRkVgLUZJWP390NmP72ePryM/D6eJYrpLuR9UWxOZZGA/YA
+	UCG7rAnwDjvFhjM6HHvo98dev4one3AiXtaL/D+JFySJxqnqwUITshvX97n+MWJsNbTOTqbbtx3
+	bbrd0uLbX08vhX2IwSRGXpvhfkzXqG8Pwsp1MRiDgUSy2iJShTwipFJaSSIcVW+3HW5eNyic7Im
+	khfYkzmPOthgC+yaswaoVk2BLHM7bbyVVr2uxaQkVQIu64kf0IZJ70AR3EvkCSOi0
+X-Received: by 2002:a05:620a:2792:b0:93e:64ac:5dfd with SMTP id af79cd13be357-949b3402246mr2288598685a.3.1795466411268;
+        Mon, 23 Nov 2026 12:40:11 -0800 (PST)
+X-Received: by 2002:a05:620a:2792:b0:93e:64ac:5dfd with SMTP id af79cd13be357-949b3402246mr2288593485a.3.1795466410642;
+        Mon, 23 Nov 2026 12:40:10 -0800 (PST)
+Received: from oss.qualcomm.com ([188.27.161.77])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b10b5f6sm22561824f8f.34.2026.11.23.12.40.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 12:34:15 -0800 (PST)
-From: Gianluca Boiano <morf3089@gmail.com>
-Date: Mon, 23 Nov 2026 21:33:57 +0100
-Subject: [PATCH 5/5] media: ccs: Apply rule-based manufacturer register
- blocks at stream start
+        Mon, 23 Nov 2026 12:40:09 -0800 (PST)
+Date: Mon, 23 Nov 2026 22:40:08 +0200
+From: Abel Vesa <abel.vesa@oss.qualcomm.com>
+To: Maulik Shah <maulik.shah@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Kamal Wadhwa <kamal.wadhwa@oss.qualcomm.com>,
+        Mark Brown <broonie@kernel.org>,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Sashiko <sashiko-bot@kernel.org>
+Subject: Re: [PATCH] soc: qcom: rpmh: Fix use-after-free on timed out
+ blocking requests
+Message-ID: <d4zzqrljfmzgyyahf6fkpxvh3zqx5whpvnz2q2456ym6o5mkxf@zsmyjt36brhj>
+References: <20261102-rpmh-timeout-uaf-v1-1-f1fe9d38f1b8@oss.qualcomm.com>
+ <50103867-1f03-4346-8174-b7301ba3ddf5@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,137 +126,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261123-b4-ccs-imx376-v1-5-2b26850a6f11@gmail.com>
-References: <20261123-b4-ccs-imx376-v1-0-2b26850a6f11@gmail.com>
-In-Reply-To: <20261123-b4-ccs-imx376-v1-0-2b26850a6f11@gmail.com>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Sakari Ailus <sakari.ailus@linux.intel.com>, 
- Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>, Gianluca Boiano <morf3089@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795466045; l=3499;
- i=morf3089@gmail.com; s=20240402; h=from:subject:message-id;
- bh=VfDCx66Bt9Q8ssDuqyaFOOZuxp5MaGCTsBGPv8t+RG8=;
- b=NAftwknVuWdeZhsZgh/6X5zyWUZbkl202qCbHJEL29BwWA0IUWx/7BgmqO5i80iqHzD4qKiJ6
- 6mHO0e+HqvVDk176PadruzQefMIA//D4e/+mM70fA0XvtZsNzGlkz6V
-X-Developer-Key: i=morf3089@gmail.com; a=ed25519;
- pk=HsGrEQ3ia8BGGGO8/nUM2K2UX9JKvRPV+nbrVDGrYhA=
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <50103867-1f03-4346-8174-b7301ba3ddf5@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=Wu++otfv c=1 sm=1 tr=0 ts=6b04a4ac cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=asF+/XNaGoxFafzDDLC1GQ==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
+ a=Vw1ili4nxZjTFdjbWr0A:9 a=CjuIK1q_8ugA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA4MiBTYWx0ZWRfX71wwu0VG20K4
+ xqlntvzbUthAKi6Rxn8+Gq/h+yFrnTqxvj1MrmkAKwZLYsDbWn6ozQ72MJlffrMU3j31Yu+mHtp
+ xU4aoh28HKQJ3+Wv5badfSY5k/lpOGSpRXyndmGpawYqflU6Zj02UTI95d4oYsX6/moDShO8/x/
+ dXVVnj8WBq9v6rrPs+chPA+c46S0qm9izxwUAwH9AT9yVe48aT8Rbt5eTUU0x7l20WjjwMa5pe/
+ 2TiWYwpkSDu3kg21SHhUTXfW6R8JJsSYEu3yec6ciEwHVTUpD9JA51vMzJ6UHUJI5tHj3DHpVpP
+ 5Dm4Vlg5buNl4LYia4GEf33v2ITT4NTFJTwmbIJ8KhQh5hjEcQZpfPZJ3zOQMKC+cY/os9s/Z5C
+ dGagNCvg5H5pVTJuH9FuJPL1SFz3F1Yj49I0i9Tq+csMAkS4Twy59YLJUfrMzaxt4QhZCyqPQuM
+ E4YuwE48lAyAce+J0Yw==
+X-Proofpoint-GUID: -fa7ff4tpreJaVe5IyG_6l4pKsiuHDzE
+X-Proofpoint-ORIG-GUID: -fa7ff4tpreJaVe5IyG_6l4pKsiuHDzE
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA4MiBTYWx0ZWRfX9lxEvFi9guTX
+ /UlOxFglWcFwq3cI3uoKHYpuyl4OJQa61dOB34PZXKTK1tQAmkCLJqyvJc7D/8/+QdGgbSDV1rn
+ OtZRdJKZUCH0xHeeMa0j4zvv73HS7pU=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-23_05,2026-11-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 priorityscore=1501 impostorscore=0 spamscore=0 adultscore=0
+ lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230082
 
-The static data rule based blocks were parsed but never used. Before
-streaming, write the base manufacturer register set again (undoing any
-earlier rule) and then the manufacturer registers of each sensor and
-module rule whose if-rules all match the current register values, e.g.
-binning_mode, which is already written at that point. This lets one
-static file carry settings that depend on the readout mode.
+On 26-11-13 10:03:32, Maulik Shah wrote:
+> 
+> 
+> On 02-11-2026 16:16, Abel Vesa wrote:
+> > rpmh_write(), rpmh_read() and the ACTIVE_ONLY path of rpmh_write_batch()
+> > hand a request to the RSC controller and wait for it to complete with
+> > wait_for_completion_timeout(). If the wait times out, they return to the
+> > caller, while the request is still owned by the TCS it was written to.
+> > For rpmh_write() and rpmh_read(), both the request and the completion
+> > live on the stack, while rpmh_write_batch() frees them on its way out.
+> >
+> > If the hardware completes the request after the timeout, tcs_tx_done()
+> > fetches the stale request from the TCS, passes it to the tracepoint and
+> > to rpmh_tx_done(), which then signals a completion that no longer
+> > exists. For reads, the response data is also written into the stale
+> > request first. This corrupts the stack of whatever the timed out caller
+> > went on to do, or freed memory. rpmh_write_batch() even documents this
+> > with a "Better hope they never finish" comment.
+> > Fix this by giving every request handed to the controller a reference
+> > count and by embedding the completion into the request. 
+> 
+> I would prefer to use BUG_ON() instead of WARN_ON() whenever timeout happens
+> just like downstream does rather than to handle the timeout cases.
 
-Tested on a Xiaomi Mi A2 (Sony IMX376) with a static file whose base set
-is the 2x2 binned mode and whose rule on binning_mode 0 holds the full
-resolution deltas: both 2592x1940 and 5184x3880 stream correctly from the
-same file. Without the rule application full resolution output is corrupt.
+That isn't an option.
 
-Signed-off-by: Gianluca Boiano <morf3089@gmail.com>
----
- drivers/media/i2c/ccs/ccs-core.c | 72 ++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 72 insertions(+)
+From Documentation/process/deprecated.rst:
 
-diff --git a/drivers/media/i2c/ccs/ccs-core.c b/drivers/media/i2c/ccs/ccs-core.c
-index acea07d906f3..db98590c1ed6 100644
---- a/drivers/media/i2c/ccs/ccs-core.c
-+++ b/drivers/media/i2c/ccs/ccs-core.c
-@@ -1620,6 +1620,72 @@ static int ccs_write_msr_regs(struct ccs_sensor *sensor)
- 				   sensor->mdata.num_module_manufacturer_regs);
- }
- 
-+static int ccs_rule_matches(struct ccs_sensor *sensor,
-+			    const struct ccs_rule *rule)
-+{
-+	for (unsigned int i = 0; i < rule->num_if_rules; i++) {
-+		const struct ccs_if_rule *if_rule = &rule->if_rules[i];
-+		u32 val;
-+		int rval;
-+
-+		rval = ccs_read_addr_8only(sensor, CCI_REG8(if_rule->addr),
-+					   &val);
-+		if (rval)
-+			return rval;
-+
-+		if ((val & if_rule->mask) != (if_rule->value & if_rule->mask))
-+			return 0;
-+	}
-+
-+	return 1;
-+}
-+
-+static int ccs_apply_rule_list(struct ccs_sensor *sensor,
-+			       const struct ccs_rule *rules, size_t num_rules)
-+{
-+	for (unsigned int i = 0; i < num_rules; i++) {
-+		int rval = ccs_rule_matches(sensor, &rules[i]);
-+
-+		if (rval < 0)
-+			return rval;
-+		if (!rval)
-+			continue;
-+
-+		rval = ccs_write_data_regs(sensor, rules[i].manufacturer_regs,
-+					   rules[i].num_manufacturer_regs);
-+		if (rval)
-+			return rval;
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * Apply the manufacturer-specific registers of the matching rule based
-+ * blocks. The conditions refer to registers that are already set for this
-+ * stream (e.g. binning_mode). The base set is written first, undoing what a
-+ * previous stream's rules may have left in the sensor.
-+ */
-+static int ccs_apply_rules(struct ccs_sensor *sensor)
-+{
-+	int rval;
-+
-+	if (!sensor->sdata.num_sensor_rules && !sensor->mdata.num_module_rules)
-+		return 0;
-+
-+	rval = ccs_write_msr_regs(sensor);
-+	if (rval)
-+		return rval;
-+
-+	rval = ccs_apply_rule_list(sensor, sensor->sdata.sensor_rules,
-+				   sensor->sdata.num_sensor_rules);
-+	if (rval)
-+		return rval;
-+
-+	return ccs_apply_rule_list(sensor, sensor->mdata.module_rules,
-+				   sensor->mdata.num_module_rules);
-+}
-+
- static int ccs_update_phy_ctrl(struct ccs_sensor *sensor)
- {
- 	struct i2c_client *client = v4l2_get_subdevdata(&sensor->src->sd);
-@@ -1993,6 +2059,12 @@ static int ccs_enable_streams(struct v4l2_subdev *subdev,
- 			goto err_pm_put;
- 	}
- 
-+	rval = ccs_apply_rules(sensor);
-+	if (rval) {
-+		dev_err(&client->dev, "applying rules failed (%d)\n", rval);
-+		goto err_pm_put;
-+	}
-+
- 	rval = ccs_call_quirk(sensor, pre_streamon);
- 	if (rval) {
- 		dev_err(&client->dev, "pre_streamon quirks failed\n");
+    BUG() and BUG_ON()
+    ------------------
+    Use WARN() and WARN_ON() instead, and handle the "impossible"
+    error condition as gracefully as possible.
 
--- 
-2.56.1
+> 
+> In cases where interrupt never arrives, already HW is stuck with no way to recover,
+> so current implementation of having a WARN_ON() and allowing to continue to run
+> will eventually end up in BUG() or crash somewhere else.
+> 
 
+The two things are orthogonal: your series improves what
+gets printed when the timeout fires, this one makes sure a late
+completion can't corrupt memory. 
+
+I can rebase on top of your debug series if that helps,
+but I don't think either replaces the other.
+
+Thanks,
+Abel
