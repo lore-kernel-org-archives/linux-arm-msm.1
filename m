@@ -1,88 +1,49 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.161.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=13.77.154.182
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795472739;
-	b=cU3Vos2+/i5th07KM02BOF1oQeFREOMAqlfA/YXh7S80EJoZKpWfljqY/Fupayqwe1do
-	 v0kJD9ZM97CjIDNkoNnD2S4ukL/GMgtCtFEFTOPyRBEHx+6CHgzgTuW+UkpLsuBRxK1vc
-	 akYJDdhBkWlOUYTVAC6098U2hGqtrVqorfAX1yg0r9Cv0SPmeU51M1HRwdKIH8cKgQIjN
-	 xVYbx1++gSnAyXQVvJ+kHfg9Z2yKNYOmiBBiPQWbzAWGUXAA/1wkYhO+RIJaxcie5pnKC
-	 5e9muzk5hdyhyUjw+zy6XXTCIoE91lyAYTCivPL56sPQNizKnv9Q7sYSzRfq76cIz3g==
+	t=1795476504;
+	b=JPpw3+mYuFa37gMhOfUqBUoRdIf5HMfgsz+REPFRHm7Ans5e1JaLUwTMs8VGfcOnsQUI
+	 oCrWiLmDAP5IKnqefhTXc22t1E2jwT6ugWVPAwaNF5A9mgwLv+Qg0xsAYcYt62FQi4Tmh
+	 kdq32hhdpcSND2lr/AwFmey1fk2MUXWiEvrMOcxMVrJweQit0kJQY+yGxxuPQAwFcQxds
+	 tf7pVLmOVon3gZcmQyBNVtNypsEl6ETwcw2jygiXtAa85aO0cPb5sQC9xmFVergvnadNt
+	 Jnsn1nJl1Cg+RIS1cRqGvrO/amHHfcvijUvMopnC4s5lg5N6amyOC89gS0gK/DIRPQw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795472739;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
-	b=p3yjEKRjkcdbwvITKhMs0+4TUVoyZQqzklX8kzFfdFYJd4ZKuZSY9MJKKPA8iNN+vXtD
-	 wIbtVT88yFzt0BAtBSgnWwVouwfQ8gMER7Fq9bp58t/YWPv0GPASbW0VYCaxW399TRQUj
-	 U8MWI2+0MkXwcRaF6tV91VlyYwoev5bGLgCE5wRW6hUScj7YT03PDr6ZAw5fJkze1XVtx
-	 kXf0z4Hv0BH2iJXTz31XJUc1nZ4jEkRdufDZ+PYpK2KTv8VdF6vtmJTUJPrNOAmKF3QId
-	 ZqUgVsUCp/uVWOGGouLC46tgR6kdnRKPa/qRUPXwgu0b7D4HBJtq+MyM2ids/pM+vDA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795476504;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:To:Cc:References:Content-Language:
+	 From:In-Reply-To:Content-Type:Content-Transfer-Encoding:X-Spam-Status:
+	 X-Spam-Checker-Version;
+	bh=Z4q2lcvDeMyQnvMma/TSV0pjEr8kXRVVL/7uiZixGfQ=;
+	b=GmXV8TMZsQxCfITlv+MzVcNL5bYgDgcrpAx9d2SDpNcfhsJ10XCAVR6BILs2Rgp9Tlx1
+	 PrM+HPWkP73i1Y8BXm8y5RBaTkojVzAA7xz1H9zA8wdabtAj6+L7qysVlnRh1bb1o8jXG
+	 qk6Jv6bqNgrv6MIcUrmbuUQVbHpKGwWdxWaTLsTsrDF9WlTUbyombohma9mAoSDFoUW+0
+	 NozGRttGAp5H6lGCeImiwrD7p1dH3rPtGzosojCh2aINF9oI3xLGAiv1eiRFZcLF8F1PK
+	 t+T5/gVLABB68iyJDojqdCZaKgrbZNgJsptukIFfuDusf9x+1PxSSj15IrWd2JeMXbQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=riscstar.com;
-	spf=pass smtp.mailfrom=riscstar.com;
-	dkim=pass header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=6LEkh1Wz;
-	arc=none smtp.remote-ip=209.85.161.46
-Received: from mail-oo1-f46.google.com (mail-oo1-f46.google.com [209.85.161.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B5ABD606A326
-	for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 22:25:38 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B5ABD606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	dmarc=pass header.from=linux.microsoft.com;
+	spf=pass smtp.mailfrom=linux.microsoft.com;
+	dkim=pass header.d=linux.microsoft.com header.i=@linux.microsoft.com header.a=rsa-sha256 header.s=default header.b=GBCBOGHy;
+	arc=none smtp.remote-ip=13.77.154.182
+Received: from linux.microsoft.com (linux.microsoft.com [13.77.154.182])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E976E606A321;
+	Mon, 23 Nov 2026 23:28:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E976E606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.microsoft.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.microsoft.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=6LEkh1Wz
-Received: by mail-oo1-f46.google.com with SMTP id 006d021491bc7-71ab5e64742so2343758eaf.3
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 14:25:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar.com; s=google; t=1795472737; x=1796077537; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
-        b=6LEkh1WzWlOSIoIIHWHHvGGe8ls6F5uMHZ1h/oA0Mfj/yUszyLlz328XQa9sRllh0p
-         tVUeWXGJcqXx9ToqGSMoiqIXv1E7puZXYIJTrpse7wiOimDRxg1VWeA9864K5z7DuTPa
-         iDKLedXwVP1geqUl+GNOhRu11khMsxrj3SrIfw0k2lxgSTTsR5qEBPlQsbzZzVqnOoyp
-         64/NqX3sCgdpxbp7WX7Cx1QzlVVorxFLiiLf2bE72H+3UlP6o4AQCaJn0Ru4kBM/y6Iz
-         /V/6jfXFmv49jLvEo9diYhTSYIrK3tnOyQodcRn6CIPXedblij46nG12w6shkcsVS0g1
-         UZAA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795472737; x=1796077537;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=O1a7RAdIgYYpZ0y9e91WZapXgmnwOdHR9E+EflWRRo4=;
-        b=QtGkbDzGRyFs24gcF0L1U1doV0f4KS5fEbCb6ugl3/kuZLjmVdELNBbMgK0lZWEX1y
-         BzMSMwAj3JNF9dAnQh6v6QMHICDBZh10BxhoShLJrDH0bGBWPiQNBJLgPulm7RDz+Qoz
-         a37Su+/x36YAIiGkjTRQMDb8+BTtLarFjrXzmc2FzyAQuKpIAA2rdEpwdF3jQLAZv3/G
-         SPGB1h9Dqodqa8HfWisL9UzWcpsJX0LAuc0UQfwTSGN80rJK6wtODzaEEEYVSnggbt9H
-         5JpAQJJEOR+3xe4htfxOdwXgPDVHO1dHmBvLcEpeUeu356mEZTlyv4D/L8hiQuL7fcJD
-         u/+w==
-X-Forwarded-Encrypted: i=1; AL+hErG5+CvO4QLKMxvIiTVsGZiNKvQ7ugU+/sE1BEu7KPChEH+MTnGaWmjjhtRmU6BYO03LfQnPPiTcpP+KoZg6@vger.kernel.org
-X-Gm-Message-State: APuU4Z/NzDqHH2O7j+LgPa1hH+ypPVMZO0xgQojwOg64sxfYs01m0wy2
-	065Kb6eD9qB9l5oOyaVCf0tPULwiwo9OPTa37JBBGNrve/uqZYU205PHXQHd7qi9oZQ=
-X-Gm-Gg: AZFdTZd8Zcq2+ZErDzVZ9kxzqHzY0TS2cWCFW46naiDmLGf2p0fRqQWZJfwUO6ao/o/
-	qgIjkMw0LmOpViz1OxBUxrrnhA4MYKVRIFBUhonpcf6ONQ8iFcGvKdmDyfeneSGx4I8QB6vWHeW
-	M2N1kRKkV/JlE7Y/JXTnIJ6Rnn+WZEUcxznNgqzfQKbamrC176Cgh39Nh7j87oNPOm+SImZC5o7
-	IR7mNcGr672/c6fNsG3StYO2vtw+hgHXFukMG3bRTUR0sAcjsRyOGKroSN6ge/QhvXnOb2QLpLQ
-	MqQlXq7/NkU73GMDwLA08ME0CZHZn+u1SkH3rXvB3/KYTNU+UaDx2q2YTTfSA3H+oAPr83VA0G9
-	TlG1I71dXfHPygPiuo7Tu1PYv3kD8mw0gf+g62HYti2viL9vor2i1B80mmMo0P1CU3ZrSqsy3Qp
-	PV7yJuhv8srVUwuyM5MY8Iao1RghgZXWZ+SC2oPFvW4m3Dj09K1PI6pa9dyrqiVEwDR2xPgE3uc
-	XNsg+rTV2NXubbb4EWWASookvnN8DC6GCQj6pbiBHbXFTBad/1xpsmt8+sx0nB4wKfAoqmLcgJe
-	yWACtxaVzWrCW73IEgzPFDQraUhkVIcF
-X-Received: by 2002:a05:6820:1391:b0:71a:dd93:2974 with SMTP id 006d021491bc7-71b39039602mr10599042eaf.0.1795472737591;
-        Mon, 23 Nov 2026 14:25:37 -0800 (PST)
-Received: from [172.22.22.28] ([76.156.233.211])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-71b380e4a6dsm8511306eaf.13.2026.11.23.14.25.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 23 Nov 2026 14:25:37 -0800 (PST)
-Message-ID: <ca6115bb-1c45-408a-be55-68b74977a380@riscstar.com>
-Date: Mon, 23 Nov 2026 16:25:36 -0600
+	dkim=pass (1024-bit key, unprotected) header.d=linux.microsoft.com header.i=@linux.microsoft.com header.a=rsa-sha256 header.s=default header.b=GBCBOGHy
+Received: from [192.168.159.19] (unknown [4.194.122.136])
+	by linux.microsoft.com (Postfix) with ESMTPSA id DCBAB20B7167;
+	Mon, 23 Nov 2026 15:27:54 -0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.11.0 linux.microsoft.com DCBAB20B7167
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.microsoft.com;
+	s=default; t=1795476499;
+	bh=Z4q2lcvDeMyQnvMma/TSV0pjEr8kXRVVL/7uiZixGfQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=GBCBOGHyS/woweuMXp/5IiE28nI/q/RWX2fOSyY1oqRdeq6mlJhA0Uy5CY+vntB9X
+	 OBTSWMmuYPNMyZOn37AlljwgO2+M5LQQTDHUqK0know9vyyT8rD60yDr0IBXlfgUHN
+	 T50QratbJQPYi89ozm+6Qtlk7+5eXdmnoqz5Vvmg=
+Message-ID: <ba8c4cdb-ba60-4166-8d0f-812db13ee90a@linux.microsoft.com>
+Date: Mon, 23 Nov 2026 15:27:55 -0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,63 +54,125 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 08/10] remoteproc: qcom: Skip unregistering uninitialised
- SSR subdevice
-To: Lee Jones <lee@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Mathieu Poirier <mathieu.poirier@linaro.org>,
- Rishabh Bhatnagar <rishabhb@codeaurora.org>,
- Siddharth Gupta <sidgup@codeaurora.org>, Alex Elder <elder@kernel.org>,
- linux-arm-msm@vger.kernel.org, linux-remoteproc@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-References: <20261123172140.3547896-1-lee@kernel.org>
- <20261123172140.3547896-9-lee@kernel.org>
+Subject: Re: [PATCH 03/14] mshv_vtl: convert mmap hooks to mmap_prepare
+To: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-sgx@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-aspeed@lists.ozlabs.org,
+ linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+ netdev@vger.kernel.org, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Madhavan Srinivasan <maddy@linux.ibm.com>,
+ Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>,
+ "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>,
+ "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+ Shrikanth Hegde <sshegde@linux.ibm.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ Jason Wang <jasowangio@gmail.com>, =?UTF-8?Q?Eugenio_P=C3=A9rez?=
+ <eperezma@redhat.com>, Xuan Zhuo <xuanzhuo@linux.alibaba.com>,
+ Jarkko Sakkinen <jarkko@kernel.org>,
+ Dave Hansen <dave.hansen@linux.intel.com>, Thomas Gleixner
+ <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+ Borislav Petkov <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.com>,
+ Paul Moore <paul@paul-moore.com>,
+ Stephen Smalley <stephen.smalley.work@gmail.com>,
+ =?UTF-8?B?T25kcmVqIE1vc27DocSNZWs=?= <omosnacek@gmail.com>,
+ Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>,
+ Ryan Chen <ryan_chen@aspeedtech.com>, Billy Tsai
+ <billy_tsai@aspeedtech.com>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>,
+ Scott Branden <scott.branden@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Richard Cochran <richardcochran@gmail.com>,
+ David Woodhouse <dwmw2@infradead.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>
+References: <20261105-late-2026-mmap_prepare-v1-0-c56aadfbab8a@kernel.org>
+ <20261105-late-2026-mmap_prepare-v1-3-c56aadfbab8a@kernel.org>
 Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <20261123172140.3547896-9-lee@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Kameron Carr <kameroncarr@linux.microsoft.com>
+In-Reply-To: <20261105-late-2026-mmap_prepare-v1-3-c56aadfbab8a@kernel.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 11/23/26 11:20 AM, Lee Jones wrote:
-> If qcom_ssr_get_subsys() fails in qcom_add_ssr_subdev(), the function
-> logs an error and returns early without calling rproc_add_subdev(),
-> leaving ssr->info NULL and ssr->subdev.node uninitialised.  When driver
-> probe unwinds or the device is later removed, qcom_remove_ssr_subdev()
-> unconditionally calls rproc_remove_subdev(), dereferencing a NULL list
-> pointer in list_del().
-
-At first I thought a failure seen in qcom_add_ssr_subdev() should
-mean that qcom_remove_ssr_subdev() never gets called.  But now
-I see that doesn't return any error, hence the check for a null
-ssr->info pointer is necessary here.
-
-So... this looks good to me.
-
-Reviewed-by: Alex Elder <elder@riscstar.com>
-
-> Guard qcom_remove_ssr_subdev() on ssr->info being non-NULL, matching the
-> GLINK and SMD subdevice teardown helpers.
+On 11/5/2026 1:05 PM, Lorenzo Stoakes (ARM) wrote:
+> Move from the deprecated mmap hook to the new mmap_prepare hook for both
+> the mshv_vtl and mshv_vtl_low devices. These only set VMA operations and
+> flags.
 > 
-> Fixes: 5abfe5cf0b83 ("remoteproc: qcom: Add per subsystem SSR notification")
-> Closes: https://sashiko.dev/#/bug/linux-5594c348-0c41-4482-b001-481878256d30
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Lee Jones <lee@kernel.org>
+> Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
+
+I don't see this causing any functional changes, but quickly ran basic
+regression testing on it anyway. I couldn't find b61fa14ce; I tested
+based on v7.4-rc1.
+
+No issues seen.
+
+Tested-by: Kameron Carr <kameroncarr@linux.microsoft.com>
+Reviewed-by: Kameron Carr <kameroncarr@linux.microsoft.com>
+
+-- 
+Regards,
+Kameron
+
 > ---
->   drivers/remoteproc/qcom_common.c | 3 +++
->   1 file changed, 3 insertions(+)
+>  drivers/hv/mshv_vtl_main.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/drivers/remoteproc/qcom_common.c b/drivers/remoteproc/qcom_common.c
-> index c53190f0c537..6fd92c33392b 100644
-> --- a/drivers/remoteproc/qcom_common.c
-> +++ b/drivers/remoteproc/qcom_common.c
-> @@ -537,6 +537,9 @@ EXPORT_SYMBOL_GPL(qcom_add_ssr_subdev);
->    */
->   void qcom_remove_ssr_subdev(struct rproc *rproc, struct qcom_rproc_ssr *ssr)
->   {
-> +	if (!ssr->info)
-> +		return;
-> +
->   	rproc_remove_subdev(rproc, &ssr->subdev);
->   	ssr->info = NULL;
->   }
-
+> diff --git a/drivers/hv/mshv_vtl_main.c b/drivers/hv/mshv_vtl_main.c
+> index d8225242c73f..e372d4c0188d 100644
+> --- a/drivers/hv/mshv_vtl_main.c
+> +++ b/drivers/hv/mshv_vtl_main.c
+> @@ -832,9 +832,9 @@ static const struct vm_operations_struct mshv_vtl_vm_ops = {
+>  	.fault = mshv_vtl_fault,
+>  };
+>  
+> -static int mshv_vtl_mmap(struct file *filp, struct vm_area_struct *vma)
+> +static int mshv_vtl_mmap_prepare(struct vm_area_desc *desc)
+>  {
+> -	vma->vm_ops = &mshv_vtl_vm_ops;
+> +	desc->vm_ops = &mshv_vtl_vm_ops;
+>  
+>  	return 0;
+>  }
+> @@ -852,7 +852,7 @@ static const struct file_operations mshv_vtl_fops = {
+>  	.owner = THIS_MODULE,
+>  	.unlocked_ioctl = mshv_vtl_ioctl,
+>  	.release = mshv_vtl_release,
+> -	.mmap = mshv_vtl_mmap,
+> +	.mmap_prepare = mshv_vtl_mmap_prepare,
+>  };
+>  
+>  static void mshv_vtl_synic_mask_vmbus_sint(void *info)
+> @@ -1283,10 +1283,10 @@ static const struct vm_operations_struct mshv_vtl_low_vm_ops = {
+>  	.huge_fault = mshv_vtl_low_huge_fault,
+>  };
+>  
+> -static int mshv_vtl_low_mmap(struct file *filp, struct vm_area_struct *vma)
+> +static int mshv_vtl_low_mmap_prepare(struct vm_area_desc *desc)
+>  {
+> -	vma->vm_ops = &mshv_vtl_low_vm_ops;
+> -	vm_flags_set(vma, VM_HUGEPAGE | VM_MIXEDMAP);
+> +	desc->vm_ops = &mshv_vtl_low_vm_ops;
+> +	vma_desc_set_flags(desc, VMA_HUGEPAGE_BIT, VMA_MIXEDMAP_BIT);
+>  
+>  	return 0;
+>  }
+> @@ -1294,7 +1294,7 @@ static int mshv_vtl_low_mmap(struct file *filp, struct vm_area_struct *vma)
+>  static const struct file_operations mshv_vtl_low_file_ops = {
+>  	.owner		= THIS_MODULE,
+>  	.open		= mshv_vtl_low_open,
+> -	.mmap		= mshv_vtl_low_mmap,
+> +	.mmap_prepare	= mshv_vtl_low_mmap_prepare,
+>  };
+>  
+>  static struct miscdevice mshv_vtl_low = {
+> 
