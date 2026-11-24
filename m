@@ -1,51 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795504488;
-	b=Ygebs1ZO32pSEaamcDVMkhRs+MgQTUyqM5lh7rbfC/Ym8IxGYehWN+ycI3V/dJ6kS3+z
-	 8KUZLV7rSjqBL51oC+TyuXo5K6F0Y3f7nDTRTXdEmB9x9U/iRCy9PjvEzSmN4B/Gi6qjj
-	 YGjlSVnlSNQyqj1t8rQO7H3RtS8KVadXbKUfoDu2g6eGIPt7Yd90Gg2HrTmQWIAu9EXTV
-	 /iyZLApmKhLNFF8M7PQe4I+q8jXeuEUnYP8MzCfldRVNEo8ckgyr58SuP8dOXhQ1q1eHX
-	 wTBC8dKrp8nn0mX4UL5swsTcRhCDcpULiRYTyYDb/cKN7bXFMizLqp4urBdddq+deXg==
+	t=1795505345;
+	b=QLUMvvCEUy1PFYOoDz6xdelWrTxXM8ptype9Jc7j9nwnmAsXp6tM+m8lV5De73QOdATb
+	 oS78fcnysqnjg2I8fMhC25YZc5BqvfJdte6ljne6fUpqe978OAVWR7StmMMzvDw+WQ9UK
+	 2LrEyYUm4cnmGZf6Zx3PVK6w0wruC4X8ctfP1cjc6rEA1NhEjAPRvCr7Cw/+l2k0mCmIP
+	 fkDRqeTGejxiDUAqzO29s4J8ITDYbIyuDPemuuQvj3FR15NZkms0RN70MnxoGn/VFtpns
+	 qENiU+o2DO7aQzofUam5xLFOszBq68LxvNzpAkRK+IvA8J2uxGmW3INmDEm25IBCmtA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795504488;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=CqEAR08nQp8aIEuUnI1o4jRsfl5ovOtX/gNUZQpYW3U=;
-	b=E3+9zmn2zELNaEx9CW+bgp9BIpPGv7abOBDTdmv+21ZqWt/HrRLqvPVMBm/LK9T7XVjv
-	 NnJziXZXjZMqoXLZHdueh7b6q9ZNKQn1tg54LWeW6i4c0qqLTcEk+R3rJVxAbkHbVvXDW
-	 aMkaP/ZbdD9ooau5IyxCDxihQ+0E6AXDcjfmT98zcughcaiIusvo83Rf+y1Cg9rtKdNrh
-	 hjk4TM5NqB9sDhpEBucf8oJsFNHA6cynZiUwXhA9T29NXBCNrEJzSorJ8xpyh2l3WXqHF
-	 RYVSKyYTsS7gZ4dz58J0opJuH0Xf34BUG6ft2Cp5bqxr51P8RdrXfwXthG9G+k3L4SQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795505345;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=jchSLJsqV4qE+3DYHPFPVhJBS7qk1PO5V8blsH44owM=;
+	b=qe5z2XK87c4na0/+4GNNtsHyFbQ9P5RMSvolJETKdQT1u6/tDQLhwk0zL1NnIjEwAVKz
+	 gz1PLYLwEap81T9n6k+f7vhX35Bd6IEWQXz8svFiZnqvu+EeAvF2xVeqtGT1vufHlNSeO
+	 I4fDC8ryjI1Rg/GENP3cEKDik/n/UOXyqVwTZaG0BWboMNnV/v/Fq4MI812fBvjybN+2B
+	 tnp56ayXK8ezVT0o5jcPKfsU+NyCfxViVJg13IEhL2bPO1dm4I/cVZM7dpKAp4SWGCK9B
+	 iDqni+cgXVpkC/a81H8tYnVGQi3PBPUpytCGG4UeVNS7GQAo6K2qsnyV2xri/Nn9Z9Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=lkvp2TwY;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k+lCVSWv;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08EC3606A31E;
-	Tue, 24 Nov 2026 07:14:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 13868606A326;
+	Tue, 24 Nov 2026 07:29:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=linuxfoundation.org header.i=@linuxfoundation.org header.a=rsa-sha256 header.s=korg header.b=lkvp2TwY
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id A371F1F000CF;
-	Tue, 24 Nov 2026 07:14:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
-	s=korg; t=1795504487;
-	bh=CqEAR08nQp8aIEuUnI1o4jRsfl5ovOtX/gNUZQpYW3U=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=lkvp2TwYzfe6wOvlTbzBwK+7PZRJ4qiBWlVGtyfMMMeDzk5dCNrNSHUdWeG7TF7Tm
-	 1FWfWV9I8AzVJJ1NWpxz4NivFiBmmO5E4kK//1bmUa4eXRHAnozLU601xm+pE+qLGE
-	 IcSGtAflSQ7gtMaLjKLkE5JvPSZ/YrAVzKB4zuJ8=
-Date: Tue, 24 Nov 2026 08:14:44 +0100
-From: Greg KH <gregkh@linuxfoundation.org>
-To: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Cc: Thinh.Nguyen@synopsys.com, robh@kernel.org, krzk+dt@kernel.org,
-	conor+dt@kernel.org, devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v14 0/3] usb: dwc3: support two connectors sharing one HS
- data bus
-Message-ID: <2026112405-sniff-untying-8990@gregkh>
-References: <20261124015002.1426767-1-xiaqinghuan@mail.ustc.edu.cn>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=k+lCVSWv
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A3A21F008B2;
+	Tue, 24 Nov 2026 07:29:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795505344;
+	bh=jchSLJsqV4qE+3DYHPFPVhJBS7qk1PO5V8blsH44owM=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=k+lCVSWv3bjRodISlhG7FCo3FHN8ywi0Fjzt6a2a/CV5dcdf3tI7fbUwI4ReA2SjJ
+	 DkdOr0tyDHnId9V92+vPHLyXjRXLBn8GRtwAwKo1fkYm6fejFst3pWHigGYH1ZRtMA
+	 ljZsW4Y33EQgmIrcHLWEmlDH/Rl0aTgYUCY/viaU9mAJWYUKQ6DyWGsqenbam+5ALl
+	 /TsSD8eSmawHGOio8NJaLjC0Ce0kNAHKyuZPl6YMzvvgY13rNqpxOJu6TQ1Dh0SGrV
+	 IF8dONHlysNau47ceXfYuRKlAg9NX3bSbxUjm63n28mK/r+MB7ufhHLCWUOmznUTLP
+	 TfAswFLJtKk+w==
+From: Vinod Koul <vkoul@kernel.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ linux-phy@lists.infradead.org, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Cc: linux-kernel@vger.kernel.org, Mark Brown <broonie@kernel.org>
+In-Reply-To: <20261123190541.262138-2-krzysztof.kozlowski@oss.qualcomm.com>
+References: <20261123190541.262138-2-krzysztof.kozlowski@oss.qualcomm.com>
+Subject: Re: [PATCH] phy: qualcomm: Allow compile testing a few SATA and
+ UNIPHY 28LP drivers
+Message-Id: <179550534221.327723.5344267836374338084.b4-ty@kernel.org>
+Date: Tue, 24 Nov 2026 12:59:02 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,24 +61,26 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261124015002.1426767-1-xiaqinghuan@mail.ustc.edu.cn>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3
 
-On Tue, Nov 24, 2026 at 09:49:59AM +0800, Qianhui Xu wrote:
-> Two USB Type-C receptacles can share one High Speed D+/D- pair if a
-> multiplexer selects which of them drives the controller.  This series
-> describes that in the DWC3 binding, adds the endpoint-scoped role-switch
-> lookup the connectors need, and drives the shared data path from the DWC3
-> mode worker through the mux controller API.
+
+On Mon, 23 Nov 2026 20:05:42 +0100, Krzysztof Kozlowski wrote:
+> There is nothing architecture specific relevant to building of
+> PHY_QCOM_APQ8064_SATA, PHY_QCOM_IPQ806X_SATA and
+> PHY_QCOM_UNIPHY_PCIE_28LP, so allow compile testing for increased build
+> coverage.
 > 
-> No runtime testing is claimed for this version: the mux path has not been
-> exercised on hardware.  The series was reviewed statically and through the
-> gates listed below.
+> 
 
-Please test on real hardware before resending, AND also cc: the proper
-mailing lists (you forgot the usb list).
+Applied, thanks!
 
-thanks,
+[1/1] phy: qualcomm: Allow compile testing a few SATA and UNIPHY 28LP drivers
+      commit: 910b8ba234c00f91aaaaf102e17b8c5b539b3e17
 
-greg k-h
+Best regards,
+-- 
+~Vinod
+
+
