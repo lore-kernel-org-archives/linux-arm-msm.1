@@ -1,84 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.51
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795539923;
-	b=C4n1oh2dplzq2tOedgmcrjy2DrUy8woqwoMZhqkkSCkG1rII3pl8wkGkIOe2TWOVcJOQ
-	 8gZ6CmLl+gWgyLg7Jhqg4o4OHCc+GoBIiF0XZLLVOjJ28QRSlkVagp8nKkT7tr8tI1dmM
-	 q22rRBWbVE4XbEN/QL2n50re/AwnaAoFOhMfzG7blqL1oKimLwNEI1+A/I9ltK129jQVr
-	 T8IoPF4geQGsy0zk55JEmhfGd+a0CV46b0OEo8++HRuj1aoM3cTVMH5dL4+zDPSM9U3uR
-	 RpVA2N99rCF8wtCfck8MvQeKPoXIIFUNlxFWPbbCnY+od2BL3qGRXz3T5Y4RUVzuQhg==
+	t=1795540468;
+	b=R+hXc1Rpiy9CoRDlYRtzXUAR03oU8Z0pBnaBBZ2tN08N2gM/9SBKHsMcnEgjcLWacFTA
+	 zPtKABjxi2xw1rrdX5XwjRUKjY17BSZ4sVrzda+fyrf4fguEMYbzhin5YPUlGD/D9qpx3
+	 XGFjljHlwEHI6+yBqgudId3TDpwRb79tsUm2lSv2PKlsfh11FxVGqVA20JSjEaN/hQnR/
+	 KT35UYO73Xa2BXk39ah26r0EFwCt6JR3XOd5vrcUH+SxACKAHZWUB0PrQQ0M+WZHmch9g
+	 8YlApb6o6fFGI9hXYsH5nMWc89lCNzjuneCsPNOH0OpmGVKr1e6W78jtN9HyDAbBsrQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795539923;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795540468;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:Content-Type:MIME-Version:Content-Transfer-Encoding:From:To:Cc:
-	 Subject:Message-ID;
-	bh=ffk4YQzeNnCAs3ZskrsO2BWcOw3Pl3rB7ma4V38WJp0=;
-	b=m/GeV3XQc6BNrP75R6n13B3U90dqhoUTrlGYks9OHIzl4qtAa2zyJq91G+TZh00U/U8U
-	 3osRH2ioAPfBYlCqFGE5n5Tj2t6jIS/qOQCdhvVMvGWjYzqPsRsaHPcLEheFb86reuZfv
-	 yER2DhD+m61NbaS4KPrH2Y1YzyUCjEjOAqLFDQmWB4hWL56rBu/Q5Q29eddvndmtkIrXq
-	 FB4HzOr2vSqe7cz9i06yvCAx7CgEhiU1U9lr2ZoMXbE2E5ZU7m2s1TBa+gCWrCGR+zZwG
-	 iibi1FZpjHvY+2v5580ThO6p9K8S2Iu3C7dZ3vnl8q3RVuFfta3hoJ+t1p8BozJKZCw==
+	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=Hd+I9pXW0sdvyEhQLvxNgU1qRGdrRwFhnl9rqEkxAvw=;
+	b=HemnIMSIfDieU+uQBduBqkbT8mQe2HVrRrunkd/FSKRtpTqIT4LoN1xYdg4R5a3x4SbN
+	 QowAoev8ZSIR7gWFW5QBMw8H3xiJlu2yBbsH5A3k35cREO/PSVW994lqfAcXsdLhSHCPg
+	 tbV/uuTWNFYCuqADZiT6gn5rHg+vRmloNOmjp6v0Z3mwP5UPLawA3jvq6H/Unu50gJOgZ
+	 PSGyyxgFUqwctwPBHFHM2Jvi44RjlR54i/+sxNxodrh3dnrcLSiRcenZpfwxDuggDqEaT
+	 n3oHeableLLsYhno3PcR2k7BLsdhWzrpU/wuZR+C8B7bYVDGokLq3K5V3RfM8wQhyeA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="Hrg19vq/";
-	arc=none smtp.remote-ip=209.85.221.51
-Received: from mail-wr1-f51.google.com (mail-wr1-f51.google.com [209.85.221.51])
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=hAzaf7HV;
+	arc=none smtp.remote-ip=209.85.128.50
+Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85222606A32E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:05:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 85222606A32E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4B553606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:14:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4B553606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Hrg19vq/
-Received: by mail-wr1-f51.google.com with SMTP id ffacd0b85a97d-4aa5833c263so4600342f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:05:23 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=hAzaf7HV
+Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-4a3517554f7so44117565e9.2
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:14:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795539922; x=1796144722; darn=vger.kernel.org;
-        h=message-id:subject:cc:to:from:content-transfer-encoding
-         :mime-version:content-type:date:from:to:cc:subject:date:message-id
+        d=linaro.org; s=google; t=1795540465; x=1796145265; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=ffk4YQzeNnCAs3ZskrsO2BWcOw3Pl3rB7ma4V38WJp0=;
-        b=Hrg19vq/nmpSkshYEQFNnq4MLH9pMGwVNXUeMCELtxzVyGYYj29mgWksjtcFIbDwLs
-         AbJr0FbAGIj+OAuwkYGhJtjtlr84P51ClxGM12lnimBaq5nZjaUo6XVrgSqlCu45b6gs
-         pn99ahpQAypu7stapx4vvOj5QU4mJAK+RitHmpV9YiPOZa6J0blVCNu62ImeQEjWQpQw
-         r36sH8i/APTE1TatM001bN5TFmc2F6mKrGE9qpuEXnBngCCHUflgS8ih70GW9HHwfAPL
-         ghi+s2geL8FoIke3QBdPkgdEQpCphhQKV7E7z9Kgsn3s8vc1uUvB1HgMvM/ZudeKtE6f
-         SWJg==
+        bh=Hd+I9pXW0sdvyEhQLvxNgU1qRGdrRwFhnl9rqEkxAvw=;
+        b=hAzaf7HVGSe6Ta8UOuiGwSzU8wC/W4gE7QFjKOfpPImYeKL433CsG+nsm0XitiI1GD
+         y17PfOXXz7bojs//ht5Lr4ZdVftlbCUunxgWR9BaPcDiKpP+RXQZ6+XfanXrgdokC/FV
+         ORgCbrv+8zod2SEdmCbDWYMw0PgTFbBAIg04iUG6aI1/aJOdtcSgB7e8sfdU1iKK74RB
+         QAj8u88PbW5EgVa9t1dncQA9pWvfFM7cA/5jINelt96IdYPjyU50Qz9qQa5Cpf002GMH
+         UVfpiSLYB3rLu3FH4KQzPF6Xay1mtVXfpQmtJrRjG6kB+BjqoH4Itm/RUD8wEiiXrlGA
+         MM6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795539922; x=1796144722;
-        h=message-id:subject:cc:to:from:content-transfer-encoding
-         :mime-version:content-type:date:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=ffk4YQzeNnCAs3ZskrsO2BWcOw3Pl3rB7ma4V38WJp0=;
-        b=F3VJcIUjdsnuC2OuEVakDJX/00lUvr323FhaW9xjVvXo95u84B2qH8YfmMQLe1Cg9q
-         yhubPEcxBOuwaPTi7D+q572bPN0Aryfx6KsHVKtaV/fkVCyoR94gQ4D0zrLS2aNPZqOp
-         g0nEsmbema1RT3FcHUJtq3r3WeGqvkNzps8oOvorVzP0zj9lVxztwekggSWvPujryqIo
-         1ykj2Nb56fpFqpbBW9hrdlz8V/Fk+h66+kghKKR03++RYxuilJOI78rjaHFpB/6xpGrv
-         ZopKDx0D0zo7WZTF+uXIhIIXeqgMEP+HVnGKlkZT5Jo7S73dLnV2YrxHm4FLyLiusqdF
-         Xi8w==
-X-Forwarded-Encrypted: i=1; AL+hErGebkOvnNnMu5m8fYaOpv1sh65fB4a0XCoRa3OwPm6kAfS6w1tOeQ3mKaLrPCWfbqF22vK3/IuQKhHlq6Ru@vger.kernel.org
-X-Gm-Message-State: APuU4Z9uTARoNM3VoyhJjsNgDcTu6ogQE7c+PYVUN529iZV6TrHIZypZ
-	hGj94wcvtf7HMCQMu65NqwMtxQjbJvjjC+PfaP5u0xwxd4GGoxZ2ZWku
-X-Gm-Gg: AZFdTZeds0BN9F8ULoZYmzQtWQTdQiBcIFewz+KWN5dBgI+3qrv98M31soJE+0nz1yn
-	cwvreYVgYKsaibe6o6G+9LKJFKzXQhXH1Pd0CZMlc+eF+zrrYhu+BuF30tqXzWIsvfhtJk1ZRLo
-	+4iFGIgS+QU5ekTG3O1MKuAJwVuGRdL+i/0+O2C1enK1XgeqHujydszI27r2MaNogtLzMUYCorq
-	vbGxPU3NrP6UXIIZzaEiBe564n/aBaez7Erlkh5kA4NvgHCQm/RD5r69KN4pFVda3fDl9SwngaT
-	x+JMATfw7Ku/5PfsPg77i49+YtbZu2gJWfolCy0Qo0TLOOWH2uLXUttPmJCqWuUl21m8CPshdfX
-	KZJxT58YRoHNy/LmiOf6JmruEAyUnYRHm/OBCswFc6Z/1W7XmEqTzvJqQrXVjQjFxtdA52iuxvx
-	ab28neDkjwZXHdjdqfOqNOTGFSdkMIOEa7A/JWyWRr5zCDeHMuITE9QoSZQbmYZ4GsXwwIQHpez
-	WO+B56Yn9iTBcSEMOVCm+hmjmOcIDLUVxh0sfT+jrca1hhx+6qrKFl5
-X-Received: by 2002:a05:600c:37c9:b0:4a6:eca1:7d5c with SMTP id 5b1f17b1804b1-4bb888251b4mr276173155e9.32.1795539921735;
-        Tue, 24 Nov 2026 09:05:21 -0800 (PST)
-Received: from [127.0.1.1] ([196.237.227.176])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb884865a2sm458176075e9.3.2026.11.24.09.05.19
+        d=1e100.net; s=20260707; t=1795540465; x=1796145265;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Hd+I9pXW0sdvyEhQLvxNgU1qRGdrRwFhnl9rqEkxAvw=;
+        b=ISNwqpW0f+JEfOnwoV5oE1aH12wtB5k8Cz6MquKRXeAmezMs/uj8QtX5/GkHEL8jUX
+         bJ18PBw7F+7XdFvJ+If27PGWBApWMy7VTBJ6NRPARV+PLB2AfthNhqYjWf8mO3c00zEf
+         TxpwjKtlYGZYnn/+1TaEBSYtOCIhbLomXIlORuuMuPqAPwgJKb8/qCh+078LUVbJNhwB
+         qYONU/kdk4tHOO10RoYH/oZzVLgH7PRA2tWP5JIoLOlBBK2snHOgVfpVNtxHnW0Wr8b0
+         eAVYJMUUGx81vBQ/l74j1T+8sUxrgf0GSnQGVfZTKi0KUn/GiWedR0SMO+vjhuUvdcvT
+         LnTQ==
+X-Forwarded-Encrypted: i=1; AL+hErHwM8MM8tz4hlUs6DiT8zN0lsR6HLo7qIvUC6QKSrXShRSGP5a4k0tHMmFThwsXK/tJNnm3FC0U7P/AWwqQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z+KxYB4QCDipur+D4e0spFHyHajvq+XzbDtsPOtxINLbfLGT0JW
+	RLSjVRYVmd6NjoX9+12+DhTn+G020OCbSOm95bywPwjdJOai5ZMi3HUhHL5Q2IuopDvbAiTLkll
+	tJ3ICyQ0=
+X-Gm-Gg: AZFdTZeJ87ON74+PC+ycz62g8UsaruVVxEy3m3IHOLEqN1it9LOCRaxwe3dCbVTXCoD
+	gMFK8fDG/O5Imo6rAXwlqjRS0xsVuQBA44NF/LtPBIvxSoY7mLrzgoV2/HJrLrsZ22t+4rdfOLZ
+	ctc71lpg3A1PhGWb2mYaJZEsTllVyFQI7nr/EqINc92PmEwdoGLcATwtY33QfGIfHCRRQeCLAaN
+	UeIjMn11FoQfN1ng6UoSRc005GpKQSQtVt7DGg2WDeCNEs14DETCu/9hSpqXcaAGy5h6FfZ8zUq
+	URSQ5+WXq2xZA9aUics+1xovN3/E3/YbaG5AW+bgFRyD51LP+hsNdnjPDta8ube62jV6ubcgE1r
+	ZGph+4JLIte87Ug5abKAAvY3AjV6XPAssvLVWM79ho1/POJ+MCT1FcMcMCY3bk7bcgQ5lJ7NcAF
+	NY7pS0HsMlzdRbfFnfpFZ0o4akwQrbFRyWioXxJdYlBpXHG5cUl2PLaBPPwlDZrCdePXnbSSzJZ
+	K/xRwX+b3JwvhS4PhbFOh27KUzp2hOkmXUoUA/RoI5DHRLS16ApRxR+04W70Cey7exMAY+6BAkF
+	vRXuTUR0KjqsM3LSnFd/TwEmKNsuV8yyjFkhpTA/eTNwgODh4tk=
+X-Received: by 2002:a05:600c:5306:b0:4bb:6ac0:6dc1 with SMTP id 5b1f17b1804b1-4bb887c994cmr314870705e9.2.1795540465344;
+        Tue, 24 Nov 2026 09:14:25 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8849e598sm410592735e9.8.2026.11.24.09.14.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 09:05:21 -0800 (PST)
-Date: Tue, 24 Nov 2026 09:05:21 -0800 (PST)
-Content-Type: text/plain; charset="utf-8"
+        Tue, 24 Nov 2026 09:14:25 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH v2 0/2] arm64: qcom: enable SM8650 audio without ADSP
+ firmware
+Date: Tue, 24 Nov 2026 18:14:21 +0100
+Message-Id: <20261124-topic-sm8650-el2-pinctrl-v2-0-fd05c8378a08@linaro.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -88,50 +94,72 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: base64
-From: Daniel Carter <yass27106@gmail.com>
-To: vkoul@kernel.org
-Cc: srinivas.kandagatla@oss.qualcomm.com, andersson@kernel.org,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, yass27106@gmail.com
-Subject: [PATCH v6] soundwire: qcom: check clk_prepare_enable() return values
-Message-ID: <e5fda000d0dc4f168120c8ec91a752d5@gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAO3FBWsC/32NQQ6CMBBFr0K6dgwtUtCV9zAsytjCGGzJtBIN4
+ e4C7l2+5P33ZxEtk43iks2C7USRgl9BHTKBvfGdBbqvLFSutJSygBRGQojPWpc52EHBSB4TD4A
+ ajTupokJTiXU+snX03tO35sfx1T4spq23GT3FFPizf09y8/7cTBJyKGVdOG1Me3Z4HcgbDsfAn
+ WiWZfkCplw1i8sAAAA=
+X-Change-ID: 20261113-topic-sm8650-el2-pinctrl-c6caf4237ca7
+To: Bartosz Golaszewski <brgl@kernel.org>, 
+ Bjorn Andersson <andersson@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>
+Cc: Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ linux-gpio@vger.kernel.org, devicetree@vger.kernel.org, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1502;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=0xZyYQ1QCsRnZoyKEDk/WLh63GWw1TE5/07D9O+VLII=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBcXvXtZBbMLDgvkGtCfwe5VQZTIYtV2vlYQQnUF7
+ gXNg72OJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawXF7wAKCRB33NvayMhJ0VKHD/
+ 9NUveMCAmZ2GPhLrcDur6R6JVJ/4cFN+ATqPprw7UcaSAsfPUwTCEZh0cutkUl72Aw6MK3aXydLHVB
+ zKTgqsQhlw7i58wOSG0souPfTE0g/ykG+yFN1gcSGYeAzTSv/V4SeNNjSW5d1Alo30uOxaJyO7Um/j
+ 3mumUY7ptOKEBMV88BzD09/UKoMFzX5mRQMLl2OtJq0PgFsG7mnQ8cnwg/TA97kyt+yOUPHMC8RDTk
+ qLn2a8eDPAHonAmaTGo/3QOFbRL4RFoVOf/tilSizA7I5jA0qwl1By6AWY6r+GeioVP3taxZMzNYL1
+ ytFaNdQRBpo2Vmd/LN0OYyuYFMNKDh6NCFfuDJq4dDJDYXTxCpRpL7tV+GWASTu7neTnON1TCdnaDN
+ bBUuD1eleDutzYIRyfcEC8rcPnICuWq0bbUuRuMYWA8WRuui2C+aATnqwsPt5Q9NzxVkIgJOBRiAth
+ JhPc+YtSPC29IJDcREnBj+1WHFb5AgdC6VkyswcnFb/FtsIbdzvA4B4jHx2awRuCbPfyCgX6VlRuT7
+ NpN2zjTIijkVTRbISBt04iDXpuvvpsehdq8PRxKnyU/g+MQJNpqgU/JWkgqWkvfvBSNIkGWL3jsnXj
+ 91x2U/VQu9iCagAr14CI/vHtIN03BWp4U8MNACz2l57Ds6sn5KOlIDZmCYRA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Y2xrX3ByZXBhcmVfZW5hYmxlKCkgY2FuIGZhaWw7IHVuY2hlY2tlZCwgdGhlIGRyaXZlciBwcm9j
-ZWVkcyB0bwp0b3VjaCByZWdpc3RlcnMgd2l0aCB0aGUgaW50ZXJmYWNlIGNsb2NrIG9mZiwgd2hp
-Y2ggYWJvcnRzIG9uIGFybTY0LgpDaGVjayB0aGUgcmV0dXJuIHZhbHVlIGluIHRoZSBpbnRlcnJ1
-cHQgaGFuZGxlciAocmV0dXJuaW5nIElSUV9OT05FLAphcyB0aGUgaW50ZXJydXB0IHN0YXR1cyBp
-cyBub3QgcmVhZCBvciBjbGVhcmVkIG9uIHRoYXQgcGF0aCksIGluCnByb2JlLCBhbmQgaW4gdGhl
-IHJ1bnRpbWUgcmVzdW1lIHBhdGggKHJldHVybmluZyB0aGUgZXJyb3Igd2l0aG91dAp1bm1hc2tp
-bmcgdGhlIGxldmVsLWhpZ2ggd2FrZSBJUlEsIHdoaWNoIHdvdWxkIHN0b3JtIHdoaWxlIHRoZSBz
-bGF2ZQprZWVwcyBkcml2aW5nIHRoZSBsaW5lKS4KCkZpeGVzOiAwMmVmYjQ5YWE4MDUgKCJzb3Vu
-ZHdpcmU6IHFjb206IGFkZCBzdXBwb3J0IGZvciBTb3VuZFdpcmUgY29udHJvbGxlciIpCkZpeGVz
-OiA3NGU3OWRhOWZkNDYgKCJzb3VuZHdpcmU6IHFjb206IGFkZCBydW50aW1lIHBtIHN1cHBvcnQi
-KQpDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZwpTaWduZWQtb2ZmLWJ5OiBEYW5pZWwgQ2FydGVy
-IDx5YXNzMjcxMDZAZ21haWwuY29tPgpSZXZpZXdlZC1ieTogU3Jpbml2YXMgS2FuZGFnYXRsYSA8
-c3Jpbml2YXMua2FuZGFnYXRsYUBvc3MucXVhbGNvbW0uY29tPgotLS0KUmViYXNlZCBvbiBzb3Vu
-ZHdpcmUgZml4ZXMgKHNkdy9maXhlcykgYXMgcmVxdWVzdGVkOyB0aGUgcnVudGltZS1yZXN1bWUg
-aHVuawpub3cgc2l0cyBvbiB0b3Agb2YgInNvdW5kd2lyZTogcWNvbTogZGlzYWJsZSB0aGUgaW50
-ZXJydXB0IGJlZm9yZSBnYXRpbmcKdGhlIGNsb2NrIi4gTm8gZnVuY3Rpb25hbCBjaGFuZ2UuCgog
-ZHJpdmVycy9zb3VuZHdpcmUvcWNvbS5jIHwgMTUgKysrKysrKysrKysrLS0tCiAxIGZpbGUgY2hh
-bmdlZCwgMTIgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9kcml2
-ZXJzL3NvdW5kd2lyZS9xY29tLmMgYi9kcml2ZXJzL3NvdW5kd2lyZS9xY29tLmMKaW5kZXggMTQ3
-ZTU1YjdhNjAuLmNhMzEyYzE4OTc5IDEwMDY0NAotLS0gYS9kcml2ZXJzL3NvdW5kd2lyZS9xY29t
-LmMKKysrIGIvZHJpdmVycy9zb3VuZHdpcmUvcWNvbS5jCkBAIC03NzgsNyArNzc4LDkgQEAgc3Rh
-dGljIGlycXJldHVybl90IHFjb21fc3dybV9pcnFfaGFuZGxlcihpbnQgaXJxLCB2b2lkICpkZXZf
-aWQpCiAJdTMyIGk7CiAJaW50IGRldm51bTsKIAlpbnQgcmV0ID0gSVJRX0hBTkRMRUQ7Ci0JY2xr
-X3ByZXBhcmVfZW5hYmxlKGN0cmwtPmhjbGspOworCisJaWYgKGNsa19wcmVwYXJlX2VuYWJsZShj
-dHJsLT5oY2xrKSkKKwkJcmV0dXJuIElSUV9OT05FOwogCiAJY3RybC0+cmVnX3JlYWQoY3RybCwg
-Y3RybC0+cmVnX2xheW91dFtTV1JNX1JFR19JTlRFUlJVUFRfU1RBVFVTXSwKIAkJICAgICAgICZp
-bnRyX3N0cyk7CkBAIC0xNjc1LDcgKzE2NzcsMTEgQEAgc3RhdGljIGludCBxY29tX3N3cm1fcHJv
-YmUoc3RydWN0IHBsYXRmb3JtX2RldmljZSAqcGRldikKIAkJZ290byBlcnJfaW5pdDsKIAl9CiAK
-LQljbGtfcHJlcGFyZV9lbmFibGUoY3RybC0+aGNsayk7CisJcmV0ID0gY2xrX3ByZXBhcmVfZW5h
-YmxlKGN0cmwtPmhjbGspOworCWlmIChyZXQpIHsKKwkJZGV2X2VycihkZXYsICJ1bmFibGUgdG8g
-ZW5hYmxlIGlmYWNlIGNsb2NrXG4iKTsKKwkJZ290byBlcnJfaW5pdDsKKwl9CiAKIAljdHJsLT5k
-ZXYgPSBkZXY7CiAJZGV2X3NldF9kcnZkYXRhKCZwZGV2LT5kZXYsIGN0cmwpOwpAQCAtMTgwMCw3
-ICsxODA2LDEwIEBAIHN0YXRpYyBpbnQgX19tYXliZV91bnVzZWQgc3dybV9ydW50aW1lX3Jlc3Vt
-ZShzdHJ1Y3QgZGV2aWNlICpkZXYpCiAJCQlkaXNhYmxlX2lycV9ub3N5bmMoY3RybC0+d2FrZV9p
-cnEpOwogCX0KIAotCWNsa19wcmVwYXJlX2VuYWJsZShjdHJsLT5oY2xrKTsKKwlyZXQgPSBjbGtf
-cHJlcGFyZV9lbmFibGUoY3RybC0+aGNsayk7CisJaWYgKHJldCkKKwkJcmV0dXJuIHJldDsKKwog
-CWVuYWJsZV9pcnEoY3RybC0+aXJxKTsKIAogCWlmIChjdHJsLT5jbG9ja19zdG9wX25vdF9zdXBw
-b3J0ZWQpIHsKLS0gCjIuNTUuMAoK
+This patchset is part of a serie adding the necessary plumbing to
+drive the SM8650 audio interfaces directly from Linux.
+This is required for boards like the Valve Deckard that boot Linux at EL2
+without the ADSP audio firmware, meaning the audio interfaces must be driven
+directly by the application processor through lpass-cpu.
+
+This patchset is forked from the monoliothic v1 at [1].
+
+Without the ADSP firmware, the resources available to power
+the pinctrl differs, and the LPI pinctrl power is controlled
+with power domains instead of DSP clocks.
+
+[1] https://patch.msgid.link/20261113-topic-sm8650-el2-v1-0-5183f6aab9fc@linaro.org
+
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Changes in v2:
+- Simplified bindings change
+- Driver update to use all power domains
+- Link to v1: https://patch.msgid.link/20261113-topic-sm8650-el2-v1-0-5183f6aab9fc@linaro.org
+
+---
+Neil Armstrong (2):
+      dt-bindings: pinctrl: qcom,sm8650-lpass-lpi-pinctrl: document clocks and power domaines when ADSP is not used
+      pinctrl: qcom: lpass-lpi: attach all the power domains
+
+ .../bindings/pinctrl/qcom,sm8650-lpass-lpi-pinctrl.yaml      | 12 +++++++++++-
+ drivers/pinctrl/qcom/pinctrl-lpass-lpi.c                     |  9 +++++++++
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+---
+base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
+change-id: 20261113-topic-sm8650-el2-pinctrl-c6caf4237ca7
+
+Best regards,
+--  
+Neil Armstrong <neil.armstrong@linaro.org>
+
