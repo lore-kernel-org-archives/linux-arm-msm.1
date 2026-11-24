@@ -1,80 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795560420;
-	b=XlZUkbY19J/jxKTa4CX5jARv1CbpU8FrV+/UvrrZOUHdE6b6aS8LlUDEPCsLrh3ohyWg
-	 e5wjELJny8cKiU5gA5gXtYB4Wz9kAWlGP/So+UrpmTdHHzp56RKBIGaHc3U2K9IpAKz10
-	 WGzzMCa037pAVgnlVx5j/rKL1h+nrQvpXETkbNc+HrXGwSCwRBN1RP/qNpwWdfJjfDyqt
-	 L2ckMFCZRaQVszcfcpPK9ukbFU8EbcU4Jv6H6i+cwP81EbCE/FCZw7etlKfBXThEcU2Hu
-	 6GFB/s/RN7cnEVqYmQ2UnrfEyND/MUX5iD2qsLhFsy9+4N5nb9uBt98go5rF1I3ccvw==
+	t=1795560427;
+	b=lx1pXn3RgTTlCTxZyI6Xv4NdllMq2oaZ3OaNBAC17cFGP8vpKmlcXMXVsF3Qw/TsHekB
+	 ugc/mpRlDoDWipzOxtysaEkKrcwL8sWb5lAQ/acXIJxvwVfcFh03Ag3Sy5StvtGlnOLUe
+	 vWZ8eRYey+cttIaWTaqqU01bXNUYI+XMcAvedCAQNvEfmqXCfLnpu+FzGF9p5JsbFXx/R
+	 +TfTGnUnK3RR7Mdxex/Zoar3LeMhOJWB5aV1txLfWPRJsIz0e4ERg9Bytgj5VuxRl7Ed0
+	 FjmKEocriHXmYnkP/aOn3kVYO+GcdyipaYBRFxwaPM2P4CsgKM3sNStGHhlm34fIQ5A==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795560420;
-	h=Received:DKIM-Signature:Received:From:Subject:Date:Message-Id:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Endpoint-Received:X-Original-From:Reply-To;
-	bh=6QBH+QyIPuZ5eESry9czXmbEjy+pBjEUYZUBFcAeLBs=;
-	b=20qSmPweMb3CRGOyrrIqZJUT14D12eJnTmgM/YTbBFSHc2BpJCn1w8ScYUHEszaFBi5z
-	 T1jRfaCbXzbSlzwehv8wzYHgKCXuyqw3wSWw3bUXhLVHCcu0XVYmfz92oBsPu5DAzWCk6
-	 Ez6EIMge4i/5qbFxEoDYCzmWdnKxDmOwSQ0hE8gy0d0vZvJTGnUgXhgG7FdSQKhhynS79
-	 2scH9t3YblarRpEbekRs4RdMRLtJ1+cp/4MqKpW96jJIOcQzKqQGrWDWd4tjI678cNCKB
-	 ea+7vDCG+rq9N6m8H3sGRqgsDUOtgm6gpGq9pHkqL46nMHrxJpPMMtjV8/DcaxenTIg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795560427;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=V1E0A45IWVmzuKrYVO4JyVjaitHwHUyvy9w2h0vkdcQ=;
+	b=SzieA1Jo4veIw+PhwmK41fbIJ1qT8j8dKCZtXEvxJx2wd5js8thu0UPIh1HiuUeVrEas
+	 /zMpf1DSjDk79rQcxH1EMXORPlHsOtoWuxAuwE8LIqJdsZ5Kz1ccJzKxGsUspjpwa/h0J
+	 cureOCiBHhws5tu7/9nACR3WYV77ky/NjFJUwRXBz6BUm0lsbiXvnujFOkDBRaWHCR5WH
+	 Pwe6KDcdq8W2DJyRv/YTzv6Kt3JUlYFNBrP/FqwMureLDtAD7RBp271B2Ky8kxzVaj6kP
+	 SzaGAzWIgGW8xj9EnXlLqQh7uw87uQ5j8L2Z9wFnikd8pnfnB3lxwK85OXxtsPRsneQ==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j1QuoGpB;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b80r5+Pd;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EEEDF606A321;
-	Tue, 24 Nov 2026 22:46:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 730A1606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 22:47:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=j1QuoGpB
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=b80r5+Pd
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795560419;
-	b=zSHbf6NU3aq6GVMCuacm/ybpO6O++QtUhEHytBbj9sS66i4YxWSByWtLqZe6mEyXpVcC
-	 6pR7f8MMkmThhaMcFDyDfcR3fGPsYr2f5hxOS665AhmzSjnYdrkvAIovChZVhuSFCUqSB
-	 aNIth3CNIJNlGaBNyTHzb7yiS7P6nBxbtkVJy0mUs2nxQLwU1lniUSJ3Pk24uJLDaDmYk
-	 A67uQnIaK08ywNi9ErZzypJM1jyWT4lzRI4mzsVXzYQ0NpphjiI7XGTQvTlA4oM0CNRX1
-	 3HJHF5YXl94DKJbjkUKw3J4vzquD+y6ERQF5b6PZTCobf0snnK4UFMSkzgSeXlrGuvg==
+	t=1795560427;
+	b=tz0LWDaEYvNI5wiD2AqZ79KSah2zsc54W0lozbOomPaHPeEnsJbOt2PhiWAvzrplcxRY
+	 c5bHnOfzzfbG5TmlMjZ3gILS/R9NUyiU0BawQMK0xnuaMabUg2sPXui3tffNT0hf32MP0
+	 zqQZq9kdO+rUXYHRl8IMKzcoglL1r8lpb3X/ksPDqzlwWMAbwSrkF/T5+6UWFf9pE3lHX
+	 RaafmmI2EOnJC7y4Z7G88CpJSn3jyC/qrnQ3g0b1rCUJtzUJ3xbJZIReQx4nTcYXfvZfx
+	 pZ0ra//PdTZmZDa3NNTHU6rTOUXA2YQeJ3J64tgj1cnEuSpcjqrLWcEL+8qnZDJx8og==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795560419;
-	h=DKIM-Signature:Received:From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To;
-	bh=6QBH+QyIPuZ5eESry9czXmbEjy+pBjEUYZUBFcAeLBs=;
-	b=vIK6z47ev+PAoXYtQV2FlLGttZYvwGKf9TaWLvMhOic9RWW/0eUFeO2hslwBfyZp+miR
-	 do7yGPkMSq3TTU5x0uR+nsCZj1MiFQ7ehLtMzt/XD04hDWUl0p6rUDFM3JTNPoMsu9/3A
-	 0aZge6zwdc1iXMUPcv1Pgg/S6VBX5lhshaCjuLP7QB07pQ9aW2ZxxwlNK+LKAAyDxtKra
-	 M+AHTUDvn7At9vnuAp8+6rvl0xShzFtEaC3d0lH8yeBHGPY9YEewzSWFHEhIbRheYURAA
-	 as2+WtM0icgxGEKztTFfBtEX6+Hw/lCjXiepcfVJy/DCdjpRjOMp1HgL21LN1R5zu0Q==
+	c=relaxed/relaxed; t=1795560427;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=V1E0A45IWVmzuKrYVO4JyVjaitHwHUyvy9w2h0vkdcQ=;
+	b=dumW9OPPTDxHt7vyGG/qluKJwXuZe5//+DVlnS/QIlMHUbbmZsnWITTL5hNT17NZNztT
+	 yk85ZpLW05dzG98zuDLXn4TqbaOiJNAfLmL2a84OiYlrpWtHSsztZTKe2amtNw8FGreaO
+	 d5yr7mLRuyyYx666/hIEpkVHNtO+eDKpt290T13aJMoyL59bhrE5l6IMm3/09MPzwbmoL
+	 sRVSr0rDY0hp0olqDaBmiMTcV3Zdy22UsjSdUKePALOb/wDhRt6jb5/V7ZSCyHnHuZIgU
+	 gtWiLrlGofuT5o9b9IO67O3BvMGflN46tVEB2qRTyrIwNQSNsXtP/faDvAl4ChWoKqQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id CEAFE1F000C4;
-	Tue, 24 Nov 2026 22:46:47 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 8E4F31F000C6;
+	Tue, 24 Nov 2026 22:46:53 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795560419;
-	bh=6QBH+QyIPuZ5eESry9czXmbEjy+pBjEUYZUBFcAeLBs=;
-	h=From:Subject:Date:To:Cc:Reply-To;
-	b=j1QuoGpBrqwsrjvoJ+YmrzhFLIUmcvFFFfbAOaRKkJo6FGGjE42PYoNSWr8licwpE
-	 fINy6/GVkU5PNMm2evhDnfQD/FgM5dMiASVcFrCoiCyRg+lDIHa49z2X9w6yuIqK8J
-	 0NlQzJdAqaRL9sVGeZ2FZcuMeKfP43tKMoSeamhp/wNnOy76Qjo9Xk5lnxJ8EOcGBs
-	 7nTF564yVlO9Y/2cL0O75vfHzOz+hJx8KxXBUgSlppeJK3sTdqOJLI16yV3gVC8G/5
-	 sPAvSI4JLN0dKTJ6zh28u3f0PRWqlC86f7vmpt+NdgpWBamK8mVt/7f6dksQgSz1vq
-	 n79Krk39KanhQ==
+	s=k20260515; t=1795560427;
+	bh=V1E0A45IWVmzuKrYVO4JyVjaitHwHUyvy9w2h0vkdcQ=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=b80r5+PdDz8cDDf+O4OzvBBUZ9mBkGPHgqrteFm2dHLJwpl9J2wfQhrkuRiNqA+d+
+	 kqjsmRyJq66z3fJ0ZA3eYE96T7ENZAJa/yn9jugPYbTpCSc792nY7D8h84X39iUrQ8
+	 ettWkpLOfOp4ivdPb5fz3/BKoUL6zfEoyqldWxq3llv80KM7LMCt98U5sChIHMM9QJ
+	 0J2dfopI+aQ4ReK7htj9NjXsX12BX4V5nULB7GnVUufPQsxC5gydyHJOrKF2AO5uc4
+	 rUbbYlsv6cA2hAJX0cK7sykSDgJBzxXDRtGB8yK6hlLAVZ9MUX1Ve+OkBVT0rvXfeR
+	 7XtWsPrRR+Kqw==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 339514CBE9;
-	Tue, 24 Nov 2026 22:46:47 +0000 (UTC)
+	by lkml.kernel.org (Postfix) with ESMTP id 223EB4CBDA;
+	Tue, 24 Nov 2026 22:46:53 +0000 (UTC)
 From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
-Subject: [PATCH 0/2] soundwire: qcom: fix WCD AHB serialization and
- wr_fifo_depth init order
-Date: Tue, 24 Nov 2026 23:46:45 +0100
-Message-Id: <20261124-qcom-soundwire-fixes-v1-0-8ca94d60ddd6@gmail.com>
+Date: Tue, 24 Nov 2026 23:46:52 +0100
+Subject: [PATCH] drm/msm/dpu: sc8180x: restore dp_phy_intf_sel on runtime
+ resume
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -85,54 +84,96 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6CMBCF4auQWTsJbZWAVzEsdDrKkNBKh6oJ4
- e5WXH55+d8KyklY4VytkPglKjEUmEMFNFzDg1F8MdjaNsbYI84UJ9SYg39LYrzLhxU77wy1nk6
- udlDSZ+J9KOWl/1vzbWRafl+wbV/o6jpEeAAAAA==
-X-Change-ID: 20261124-qcom-soundwire-fixes-9d31c8dc5303
-To: Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
- Bard Liao <yung-chuan.liao@linux.intel.com>, 
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
- Robert Ijtsma <robertijtsma@gmail.com>
+Message-Id: <20261124-drm-msm-dpu-sc8180x-resume-v1-1-a6201f43136d@gmail.com>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMwQrCMAwA0F8ZORtYyhydvyIeNM00QudIVhmM/
+ btVj+/yNnAxFYdTs4HJW11fUwUdGuDHdboLaqqG0IaeKHSYLGP2jGku6BwptiuaeMmCQmmgLvJ
+ xIIYazCajrr/8fPnby+0pvHxH2PcPEEPraH4AAAA=
+X-Change-ID: 20261124-drm-msm-dpu-sc8180x-resume-e1d9148c591c
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, Robert Ijtsma <robertijtsma@gmail.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795560406; l=1208;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795560412; l=2603;
  i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
- bh=nRQ81G0pOHjTe19q0T04n8A6t3fPhnAHDBRobILJgfU=;
- b=Cgl9VQw+aZpzc2uVyo9Pn37RN8cCRaw9l4qgsxkUnFWGZrCsVHjqaYH4a9fuPeSGLUKMQZJJC
- tTwJmyKlJS8BNPqmwSb7fn5+dhMqDk89ZIg5YCKNqW4S/qb9mAaW5wK
+ bh=LEmFhgAwoaN37Scx4SDiFsrI98URrH/adaZQ6fMNsJ0=;
+ b=INOGyHygY6Tv+74+M2k8AElw9Kze/4QI4LXYWJ2VRw2Wk3YNQWM0+SiNE3nHBL94sYsecWXUa
+ HgUlPP8KsSpA8ANTB4BLOKY1Mo6YH5QBEEFKWI083nhHrSJAUFPbakM
 X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
  pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
 X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
  auth_id=1604
 X-Original-From: Robert Ijtsma <robertijtsma@gmail.com>
 Reply-To: robertijtsma@gmail.com
+Content-Transfer-Encoding: 7bit
 
-Fix two race conditions observed on WCD934x-hosted Qualcomm SoundWire
-controllers (such as on Microsoft Surface Pro X / SC8180X):
+From: Robert Ijtsma <robertijtsma@gmail.com>
 
-1. Serialize each two-step WCD AHB bridge register access (RD_ADDR +
-   RD_DATA or WR_DATA + WR_ADDR) with a controller mutex so concurrent
-   IRQ and init/bus accesses cannot interleave on the shared bridge
-   registers.
-2. Read and validate SWRM_COMP_PARAMS write FIFO depth before
-   registering the threaded IRQ in probe and before enabling CPU
-   interrupts in qcom_swrm_init(), avoiding false write-FIFO overflow
-   errors while wr_fifo_depth is still zero.
+On SC8180X, MDP_DP_PHY_INTF_SEL is currently programmed only once during
+dpu_kms_hw_init(). When MDSS/DPU loses register state across runtime PM
+or s2idle suspend/resume, dpu_runtime_resume() restores VBIF memtypes
+via dpu_vbif_init_memtypes() but leaves MDP_DP_PHY_INTF_SEL reset to
+zero, misrouting eDP/DP output after resume.
 
-Tested on Microsoft Surface Pro X SQ2 (SC8180X, WCD934x + WSA881x).
+Factor out dpu_kms_setup_dp_phy_intf_sel() and invoke it from both
+dpu_kms_hw_init() and dpu_runtime_resume().
 
+Fixes: be3415c620d1 ("drm/msm/dpu: Configure DP INTF/PHY selector")
 Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
 ---
-Robert Ijtsma (2):
-      soundwire: qcom: serialize WCD AHB bridge transactions
-      soundwire: qcom: populate wr_fifo_depth before enabling interrupts
+Restore MDP_DP_PHY_INTF_SEL in dpu_runtime_resume() on SC8180X so eDP/DP
+PHY routing survives MDSS runtime PM and s2idle power collapse.
+---
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
- drivers/soundwire/qcom.c | 57 ++++++++++++++++++++++++++++++++----------------
- 1 file changed, 38 insertions(+), 19 deletions(-)
+diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+index 1b6286d..31166e7 100644
+--- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
++++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
+@@ -1135,6 +1135,16 @@ unsigned long dpu_kms_get_clk_rate(struct dpu_kms *dpu_kms, char *clock_name)
+ 
+ #define	DPU_PERF_DEFAULT_MAX_CORE_CLK_RATE	412500000
+ 
++static void dpu_kms_setup_dp_phy_intf_sel(struct dpu_kms *dpu_kms)
++{
++	if (!dpu_kms->hw_mdp || !dpu_kms->hw_mdp->ops.dp_phy_intf_sel)
++		return;
++
++	if (of_device_is_compatible(dpu_kms->pdev->dev.of_node, "qcom,sc8180x-dpu"))
++		dpu_kms->hw_mdp->ops.dp_phy_intf_sel(dpu_kms->hw_mdp,
++						     (unsigned int[]){ 1, 2, });
++}
++
+ static int dpu_kms_hw_init(struct msm_kms *kms)
+ {
+ 	struct dpu_kms *dpu_kms;
+@@ -1246,8 +1256,7 @@ static int dpu_kms_hw_init(struct msm_kms *kms)
+ 	 * the INTF <->DP relationship isn't static anymore, this needs to be
+ 	 * configured through the DT.
+ 	 */
+-	if (of_device_is_compatible(dpu_kms->pdev->dev.of_node, "qcom,sc8180x-dpu"))
+-		dpu_kms->hw_mdp->ops.dp_phy_intf_sel(dpu_kms->hw_mdp, (unsigned int[]){ 1, 2, });
++	dpu_kms_setup_dp_phy_intf_sel(dpu_kms);
+ 
+ 	dpu_kms->hw_intr = dpu_hw_intr_init(dev, dpu_kms->mmio, dpu_kms->catalog);
+ 	if (IS_ERR(dpu_kms->hw_intr)) {
+@@ -1464,6 +1473,7 @@ static int __maybe_unused dpu_runtime_resume(struct device *dev)
+ 	}
+ 
+ 	dpu_vbif_init_memtypes(dpu_kms);
++	dpu_kms_setup_dp_phy_intf_sel(dpu_kms);
+ 
+ 	drm_for_each_encoder(encoder, ddev)
+ 		dpu_encoder_virt_runtime_resume(encoder);
+
 ---
 base-commit: 4843f6873f7c4835e62f2c73ba0fd538e57a2f22
-change-id: 20261124-qcom-soundwire-fixes-9d31c8dc5303
+change-id: 20261124-drm-msm-dpu-sc8180x-resume-e1d9148c591c
 
 Best regards,
 --  
