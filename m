@@ -1,86 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.42
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795558413;
-	b=emabcC95wDylIo2V8yKzz3u5BsdNEwgPVKi3JXBeIiDsg48k8/OSM0jBWdOK5sJBPIyN
-	 pyojI30t2q3rgUfas7i5eok9lrhm365Mw9yaoC6U5PsESiQqSHeN2Bz62vTK7GXPe1+uw
-	 YMYLD5jsTnezGb60ZwrRNCOGnrnk20ZFFqtI0XS2li7mbQl/Pej4hl352sKJ0uh2wLbnK
-	 s7BIXcgccTq8KPqP8jxP229kOlz6x8FahokWM6uKAUpj6Sn8lZH5Wg4d4nIr3Msewv4yi
-	 EGsoJCEWLPTEP+4ctK13gV9/JcIm8H5A6n/1YxCEWvnT/2BGsusouA6WFNEbqUj/zTw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795558413;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:Autocrypt:In-Reply-To:Content-Type;
-	bh=jFcGsqmfmZRkt05qBK9du4hRMwTvxalV5t9KfsrqdEM=;
-	b=OFHUDD0zOMc6xs7FAA4+fm3104MFs3C75QIThEVWxliKc3BndPOHdIDjeBIB1YxSPpxn
-	 b9fcjPBbfRiTEZdi1PuhqICpNM2uFoC9sJFl4oMFK3kM3/kvjRwXJmXpzsthSEEzfrQPp
-	 35VvEbJaLANhtb/1WNgzwVw+TGRleGRw1yVF+eKodGiZF4rkTVO4cKVim1+7VNSf0AkNN
-	 ry0KUfkU5Gm4CiVDirlnLxbt1m0PrOz9JkoC/opnfikWyu0HoqDScy3VRUnBj5xe5cKJX
-	 A7TIXCfcjs6V+vzkurgrlB9O0qAkGeh6edhSc4gSE/eAO7ylM8+dIU/whlY+QXrB+9g==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gB9K22sH;
-	arc=none smtp.remote-ip=74.125.224.42
-Received: from mail-yx1-f42.google.com (mail-yx1-f42.google.com [74.125.224.42])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795560412;
+	b=kZDx0dHEh2Ssnrw8JVAUc8g8vllSYlGOjj+JTF4/kwvvenGtrmR2OKUqALyP9eyd/ygt
+	 o/VRrwwxN+91sCOGj5PiWkaDqrjbh3A3iGgZUM2T4CoCc++Dsco8CRQTdgN+dC+2YuDUp
+	 TRjqGZBW/F1wVpcEdp+0U7hVmvGiy6gxU/ph9SWv3PI2ytlpq9qVPFUw6fhFdBSdfd3on
+	 yb8HQ5eiqhKWODLTqrOi2dJOh4lLi8eziH60U1j11MR1qXfL1D+0GRMC6aVDciBNzjQyS
+	 n+pFLv/N29sd/jZLY8dk91O4Qc7irFD61B4/PDhTW7v85Rp0lFZ4ANKRA9hcpZJCIfw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795560412;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=P1vmFLW8Trf7KPUYhuvAYw5AWIFsslviiSSCBriFog4=;
+	b=yp7Zx/wBqW26+A6fmbU9nSUMMFZ4Z0wF8WN6Ola+cSbv83mZqj7OZNtdBsDzbZqi1R3u
+	 6CeDFP71K19R/x6VLFbXb/NP81AtxKWI/Nupd82omqY1jhfACr5nxPkC+MYC+vo4Map2i
+	 02rBJZVgIpwB/9TonUA2WXdC30xmfC3AdayIOABX+78v1WqvgEbIqmHcHYW/uqk+D9P6r
+	 Fwx7gpK1m+25hM3RYqkDgSKgbl5GpnQox564xmtOxw7EiPY4j8IoI2Yu0pFf52aaxYLbC
+	 gVnfvqe4MbLBb8klJBaTkXpuD3WqKZrGx2Q7Qv1cvhhwKIuGGbpamYHDNRJ+k++MAeA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UO0h7U97;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 10EFF606A31E;
+	Tue, 24 Nov 2026 22:46:52 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UO0h7U97
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795560411;
+	b=S1UrI5AkuEWoLJF/KW1chMzUDlhRdAbsqxuisMH0/gsG85ZH1BTn6luEqb2mp72XohD7
+	 jiA6qNd5s6nsA7KFlq9Yw2YbvBmKAUOXigeWwcZQL5UFV+PLtddfE7h/Sj1ssGLcHg9BS
+	 0lF7lJg3IclfBQ4Bla7JXz8uUmwYaA5zum5adxVJ4sWBqCpkc1Bv5OsQ1d8OKwCKTvzQy
+	 C1JM5UN7xK/+3LDYW8+xCs1hzqVcWGCtvs6FonxAd3lVgGJs7h0SGZqDE6Z50lI3+ykpA
+	 KcRoy1LDxhW4M/Ncujz9r6bJbXsgz6bQVNBMQtkFGK8+R9Nf2hZCePf5Q4GuhjgYNeg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795560411;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=P1vmFLW8Trf7KPUYhuvAYw5AWIFsslviiSSCBriFog4=;
+	b=kuQckzt3pYg+hCIXzpYx2zELQtJ/y0pILgXgRJI/MZULieGnJ5hMrwznr7Y5nYKPA4ni
+	 DaVSred62Nezz51g7sqbC8mhAENOKrUfjXVvwbhVpAkGGBDkr3Fp/sTiMta9vPB9+Uogz
+	 ygE1CeqCpB0uuNDB0gHLd6oOzU6mTE4uBihAAsYWioncdpXZQYs3Xi/gE9EwHqjBPqzHk
+	 w07jhNUcCmnmMJ0kH/J3MEVAdd/NVJfRvoytBgDwFXnMaDWleN0SUm53uFeFN8072dNRq
+	 IWiLV61Fpbc89pL1uTsGVeIrfaJA7QYxHzTkkmjpO9fOVdCo/mY5tPRVsy50Opn3k9w==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00C5B606A329
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 22:13:32 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 00C5B606A329
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=gB9K22sH
-Received: by mail-yx1-f42.google.com with SMTP id 956f58d0204a3-67db8985419so6373843d50.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 14:13:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795558412; x=1796163212; darn=vger.kernel.org;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=jFcGsqmfmZRkt05qBK9du4hRMwTvxalV5t9KfsrqdEM=;
-        b=gB9K22sH3Jxyk8oxd2+t7FhrKi+TwrUhuySrypm+PkQ4ciNYXwN7rVyLAcQDPpqnIk
-         Tc0i5ULrnsXVpaFb0hGc+bEksT30tYdmMaoo2VWLTxqnh80LZR9jnyl3rzBNb4d9eCwe
-         9aTRyakPTBumqQ2yxUz58T/5bhHPv+UKJoYLOiepaw7R045IE6n3slT5vuKm4LzztWZM
-         aTGZ0jVcl5WFw8I3WuM7bx2HZ/QMvSTvpbwXxpKnEaYqJBQs8Zw0GOO3eDs4dJ7XDe6L
-         DwaqVmlJW54K1TAeyEeVXTcikuvMJyI8tICxEDnlwrKzPqWmcUvkXzWa9xs+Fh8lcwlH
-         aauQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795558412; x=1796163212;
-        h=content-type:in-reply-to:autocrypt:from:content-language:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jFcGsqmfmZRkt05qBK9du4hRMwTvxalV5t9KfsrqdEM=;
-        b=dCewcPEIeHA3KphHEjxD19+csmyXi3czZ40hh0R+RhIEhY3C+pip/jqrddTI76PkpJ
-         vaqQjwuKidWFNA3mEcAeKGwqExdt40uSq4QaFnpTQ6FkHAVs82Q2GtFKNDVmJemZKQ4e
-         RbUJvA0TxxzCvlps2LusvJ3DcCNYG3Fziyy7q88IzMkBnaoFfQcYIG8LtArjsCJMtNkx
-         UlglTryEp3dX8GiY24R78PUNgAThnWSFp3dN/Ys7Hbk2YEycUMeiqWZKPeVzzu17e5qk
-         wlTN8hQ9I24uVwpa04M2JuwQVvgMjcNhe9z6OjVhgVIpnhiH2LqfiFj3rsWyWkXKlkxC
-         xxmg==
-X-Forwarded-Encrypted: i=1; AL+hErFwCgpZyMlAiitt2eoIOsSwlk+RXKZVid0ofaKbzXWAiAgzEs9A/cD6LK4I9dUIIj/YMZTMwxA3vVAiaUHf@vger.kernel.org
-X-Gm-Message-State: APuU4Z9RgmhOgS3cV/JELDlPmbLxidab70w9e3zp+koKyU5WM8eEY1SS
-	Yb5tl6yxk5xxKOUJtOfrLoTxgKMmyyRwVbuTzFXf/3LJABkvySG92uT3
-X-Gm-Gg: AZFdTZdrSIPoC/gdxI4+cu+U0Jfo19DBV6p/V/N7ODJ5jKfrP/bvILIElFlRtevQVqh
-	WbNpXNZqkQ/zYDcmwx3yzWY0T0Pn5YOmrsd+1g+siyvt+aojop3qA68x7opQvD2nSp5ooYjFmF7
-	3dUMok5VClaVAuQGZi2JkbQSBbE2A9MY/zBnpi5APqwgeJysa4tFViMln1bE2fZmmcQYXqO3Scy
-	bNgFMHQYLQOS3kzxr31l/iMBv69KtMDMaLT9ullpmMZotjQYy9XgvSEmI6R/aJmgvZ0RDW7ZJKt
-	5zTxii2zveYB1Pm7Xidbwe255YFfnxGoiZgVn/xDL8K2loNaKXWMV0Ps1g3gtY4E+NJhA0Sgbav
-	gDvXnINScdGVU/lWcCOhU+RvgWc0Yx3Ex4oUk03c2G2FHpc9q2VHk7k8mQddvbZMe+AirqLor+1
-	jLjF5c0fmVa/ucE2jA/nsmyCBLP0h3SWYgQLTXzm8XlXGgf8TUsEZlxUVfhyhDcl8uZCN5La/Kn
-	4cAbQR2BJbLMaOmh8IMNcsVU0OAullAbTv/hf+iX4auIxxNcL7fs7MkoCMJ/aQZYSRlRIv4IKsB
-	xtmtmUBXnSmrfAp2A/nvA8agAuIhXeG0Kg==
-X-Received: by 2002:a53:ac90:0:b0:67d:c14c:9f8e with SMTP id 956f58d0204a3-67df4410ca0mr6821449d50.32.1795558411857;
-        Tue, 24 Nov 2026 14:13:31 -0800 (PST)
-Received: from [10.138.10.6] ([149.102.242.31])
-        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67df30e4407sm7857086d50.0.2026.11.24.14.13.30
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Nov 2026 14:13:30 -0800 (PST)
-Message-ID: <834c266a-eb07-4427-b1fa-5c6508a5ce32@gmail.com>
-Date: Tue, 24 Nov 2026 17:13:15 -0500
+	by smtp.kernel.org (Postfix) with ESMTPS id CEB381F000D0;
+	Tue, 24 Nov 2026 22:46:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795560411;
+	bh=P1vmFLW8Trf7KPUYhuvAYw5AWIFsslviiSSCBriFog4=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=UO0h7U97LyxCGwnnVyG0lD14+/NQkl1jqKWK0z/1aGbgJWak7rMZGb0frjSLQXXMB
+	 6EGM6V1jXm+z9IBAIxxZBLzVinJVSGomUWSsdfW3v3zc5f7Nrek8tzskSMZnOOJWAm
+	 7OZ/9ZyFfaZZp7JJQBLNtRrECgte4GQ2Ize2jeg7GPrZ/+0vMUZOCPdAq5H7K0jNyK
+	 JON4MDk+uRxrlSRckE4DXI4LVFsXXrTTTQswpggTeYQMul7trdtrOkM4mTj5URiC3+
+	 jtOhh1bg/p6ekxZJOqFfw4epSJuywUYZIPNMCKkbS8OpM9nWPs+O//swU+0RCrcZyH
+	 nNRUnod0Up93A==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 54A9F4CBFD;
+	Tue, 24 Nov 2026 22:46:47 +0000 (UTC)
+From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
+Date: Tue, 24 Nov 2026 23:46:46 +0100
+Subject: [PATCH 1/2] soundwire: qcom: serialize WCD AHB bridge transactions
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,207 +82,126 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 3/4] arm64: defconfig: update the Qualcomm Crypto
- Engine entry
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org,
- linux-arm-kernel@lists.infradead.org
-References: <20261120-qce-fix-self-tests-v12-0-b5a2a44bc5ae@oss.qualcomm.com>
- <20261120-qce-fix-self-tests-v12-3-b5a2a44bc5ae@oss.qualcomm.com>
- <9faa6fce-594f-4556-b5ab-6aa73330da8d@kernel.org>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <9faa6fce-594f-4556-b5ab-6aa73330da8d@kernel.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------HRJ667nozFI7pDuLiKLXtKsh"
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261124-qcom-soundwire-fixes-v1-1-8ca94d60ddd6@gmail.com>
+References: <20261124-qcom-soundwire-fixes-v1-0-8ca94d60ddd6@gmail.com>
+In-Reply-To: <20261124-qcom-soundwire-fixes-v1-0-8ca94d60ddd6@gmail.com>
+To: Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>, 
+ Bard Liao <yung-chuan.liao@linux.intel.com>, 
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+ Robert Ijtsma <robertijtsma@gmail.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795560406; l=3025;
+ i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
+ bh=seKITjD52g3wa0NvgJltN4epkXUV8cHeix7iGN/p92s=;
+ b=PK2gUqlFU6DD8vPsRfN4klIBZoNkLXSQDBwnYArD2JhvQnDg19gmRbUrbiMj4hV59qpxORz3F
+ /9rB3bG1H1pBJNbxU+SF+3IN0GKH/B1LtFBQ81JpPHF9HXathULbIcf
+X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
+ pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
+X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
+ auth_id=1604
+X-Original-From: Robert Ijtsma <robertijtsma@gmail.com>
+Reply-To: robertijtsma@gmail.com
+Content-Transfer-Encoding: 7bit
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------HRJ667nozFI7pDuLiKLXtKsh
-Content-Type: multipart/mixed; boundary="------------lc9NsThzkDEG0rUbHzJI36Wt";
- protected-headers="v1"; hp="clear"
-Message-ID: <834c266a-eb07-4427-b1fa-5c6508a5ce32@gmail.com>
-Date: Tue, 24 Nov 2026 17:13:15 -0500
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v12 3/4] arm64: defconfig: update the Qualcomm Crypto
- Engine entry
-To: Krzysztof Kozlowski <krzk@kernel.org>,
- Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
- Thara Gopinath <thara.gopinath@gmail.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>,
- Stanimir Varbanov <svarbanov@mm-sol.com>,
- Eneas U de Queiroz <cotequeiroz@gmail.com>,
- Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>,
- Eric Biggers <ebiggers@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Russell King
- <linux@armlinux.org.uk>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-crypto@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, brgl@kernel.org,
- linux-arm-kernel@lists.infradead.org
-References: <20261120-qce-fix-self-tests-v12-0-b5a2a44bc5ae@oss.qualcomm.com>
- <20261120-qce-fix-self-tests-v12-3-b5a2a44bc5ae@oss.qualcomm.com>
- <9faa6fce-594f-4556-b5ab-6aa73330da8d@kernel.org>
-Content-Language: en-US
-From: Demi Marie Obenour <demiobenour@gmail.com>
-Autocrypt: addr=demiobenour@gmail.com; keydata=
- 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
- +MYSfkEjBz0E8CLOcAw7JIwAaeBT
-In-Reply-To: <9faa6fce-594f-4556-b5ab-6aa73330da8d@kernel.org>
+From: Robert Ijtsma <robertijtsma@gmail.com>
 
---------------lc9NsThzkDEG0rUbHzJI36Wt
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On SLIMbus-hosted WCD934x Qualcomm SoundWire controllers, each AHB
+bridge register access spans two separate regmap_bulk_*() transfers
+(SWRM_AHB_BRIDGE_RD_ADDR_0 followed by SWRM_AHB_BRIDGE_RD_DATA_0, or
+SWRM_AHB_BRIDGE_WR_DATA_0 followed by SWRM_AHB_BRIDGE_WR_ADDR_0).
 
-On 11/21/26 7:22 AM, Krzysztof Kozlowski wrote:
-> On 20/11/2026 20:34, Bartosz Golaszewski wrote:
->> Most Qualcomm SoCs contain the QCE hardware offloader. The crypto driv=
-er
->> for this IP is being split into a smaller core stub that doesn't regis=
-ter
->> the crypto algorithms on its own AND an auxiliary driver than handles
->=20
-> This part is fine...
->=20
->> the crypto part. Update the arm64 defconfig to only build the core par=
-t
->> by default and leave the choice of building the crypto part to the use=
-r.
->=20
-> but here you miss answer why. We do want the proper driver, not only th=
-e
-> stub, no?
->=20
-> Best regards,
-> Krzysztof
+Without controller-level serialization across each pair, concurrent
+accesses from the threaded IRQ handler and bus/init callers can
+interleave on the shared AHB bridge registers and corrupt reads or
+writes.
 
-Most users don't want to use the Qualcomm Crypto Engine.  It is
-significantly slower than the CPU, its driver has a history of bugs,
-and operations that don't meet certain fairly arbitrary constraints
-fall back to software anyway.  However, most users _do_ want to allow
-the interconnect to power down, which is what the stub driver does.
---=20
-Sincerely,
-Demi Marie Obenour (she/her/hers)
+Add ahb_lock to struct qcom_swrm_ctrl to serialize each two-step AHB
+bridge register transaction.
 
---------------lc9NsThzkDEG0rUbHzJI36Wt--
+Fixes: 02efb49aa805 ("soundwire: qcom: add support for SoundWire controller")
+Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
+---
+ drivers/soundwire/qcom.c | 30 +++++++++++++++++-------------
+ 1 file changed, 17 insertions(+), 13 deletions(-)
 
---------------HRJ667nozFI7pDuLiKLXtKsh
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index c31d921..368f511 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -202,6 +202,8 @@ struct qcom_swrm_ctrl {
+ 	struct completion enumeration;
+ 	/* Port alloc/free lock */
+ 	struct mutex port_lock;
++	/* Serialize two-step WCD AHB bridge address/data accesses */
++	struct mutex ahb_lock;
+ 	struct clk *hclk;
+ 	int irq;
+ 	u32 ee;
+@@ -388,18 +390,18 @@ static int qcom_swrm_ahb_reg_read(struct qcom_swrm_ctrl *ctrl, int reg,
+ 	struct regmap *wcd_regmap = ctrl->regmap;
+ 	int ret;
+ 
++	mutex_lock(&ctrl->ahb_lock);
+ 	/* pg register + offset */
+ 	ret = regmap_bulk_write(wcd_regmap, SWRM_AHB_BRIDGE_RD_ADDR_0,
+-			  (u8 *)&reg, 4);
++				(u8 *)&reg, 4);
+ 	if (ret < 0)
+-		return SDW_CMD_FAIL;
++		goto out;
+ 
+ 	ret = regmap_bulk_read(wcd_regmap, SWRM_AHB_BRIDGE_RD_DATA_0,
+ 			       val, 4);
+-	if (ret < 0)
+-		return SDW_CMD_FAIL;
+-
+-	return SDW_CMD_OK;
++out:
++	mutex_unlock(&ctrl->ahb_lock);
++	return ret < 0 ? SDW_CMD_FAIL : SDW_CMD_OK;
+ }
+ 
+ static int qcom_swrm_ahb_reg_write(struct qcom_swrm_ctrl *ctrl,
+@@ -407,19 +409,20 @@ static int qcom_swrm_ahb_reg_write(struct qcom_swrm_ctrl *ctrl,
+ {
+ 	struct regmap *wcd_regmap = ctrl->regmap;
+ 	int ret;
++
++	mutex_lock(&ctrl->ahb_lock);
+ 	/* pg register + offset */
+ 	ret = regmap_bulk_write(wcd_regmap, SWRM_AHB_BRIDGE_WR_DATA_0,
+-			  (u8 *)&val, 4);
++				(u8 *)&val, 4);
+ 	if (ret)
+-		return SDW_CMD_FAIL;
++		goto out;
+ 
+ 	/* write address register */
+ 	ret = regmap_bulk_write(wcd_regmap, SWRM_AHB_BRIDGE_WR_ADDR_0,
+-			  (u8 *)&reg, 4);
+-	if (ret)
+-		return SDW_CMD_FAIL;
+-
+-	return SDW_CMD_OK;
++				(u8 *)&reg, 4);
++out:
++	mutex_unlock(&ctrl->ahb_lock);
++	return ret ? SDW_CMD_FAIL : SDW_CMD_OK;
+ }
+ 
+ static int qcom_swrm_cpu_reg_read(struct qcom_swrm_ctrl *ctrl, int reg,
+@@ -1680,6 +1683,7 @@ static int qcom_swrm_probe(struct platform_device *pdev)
+ 	ctrl->dev = dev;
+ 	dev_set_drvdata(&pdev->dev, ctrl);
+ 	mutex_init(&ctrl->port_lock);
++	mutex_init(&ctrl->ahb_lock);
+ 	init_completion(&ctrl->broadcast);
+ 	init_completion(&ctrl->enumeration);
+ 
 
------BEGIN PGP SIGNATURE-----
+-- 
+2.56.0
 
-iQIzBAEBCgAdFiEEopQtqVJW1aeuo9/sszaHOrMp8lMFAmsGDAYACgkQszaHOrMp
-8lNsng/+NMmecEwic70Ntrxi+PaLjYhERE/2Y0pncM9FfvCEV88uvNtEmnzf5s03
-qwbguuFGvVa3220G3VvmAWRtz5ai/nL4yZzT28GuBmD5WyMgrbpHJ+/ovO6Mzrc7
-y3uA/joBKmD3/Mornqp6id/EN15XlHnRZTO7cYZBELp+VJhdMGnQ3pu1Iiq4GhBx
-bdcLrTAJvkUG2DPvozkBz+xOmsnTsGmljviZD37JimbQ9NRh/pxHO+5HzJNEqNen
-3ee/o1i7BN9ThwxKyOSUWVrVdxhep0StfCc83+ickZIVtC3cR54zy7FToQlsKIRJ
-VioxblgFtBTI7i0JgGo2VaCWSR2sy6w0twJSeb+6fyQYOPcjRyoOvqEBzOeysvPc
-LD+pqC94Tvbka4UPtBZXMuX574qkrfy4ELlGcqtdGF3rGqvTMlZSuR9Z3Wr4607v
-j1yibCVtrkWhl1QWHh7PhITv73Lxy3ZHOj084OL5CQhREGE+xlqSGqnzs9nKlhoM
-sZ3f4IbI9yu05BdRt7+k+k6XjuiAd6LosIIzgSFqROoi1M8SlGtuhCWCF6j4i7vc
-tQUP1SMlNvblhXonfqD3OH9fuR2epqGn6QgpRmvgB81utzhjwt6U+rzi3+iX/HO+
-siMLhb/S1P7Qrd1Me4R0a79ixD2BUt2uTtlO/jqMw9N9q8wc2bY=
-=O1EQ
------END PGP SIGNATURE-----
 
---------------HRJ667nozFI7pDuLiKLXtKsh--
