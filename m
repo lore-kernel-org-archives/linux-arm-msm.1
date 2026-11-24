@@ -1,64 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795484036;
-	b=KNF1GAP2/cllvRxVmqAUeAQnsW5XfyabblLzwMxzQJduK96n7k1T/cXrPb+VaP2Eqdpg
-	 uTXXniMG7zli2cbCgPiwEn0rZfVPQx8ZEh2A4HtY/FcjQl6RCFEWtFK+PJKlO0aPhcslg
-	 PCfVc7TVdUDVz5CBV4BTpF34ot4NDTtn1bIcUURAtDS572RgPeHezVinStB1gSfZPT29N
-	 q1mvPvUUwcdLWyZUhQEffnIXWo0NxKlAaOIencMqDwol8Q6xRje81MbMPSMwmarX3KpUX
-	 SB/5kB3aeTP54MAV4s308O7yY8HaoNwjkKsCsI08D4kyEG2BLQBp/nqYwYwhxWr6Mbg==
+	t=1795485016;
+	b=U6YuWVK/NrPLYRm7CGVVNYL/pZ6JIXvRVotmfshiuWZfdVLzSsRImVgXmSDHnJVTe3q5
+	 d4bG4I5hvJgt83CBcyRrVEZ92C4u+Zi1LDwsUfIYnB3c5UEualwSb2zP34IGwH9xNUfoL
+	 cZohs4dTAI9orf3pIFXaZtU4tdy1bSyU/3IOvqR8E3TxzAJ5qpmt+IEUSzflqw7jWWIcf
+	 KwH5mu7gum3H+J0M47QTPq2hbmgA/iOqKHRBqGGfmKO/BjiSN1N4wTI84U89ZzpBdj/Xi
+	 TN5AVgJiyiz5hCphWyMDnKJrD1Vl3TzkWWoyl/QIX9jxbAdAGYn5MKSQTMTb7P4kXyQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795484036;
-	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
-	 In-Reply-To:References:X-sashiko-severity:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=d7m7HVJOhtX+DCuQTIUO8zHvldU1qVZx8CQyQENA6bs=;
-	b=O/XGl/OA7d4z8zu7sKcoIQJ5Mw3v1w5grwu4f+NwEWQneWl6ux8+ynw0O35TL0oDYKsL
-	 kxd+DpxceUls/USAh3eskfkKfDrL1VwN7q6F6cCQGo8euGswgLVemFzUPYBKOg3uCfI0z
-	 47OCip+eke4C+zZtN95AGjwWYD4LPcq/Oll/qvGsIwHsmESJWmibp+qwOjGM/P8lFDE1b
-	 9dCW5nQmVy/BQ5SePhqc0Svwzq5f3NwAXBHFt1ClMTq83exgdg8EFSd8ud8rPsafj4ou3
-	 MJ8pRK+29MRb/qBx+zbDQ7y0h9MHNj88qHnn4M9ElSHLwq2KqIZRID8PUEEO2e8I/OA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795485016;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=2QXMNnMraTZH/FnAkc7kgTSbDePKAwMxVAPlh8rzchk=;
+	b=qUzTI6kfGOZ5ba+s/Crar3RmwJd3bNgcs1SraYMWi3tyckaUj3zRwZ+sfDpbvokLxdqW
+	 uCtt2z3irPjB+U4tuVuABJenQ3SNyL2VK9qjGbiXIBwEOljeeakowSVk1fx2scgFw8V8R
+	 BpBwLJzYEpF4M6gBdSFRdfK+nfK0p1r0fn8VN8OX9//OI/lW0a7j1eofF6z4UucWJjrWO
+	 4F1TTaMDwnHq9raWC25TOWplEQdDKE3XLeNE+GnXm1RUmJPW8on4DlCWDfY+W5dHzeXp5
+	 waQB0KF1uBV6YCMRSacYsvnAIRWzRwfogzyl6gn4ABzv+lqPd14TGLfqt5c6ZOhsF4w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XtLSd9Px;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 791F3606A31E;
-	Tue, 24 Nov 2026 01:33:56 +0000 (UTC)
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=Cpo8CDwz;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id E50FD606A31E;
+	Tue, 24 Nov 2026 01:50:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E50FD606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XtLSd9Px
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF2171F000C4;
-	Tue, 24 Nov 2026 01:33:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795484035;
-	bh=d7m7HVJOhtX+DCuQTIUO8zHvldU1qVZx8CQyQENA6bs=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=XtLSd9Px4vWbCSo09M0U76E+DUQaqKzAAHg2tpv9Rx7hzkKKE/NFzjaUdGD+YwvAQ
-	 44IZ1l+F8JeP8VMeYHcy8F2V+kDYrw6tLxfwv2SmELNBy0FgJn4/VvkFyVe/SIQj/L
-	 YPX0RNMyNg16UeeqpJnTqAYWUgpPsgr95ZgGk0ssr/ZEabPNgiL+l778DpCpebiu2/
-	 czrC0AQh+ExzpWqZjK5IUKnj8EJyPJ+nw3sbtXQrj7X4+1QTlpuZWysjth8rYgkvRX
-	 4eY/KTqaozy1i62oArfuFuVQsU7Wn2SyjRjTePQDRKAOAJNh6YhunqDldcgTUDq1+p
-	 Ovtk4qs60al2w==
-Subject:
- Re: [PATCH net-next v5] net: stmmac: dwxgmac2: enable L2 split header support
-From: netdev-bot+sashiko@kernel.org
-To: sagar.cheluvegowda@oss.qualcomm.com
-Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
- netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, lorenzo.bianconi@oss.qualcomm.com,
- hongmei.xu@oss.qualcomm.com, abhishek.chauhan@oss.qualcomm.com,
- sarosh.hasan@oss.qualcomm.com
-Date: Tue, 24 Nov 2026 01:33:54 +0000
-Message-ID: <179548403438.3135.1804854034587814346@kernel.org>
-In-Reply-To: <20261120005243.3724402-1-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20261120005243.3724402-1-sagar.cheluvegowda@oss.qualcomm.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=Cpo8CDwz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=2QXMNnMraT
+	ZH/FnAkc7kgTSbDePKAwMxVAPlh8rzchk=; b=Cpo8CDwzcDTUjocWYca3faQ5Cy
+	I13LZH+3+oUHB5ZJBS72lz8vfyqy15ZpSKROgJxIdjDHp9NAT148mPckjrJvYucQ
+	QJ4HNPHGfibdLVm5Y3BxIKxiq8oKg+awqzHhhvgIW901OgbvVsHXY/WtU0S7vFj1
+	O0WgRc5xdRbBnXHgs=
+Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.185.179])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgAntEhK7QRrnDDvAA--.91S2;
+	Tue, 24 Nov 2026 09:50:02 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: Thinh.Nguyen@synopsys.com
+Cc: robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	gregkh@linuxfoundation.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v14 0/3] usb: dwc3: support two connectors sharing one HS data bus
+Date: Tue, 24 Nov 2026 09:49:59 +0800
+Message-ID: <20261124015002.1426767-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,239 +62,240 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgAntEhK7QRrnDDvAA--.91S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3ZryUCry8Wry5Xr17tr4fKrg_yoWDuFy5pF
+	Z8tr4SyF4kGFWfAryxAF1UC34ruan3GrsrtFy8Ka4UAa13u3yfXr93K3yrWFyUCF93Xa4a
+	vFyDW3srGFnrAaUanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvIb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4
+	vEx4A2jsIEc7CjxVAFwI0_Cr1j6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
+	Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJV
+	W8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_JF0_
+	Jw1lc2xSY4AK67AK6w4l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2
+	IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v2
+	6r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2
+	IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv
+	67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU0xZFpf
+	9x07bY3kNUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREAB2sElFsCDQAqsS
 
-Thank you for your contribution! Sashiko AI review found 4 potential
-issue(s) to consider.
+Two USB Type-C receptacles can share one High Speed D+/D- pair if a
+multiplexer selects which of them drives the controller.  This series
+describes that in the DWC3 binding, adds the endpoint-scoped role-switch
+lookup the connectors need, and drives the shared data path from the DWC3
+mode worker through the mux controller API.
 
-Critical: 0 · High: 0 (1) · Medium: 3 · Low: 1
+No runtime testing is claimed for this version: the mux path has not been
+exercised on hardware.  The series was reviewed statically and through the
+gates listed below.
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+*** AI-assistance disclosure ***
+This series was prepared with the help of an LLM coding assistant.  The
+author reviewed every line, checked every quoted claim against the tree,
+and ran the gates quoted below; the design decisions and any errors are the
+author's.  Each patch carries the same disclosure below its "---"
+separator.
 
-- [Medium] The rewrite of dwxgmac2_get_rx_header_len() in
-  drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c is shared by…
-- [Medium] In dwxgmac2_get_rx_header_len()
-  (drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c), the header…
-- [Medium] The new dwxgmac2_get_rx_header_len() reads the header length
-  in two different ways under the same SPLM=L2OFST + SAVE_EN…
-- [Low] dwxgmac2_config_l2_split()
-  (drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c) sets SPLM =…
+Changes in earlier versions (full history)
 
-Pre-existing issues:
-- [High] This problem wasn't introduced by this patch, but the patch
-  extends it.
+v4 (2026-10-26) first posted the series: the binding described a private
+"port-select-gpios" property and separate High Speed ports per connector
+(port@0 and port@2); the driver drove the shared data path through a raw
+GPIO from the role-switch callbacks.  v5 (2026-10-31) was a fixup round.
 
---
+v7 (2026-11-06) reworked both ends:
+- binding: the two connectors are two mux'ed data streams of one High Speed
+  bus; "port@0" carries two endpoints with "mux-state" 0/1, and the private
+  GPIO property is replaced by "mux-controls" (a phandle to a mux
+  controller such as "gpio-mux").
+- driver: the shared data path is driven through the mux controller API
+  (devm_mux_control_get()/mux_control_select()); mux_control_select() may
+  sleep, so it is only called from the mode worker.
+- usb: roles: role-switch lookup extended to switches attached to a graph
+  endpoint, which the two-endpoint binding needs.
+v8 (same day) is the same series rebased; v6 was never posted.
 
-net: stmmac: dwxgmac2: enable L2 split header support
+v9 (2026-11-17) answered Rob Herring's 2026-11-10 review of the cover:
+"port@2" is gone (the second connector is a second endpoint of "port@0"),
+"port-select-gpios" is replaced by "mux-controls", the driver uses the mux
+controller API, and the board DTS is posted separately.
 
-This adds a config_l2_split MAC callback and implements it for XGMAC2. On
-enable it selects split at the L2 header offset, enables Split AV in
-XGMAC_EXT_CFG1 and clears VPRE in XGMAC_EXT_CFG0. The callback is called
-from stmmac_hw_setup(), stmmac_set_features() and stmmac_xdp_open() on split
-header capable cores, and dwxgmac2_get_rx_header_len() is reworked to look
-at FD/LD when reading the header length.
+Changes since v10
 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> index 09194b9d8322e..58d7433e8b17c 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> @@ -1412,6 +1412,25 @@ static int dwxgmac2_config_l4_filter(struct mac_device_info *hw, u32 filter_no,
->  	return 0;
->  }
->  
-> +static void dwxgmac2_config_l2_split(struct mac_device_info *hw, bool en)
-> +{
-> +	void __iomem *ioaddr = hw->pcsr;
-> +	u32 value;
-> +
-> +	/* L2 split is not supported for packets with variable preamble */
-> +	if (en) {
-> +		value = readl(ioaddr + XGMAC_EXT_CFG0);
-> +		value &= ~XGMAC_EXT_CFG0_VPRE;
-> +		writel(value, ioaddr + XGMAC_EXT_CFG0);
-> +	}
-> +
-> +	value = readl(ioaddr + XGMAC_EXT_CFG1);
-> +	value &= ~(XGMAC_CONFIG1_SPLM_MASK | XGMAC_CONFIG1_SAVE_EN);
-> +	if (en)
-> +		value |= XGMAC_CONFIG1_SPLM(1) | XGMAC_CONFIG1_SAVE_EN;
+1) [Medium, on 3/3] "Should dwc3_role_mux_deselect() be called after the
+   switch (dwc->current_dr_role) block tears down the active host or gadget
+   instance?"
 
-[Severity: Low]
-This isn't a bug, but should the commit message say that SPLM = L2OFST
-moves the split point for all split header traffic, and not only for the
-tagged or non-IP packets it talks about?
+   Accepted.  dwc3_role_mux_deselect() is now called after that switch
+   block, in the same order as __dwc3_set_mode() (host/gadget exit first,
+   then the data path switch), and still after
+   cancel_work_sync(&dwc->drd_work).
 
-Untagged and VLAN stripped IPv4/IPv6 TCP/UDP frames were previously split
-at the L3/L4 header boundary. With L2OFST they would be split right after
-the EtherType. Commit d10f1a4e44c3 describes the same change for dwmac4.
+2) [Medium, on 1/3] "Does applying $ref: '#/$defs/hs-port'
+   unconditionally to port@0 cause a dtbs_check regression for
+   single-connector DWC3 nodes without mux-controls?"
 
-stmmac_hw_setup() turns this on by default for every sph_capable XGMAC2
-with RX checksum offload enabled. stmmac_rx() would then build the skb head
-from the 14/18 byte MAC header only. The IP/L4 headers would have to be
-pulled from the buffer 2 page fragment.
+   Accepted, for the shape that v10 posted.  A single-connector node that
+   numbers its endpoint ("port@0/endpoint@0" with "reg" only) was rejected
+   by the v10 schema with "'usb-role-switch' is a required property" and
+   "'mux-state' is a required property".  "port@0" keeps the generic graph
+   port at the top level now; the two endpoints, their
+   "usb-role-switch"/"mux-state" and the address/size cells are required by
+   the "mux-controls" branch of "allOf" only, so single-connector
+   controllers are described exactly as before.  An unnumbered
+   "port@0/endpoint" of a non-mux controller was not rejected by the v10
+   schema either; both shapes pass now.
 
-Could the commit message state that this changes the RX layout for IP
-traffic on existing XGMAC2 users, and ideally include some throughput
-numbers?
+3) [Low, on 1/3] "should the local $defs be dropped in favor of defining
+   the endpoint schema under patternProperties for '^endpoint@[01]$', and
+   can the Linux driver implementation details be removed from the
+   binding?"
 
-> +	writel(value, ioaddr + XGMAC_EXT_CFG1);
-> +}
-> +
+   Accepted.  The endpoint schema is inlined under "port@0" through
+   patternProperties, the local "$defs" section and the "$ref" to it are
+   gone, and the "mux-controls" branch no longer names driver functions.
 
-[ ... ]
+Changes since v11
 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> index 6719ac6e395bc..b28aa39f99472 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> @@ -292,8 +292,22 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
->  
->  static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
->  {
-> -	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-> +	u32 rdes3 = le32_to_cpu(p->des3);
-> +
-> +	/* HL is only defined on the first descriptor */
-> +	if (!(rdes3 & XGMAC_RDES3_FD))
-> +		return;
-> +
-> +	/* when FD=1 and LD=0, HL is RDES2[9:0] */
-> +	if (!(rdes3 & XGMAC_RDES3_LD)) {
-> +		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +		return;
-> +	}
+Posting fixes only.  The three patches are byte-identical to v11: the
+"diff --git" section of each of 1/3, 2/3 and 3/3 compared with "diff -u"
+against the v11 file gives empty output, and applying this series on the
+same base (v7.4-rc3 = aebb727447) yields the same file blobs as v11
+(snps,dwc3-common.yaml = 7a9cb5a115a6, drd.c = 906cac4f3e6e).
 
-[Severity: Medium]
-In hwif.c, the XGMAC2 entry and the XLGMAC entry both use
-.desc = &dwxgmac210_desc_ops. So this parsing change applies to every
-existing split header user, including XLGMAC, which never gets
-config_l2_split.
+6) [Krzysztof Kozlowski, on v10 1/3, 2026-11-21] "This does not go to
+   commit msg, but changelog."
 
-If the databook statement in the commit message is right and L34T is only
-valid on the last descriptor, then on FD=1/LD=0 descriptors the old code
-tested an undefined field:
+   Adopted.  The AI-assistance disclosure paragraphs no longer sit in the
+   commit messages; each of 1/3, 2/3 and 3/3 now carries its disclosure
+   below the "---" separator, next to the changelog.  sashiko's [Low] on
+   v11 1/3 ("transient AI disclosure left in commit message") is the same
+   item; sashiko reported patches 2/3 and 3/3 of v11 with no issues.
 
-	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
+7) [Krzysztof Kozlowski, same mail] "...this one even threaded to other
+   posting..."
 
-If L34T reads 0 there, hlen stays 0. stmmac_rx_buf1_len() then returns
-dma_buf_sz for a header buffer that holds only HL valid bytes, so the skb
-head would carry stale page data.
+   Adopted.  This series starts a new thread: no In-Reply-To or
+   References to the v9/v10 postings.  The v9/v10 Message-IDs for
+   reference: v10 cover
+   <20261121022104.1507987-1-xiaqinghuan@mail.ustc.edu.cn>.
 
-A remote peer can produce multi-descriptor split frames.
-XGMAC_CORE_INIT_RX sets GPSLCE with GPSL = XGMAC_JUMBO_LEN (16368) whatever
-the MTU, while dma_buf_sz is 1536 at MTU 1500.
+8) [Greg Kroah-Hartman, Re: v11 3/3, 2026-11-23] "What about all the
+   previous versions?  Please always include them all, right?"
 
-Is this fixing an existing RX corruption bug inside a feature patch? If so,
-could it go in a separate patch with a Fixes: tag so that stable picks it
-up? The v5 changelog says the fix wording was removed on purpose. If the
-old behaviour can't actually be reached, could the commit message say the
-change is a no-op for existing configurations?
+   Adopted.  This cover letter now carries the changelog of every previous
+   posting (v4, v5, v7, v8, v9, v10, v11 above); v13 itself only changes
+   the cover letter, the three patches are byte-identical to v12.
+   Message-IDs for reference: v11 cover
+   <20261121132029.2379449-1-xiaqinghuan@mail.ustc.edu.cn>.
 
-There is also the L2T branch further down. On XLGMAC, SPLM/SAVE_EN are
-never set, yet non-IP last descriptors with L2T != 0 now take HL from
-RDES2[9:2] >> 2. Are those bits guaranteed to be zero for frames XLGMAC
-never split? "The callback is not implemented for XLGMAC" in the commit
-message makes it sound as if XLGMAC is unaffected.
+Changes since v13
 
-[Severity: Medium]
-Is RDES2[9:0] the right layout here for non-IP frames?
+Sashiko reviewed v13 1/3 on 2026-11-23 and reported three low-severity
+binding issues; all three are addressed here and 2/3 and 3/3 are
+byte-identical to v13.
 
-This branch reads HL from RDES2[9:0] for every packet, although the packet
-type isn't known on an FD=1/LD=0 descriptor. The FD=1/LD=1 non-IP branch
-below uses (RDES2 & GENMASK(9, 2)) >> 2, because RDES2[1:0] carry AV
-status.
+ - "mux-controls" now has "maxItems: 1": the shared bus is driven by one
+   two-state multiplexer, so the number of mux controllers is not open.
+ - Inside the "mux-controls" branch, "port@0" now rejects a plain
+   "endpoint" and any "endpoint@2"+; a mux'ed bus has exactly two data
+   streams and neither shape was rejected before, because the graph port
+   base leaves "unevaluatedProperties" open on purpose.  Single-connector
+   controllers keep the generic graph port binding untouched.
+ - The "oneOf" that requires opposite "mux-state" values moved into the
+   "mux-controls" branch.  Outside it, both alternatives matched whenever
+   "mux-state" was absent (JSON Schema evaluates "properties" of a missing
+   property as true), so a two-endpoint tree without "mux-controls" was
+   rejected.  The now redundant "dependentRequired" and "mux-controls:
+   false" are gone.
 
-The MAC may also write AV status into RDES2[1:0] of the first descriptor
-for non-IP split frames. In that case a multi-descriptor non-IP/AV frame
-would get HL read as roughly 4x the real value plus the status bits.
-stmmac_rx_buf1_len() would return an oversized header length, and
-stmmac_rx_buf2_len() would be off by the same amount.
+Gate notes for this version: G1/G2/G4/G5 were re-run on the same base
+(aebb727447 = v7.4-rc3); G6 gained two negative samples (plain "endpoint"
+and "endpoint@2" under a mux), both rejected here and accepted by the v13
+schema, plus a positive two-endpoint tree without "mux-controls" that the
+v13 schema rejected.  G3 was not re-run: 2/3 and 3/3 are byte-identical
+and 1/3 only touches the binding.
 
-For comparison, dwmac4_enable_sph() uses the same
-GMAC_CONFIG1_SPLM(1) | GMAC_CONFIG1_SAVE_EN setup, and
-dwmac4_get_rx_header_len() always reads RDES2[9:0]. Does the XGMAC
-databook really make the HL bit layout depend on descriptor position?
+Known gaps (stated so that nobody has to guess)
 
-> +
-> +	if (rdes3 & XGMAC_RDES3_L34T)
->  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
-> +	else if (rdes3 & XGMAC_RDES3_L2T)
-> +		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
+- Which physical receptacle corresponds to mux state 0 and which to 1 is not
+  proven on hardware yet; the board DTS therefore names them "Receptacle A"
+  and "Receptacle B" and does not claim long/short edge.
+- "gpio-mux" drives the select lines low in probe
+  (devm_gpiod_get_array(dev, "mux", GPIOD_OUT_LOW)), so the level left by
+  the firmware is not preserved.  "idle-state" is deliberately omitted: a
+  non-AS_IS idle state would drive the wrong state between
+  mux_control_deselect() and the following mux_control_select().  Making the
+  probe keep the pin as is (GPIOD_ASIS) is a change to drivers/mux/gpio.c and
+  affects the ~70 existing gpio-mux users, so it does not belong in this
+  series; it needs a separate discussion with the mux maintainer.
+- dtbs_check cannot see "idle-state" values: gpio-mux.yaml declares it
+  without a type or bounds, so an out-of-range value is only rejected at
+  probe time.  The gate below therefore does not claim coverage for it.
+- The board DTS is not part of this posting: the Lenovo Legion Y700 Gen 4
+  file is not upstream yet and is posted with its own board series.
 
-[Severity: Medium]
-What happens here to non-IP frames whose L2 type is 0?
+Gate results (base: v7.4-rc3 = aebb7274476403040d582c61478df8f4a7bf9cd3)
 
-XGMAC_RDES3_L2T is GENMASK(19, 16), the same bits as XGMAC_RDES3_ET_LT, so
-this check really means "L2 type != 0". In the LT encoding, 0 seems to be a
-valid type: an IEEE 802.3 length encapsulated frame (LLC/SNAP, for example
-STP BPDUs).
+  G1 apply       git apply --check + apply on a pristine check-out of the
+                 base above: 3/3 clean, rc=0, no offset/fuzz; resulting
+                 blobs snps,dwc3-common.yaml = 7a9cb5a115a6,
+                 drd.c = 906cac4f3e6e
+  G2 checkpatch  perl scripts/checkpatch.pl --strict --no-signoff --no-tree
+                 1/3 0E/0W/0C (115 lines) ; 2/3 0E/0W/0C (63 lines)
+                 3/3 0E/0W/0C (624 lines)
+  G3 build       make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- W=1
+                 drivers/usb/dwc3/ drivers/usb/roles/
+                 (CONFIG_MULTIPLEXER=y, CONFIG_USB_ROLE_SWITCH=y)
+                 rc=0, 0 warnings, 22 objects (21 dwc3 + 1 roles), all
+                 aarch64 relocatables
+  G4 binding     make ARCH=arm64 dt_binding_check   (no DT_SCHEMA_FILES)
+                 rc=0, no diagnostics; 5420 example DTC [C]
+  G5 dtbs_check  make ARCH=arm64 CHECK_DTBS=1 qcom/sm8250-mtp.dtb
+                 qcom/sm8650-mtp.dtb qcom/sm8750-mtp.dtb qcom/sm8750-qrd.dtb
+                 (no DT_SCHEMA_FILES)
+                 patched: 4/4 DTC [C], 0 diagnostics
+                 base:    4/4 DTC [C], 0 diagnostics  => 0 new
+  G6 samples     dt-validate on the rebuilt schema bundle
+                 positive, 0 complaints each:
+                   two endpoints, opposite mux-state, dr_mode = "otg"
+                   same, with dr_mode omitted (usb-drd.yaml default)
+                   single connector, plain "port@0/endpoint", no mux
+                   single connector, "port@0/endpoint@0" without role props
+                 negatives, all rejected:
+                   same mux-state on both endpoints
+                   endpoint@1 missing
+                   endpoint@1 without usb-role-switch/mux-state
+                   mux-controls with dr_mode = "host"
+                 control: the v10 schema bundle rejects the two shapes of
+                 items 2 and 4 above, the v11 bundle accepts them.
+  G7 hardware    not run
 
-Suppose the MAC splits such a frame at the L2 offset with SPLM = L2OFST and
-SAVE_EN set. Then *len stays 0, and stmmac_rx_buf1_len() skips this branch:
+  On the command shapes: DT_SCHEMA_FILES is intentionally not used for
+  dtbs_check.  It is passed to dt-validate as "-l", which only keeps schemas
+  whose $id matches and that still select a node themselves;
+  snps,dwc3-common.yaml is a fragment without "select:", so the run reports
+  nothing and looks green.  The dtbs_check rule also ends with "|| true", so
+  the result is read from the diagnostics in the output, not from the exit
+  status.
 
-	if (priv->sph_active && hlen) {
-		priv->xstats.rx_split_hdr_pkt_n++;
-		return hlen;
-	}
+Qianhui Xu (3):
+  dt-bindings: usb: snps,dwc3: describe two connectors on one HS data
+    bus
+  usb: roles: look up role switches attached to a graph endpoint
+  usb: dwc3: select the shared HS data bus with a mux controller
 
-It returns min(dma_buf_sz, plen) instead, and stmmac_rx_buf2_len() returns
-0. Wouldn't the skb then contain the split header followed by stale
-page_pool data from buffer 1, with the real payload in buffer 2 dropped?
-
-If HL is always 0 for frames the hardware doesn't split, could the L2T
-check be dropped so that RDES2[9:2] is read for every non-IP FD=1/LD=1
-descriptor? That would match the databook table cited in the commit
-message.
-
->  }
-
-[ ... ]
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> index f256244ce0d11..0c333d14be4d2 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
-
-[ ... ]
-
-> @@ -6467,6 +6469,7 @@ static int stmmac_set_features(struct net_device *netdev,
->  		bool sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
->  		u8 chan;
->  
-> +		stmmac_config_l2_split(priv, priv->hw, sph_en);
->  		for (chan = 0; chan < priv->plat->rx_queues_to_use; chan++)
->  			stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
->  	}
-
-[Severity: High]
-This is a pre-existing issue that this patch didn't introduce, but the
-patch builds on it. When RX checksum offload is turned off,
-stmmac_set_features() now also calls
-stmmac_config_l2_split(priv, priv->hw, false). However, priv->sph_active
-is never cleared. It is only assigned at probe and in stmmac_xdp.c.
-
-stmmac_init_rx_buffers() and stmmac_rx_refill() keep buffer 2 programmed
-through stmmac_rx_check_buf2_cap(). With split header off, the DMA fills
-buffer 1 and then buffer 2 of each descriptor. Meanwhile
-stmmac_rx_buf1_len() still does this for every non-first descriptor:
-
-	if (priv->sph_active && len)
-		return 0;
-
-Take a frame larger than 2 * dma_buf_sz, for example more than 3072 bytes
-at MTU 1500. XGMAC accepts it, since XGMAC_CORE_INIT_RX sets GPSL = 16368.
-Wouldn't the buffer 1 data of the second descriptor be dropped, and
-stmmac_rx_buf2_len() return plen - len from a buffer 2 the DMA never
-wrote?
-
-After something like 'ethtool -K ethX rx off', that would hand stale or
-uninitialized page_pool memory to the stack. Should sph_active, or the RX
-length accounting, follow sph_en here?
+ .../devicetree/bindings/usb/snps,dwc3-common.yaml  |  99 ++++++
+ drivers/usb/roles/class.c                          |  45 +++
+ drivers/usb/dwc3/core.c                            | 116 +++++++
+ drivers/usb/dwc3/core.h                            |  43 +++
+ drivers/usb/dwc3/debugfs.c                         |   4 
+ drivers/usb/dwc3/drd.c                             | 329 ++++++++++++++++++++
+ 6 files changed, 632 insertions(+), 4 deletions(-)
 
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261120005243.3724402-1-sagar.cheluvegowda%40oss.qualcomm.com
+2.53.0
+
