@@ -1,111 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.210
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795542559;
-	b=JTWZb8dzfusSrULgOz2ZGLbSeDXHJMhHIgAaMkG99Ij+hr4ELMbO7Qh3Eq4Z8xWjNNop
-	 xu9dHAIGXLGDZwLfsRIYBZg46J0jZK4EvCPFhWPcYy427EiVUkuCS3gZ6ka7uLHVPK6I9
-	 xpRLnyvRneRxEA1j0yjgO8jkrcpRDnoLi9HSqkXkRDeMjwQ/nZySXV77NP2lwa83mypaF
-	 okVIIGUGEsmcgB8+4qHNEQbTXxg3kVS7M0sKVBz5dANWtJd1kcqB9bAah2dKAhDuBXv8a
-	 g5z0GD9f90t+5cr12dZDFsIoyQ9rbLS5I0ZudJ5E3OE+HGLYU2TYJDYt5wevBKthwxw==
+	t=1795545017;
+	b=XBe22qjGk461bAcMUQpO92UzhrOXZ8xF/9MzYLEKQqrEYAA78WZEJLUtWbEqCIr199Jr
+	 0yNT7O8weU9mRphODu0zgp4M3i3S1RWogbIiKwiOhle+kChoSSy918xOYV21w1qN2x4UF
+	 2c5hYnfpTd6HctXpNIr31rXBH7YRTOn2dV4SdZ5Fy2iICIvUOh2r++Qgrb6ptpD6GiQhC
+	 v48DjVfyXtoFzJzi8j2ANZuP3EACQh8jAiPWWJ4wwKV9hmQU1VRqhpUmJ3xg1BG8UFhz5
+	 28wUg5oIo0e+gSy7Aie17fktNCnSoajKY+8DjbxWTrn6Ll+ZraTGSM4op+sqDejhy+Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795542559;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Sfqj8GQEe8Ctm8nPT/0qV5MLtb/lLvRLhVjLF65l9O8=;
-	b=uDxMniU26HLi3cY9H4ojWduvdv1SA+egaSr60Alm3AcKIQPEIvdO58K2j4YgX5EpCwXU
-	 lMK2qzxOtxAVdgCgLAMbWF+gKtWAYCNd5y7j6jj6tTA7AjxVxRxnFRu/zZkOWbJvEp8yo
-	 lJvWAhTh2oubCNiDNNon+I2tzrpGJYr64rS3WOOt90v/0JAsH2QVZQcW0XuTV9Y7H3lda
-	 5gh8MT+dGTcSNqNfqNQREyVhI0mJ3+RFCHnCp2/96pf9AROqPpBZst/tAPXv8xb3XCN4G
-	 N0QrVI+hQ2183twbnhUHtpx8yCZM0TidPj7PIN+fom9CxcIa8NvnkzquCHFXnwxkvzw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795545017;
+	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
+	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=0K0WZc/39/LoeP518yVuoZSqLaQqIw4BwskJvntaZvY=;
+	b=azpLGaQkMjvQfSBla93fT0Avw/j/BJsSH45I8+YNWGN+1tyUrYH7iAWu2EuascxpNPrU
+	 pra9XTNjQZEccqge96KxZ2ABkotZRw4V9ZDY0oeVz6Po7CPwPpbbId+F0BdQ12sGoIMj+
+	 ZFdKW4bdwwbooYriC9ZGiTU87X7Pp7ce7xrvOm0nbcvaYxMYhWUMZo5qGjpBu6yxtdIFT
+	 w0fcadrjRo5ldHs1sTq/a+PG7E22MUqv3MpRohm90ftbgTT87bOClRSFkyJAK1qGRB880
+	 x5XVO1JM3DfmXK+MgrihkQYcBaZG8NnOHNDfg6ZwDF1hcKc/8khuW7FG6Oao0FtYhEg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aBJSctzz;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SdJARYbt;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=packett.cool;
+	spf=pass smtp.mailfrom=packett.cool;
+	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=U4V8Lmxp;
+	arc=none smtp.remote-ip=95.215.58.210
+Received: from mta1.migadu.com (out-210.mta1.migadu.com [95.215.58.210])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5828D606A33E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:49:19 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5828D606A33E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 211BA606A32D
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 18:30:15 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 211BA606A32D
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aBJSctzz;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=SdJARYbt
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AOFL9HF1184019
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:49:18 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Sfqj8GQEe8Ctm8nPT/0qV5MLtb/lLvRLhVjLF65l9O8=; b=aBJSctzzFJkx4XTq
-	QVlCkgmgoNiS4ygeu58LQLgHbiKTABuGbpyTtkPOtJ3cKy0DpQ8dy9Hs3S9IEeWs
-	V5zItmodZd1GAexTxjGoyCrY3190eNx8PTXG04hZiBglzo7oeLnzZ2Ma9BWk05yW
-	c+3l5Vpp/vLdXqZYibG+US5IcrTdrxEsJhPt0caD2gnUmDQGFAFvk3VDExVl3MB9
-	HJAK0Tk6VdKvl/3gvU+rEcJWFmceAa+IwbFvibLYeyFOwtqMFt5zjrwYalgjz9A9
-	YCuQC4WTb0My3bkJKkwAO1GHOgpcXRq5GU0bsCGuLzDExeun5B4Ds5qHQ91rl0ra
-	EBGWVQ==
-Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j50ky42ww-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:49:18 +0000 (GMT)
-Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-92114c39cadso91267016d6.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:49:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795542558; x=1796147358; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Sfqj8GQEe8Ctm8nPT/0qV5MLtb/lLvRLhVjLF65l9O8=;
-        b=SdJARYbtBtVmBOVpfGzktaBa0llQFCZNIRwUd+S4OkVUX5QPyCTdfKx8fAICWZ7MC0
-         iNQeQ0sj4QzlRdM94rlpZ4Gukmzrz047NRA8TdBehkoEbCsD+L11hVFH2DQo52/nPeXW
-         7Ajg3/wXwFaaqdbo1yo+XyTyLoOd/5ZVWNAHWa1KlsQ1sHYAyLCLJLeHLQLpgQlk4tyE
-         7exITYWnSdS7/GuSI6RHsEHTn4JSXCzWtV6EVTjbSGkTCFqr4JqkUrQCb3mSFTAz9uqr
-         bA86sNARS9WABYRZn3iu0Wz4Mc2VdvD12qCtpn0shqFyUvUGAnyy/gTLEhOn5uoYIx+O
-         wMiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795542558; x=1796147358;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Sfqj8GQEe8Ctm8nPT/0qV5MLtb/lLvRLhVjLF65l9O8=;
-        b=p7iI/twBogBQbr4yror0XX5BLo9If3E9DMjqbibm3NDoniDyG5nSX31JDmchJ4alc/
-         7OzgHfzJlmNkvljOavYKWGLD8GMSO2h4OEB/YewvMLL8KcrB3T6cBX5czmyVsQYIPnKo
-         b/hjvi9pzGTngKRseyU+J1EAswxLOA4mtAVQVKM1KA5Bs7Nt7XsisJouzegUmRo7If/+
-         9cpu1IbFw5MAfb4xooC104fgxKFRYosRZHNRn8yhdKsqGm/xDpoUGFw2wQ/TLOZXwy/m
-         AuIyORpRIMkOgfHZ7Z3Rdcs68zMXnTaDUYsrzQ1mSb7PldZFWa2DX1WAHwOBohbRg45t
-         o71Q==
-X-Gm-Message-State: APuU4Z8mC7nBBzD0i59E7OjIVkQLCjeoQAAcZ7JJkWoZxm6flr+/nRhp
-	URjGXqVRvP6urXJAvpF9Pg2hN78arNLyuE/cl3PwboOddobJF3WhIno8Gh/EIK+9D0B6l4pqBAv
-	8AnPNJm24K6mvxe5wib0zNtUl60sk41KEcXtWI51PR4XUw/hhz7h7vhTofERfVpLrdxW2
-X-Gm-Gg: AZFdTZfo98vZTzRT91NOJGPUvYK7tw12st+xcC0vLNCkiOrYcQ8jd4yCEifO7f/fGrg
-	xRlD9mlkNhGMBxl7oRSizmqjZBLXjBBLUJw7FRmTI14JYTF0Nmue7nlQJeh6I4d2zzN3GjhBfcl
-	zo1MbQD8C3PZlvh6OUaun33w6TvubLMxg8dplkRS/9+WisV9s3MjWfZBQ4U5qmqwog/d6qBuSkC
-	R7WFgW1K3xzppvRKDxTpjV0m4SXt/9NUeo/dcnXRBYIpgglcsoYvExtXmaoGU51W+CKGeS4MAfO
-	VndQ8qWZA0/LTV89zbnEKfCrW2Vvrc0DSlp0sN6adbjO0w7grawB8Z7KeBOqrp4h0ogdPgPCENw
-	nHvMyJNVnraEJdLwVp6jLq0NuER3SkohXnM8Jn44jox1/F7VzGEgSrum/dC5IUniB5mC283E6zg
-	A0u2gVNvmAyMOl
-X-Received: by 2002:a05:620a:1332:b0:949:6193:acd0 with SMTP id af79cd13be357-949bab4d91bmr2688327385a.81.1795542557762;
-        Tue, 24 Nov 2026 09:49:17 -0800 (PST)
-X-Received: by 2002:a05:620a:1332:b0:949:6193:acd0 with SMTP id af79cd13be357-949bab4d91bmr2688284585a.81.1795542552469;
-        Tue, 24 Nov 2026 09:49:12 -0800 (PST)
-Received: from [127.0.1.1] (93-159-22-70.cgnat.inetia.pl. [93.159.22.70])
-        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ba370e77d8sm6899678a12.14.2026.11.24.09.49.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 09:49:11 -0800 (PST)
-From: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-Date: Tue, 24 Nov 2026 18:48:52 +0100
-Subject: [PATCH v3 2/3] arm64: dts: qcom: agatti: add the Embedded USB
- Debugger
+	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=U4V8Lmxp
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+DKIM-Signature: a=rsa-sha256; bh=5FzHrKNgD5lCIK6oHJu6SlDrdrGmdZHkQ/9jYR5U3ZU=;
+ c=simple/simple; d=packett.cool;
+ h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
+ t=1795545014; v=1; x=1796149814;
+ b=U4V8LmxpaxCGNshsJQMp1cGqvNoMnmJ61t4agxFJvdLgGE89eKi6YbLla8aOfehsipx5T2n4
+ HWgJRpfRw4kEL/JUvalPLYfgURfguVd29h0ePzJ+ABt6PfmU4mVx2A+tklIS53+6qnVmccIFIRH
+ lJ9lYUAFK+VXQ+yp0WMIZ92HXIeR8Y6Hq8kbbS300vJs1kOadA1EumZjNH6XL+oXkQApGV+0/yD
+ UhsbzpurWw/kKqi/HzhYt676/2jaGpRZAIc3VnbYxSfC0poxbBidkBNK452LjMuoVlceTOC4b69
+ ag+p5cpx0e4I1v5YO6l/VHzqWhwltmPMbf4AUuuVCFnRA==
+X-Envelope-To: linux-arm-msm@vger.kernel.org
+Received: by smtp.migadu.com with ESMTPS id cf4f11413430c8c2;
+	Tue, 24 Nov 2026 18:30:12 +0000
+X-Mizu-Trace-ID: cf4f11413430c8c2
+X-Migadu-Flow: FLOW_OUT
+Message-ID: <87735cc2-3759-4b7b-a16d-8aa4911ea7fb@packett.cool>
+Date: Tue, 24 Nov 2026 15:30:04 -0300
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,122 +60,74 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/5] rtc: Add basic support for RTC via Surface System
+ Aggregator Module
+To: Emfox Zhou <emfox@debian.org>, Maximilian Luz <luzmaximilian@gmail.com>,
+ Alexandre Belloni <alexandre.belloni@bootlin.com>
+Cc: Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Hans de Goede <hansg@kernel.org>,
+ =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-rtc@vger.kernel.org
+References: <20261104070441.74127-1-val@packett.cool>
+ <20261104070441.74127-5-val@packett.cool> <1795439501.1366.emfox@debian.org>
+Content-Language: en-US
+From: Val Packett <val@packett.cool>
+In-Reply-To: <1795439501.1366.emfox@debian.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-qcm2290-eud-dts-v3-2-b3e5af3701e7@oss.qualcomm.com>
-References: <20261124-qcm2290-eud-dts-v3-0-b3e5af3701e7@oss.qualcomm.com>
-In-Reply-To: <20261124-qcm2290-eud-dts-v3-0-b3e5af3701e7@oss.qualcomm.com>
-To: Souradeep Chowdhury <quic_schowdhu@quicinc.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Elson Serrao <elson.serrao@oss.qualcomm.com>,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
-X-Mailer: b4 0.14.3
-X-Authority-Analysis: v=2.4 cv=Y+ptIReN c=1 sm=1 tr=0 ts=6b05ce1e cx=c_pps
- a=wEM5vcRIz55oU/E2lInRtA==:117 a=ySe+0nHqNG5yihRO1pIWsw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=FHn9pCZiDirsiwHFROYA:9 a=QEXdDO2ut3YA:10
- a=OIgjcC2v60KrkQgK7BGD:22
-X-Proofpoint-GUID: PLMP8xCb1W4nEBRG4Gyf7fg9AfzCDK5G
-X-Proofpoint-ORIG-GUID: PLMP8xCb1W4nEBRG4Gyf7fg9AfzCDK5G
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA2OSBTYWx0ZWRfX03JzQYbHZHPh
- eCFA2rpRbNrzsIyCSrSXNSEnFS/sPPiaOw91XsD0y0v3oWoPJAVYyavTNr6j97HydPzCSjKa5uM
- O6gsV+SfAo44bmX/uJCeyCThc0Snl1s=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA2OSBTYWx0ZWRfX+mQdcFphXykC
- +vPVWQDi9hs/aaxG9ST4WmyOnsc0kq9b926WhIwLfsuyuh0bTz21ByubZmtHdMFPbcJ6/0XAzuh
- O5DfzcgfXpNhF49i0/zN8f3zvkCIpaqF21ksfda0uCYUIKAqnYWSutvJ2uWmkJ6NGJIAx+zSUXa
- Ysw0epbeezZSC1CZWbciqv5QJ6r4bjNWjvQtev1KSgOGDKh1OWgseL4PtsvMqF/0v4Di7ku8XNX
- 6ow2lj930lZO+YgPA7QPhzH4Jh7m8EOGIvGXkkNqlQ4jNuR//AOGBtGL5/p2uUq3NjlYDagPVew
- ahyde/wmIetR7Cxye5QjQX9Nr6vuSRXsHqBEyaWpIiN0ZYMH1NzJp+EhM/U57+Df2NZkhmfRWLR
- b/d0E02djen3CN5sXOGHbEod/DHFa7ZDEnVMedkO/FlsgYW2p6lvpezBtDCF3E/Xv6Df+n7dgnc
- xDRDj5f9SL/AAowifow==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_04,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 malwarescore=0 adultscore=0 spamscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240069
 
-Describe the EUD:
 
-- its CSRs at 0x1610000 and the mode manager register at 0x1612000;
-- TCSR_APSS_SPARE_REG1 (0x3e5018), as offset 0x25018 into the TCSR
-  syscon;
-- its interrupt (eud_int[1], GIC SPI 189).
+On 11/23/26 10:11 AM, Emfox Zhou wrote:
+> Hi Val,
+>
+> Tested on a Surface Pro 8 (x86, Tiger Lake): this is not SPX/ARM-only, the
+> same SAM RTC sits behind the aggregator there. Two things came out of it.
+Didn't think anyone else would be interested though :) as the SPX is the 
+only machine with *no other working RTC at all*.
+> First, as posted the driver cannot bind on the x86 machines: 5/5 adds
+> ssam_node_rtc only to ssam_node_group_spx[], while the x86 devices come
+> from the ACPI-matched groups. With one line in ssam_node_group_sp8[],
+>
+> 	&ssam_node_rtc,
+>
+> "ssam:01:01:01:00:00" appears and the driver registers rtc2:
+>
+> 	surface_rtc 01:01:01:00:00: registered as rtc2
+>
+> It would be good to have the node in the other x86 groups as well. Note
+> that the node name will collide with the SPX one, so whichever lands
+> first keeps it.
 
-Hook its port to a second endpoint of the dwc3 high-speed port so the
-driver finds the role switch, while the board keeps the first endpoint
-for its connector.
+Well, I don't have all these machines to test on, so I wasn't very 
+confident about adding it to other groups. I could do it though, sure.
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/agatti.dtsi | 34 +++++++++++++++++++++++++++++++++-
- 1 file changed, 33 insertions(+), 1 deletion(-)
+> Second, set_time() needs a timezone compensation. The EC keeps UTC in the
+> SAM timestamp (CID 0x10), but also exposes _GRT (CID 0x1f), the same clock
+> plus the zone stored in the EC, and the firmware copies _GRT into rtc_cmos
+> at POST. Right after a cold boot here:
+>
+> 	rtc0 read at boot	 1795199717
+> 	true UTC at boot	 1795170940
+> 	EC _GRT at boot		 1795199714	(zone +28800)
+>
+> so CMOS came from _GRT, 8 h ahead of UTC. The write side shows the same:
+> after "hwclock -w -f /dev/rtc2" the SAM timestamp equals system UTC and
+> _GRT is then UTC + zone, so the next cold boot is off by the zone again.
+> Either write (UTC - zone), taking the zone from _GRT minus the timestamp,
+> or state that this RTC is local time and leave the conversion to user
+> space.
+Ack
+> Tested-by: Emfox Zhou <emfox@debian.org> # Surface Pro 8 (x86), with ssam_node_rtc added
+>
+> Since the same RTC is on the x86 machines, the descriptions are no longer
+> accurate either: the commit message, the Kconfig help and the MAINTAINERS
+> entry all name the Pro X: [..]
 
-diff --git a/arch/arm64/boot/dts/qcom/agatti.dtsi b/arch/arm64/boot/dts/qcom/agatti.dtsi
-index ea9b39b1ed43..ac7a653a6f03 100644
---- a/arch/arm64/boot/dts/qcom/agatti.dtsi
-+++ b/arch/arm64/boot/dts/qcom/agatti.dtsi
-@@ -826,6 +826,30 @@ gcc: clock-controller@1400000 {
- 			#power-domain-cells = <1>;
- 		};
- 
-+		eud: eud@1610000 {
-+			compatible = "qcom,qcm2290-eud", "qcom,eud";
-+			reg = <0x0 0x01610000 0x0 0x2000>,
-+			      <0x0 0x01612000 0x0 0x1000>;
-+			interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH>;
-+
-+			qcom,tcsr-reg = <&tcsr_regs 0x25018>;
-+
-+			status = "disabled";
-+
-+			ports {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				port@0 {
-+					reg = <0>;
-+
-+					eud_ep: endpoint {
-+						remote-endpoint = <&usb_dwc3_hs_eud>;
-+					};
-+				};
-+			};
-+		};
-+
- 		usb_hsphy: phy@1613000 {
- 			compatible = "qcom,qcm2290-qusb2-phy";
- 			reg = <0x0 0x01613000 0x0 0x180>;
-@@ -1680,8 +1704,16 @@ ports {
- 
- 				port@0 {
- 					reg = <0>;
-+					#address-cells = <1>;
-+					#size-cells = <0>;
- 
--					usb_dwc3_hs: endpoint {
-+					usb_dwc3_hs: endpoint@0 {
-+						reg = <0>;
-+					};
-+
-+					usb_dwc3_hs_eud: endpoint@1 {
-+						reg = <1>;
-+						remote-endpoint = <&eud_ep>;
- 					};
- 				};
- 
+Sure, I'll change the names!
 
--- 
-2.53.0
+
+Thanks,
+~val
 
