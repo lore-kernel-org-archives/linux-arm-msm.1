@@ -1,108 +1,109 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795511057;
-	b=22xHEehwYRSU+7ei2QrA56/vSXxo7ILlJux+eNsFK1UsyuGjYeMK9S/LGUC97UIFBKYZ
-	 oLrzPLzu5vTNjtTcSTY54y14AyTO22TiBiC8ZDdNddVbG+9ppqnAJiWtc5p6dGR4q9nCW
-	 TJntmI2BxqLmIUBPbM7LhfxtEBV3sGEQwuaFCbGq7ETatEl1wkqhapsbp6zy5GY0JeduR
-	 aW9DYjSHrKJpgt6zpv7oFzNa0dJKQiJksBiUmkzpapBFXMzeSwCy01Z75ufzDF3ZqAvJj
-	 K5UMUhknE5bn2de19LVJqpCNaH1uyIImnJMMlRsHnVHO2k5wnDencqA2X7XVeJEqwqQ==
+	t=1795511611;
+	b=f5MnsY/diPBB/Bm93eSoT6YhBgRcsSCy/O+d/CYWV6BV+y5korfjiFw5ql7+GmI/4uqN
+	 qHlJ8PxiGTQ2R2kqDbHhpxrI7NYoEmeSxHtT49HXk+PNHaWTWN6eO3B/3B9XLnNxALZxX
+	 vX1clH/xrzUbXY1h59bweizLhua8IE8av9wOnTAhZFpDl4pX3EeoMmFsgk9d1kT7P3KIm
+	 Cb8LKM81EkZ9g9Ouwiohg/q2XlKErPke6MHCCefi3G3uPPv97OuR+2+msKNqfrmfEB6RP
+	 hh5x555rDWk0Sllkp2INB6XM/Z7rBIukjpLO1F+qCVpPj3C0GeEcxtw73B5LXC5VCbQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795511057;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795511611;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=1UQBuNMToGONG9hy3Du+9qM2XSmErbNq29UGtfHTpFo=;
-	b=H6tETAvziJLHyZ2We2lzZR4P/OZpPtbqoGuyUaFFHGftfAQOjzQjTWNPrQAFYIQIN9Dr
-	 RMtf8Wl5VLSJtCj0Z2ZpxCgC5oxlyF8VGgfZC2bNQPllY1iBhkPm6QYl1/vTlm7j5hDcS
-	 sZnycG7OLhHMRcsfelub/20Di7fsPx2eq7WF6zde9MWc1LcdatCNhBX+e7e11hg839WIF
-	 YtwXsHRJRho8qBObFtVrm4DxJOgVDzd5A5+kdOF4b5GPbB6WnLKTcoB38Jz073yjlBtG3
-	 O2HtH1JieoyGJvgmLyGaBoF7rFnpOQ7yHUyc0Xf5NGo4h6TOP6rm4hCJ+ZqWhh3XCoA==
+	 X-Change-ID:To:Cc:X-Mailer:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=PorUwiX90p308WI3naAWjv0o1LYB7za/YPyaLIfmyi4=;
+	b=JNrl+6FUpdWLEPu8v9OGKxjBocAGWfxOOCAkQMMz20deWwJ1327f0TnCh1aPB5Wx3av+
+	 UXkeHZtMiqdSNjZJW7LmagNVHRrKlVkxlf0G2liNTkTjuctR4GXhLw+4Nx1Js6MPmFYuO
+	 HtqN7cJElQNs29PHWpYfqWS2e50IEHBd74GqZve63snpxZZHO7TYhze2sNL1vvaAfQZy1
+	 exxX/4Hh2wmIEMlSqcn6j2BWojIiAysJ1DxVCONYzmoGp+OxnAYEzNqatL56ZYZ4XiDOJ
+	 /r5r97UO/4YlBCHMsj959zwVWNZH3R4vIqrULBXCGr8jyIfCBFngpIR6+PHshL6/nDA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pVeIuy08;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z9UXAD8w;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RCK6r2LO;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="M87/BK9y";
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66897606A32A
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:04:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 66897606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FE3C606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:13:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2FE3C606A321
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=pVeIuy08;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z9UXAD8w
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AO8rq9E1598186
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:04:15 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RCK6r2LO;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=M87/BK9y
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AO8SpPX3851149
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:13:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=1UQBuNMToGONG9hy3Du+9q
-	M2XSmErbNq29UGtfHTpFo=; b=pVeIuy08qEr2oNoNSLP8pTCIZGYmmF6m2eOFCy
-	m57rGCXwzj+u5sUgM0dI/Gvf0/Czoxz6lEbF6ucvpCInNiQ11JWKPv1HzvWJj9aD
-	wOohjS4NWevM0K+cjWLfBPzyRl1cKfiPNuYhj8zyyY1Y5oLUD9FGmzbzmnv0/vKx
-	jAD4UiIDmaVnWx1mNXk1jEjiub7EZVoKrUoec+wF6OY/yoQpF8IbO6sSHW/bADvK
-	/Lo38n9kznB8Y1AMhj/wJnJPLwREn1qbuDfrxQLwf2yT9BwPJAXrfN7yKY0YphE3
-	zKw3IH2UoQsUY3ytwr03HpeWQW2Tw6xRilpfYdmvYBmvUfaQ==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4ukqjr8y-1
+	:mime-version:subject:to; s=qcppdkim1; bh=PorUwiX90p308WI3naAWjv
+	0o1LYB7za/YPyaLIfmyi4=; b=RCK6r2LOI9AyYFjrv7TdZ/xWyLXUxrWOh2ox4q
+	4FD/UogyJP66210i7nQCQE5DR+Pd7eRpe0pvSvO3W+PdDSK3tjypitpFPjsNPJJs
+	JQNazvMiWduLT2VCaxtII1swhD5xALAF+YQNInDM1HU+5VOWjZq1/r1q8OLz0BCt
+	mROSoYEq/8UMhTJhVvg4NgTwBUpIfZuUcqKAJ2KvNNhz4a1h6bgxh3YGP1rwLAw7
+	AnP0bc54sM579FEnzfYGa5RmjRrIGn65g6mVdKSxbWkUxoyUSp1OzzvcKiaho//U
+	FZ7noZRCG1n/uR4u7iPS2mNwZHWyh3Ree32MizZ3nI2d8Fgg==
+Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4yvb1w4c-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:04:15 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-3869865a304so3304870eec.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 01:04:14 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:13:29 +0000 (GMT)
+Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-3869865a304so3322384eec.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 01:13:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795511054; x=1796115854; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795511609; x=1796116409; darn=vger.kernel.org;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=1UQBuNMToGONG9hy3Du+9qM2XSmErbNq29UGtfHTpFo=;
-        b=Z9UXAD8wve1UhhiCqSvEwMV97LY1f0MKtBzt6hCpyqJH0RbqLxmx1BlQxWJbMNmpM3
-         /eXdBzWgiIBnPsTYxv6DS/EOikExbMQPL6hZJihAgMHrpYBo2z5rK3NM1X/F+g/jKm66
-         o2QZ5sAmy7FEQTWgS0UZlgOnzISAGtGzyyEyDz2jiiWI1uEeKCaccSy/MjOf5yRoBuba
-         xNfipuOEfG9rASFg97eic8nOjGyjAx7SYj/gBTKKLd4E8b2OQOs9mooAHKq5GMLMwyjJ
-         89bRUgrIedV9Fgh7AAYDDd0G2pp98f9sNUcENDzBdH8CBMmXzPxMLAzlVcJ00tFGsqMQ
-         J1TQ==
+        bh=PorUwiX90p308WI3naAWjv0o1LYB7za/YPyaLIfmyi4=;
+        b=M87/BK9yYyrqpNWV8xqTRawKmHtuJ0meC/qFzSrNV/TJSO75kjDdlhIHuNElTXHusb
+         Tp3tpqxOR73VLX2SnUH3J5Tf4hJB0MljV5/Lcq1s3gH44UC+KoaLL0yC/h1MabxJD/Hu
+         8fganaoXLSial2Rbp3xxU9xrztPTFRmE1M23aTLqlyq70kai+ad/kPXOYkqEdvVZptSk
+         iv4D3n3r4AKp6D/WsP1bT6cNclO8c44rpNCfxiLdNLHsyO+2HkH0kZlSgicsoPrcw6AM
+         6bUtni1rFU6BaunhDTHEZs4CiRMUGc5Kn/no8sHVhU/oeIddK1TpE6CiS9o55aWDam0T
+         yGZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795511054; x=1796115854;
+        d=1e100.net; s=20260707; t=1795511609; x=1796116409;
         h=cc:to:message-id:content-transfer-encoding:content-type
          :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
          :cc:subject:date:message-id:reply-to:content-type;
-        bh=1UQBuNMToGONG9hy3Du+9qM2XSmErbNq29UGtfHTpFo=;
-        b=tMoxRRB7fwBpV6g+qyzaouuiHHuOpUY84D+F+FVNoTJLYnMO7Y8zjrAkJ6+cq2x+h+
-         jkYcBqhpdr4DwbRRZtEKnPDDhXZW/yG/1QfmHUOeKjWnEzKg0u5CscfYDsl/I/qISYs+
-         rrxyh1YNCLKQ0DLBHFw8nqXHT52FTi5L7FSkwZnGVdWmQjvB+uaGK+whD3G5+JoRQ2mR
-         8L4szf2cbVzcfxx3bcLkorKM5+CyYC5lQYDQYeJflZCIpGc9GCtZ/dFYzUkhV5C8/Pbh
-         pjpn5sjdWNIQQMmV2ksasfq/bSKuZpsXT4XYeGybfDxBOfiu10dut/4J/M4UDD+7G2S8
-         7UAQ==
-X-Gm-Message-State: APuU4Z9lYgBAW4PasOFBlKcKtqu4Kdd/nwSpE3KdVgE8ujCerRb/zQkl
-	G3ZzfX+06o8dUo96/P8v9D9EJNRisXyFA9iHV/3dPGYm+/dXBQjRs9UwDfSeXCt60EHgGCDSER9
-	wo7Zasnx/fW50IWyfPc86Ue4a2mOCNJ79NrHV8DbeVV3/lzzxyUyMXYQoBh4ML5AQ/xgX
-X-Gm-Gg: AZFdTZeiO64SOj3WQ7UI3E0pgPes7fDf8Zg6I8V0fF33qhD3xgnHO49CPvTsXy/ffim
-	fC1xzyx0cPnykM3Yqs3n7O6n+mz92pnsPm9jC5CCm+ksILybmUFNzk2jYswqcU+RIj2NdewxsiD
-	eso/3/NF5ld4XMWoPkqa6Rqa+LVnVl5ajg+KPVMBQ6vTVsW3zZWWEjYlP2u7EHQTuAsXiTfl//3
-	jHs60qQ4pRwQKcAup+7JEnPTou56DPgtle0YfBE68O+9vu7in8eaQwZlhj8d8a/Dt5Vmlj2Gd1K
-	azwlhTHCkq6nInoEmRbya3a839W2NLMpPhSRw17ngdf81k0vRv6H6sJRB6NFc9yDKTMaBqmiztL
-	9RqDa+KobbuLYm54MgH8z5JJXS305UcbPprpWNTFzHVxmkPJlr15m94jQmdAbJVWMtnvo
-X-Received: by 2002:a05:693c:60d4:b0:360:5f7e:2eb9 with SMTP id 5a478bee46e88-3857111f65amr16288651eec.32.1795511053662;
-        Tue, 24 Nov 2026 01:04:13 -0800 (PST)
-X-Received: by 2002:a05:693c:60d4:b0:360:5f7e:2eb9 with SMTP id 5a478bee46e88-3857111f65amr16288619eec.32.1795511053078;
-        Tue, 24 Nov 2026 01:04:13 -0800 (PST)
-Received: from [10.213.109.130] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm75516157eec.3.2026.11.24.01.04.08
+        bh=PorUwiX90p308WI3naAWjv0o1LYB7za/YPyaLIfmyi4=;
+        b=Ilr1R7uvuAmEI8pmbeD2kOHS9an/SXmzThUU4DannBPXTVuxTE3nPTKG72l6XTiRgS
+         11kiQmuzblEM8+NAIhFxGEQRpFM+RgIAeR0WLSbweyfX1/AsC4f0biZsjnvXb3zzeAdO
+         8skk7VOx33JK/PBfWQ62irThtr889ISMP/610gb3RYq94u8EhoatZICkmYL0Mp1EOgXM
+         ek83uXss7X+NJFa6Gzh9pnmLQqz1EP99hquUC0If98IJ4MOecWONiKmpLzETVWomNS8U
+         mLgQxWjUFBO7bV0Qhcan36DbaoiugE0tClEr4KjFgMU26IHzdvlelN7d+Ol1M4Phx+yr
+         Le/g==
+X-Gm-Message-State: APuU4Z/XeKv305miDZj5Yin7AJ9VlbL9ciJ80j3LVuYRXnT4daB3DppC
+	Rud+NEXn8jcquQEu6jU1DBsaW9raWqGuzsJiFpwSoujwRvBiSNccPS+XkgVX8GXxOhKDHiYA82v
+	hj6GmvpbPW53xgpWprb+OPFFK0jSj/V4agh9uJahFBgXBQyv5/0nToHlJmRik5LNOYzg8
+X-Gm-Gg: AZFdTZdtGXO+9Nb+1coAfX/cFx5opO95asP4g6bjeg/RECMp0aWpiV0VRllFqP0nhON
+	ifxS+6kUrkUDjhKUEaxPUQA9fWgXtZiiAWdM4KyftqgbQbARiX9nRAuB8xcKbl7by5vr66vHDbE
+	9p3Yx5E4vpCzv/S9UeB7wWk77+rn+CYeEgX/vxUTJGUG7qt7ytkPfCX9p26t3Bbu0yollsMhcgg
+	H9P/5Y6JQruFrhYhQAefIPgn4w7kIBQR+teORu1OsfZO+5OqA8+4u0rmp4Kl7JNHHez66xdp8aQ
+	beMOMliR3o0TWq6zHw0xvZ/FYz6w57EWHG2GFEkXzmeJYE971DpNRCTJ+QG+8r70jCDSPLAiIJJ
+	g4bYenVdwBJbcPIGV3bL05+PAom8yxFcDeSh6JVuZNv2+MmlLJmygYF66NSMTlTLoCj0bkVx6tw
+	0o0TmAjY2AuJM=
+X-Received: by 2002:a05:7300:26a2:b0:386:a415:5436 with SMTP id 5a478bee46e88-386a4155a49mr8420241eec.0.1795511608796;
+        Tue, 24 Nov 2026 01:13:28 -0800 (PST)
+X-Received: by 2002:a05:7300:26a2:b0:386:a415:5436 with SMTP id 5a478bee46e88-386a4155a49mr8420221eec.0.1795511608303;
+        Tue, 24 Nov 2026 01:13:28 -0800 (PST)
+Received: from hu-arakshit-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm75674312eec.3.2026.11.24.01.13.24
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 01:04:12 -0800 (PST)
-From: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-Date: Tue, 24 Nov 2026 14:33:49 +0530
-Subject: [PATCH v3] thermal: qcom-spmi-adc-tm5-gen3: move hardirq actions
- into threaded handler
+        Tue, 24 Nov 2026 01:13:27 -0800 (PST)
+From: Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
+Date: Tue, 24 Nov 2026 14:43:21 +0530
+Subject: [PATCH v2] arm64: dts: qcom: lemans: Enable the Inline Crypto
+ Engine for SDHC
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,199 +115,129 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-adctm5_gen3_hardirq_removal-v3-1-c7923e9a54c1@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAPRSBWsC/43N0Q6CIBQG4FdpXIcDUdSueo/WHMFJaSIJymrOd
- w/tpovWOhdn+7d/3z8jD06DR4fdjBwE7bXtY2D7HZKt6BvAWsWMUpJyGg8LJUeT1w30rG6FU9o
- NtQNjg+hwxguRsUIUJVAUhbuDq35s+un8zn663ECOK7k2Wu1H657bfKBr77+lQDHFOeOgcsJYx
- eXRep8Mk+ikNSaJD62DIf0k2W8yjaQgspJZSUiV0S/ksiwv7TqkvjIBAAA=
-X-Change-ID: 20261111-adctm5_gen3_hardirq_removal-467a437a78e1
-To: Amit Kucheria <amitk@kernel.org>,
-        Thara Gopinath <thara.gopinath@gmail.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Daniel Lezcano <daniel.lezcano@kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-        Andy Shevchenko <andriy.shevchenko@intel.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, kamal.wadhwa@oss.qualcomm.com,
-        Pankaj Patil <pankaj.patil@oss.qualcomm.com>,
-        Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795511048; l=5207;
- i=jishnu.prakash@oss.qualcomm.com; s=20251014; h=from:subject:message-id;
- bh=Oow7SbHjlqlBkog7Fq729nsTBAo6RGjET/g3jAQ1r/I=;
- b=4SjAUaKOLDBt5BAzga6Qw8+zDqlN2EiPL2NXOKUN2mZVWhJOrwzjDeNUlnD3agVp1vt9eizWw
- hRvPfV7qcFlBDGJocCEqMc0GxhgutAAtPg3PD7ypDik4B8M9rJmw4y8
-X-Developer-Key: i=jishnu.prakash@oss.qualcomm.com; a=ed25519;
- pk=g89pXdLVwRjdTeQ+uX1QzvBO346E3hQAc1N7fcTXgmk=
-X-Authority-Analysis: v=2.4 cv=Wu++otfv c=1 sm=1 tr=0 ts=6b05530f cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+Message-Id: <20261124-enable-ice-sdhc-for-lemans-v2-1-0bfa9ed6b4bb@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIADBVBWsC/1WNwQ6CMBBEf4Xs2RJaQV1P/ofhUMoiTaDVrhIN4
+ d9diRcyySRvDm9mYEqeGM7ZDIkmzz4GAbPLwPU23Ej5VhhMYQ5am1JRsM0gqyPFbe9UF5MaaLS
+ B1RFLbCqDJ9wjiOCeqPPvVX6thXvPz5g+69ekf+tfW+BW6zbaSStJZ6qWGiJb4iUy54+XHVwcx
+ 1wK6mVZvgIk2T7LAAAA
+X-Change-ID: 20261124-enable-ice-sdhc-for-lemans-7949b5298939
+To: Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Neeraj Soni <neeraj.soni@oss.qualcomm.com>,
+        Kuldeep Singh <kuldeep.singh@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+        Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Authority-Analysis: v=2.4 cv=aJ1lOr9m c=1 sm=1 tr=0 ts=6b055539 cx=c_pps
+ a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=bC-a23v3AAAA:8 a=2T0weqYnj29I6vGzhR4A:9
- a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10 a=scEy_gLbYbu1JhEsrz4S:22
- a=FO4_E8m0qiDe52t0p3_H:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfXy8tL+MOEfTl/
- zVqdfHWmRIxHUwMG4e7r7VMCuak8tE11SI773P709n1OFQFj0oOLxMC/ol6wu7SaijtFwmgf6L3
- P3wTm6IIrbdvjxXtuji8dtlcYVzj0ZL/jA42y70iZb0+pi6Fy19gxmo5lvdw532fbDlv4M/hsuu
- I+ZTLg6JbNW9+87X93jQnbOwmRrRTEQYF3oWOfbNGnSDKapmcPA/719CTxJZE/p0xqPkuroRREC
- F/WRvc27YmmQjMIIFcHCXh2mpKBfmthzyry2olWAA+ltzPEmIZR20ImY3BNzEfCACXZiP4hh2hJ
- C8WcJPk+blCJxHlrZOO39tOwvF7iJN83FkSH9jQ3uESUZDWi0ZndpO/wPLX2xxMndiMzV6E3qRX
- ZROW3pxDg+Zt/IRA41lvwXQ1GmiJbY/rqkidTIl1M1+S10l8cen+mSyoawrGM9kvlvVAG6U1QC6
- YDkRdtJhgb8ho5GkD2Q==
-X-Proofpoint-GUID: Sga-m6MArRrBZkz7H1UUt1y0nqSLFC7l
-X-Proofpoint-ORIG-GUID: Sga-m6MArRrBZkz7H1UUt1y0nqSLFC7l
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDAzNCBTYWx0ZWRfXyES2GQa67lVC
- uj6kuzyISiWibosv3BmNBfZ+X2F77q97lRlUajJknSgLrOQ4+c6FAB4cQcC0KdJFIW21P75M7IR
- hjCcu7N2YPkhZkUslCKu9lFpaRuwuvE=
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=aDrDLeE5ssBeLXbAN28A:9 a=QEXdDO2ut3YA:10
+ a=bBxd6f-gb0O0v-kibOvt:22
+X-Proofpoint-ORIG-GUID: nCZzuA83KBDGr9_Ma8iRHdh5uSANtYmz
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDAzNSBTYWx0ZWRfXzRh52KPkZIrA
+ +2wsXtkCLyj2f1F3xaz+9CrzqGNERLaKFzdKohEJhlkgMX0dGXRm1tiMXLIOplS2ATJh3OUaldl
+ 3OE758zchF77uAykaxxt4KQLe46YYhc=
+X-Proofpoint-GUID: nCZzuA83KBDGr9_Ma8iRHdh5uSANtYmz
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDAzNSBTYWx0ZWRfX1OxdqttDJpdu
+ 22WrsQUAjFCHM6dB8SZkgLro9sEzRBVcoEuVDJt46dZtACy6a+NJ7iam6crP90PWDR44ryURm1h
+ GxhRJJKkPAriYyk7T8uwBahcu9d4R1QSSp75/4mRa6GCHB/k61sDfyAEOSEFuGd15Z8Au4lCWmy
+ ysFCAVl+5ewX7Yoa4w5RF/43tOLnblxrpxMH2uHn6RKrCRHXgNDN1DsegGJWzUhYjYbi4KPwzDp
+ 8EgIcKj87KtWeeVN0TYMi90ZlaR9OJda4OIJwZwQQDmOTW9U4W5ia9YTYfjC4gOqAWVXcisXyuh
+ vR1McGnXiolrwXVWqRaMW/Y08M9PPgi30Q6xmBJBHPT13awP8mmTmxjF7z5jYwmgaubOmgz2UEl
+ qmfzsegAfvQ8g+tdl0P4/DdGJc5ZRuZI7JxbCbaHjNHN9arrPiCPpSDobXhpxcSJm1OuTlf9Ulw
+ jzqq9x01diGSC3aOmuA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-24_01,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 impostorscore=0 spamscore=0 adultscore=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 phishscore=0
+ spamscore=0 phishscore=0 clxscore=1015 priorityscore=1501 malwarescore=0
+ adultscore=0 bulkscore=0 suspectscore=0 impostorscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240034
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240035
 
-adc_tm5_probe() registers the ADC_TM interrupt with both a primary
-handler and thread function (adctm5_gen3_isr/adctm5_gen3_isr_thread)
-with IRQF_ONESHOT. The primary handler calls adc5_gen3_read(), which
-takes the SPMI regmap's lock (a regular, non-raw spinlock) from hardirq
-context. With CONFIG_PROVE_LOCKING enabled, this leads to a warning
-about an attempt to take a lock in an invalid wait context:
+Add an ICE node to LeMans SoC description and enable it by adding a
+phandle to the SDHC node.
 
-  swapper/0/0 is trying to lock:
-  ffff000b67201018
-  (qcom_spmi_pmic:259:(&spmi_regmap_config)->lock){....}-{3:3}, at:
-  regmap_lock_spinlock+0x20/0x40
-  other info that might help us debug this:
-  context-{2:2}
-
-  Call trace:
-  regmap_lock_spinlock+0x20/0x40
-  regmap_raw_read+0x88/0x328
-  regmap_bulk_read+0x10c/0x340
-  adc5_gen3_read+0x38/0x50 [qcom_spmi_adc5_gen3]
-  adctm5_gen3_isr+0x90/0x130 [qcom_spmi_adc_tm5_gen3]
-
-There is no requirement for any of the work done in the primary handler
-to run in hardirq context. Drop the primary handler and move all the
-actions in it to the threaded handler, which removes the invalid wait
-context warning.
-
-Note that both handlers used a local variable to hold the index of the
-SDAM whose IRQ was triggered ('sdam_num' in the primary handler and
-'sdam_index' in the thread function). These are the same value under
-different names and 'sdam_index' is kept now, since the variable
-represents an index, not a count.
-
-Reported-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-Closes: https://lore.kernel.org/all/1cb6d902-73f3-4d65-96f4-4b3c5217253c@oss.qualcomm.com/
-Fixes: 948ee3a74f35 ("thermal/drivers/qcom: add support for PMIC5 Gen3 ADC thermal monitoring")
-Signed-off-by: Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+Signed-off-by: Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
 ---
-Changes in v3:
-- Updated commit message with right justification for using the variable
-  name 'sdam_index' and moved its declaration to separate line in
-  adctm5_gen3_isr_thread(), as suggested by Andy.
-- Link to v2: https://patch.msgid.link/20261113-adctm5_gen3_hardirq_removal-v2-1-a0c9c4800941@oss.qualcomm.com
+This patchseries enables Inline Crypto Engine for LeMans platform
+for SDHC storage.
 
+Testing:
+* dtbs_check.
+* Validated on LeMans-evk with custom Mezzanine board for SDHC support.
+
+Dependencies
+============
+
+[1] Enable ICE clock scaling
+    https://lore.kernel.org/all/20260824-enable-ice-clock-scaling-v12-0-09271f583dc6@oss.qualcomm.com/
+---
 Changes in v2:
-- Trimmed call stack and error lines and added clarification about sdam_index
-  in commit message, as suggested by Andy.
-- Link to v1: https://patch.msgid.link/20261111-adctm5_gen3_hardirq_removal-v1-1-536ed503396c@oss.qualcomm.com
+- Rebase ICE SDHC on latest tip.
+- Rename ice_mmc_opp_table to sdhc_ice_opp_table.
+- Link to v1: https://lore.kernel.org/r/20261109-enable-ice-sdcc-for-lemans-v1-1-1f25debeea49@oss.qualcomm.com
 ---
- drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c | 42 +++++++--------------------
- 1 file changed, 11 insertions(+), 31 deletions(-)
+ arch/arm64/boot/dts/qcom/lemans-embedded.dtsi | 29 +++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
 
-diff --git a/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c b/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-index 910b241fa94d..9e9019f5009d 100644
---- a/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-+++ b/drivers/thermal/qcom/qcom-spmi-adc-tm5-gen3.c
-@@ -73,58 +73,39 @@ static int get_sdam_from_irq(struct adc_tm5_gen3_chip *adc_tm5, int irq)
- 	return -ENOENT;
- }
+diff --git a/arch/arm64/boot/dts/qcom/lemans-embedded.dtsi b/arch/arm64/boot/dts/qcom/lemans-embedded.dtsi
+index 0be39bb9de1e1cdbb7d67a992172861a5a10a05a..4cb3af416a3fccb094ecc3022aa937669a8d4ce6 100644
+--- a/arch/arm64/boot/dts/qcom/lemans-embedded.dtsi
++++ b/arch/arm64/boot/dts/qcom/lemans-embedded.dtsi
+@@ -1651,6 +1651,8 @@ &mc_virt SLAVE_EBI1 QCOM_ICC_TAG_ALWAYS>,
+ 	power-domains = <&rpmhpd SA8775P_CX>;
+ 	resets = <&gcc GCC_SDCC1_BCR>;
  
--static irqreturn_t adctm5_gen3_isr(int irq, void *dev_id)
-+static irqreturn_t adctm5_gen3_isr_thread(int irq, void *dev_id)
- {
- 	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
--	int ret, sdam_num;
- 	u8 tm_status[2];
- 	u8 status, val;
-+	int sdam_index;
-+	int ret;
- 
--	sdam_num = get_sdam_from_irq(adc_tm5, irq);
--	if (sdam_num < 0)
-+	sdam_index = get_sdam_from_irq(adc_tm5, irq);
-+	if (sdam_index < 0)
- 		return IRQ_NONE;
- 
--	ret = adc5_gen3_read(adc_tm5->dev_data, sdam_num, ADC5_GEN3_STATUS1,
-+	ret = adc5_gen3_read(adc_tm5->dev_data, sdam_index, ADC5_GEN3_STATUS1,
- 			     &status, sizeof(status));
- 	if (ret)
- 		return IRQ_NONE;
- 
- 	if (status & ADC5_GEN3_STATUS1_CONV_FAULT) {
- 		val = ADC5_GEN3_CONV_ERR_CLR_REQ;
--		adc5_gen3_status_clear(adc_tm5->dev_data, sdam_num,
-+		adc5_gen3_status_clear(adc_tm5->dev_data, sdam_index,
- 				       ADC5_GEN3_CONV_ERR_CLR, &val, 1);
- 		return IRQ_HANDLED;
- 	}
- 
--	ret = adc5_gen3_read(adc_tm5->dev_data, sdam_num, ADC5_GEN3_TM_HIGH_STS,
--			     tm_status, sizeof(tm_status));
--	if (ret)
--		return IRQ_NONE;
--
--	if (tm_status[0] || tm_status[1])
--		return IRQ_WAKE_THREAD;
--
--	return IRQ_NONE;
--}
--
--static irqreturn_t adctm5_gen3_isr_thread(int irq, void *dev_id)
--{
--	struct adc_tm5_gen3_chip *adc_tm5 = dev_id;
--	u8 tm_status[2];
--	int sdam_index;
--
--	sdam_index = get_sdam_from_irq(adc_tm5, irq);
--	if (sdam_index < 0)
--		return IRQ_NONE;
--
- 	scoped_guard(adc5_gen3, adc_tm5) {
--		int ret;
--
- 		ret = adc5_gen3_read(adc_tm5->dev_data, sdam_index, ADC5_GEN3_TM_HIGH_STS,
- 				     tm_status, sizeof(tm_status));
- 		if (ret)
- 			return IRQ_NONE;
- 
-+		if (!(tm_status[0] || tm_status[1]))
-+			return IRQ_NONE;
++	qcom,ice = <&sdhc_ice>;
 +
- 		ret = adc5_gen3_status_clear(adc_tm5->dev_data, sdam_index,
- 					     ADC5_GEN3_TM_HIGH_STS_CLR, tm_status,
- 					     sizeof(tm_status));
-@@ -405,8 +386,7 @@ static int adc_tm5_probe(struct auxiliary_device *aux_dev,
+ 	sdhc_opp_table: opp-table {
+ 		compatible = "operating-points-v2";
  
- 		ret = devm_request_threaded_irq(dev,
- 						adc_tm5->dev_data->base[i].irq,
--						adctm5_gen3_isr,
--						adctm5_gen3_isr_thread,
-+						NULL, adctm5_gen3_isr_thread,
- 						irq_flags,
- 						adc_tm5->dev_data->base[i].irq_name,
- 						adc_tm5);
+@@ -1849,6 +1851,33 @@ lpass_ag_noc: interconnect@3c40000 {
+ 		qcom,bcm-voters = <&apps_bcm_voter>;
+ 	};
+ 
++	sdhc_ice: crypto@87c8000 {
++		compatible = "qcom,sa8775p-inline-crypto-engine",
++			     "qcom,inline-crypto-engine";
++		reg = <0x0 0x087c8000 0x0 0x18000>;
++		clocks = <&gcc GCC_SDCC1_ICE_CORE_CLK>,
++			 <&gcc GCC_SDCC1_AHB_CLK>;
++		clock-names = "core",
++			      "iface";
++		power-domains = <&rpmhpd SA8775P_CX>;
++
++		operating-points-v2 = <&sdhc_ice_opp_table>;
++
++		sdhc_ice_opp_table: opp-table {
++			compatible = "operating-points-v2";
++
++			opp-150000000 {
++				opp-hz = /bits/ 64 <150000000>;
++				required-opps = <&rpmhpd_opp_svs_l1>;
++			};
++
++			opp-300000000 {
++				opp-hz = /bits/ 64 <300000000>;
++				required-opps = <&rpmhpd_opp_nom>;
++			};
++		};
++	};
++
+ 	usb_0_hsphy: phy@88e4000 {
+ 		compatible = "qcom,sa8775p-usb-hs-phy",
+ 			     "qcom,usb-snps-hs-5nm-phy";
 
 ---
-base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
-change-id: 20261111-adctm5_gen3_hardirq_removal-467a437a78e1
+base-commit: 3191063649dbf7c0d0b768e1f3655e4c5fc6edb5
+change-id: 20261124-enable-ice-sdhc-for-lemans-7949b5298939
 
 Best regards,
---  
-Jishnu Prakash <jishnu.prakash@oss.qualcomm.com>
+-- 
+Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com>
 
