@@ -1,91 +1,64 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.9
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795479958;
-	b=flQDlSzegfRvXVJy/TWEfq8nH2Vkb9HjUI/mideAemUSfS1V5nhxb9AfuiKJC6nQAxTU
-	 pzKJ/phKGK/htlrAmd7r/xkeCn9FGApTBhRSFRrQ1aNW9ne57O2FRuY6o2TTvdcTxYDWe
-	 qXllPjPpyNk4Txuw4VuyzYL5oBWM56EWh6SL5jG9zsitslVwobL2np6CjABkeHJ+ZSEU3
-	 NISe9sNYUaxfsSA3bOawpLnbjw+9dni2aCpHTqXdlGCU5sH+K2OsaBc2eD3v+dKDIbk3E
-	 83SDd7ktkGvL9NgsiJEMopfY63pSYZ6xPZmcxUVwoegTxn2WgyNLZ0RQ6ZXHZ3kqM7A==
+	t=1795484036;
+	b=KNF1GAP2/cllvRxVmqAUeAQnsW5XfyabblLzwMxzQJduK96n7k1T/cXrPb+VaP2Eqdpg
+	 uTXXniMG7zli2cbCgPiwEn0rZfVPQx8ZEh2A4HtY/FcjQl6RCFEWtFK+PJKlO0aPhcslg
+	 PCfVc7TVdUDVz5CBV4BTpF34ot4NDTtn1bIcUURAtDS572RgPeHezVinStB1gSfZPT29N
+	 q1mvPvUUwcdLWyZUhQEffnIXWo0NxKlAaOIencMqDwol8Q6xRje81MbMPSMwmarX3KpUX
+	 SB/5kB3aeTP54MAV4s308O7yY8HaoNwjkKsCsI08D4kyEG2BLQBp/nqYwYwhxWr6Mbg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795479958;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=Kxj3LTKCk8n1ShsiLvXIwCrcjkbbdAXHYZZDDBMTS0o=;
-	b=05PSXuZGMb0FXIGxyw4m73xiVhGn9ECzUdww/ISrHbmr4h+1jifRXbu8qblFTjUcYfv/
-	 pXfSennvsMSuPs6uZ837pXY11RgMLoc9bK/y15b3zZtddLZ7nSqcGAfHDajy0m33t+2Kg
-	 db3ADa2H7iCM4IfwqUhKiIn6D7zwrOUQ21aP5nG77irRUmf9ddt8jPIjqr7xWwkv3Ln6b
-	 qdo2jSf9zZQNhmevfiNpS2jG1eW0eaugXVErXaBZNnJgPa9ARUbvyGCkQiPQsrXgXvGFx
-	 x3AndFXdN4Yi7WuFhmeL28580mIHTncONi/B3eOGodejXRSk4eWRNfLSI1ialaP4Kmw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795484036;
+	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
+	 In-Reply-To:References:X-sashiko-severity:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=d7m7HVJOhtX+DCuQTIUO8zHvldU1qVZx8CQyQENA6bs=;
+	b=O/XGl/OA7d4z8zu7sKcoIQJ5Mw3v1w5grwu4f+NwEWQneWl6ux8+ynw0O35TL0oDYKsL
+	 kxd+DpxceUls/USAh3eskfkKfDrL1VwN7q6F6cCQGo8euGswgLVemFzUPYBKOg3uCfI0z
+	 47OCip+eke4C+zZtN95AGjwWYD4LPcq/Oll/qvGsIwHsmESJWmibp+qwOjGM/P8lFDE1b
+	 9dCW5nQmVy/BQ5SePhqc0Svwzq5f3NwAXBHFt1ClMTq83exgdg8EFSd8ud8rPsafj4ou3
+	 MJ8pRK+29MRb/qBx+zbDQ7y0h9MHNj88qHnn4M9ElSHLwq2KqIZRID8PUEEO2e8I/OA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=YpBk1rkM;
-	arc=none smtp.remote-ip=192.198.163.9
-Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XtLSd9Px;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51366606A321;
-	Tue, 24 Nov 2026 00:25:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 51366606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 791F3606A31E;
+	Tue, 24 Nov 2026 01:33:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=YpBk1rkM
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1795479958; x=1827015958;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=nVAmdEDaDnYRQHSgXYadxkqn7jxNQZQ2b8Lekb4iy7U=;
-  b=YpBk1rkMpMyymwGqaUnfHgVnYj+Y3NcZRQM0Pxlq/MFAoNTQyIy2wLes
-   7E+uohyc/PcLc2tH2wRqRcUUn3/eT0FMr2SgM1HW9hdMnh5CUl95nVJRm
-   /lA/P82e65km376OIRyx8ug73j94jjVF3dPuX2IqlOMJZluNKOUM5zgej
-   AXupFwHxCxQp64fEf5y/YRERJtRZIk6rJQkcZD3XH3weK9JH9f/Ti1IQb
-   RfC7A8rXNkedC1R2H5wkBnPhV7qRKRwrmZm8gxN74JgAjBzkl3rL0NQl0
-   uS3MgSyxqV1RFr43sS/j+nh4q9Bi1MS4GVHAUA7Jrjx+BDB4vXp2rQeUS
-   Q==;
-X-CSE-ConnectionGUID: C7N8MUl1RtWcOLvTx+RtEA==
-X-CSE-MsgGUID: MgLs3Q7BRTydw/j9D9Jm0A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11975"; a="4189354"
-X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
-   d="scan'208";a="4189354"
-Received: from fmviesa005.fm.intel.com ([10.60.135.145])
-  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 16:25:57 -0800
-X-CSE-ConnectionGUID: k14Qo0u8TLu1N32wmi9GQw==
-X-CSE-MsgGUID: dPCKt2FpRF6mZjF3kBUgNA==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
-   d="scan'208";a="11543163"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa005.fm.intel.com with ESMTP; 23 Nov 2026 16:25:52 -0800
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xVeM1-00000001OBi-0g1j;
-	Tue, 24 Nov 2026 00:25:49 +0000
-Date: Tue, 24 Nov 2026 08:25:06 +0800
-From: kernel test robot <lkp@intel.com>
-To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-	Mark Brown <broonie@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>
-Cc: oe-kbuild-all@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-	Shuah Khan <skhan@linuxfoundation.org>,
-	Randy Dunlap <rdunlap@infradead.org>, linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 08/24] ASoC: codecs: wsa884x: register the die
- temperature as a thermal zone
-Message-ID: <20261124081056.uJlgRhV6-lkp@intel.com>
-References: <20261122161437.5994-9-srinivas.kandagatla@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XtLSd9Px
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF2171F000C4;
+	Tue, 24 Nov 2026 01:33:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795484035;
+	bh=d7m7HVJOhtX+DCuQTIUO8zHvldU1qVZx8CQyQENA6bs=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=XtLSd9Px4vWbCSo09M0U76E+DUQaqKzAAHg2tpv9Rx7hzkKKE/NFzjaUdGD+YwvAQ
+	 44IZ1l+F8JeP8VMeYHcy8F2V+kDYrw6tLxfwv2SmELNBy0FgJn4/VvkFyVe/SIQj/L
+	 YPX0RNMyNg16UeeqpJnTqAYWUgpPsgr95ZgGk0ssr/ZEabPNgiL+l778DpCpebiu2/
+	 czrC0AQh+ExzpWqZjK5IUKnj8EJyPJ+nw3sbtXQrj7X4+1QTlpuZWysjth8rYgkvRX
+	 4eY/KTqaozy1i62oArfuFuVQsU7Wn2SyjRjTePQDRKAOAJNh6YhunqDldcgTUDq1+p
+	 Ovtk4qs60al2w==
+Subject:
+ Re: [PATCH net-next v5] net: stmmac: dwxgmac2: enable L2 split header support
+From: netdev-bot+sashiko@kernel.org
+To: sagar.cheluvegowda@oss.qualcomm.com
+Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
+ edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
+ mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
+ netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, lorenzo.bianconi@oss.qualcomm.com,
+ hongmei.xu@oss.qualcomm.com, abhishek.chauhan@oss.qualcomm.com,
+ sarosh.hasan@oss.qualcomm.com
+Date: Tue, 24 Nov 2026 01:33:54 +0000
+Message-ID: <179548403438.3135.1804854034587814346@kernel.org>
+In-Reply-To: <20261120005243.3724402-1-sagar.cheluvegowda@oss.qualcomm.com>
+References: <20261120005243.3724402-1-sagar.cheluvegowda@oss.qualcomm.com>
+X-sashiko-severity: Medium
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,176 +68,239 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261122161437.5994-9-srinivas.kandagatla@oss.qualcomm.com>
 
-Hi Srinivas,
+Thank you for your contribution! Sashiko AI review found 4 potential
+issue(s) to consider.
 
-kernel test robot noticed the following build warnings:
+Critical: 0 · High: 0 (1) · Medium: 3 · Low: 1
 
-[auto build test WARNING on next-20261120]
-[cannot apply to broonie-sound/for-next tiwai-sound/for-next tiwai-sound/for-linus robh/for-next v7.4-rc3 v7.4-rc2 v7.4-rc1 linus/master v7.4-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Srinivas-Kandagatla/ASoC-soc-pcm-add-multi_direction_codecs-link-flag/20261122-161415
-base:   next-20261120
-patch link:    https://lore.kernel.org/r/20261122161437.5994-9-srinivas.kandagatla%40oss.qualcomm.com
-patch subject: [PATCH v2 08/24] ASoC: codecs: wsa884x: register the die temperature as a thermal zone
-config: i386-buildonly-randconfig-1001-20261124 (https://download.01.org/0day-ci/archive/20261124/20261124081056.uJlgRhV6-lkp@intel.com/config)
-compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261124/20261124081056.uJlgRhV6-lkp@intel.com/reproduce)
+- [Medium] The rewrite of dwxgmac2_get_rx_header_len() in
+  drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c is shared by…
+- [Medium] In dwxgmac2_get_rx_header_len()
+  (drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c), the header…
+- [Medium] The new dwxgmac2_get_rx_header_len() reads the header length
+  in two different ways under the same SPLM=L2OFST + SAVE_EN…
+- [Low] dwxgmac2_config_l2_split()
+  (drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c) sets SPLM =…
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/20261124081056.uJlgRhV6-lkp@intel.com/
+Pre-existing issues:
+- [High] This problem wasn't introduced by this patch, but the patch
+  extends it.
 
-All warnings (new ones prefixed by >>):
+--
 
-   sound/soc/codecs/wsa884x.c: In function 'wsa884x_probe':
->> sound/soc/codecs/wsa884x.c:2248:60: warning: passing argument 3 of 'thermal_tripless_zone_device_register' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
-    2248 |                                                            &wsa884x_tz_ops,
-         |                                                            ^~~~~~~~~~~~~~~
-   In file included from sound/soc/codecs/wsa884x.c:26:
-   include/linux/thermal.h:333:73: note: expected 'struct thermal_zone_device_ops *' but argument is of type 'const struct thermal_zone_device_ops *'
-     333 |                                         struct thermal_zone_device_ops *ops,
-         |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+net: stmmac: dwxgmac2: enable L2 split header support
 
+This adds a config_l2_split MAC callback and implements it for XGMAC2. On
+enable it selects split at the L2 header offset, enables Split AV in
+XGMAC_EXT_CFG1 and clears VPRE in XGMAC_EXT_CFG0. The callback is called
+from stmmac_hw_setup(), stmmac_set_features() and stmmac_xdp_open() on split
+header capable cores, and dwxgmac2_get_rx_header_len() is reworked to look
+at FD/LD when reading the header length.
 
-vim +2248 sound/soc/codecs/wsa884x.c
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
+> index 09194b9d8322e..58d7433e8b17c 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
+> @@ -1412,6 +1412,25 @@ static int dwxgmac2_config_l4_filter(struct mac_device_info *hw, u32 filter_no,
+>  	return 0;
+>  }
+>  
+> +static void dwxgmac2_config_l2_split(struct mac_device_info *hw, bool en)
+> +{
+> +	void __iomem *ioaddr = hw->pcsr;
+> +	u32 value;
+> +
+> +	/* L2 split is not supported for packets with variable preamble */
+> +	if (en) {
+> +		value = readl(ioaddr + XGMAC_EXT_CFG0);
+> +		value &= ~XGMAC_EXT_CFG0_VPRE;
+> +		writel(value, ioaddr + XGMAC_EXT_CFG0);
+> +	}
+> +
+> +	value = readl(ioaddr + XGMAC_EXT_CFG1);
+> +	value &= ~(XGMAC_CONFIG1_SPLM_MASK | XGMAC_CONFIG1_SAVE_EN);
+> +	if (en)
+> +		value |= XGMAC_CONFIG1_SPLM(1) | XGMAC_CONFIG1_SAVE_EN;
 
-  2143	
-  2144	static int wsa884x_probe(struct sdw_slave *pdev,
-  2145				 const struct sdw_device_id *id)
-  2146	{
-  2147		struct device *dev = &pdev->dev;
-  2148		struct wsa884x_priv *wsa884x;
-  2149		unsigned int i;
-  2150		int ret;
-  2151	
-  2152		wsa884x = devm_kzalloc_obj(dev, *wsa884x);
-  2153		if (!wsa884x)
-  2154			return -ENOMEM;
-  2155	
-  2156		mutex_init(&wsa884x->sp_lock);
-  2157	
-  2158		for (i = 0; i < WSA884X_SUPPLIES_NUM; i++)
-  2159			wsa884x->supplies[i].supply = wsa884x_supply_name[i];
-  2160	
-  2161		ret = devm_regulator_bulk_get(dev, WSA884X_SUPPLIES_NUM,
-  2162					      wsa884x->supplies);
-  2163		if (ret)
-  2164			return dev_err_probe(dev, ret, "Failed to get regulators\n");
-  2165	
-  2166		ret = regulator_bulk_enable(WSA884X_SUPPLIES_NUM, wsa884x->supplies);
-  2167		if (ret)
-  2168			return dev_err_probe(dev, ret, "Failed to enable regulators\n");
-  2169	
-  2170		ret = devm_add_action_or_reset(dev, wsa884x_regulator_disable,
-  2171					       wsa884x->supplies);
-  2172		if (ret)
-  2173			return ret;
-  2174	
-  2175		ret = wsa884x_get_reset(dev, wsa884x);
-  2176		if (ret)
-  2177			return ret;
-  2178	
-  2179		dev_set_drvdata(dev, wsa884x);
-  2180		wsa884x->slave = pdev;
-  2181		wsa884x->dev = dev;
-  2182		wsa884x->dev_mode = WSA884X_SPEAKER;
-  2183		wsa884x->sconfig.ch_count = 1;
-  2184		wsa884x->sconfig.bps = 1;
-  2185		wsa884x->sconfig.direction = SDW_DATA_DIR_RX;
-  2186		wsa884x->sconfig.type = SDW_STREAM_PDM;
-  2187	
-  2188		/*
-  2189		 * Port map index starts with 0, however the data port for this codec
-  2190		 * are from index 1
-  2191		 */
-  2192		if (of_property_read_u32_array(dev->of_node, "qcom,port-mapping", &pdev->m_port_map[1],
-  2193						WSA884X_MAX_SWR_PORTS))
-  2194			dev_dbg(dev, "Static Port mapping not specified\n");
-  2195	
-  2196		pdev->prop.sink_ports = GENMASK(WSA884X_MAX_SWR_PORTS - 1, 0) & ~BIT(WSA884X_PORT_VISENSE);
-  2197		pdev->prop.source_ports = BIT(WSA884X_PORT_VISENSE);
-  2198		pdev->prop.simple_clk_stop_capable = true;
-  2199		pdev->prop.sink_dpn_prop = wsa884x_sink_dpn_prop;
-  2200		pdev->prop.src_dpn_prop = wsa884x_src_dpn_prop;
-  2201		pdev->prop.scp_int1_mask = SDW_SCP_INT1_BUS_CLASH | SDW_SCP_INT1_PARITY;
-  2202	
-  2203		wsa884x_reset_deassert(wsa884x);
-  2204		ret = devm_add_action_or_reset(dev, wsa884x_reset_powerdown, wsa884x);
-  2205		if (ret)
-  2206			return ret;
-  2207	
-  2208		wsa884x->regmap = devm_regmap_init_sdw(pdev, &wsa884x_regmap_config);
-  2209		if (IS_ERR(wsa884x->regmap))
-  2210			return dev_err_probe(dev, PTR_ERR(wsa884x->regmap),
-  2211					     "regmap_init failed\n");
-  2212	
-  2213		/* Start in cache-only until device is enumerated */
-  2214		regcache_cache_only(wsa884x->regmap, true);
-  2215	
-  2216		if (IS_REACHABLE(CONFIG_HWMON)) {
-  2217			struct device *hwmon;
-  2218	
-  2219			hwmon = devm_hwmon_device_register_with_info(dev, "wsa884x",
-  2220								     wsa884x,
-  2221								     &wsa884x_hwmon_chip_info,
-  2222								     NULL);
-  2223			if (IS_ERR(hwmon))
-  2224				return dev_err_probe(dev, PTR_ERR(hwmon),
-  2225						     "Failed to register hwmon sensor\n");
-  2226		}
-  2227	
-  2228		pm_runtime_set_autosuspend_delay(dev, 3000);
-  2229		pm_runtime_use_autosuspend(dev);
-  2230		pm_runtime_mark_last_busy(dev);
-  2231		pm_runtime_set_active(dev);
-  2232		ret = devm_pm_runtime_enable(dev);
-  2233		if (ret)
-  2234			return ret;
-  2235	
-  2236		if (IS_REACHABLE(CONFIG_THERMAL)) {
-  2237			char tz_name[THERMAL_NAME_LENGTH];
-  2238			struct thermal_zone_device *tz;
-  2239	
-  2240			/*
-  2241			 * Register after runtime PM is enabled, as the zone is read
-  2242			 * right away. dev_name() is too long for a zone name.
-  2243			 */
-  2244			scnprintf(tz_name, sizeof(tz_name), "wsa-%d-%u",
-  2245				  pdev->bus->id, pdev->id.unique_id);
-  2246			tz = thermal_tripless_zone_device_register(tz_name,
-  2247								   wsa884x,
-> 2248								   &wsa884x_tz_ops,
-  2249								   NULL);
-  2250			if (IS_ERR(tz)) {
-  2251				dev_warn(dev,
-  2252					 "thermal zone '%s' registration failed (%ld); SP T0 kcontrol will read 0 for this codec\n",
-  2253					 tz_name, PTR_ERR(tz));
-  2254			} else {
-  2255				ret = devm_add_action_or_reset(dev,
-  2256							       wsa884x_tz_unregister,
-  2257							       tz);
-  2258				if (ret)
-  2259					return ret;
-  2260	
-  2261				thermal_zone_device_enable(tz);
-  2262			}
-  2263		}
-  2264	
-  2265		return devm_snd_soc_register_component(dev,
-  2266						       &wsa884x_component_drv,
-  2267						       wsa884x_dais,
-  2268						       ARRAY_SIZE(wsa884x_dais));
-  2269	}
-  2270	
+[Severity: Low]
+This isn't a bug, but should the commit message say that SPLM = L2OFST
+moves the split point for all split header traffic, and not only for the
+tagged or non-IP packets it talks about?
+
+Untagged and VLAN stripped IPv4/IPv6 TCP/UDP frames were previously split
+at the L3/L4 header boundary. With L2OFST they would be split right after
+the EtherType. Commit d10f1a4e44c3 describes the same change for dwmac4.
+
+stmmac_hw_setup() turns this on by default for every sph_capable XGMAC2
+with RX checksum offload enabled. stmmac_rx() would then build the skb head
+from the 14/18 byte MAC header only. The IP/L4 headers would have to be
+pulled from the buffer 2 page fragment.
+
+Could the commit message state that this changes the RX layout for IP
+traffic on existing XGMAC2 users, and ideally include some throughput
+numbers?
+
+> +	writel(value, ioaddr + XGMAC_EXT_CFG1);
+> +}
+> +
+
+[ ... ]
+
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
+> index 6719ac6e395bc..b28aa39f99472 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
+> @@ -292,8 +292,22 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
+>  
+>  static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
+>  {
+> -	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
+> +	u32 rdes3 = le32_to_cpu(p->des3);
+> +
+> +	/* HL is only defined on the first descriptor */
+> +	if (!(rdes3 & XGMAC_RDES3_FD))
+> +		return;
+> +
+> +	/* when FD=1 and LD=0, HL is RDES2[9:0] */
+> +	if (!(rdes3 & XGMAC_RDES3_LD)) {
+> +		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
+> +		return;
+> +	}
+
+[Severity: Medium]
+In hwif.c, the XGMAC2 entry and the XLGMAC entry both use
+.desc = &dwxgmac210_desc_ops. So this parsing change applies to every
+existing split header user, including XLGMAC, which never gets
+config_l2_split.
+
+If the databook statement in the commit message is right and L34T is only
+valid on the last descriptor, then on FD=1/LD=0 descriptors the old code
+tested an undefined field:
+
+	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
+		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
+
+If L34T reads 0 there, hlen stays 0. stmmac_rx_buf1_len() then returns
+dma_buf_sz for a header buffer that holds only HL valid bytes, so the skb
+head would carry stale page data.
+
+A remote peer can produce multi-descriptor split frames.
+XGMAC_CORE_INIT_RX sets GPSLCE with GPSL = XGMAC_JUMBO_LEN (16368) whatever
+the MTU, while dma_buf_sz is 1536 at MTU 1500.
+
+Is this fixing an existing RX corruption bug inside a feature patch? If so,
+could it go in a separate patch with a Fixes: tag so that stable picks it
+up? The v5 changelog says the fix wording was removed on purpose. If the
+old behaviour can't actually be reached, could the commit message say the
+change is a no-op for existing configurations?
+
+There is also the L2T branch further down. On XLGMAC, SPLM/SAVE_EN are
+never set, yet non-IP last descriptors with L2T != 0 now take HL from
+RDES2[9:2] >> 2. Are those bits guaranteed to be zero for frames XLGMAC
+never split? "The callback is not implemented for XLGMAC" in the commit
+message makes it sound as if XLGMAC is unaffected.
+
+[Severity: Medium]
+Is RDES2[9:0] the right layout here for non-IP frames?
+
+This branch reads HL from RDES2[9:0] for every packet, although the packet
+type isn't known on an FD=1/LD=0 descriptor. The FD=1/LD=1 non-IP branch
+below uses (RDES2 & GENMASK(9, 2)) >> 2, because RDES2[1:0] carry AV
+status.
+
+The MAC may also write AV status into RDES2[1:0] of the first descriptor
+for non-IP split frames. In that case a multi-descriptor non-IP/AV frame
+would get HL read as roughly 4x the real value plus the status bits.
+stmmac_rx_buf1_len() would return an oversized header length, and
+stmmac_rx_buf2_len() would be off by the same amount.
+
+For comparison, dwmac4_enable_sph() uses the same
+GMAC_CONFIG1_SPLM(1) | GMAC_CONFIG1_SAVE_EN setup, and
+dwmac4_get_rx_header_len() always reads RDES2[9:0]. Does the XGMAC
+databook really make the HL bit layout depend on descriptor position?
+
+> +
+> +	if (rdes3 & XGMAC_RDES3_L34T)
+>  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
+> +	else if (rdes3 & XGMAC_RDES3_L2T)
+> +		*len = (le32_to_cpu(p->des2) & XGMAC_RDES2_NONIPHL) >> 2;
+
+[Severity: Medium]
+What happens here to non-IP frames whose L2 type is 0?
+
+XGMAC_RDES3_L2T is GENMASK(19, 16), the same bits as XGMAC_RDES3_ET_LT, so
+this check really means "L2 type != 0". In the LT encoding, 0 seems to be a
+valid type: an IEEE 802.3 length encapsulated frame (LLC/SNAP, for example
+STP BPDUs).
+
+Suppose the MAC splits such a frame at the L2 offset with SPLM = L2OFST and
+SAVE_EN set. Then *len stays 0, and stmmac_rx_buf1_len() skips this branch:
+
+	if (priv->sph_active && hlen) {
+		priv->xstats.rx_split_hdr_pkt_n++;
+		return hlen;
+	}
+
+It returns min(dma_buf_sz, plen) instead, and stmmac_rx_buf2_len() returns
+0. Wouldn't the skb then contain the split header followed by stale
+page_pool data from buffer 1, with the real payload in buffer 2 dropped?
+
+If HL is always 0 for frames the hardware doesn't split, could the L2T
+check be dropped so that RDES2[9:2] is read for every non-IP FD=1/LD=1
+descriptor? That would match the databook table cited in the commit
+message.
+
+>  }
+
+[ ... ]
+
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> index f256244ce0d11..0c333d14be4d2 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+
+[ ... ]
+
+> @@ -6467,6 +6469,7 @@ static int stmmac_set_features(struct net_device *netdev,
+>  		bool sph_en = (priv->hw->rx_csum > 0) && priv->sph_active;
+>  		u8 chan;
+>  
+> +		stmmac_config_l2_split(priv, priv->hw, sph_en);
+>  		for (chan = 0; chan < priv->plat->rx_queues_to_use; chan++)
+>  			stmmac_enable_sph(priv, priv->ioaddr, sph_en, chan);
+>  	}
+
+[Severity: High]
+This is a pre-existing issue that this patch didn't introduce, but the
+patch builds on it. When RX checksum offload is turned off,
+stmmac_set_features() now also calls
+stmmac_config_l2_split(priv, priv->hw, false). However, priv->sph_active
+is never cleared. It is only assigned at probe and in stmmac_xdp.c.
+
+stmmac_init_rx_buffers() and stmmac_rx_refill() keep buffer 2 programmed
+through stmmac_rx_check_buf2_cap(). With split header off, the DMA fills
+buffer 1 and then buffer 2 of each descriptor. Meanwhile
+stmmac_rx_buf1_len() still does this for every non-first descriptor:
+
+	if (priv->sph_active && len)
+		return 0;
+
+Take a frame larger than 2 * dma_buf_sz, for example more than 3072 bytes
+at MTU 1500. XGMAC accepts it, since XGMAC_CORE_INIT_RX sets GPSL = 16368.
+Wouldn't the buffer 1 data of the second descriptor be dropped, and
+stmmac_rx_buf2_len() return plen - len from a buffer 2 the DMA never
+wrote?
+
+After something like 'ethtool -K ethX rx off', that would hand stale or
+uninitialized page_pool memory to the stack. Should sph_active, or the RX
+length accounting, follow sph_en here?
 
 -- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261120005243.3724402-1-sagar.cheluvegowda%40oss.qualcomm.com
