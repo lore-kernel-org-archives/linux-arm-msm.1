@@ -1,38 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795513779;
-	b=eLhQ3sso4YmUtC+P3fdy5XKl6sXprWBkjgy8AwR7lYMtO7Mf0BNTxz5zrf4k2ADZfUT4
-	 BnTfjOYayEopRrJGbYzn5TQDLhrc+Xcm2hKUYvRxr0j3OEQkwmBlhMw3C2SFFl6iXKC1l
-	 doPnm5SLyvi+ave97kDaQrgePjHB/TZfk1oRBsFRU+abFmZWHgOJ4RpHdGJefHFLcWR5y
-	 L1DVRO3F7FcenWcm1vwRUJI7SXL/mtj/HkUjf32IzxvC2eBFvzE6TnXTany/VsvdQBNrP
-	 5vNp15OERTks26YwehSPKHdXIRtGSZibXYHlXXmHxqeEg6EeYBEYLy0AeTHxIYeapNw==
+	t=1795513938;
+	b=4GEU0ReXC89NCjFuK5DhRYIPH1KIi3GZtKQngHtNgl5NMuCsOER2PPtc3pcZtxiFt6WK
+	 pL7v84Rk/K8nYVC5TyTM3GiSAO7T4syztR5/bioM2dk2y9SXO1e9gjGV6Csns69Ql0+S5
+	 ssozJVjzMYl9dkg/85ByBoakzbre6efYFqi9SG7LSJRjp+Fh1lS4vQowVXZp+txs394uL
+	 7f6jmLYfiQrQ7ax9+dHL0PE+3II5OZ+d4igUrY4v8NnOYRVGpDQAXRtoFVxrZNjCFCr72
+	 Yh1jH+DEt46Nb2V5dgVlGWpO6KbSZhs40JH8W2yCTTCeR5109nj7O0Iaxlhx3TcSEcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795513779;
-	h=DMARC-Filter:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=0MNLTK0fQhsrYOqNKIOaGGwWA/saDokjTp6WINPbrXU=;
-	b=QIdlFus5Efk5wm1mOTb+VzUTDPLCP6eKZ4alTiMMf/x5qowvml55GF78A2fVV9TWrSo8
-	 cJfRD/ypcy0J37jCtBe8LGOJCDHxstJLW8YJHUg3wialZSwE1ZGHUk2JEidrMq2wOrB43
-	 L3yr1GZ2dZIWcKYuuG8aQX0RsXkY1lD8/mGoT6RqJh+Ofi2AS1WCCvNfTg7KtF3kMHzXA
-	 MJnfls781w7KQxfw2det/438VGpFfSBlFogShxd3QUIM0OafyUHGOskY3FWtgy8ivyAYh
-	 2zxl2B7p+GT+I9mIkH2XFk7OwVzg1DlJg26s+EhUhlAcONnfPZTBbVTwiijP0Evs30g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795513938;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer;
+	bh=mmItOux6gbXFDiG1sj4aWGwqr8TzaeFQw0Lbw1W3I94=;
+	b=ZwYfDBk0Uw8tULvTJ04VXx4au5YzKXPeqHcMKNHP1fgwkxz4tkvGXgoaOG1/pC2RA/Lx
+	 EICsWPOodgBOdhqJj1MIKUP0snwufvd2l2F9EmHO/0fsaLzA4b8Rj18AP+1sNJgl+7/P0
+	 u4wjIeN/bVh/vdb82Kqj6j0E9jDi1/dcjq1FwqUVvhL3N24xrkSx/88M75cISSwyV7A5s
+	 cwbkdvPba3GtSAhT6w8zyMRzGKYKMSHMuKi8KFqI2YFLp7Py12RpvwuONZPmhTkIILTBe
+	 +VfRdYbmvGmtLn1qFwONeo1qJVDcEATfAJlAp85bRUTHj+RtWswOsTPtVMw3fcBamFQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=krgm.moe;
-	spf=pass smtp.mailfrom=krgm.moe;
-	arc=none smtp.remote-ip=103.47.186.116
-Received: from krgm.moe (krgm.moe [103.47.186.116])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 355C7606CF3A;
-	Tue, 24 Nov 2026 09:49:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 355C7606CF3A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
-Received: from [10.42.0.96] (unknown [114.242.206.180])
-	by krgm.moe (Postfix) with ESMTPSA id 64EFC7912;
-	Tue, 24 Nov 2026 15:19:32 +0530 (IST)
-From: SignKirigami <prcups@krgm.moe>
-Date: Tue, 24 Nov 2026 17:48:23 +0800
-Subject: [PATCH 4/4] clk: qcom: rpmh: Add Netrani clock resources
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e8+pQLSi;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73C03606A681;
+	Tue, 24 Nov 2026 09:52:18 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=e8+pQLSi
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D1A491F000F2;
+	Tue, 24 Nov 2026 09:52:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795513937;
+	bh=mmItOux6gbXFDiG1sj4aWGwqr8TzaeFQw0Lbw1W3I94=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=e8+pQLSiAYt7nJTEt+xOhWi40KfiLC8uGFaByQkpY6tJqtwxarIXSJJNR0fpULIH4
+	 v1yjbBQaDTHHWScHDWMwvDmBXd6koWOER52sinVFdAp9KkTo4Js+sSGcdr9PVfumaw
+	 3vlRcRQc0fDehQtBQM4s/hLz4Q9d5IcQRyoTIwMgrNGMiDEZL+0UB8tWQg5/zGHWc9
+	 FL6giDD4zKk1WEuvaoCh+yiKnCCh4OyCmsulJjLCd9btd93Qebi//b6ygUSRMj3bjx
+	 682KXDxKGferLxZdjbRKojanEXAD2ERwEnjP8Ht62BdvhnRU3Kp6bCcgIvzyvjERQN
+	 7UXqjJOYzDYlw==
+From: Vinod Koul <vkoul@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Bard Liao <yung-chuan.liao@linux.intel.com>, 
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>, 
+ Mohammad Rafi Shaik <mohammad.rafi.shaik@oss.qualcomm.com>, 
+ Ivan Verbovoy <ivanverbovoy@gmail.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <20261109-swrm-mmio-irq-v1-1-570fc05f22d7@gmail.com>
+References: <20261109-swrm-mmio-irq-v1-1-570fc05f22d7@gmail.com>
+Subject: Re: [PATCH] soundwire: qcom: enable CPU interrupts only for MMIO
+ controllers
+Message-Id: <179551393550.362684.3377982334908921216.b4-ty@kernel.org>
+Date: Tue, 24 Nov 2026 15:22:15 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -44,84 +65,27 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-netrani-clock-v1-v1-4-ce10cedbfa4b@krgm.moe>
-References: <20261124-netrani-clock-v1-v1-0-ce10cedbfa4b@krgm.moe>
-In-Reply-To: <20261124-netrani-clock-v1-v1-0-ce10cedbfa4b@krgm.moe>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
- Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, 
- Taniya Das <taniya.das@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-X-Mailer: b4 0.15.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2307; i=prcups@krgm.moe;
- h=from:subject:message-id; bh=M0YLCq6nAE5vu9Uz1AFFKGooJAbkshl6w/NwD8n+T/I=;
- b=owEBCQL2/ZANAwAIAV0dOJt2umJjAcsmYgBrBV13mTkpIaTqCmR0HsS8WBtEtjmSEIjHR21HO
- QRQ4L+QZQ2JAc8EAAEIADkWIQRSClJ2zjncUdNU0FFdHTibdrpiYwUCawVddxsUgAAAAAAEAA5t
- YW51MiwyLjUrMS4xMiwwLDIACgkQXR04m3a6YmNmuQv/fpq1XBWYb55jhkZtiwFaeDUlkkRy40r
- tl4xTiT9BPV5pRwpfzao+MiEOpduZVBM7adKd3nCvqVJ6YoywLQqsTm0loUJ+NVbrJUJS6trNX+
- 6SCPiXqikaSGYeNS04XBxgux6Brq5nzJyHxULTlE8eCr9kDg+itfxCR8LmT7pkvnX8Q0+Q3MMM8
- PpAzWIL5ZZ4D5efwh8xOoyCeN9HjsYcNSyvWJTBmFCvc12PwxvHaHl2wTj02DMlmAQOXGn7wqGo
- CouY+XI9crFWpOqupYuh7I8bfdcMuGM44Cmqu22W3DGjkmg2qFgBJuo7UuDi87EoA/ExTB4Xiwb
- 32h5b5xdDKTNeXQrY2JR97WE9oaPK2YdFXA77kOAkueiE+/UOgHDHuIHFhW+OiMyxHZZPIW0GBz
- KxhYkfGWd2hc4k9NAuVZ9JouIRtI+I7SqqLzmFz83KDfXqfcSuXZuUXMDwUNORn+lLOW34pXKS2
- 08WL9gI8L38902vJcflNsSkAKoxChjH
-X-Developer-Key: i=prcups@krgm.moe; a=openpgp;
- fpr=520A5276CE39DC51D354D0515D1D389B76BA6263
+X-Mailer: b4 0.14.3
 
-Describe the Netrani XO, line/broadband, RF and IPA resource clocks. The
-76.8 MHz oscillator is divided by four for the 19.2 MHz CXO output.
-Provide both normal and active-only votes for the oscillator and radio
-resources using the existing RPMh clock operations.
 
-Signed-off-by: SignKirigami <prcups@krgm.moe>
----
- drivers/clk/qcom/clk-rpmh.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+On Mon, 09 Nov 2026 06:21:11 +0200, Ivan Verbovoy wrote:
+> Commit b27be5a85ed3 ("soundwire: qcom: add EE-aware register layout for
+> Shikra") dropped the ctrl->mmio check around the CPU interrupt enable in
+> qcom_swrm_init(), which its message does not mention. The enable has
+> been written for MMIO controllers only since they were added in
+> commit 82f5c70c2651 ("soundwire: qcom: add support for mmio soundwire
+> master devices"); a controller inside a codec, reached over SLIMbus, was
+> left alone.
+> 
+> [...]
 
-diff --git a/drivers/clk/qcom/clk-rpmh.c b/drivers/clk/qcom/clk-rpmh.c
-index 68640e5904a64..389f9567f2397 100644
---- a/drivers/clk/qcom/clk-rpmh.c
-+++ b/drivers/clk/qcom/clk-rpmh.c
-@@ -499,6 +499,27 @@ static const struct clk_rpmh_desc clk_rpmh_sdx55 = {
- 	.num_clks = ARRAY_SIZE(sdx55_rpmh_clocks),
- };
- 
-+static struct clk_hw *netrani_rpmh_clocks[] = {
-+	[RPMH_CXO_CLK]		= &clk_rpmh_bi_tcxo_div4.hw,
-+	[RPMH_CXO_CLK_A]	= &clk_rpmh_bi_tcxo_div4_ao.hw,
-+	[RPMH_LN_BB_CLK2]	= &clk_rpmh_ln_bb_clk2_a4.hw,
-+	[RPMH_LN_BB_CLK2_A]	= &clk_rpmh_ln_bb_clk2_a4_ao.hw,
-+	[RPMH_LN_BB_CLK3]	= &clk_rpmh_ln_bb_clk3_a2.hw,
-+	[RPMH_LN_BB_CLK3_A]	= &clk_rpmh_ln_bb_clk3_a2_ao.hw,
-+	[RPMH_RF_CLK1]		= &clk_rpmh_rf_clk1_a.hw,
-+	[RPMH_RF_CLK1_A]	= &clk_rpmh_rf_clk1_a_ao.hw,
-+	[RPMH_RF_CLK2]		= &clk_rpmh_rf_clk2_a.hw,
-+	[RPMH_RF_CLK2_A]	= &clk_rpmh_rf_clk2_a_ao.hw,
-+	[RPMH_RF_CLK5]		= &clk_rpmh_rf_clk5_a.hw,
-+	[RPMH_RF_CLK5_A]	= &clk_rpmh_rf_clk5_a_ao.hw,
-+	[RPMH_IPA_CLK]		= &clk_rpmh_ipa.hw,
-+};
-+
-+static const struct clk_rpmh_desc clk_rpmh_netrani = {
-+	.clks = netrani_rpmh_clocks,
-+	.num_clks = ARRAY_SIZE(netrani_rpmh_clocks),
-+};
-+
- static struct clk_hw *sm8150_rpmh_clocks[] = {
- 	[RPMH_CXO_CLK]		= &clk_rpmh_bi_tcxo_div2.hw,
- 	[RPMH_CXO_CLK_A]	= &clk_rpmh_bi_tcxo_div2_ao.hw,
-@@ -1141,6 +1162,7 @@ static const struct of_device_id clk_rpmh_match_table[] = {
- 	{ .compatible = "qcom,kaanapali-rpmh-clk", .data = &clk_rpmh_kaanapali},
- 	{ .compatible = "qcom,kuno-rpmh-clk", .data = &clk_rpmh_kuno},
- 	{ .compatible = "qcom,milos-rpmh-clk", .data = &clk_rpmh_milos},
-+	{ .compatible = "qcom,netrani-rpmh-clk", .data = &clk_rpmh_netrani },
- 	{ .compatible = "qcom,nord-rpmh-clk", .data = &clk_rpmh_nord},
- 	{ .compatible = "qcom,qcs615-rpmh-clk", .data = &clk_rpmh_qcs615},
- 	{ .compatible = "qcom,qdu1000-rpmh-clk", .data = &clk_rpmh_qdu1000},
+Applied, thanks!
 
+[1/1] soundwire: qcom: enable CPU interrupts only for MMIO controllers
+      commit: ae0f780d10e3b8782e5559c22e0360c76c7bece8
+
+Best regards,
 -- 
-2.56.0
+~Vinod
+
 
