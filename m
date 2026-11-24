@@ -1,86 +1,50 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795514278;
-	b=ZUbSr+AyB6xK9NJKsjrkoRe5H9g24WGChahMchKzRVaOQatbilVtusxJEeMQelVHILdk
-	 FML9E1HEq0nrwCUpT5ByPRhW4RlzvEWoIdUCJZg4KiDjm6Bs3yaIgjtem8HVaC4/yybyK
-	 ZH9QZl5p61AJ5zjTlg/env5YbH/zENPL7/Z/zgMW7qC1cuMJn/MihdTDEGEP0YM1bGdpg
-	 hDYfdoZTUaTIZjAGxNFqgvvaAYDBTIhgwftX5UyUUsVmd/tp82+V1xvKlFt9GNTWpXT6R
-	 rIUH8Kd8vxlethuQUSFFpSIg8/ACyiFyVp1WrcNGEbSEzWuwXvrmR22x8XrE6xmnH2g==
+	t=1795514383;
+	b=OQKN/5bZiqDwKlrqlmjZqKXEkffY9+2ESmwkkPAo+gB34l/K2HQAsLvldCzOcNlkaRK/
+	 SmuPj/0MmHdcXPTwGSJ0RF9+0XidQvQgMC2mJYsJ1ECodrZP9R7g2eiZl8bJnMe3afYXA
+	 lWjPWi2WfNF9yujREn5o7d8A4q0xIBZJG8OcUW77yofG8Pq88/EFM555/Z7gq3RSDRq/N
+	 Xwtu6Q6lT6kUvaoTLfSrgfabonnDfzmOhq/BeUMiae7hz3x4psFjDXTcS64I4zZ4cibN8
+	 FiHgYXmh13Um8Qen6jLtUZxgVm0wqwH7OdZQdirKkHknfrwnpOP+WhPaEK6iv3XMBFw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795514278;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=kXyUg3NoH8fdqsuK8DsovCC6A8tK75idYEl23ompiLQ=;
-	b=L4J5oNKLCtZHZZIpXfH0dRuAKjMOUwXiph6jJcjB8GQ9dQK50RCcMyklKrPCSQtaYjT9
-	 Z0zxbS27BGkNCGaZGpi+ZlZ8vgoR/E+0pF0P6pl5fzH+oRd2Q9HAhzevB69UiniD4wa13
-	 6A354rwrkaZsdxmPYXBiS/c416+R1wrygv7mMz/Sf4/L1n6IT0heP/FIyN1Wox3bkdbrp
-	 wi8ZMw+kUXNFJdFLsxZQOdxIan2SzcFTykFs5IVa0CDTUev51zPEos1ZPnFtHQfqClTRl
-	 Iftnm1T/DiHxFOgc8TYd1cKzP0VUBys9IifEBjy0fw4kVhmsm6KLSf5pejxgFZJmJ8g==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795514383;
+	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
+	 References:MIME-Version:Content-Transfer-Encoding:Content-Type;
+	bh=UBZCLtFyDcx6tMiD2W3CXEoiJabgHbN2NvJtlqv5Hf4=;
+	b=vjdvtJEDR42/pN80AZm7FbC5eMp4MhjntXlj4tENnT1HUUnnoIXcGOa9F1hURhetjsE/
+	 kbKmpRd91lLV401pI3UddI+M/sBeYhPcQ4iH0U+Txyj7TON48J4aL9OTN/Q7n3rVPNfQ6
+	 NemdRhVQY6iU8YalW5bRkbzVDQWr3gBghf3MKy6yvSYdIRs8oxbl1JNz4iA9ydnnz8fDH
+	 ttm1ksnZU/d1bSjH33QpFtYXgdfpmNQOAezTa/jkl8M6bywHzr253+mPVimO/uKc0BrJV
+	 voxgnzAEf/34NXCFFJTNxlRIxDRrRl4Xrzofq4KMk9bOIFBB1BRNDRLmmy/MzaCmT0A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=t5feP5FS;
-	arc=none smtp.remote-ip=209.85.208.45
-Received: from mail-ed1-f45.google.com (mail-ed1-f45.google.com [209.85.208.45])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D6498606A322
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:57:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D6498606A322
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=t5feP5FS
-Received: by mail-ed1-f45.google.com with SMTP id 4fb4d7f45d1cf-6bab10844b5so3339312a12.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 01:57:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795514276; x=1796119076; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=kXyUg3NoH8fdqsuK8DsovCC6A8tK75idYEl23ompiLQ=;
-        b=t5feP5FSqUeh4OUPpz/G2qREcYdQLeO7DmoP0KcDpNlxLW5YDVPbm/4Y+9l5pIfOLg
-         VTJdJsniqfbvzKi32+gjtTylG+NLszNUoLK8grYIn7MZz/2KY/vNC4ikLKW3INcctV59
-         MlDfs9WlBH8JxRd+ehnBXj6MaJ8bZhRyk38kNrlsopV9B0bit7eK6ORPlBo7IpMN8DlL
-         n/qiTjcsvSQJuDp7OIdkYsVg/DnLTEg7M/S9v5ZG4wEJbXxoRaFKFfrT7EhT91u+EECX
-         4wv3o1IfjbwfPggyiQFREhKZWgfch+xyo2W1f/GlGAtwzj93Gz4SVLOV52hIZtWrXdNx
-         yQUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795514276; x=1796119076;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=kXyUg3NoH8fdqsuK8DsovCC6A8tK75idYEl23ompiLQ=;
-        b=CTLEKW4xbAgHcsHG4E0VG6Pe1LUag//9ZTlDv0i4SZNN3N/zwrGPSMRft2lJhEIgL7
-         G2S9+OprqNaa3/wxr4lDWYQyCQzZ3CEEsFu29FK67hMpw7fOentcsO4TAK+MRvU4Sa3y
-         SMn2LBvD9uNYketuFjc16R5KU8Qn9SEMa5qEaM9zF8gvgPiqjHoRS1NV4No6wLqfAnWQ
-         NPcs/YjWw067lvoN+NKaNTrYMGYeTcEIQp1WERKX9hfuwG9AG5A82PgfgLIAVeRPDrWq
-         WhRvgnM5OWloFK8Jou4b6+KzLHyQlZNwhaUrj/WMq78xkxGW+bIbAvkk3RSl3sf0P1HO
-         jebw==
-X-Forwarded-Encrypted: i=1; AL+hErEtT9y2DtUhWZBnVJOkYvPg/MjLiP7qrFzRTr2/MKxoUzI5kOYZfWZ81H9o/hvQqW4hlm1qLZ2YKmDF+NzR@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Ibfg9b8JOZ2eWhar32ihF6qZ2fbJVU67ZSq9pb+iiD3nc5MB4
-	9hUalZAo2s5kaudaJFnsKWDXUswhwArd6naDS6OoOhki9gohJ7KstQjCiBkBCnsa76U=
-X-Gm-Gg: AZFdTZcCc5ESElNrOCwK2Niij/lmRIczExcRCpDOAcebG4bdixF+KJXRD9XEKC7Liv5
-	PUxvh5iBFfSpYuO20cuJBakn0JK2sSCPlXEre3nIcC5VY+zsJSrTNJIL9Rd2FJfR6THOd8wssaF
-	LZa69xYUZaTzvmN6cY9C6PGeWEN4VSJkadTsKL+YVcqIZJlSPlo6CvnHsuRN2s0hYCYr4vDRdT+
-	e0j6t8GmZlgOyYLLZl5b+7wSbsRhOU3AEpbuQ5vtajHiqXxmBoqAInjO6XNNYtmHmf9FjUWMSbs
-	NFn0auAV9z+WGxE8OwqJz5XuYgBlnMspDT6iY0Kypv7yol0sqiV0wtLeDXiHLIzTddM0lEci9s0
-	4VpBewiMvHJON41nXJwibF184TW6kshTHuWLZYDul9+QSp//WC3lsl6hMCna9d2oLlt5WOpWeGz
-	eHfMf/IisEECTb30q8aSK07zKsSVLuEvyMlfgivYtdWcuF3gYt5pfMKdlXOHlsIrrlPtKib58Km
-	8EFmRnBwrjlPJGtH5PKsMw3y1BifDoV21TmDABrVv+GhV7qGk3+kePgTi+VSQ1g+92lYJulnoKk
-	4HqrvDgXzXYkVRIwutHfYduQvZoEL726UhsAOpysQXtCqHTIsVu12u86H0J7fful
-X-Received: by 2002:a17:906:370b:b0:c51:34ae:dd7 with SMTP id a640c23a62f3a-c5134ae12d8mr835789566b.17.1795514276195;
-        Tue, 24 Nov 2026 01:57:56 -0800 (PST)
-Received: from [192.168.0.167] ([109.76.241.250])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513b00117dsm492806766b.80.2026.11.24.01.57.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Nov 2026 01:57:55 -0800 (PST)
-Message-ID: <c7fc67a6-e15f-40df-9c0a-7eae54e99d23@linaro.org>
-Date: Tue, 24 Nov 2026 09:57:54 +0000
+	dmarc=pass header.from=krgm.moe;
+	spf=pass smtp.mailfrom=krgm.moe;
+	arc=none smtp.remote-ip=103.47.186.116
+Received: from krgm.moe (krgm.moe [103.47.186.116])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 2ADDD606A33C;
+	Tue, 24 Nov 2026 09:59:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2ADDD606A33C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
+Received: from yuno-loong.localnet (unknown [114.242.206.180])
+	by krgm.moe (Postfix) with ESMTPSA id F1FCC791B;
+	Tue, 24 Nov 2026 15:29:37 +0530 (IST)
+From: SignKirigami <prcups@krgm.moe>
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Taniya Das <taniya.das@oss.qualcomm.com>,
+ Krzysztof Kozlowski <krzk@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/4] Add Qualcomm Netrani clock support
+Date: Tue, 24 Nov 2026 17:58:59 +0800
+Message-ID: <AHxcMRgGRTeahvoG5rfviw@krgm.moe>
+In-Reply-To: <59d34135-d280-4d9f-8517-541c4d2ac324@kernel.org>
+References:
+ <20261124-netrani-clock-v1-v1-0-ce10cedbfa4b@krgm.moe>
+ <59d34135-d280-4d9f-8517-541c4d2ac324@kernel.org>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,51 +54,31 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] media: qcom: camss: csid-340: Report the hardware SOF
- timestamp
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20261123-camss-hw-ts-v1-0-7b62dda6d7a9@oss.qualcomm.com>
- <20261123-camss-hw-ts-v1-3-7b62dda6d7a9@oss.qualcomm.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261123-camss-hw-ts-v1-3-7b62dda6d7a9@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 
-On 23/11/2026 17:16, Loic Poulain wrote:
-> +static u64 __csid_sof_timestamp(struct csid_device *csid, enum csid_iface iface)
-> +{
-> +	u32 lo, hi;
-> +
-> +	/*
-> +	 * The pair is latched on SOF rather than counting, so it can be read
-> +	 * one word at a time without tearing.
-> +	 */
-> +	lo = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR0_SOF(iface));
-> +	hi = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR1_SOF(iface));
-> +
-> +	return csid_timestamp_to_monotonic(csid, ((u64)hi << 32) | lo);
-> +}
-> +
->   static irqreturn_t csid_isr(int irq, void *dev)
->   {
->   	struct csid_device *csid = dev;
-> @@ -207,7 +234,7 @@ static irqreturn_t csid_isr(int irq, void *dev)
->   		iface_val |= status;
->   
->   		if (status & CSID_IFACE_IRQ_INFO_INPUT_SOF)
-> -			csid_sof_event(csid, i, 0);
-> +			csid_sof_event(csid, i, __csid_sof_timestamp(csid, iface));
->   	}
+On 2026=E5=B9=B411=E6=9C=8824=E6=97=A5=E6=98=9F=E6=9C=9F=E4=BA=8C =E4=B8=AD=
+=E5=9B=BD=E6=A0=87=E5=87=86=E6=97=B6=E9=97=B4 17:52:36=EF=BC=8CKrzysztof Ko=
+zlowski wrote=EF=BC=9A
+> On 24/11/2026 10:48, SignKirigami wrote:
+> > Add the RPMh clock data, GCC binding and GCC driver for Qualcomm
+> > Netrani (SM7435). The implementation follows the existing Qualcomm clock
+>=20
+> >From where did you get the "Netrani" name?
 
-I think a callback in csid_sof_event() might be cleaner or some other 
-way to not have to replicate all of __csid_sof_timestamp() for each CSI 
-decoder.
+I have seen [1].
 
----
-bod
+Best regards,
+SignKirigami
+
+[1]: https://lore-kernel.gnuweeb.org/linux-mmc/c379aad4-96f6-4134-8b90-0f1e=
+ec8001a3%40oss.qualcomm.com/
+
+>=20
+> Best regards,
+> Krzysztof
+>=20
+
+
+
+
