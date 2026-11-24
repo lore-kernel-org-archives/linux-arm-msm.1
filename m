@@ -1,131 +1,58 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795516152;
-	b=sfWcqM0Nqt7CuUrDQqEMU6+VLyuLolJCWl/NZa8c5XDSgkZ4eZJkrPZX9Ujm1gIKk/o4
-	 vZyezLVzjM5NTj0cu5fMdraPYsjjLDiVB953gn+58pge/Mra6jURDUHhXitSQODgbUO9O
-	 vyznkRSkqc6wky+5T29TWTi0LOkvbZhsHcXwt5GW2S5uVrzOZVfKcx+vA6rfqzDXk4as8
-	 PShQIcuRHFyffwnMjQofIVTlhW/EZpS6bO5LS4PIL+6KfqI2GLWs9cVsplhVYoxEjzXdt
-	 XZ8cWv1mvBS50Z1TqfkDrAgUElqnoj5BD1Dbp9HM8qlIrNfvVDN+l0Y0F2vwpIHGimg==
+	t=1795516540;
+	b=mIFmyL2oy8vSqIAyCPvAUYhHo16gQO1T5+CwoOfC18ANcWSMmjhihSFTb0lpCntsfOSb
+	 0H4WlAwqt1sgPgQdYtrDFur2S44jliAdqsgyW3kdZDfHOyKDZ9Y056CrPyPF3o3kGkpAJ
+	 t7G6rMHpnfPlrPS/5xo/Os6HvUMjtPKZ0bkcFPvXAB8/A/15jy4g+hsMg2t9bVDfzEZZn
+	 GiMhIqLnDTgtwPlW+XSNdObKRKObJ76YD179qr5H+QilsMNrB7bXJBjhO3c+Z/XjkMCy1
+	 VhTegbp3MK8KCra0ftnIdL9ezs99n2PnFkVk32SL5eO//Kgivp+Eeb0irXSzKxj2eLg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795516152;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=isq1BtOcwaV6k1B+5U1NnLpldAIjmTJ+TO6ciHLOLmM=;
-	b=t2wiY01jkg60xBv9NeyPpdrYLk3b5SFTGnz1a7F04E+anTx837cVlDdZ4V8VFonKcY/1
-	 NozO6qG83oPVQrAtTjysUOEoGrf2HP35K79wjHVvQNhwRU12vbZcTVzM6UI47iJE2eMvp
-	 ffqH5khxkcf3x+X8YygQhFJXtYPAU/N6Tw7DIvTiJbpxk5UCGbRzBh2MhKpD41dOxnMVv
-	 x8YiCwTX9PIj08AZrzNuWX66/iPCPFUVKAiiULnHSTOW/m9gRf61tTNq7ComrVSgxpORd
-	 1kM9QM8oTPod8csfh0NvcxZUAL2/R4dfmlpDfJxsFbX6xwoGZ6ORmPulHtdRHbKK1AA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795516540;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=gcHnGr+EWKizS1GumnjfLSnWqHQiWDkKEJikRlAsFBE=;
+	b=DvDjr4NvWnzdWVW5nFv/5yY/zHw19DRaMG9RVdjeINGJcxTPypmNXbc8+0AaIAnWw48C
+	 SYLozFqFXCy0s5/vF/Zk5MJ1v8P0RXiaTvcs90WxboCYzkc88RPHhgMZE+WX6aQVWBJ/3
+	 +dKiBVfMXD3laI4YDbmtE8O40bJdY/gUILxxbubesEVHqj9Dr5HkyhjZzO0i5RIa/BRiJ
+	 3YDz1Fzrm+IdHh8IG+UZrgNLRF1CB6RsVetQjzWR7blnXI01RkJgVov7Iiwh3lQl8Ls3I
+	 xrIO768JsN+zglYxn+fAx8xLIc5IbZ9IRxbEmhUDaI8qelBmP7v8E/MWxSkdW62/Eng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N8ZdrZYR;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hNjrsOkr;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m1SCu11l;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 953C2606A32C
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 10:29:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 953C2606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id 96113606A33D;
+	Tue, 24 Nov 2026 10:35:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=N8ZdrZYR;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=hNjrsOkr
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AO8Vshr1598316
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 10:29:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=isq1BtOcwaV6k1B+5U1NnLpl
-	dAIjmTJ+TO6ciHLOLmM=; b=N8ZdrZYRTl7zB7gP1LKPgniw4ZznMWPBcr9GFT0b
-	Fe7H8LGIZ2nxbS2jaRVVul26B1IIWYrp1UDJnoMDfToiE8DB6f7Ru0XuZdlDvUfI
-	qmyIoHdn1WpjbECp4HFRlQTpu6qPZzQvZjUspEg55oIbpQE6bCjagm+1/STBLkjL
-	MwDHhiS552nWzqet2sREks0dEbIHSqN96XgBjLfoSQfLsuta94wTN5rXAE6Zyz9d
-	YloTWHdLEz5J0KSBPpFxtjs95IM09Snf95YNf9grOlz0Qheo5v399rIP/qQXFXpa
-	gCSILi3XOSXEmgV/uhNLO8rBshCJc6mr2HBxa1hKRN0k3Q==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4ukqk4uf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 10:29:10 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-38531c1a566so3539921eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 02:29:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795516149; x=1796120949; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=isq1BtOcwaV6k1B+5U1NnLpldAIjmTJ+TO6ciHLOLmM=;
-        b=hNjrsOkrhyg8w6IsDeNIS4R2yEAEn0IfJDnenSIHrM4MxqZ/y8mRnvqpMx7Co2bMr+
-         rjm57sGk0W2Nd3FDGHM5fMnLMi12PtZx6iWww7R3OEj+uV0QcVhTCKmTr+9YT6DBzvEg
-         /AzEpEU6M2fSp8I7wx5HKnIbYDJQ2n2flN7pvM47+8mVvVYQQoG7muxxaauW3KEF+uKV
-         ca7X43dQN972Aa81jinX//IQnhbKT/VltLv6If4QP5DpUnDVxaEeVNV3RHKDMXhSfI2n
-         M+7MsKI5yEj+xcHX6Q2oZtHUpp/wOoaPjndFTkCU4xabPU4XAgAw5eY0cTGbOvjkbQRj
-         wxWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795516149; x=1796120949;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=isq1BtOcwaV6k1B+5U1NnLpldAIjmTJ+TO6ciHLOLmM=;
-        b=KKNLEujjbor/dYm6Tr+/Om+mm8pQO2HvvvB58sazWXPM5LKNswIIdE/uMVCWCoqWCG
-         +cYtnLFLezmxaICikv/TmbyYoAANCCgHRqkmRqRIMDdi9d4NhxdlWQNqBMyISFJMiGrl
-         YjrfJtfbM3SpihpDR3+8+DNTYd55nkAf4vSG0Lr4pWt1k8B3gjf8p1XJ240NSSUA3CXf
-         n/ZzqUZ7b0FZVvI3tjrWtB8m9ER5JaM8oT5Zv/i6RhPAJYOHlCwUAa+206Xsx+G5pzm4
-         cMgdh8HK6XDAaqM8k7CeKiFnu4/q3Koh+HLkKgjh5faMMICigSbvMQ2R0TI4snM8p3vN
-         kJ5A==
-X-Forwarded-Encrypted: i=1; AL+hErFW1pvce+nN+g3iO/ltP4vP7FRH2QJChPaHjQXEoOFFNjJUvGB4eejnQ2VzGwKLTiQHKEy+LeOd4WkZSH+b@vger.kernel.org
-X-Gm-Message-State: APuU4Z9CD45684yiAoZUJCovoCuegymTeUWSopHI68Ak4/bc/qVBJu8J
-	bODvrbn+bgWWhCYkkknuBP3PPnmIMJw9v6RMUfZz1JkJCS69FtTlo+jrKgy+VigKU6HUWkBAD9F
-	2467jGOsFdUjefe4a7/U2I3Oxs8bs/zPu4UECuylCHPWkKk2stm9TCa7uu6osRgVgmak6
-X-Gm-Gg: AZFdTZeQEzqvc3bLmY0NWPJuOi9xXTM2cRkzarZldGRLSJywAtHzR29JnA3t2ukfVvT
-	P/jWyGuFATmRuJZps8ouAmtGYzyETbV4XlGI4D1ddBVhq5nRNoc3/YUGz6GK0EXdVnZAL9dSY5l
-	Amrr51jWdXY5oFglaQDuNBYUXyvtLWs1/sUmdKiGwaLpBSVI+dbSxJPjkCKy26m3bqVTksJhtOR
-	chTHNxW805tY9ru1T7HBD0SAvXISttMtpAIRSbuV2/+WHBSewB6m0VHk437bAWilZfI4PjSm/Bt
-	lFXallSI0kCGz3EU91e9A5D7bLEE/G+05H+VqnwSzlLnyfsrrI4fKLWHjkjjf1cVDmMe86WDwE6
-	Qn8aZ6EJj39gbiaH8WAxsSE0RQ2ZjCMzBrcXXIzjb1vNaqDjKH2rLSs0Vb0V9WXQ4DTn7QAQlgK
-	Id
-X-Received: by 2002:a05:7301:c005:b0:386:a0c0:5e59 with SMTP id 5a478bee46e88-386a0c0757fmr11227806eec.20.1795516149099;
-        Tue, 24 Nov 2026 02:29:09 -0800 (PST)
-X-Received: by 2002:a05:7301:c005:b0:386:a0c0:5e59 with SMTP id 5a478bee46e88-386a0c0757fmr11227771eec.20.1795516148444;
-        Tue, 24 Nov 2026 02:29:08 -0800 (PST)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7f59sm46045074eec.6.2026.11.24.02.29.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 02:29:07 -0800 (PST)
-Date: Tue, 24 Nov 2026 15:58:59 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Kumar Patro <bibek.patro@oss.qualcomm.com>,
-        Jingyi Wang <jingyi.wang@oss.qualcomm.com>,
-        Luca Weiss <luca.weiss@fairphone.com>,
-        Shawn Guo <shengchao.guo@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-remoteproc@vger.kernel.org,
-        Abel Vesa <abel.vesa@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Subject: Re: [PATCH v7 4/5] arm64: dts: qcom: shikra: Add EL2 overlay for EVK
- variants
-Message-ID: <20261124102859.s6wr5l2ta3sne7ci@hu-mojha-hyd.qualcomm.com>
-References: <20261120-shikra-el2-v7-0-9d9000eb50d4@oss.qualcomm.com>
- <20261120-shikra-el2-v7-4-9d9000eb50d4@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=m1SCu11l
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 461791F000D2;
+	Tue, 24 Nov 2026 10:35:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795516540;
+	bh=gcHnGr+EWKizS1GumnjfLSnWqHQiWDkKEJikRlAsFBE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=m1SCu11lXCgrtQndFUuPQa4nAIzHdYxzjW3lJmjEapArRv7DjKd6q0cbjurhr6qqw
+	 y16D76hCdK/a1p0UnCLyqJJde8yq6IfsH/Oz+hcOfCl3KfhD3Ng5fJb6pSrIGCUP+w
+	 LJ0DdK4Cp8ovArbl8QLLOH8UE2zvoSalKn2VRdPg5nlwSl49m+AR86fpzsYaGXiujd
+	 fg9kyFPvVx7uhqICg9POg/CoKuNr+GkAQa9HdsRLXzjP1DU/O/ETsz8VXE1U+jj9oD
+	 ZtOMkA1fa0P3VQz1G+Z+047Kjc4lXFgEQSw35oh83KM1vy7mF5OcsDH2yZAFzlcSOZ
+	 r+zdSoUFySF4w==
+Date: Tue, 24 Nov 2026 11:35:32 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+To: Stanislav Aleksandrov <lightofmysoul@gmail.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, 
+	Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Konrad Dybcio <konradybcio@kernel.org>, linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 2/2] pinctrl: qcom: Add Halliday pinctrl driver
+Message-ID: <wkceygbndcdv2ldsemla27mn5dnzdeijowvxpjozee73wyze6r@mlmymb7cehm4>
+References: <20261116-halliday-tlmm-v2-0-b4dd502ca142@gmail.com>
+ <20261116-halliday-tlmm-v2-2-b4dd502ca142@gmail.com>
+ <su7onpn56wd2dtsn63qwbv5v65kci54rhqjndh6qjpb6gwlwnj@m2kxvcdrpjws>
+ <20261123195935.1046144-1-lightofmysoul@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -137,55 +64,70 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20261120-shikra-el2-v7-4-9d9000eb50d4@oss.qualcomm.com>
-X-Authority-Analysis: v=2.4 cv=Wu++otfv c=1 sm=1 tr=0 ts=6b0566f6 cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=3WHJM1ZQz_JShphwDgj5:22
- a=EUspDBNiAAAA:8 a=wRyLKtKWvOkyam-9G8YA:9 a=CjuIK1q_8ugA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA0MCBTYWx0ZWRfX56J09FeQuKYC
- s1FB/ZHXxL5JZvLzF4phtEzzDaMm2ZP+M8qNxAT1Sbl4bCTFvM5WeXAh+GJJvqssnaS2cP37yQR
- e3p738qholhbtplZaR8n7PE5q/EMxr51jpKCJ2dVWHVFVcFUKvhjhNRS5i+s/Va95SpVlwlEDas
- xRe/Qt/QYO2+S8f61B5MWI+UEv396FjJFYPvbzH0eNY7egiZ9jN77BsJ12ZVj6+5P16jKgbZQDA
- MXOsXkMOwFsyWZVfXiCgwDqsCZ+agej2KoAS0RIazjvBL5ZjwDXBmAYB3vM1pp6+HlHFBk0H7Er
- KIpWTM0Fih4uXIsMTimZP2iZtRv2tGC/r/R77kIgO/xEl/o93IQLG+gk6XJuPa9cdopUjNH4xW9
- lE+dbi3xmnNAr8hTiaO0Xr/OFD5QvWfW4ZrqhMRTJhDjjPsPysMyTv4koTn+zmvsxWDis3uPxA1
- yqfq4/xCULk1QCp3gUA==
-X-Proofpoint-GUID: ae2qOijJspBzYT_dn64FXBUGq0_HHZLF
-X-Proofpoint-ORIG-GUID: ae2qOijJspBzYT_dn64FXBUGq0_HHZLF
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA0MCBTYWx0ZWRfX8YmtgcTU125K
- 60bQI/7vXc2WvIZlpLZ0XEOv1E9ClmbupDn2nVjpQSku+0TlO2HzPwIzsq24bmc5g9ksCKWgJ4K
- FDN+a5yA08YVB1jzLy/vrN+jeMs86oI=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_01,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 priorityscore=1501 impostorscore=0 spamscore=0 adultscore=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240040
+In-Reply-To: <20261123195935.1046144-1-lightofmysoul@gmail.com>
 
-On Fri, Nov 20, 2026 at 06:50:52PM +0530, Komal Bajaj wrote:
-> All existing Shikra board variants boot Linux under the Gunyah
-> hypervisor, with Linux running at EL1. Linux can also be booted
-> directly at EL2 on these devices.
+On Mon, Nov 23, 2026 at 07:59:34PM +0000, Stanislav Aleksandrov wrote:
+> On Mon, Nov 23, 2026 at 05:16:55PM +0100, Bartosz Golaszewski wrote:
+> > Can you verify the pdc map against the interrupt map? It looks incomplete to
+> > me, there should be more wake GPIOs. Unless you have a reason to not
+> > include all of them?
 > 
-> For EL2 boot, describe the IOMMU streams used by the remote
-> processor firmware in the DeviceTree consumed by Linux. Also
-> disable GPU zap shader and Iris video codec.
+> I do not have the interrupt map. The PDC map is from the pinctrl-anorak
+> driver in Samsung's kernel source. There are 93 GPIOs with a wakeup
+> enable bit, but its PDC map contains only 76.
 > 
-> Add an EL2-specific DT overlay and apply it to the Shikra CQM, CQS and
-> IQS EVK variants to produce -el2.dtb artifacts alongside the standard
-> DTBs.
+> I did a test: set an interrupt handler on every unused PDC pin on
+> my headset and then I toggled each GPIO to see which pin fires.
 > 
-> Co-developed-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-> Signed-off-by: Bibek Kumar Patro <bibek.patro@oss.qualcomm.com>
-> Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-> Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-> Signed-off-by: Komal Bajaj <komal.bajaj@oss.qualcomm.com>
+> 1. Out of existing 76 entries 42 PDC pins got triggered. 26 are used
+>    by devices on the headset and 8 do not change their level,
+>    so these 34 are not tested.
+> 
+> 2. 17 missing GPIOs: only 14 give a result:
+> 
+>      GPIO 42 -> PDC 105, 48 -> 87, 63 -> 122, 80 -> 42, 97 -> 96,
+>      105 -> 55, 143 -> 72, 151 -> 118, 168 -> 94, 205 -> 130,
+>      218 -> 124, 219 -> 68, 221 -> 133, 223 -> 134
+> 
+>    I am not sure about 151 and 168, their lines are not quiet on the
+>    headset. GPIOs 114, 125 and 162 do not change their level.
+> 
+> I think it is not a good idea to add these pins without documentation.
+> If someone can confirm these pins are correct then I will add them in
+> the next version.
+> 
 
-Reviewed-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
+Here, use this:
 
--- 
--Mukesh Ojha
+static const struct msm_gpio_wakeirq_map halliday_pdc_map[] = {
+	{ 18, 99 },   { 31, 120 },  { 37, 101 },  { 40, 103 },  { 41, 104 },
+	{ 42, 105 },  { 43, 106 },  { 44, 107 },  { 45, 92 },   { 46, 83 },
+	{ 47, 86 },   { 48, 87 },   { 53, 111 },  { 57, 121 },  { 60, 56 },
+	{ 61, 108 },  { 62, 109 },  { 63, 122 },  { 66, 110 },  { 68, 57 },
+	{ 72, 112 },  { 74, 43 },   { 78, 114 },  { 80, 42 },   { 84, 67 },
+	{ 86, 66 },   { 87, 100 },  { 91, 102 },  { 94, 93 },   { 97, 96 },
+	{ 98, 123 },  { 100, 44 },  { 101, 97 },  { 103, 75 },  { 104, 52 },
+	{ 105, 55 },  { 106, 48 },  { 110, 53 },  { 111, 76 },  { 112, 49 },
+	{ 113, 50 },  { 114, 51 },  { 115, 54 },  { 118, 58 },  { 119, 77 },
+	{ 122, 62 },  { 123, 63 },  { 125, 59 },  { 129, 61 },  { 133, 65 },
+	{ 137, 69 },  { 139, 70 },  { 142, 71 },  { 143, 72 },  { 145, 74 },
+	{ 146, 45 },  { 147, 78 },  { 148, 60 },  { 150, 119 }, { 151, 118 },
+	{ 152, 85 },  { 153, 79 },  { 154, 80 },  { 155, 81 },  { 157, 84 },
+	{ 162, 64 },  { 163, 88 },  { 164, 89 },  { 165, 73 },  { 166, 90 },
+	{ 167, 91 },  { 168, 94 },  { 169, 82 },  { 170, 95 },  { 171, 98 },
+	{ 172, 47 },  { 175, 46 },  { 186, 129 }, { 189, 131 }, { 194, 116 },
+	{ 196, 117 }, { 199, 113 }, { 201, 128 }, { 205, 130 }, { 207, 115 },
+	{ 208, 132 }, { 210, 135 }, { 212, 136 }, { 215, 137 }, { 218, 124 },
+	{ 219, 68 },  { 221, 133 }, { 223, 134 },
+};
+
+
+> > There's no egpio function. I assume you copied it from sm8550 but I
+> > think you should do something similar to commit a326b0523fc1 ("pinctrl:
+> > qcom: sa8775p: Enable egpio function") here.
+> 
+> I'll add this in v3. EGPIO_PRESENT is set on GPIOs 185 to 223.
+>
+
+Thanks,
+Bartosz
