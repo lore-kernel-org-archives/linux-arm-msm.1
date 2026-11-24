@@ -1,111 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795527034;
-	b=KR7I2/3LceIpwZbceP9EpRmtvrrQTyGZ73TtYgC3OfrSNKPaCMYJUYwHRGpp0qMCUBon
-	 6lwxCIxHtLWqeQGCWnXpCJCYco3kcyaM0/49/lWUCKuslYSITnfHdwb5D/PUyZFjcI5tE
-	 mZOp19ZUXpALwOEehn5G+qQZnd2S7I2p3tDW4SDEnBO7Mm04p5co/87RV+ObpqU7DTWEk
-	 b9hwrelVXRJJYGCtMF7rddpshjcKLpN7bflpE8YZWrojzc/9zF1if4kMIjPkhEBGchGMB
-	 IMBU+SC4xWu11wSJZHsUyJfcncYHdY9ENIq/3SxCsRzn77/+5xrk6dGEa2apIFsDprg==
+	t=1795527320;
+	b=ZWfd71wRuN+xmRhupQ5fsSMAHr4I3ieqei83ijccjxRNDOlX2Uo74/g0R9bEgCRFh869
+	 0FtF21l1uV/XlmFzwBmYUoPYhIeXmVEr0Eg92gnBr/+N6QUlqDLj5d75WsvJYY+eR38fe
+	 J3GL2LhP4qkt0a4ascGpgqbwNMaF+Q5wHE1QouXyhrKEvHqBReK1Ircyq+5klvGRXF9Mx
+	 brTl5U6zXD96qlNz8YcnNjBvh3r1YosyI7HLOS12ByWFdpvz+PFkeBkn1vSIpHS506I6D
+	 GdU+CVv3f0ji5+s9HPEBCo/cxZT7fN/PXHCYVFd0ueKKQX+ZsYDwPhVaC/bH2Udjm5A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795527034;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=LkTmPmwoE9TvZheDgfVIeiBbBVqnSljafHMjO7Tou00=;
-	b=TMypHukyQzZ/WKLzFk6WOxBLrQqAh+q6QHHOJvuKiizPJlI9AjSR4hCG5oINxl8j+81Z
-	 uRH5XViozGn8oa/jvLYEzoguVyfCVWGofOm5COuPQCJZNszBYT54dn0l7NW5IwznMsB9C
-	 snC3H4AVgkgx63XYxm6o96jnvyjtn0QrBpHM/wkpKV5HcnsTy/9gozF/YXDUvtsUshW8k
-	 hrduNSMn78AYBXlG/h3TUUm+HFVdIIgeeiEKJwkdg8AK0mu3doyLzrkBUz5CWeJwPZd2y
-	 Bx6VXqfVoezfuGYh57trv9LJoW9RNQrpqX8ACmjUJ1sF7RsB7JTaLpDtfiK3ul0EH6w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795527320;
+	h=Received:DKIM-Signature:Date:Content-Type:Content-Transfer-Encoding:
+	 MIME-Version:From:Cc:To:In-Reply-To:References:Message-Id:Subject;
+	bh=dtrcKHCDOQwC/1Y9pVFvIgO8WKKsGNe4/+JPGrTVGUA=;
+	b=xlCiV/UaiE8HxrQ5wX0aoBeQfowLmR51lJ3eTPPnRZsvt2cYIc2w83isG3SfpJbACcaX
+	 0rVkmk6xOkwVpbXocy0d0roBag8DMiQjP3KNLvWJ27VnbDd/M9AIm9VQ7XWQyUJAXdpDn
+	 cS3Lbm/gCpj5pKYGmO77WK1PmcDrIbJfgX8j93atZpGfELHe+FjPStEntSNm3HrvScOCB
+	 Xw+W3XLOj83I7g0B0nm4kGUXiILYwDrMGYurFhL2Y0w9g5v+g8I0kabH3S6arY4i4UtoX
+	 R7cJ2kDCNmzVtAMWrD9msdtZrQqBqUafZK/pqEJefRKyW3BcbMnW/JzN2tWcAEMfuBw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RQK7mGxi;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="W/npoRZ1";
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AbEFYbd7;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4D33606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 13:30:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C4D33606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3027C606A33C;
+	Tue, 24 Nov 2026 13:35:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=RQK7mGxi;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=W/npoRZ1
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AOAujQ3601625
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 13:30:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	LkTmPmwoE9TvZheDgfVIeiBbBVqnSljafHMjO7Tou00=; b=RQK7mGxi01Zl0xYj
-	tvNOj++EndxGDQcCEX5ecs4H7w+1isHh+p0G1PcgdXKGEb6yj57e2t5ehyz+Hj+E
-	49UWkUN1ScizDM2m8tjqZI0uClA4Sx/oB84+lJCRnNmVRi3ll9BK7GIDtWTZklnX
-	by+5xKo3gWYPfGtw2r9WJ3y74ZERNho0phXMEH1F115h8TcOHMmv4ZtWFWz/jJc7
-	yLnU9Se5G8iCg/XWZjvHlHBsIpyZ+HPXN13IHveab7n1dlHn4vkMdIC7bM6FksxI
-	QI9YGCswpkpbOFBt/BWPejuSWQ43xEpI1mznyhG9Y7L9fChhyZPZ023ZNKBXbcvU
-	XuZ/Xw==
-Received: from mail-yw1-f197.google.com (mail-yw1-f197.google.com [209.85.128.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j50ky2uj8-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 13:30:32 +0000 (GMT)
-Received: by mail-yw1-f197.google.com with SMTP id 00721157ae682-8b4f87a6128so1706057b3.2
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 05:30:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795527032; x=1796131832; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LkTmPmwoE9TvZheDgfVIeiBbBVqnSljafHMjO7Tou00=;
-        b=W/npoRZ1WhnPAG4SdE/SByRngP5MOZbGyePKY/L9d94eADb1UYBZgsZcHXxTTtOPrR
-         +mm6iKFmvHqvbInlk+LZAYef1R6HbbyoSj5T5mOW5F3e7aDT7iBjrSIuZ74qMoRlpREM
-         sh1CAXMiR1WuKpQP+K9MfbbgAZiJdxxyrVeJqkv2JWtyGpQAjqSXjoZMuUTi2kxEakHI
-         VqLYTHAMtigHNkgK30pNCnEGyC4OXGMrqduQXGiTGZZRGnZT8qZlfLxHrD+43HvIzno6
-         zo4hgWjfccHzeZEbj0Onw4Yr6FYekYqVtuvyQfMnxuX4Iios8+uHc58kC9nTgxGeJ8Wl
-         ccwg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795527032; x=1796131832;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=LkTmPmwoE9TvZheDgfVIeiBbBVqnSljafHMjO7Tou00=;
-        b=Bx32muOGnjkWy/tNKyhjJzoo85HFwFlWFxsbiJCcuGD+y9jJLqi1OS6Z9HRR8Sccd7
-         uljRNi7Rm8nat2ofkU2gF6I59iFbryk0+U0d1Dpi8xyGiFFYF/z1HdjNxjcBlCNxsShj
-         G+Sxmfc0QRmJo3W7OIZy182BZHc1S4UwKAC2t1x9vKG0pu2Ysqwo/SgC8R6o/UzwNiSv
-         u+OZHEO2TdUHkMKE4jKv2Eqa+S8QvZqzrWCTV8tI8d7UB5cAXCAk/KMzPA20knOAwY7Z
-         K61cytjkKcmC+DWGeWArIP+mzS8Aqll8WC/Krh51OY/GcZhchQVkvm2UweDf+uk08+XV
-         DSlA==
-X-Gm-Message-State: APuU4Z+sA7z8xAypjnNm2nIAsLZwOEtnzuVgo1hUcXHg/1/Esk/Dr/Lv
-	R+mcAivnTSCvs3NEdoTnZH28N1//0rXc8Ii5aQgn83XR1dweME1C1BSWGcLVNBdcV5hjh2PHVEn
-	i26LYGJPVE9bz//7rs1GNbloGhCZU/yiBdUZOzXfGVQkFs3khRO/WBY+SvOVHyvcVtODJODnUkV
-	Kb
-X-Gm-Gg: AZFdTZeHbjpLrGIJvShVKICFU/qAwh0JIhIg4cbYi5rhHpzNxNEBIQqePflOVcLWMSS
-	iq4Cf3MZXBAkTyvtd4Xrp3VOBESmcq+0JAT3WmzM0AnH3HKuWSL+L6yZj9taLkOhRsTvbNC2pCr
-	rBqJ0TSPshrw4O7WNZEx/zDAtDYD9NJhPFK1/u1ojFXxwP7SBVYmYJQWua6Ir7CxchAk/x37u02
-	Gdz7/Gap5Z0gTZE16Xwlxref6gsPX4MkYIFf4NfxUMbwMaDLMzXO05Aqtxi9h4Xjdkg4vmcyTye
-	rWvTH8+0NCSO1raOB0gWU6b1TgCq6HA7YveZlSI1jSUMz87Y7H+98sVy/7A/fZiPrYHH4LX9YFt
-	3YT/r4wCb5/YcsGGJaVg1lC5WT0Yxq6pzpxkSEz9in0JMEnmYtguQq4HcYK2M12nN6spuLOqWIt
-	2i9zJXLDY=
-X-Received: by 2002:a05:690c:a20e:10b0:8b5:3352:774d with SMTP id 00721157ae682-8b5335277c0mr53453667b3.0.1795527031849;
-        Tue, 24 Nov 2026 05:30:31 -0800 (PST)
-X-Received: by 2002:a05:690c:a20e:10b0:8b5:3352:774d with SMTP id 00721157ae682-8b5335277c0mr53453437b3.0.1795527031174;
-        Tue, 24 Nov 2026 05:30:31 -0800 (PST)
-Received: from KDYBCIO.eu.qualcomm.com ([2a02:2a40:15fe:b200:a546:3db2:3be0:87d9])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4b1ed8b6a05sm11659080f8f.43.2026.11.24.05.30.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 05:30:30 -0800 (PST)
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Date: Tue, 24 Nov 2026 14:30:18 +0100
-Subject: [PATCH 3/3] clk: qcom: gcc-sc8280xp: Keep USB4 uC memory powered
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AbEFYbd7
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A008F1F000D4;
+	Tue, 24 Nov 2026 13:35:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795527319;
+	bh=dtrcKHCDOQwC/1Y9pVFvIgO8WKKsGNe4/+JPGrTVGUA=;
+	h=Date:From:Cc:To:In-Reply-To:References:Subject;
+	b=AbEFYbd7lwIf/jyWl/sn/DumUXZrfLlfnTKnyAbeLL5sbmhEOmwCHbOHB7rmeqkDm
+	 ct05xZ508E575N2dRrPz0Eo+/Trzyr3jfF2+d+zR1YnGvrhLoyehmGvVU1fkHXJ7sh
+	 Y8MHJYd15gvlJFHuhkHFAg1XngVpkM8buQRuK9HEHsbZQty61TCiktt6Xc4V5kt+zs
+	 WR0n1idQ5+lETAtwJDiIpwEUCwiROnr0zWJhHkIDqilRv2yABTeBIjf0ahyanhCBY6
+	 TbMOyRcuM+1tyNgr4Cjne5RyBjBcnZoEa3m2HGf3FTW7Th3KXk5K3Q4qSxhzKpXE04
+	 DQpmY9zxRYAkQ==
+Date: Tue, 24 Nov 2026 07:35:18 -0600
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,88 +51,79 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-topic-8280_usb4_clks-v1-3-be083a711eb4@oss.qualcomm.com>
-References: <20261124-topic-8280_usb4_clks-v1-0-be083a711eb4@oss.qualcomm.com>
-In-Reply-To: <20261124-topic-8280_usb4_clks-v1-0-be083a711eb4@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Vinod Koul <vkoul@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795527022; l=1334;
- i=konrad.dybcio@oss.qualcomm.com; s=20260604; h=from:subject:message-id;
- bh=CxLKX6YJtdQ2X0/H7/YrcqnD2wFzAKxM4o71EKxBqpU=;
- b=go1HBHtGZBp1WY8Mn7YI1qy/1ZPfk9jG9b8Dj4RgPJydxDIl/B7N7szYh6RHXMy5G9/tG5dFx
- I9eQ0T0fS0MDjVbq2W2lPGWl4iBLdJtPQXltcCIBjLrpvMFHMtpVQ3C
-X-Developer-Key: i=konrad.dybcio@oss.qualcomm.com; a=ed25519;
- pk=SGRRMmlLTuP/lGKdQ0f4KPvxn8VVsXtXaTpdGc8i82c=
-X-Authority-Analysis: v=2.4 cv=Y+ptIReN c=1 sm=1 tr=0 ts=6b059178 cx=c_pps
- a=0mLRTIufkjop4KoA/9S1MA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=EUspDBNiAAAA:8
- a=e0QnMNc9jRWkZ8z8M0MA:9 a=QEXdDO2ut3YA:10 a=WgItmB6HBUc_1uVUp3mg:22
-X-Proofpoint-GUID: NuiHW9VDdwL5fGqZUnAh4mgI5qNJNYEB
-X-Proofpoint-ORIG-GUID: NuiHW9VDdwL5fGqZUnAh4mgI5qNJNYEB
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA1MiBTYWx0ZWRfX8TOYV5SIDTFd
- nTM4NaETJkZ67IKfcbmr32uqySchGR6H0wzlXpCisKeWaTBkwqQUBNS0Y65uaDG/i8SgVJYj68n
- BrOWHoYVRahGnnSjJ5BSq3M8SoFBEUk=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA1MiBTYWx0ZWRfXxUUypNK1QtPB
- 3S0q3ia3ah/RfshOtv9kJX696rwzNjTfpAajmoAmLWJKEJV54d11NTQxZKwa5y/6dQMCLg1ZxA8
- PIZfviszzJqXpGsqMSKtyP/6euaYOYqescCeUgxEhY5TOaD5gWpF8X4wVlqCfkYiONCfZls2Omc
- 9OhIQlBwp1NFCRczjL2GEQBXfYZ1fgDBGI5TVqlE+PO1kvWQCl2ZQZYjMga8TJxKXsKAmfPeM74
- dq0NyarBRERYum2YRySmn6gBOOobIQTinMW3yZYZG/6Ik7ZX//eGqi6hhs5X9XdNah6ULip66kf
- PNPN7wZIl3vw8zFL5Tj8/kXcuUWpNLtd2jF0BXps278hmV07+lIbCYoKYtr4pux0oEqLR/DQG0/
- 67j/wGdpwETeM0Ca7lZqTFG4jMEFFI4mt2DTYlNcyBn8kHvL7ArkU6uoCr8+FUocSnrhXmkBdc+
- ta1GlV8AWTX4wJU+YdA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 clxscore=1015 malwarescore=0 adultscore=0 spamscore=0
- lowpriorityscore=0 bulkscore=0 suspectscore=0 impostorscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240052
+From: "Rob Herring (Arm)" <robh@kernel.org>
+Cc: linux-pm@vger.kernel.org, Liam Girdwood <lgirdwood@gmail.com>, 
+ Mark Brown <broonie@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Rakesh Kota <rakesh.kota@oss.qualcomm.com>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Sebastian Reichel <sre@kernel.org>, 
+ Casey Connolly <casey.connolly@linaro.org>, linux-kernel@vger.kernel.org, 
+ devicetree@vger.kernel.org
+To: Raj Aryan <raj.aryan@oss.qualcomm.com>
+In-Reply-To: <20261124-smblite-charger-for-pm4125-v1-1-2132c9f0601f@oss.qualcomm.com>
+References: <20261124-smblite-charger-for-pm4125-v1-0-2132c9f0601f@oss.qualcomm.com>
+ <20261124-smblite-charger-for-pm4125-v1-1-2132c9f0601f@oss.qualcomm.com>
+Message-Id: <179552715903.40664.16651410338735245830.robh@kernel.org>
+Subject: Re: [PATCH 1/2] dt-bindings: power: supply: Add
+ qcom,pm4125-charger binding
 
-On SC8280XP, the USB4 uC's RAM contents may not be retained correctly
-by default. Set the corresponding signals to force it.
 
-Fixes: d65d005f9a6c ("clk: qcom: add sc8280xp GCC driver")
-Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
----
- drivers/clk/qcom/gcc-sc8280xp.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+On Tue, 24 Nov 2026 14:45:44 +0530, Raj Aryan wrote:
+> Add YAML devicetree binding for the Qualcomm SMBLite switch-mode
+> battery charger found on the PM4125 PMIC.
+> 
+> SMBLite is a reduced-feature charger IP sharing a common SPMI
+> interface with the SMB2 family (PMI8998, PM660) but using separate
+> SPMI peripheral bases for CHGR, DCDC, USB, MISC and BATIF blocks.
+> 
+> The binding covers:
+> 
+>   - compatible string: qcom,pm4125-charger
+>   - reg property for the CHGR peripheral base address
+>   - Four interrupts: usb-plugin, bat-ov, wdog-bark and
+>     usbin-icl-change
+>   - Two IIO channels: usbin_v (USB input voltage via ADC5_USB_IN_V_16)
+>     and usbin_i (USB input current via ADC5_USB_IN_I)
+>   - Optional JEITA soft and hard threshold configuration as raw
+>     16-bit ADC comparator values written to BATIF ADC comparator
+>     registers
+>   - Optional monitored-battery phandle for battery parameters such
+>     as float voltage and charge termination current
+> 
+> Signed-off-by: Raj Aryan <raj.aryan@oss.qualcomm.com>
+> Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
+> ---
+>  .../bindings/power/supply/qcom,pm4125-charger.yaml | 109 +++++++++++++++++++++
+>  1 file changed, 109 insertions(+)
+> 
 
-diff --git a/drivers/clk/qcom/gcc-sc8280xp.c b/drivers/clk/qcom/gcc-sc8280xp.c
-index 077dd28610dc7b2a43c358a99317435c42ded970..2191e27626efb204cf171db4575b55fb2a2f97c5 100644
---- a/drivers/clk/qcom/gcc-sc8280xp.c
-+++ b/drivers/clk/qcom/gcc-sc8280xp.c
-@@ -7541,11 +7541,18 @@ static const u32 gcc_sc8280xp_critical_cbcrs[] = {
- 	0xbb028, /* GCC_DISP1_XO_CLK */
- };
- 
-+static void clk_sc8280xp_regs_configure(struct device *dev, struct regmap *regmap)
-+{
-+	qcom_branch_set_force_mem_core(regmap, gcc_usb4_sys_clk, true);
-+	qcom_branch_set_force_mem_core(regmap, gcc_usb4_1_sys_clk, true);
-+}
-+
- static const struct qcom_cc_driver_data gcc_sc8280xp_driver_data = {
- 	.clk_cbcrs = gcc_sc8280xp_critical_cbcrs,
- 	.num_clk_cbcrs = ARRAY_SIZE(gcc_sc8280xp_critical_cbcrs),
- 	.dfs_rcgs = gcc_dfs_clocks,
- 	.num_dfs_rcgs = ARRAY_SIZE(gcc_dfs_clocks),
-+	.clk_regs_configure = clk_sc8280xp_regs_configure,
- };
- 
- static const struct qcom_cc_desc gcc_sc8280xp_desc = {
+My bot found errors running 'make dt_binding_check' on your patch:
 
--- 
-2.55.0
+yamllint warnings/errors:
+
+dtschema/dtc warnings/errors:
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dts:29.13-28: Warning (reg_format): /example-0/charger@1000:reg: property has invalid length (4 bytes) (#address-cells == 1, #size-cells == 1)
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dtb: Warning (pci_device_reg): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dtb: Warning (pci_device_bus_num): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dtb: Warning (simple_bus_reg): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dtb: Warning (i2c_bus_reg): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/power/supply/qcom,pm4125-charger.example.dtb: Warning (spi_bus_reg): Failed prerequisite 'reg_format'
+
+doc reference errors (make refcheckdocs):
+
+See https://patchwork.kernel.org/project/devicetree/patch/20261124-smblite-charger-for-pm4125-v1-1-2132c9f0601f@oss.qualcomm.com
+
+The base for the series is generally the latest rc1. A different dependency
+should be noted in *this* patch.
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure 'yamllint' is installed and dt-schema is up to
+date:
+
+pip3 install dtschema --upgrade
+
+Please check and re-submit after running the above command yourself. Note
+that DT_SCHEMA_FILES can be set to your schema file to speed up checking
+your schema. However, it must be unset to test all examples with your schema.
 
