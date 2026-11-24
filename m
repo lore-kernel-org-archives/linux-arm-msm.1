@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.219.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.222.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795485419;
-	b=metSYer0bOSFOfUAUguUT8FhX/Uvzra9jAUMTlrnJtd+b5RrLxk1TNpmIScd0d8w+OIL
-	 oVVbenq7oyFwsGTlzs/yZgtkWnRvHCg1P2jtNkECyjMSylBjNICoEnolNLSDhInbwD/6s
-	 Pq29qxiTcj/LLsCYf9/OBW9G1JMKHmb7YjMH01n0ZwBysCvBoZ/6mXGgftt+oj/+Fwar/
-	 nVCMDRMiR1q1Xd3G5j/1muZdnhbAzbZgwIH8xSUWgiEXk0PlRbQGWXMuVOBh3vU13kClM
-	 A5k1Tmz9Plxsn6AAYvzT9KlBDYGnITixQ4myS3pQc8r7dMeyKeMHwseGnKG3cNTQ7zQ==
+	t=1795485430;
+	b=apbPmgiRDJgQ7Gp9O0fW6+TC6TlE9cOrlhog20URz5heemCG4/DA6h+37CVDylsQWTdY
+	 47syZrpRKPIYA/IJKjGk6BAmEJ3aqJqJvUJWH0wv9NUoQtGNrWbmO/GLFcVGFUJNb1w9S
+	 jZZMqwXtjsiHYCKrBhsetsE6wGXXxsEO+Z/Tx1xiMk/jzlDAGvyOANy7VOeF0+zMT3ywH
+	 VN76qb47jtzmrl1khDtE+y8tBLlMThWOETeWAwaBqGVilG7hDJbswXU+dljOspYP6vz5X
+	 ANHzQ1583Xps2iBCiJ1MAzZ7qDHb04YDC+rzGqvoEtwqJp2VWbYmCPhkF5aMDoVcbog==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795485419;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795485430;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=Ys7Nc7n51L/KeLLawMSwxhQi3I/mI/NHV1h3ZwDRG5A=;
-	b=BtENES3c37WhUwjuso7obzSvPRZQjCAV0GWjXQVC5Lg89MD++XRQtIcvXZxhMTN3UYrA
-	 hRiw+cJ5+3JSUbc0TwCJ4dvZM9U+9J1u5VsA71Nj4oRNBX+kxkfLO4gfQVICu7DMzA1vc
-	 PltGOgkmN28LSIc8wu2fQJdG82UsiKok+Hk62CD3ZzJRqtEbBid+f3R2sCXnWdJUPQ9Xn
-	 NbLTsg0GYkvMC2mdK+57grLVTxC05kK+0G6hvUOUt3zKnuWM0YKDv1YNYuYvMed7bHPZo
-	 HskXwp2b1DKKEJQoUnrPGMYhFL1Z94pboe1E2D14bLq3gGGw05OEzVSuNETiDQtP3Gw==
+	bh=xabHsePonONdwiTfItD6MgwcyoESmGbeuIKIPwB7xTk=;
+	b=S3KEsfU10/XEJEKlnCBQJQ2KlB0IcDDRc6vcbPWU+VIn9602oCrf+LsmjSQ+z3KAoEAa
+	 Pjt62flK9AHbnNwpWH14sdYfQi2VJUr1WxSexMEkUTGYZYJ/SCsJH4X6zOpW6ovkxT2yl
+	 XJXLVltodbKxtv5CfEGDpF+7NnGXYCWmWOfPEjWNTiOv2xd8x79lY0rkxm3d5yq/xHaY8
+	 3/OFtVl7hp/K6xVxASS2XjpB3AD4lgjN4ODcjwhiWaji/VMcI/TlZYuc6LxAVJoL0qovt
+	 70pZmrXpVVYRE5XwvLrFsP8YMPcPhxgnLW6NdFhPDbStfsUmBERqvw9qkSfJW8isJ3w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N1m14udG;
-	arc=none smtp.remote-ip=209.85.219.52
-Received: from mail-qv1-f52.google.com (mail-qv1-f52.google.com [209.85.219.52])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tRi7EmBy;
+	arc=none smtp.remote-ip=209.85.222.176
+Received: from mail-qk1-f176.google.com (mail-qk1-f176.google.com [209.85.222.176])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AE244606A31E
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 01:56:58 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org AE244606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7E606606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 01:57:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7E606606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=N1m14udG
-Received: by mail-qv1-f52.google.com with SMTP id 6a1803df08f44-92123f02faeso41505476d6.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 17:56:58 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tRi7EmBy
+Received: by mail-qk1-f176.google.com with SMTP id af79cd13be357-9495f083657so447043485a.0
+        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 17:57:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795485418; x=1796090218; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795485429; x=1796090229; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Ys7Nc7n51L/KeLLawMSwxhQi3I/mI/NHV1h3ZwDRG5A=;
-        b=N1m14udG0h8jba3K9ai5qMlm6qdGjG3bqClGk7/veFDHpq6CPyM49tjIn2rn8wTDTq
-         BqffRqsGdLGdcgI8caRv3mW29ArdUKBFoz/nIJ/7tGkK75trdW6JgUc1/l2YlW4u3ZCN
-         FZ7IX3CykWZHK5UVF3g+BjNiKwBHxUPQGRKXE7wGXe+B98lg/71Sa+vtmmWH8pMIiVoM
-         KdRyAgPxzCm6s8CSiUjgLezFtfSpqcQrQfRf30AuF+7cYGfUxT19KzcWf9+vwlH+gH7D
-         o2RbanUsOhjEl9HEY+PmSa94mU4VLDkv1HuwDoQwSuJHd3Cebng459miaQra0keaI+/v
-         +tXw==
+        bh=xabHsePonONdwiTfItD6MgwcyoESmGbeuIKIPwB7xTk=;
+        b=tRi7EmByIhgObATe2GhCUv1TEXldNm7csFsBg3QUKYAWyf08f+rm/gIc2r4Ill6JBS
+         5cQimg2e0+HXf2MShkwB2vJK4bYC+knCV/6RjTDTLik3iLj8Qc5PqXat78HpQ7u2NaDu
+         v4yysu0OgBfsj3rh/Sq4QK6Q/GKrP33rVTcozklXk3kfsGrqhInSt2y/v3JkkYQWwoBs
+         OhcOQcNND3TRi7+zq/S7dz4KcDhkTbcTKiC3MyAVsG4xjCgnPhJo0H2SLmBhqlQ52plw
+         Z29O/0zZ2gF73f058JTUYATU3c/+MxVam3sVkQZ3jIQQEHrVAGZv4Z2QQnhNKuOk5YVJ
+         wO6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795485418; x=1796090218;
+        d=1e100.net; s=20260707; t=1795485429; x=1796090229;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Ys7Nc7n51L/KeLLawMSwxhQi3I/mI/NHV1h3ZwDRG5A=;
-        b=slB4iWXOlexfO07cUEkCqHEgmSogR5CYSg7tj5kBqgbU2lOJMeSupYSHxcxEwRQGXM
-         5S1GbKr+GtxYF1TXUaVL0iyt37euKHT+q/nGSUeSnqSkpXF7Cz4BtxprVKOCdRm5aG4/
-         tzvGmsO2w7UkphY3BClrtKHxlQ9edSIyCy1pJv8ovF595S7fBY3j21h3Sg5C/cIVFuK/
-         iHykgo9vhW1ZME8AjYWpsGA2X+ZRjsCLtwznAdRafepQhg7cg3BgkiBqcq4bDoyOPoS5
-         QP2Nk2ItZ89ak0xiw58tX81KGpiash34tMh+n5LfTB1O+jS4pFP15p7i4OOx4u+jZ8qm
-         Lmbw==
-X-Forwarded-Encrypted: i=1; AL+hErERvEA176cyd6ZnFZS1Jhw00sCahiJkIIqFFFEzQ4ds7TEQ4KM6s5MBngcC0VbwabIh3xntRcWcwpz0A324@vger.kernel.org
-X-Gm-Message-State: APuU4Z8guaW80hL7TvDBMnjLKaekOI0ECJKem6wgWKe0Di9k4vPGQTS2
-	aetuMjtQGitWBj/ClMc4n997EY4SZDulrhIUG9kMkmSPBG7CQ1ckFX7t
-X-Gm-Gg: AZFdTZeIhJdTUYv0Uj6G3B+Rs/GBocHaijHvgP4Iq4+mBwTxQNjDvncTuKetQBSGYzJ
-	xGLVl7ftVQMwt2akKmVsjxzzsodnK2uxAF5ZACcT2bhDZ0jahd6VW8SlGaQdq9inF/x4C0IpbxM
-	Ca8JpRkfL+4l11uVb+L9HsfL4Llll2gaSpSNnUPbVmNQbQBTlzswprNbodAt930dW5PlICxm2KP
-	i1XD7PFN5yioaIs/7YAjSQHqMwMn82lSuHvro4izNyoGKYskqV9MRykoDZfr9JxeQhdxSFRkePK
-	xQleSYltFk6/VMl/V9usxxXFo2nIZPpZkFrTPydBbjx7ZSIfgWhObypKzxKD0ubYN04pI87prTD
-	Q6K1MJZt6jURw5e2nMIvjtvo8Aj+DI8bz0RbXZ8i8E7h6nZ40gstpdqujlhX+zbK2eMondQ8A2z
-	YemxDsBtx/5QnfSigYGihIwgVcSeET1b4S6Rxkc3c8YJBJYEZQu98QQ/NXVrWtRmXN1IWt9q6wn
-	n38ng55cUvraBzdHiejx4IlYpKvXlvXt1TYtkd1R8mc12s/LtWCTzjwKkcam4j46jAx93VBxuYl
-	fpl+vyEHe4LLZT3yU22oOQVl+76V
-X-Received: by 2002:a05:6214:27eb:b0:921:57fb:4bc1 with SMTP id 6a1803df08f44-92157fb4dfcmr85526476d6.29.1795485417823;
-        Mon, 23 Nov 2026 17:56:57 -0800 (PST)
+        bh=xabHsePonONdwiTfItD6MgwcyoESmGbeuIKIPwB7xTk=;
+        b=26sitpTA+Su5W2KEJ42nsrqxk/uL5Qz3E452D7VFRFws6FMQWcS5uzxugxzVDicHfn
+         FO3ASKdrHDanNwbveiLiq0jhUhvs3+4dndX6IPv160b7TnQPYFWp52zfHC6aqfu09klO
+         9930aMNLS3L2SfhA0A7B9P1UjSLa7g1OnFyEfdypai+y0LiB7RxMgbAaB0uV8gzcHTW+
+         xZSToLczRC0cveK9R3bMacopKB3fHStORNJh4xHVmfiuwlMmTjgdt73Eo8Dmca5o/o9D
+         ebGDNCsbVP3/Z2ACnb0sNu28mDu+r4gllLaWQRpZCBc0Ks58Q1ua7aFaFp6/c4BgrtiJ
+         oOig==
+X-Forwarded-Encrypted: i=1; AL+hErHSnQKYSgWDFN1sQlRAmWUgI/cwG2sfX8mft7tP8zWDTjd/9KHXu/jP0YfKi1hENB6eNI8sIj/katobIoLV@vger.kernel.org
+X-Gm-Message-State: APuU4Z9aDUqWBxvxR8/9hsN0OGT7pYH7d9p7Nc9Yp72QQUEDMsB/++1U
+	HcnlvrGY4HfrKT0MMI6Bysy7A2YNi8h8ZpdjWknbdTSqV7FKScBECXYA
+X-Gm-Gg: AZFdTZeYQiuYnkvIGifSCn1NBcEJ4FqvU36KH8IGm1mk4JZT7V8YXgzUlRr2egKU971
+	+30i2pSUGIRIvYTvQMafRkT9NOdPboIg0xpWbY9Q157n3iPYHpvZp8n0fIzpP/X9yB/6c02y2oL
+	599AjvxvrwaU1qflVo8CAveX+WE2UwByA2NGhK7r8GxQLlyQ+HTlM8nmEL6r5nTm0BUsbGsQa2k
+	nI9amQATcXFAgD0YyruPIesryzMEosqvZtoi9czwsdQiJ66oeJHppdCz0UKvbFCoWaci/02heqo
+	DhfH+Vf2WZk2xTIdifkgIo4DUZMrgih+fPgsrO5KbkP6ofkfu0QiShvBdDieapqF4HmpcHDYGVb
+	zHi3jw/fbp6kwAk64Dd+wtJk8Dy39pKN4HSlRdXBLW6ez/UVP33o//eeX0lhp7PICUNcTTDf1Ut
+	hPTzHaLp16/8s5+pqbzqGXwx6H5WZ4W0uqH2PgY8VampF7RBGqUZcDTwx+wqhBXx6Yqm0sj3xGj
+	Hsp/iglLxbWLwQg64nO3JydiX/axjz5+jB94O/jPVdai1dO/liFZ9eBdWsjXFatgybldmALpwyc
+	xFQMSBWEDMqxbVV6QaaF8fNtt8zc
+X-Received: by 2002:a05:620a:601b:b0:949:76ed:591f with SMTP id af79cd13be357-949ba82851fmr2343857285a.8.1795485429482;
+        Mon, 23 Nov 2026 17:57:09 -0800 (PST)
 Received: from localhost ([174.93.36.89])
-        by smtp.gmail.com with ESMTPSA id 6a1803df08f44-921349eae11sm121629546d6.25.2026.11.23.17.56.57
+        by smtp.gmail.com with ESMTPSA id af79cd13be357-949bb0354a9sm946256185a.5.2026.11.23.17.57.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 17:56:57 -0800 (PST)
+        Mon, 23 Nov 2026 17:57:09 -0800 (PST)
 From: Richard Acayan <mailingradian@gmail.com>
 To: Bjorn Andersson <andersson@kernel.org>,
 	Konrad Dybcio <konradybcio@kernel.org>,
@@ -89,9 +89,9 @@ To: Bjorn Andersson <andersson@kernel.org>,
 	devicetree@vger.kernel.org
 Cc: phone-devel@vger.kernel.org,
 	Richard Acayan <mailingradian@gmail.com>
-Subject: [PATCH v4 3/5] arm64: dts: qcom: pm660l: add analog audio codec
-Date: Mon, 23 Nov 2026 20:56:09 -0500
-Message-ID: <20261124015611.187024-4-mailingradian@gmail.com>
+Subject: [PATCH v4 4/5] arm64: dts: qcom: sdm670: add digital audio codec
+Date: Mon, 23 Nov 2026 20:56:10 -0500
+Message-ID: <20261124015611.187024-5-mailingradian@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261124015611.187024-1-mailingradian@gmail.com>
 References: <20261124015611.187024-1-mailingradian@gmail.com>
@@ -106,64 +106,58 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The PM660L analog audio codec (PMIC revision 4) controls the headphone
-jack, and optionally the earpiece and speaker, at the vendor's decision.
-Add the analog audio codec.
+Add the digital WCD audio codec to the SDM670 device tree.
 
 Signed-off-by: Richard Acayan <mailingradian@gmail.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 ---
- arch/arm64/boot/dts/qcom/pm660l.dtsi | 37 ++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ arch/arm64/boot/dts/qcom/sdm670.dtsi | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/arch/arm64/boot/dts/qcom/pm660l.dtsi b/arch/arm64/boot/dts/qcom/pm660l.dtsi
-index 3f8b9eafe164..59afe3ba6fe6 100644
---- a/arch/arm64/boot/dts/qcom/pm660l.dtsi
-+++ b/arch/arm64/boot/dts/qcom/pm660l.dtsi
-@@ -87,6 +87,43 @@ pm660l_wled: leds@d800 {
- 			status = "disabled";
- 		};
+diff --git a/arch/arm64/boot/dts/qcom/sdm670.dtsi b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+index e99183c22208..54d903b89cc1 100644
+--- a/arch/arm64/boot/dts/qcom/sdm670.dtsi
++++ b/arch/arm64/boot/dts/qcom/sdm670.dtsi
+@@ -21,6 +21,7 @@
+ #include <dt-bindings/power/qcom-rpmpd.h>
+ #include <dt-bindings/soc/qcom,apr.h>
+ #include <dt-bindings/soc/qcom,rpmh-rsc.h>
++#include <dt-bindings/sound/qcom,q6dsp-lpass-ports.h>
  
-+		pm660l_codec: audio-codec@f000 {
-+			compatible = "qcom,pm660l-wcd-analog-codec",
-+				     "qcom,pm8953-wcd-analog-codec";
-+			reg = <0xf000>;
-+			interrupts = <0x3 0xf0 0x0 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x1 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x2 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x3 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x4 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x5 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x6 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf0 0x7 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x0 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x1 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x2 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x3 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x4 IRQ_TYPE_EDGE_BOTH>,
-+				     <0x3 0xf1 0x5 IRQ_TYPE_EDGE_BOTH>;
-+			interrupt-names = "cdc_spk_cnp_int",
-+					  "cdc_spk_clip_int",
-+					  "cdc_spk_ocp_int",
-+					  "mbhc_ins_rem_det1",
-+					  "mbhc_but_rel_det",
-+					  "mbhc_but_press_det",
-+					  "mbhc_ins_rem_det",
-+					  "mbhc_switch_int",
-+					  "cdc_ear_ocp_int",
-+					  "cdc_hphr_ocp_int",
-+					  "cdc_hphl_ocp_det",
-+					  "cdc_ear_cnp_int",
-+					  "cdc_hphr_cnp_int",
-+					  "cdc_hphl_cnp_int";
+ / {
+ 	interrupt-parent = <&intc>;
+@@ -33,6 +34,12 @@ / {
+ 	chosen { };
+ 
+ 	clocks {
++		lpass_cdc_bclk: lpass-cdc-bclk {
++			compatible = "fixed-clock";
++			#clock-cells = <0>;
++			clock-frequency = <1536000>;
++		};
++
+ 		sleep_clk: sleep-clk {
+ 			compatible = "fixed-clock";
+ 			#clock-cells = <0>;
+@@ -2822,5 +2829,19 @@ data2-pins {
+ 				};
+ 			};
+ 		};
++
++		lpass_codec: audio-codec@62ec0000 {
++			compatible = "qcom,sdm670-wcd-digital-codec",
++				     "qcom,msm8916-wcd-digital-codec";
++			reg = <0 0x62ec0000 0 0x400>;
++
++			clocks = <&lpass_cdc_bclk>,
++				 <&q6afecc LPASS_CLK_ID_INT_MCLK_0 LPASS_CLK_ATTRIBUTE_COUPLE_NO>;
++			clock-names = "ahbix-clk", "mclk";
++
 +			#sound-dai-cells = <1>;
 +
 +			status = "disabled";
 +		};
-+
- 		pm660l_spmi_regulators: regulators {
- 			compatible = "qcom,pm660l-regulators";
- 		};
+ 	};
+ };
 -- 
 2.56.1
 
