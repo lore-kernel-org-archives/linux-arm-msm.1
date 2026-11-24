@@ -1,89 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795541547;
-	b=39VL5gq7dDIt7hd5RX5OyFuOFGqNhYHYPfKfska5Mg8krrvukDiG6cp3ruNHopUWejw6
-	 zz68SPj5EaERT171+D86efLC73cGvIkML4LiDUJRAM4Giq1XGU1QnHreRLQf+fMJQOR9I
-	 4pXu6BOKIJ3vGOczWxrGbjPeqRXWTAwnbPrMcSSi7HF0g73zbkp4hlRstCVSyA7gDNpK5
-	 UjboXMDve0KEmQXva5gGU7snIvhlwm70uh0X6Alwq8W2Rvcm1P9UuFLOiJE6KyLul1Lcn
-	 Q0CCawX3lUnk9iQcXByeP8lkYxThPnMuAr/ef7zyRmjtQsosqsC+Bo4hYLk620HRxYQ==
+	t=1795541549;
+	b=ArlSV+JyRrKAOFI7lP3qK+jHLEtsc2W+yepHt0OGI/aUZk3PAobP+fXZlTt6ry+cBmGC
+	 8BKvtud2ljlyaFSAeUVbYCah6ZzjRff4eT9UfNgK9WKrDD5CzXZtxU3S3GLbMqWd8542T
+	 kgsMqOgpNW8NH6F1lwxG1txeC1cJiS/zUkQIjojgZLEQboaVPAcdqSkcv5mDHyKCzONci
+	 MA3iVZOojtNc1c+69UiKjobQBf5X8TLLPScCPDr1DXfKayse6+Wtx7IUDaKSL98bcUIk5
+	 qpZtP5RfcQloIVPzHHhb00BIHRjPDpuKcKSfNOZ+cgjd4ytdM2rfahMRUgOqEaU7NtQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795541547;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795541549;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=9SvbCg7Ps5Nq9N8nXx7dRohF/YVoRnfTVKAxW5AGeuk=;
-	b=B9Lk3pDkQCCVcLPeaXvwkia81TvFUeXd7UN3xa+mx4zhdZKIRCRbGBhM3oP3Lm66rCOH
-	 /mb2jGkANJP66oDJNhxFsSKOIibgkRVzbfKLCMLFM37pgOt5BMUHouQ303bY95TxlL58n
-	 n5dBZ2LUGd54HJ/va58zCWWGvDM0vcuPhZo0Waowu9I22b3EejP91xtM8L+ceqFrSGL9X
-	 nQ4qyHBh/bjO5KMXlR23JPe/usGMuYplv6SaZpoRkpI9W4gAVNH9eXyaX6DaeFy2Om6XK
-	 YF0e+zhUAl69cpQyC5BW5HT2kZ7mUifRahNzbt8GriZ6MBT8VngsrNzS1B8GquILt8g==
+	bh=+SL1KT/eGq3EnDcZK3GAhW4sKp/ckh6MgmCYDRbhWdE=;
+	b=phsD+G/qKRCVq5dPGBEJwxat1pKsEtOSTfZLsqISuddUvQP1vTudxbaNDSTlEtuIkefa
+	 POjvDnOQCcwHS6JCU/pER3CluMfDQMJgZrOrZlbALXh44B7kU6ntwlhSaNL4hXlKXsm3C
+	 HQpoUnn0EQKoxadLh9DKcF5mNq7eYnAqotMGUINf7AJADKtQcST8EOm9tK5HtQqzfIi0u
+	 AOl3CIQZIeyLUlQaYrk8vhk5a01sh8ENy4HWjjDsZ7SMw6R7OT6o1UaDDE86bSE7bnmui
+	 UgXCK5G7tu31rXveAiEuY50f/49cc77A/XYk/sSUG5IV4aX96mTX27eooUa67C9uySQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OMdOiAWe;
-	arc=none smtp.remote-ip=209.85.221.41
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CAzlwEmN;
+	arc=none smtp.remote-ip=209.85.221.45
+Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4FF2606A336
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:32:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4FF2606A336
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDDA6606A337
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:32:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DDDA6606A337
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=OMdOiAWe
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-492fcbfaa88so3134326f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:32:26 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=CAzlwEmN
+Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-4a32576da88so2798961f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:32:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795541545; x=1796146345; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1795541547; x=1796146347; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=9SvbCg7Ps5Nq9N8nXx7dRohF/YVoRnfTVKAxW5AGeuk=;
-        b=OMdOiAWeNGehUvoWHF11Ewvcv7JrnE+5P4gdU+sKW4N/flR9Xra1mEe9VTKPga+pCy
-         9GhIT1NZqKgoPJWEX7fXU1gpYOYAh3T39giXjwPzJIS+AVc5V/T9Jt8skxkCSW+Xt9gM
-         aQioNdQLLzVMnv4K054mqTOqHmi/pfGFYe2eRBAm8gclFT4p5pt1cCmZRQIq1rPtyZqV
-         1cTWJcO00Ua+qIiJZMpg+QnyrFRZzkBWifZC4oHKeG0kqYJRD3Ugk6PAJp3apXx2PORj
-         0TbTAPWrQDpfBgULH6k6TWpGuXw2jcyDVSAV4LbPhVjuE34AbX2o2kAqhmdA8FcbQbcF
-         UPew==
+        bh=+SL1KT/eGq3EnDcZK3GAhW4sKp/ckh6MgmCYDRbhWdE=;
+        b=CAzlwEmN9dC0GaiVbvr6PRQMqbM1riHbYgXNkb53ws4oCaBivG/BoCh6bN1Sw/ZEHC
+         w07Y5Et6b/7Vwgw93y8Zf9iNg8vLY94qHeb9zERCMCMU/gbsQk7eRXSLhop7B/BBXFbo
+         r3kXgiOfdeRzVurOJekr/lfLMZ7bJwhUHvdi9zx4ADlaWpCBE6sElkHpP0oMyTGVk78T
+         JDa9oMJobNxa685jtKfLjKFNv7bgE4QDUJ2lh6gVwAGC/sIqtAtVKPd/R6WShfIj97bK
+         k6JI+94y8BtWCVvlCbOJcO/Nwmuty1yIT+ES+lJlj1cfMDmBNSk6+eqeEPHGwxq4uT2h
+         5U3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795541545; x=1796146345;
+        d=1e100.net; s=20260707; t=1795541547; x=1796146347;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=9SvbCg7Ps5Nq9N8nXx7dRohF/YVoRnfTVKAxW5AGeuk=;
-        b=H5j6UOAOMXv/y9RctChogpKY32H/Y4u9s95ubwkvm1AQ6ULIGADDTGfIX1xEm1AxAy
-         y7ZCpp72Dgyw901IId7JwaUrfEagQeCovsuQTG3sw0W2lTMcS3ENn7cetw//q9gqrWbd
-         693bWt9ZpQsghFrqffXUSZxB1UYCRZPHG/0oWcTbaWhI5ZU28rv7s8b2pj++VzWd33s4
-         tTpVqePnJKi/jc2ldJXk/KMHx93N8SEpByjWv802E1d0DFl8SGzUDpK+JeA2ZfuYGsoU
-         jQXs740UV9um5ohTjJ9/k4e6bRckJcrj4nb0CHOYZ9WvE61QDG0LxiA2j4cGAGb5IwOL
-         fhSg==
-X-Forwarded-Encrypted: i=1; AL+hErFy7+kAvA755BCsdR22RslEWmd/MDdgkLpf+szjyfNz1krxlARYhcYRNj/EZdf7zxSkJ8gvW48D+PI+9Uoh@vger.kernel.org
-X-Gm-Message-State: APuU4Z+8X0Gca6jD25U5CgngWZBU7GYp8eddviAa/zSZoRvQCfC1bQo0
-	5Xtgxo8QKJjn5tB7K/fqkVx4Yt0k83jbav0eiU7u1jIehS+I0BBfw0jVvo3ioRA0wIc=
-X-Gm-Gg: AZFdTZdUKlhomEwSbhljr0/PyGzE7SkpSJUGGrbSxB2MbOMKQm9spsS83WVdMuYaXbi
-	K7q79ZhOd4LlZomkgRKHMuVf0wnvpb73tUdbaHjROp1eg1LCeMnEBD5Ryc3CeUBGsf0m982Pc/Z
-	qBO4qsRkFspwLWHx0Z+/jhDL9gZaDttIZL8aaqwKT/KVU0aBvZvbqJCC68HuuYvKyxSCybpmqVM
-	BsHpvOV4UcQZ8j1s/uNj2+GnqamSpIfPe2pB1L0hA8YrTKXM1Mw7ZEoY3Y8FxYmuXU64u+BDOYO
-	N3pjiBf8CZUaIwvGM43ss36OaY4V1eLyDBpm2m5Y0UflzCyQLl2mk3hUwczK8a6NbeIGF8raGX8
-	h/Ks1bGlUE03zMuin+U1a4oHxkihTyE+kSSYyjkt7CerOgzzD5qsB1EaHpnksxUiYkj1vNanOuM
-	zsiIKcFiDZ6K1+SN6tIms/tiFkqz99gMAhwZoQPvzkyBjm780GNrt0ygaT4L2RL0dzGEwX21gX4
-	BZ5Usj7Fbjs8FtouabBc6YrEL50QTqXv/iR2CeqZthMXp1dUeirv8QwU3wKXQyKx/wUgollewMB
-	SegE9EhqK1R/j9vA4k8S5dba3cntiWKI4Xx+3xrqEVAca570Kw==
-X-Received: by 2002:adf:e010:0:20b0:492:b221:ac38 with SMTP id ffacd0b85a97d-4abb2ce4bb5mr22650837f8f.26.1795541545190;
-        Tue, 24 Nov 2026 09:32:25 -0800 (PST)
+        bh=+SL1KT/eGq3EnDcZK3GAhW4sKp/ckh6MgmCYDRbhWdE=;
+        b=E93K2JqSrQA6bO9G7F5CBFHSasMXDx3Mn9iVPNqZmepv1JC2LPgxgEYzEfbVQ883t9
+         ZBmyyJpRXF0AdYINCz+acVb5+NMa8L24ajp19mWBGX9dBqByMB3lOPPihy5t1Kir3E6K
+         HJdyiO3E2KwR1O4xeK5+4qdcNINjvvbnl3MEiecyY4CDFsy6aUhNE5QioIeQt7sUXlaq
+         2hIhBTftJNnwGWa2OMkuqsIQ0utyLEMpB0wKR882ByjtsfLjytuIdoQacNWh35YwTt1d
+         5uC3nUs/pS2nWmzHwWiVmJCu/rlkMoNG/rUg6I+Ws2mB1gg9kQfhw/nbPcdHYRmEaGi2
+         tTQQ==
+X-Forwarded-Encrypted: i=1; AL+hErEfYUztm0ch9CY4CTSdd+aGcURZTV9hnBER6n6F3vnWczuJJzRSkvTwjE2YY83srRHlCjlsyGbbBU0ICJsU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+ttQeq1sNfHGvEmQr3pJUBy6ySGmynRS2vRWbMARYG7uU1kNGR
+	YERVbt9+pyBYhPAyiSvMx+Mc9AKs02LmB+Fkql0rotLKx8XxpgUZFGncVhybP0Z5UCU=
+X-Gm-Gg: AZFdTZedHB2f6oad0rzmVTNVK2J8Q+hemA2UW6vMRmK+3oQittlM/qruqHX4W481ciK
+	cKCriYg04rFgrlgyHXY3cgCLkBIlkirTOszWG76UCSJkxGToy4wF2evtTVv0pBlzrcJbx1TvXnE
+	N2yQhg3jrEMaI7CagEUQM++t9AbOUOvU4DDyhgtX1gV7RD+RrtkSa7v3qrdzCZ5+qD+cc5ECB5f
+	m+b92PWoZJxn9bUX2EPT5TtaeTlKLM3ikssjVJ4G4IjHPX46s7ptlA02qBwOdgnycRMlzauc7uh
+	VKNMbzYfERjKLDWozkt5vOuW7fEdoP45hor3Fg6djcgHxaSnQxc4Njv30CBRNbEzzrxETHYqEE0
+	7rJVJolfmgKOJ2i6IT/WozAPAjPU2xx3tXtWNGgX0Sy2lP5oIWyYfKo5COZvi0T0BJUo4tetVaj
+	XTWT6k2yCWQF3uHQpTwGWPobPYC1O65i69lTo6khdxPaLz0veyIu4ds8C/6CMmwflqrf21obq0s
+	TCXWDeKDcYvOZjoMbHEeHGTyvwc62kA7zwJiUrtRoIAPSIJtciX4Z42YSXuq+f8JNEj+N9aYstb
+	r8ZMip68pXA2In2ct9lSIrvbMPP3Q+BbFfwYAjlvza2evIpnZQ==
+X-Received: by 2002:a05:6000:2383:b0:4a8:8004:5261 with SMTP id ffacd0b85a97d-4abb6d04250mr34327691f8f.44.1795541547074;
+        Tue, 24 Nov 2026 09:32:27 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm29560057f8f.44.2026.11.24.09.32.24
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm29560057f8f.44.2026.11.24.09.32.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 09:32:24 -0800 (PST)
+        Tue, 24 Nov 2026 09:32:26 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 24 Nov 2026 18:32:12 +0100
-Subject: [PATCH v2 05/19] ASoC: dt-bindings: qcom,lpass-*-macro: document
- less clock when ADSP is not used
+Date: Tue, 24 Nov 2026 18:32:14 +0100
+Subject: [PATCH v2 07/19] ASoC: codecs: lpass-wsa-macro: handle the macro &
+ dcodec power domains
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-topic-sm8650-el2-v2-5-174e159f0f69@linaro.org>
+Message-Id: <20261124-topic-sm8650-el2-v2-7-174e159f0f69@linaro.org>
 References: <20261124-topic-sm8650-el2-v2-0-174e159f0f69@linaro.org>
 In-Reply-To: <20261124-topic-sm8650-el2-v2-0-174e159f0f69@linaro.org>
 To: Srinivas Kandagatla <srini@kernel.org>, 
@@ -109,192 +109,60 @@ Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5362;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1340;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=do4Pmf+OVu07K8cj6AtpBZmoXVp+LaC/8m6b8cSv7gg=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBcocYv9+888ZgnQroXtUIA8JcUnztIEsC5bdXRJy
- DDjRFMeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawXKHAAKCRB33NvayMhJ0YNwD/
- 42F6P7p/IOzgCWAv7VWdS4T77nO3fg9sWC5QbrR1LcEK51x4KxUWpf+z/cOg5HDUMYS54DDBL9w7ve
- a+5ft1K7AOOvJbInIHltppdlJfBwEI2cMelcSBt4/7+cYILBNxeh9O2qz7JzsyZPP78wD5YY0sUlyM
- fRVc/GruFa2+Sgo0l/JwBYmhFKNauLebKecEqvJ59EgqwUO1tq8QIhu/lqipeJEoANevWAcjWcB8BE
- aUhGXsceO15KEqMolIM83kTNHQwPXRJdOCi8wOzAGstvjgf1ril8d9Hu7eio+NMRy20O6sfus88xBI
- DeV7V6EeEh8Nx8Liu65JjyInFBvNlpN7JvVLpDyvfsIwrirGQ3oRDzOvY1b8Xd+nVnXpscScoJDRbA
- 7h5FdXL1baJvYd5e/rjS0wQPfBQTD9nQKqkIest2EfWi2s9WXoPOY5/s3dYKV7aJBreh13Tc7aNTKp
- cf+DaPOtlMUY/GTF3f02J2hEPt7Y+BZdfP4BrWW3jdPmn6M4oS1caMcxZAvRwSttfR8rPJjJ5U2ZX0
- EHKkd7XrWp5rT4zoyGpKLkg/GIfhzE1QTkmI9roNtey+ggzok+yRlOFdRi+igl278HLXDh0JVJv7H2
- XRR88/fc+IUiqsZYLZ06KKx5QkrPkImdLxG2j1xLH4mAVIOH08iaC5QjaMeg==
+ bh=hVFg3Y31Ispb6dIhV4lKOW6ZJCfvIzuJH+rNG0A18RE=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBcod3y0YQ0h2BUQpIM4apyqk8yOgOGlztGUy36oe
+ 7e2JPcqJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawXKHQAKCRB33NvayMhJ0Se7EA
+ DFos36gYy4RYDRa7R1O6n7gn3ZjBST+lXq0rc+BtlYRhQBkv+plvM/fdkv1vhFxFcAL3LMJm26pgg6
+ EAc4ea/zyMm9nLe9JZyBXI6R6tXmPSAmnPfA/pkc1g+26Bi6HDrv0w4qYPDemOZ4TR9ErrHRlxZiZu
+ mpt2Ay4r42L0T5QF0jszfiuoqbbFFNGNiGzfHH4Tg0br95tQSgrAQBQx0RkLJR1s8YJfxUpEe63yof
+ SC4bjrgMa0Ahd1TUkY6pTmdg+OKqeokhbO+Q/Fx/ay0lrjEHJVMytyAXvxH+PFZY2iyjXS/y9jhaF8
+ VhOvgz9bAIx6y+fvgPBlsT7Dr//jgYQ7DswTbC/UxeDRt9LTUo4Mj+9atQYvyI5jyPcfTpcamZD7kK
+ w6cWGJvKV3dh1t+oG9+UReA+HOfaoaTxhqTRKBcawcNNKXZPJBAfKylGj3lepPQKcOr355h5x5kT54
+ 1i9QipL2N1hlE/atQCVwnJqBXhn8CLUitlCjTufD97ldbJisg0H39XzrNTkk+7vYdzMqM9EbVnM8X8
+ DLDZFllX1fV2ip2iOIdk0cOgB8X+pJgjDWJqUG116Z2A/oTam9YlFZUMurEh2KcRo5TI3JTrI8Efsy
+ URFlBGIaJG7OAI/gE5gHeOFA3XAzLGZtxhSz552Lx6KQ/360SRc1kHU0qUFw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-On platforms where the ADSP is not used and the RX/TX/VA/WSA macros
-are entirely handled by the OS, the macros blocks requires a different
-set of clocks and power-domains to replace the clocks exposed by the
-ADSP firmware interface.
+When the LPASS is not handled by the ADSP firmware, the WSA macro lies
+in the LPASS core and audio power domains like the RX, TX and VA
+macros, so attach and power them with lpass_macro_pds_init() like
+the other macro drivers.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- .../bindings/sound/qcom,lpass-rx-macro.yaml        | 17 ++++++++-----
- .../bindings/sound/qcom,lpass-tx-macro.yaml        | 20 +++++++++------
- .../bindings/sound/qcom,lpass-va-macro.yaml        | 13 ++++++----
- .../bindings/sound/qcom,lpass-wsa-macro.yaml       | 29 ++++++++++++++++------
- 4 files changed, 52 insertions(+), 27 deletions(-)
+ sound/soc/codecs/lpass-wsa-macro.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
-index 67a4a9536d06..62ddc577a345 100644
---- a/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
-+++ b/Documentation/devicetree/bindings/sound/qcom,lpass-rx-macro.yaml
-@@ -133,14 +133,19 @@ allOf:
-     then:
-       properties:
-         clocks:
--          minItems: 4
-+          minItems: 3
-           maxItems: 4
-         clock-names:
--          items:
--            - const: mclk
--            - const: macro
--            - const: dcodec
--            - const: fsgen
-+          oneOf:
-+            - items:   # for ADSP based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: dcodec
-+                - const: fsgen
-+            - items:   # for ADSP bypass based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: fsgen
+diff --git a/sound/soc/codecs/lpass-wsa-macro.c b/sound/soc/codecs/lpass-wsa-macro.c
+index 2b63954f783b..254b8faaa8a1 100644
+--- a/sound/soc/codecs/lpass-wsa-macro.c
++++ b/sound/soc/codecs/lpass-wsa-macro.c
+@@ -419,6 +419,7 @@ struct wsa_macro {
+ 	struct clk *macro;
+ 	struct clk *dcodec;
+ 	struct clk *fsgen;
++	struct lpass_macro *pds;
+ 	struct clk_hw hw;
+ };
+ #define to_wsa_macro(_hw) container_of(_hw, struct wsa_macro, hw)
+@@ -2769,6 +2770,14 @@ static int wsa_macro_probe(struct platform_device *pdev)
+ 	if (IS_ERR(wsa->fsgen))
+ 		return dev_err_probe(dev, PTR_ERR(wsa->fsgen), "unable to get fsgen clock\n");
  
- unevaluatedProperties: false
- 
-diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
-index f9702a11ef82..e593b84bdbc2 100644
---- a/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
-+++ b/Documentation/devicetree/bindings/sound/qcom,lpass-tx-macro.yaml
-@@ -41,11 +41,11 @@ properties:
-     const: 0
- 
-   clocks:
--    minItems: 3
-+    minItems: 2
-     maxItems: 5
- 
-   clock-names:
--    minItems: 3
-+    minItems: 2
-     maxItems: 5
- 
-   clock-output-names:
-@@ -137,14 +137,18 @@ allOf:
-     then:
-       properties:
-         clocks:
--          minItems: 4
-+          minItems: 2
-           maxItems: 4
-         clock-names:
--          items:
--            - const: mclk
--            - const: macro
--            - const: dcodec
--            - const: fsgen
-+          oneOf:
-+            - items:   # for ADSP based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: dcodec
-+                - const: fsgen
-+            - items:   # for ADSP bypass based platforms
-+                - const: mclk
-+                - const: fsgen
- 
- unevaluatedProperties: false
- 
-diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
-index a5466e61b0b1..3f8d0b4cbde2 100644
---- a/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
-+++ b/Documentation/devicetree/bindings/sound/qcom,lpass-va-macro.yaml
-@@ -163,13 +163,16 @@ allOf:
-     then:
-       properties:
-         clocks:
--          minItems: 3
-+          minItems: 1
-           maxItems: 3
-         clock-names:
--          items:
--            - const: mclk
--            - const: macro
--            - const: dcodec
-+          oneOf:
-+            - items:   # for ADSP based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: dcodec
-+            - items:   # for ADSP bypass based platforms
-+                - const: mclk
- 
- unevaluatedProperties: false
- 
-diff --git a/Documentation/devicetree/bindings/sound/qcom,lpass-wsa-macro.yaml b/Documentation/devicetree/bindings/sound/qcom,lpass-wsa-macro.yaml
-index 9fedd80532e2..432839f05c58 100644
---- a/Documentation/devicetree/bindings/sound/qcom,lpass-wsa-macro.yaml
-+++ b/Documentation/devicetree/bindings/sound/qcom,lpass-wsa-macro.yaml
-@@ -38,16 +38,24 @@ properties:
-     const: 0
- 
-   clocks:
--    minItems: 4
-+    minItems: 3
-     maxItems: 6
- 
-   clock-names:
--    minItems: 4
-+    minItems: 3
-     maxItems: 6
- 
-   clock-output-names:
-     maxItems: 1
- 
-+  power-domains:
-+    maxItems: 2
++	wsa->pds = lpass_macro_pds_init(dev);
++	if (IS_ERR(wsa->pds))
++		return PTR_ERR(wsa->pds);
 +
-+  power-domain-names:
-+    items:
-+      - const: macro
-+      - const: dcodec
++	ret = devm_add_action_or_reset(dev, lpass_macro_pds_exit_action, wsa->pds);
++	if (ret)
++		return ret;
 +
-   qcom,dmic-sample-rate:
-     description: dmic sample rate
-     $ref: /schemas/types.yaml#/definitions/uint32
-@@ -93,14 +101,19 @@ allOf:
-     then:
-       properties:
-         clocks:
--          minItems: 4
-+          minItems: 3
-           maxItems: 4
-         clock-names:
--          items:
--            - const: mclk
--            - const: macro
--            - const: dcodec
--            - const: fsgen
-+          oneOf:
-+            - items:   # for ADSP based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: dcodec
-+                - const: fsgen
-+            - items:   # for ADSP bypass based platforms
-+                - const: mclk
-+                - const: macro
-+                - const: fsgen
- 
- unevaluatedProperties: false
- 
+ 	base = devm_platform_ioremap_resource(pdev, 0);
+ 	if (IS_ERR(base))
+ 		return PTR_ERR(base);
 
 -- 
 2.34.1
