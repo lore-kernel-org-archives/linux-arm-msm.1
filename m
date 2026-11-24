@@ -1,11 +1,11 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795541545;
-	b=K/45Q1zrMw+qmr/5n0VYw4R7i3ahDnynT/gKxR+7O8Z50tiDH9e41P1l1ol4PYULgSO+
-	 znPGRCqbnUSa/Fu5+8hWtXSvGlML3lHJcXMnY+z2seOnOBlSD5PjGI1MOQRUBhNWks6Ad
-	 9rS9qNsEdSz9RVJAP+VB23MIZ8wW0J+7iXb2yHpMaiwbvaag4UHyZFaWH7UUOhpRgq6wV
-	 EpimHQGZ8xLqSA1P4wi0kF+rTjRIy6Jl6PlIOYZk41uptFejYQgZ5YEMKQ6UgWDpkjml3
-	 FH8rln7U5TeUWUDKnYWRChp6wG+RxQ09wF9Y2/FOgQhVDGL3aIeIfYofGOKX2LNGVTA==
+	b=hQ+gLpcBxCX3glK/BrNKLfxWC3d1Fun5oN1urlcMPUu8OhM8oM3ITcZnqCxxRVxLoVdf
+	 tuUiiQMBw8Je35U+RF7C2Bm6LxT2sIAuB+lwaHrW8MNTtio4E0VtHdYydUvLNYMsrDx+p
+	 dfclWGKsSm/ZKrNAEuAANXjy8Sf9drDFPRNvpdWoeVSWo5wpDBYPlIXHiCAPsA/7zxwi2
+	 YIl1DzNWLhao20FtDl9vogIWZDOUUinCylfsyK5F8bR1/swMdPek4EJDzr7ecShBXslLw
+	 skuSxq4/wk32mDkEedhwxNhtTxXeTwJebE3QfSxHDq/jITkDmSU6KhsAai7hjUeWogA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795541545;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
@@ -13,77 +13,77 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=mElIxptdta46/R9CCcDiVZtCz+nxON/yJk/P+Rr578s=;
-	b=E/hCJ/gfQlPBul6k07IMwqG46TUwMFVDQMtoRq27nb/Bw9GZjsdz8QcCzS0ap15QXO4n
-	 v9j/6uQlXI0n0yrUx/k16ZnrOmXcTalfMJq0e6+zIEaGiQdYXrXjqdiQ3zeUalaQNLbZs
-	 FKS8tQK7xA++UQn954C8THWscW+MdvFjrAH0ELIM7VFFMYJIsNbmmMSnpWkVTp6Oypffl
-	 WYWMsoe4h4fN7Bj1riERE4JoAw8NFV68yN2rDyo84WBi+yNr2RnjJmF4Y111tO1mSv9Ng
-	 ArBOKNf1eOhL22POrIltkTB9FmgwIVsLK1wmG+axglJtSoBQbQGlXVbRvI8G6JgQxMw==
+	bh=E1l3muk9mvj2eUO9vG6GnMDOjISfB3yngVtzlHm1Fos=;
+	b=zPezUqPwYnXtdSuKMHM7hveGwVo86F+uyma6VFfKdM8JEbzcy7XqNVr9x0M2EKs2dHjx
+	 Efo7LCr8yBVpQd+RTVYypEDj+cKckxS+9mwSXKXr5qTOf1LfDcEb96U2Kmqero3OgVXN7
+	 Tp+bsieVFkNEHBxlVrZQoIRnPLkOj4SjubcIJvNWD6FAN/0XnJawmYnk1oLrY7JdA3LpP
+	 hAH3+XnXzHlP4V/EpR/YTI5CZJ90wijMB7HSQQps8fWPh88vyDHgqCiMxW/VV6u1xvywm
+	 QiTwQUmXo3R54lNif+IZnyr/eF1TjIaWjksTAfoHbq3Il/0E4UnUvm4P+JAaxnulIlA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=SYGXy5Ap;
-	arc=none smtp.remote-ip=209.85.221.41
-Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=IxTmaRZg;
+	arc=none smtp.remote-ip=209.85.128.45
+Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B4B3C606A689
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:32:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B4B3C606A689
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3C50606A33F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 17:32:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C3C50606A33F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=SYGXy5Ap
-Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-49a92144733so2362730f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:32:24 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=IxTmaRZg
+Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4a207b02a2cso34519345e9.1
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:32:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795541543; x=1796146343; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1795541542; x=1796146342; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=mElIxptdta46/R9CCcDiVZtCz+nxON/yJk/P+Rr578s=;
-        b=SYGXy5Ap2u/X5/KQA7XPp07sMy5CgEguqu7FL08TXFm/hqOEQruZbw1hMZsKonEV/l
-         HOJYbNxnnkiaXjP+iTfNjDb+tCtb8lgbQdlT1/bk2ppPOcgY4HXPs+bO+3wDsxDWhWvj
-         /cRKaVH1hAR+hIFtV4glDO+OBWJNnMeebm8W5+O8SCZMkYZIiqkSlHqUi3SJRyCAaRPp
-         hLgZlkjKz6wWatMVSQsiI/K+g7CDbHVlDU4m7f3Rw1ja3LW3xJHaotoAE+s9XGycvEiW
-         nkysYRYQrV+Ed+F3/EwlLq+QkF+3oKt7Qbn9nhW+QRpJqvJN9FruCRU3crA1YArQm2j8
-         AFIA==
+        bh=E1l3muk9mvj2eUO9vG6GnMDOjISfB3yngVtzlHm1Fos=;
+        b=IxTmaRZgx+ZSGfKjB08NNxSE4z8CKY+0a07wlhzAV/It6ahQYSo4BSx4x0MBkr/l7L
+         SkgSoOiETlXP9D4ZVqjCpjHZaglxA4fBQ/PDbpLc0bPV0iqbkp8WJhC16z0QdIlNwL+F
+         5V3ih7HnT8pNokrq+A/LAI7QfN5tjnLjE+N0VdK6LIZZMYucNyYES0JYl5/MgboY6x0+
+         Umpkhjh/XzP+p7gSGI7Io94zA/VOpNAeNqDbuv/jRG1sJsuB3u0ssnn7KrFxu7JAs/LJ
+         tLbNsM2YNWPNcAr3h5pLw2mK/xaAzzqfMadTvNxHT1wVzigI9Zbfcg+RJl4T+kHZDt0V
+         qOGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795541543; x=1796146343;
+        d=1e100.net; s=20260707; t=1795541542; x=1796146342;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=mElIxptdta46/R9CCcDiVZtCz+nxON/yJk/P+Rr578s=;
-        b=LI6OoCB1ib54M7hRywEDw2E0sI0t6eX1J7aleccLEf3rzKApqvTgo/p4wG5LaYU0MA
-         oszCppqqcmOkk2LV/ITgLI1DnRnaZPcATfO1zdgNBS2vKMTGoDkCNAqE+4Z2n1w2PDDr
-         6gZjPfOdqJc1IFPDVFKcuRD0SbNyto/0M9kWlbHp7jRQuh6rrvJF2TcE2glAHyQvdNzC
-         r6AkxLqwoLsIQmbyjISvDei8Pm5I5pS+hmlMg5DWJU66dnRq/oJ0Kb46NhV1R1zugTsr
-         W4HlLDLpOe0mnx21NFeFZcWlWAriaqc5scJ/ualf96L6DKTFCbhoDbsr3zzLWbJCbwuc
-         1GRA==
-X-Forwarded-Encrypted: i=1; AL+hErFm1w9UXJ/9eOUTZeqmBzdL8ZN2RQ9kttVJvQ5NqXZxX8ybb2IGiN/O9chWngSochoiu2vNP1zEo/5gWgV+@vger.kernel.org
-X-Gm-Message-State: APuU4Z95nbFUAhj6YdTWSeSN3ExK1Quler1hzGP8ZZZEp8kVop57El3t
-	D83ES1kAip77TlenBm0Pf519Gw+dHg+1E+MMR9YC5gJeb9yZP3Kp0Wo7po600GZW9DA=
-X-Gm-Gg: AZFdTZe3ll19b3B25P3HRLNMWrm7AY4hCG1CJ5bOYkdbloVk/6kbMUI8iSWVYNwqDcX
-	grRDSw6iT28RhEuFtZYQM/ihk+plo9/tL7MWuioLGpdCCKXCtovJ8H8eOOTlBNvfShL4XlyBEb+
-	JEd21d3KPR7e5IAhoE+pBfkDk6Q+SIADyLNqn3Fu4pyE7GUrTrXUduk0r8TClp6SFw1skZ8Em/E
-	Ql3OFMN01tb03G1lDkmwWiku2yE02HVjwuTiD+Ex0CrgFQjgEq7qGEW8PVGQoADSmzMGlZu6CyD
-	jSnYkwT92oiihX7XLt3uO+uWg0F7xtSOEvyiw4v464zlCYNcXKIIPTgHSbKM5focakFBLvnl7qH
-	nPfOWlc1QhQ0k28UUs9FdhQ8t4UBOlItpz4UnROIjAhHNQNHkf909ZNOHZ8756sl7FYuwVRYgFr
-	Zk9ZDtR9oElqv1kNB3VDy+z2XfLZluZ/0AQLOnhOiAlHFFC/tBuW7PvJlJim019wNDRLXX0pLLA
-	Z5foKDLEfrY9cDRu/Z4CRdwDESbqB5y2Z/GEgj3bZs5VnEKgEtLqmWRKLIvkWs3LhqTru93kbDB
-	Yuze/gkVS96UrZcgMosGM2bGx36sccqzdNO227jqMqs6FOG1BA==
-X-Received: by 2002:adf:e197:0:b0:4a4:14db:233b with SMTP id ffacd0b85a97d-4abb3678774mr26445608f8f.12.1795541542844;
-        Tue, 24 Nov 2026 09:32:22 -0800 (PST)
+        bh=E1l3muk9mvj2eUO9vG6GnMDOjISfB3yngVtzlHm1Fos=;
+        b=wq2Gkhxz1nWHOVvhRNNgXOmQsPiKnVFktQhF3sVZ8ILT1/6n/ESXRTBw/lgVQUCLn6
+         f9RcJ7EDIQba8niMGREtYUJZcx7WBFcDKB6tkNcpyK+2Uh5Idd7WVqh00tHcVYLRt08Y
+         djCmMWtDl5lAsThimdkIxMioPMEmXaEdqrisGg1hphER8PU6UKvZMRYORFRPg/bwcWRI
+         NzNWwLnIfCDdyLVsKKWeIJbBr/dZfwEVPsEfxgKzcr1tGjf/6tvu9brbWo7JNZdI0z0M
+         XcoxQsM1MR073W6d33NvIwWeHXaRUYOBIHft91hAXYtrmv4IpBIyzhK26MvWDogat9km
+         k74w==
+X-Forwarded-Encrypted: i=1; AL+hErG6i60CdBj/DUI7ibK6Si9FC68z0qhhneeSHzP5AQCGkXbaOBFz2SZeiZsSE8FIVP3JlTcKXd9KDwAyN8p9@vger.kernel.org
+X-Gm-Message-State: APuU4Z8pk5IsKw2KvH7DDa3GaTXJUbJ6FcQduwBFmLrWw/Jeo1rSBTea
+	0H+rehzLGXvle/WY+CIbZr2QE1bvygEMIa+IxZL5+/xIllwOOCXAKbhgaiSXt30R2Z8=
+X-Gm-Gg: AZFdTZdGzNoazCbGbuhjdbObwyeHgdMF2FzC8beNlwF/tQTVFfqcINVaGM2cceGcW96
+	a1gdww8XIfGgLSf5KLa9wZaPszaWL55ibqnbovqbgf5cyaR5b9zApNitfxtxRqamCb6hFTyJmS5
+	EDnokW4HZeyjGa4pwTPRr1nsRv0KC6+bIG5X2YK8NzrBW+M6R6kwTK2//iEcj06tLOZr/COLW4g
+	Ji+dGDPfxZX25ZJ2Yc3hhuSY/p/65OqJi6f7UPYnW8NLfLlbFqa0/MyscMkaw7RoBhTIfeEAOcU
+	RiMtMYPD2455jy+3/jHtpwjWdsMsyvosVOC8V9bqIEW+XSm9AZtSP/C7pqZYwqbbLZScp18AHrQ
+	02P4VT302yZj8ZuJu4PokEjLIQoK9CtM5rJR8HP8TVFFUZISn3ZFocqtGjpWHlmPadNVg/oh+hl
+	6PflzAx79kK+aGTdNu+PAD1IZaMMhHKGPD42scDNur8n3uYaeVZ00qWyYyAoTP2lBJ3QCP8KnXs
+	4n67Ox/jD5lD+UiAzz6HCP+DSBiduAtFhVuod2YNmzqGP1zT7ZCshGfUXnpYJ6Nhf53FxdpNc4e
+	J7/ElwMfVFQahacmVL7fl50ypQHZX9EDtf8y8VaWIEfDWxUmQw==
+X-Received: by 2002:a05:600c:b8a:b0:4bb:7007:4a5a with SMTP id 5b1f17b1804b1-4bb88817772mr322992005e9.23.1795541541955;
+        Tue, 24 Nov 2026 09:32:21 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm29560057f8f.44.2026.11.24.09.32.22
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm29560057f8f.44.2026.11.24.09.32.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 09:32:22 -0800 (PST)
+        Tue, 24 Nov 2026 09:32:21 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Tue, 24 Nov 2026 18:32:09 +0100
-Subject: [PATCH v2 02/19] ASoC: qcom: lpass-platform: disable the RXTX & VA
- DMA interrupts on stop
+Date: Tue, 24 Nov 2026 18:32:08 +0100
+Subject: [PATCH v2 01/19] ASoC: qcom: lpass-cpu: fix RXTX WRDMA current
+ address register readability
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-topic-sm8650-el2-v2-2-174e159f0f69@linaro.org>
+Message-Id: <20261124-topic-sm8650-el2-v2-1-174e159f0f69@linaro.org>
 References: <20261124-topic-sm8650-el2-v2-0-174e159f0f69@linaro.org>
 In-Reply-To: <20261124-topic-sm8650-el2-v2-0-174e159f0f69@linaro.org>
 To: Srinivas Kandagatla <srini@kernel.org>, 
@@ -110,73 +110,54 @@ Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sashiko <sashiko-bot@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2073;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1433;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=/fsIHu6LLX02EBqFrzxtmSXw80zjZLf2vPoqG7Eq77I=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBcoaUI+Ey3cpx0oclxJ0BXcgHjXP65kiip5bZsF4
- lAYCriyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawXKGgAKCRB33NvayMhJ0QQuD/
- 9pJ9+7KRKgBDU43qgCv+lNJYfANeC2u/lWlHn7lj/L+rtHC1bC/dnwZ9MKq0FokNeYhOX3KkafaNBC
- JEnp4fIJSy8vMDejmTUsLiNTDm2xt2WG2kcf0YcyKS8v5LCIQnRdgYC9NyOsTZek1AkpvKQYW/AHN4
- sE/LUiXpldjN136fa4G9Hpz9nJAr9PU5wRQOEPlMxdIvb8rO08iQDfv1dzhrtyjp6X674F83QOD5Gc
- 2WBm4rfbqbcDZ5GQ2z9djiBaijVzHUIuldz90XoFybzb1w8L70TyyXu63ePVE2RUeMuRc8FMp8kyOh
- uklsd8vrZ+NMKjCFtlaImyDaQr9KDVpnXA7qv/U+Q4B5tihQcG1s4zWkwYESgzrKZRMzCfU6BhW6qa
- RJvClCA1YStk+grQd7OFMb+VHK+EWHy/Loor9fU2gFuoKg3AY1SoPVVhe+wcuIdbqjH8uyQIBJk/6r
- +624C8vjUIToXwKU/Xfg7dPhUPZyLWNfrftTFaiNC+bm3zS1O84AmtBQTyKyDLnBDCzq2pKWhnbFKx
- 6nSmMLOdRHOqDwt7ZoKzMMj+ntgYrHqvdFGCfyYs/EdUORbYB2gORzUfb1bKDcgYNvAaZOldcrPKli
- qApjQsl9XIWZbkw9CXE94le3TeSIMKUwsKNbPsfH5AT3YXA4Swwf5QcNAqrg==
+ bh=ZWtXXIAu1ROHouXHoyzPIX41ZECCUibcP81WQj1ZjMA=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBcoaMxJMF4WK27iYIRXyPHY+J3KHRZ3Nj+2lFHF5
+ iVYlM9qJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawXKGgAKCRB33NvayMhJ0ebID/
+ 0ScKo7Wg04BZQhsw0ik1LBznnUCP0x1l5J8gG38v/wvoUG/mJQq48WlEFTduIhLwmX37Cd2eWhiIf8
+ tW2AgtXeDpZgd1tSSfSHj6L6/8sV+s8HLwyYkfR4c6+EwU1HBw4OglZMec1lmKzdQPnGxiZO2np137
+ ghZUPW38OsShr1Yz04C2spnc7zKD8xJ9OHBox6QTdGdYn+Ho5UWpdvyaKQnlR25GKAjbKIw9M4lLo1
+ rx7VTbrmfu93yD0A35z8L/3IV+GWRlWaPB+1HpeZp8wxSim5pBX0HO2J5uf2DKSH9uqsuWXOMGiDfA
+ yj9B2EVKssy/EHDMWd88x8FLUSrTc3MWDeJYHDwLwll4YB+igVpSUTVm+aiL0fyUZwYaFWGQH5Ki6H
+ djL+eMwpwyTuw8qccK2e1a8HQ/4jNvfW0vibRE+o2zz/eayzOFF8wQOI6KK2q0FuKQALNsD9zajMDX
+ NDToXbvTwhy3q+mR/eitHI43AUTpN9x6W62PXLBs5rqHgEicUpZo8tN4U2bQWzUSTmqoqpXfJ0lZOq
+ yK6SyJDOVTWJpnbloVuDpeKoeaiCsIVS6f2Ex3meL0zCgRf5h8CiyoV4com39PyM/erC7qKWMA54LP
+ 2xp59pvMRBOSCtV2h5mc1oJ7JqJj2H3sx9JBSkRThHAXln1A8MZOirJpjeLw==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-On SNDRV_PCM_TRIGGER_STOP, SUSPEND and PAUSE_PUSH, the RXTX and VA codec
-DMA cases set val_irqen to LPAIF_IRQ_ALL(ch), so the channel interrupts
-are kept enabled instead of being disabled like for the MI2S and HDMI
-DMAs. Once the stream is closed the substream is cleared, and the
-interrupt handlers ignore the pending interrupts of the channel
-without clearing them.
+__lpass_rxtx_regmap_accessible() checks the RXTX WRDMA current address
+register without adding rxtx_wrdma_channel_start to the channel index
+while all the other RXTX WRDMA registers do, so the current address
+register of the last WRDMA channels is not readable and
+lpass_platform_pcmops_pointer() fails with -EIO on those capture
+channels.
 
-Disable the channel interrupts on stop, and drop the irq clear
-register setup which is unused on stop.
+Add rxtx_wrdma_channel_start like for the other RXTX WRDMA registers.
 
-Fixes: 7d7209557b67 ("ASoC: qcom: Add support for codec dma driver")
+Fixes: b138706225c9 ("ASoC: qcom: Add regmap config support for codec dma driver")
 Reported-by: Sashiko <sashiko-bot@kernel.org>
 Closes: https://lore.kernel.org/r/sashiko-outbox-213518@kernel.org
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- sound/soc/qcom/lpass-platform.c | 10 ++--------
- 1 file changed, 2 insertions(+), 8 deletions(-)
+ sound/soc/qcom/lpass-cpu.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/sound/soc/qcom/lpass-platform.c b/sound/soc/qcom/lpass-platform.c
-index dad4becf7579..9666049ae51b 100644
---- a/sound/soc/qcom/lpass-platform.c
-+++ b/sound/soc/qcom/lpass-platform.c
-@@ -814,12 +814,9 @@ static int lpass_platform_pcmops_trigger(struct snd_soc_component *component,
- 				return ret;
- 			}
- 
--			reg_irqclr = LPAIF_RXTX_IRQCLEAR_REG(v, LPAIF_IRQ_PORT_HOST);
--			val_irqclr = LPAIF_IRQ_ALL(ch);
--
- 			reg_irqen = LPAIF_RXTX_IRQEN_REG(v, LPAIF_IRQ_PORT_HOST);
- 			val_mask = LPAIF_IRQ_ALL(ch);
--			val_irqen = LPAIF_IRQ_ALL(ch);
-+			val_irqen = 0;
- 			break;
- 		case LPASS_CDC_DMA_VA_TX0 ... LPASS_CDC_DMA_VA_TX8:
- 			ret = regmap_fields_write(dmactl->dyncclk, id, LPAIF_DMACTL_DYNCLK_OFF);
-@@ -829,12 +826,9 @@ static int lpass_platform_pcmops_trigger(struct snd_soc_component *component,
- 				return ret;
- 			}
- 
--			reg_irqclr = LPAIF_VA_IRQCLEAR_REG(v, LPAIF_IRQ_PORT_HOST);
--			val_irqclr = LPAIF_IRQ_ALL(ch);
--
- 			reg_irqen = LPAIF_VA_IRQEN_REG(v, LPAIF_IRQ_PORT_HOST);
- 			val_mask = LPAIF_IRQ_ALL(ch);
--			val_irqen = LPAIF_IRQ_ALL(ch);
-+			val_irqen = 0;
- 			break;
- 		default:
- 			dev_err(soc_runtime->dev, "%s: invalid %d interface\n", __func__, dai_id);
+diff --git a/sound/soc/qcom/lpass-cpu.c b/sound/soc/qcom/lpass-cpu.c
+index 81eebfabcc9f..5fb20e284afe 100644
+--- a/sound/soc/qcom/lpass-cpu.c
++++ b/sound/soc/qcom/lpass-cpu.c
+@@ -843,7 +843,8 @@ static bool __lpass_rxtx_regmap_accessible(struct device *dev, unsigned int reg,
+ 							LPASS_CDC_DMA_TX3))
+ 			return true;
+ 		if (rw == LPASS_REG_READ) {
+-			if (reg == LPAIF_CDC_RXTX_WRDMACURR_REG(v, i, LPASS_CDC_DMA_RX0))
++			if (reg == LPAIF_CDC_RXTX_WRDMACURR_REG(v, i + v->rxtx_wrdma_channel_start,
++								LPASS_CDC_DMA_TX3))
+ 				return true;
+ 		}
+ 		if (reg == LPAIF_CDC_RXTX_WRDMAPER_REG(v, i + v->rxtx_wrdma_channel_start,
 
 -- 
 2.34.1
