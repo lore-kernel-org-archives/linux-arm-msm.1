@@ -1,120 +1,54 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795521386;
-	b=K/vwzSEE0PlFviqEH9qan8Rxe47iPNn4RN4fLTFvInPOj5pGP0Y9ao8i1h3T4wSp6zaN
-	 U6tYsoCZpu4mNobsCdtKEMyMxfbaV3BOmDjWawTpbE8krDUEHJ2Eqw7Jg8tbGwv5i+5Ef
-	 sl9D/1vDvOs8msYNTEhQb8II4W7XugjS3ut6+BwcOVS1MgoxAY8tYjgIEd3qktBe63WVr
-	 IK/P9WE7oZ6xXahsyj17y9s0YVJAse4ZSBT+Dpr3o/H68CcSKPiYH40TFzAUMMecN+k0E
-	 u6Tk7NSDVeZ4QXUJ67n0dC5cN/d+XtKbY10ejR1TYaLYkAsrYiy8qfIsGFHesW9XwDA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795521386;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=qiJdwOJzBM6Kd1w598aMZRytqMeSnmHW/XmVJ2AjRfc=;
-	b=FwpUWSD/FRdT5SPRVDcrS5do1os7/XjB0gSQFTkNwJMf6Tvukfy+YgWFnGObanq4d2xO
-	 8ckHFJlJ1km0VKbc13A2rx8+/9+Jc897d1db4SHp/Uj+CT6wf4ZUWLuOKss5Rq+J8rhHt
-	 wdDBKyEEbiGt3v/7Y7JATORAdo5WOdX/gyDp8tADj7Sc1wohOhdvffqvUU2fMQ/08whPR
-	 vVHBmeAPfco6SdvTIKtrL8CcVagVLf2kdADqW03LXKLBS8XGbf1H1RTeG4tyB7erI/Q5Y
-	 pQ1TFJbSNWI9RYWWu2qxrssCT7Jo497qmjRGy80TJ3R1UfQ/y+3Lo1VM702bF9wo1Cg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="Nxx//tJE";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jHUiewJC;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.112
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795521704;
+	b=Q/isUAl1pKvxZGONUZsHIP+Hv0v9doqm5pobo/KmLVckju43pvyF8Rhj/d0/6taYoaU5
+	 eBCvoeEPskWWy4/D9gGHRXaUaGaG+t/wAkDtsoU+6iNgmofZ3uQIv3//18/q7150O+hmr
+	 gyZBCKSZn6gDHD6r8ABpRoy3vSj1KeLpoqJK16hdFqpD5fx+N/WWG6gq/gE/qVwJptN8S
+	 FPbP5pPWmGsDUppYD3jqPerqnk8fLXdYurTYl0PrXqkXj5PoA+7pxhmf/naKj+4cpbkvD
+	 W0OLXVib4zqnzXSo98Epn6h0OT01y17xUX38fvZ+X9Xa7Mm/sMesdfohbOADPHZELMA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795521704;
+	h=DMARC-Filter:DKIM-Signature:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-ZohoMailClient;
+	bh=B2aLh1Rb7EeAQdgB6X2lj4SKSG58JQu7NcueyZ/8jZk=;
+	b=07NVOnUez/fP/0e7lFZRdZxIvtHt7SDLui4St6QhMksUpesMFdlM/TLi/EX+9tR34mwc
+	 PcqY50cbRNae9qYDXjVA9Q/eF/WV0a9brKG+E5fkmQ15z4SKihp6L/XZBuwu1OkwkQsgv
+	 /owS5URyJHz98ibcSe7CerDMh6VRAVUMfHZRJtU4iPoc5nt284NUyMzV08HDZ8MuWpEas
+	 Dtb/gSYpHbec65Mt1q0TkMZyBLdMWxSyIbV9OUVHuVcIQKrXAfsjVEhBYmBvxNMO4m5RK
+	 Zl20tL2YDExUaxs81rs1eTc3NigYcDCCo7pLpuxv15bLncWLvZ758mxRHH9qlfYfCWA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=collabora.com;
+	spf=pass smtp.mailfrom=collabora.com;
+	dkim=pass header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=zohomail header.b=YjSMzvp4;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=165.173.180.112
+Received: from sender6-pp-f112.zoho.com (sender6-pp-f112.zoho.com [165.173.180.112])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3426C606A326
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 11:56:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3426C606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFEA3606A321;
+	Tue, 24 Nov 2026 12:01:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EFEA3606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=collabora.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Nxx//tJE;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=jHUiewJC
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AOAuKhZ636658
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 11:56:24 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=qiJdwOJzBM6Kd1w598aMZRyt
-	qMeSnmHW/XmVJ2AjRfc=; b=Nxx//tJEuRhKaWvnXEsr7ScrUeXod/e92f006Vut
-	R2NVMCBIkodXOR2yMuJEPkDFPq2TLnLhFqon+sCO+BQR6PwCPXSbZcWL0b1ANd1d
-	J7EkB7at4972z4M8cdKaU6D0Ci5hxBgvVWKcIjEQR2Bt39P8xZUX08SvNdDn/ItF
-	r1frv/UOGmmi/J0MNVn7xt/4/ccr3KWbpC+tlnDl8lZn3Y4CDNI13QAjiSXvr34B
-	aMDLTcSOJ2OCx54rV/QWSWs3OionBPeT4ihyCddbXKzwNklyLjVUU1wulBePn0oG
-	w9KRhA/TWy1Q86pRRZrlnL+rV4hi9rkkJsNrZf/8+7u47w==
-Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j54rphhye-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 11:56:23 +0000 (GMT)
-Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1383723dfddso4637531c88.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 03:56:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795521383; x=1796126183; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=qiJdwOJzBM6Kd1w598aMZRytqMeSnmHW/XmVJ2AjRfc=;
-        b=jHUiewJCLezAMwgz7kRicDKbISqfg1rtZzbj5O7WfMq5pgUtVyzgBIAQd7G4ZZtYe/
-         HTdPxnzujwqjNsOr4gh5/SfnoGbKqe9cewmCjHvcVr0P3YNH1NUVDwIEbLwp+u+8TTSM
-         Ch5Rhy+Ctr3UqiTRc60JbLozMrUkG47GdsChTBHKuuGj+WmArJK51cQQoznVxRRuX/eR
-         +TQp5qRERlQSKxcUCG5VKRPMcDI7MIgtwz441wpiyJBQJ/BTCSTinLRFjyynLVZkaTqJ
-         sdHbizXcAnfPaIPGSPVaj47iNPq58HBB5TesJov50OxZe30hbJDBAABLfYb0db7e3+ks
-         GgNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795521383; x=1796126183;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qiJdwOJzBM6Kd1w598aMZRytqMeSnmHW/XmVJ2AjRfc=;
-        b=eUgwdykfi/ulpn7pp7bY24PVvAfIOrzDsd+D+W04n3MOnjYn8lTHuWgpKGM0U4jEQ6
-         FCeKSQ1AlwpT8nLi/34aC+B2GrfdzOsyqxpI/Pj/BivaiDmqUi3Kdzag7wq0h/oEbMgl
-         JvQC0/fUlDDGb4MxD0pfP7yvzv/Sb0U1ef1/gY6WR7wO/JBr6QPGXa8ys9RxSoQf3rlg
-         EFka+NYEqqa2W3wN1AgpUt78klf5wltEnMggmEHGFl3mIqApTKKpv8kXGYubwYzcB1pz
-         11jY6LkEW3HP302JN+c9c3p4tPK+qMGHGPv0i0mf3u7r5avjkq6bCyPbvrmJJ3pq9m+R
-         qvHg==
-X-Forwarded-Encrypted: i=1; AL+hErGsGfYaF/RFWUgAPwRC77hBY8SHkyNoBSSHPzmzSt9GlN/OjUZeVTcTOBJPk6/JLvMayYMyOdND57wWZFct@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Gm54DWmFCCL/PzD6Q2B5TDjdLrEHjByPz6w2gwzlfZdFf5dgb
-	50UwGUulKQmU1WaTL9hL6PadzvtSK1j/MOSTj+uBAVI72/1OQ+mfBWPvyxkBXpas93R5i0omegT
-	LrCwdrQF0/Cwr0RKqQvk7jbWh5a3TMtcOGK48YPBfHEbHjsrzB9yKegY/ROs27NAJUNst
-X-Gm-Gg: AZFdTZf6AOA1wWvMRpSiXVfpzu8FtaApmFz1pFN+KZ0O2kMrcLPlj8AyLVXT7h3WTnn
-	pH0DBNxTQhtBGmstP5zJ31qfozMYwfVS4ErWxViaaptdsw+KNz8QH5or4ITGQmwvpvWv4rB2lN1
-	lkVsTymyFxChTmQLx541YLLxJz5STDNU3XvyaQppJsfTPvwxgnp8tgcQaPMmHkOxKXp4wWv8fdA
-	vwkqcJGTe0lPYIrLOHvvVXZsmiCh/WfHuLzulOnEB/Hx7WwTPNLvrTxoSPqebSmoj+b2Gwh6Gip
-	Tu1eQYHt+/K67F6IqeP/fD6nEVq0AuduIdacM/ggVImBnyEXyGVIXnz62Kae8OF+2UauGWcGNaQ
-	zs4zRifnv8hEXBLzJ4qgnft2Hc4WPJe8GprURq1vNIsdsZ45gCJmi8ZtSrqWZivMSv2JZTkXIVY
-	bh
-X-Received: by 2002:a05:701b:4591:10b0:143:297c:276c with SMTP id a92af1059eb24-1b55691aac2mr12967278c88.33.1795521382767;
-        Tue, 24 Nov 2026 03:56:22 -0800 (PST)
-X-Received: by 2002:a05:701b:4591:10b0:143:297c:276c with SMTP id a92af1059eb24-1b55691aac2mr12967252c88.33.1795521382015;
-        Tue, 24 Nov 2026 03:56:22 -0800 (PST)
-Received: from hu-mojha-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b55682d301sm35145257c88.10.2026.11.24.03.56.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 03:56:21 -0800 (PST)
-Date: Tue, 24 Nov 2026 17:26:14 +0530
-From: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-To: Yadu M G <yadu.mg@oss.qualcomm.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Linus Walleij <linusw@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, linux-arm-msm@vger.kernel.org,
-        linux-gpio@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] pinctrl: qcom: Add Seca TLMM support
-Message-ID: <20261124115614.cqzo6ilr2shmzrxa@hu-mojha-hyd.qualcomm.com>
-References: <cover.1795517583.git.yadu.mg@oss.qualcomm.com>
+	dkim=pass (1024-bit key, unprotected) header.d=collabora.com header.i=@collabora.com header.a=rsa-sha256 header.s=zohomail header.b=YjSMzvp4
+ARC-Seal: i=1; a=rsa-sha256; t=1795521679; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=Pl+ihXuwYyUvtfSLd1N1Pbi3CQTgNWTthvC04yrOaz++2wfYYtJWTtKApPl+11KRmqT82ZVsVWYf+B/3FLjNyvFVmkWjoJLh2uVfjcSApyb/Sn/hMr+V3G6d065cU91XK93Z6REbc/GelW8uvN2UqnONHOX4bYcx0grBtKbum9Q=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1795521679; h=Content-Type:Content-Transfer-Encoding:Cc:Cc:Date:Date:From:From:In-Reply-To:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To; 
+	bh=B2aLh1Rb7EeAQdgB6X2lj4SKSG58JQu7NcueyZ/8jZk=; 
+	b=C9J7nEPPlm8RvIJastMZzoNxIfdFtPC1S1tryIq1ipsyj0JH4ktUL1rWJ9CjITyWHRmo2nvA6Baf9KWg/dblKEafxAb9mXVtU6bo5PD68vYKJKbQU/g6IJmXLwWhPRng/nRlNKKUGbSP1AqpEERJLGVHsMce2fjbNRs6Swea3HU=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=collabora.com;
+	spf=pass  smtp.mailfrom=michael.riesch@collabora.com;
+	dmarc=pass header.from=<michael.riesch@collabora.com>
+DKIM-Signature: a=rsa-sha256; b=YjSMzvp4ePpoQaOaxcLPjJ9Q5rgzP3v4D9r53X8EDK28J+aL4CTC2B8FFP0337/gTBria6q1Yv9sA18U67IosMMlj/NUKGXdb2xxz2hR+Z+C7SiF9NkSEODJfkrf/ozsOmNolzlzshgU11/b3kENSJY9+PDY7S9CmfU7UXdblck=; c=relaxed/relaxed; s=zohomail; d=collabora.com; v=1; bh=B2aLh1Rb7EeAQdgB6X2lj4SKSG58JQu7NcueyZ/8jZk=; h=Content-Description:Content-ID:Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:List-Subscribe:List-Post:List-Owner:List-Id:List-Archive:List-Help:List-Unsubscribe:MIME-Version:Message-ID:Resent-Sender:Resent-Cc:Resent-Date:Resent-To:Reply-To:Resent-Message-ID:Resent-From:Sender:Subject:To:Date:From:Message-Id:Reply-To:Subject:To:Cc;
+Received: by smtp.zohomail.com with SMTPS id 1795521671464907.5657925737316;
+	Tue, 24 Nov 2026 04:01:11 -0800 (PST)
+Message-ID: <773b5d1b-6679-4f68-b15e-022842f5109a@collabora.com>
+Date: Tue, 24 Nov 2026 13:01:05 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -124,67 +58,85 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cover.1795517583.git.yadu.mg@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI0MDA0NiBTYWx0ZWRfX7PpkIDOGQePm
- IAQ13QikPZvdh5JQv6aes+Ly9XwLD+RpWgw8BW8HFKeAArO5LIL3pL6HsOs1I7DlubP/05dDoio
- ZeS84eE0lS0iTvQ0v4YRhBy8leqDsVIgMFwbacvgNuukagbvLxEuAovHD9FS0TezrKuosLVhZEl
- Lyq78XAO1Nnft68ELOfSjornBca5CBFtrCLbI32Rn0lXSxbQYzBRbEKZaMKC8Arq0Bk04K6Zkc2
- JgVwkVxn5F/qPqy+OkCmGarKs/2TPMtvDydpArRvIiyzbEiyy3NT6AbanvLvV/kmcesm9eT/Xrl
- jv41edPK7gRhxIjhHKHgJpA2iLPoUEqTyBMK+9bVcohEdImlpcHsJpKn0/RkJtcX9f89Fw0PS8S
- EtxxM5M/xIuhysvm6QDC6BRtN9FILd2XSKkHtnqrFTB7Fg1ffr7k0x510u+q0AQaq1lGf5/FFPO
- qgfVZst90GUMKH+ADcw==
-X-Proofpoint-GUID: erImQU3O9vu_pyNQJ87T_9QXt_3Ox82G
-X-Authority-Analysis: v=2.4 cv=MvbHeGae c=1 sm=1 tr=0 ts=6b057b67 cx=c_pps
- a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22
- a=6J28aJzw-_SWfeiIoy8A:9 a=CjuIK1q_8ugA:10 a=vr4QvYf-bLy2KjpDp97w:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI0MDA0NiBTYWx0ZWRfX/YI72ybLJ4rS
- XCAU7x+45vaiOqLcSI7Tk6LSJ5fuhzFinOQSDseyqS/lSrSI3dONAYDqcW3UxXyEn1ZWt2y9p3v
- 5ZroKq5kOiDWKnSdPaIjI5qXWW8c2Uc=
-X-Proofpoint-ORIG-GUID: erImQU3O9vu_pyNQJ87T_9QXt_3Ox82G
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 phishscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0
- clxscore=1015 impostorscore=0 suspectscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611240046
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/3] phy: core: add generic MIPI C-PHY configuration API
+To: Bryan O'Donoghue <bod@kernel.org>,
+ Anusha Arun Nandi <anusha.nandi@oss.qualcomm.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, david@ixit.cz,
+ andersson@kernel.org, konradybcio@kernel.org, robh@kernel.org,
+ krzk+dt@kernel.org, conor+dt@kernel.org, vladimir.zapolskiy@linaro.org,
+ loic.poulain@oss.qualcomm.com, mchehab@kernel.org
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, gjorgji.rosikopulos@oss.qualcomm.com,
+ jigarkumar.zala@oss.qualcomm.com, hariram.purushothaman@oss.qualcomm.com,
+ akapatra@quicinc.com, linux-media@vger.kernel.org,
+ krzysztof.kozlowski@oss.qualcomm.com, daniel@quora.org,
+ konrad.dybcio@oss.qualcomm.com, christopher.obbard@linaro.org,
+ alex.vinarskis@gmail.com
+References: <20261017041733.3946816-1-anusha.nandi@oss.qualcomm.com>
+ <20261017041733.3946816-2-anusha.nandi@oss.qualcomm.com>
+ <a6d8514b-269c-441d-b280-4895b5f21fac@linaro.org>
+ <f689ccfe-4adb-41f6-b492-97a48090413d@oss.qualcomm.com>
+ <e3d322a0-43d5-4369-bd09-128152f4b233@linaro.org>
+ <8741d667-efdd-4e3f-a1b2-2f04255d7c7d@oss.qualcomm.com>
+ <3Qy0nxBJKeIHC6U9JocO-BGMDL8rLOkC_xTz4kT1GKMFKf86iv9Jhty6HHNLjO2CNSn6ZjK3G8TAXKLwckkhVg==@protonmail.internalid>
+ <e579e40b-9ee7-48ba-92b7-78f9dfffbeb8@collabora.com>
+ <fab551bc-5cd8-4ab0-b97b-f808027506ad@kernel.org>
+Content-Language: en-US
+From: Michael Riesch <michael.riesch@collabora.com>
+In-Reply-To: <fab551bc-5cd8-4ab0-b97b-f808027506ad@kernel.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ZohoMailClient: External
 
-On Tue, Nov 24, 2026 at 04:23:01PM +0530, Yadu M G wrote:
-> Add the TLMM pin controller binding and driver for the Qualcomm Seca
-> automotive SoC.
+Hi Bryan,
 
-Where is the introduction of Seca ? what is  Seca..?
+On 11/24/26 12:51, Bryan O'Donoghue wrote:
+> On 24/11/2026 10:13, Michael Riesch wrote:
+>> Hi Anusha, hi Bryan,
+>>
+>> Thanks for your work. I am working on CSI C-PHY support for the Rockchip
+>> RK3588 MIPI D-PHY/C-PHY Combo PHY and would love to see this landing in
+>> mainline.
+>>
+>> On 10/24/26 01:20, Anusha Arun Nandi wrote:
+>>> [...]
+>>>> The CSID needs to know the symbol rate - so that it can vote on the
+>>>> appropriate NOC/CamNOC clocks/rails but... does the PHY driver itself
+>>>> need to know that ? It does not, symbol_rate is not required in this
+>>>> struct no more than it is in DPHY.
+>>>>
+>>> Yes agree. I was thinking the same. We would not need the symbol_rate in
+>>> the struct.
+>>
+>> How would a timing calculation like in the Rockchip downstream [0] work
+>> then? Can this table be implemented once in a common helper, and the
+>> resulting values are passed via the struct?
+>>
+>> I am new to this spec so please bear with me, but it feels the symbol
+>> rate should be in the struct?!
+> 
+> Might be the case alright. We have two approaches we can take. Something
+> like DPHY which populates just about everything in the configuration
+> struct or just add stuff in as needed.
+> 
+> Maybe the PHY does need to know the symbol rate.. In our case on qcom we
+> vote for bandwidth in on the CSI decoder side.
+> 
+> But maybe there's a use case for the PHY to know that rate..
+
+Fortunately, that is a kernel space API, so not *that* critical.
+
+Then I guess we can put the symbol rate in there. If it is unused, there
+is not much damage done, I would say. Plus there is the possibility to
+remove it too, right.
+
+Just my € 0.02.
+
+Best regards,
+Michael
 
 > 
-> This series was prepared with help from an AI coding assistant
-> (Claude). It assisted with review on the device tree, bindings and
-> driver (formatting and alignment fixes), rewording commit messages,
-> and running the validation steps (checkpatch, dt_binding_check,
-> dtbs_check and W=1 builds). All changes were reviewed and tested on the
-> Seca Ride board.
-> 
-> Yadu M G (2):
->   dt-bindings: pinctrl: qcom: Add Seca TLMM bindings
->   pinctrl: qcom: Add seca pinctrl driver
-> 
->  .../bindings/pinctrl/qcom,seca-tlmm.yaml      |  135 ++
->  drivers/pinctrl/qcom/Kconfig.msm              |   11 +
->  drivers/pinctrl/qcom/Makefile                 |    1 +
->  drivers/pinctrl/qcom/pinctrl-seca.c           | 1705 +++++++++++++++++
->  4 files changed, 1852 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/pinctrl/qcom,seca-tlmm.yaml
->  create mode 100644 drivers/pinctrl/qcom/pinctrl-seca.c
-> 
-> 
-> base-commit: 3191063649dbf7c0d0b768e1f3655e4c5fc6edb5
-> -- 
-> 2.43.0
-> 
+> ---
+> bod
 
--- 
--Mukesh Ojha
