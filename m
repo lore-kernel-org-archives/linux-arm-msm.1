@@ -1,55 +1,56 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795519682;
-	b=m4JH7l/EMtooznY4i1Idnk5WN7Tb3OfVV/WZwH4GJ8JV7GC8SIaMRijNahlNNoBXwKfN
-	 ecUb5Bi9aSYWqTCRdfpEw5BFT06uNigcY+dacfJ++D2S3scb+BFiIsb0Y6GBc7Zkty0cq
-	 8MweL8MW/zurWkFjYL9Hd7sYEnhN+VWM8t6DisaYbGrydKi5HbjLZlL7JTPJ0kBT9jJXI
-	 vDlYJeZE2BaxGnOdrdkOfW92zimktkzFDSHuwFJfuV990qoSXPQlH+ImlK2s+oO4tDg8S
-	 yigyEpRdXLm4fmvZtDuZMHsEPhoLkI/pJvO8H/raana/WxN+YWTT4O/4DAFy6WKOF+g==
+	t=1795520157;
+	b=hqNEBiV8DQsC5BqCjrURm57/5+ECNLhxYKdJhAG2bEyT7lkFYkkCFaSG6cezpCTcJH2M
+	 cH56fZUy7ZFsy/4RiiLLIVIAq0FXnVkXXh/7xIHnn1jDbkPRmXKfMMYb4MgaGbI6o4kBm
+	 KTCUsX9gxu6kkhLnraVg65ITwwvo8nxMU0UPjp0nXSM/vZwMaiakE4ePHf7odzOP8mBKv
+	 Iex8WTAaSbwwaWmw9g10XZNgGAsMvubO1v+RUm5/dXv5fnfr7sPUZG+FigP+Q1BffQkYO
+	 2OWDwOzlRyN7EuGYium7w/LNyOIX9esU6OB+wJY74tBxmqitUQAJiu0pU4kGyXPocqw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795519682;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=mZqZ5sJLGwbaIRL7huQYFH34N+QOtAfLN1m5mgeP2K0=;
-	b=zdcyuJKVbzufvL+xxGv3n0zptXn0eLx4YNwegDZZoaAVZiYCx95bf9qvXy5CvIruDbVS
-	 auTruDcIkfof7iUjCbtidZq7XdEYplVNghlC+zOA2qF9C5/YLgGC8z3v2GZBZqjrDASi1
-	 mZoz+hENw8WZMJ8Tu8pT8D93BSBYuPVUv91n/JZ27BMC6i0eXwNuPzGG/T6+LOFmepa8j
-	 e4po5ERBBH3XtgfDBj4K76mYN/BjF7mGUlCvSnRLdSGwnYRbMTyR4sVwKyg6XqXLeQp3R
-	 VUfU44XQxxDZIfVJLblrDfGL1xZayR/U3oWoy1HHP782Rrf2Tp4Gki8K2NNGSpI/zoA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795520157;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To:
+	 X-Cookie;
+	bh=876+fwGzsHgubS3eU7gxfVqu6W2+V0uTJ15kZvLjf44=;
+	b=bNErUBOJZX3qu6uJlXIla79sXzSoo3OtvxnmGYbUi6xdfeM6hwsr3EjuZc2M+18ioEjL
+	 tSrLlLaKbIGxCfnDoTa91sy5oDLh3ECYN+N0EHGW9AIgbz0eRdCU5LsMwXx3GJA17R5xY
+	 kDFUEExdDAEJ72/ky9vB2RI4EQ0D5TwGJfgPxlHADDMKwjgbULbhH6sKS012KcWn8Nx1X
+	 rahcfZmEk6I3tfJ5lkA7e24NhdT21B9N3Hq3T+72nJL09NYURXjoIb7lnLS/oNtVTBen5
+	 4fSYC1k68rqKrhk3VIkSHAq7/2Yd0tbNVp6GsYo36IrJKCw0aCDBg39Tp6XDCjHa1EQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jp2gwds7;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cGGvjYyd;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26B32606A31E;
-	Tue, 24 Nov 2026 11:28:01 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CDE6F606A31E;
+	Tue, 24 Nov 2026 11:35:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=jp2gwds7
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4F9201F000C6;
-	Tue, 24 Nov 2026 11:28:00 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=cGGvjYyd
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 905191F000D0;
+	Tue, 24 Nov 2026 11:35:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795519681;
-	bh=mZqZ5sJLGwbaIRL7huQYFH34N+QOtAfLN1m5mgeP2K0=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=jp2gwds7OttrYKwfNH32eCe+gS3Wk4WzRML/toAaPIbufM39ecvyVaE9m6GwCFwCq
-	 LPTuNPkXAipgDARjI5WW1qu6bs7FgafA2/TX5rnu06BTekJBTj2ny8NcOv/sbd3i/8
-	 gvkCkEk1WqlfW4d08O9YiGmTM/MKfD2L4oFNt6v+45P2LEbsQl69ZRkm5vGUr4QISf
-	 zoT23QY/f5mrYROdv8oM3kNXzsq7rFb+kqp63ytCO4xr0MpYx6Pr+Zz72g6t50POec
-	 7+/WOBMCvGMUTxuQ8Ft7395jsDUJvTJJffpgd0zmh7U0va33b2W4kDRmsp6SXkZHZx
-	 7Dnojg6TQKP0w==
+	s=k20260515; t=1795520157;
+	bh=876+fwGzsHgubS3eU7gxfVqu6W2+V0uTJ15kZvLjf44=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=cGGvjYydN7/lzWQLw3o4rLdPdRwW19vuuiP1lU+ADsTFIMgqW3R8Upg/8Yi//KaGY
+	 9LCcaE5uBbyvffTzy30uumDf2VoEPU5qQRZOKzAniakx7dah7hjoe50HCT+CnWse86
+	 tTfAJBdbXfun+exa32JZJs552xW0YEo1i6RUKq1lyJeahkygJbsUFss75mNzWYDcFH
+	 QbRtfQYdIKnBY9PwMlzi5k6oy7w6xus/b7CeEcl2t/sMgzhbC2LOdkVr8uVTIYqB0C
+	 gTeuAThq3JfKevDJyML6xakqK0d/4a9V05yalHMv4uSmY6zdk9OTTkOSF/WWgpbAPW
+	 KbPtbRuI0qIdg==
+Date: Tue, 24 Nov 2026 11:35:53 +0000
 From: Mark Brown <broonie@kernel.org>
-To: Somesh Dey <somesh.dey@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org, 
- stable@vger.kernel.org
-In-Reply-To: <20261118-spi-bpw-fix-v1-1-e475586ca8e8@oss.qualcomm.com>
-References: <20261118-spi-bpw-fix-v1-1-e475586ca8e8@oss.qualcomm.com>
-Subject: Re: [PATCH] spi: geni-qcom: Fix sub-byte transfer packing and
- length calculation
-Message-Id: <179546169682.25092.17475274653524039881.b4-ty@b4>
-Date: Mon, 23 Nov 2026 19:21:36 +0000
+To: Yadu M G <yadu.mg@oss.qualcomm.com>
+Cc: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Praveen Talari <praveen.talari@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org, linux-spi@vger.kernel.org,
+	devicetree@vger.kernel.org
+Subject: Re: [PATCH] dt-bindings: spi: Add compatible for Qualcomm Seca SoC
+Message-ID: <04e8a33a-ad20-4f2d-845e-1c0b13984a69@sirena.org.uk>
+References: <358f1284a656582ef0ea0e2b7bc07224372f9fdf.1795517702.git.yadu.mg@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -59,46 +60,40 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1148; i=broonie@kernel.org;
- h=from:subject:message-id; bh=yCgnZB8RwZ6vxcNCkANeGLFA8h632YFiZooLgvISmN8=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLJZS/ZdeLKtP+4M69FPRWoHpi1+qXRZKyWxxkXUjU9I9
- p7yxnUvO0pZGMS4GGTFFFnisrhf1pe8XsN3cGEbzBxWJpAhDFycAjARYW+Gv5KsR2XbHBtmMa8v
- Zc4IjLkfJymiv7NXlKvI++/EhzF9Jxn+B8bWRbw7+XJ70V6uqn6P33Ps9vxb1vNId0rW6x/MyaY
- CPAA=
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="h22AHbBH7jYC9AtG"
+Content-Disposition: inline
+In-Reply-To: <358f1284a656582ef0ea0e2b7bc07224372f9fdf.1795517702.git.yadu.mg@oss.qualcomm.com>
+X-Cookie: Real Users never use the Help key.
 
-On Wed, 18 Nov 2026 18:26:07 +0530, Somesh Dey wrote:
-> spi: geni-qcom: Fix sub-byte transfer packing and length calculation
 
-Applied to
+--h22AHbBH7jYC9AtG
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/spi.git for-7.4
+On Tue, Nov 24, 2026 at 04:25:03PM +0530, Yadu M G wrote:
+> Document QUP GENI SPI controller on Qualcomm Seca SoC which is
+> compatible with the SA8255P controller.
 
-Thanks!
+Please submit patches using subject lines reflecting the style for the
+subsystem, this makes it easier for people to identify relevant patches.
+Look at what existing commits in the area you're changing are doing and
+make sure your subject lines visually resemble what they're doing.
+There's no need to resubmit to fix this alone.
 
-[1/1] spi: geni-qcom: Fix sub-byte transfer packing and length calculation
-      https://git.kernel.org/broonie/spi/c/5bb070e3f968
+--h22AHbBH7jYC9AtG
+Content-Type: application/pgp-signature; name="signature.asc"
 
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
+-----BEGIN PGP SIGNATURE-----
 
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAmsFdpgACgkQJNaLcl1U
+h9B3nAf+MIXSQROnhAHfC/ntT1IpFGTsyVSpAhCrUcBuoeWpmQ0ckd/AY66tZ7TT
+nzDjp/dn1tHH16cypPJsYps5jXAHLTNWtsHUNsjoqRQCFY/TjfsNuCxkTts9QqlD
+KFccmwrmEepVtJVrnDXu5Fbfy8YQle/ZXx0YEe9/kDsU/NJOzdfao/a+rf5EXXFP
+qx5x3sDNTP27LKNNgMl9UMIyW0HtbsLeKtV2x4+UVW0DC63WJr7igVswvNiwPs7R
+TfWbNfXVkwbW1EJOnuHYeD6mBM/aaNOg63Rp2Qc05XwdqKgc4+HiPvCNVTLImD8/
+6k7iStDl2r4WgTQvHu0ZLh3XIKEJYQ==
+=XhVd
+-----END PGP SIGNATURE-----
 
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+--h22AHbBH7jYC9AtG--
