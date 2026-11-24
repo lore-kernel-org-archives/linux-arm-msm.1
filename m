@@ -1,61 +1,64 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795485018;
-	b=hDUv3UcEI8H0VT40JDmJ84XNA5uGJTNIKAHD5Q3liJVZ010t6X5JVHzjji//d79UfD6j
-	 PQXMWgEB0ech8dib+Ime408tTfockmMi70tyfdf8jDWaExwzf082CXL2hwbWGIWkUJI8q
-	 onvV8bA6VFxrUcevpxJTV482AHXCrI9BSVyZ1ihJ75kI3I5819T/9KTubGMQ/Qn5DYtnQ
-	 svu+ZFsGIvH/4MZKe0BtwrW5sFXJ13Kr6EROp0XtqeBUcHE7Jv9ng4v4kWxRZVFhQDkMg
-	 8zL16zChHdhn0cO55DPTPHtYi55ebqUeeHLCQ7PzuNWTG00xEkth4bsBGllf+8W+cGA==
+	t=1795485140;
+	b=oVtxh6CyA7qQrF/kzh+qyxAP8UYJ+++GnnDeVBXLvi1BPcrFJcjWbAnn4ufuXBHJj9DM
+	 L0IlsFIGzfX6U3rzVXhXrOY/636I5GATvmViHvyWosXEgVhCYoynaC1eHoFQQU+GRieiW
+	 vLgm9LLokJjFEWrrgZGKBiduqtaJ/QioxsYWIEzfk0mcuEmXb9FRygCYos6N5BArHSxAN
+	 /tLyVbgHBUWGtQkb3kxkTfbWqCbivgISgFEkDF+sntr6EJ+3vIM31v20jXmGaKGrTDUWG
+	 iSjcWrFQB8lwHpNzmEymLFwAPne2pYCm1xPx38UY/Z96XrJ0Q9zkvM8em8xIS4qD89Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795485018;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795485140;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
 	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
 	 X-CM-SenderInfo;
-	bh=/2sPhb+dBfJo/CBZCdUXXP3d9QURixSTo8LXz8G5LaA=;
-	b=EY834zfqUF3B4j060X8zjMiy7xnyaQrdqtWCCesnIEmEs3lTm6xePHwOMRQ9mgFDWpce
-	 iN6WYwVMK9vUeTl/v+8+qEeB/xOZUQAgeuUkU3wY8WzZFibgwvTOtrSYIgZyByXHzeaFp
-	 AhNRCW/GJ73YD0N6HP4NX3s14RspnDZEJMmZ6l9HxZWzuzBSCsPOaFiMhlEwwqd1j6LK4
-	 vgfZStXkbZD7kYSQxLP4wmOeJ5eqT7+2EsgpK+VxPHM+wMDVb8bvD3E/IeTl4XS0D8pLX
-	 kMldXCfA2vRf3phKtDrkZJ+Uatb9LrYOb9A8f+J8Nz+/vGIc3Zu34jqdLYGltSNLVOQ==
+	bh=Bu/axAx8BU2cICwCPSy22lmYpBgK1vJ7VrSHsLWeVlg=;
+	b=jRvP7eUmGY+DSsua/WjuwNRZLXxPfZEFZISUr54tGvKfbYKAVYzcEbQTzaXYfKHMvdwb
+	 8ky1dvZQObXWhnPcZ2VU9wYB7lF6Sjz6ghYM6WK+zFeCJ73ld7XbZYVeBpeuO+m3nCtd7
+	 R56lEcZzhqo2iDV3FNKs2HWyHq7WwwUI4qrE+mwP6J/1cpZLfKwclmAiNVT7Jk+Hw2pz6
+	 1lXoYg4lFT2x6vMv6ifjpEknZ8S2TGZtuk/ulcrr0qPg/aZMz0QUyRJyjad520ih0SG+f
+	 Q5hxTr58P25ETH69CMB1ZyG9Y7DdjT+gkdiLRsl7t1gUkGXfBuY9UIHBjkTS9zolywA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=mail.ustc.edu.cn;
 	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b="CTzwm0z/";
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KOiEErbR;
 	arc=none smtp.remote-ip=202.38.64.46
 Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 92E05606A326;
-	Tue, 24 Nov 2026 01:50:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 92E05606A326
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id BB4B6606A31E;
+	Tue, 24 Nov 2026 01:52:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BB4B6606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=CTzwm0z/
+	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=KOiEErbR
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
 	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=/2sPhb+dBfJo/CBZCdUXXP3d9QURixSTo8
-	LXz8G5LaA=; b=CTzwm0z/a8f/hBXCO4zj4B3iYygHitrAIyVBgh8HIrmK4yPU3p
-	8AGAkzKy0bj+Np+0TC3w1hj6Nbj/Wn5G3KBJqnZlbAbQkHSBuPOB0bbJoN2JuuXr
-	8g/pPVqa9IKZXQv47Rmbt4NcuY36tJFOkR18F9U3zU5KqhFLhSW2PE56I=
+	Content-Transfer-Encoding; bh=Bu/axAx8BU2cICwCPSy22lmYpBgK1vJ7Vr
+	SHsLWeVlg=; b=KOiEErbR/u+wQk9OAEj0x2RxgqAiJQtPlD/V9UOEr1wiVVVUGY
+	ypGqB+uTNACq9lG9qto81nd8/J8YWLpcjFrjgmBtMSL9qSuQBF6IjduiBFOYgj/8
+	vDh4ZrCQSdP2kLICdHJdMo3/hqHcyTleGw6cIl0Hh+64EErf9UZD8O0aE=
 Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.185.179])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgAntEhK7QRrnDDvAA--.91S4;
-	Tue, 24 Nov 2026 09:50:11 +0800 (CST)
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgAXo0fH7QRrLzPvAA--.95S2;
+	Tue, 24 Nov 2026 09:52:08 +0800 (CST)
 From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Thinh.Nguyen@synopsys.com
-Cc: robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	gregkh@linuxfoundation.org,
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
 	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v14 2/3] usb: roles: look up role switches attached to a graph endpoint
-Date: Tue, 24 Nov 2026 09:50:01 +0800
-Message-ID: <20261124015002.1426767-3-xiaqinghuan@mail.ustc.edu.cn>
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk+dt@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>
+Subject: Re: [PATCH v5 0/3] drm/msm/mdss: reset all block resets described in DT
+Date: Tue, 24 Nov 2026 09:52:07 +0800
+Message-ID: <20261124015207.1432460-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261124015002.1426767-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261124015002.1426767-1-xiaqinghuan@mail.ustc.edu.cn>
+In-Reply-To: <20261113155635.1677541-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261113155635.1677541-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,119 +69,62 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgAntEhK7QRrnDDvAA--.91S4
-X-Coremail-Antispam: 1UD129KBjvJXoWxJF4fZFy3ur1DCryDZr1kXwb_yoW5KF4fpr
-	yakF1Fvr4DJFya9w4fGa1UAFWrWr4fGF4UJF4xt3WfC3Z3t3yrJr18ta4ayr1UCanIgw1Y
-	v348A3409a4DA3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUP2b7Iv0xC_KF4lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUXwA2048vs2IY020Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280
-	aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzV
-	Aqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S
-	6xCaFVCjc4AY6r1j6r4UM4x0Y48IcxkI7VAKI48JMxkF7I0En4kS14v26r126r1DMxkIec
-	xEwVAFwVWkMxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8C
-	rVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8Zw
-	CIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x02
-	67AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr
-	0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU0s0
-	ePUUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREAB2sElFsCDQAssU
+X-CM-TRANSID:3pYKCgAXo0fH7QRrLzPvAA--.95S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CFW7CrWxZFWDCr4xKrykZrb_yoW8Ww1kp3
+	yYga13AFyDXr1rAFs2k3409r4fCayrK343Wa1q93y7Zr909F10yrZrt39Y934DAr93A34j
+	yw48GrykGF15Aa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9lb7Iv0xC_Cr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4
+	vEx4A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xv
+	F2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jrv_JF1lYx0Ex4A2jsIE14v26r1j6r
+	4UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kI
+	c2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_KwCF04k20xvY0x0EwIxGrwCFx2
+	IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
+	6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
+	AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8I
+	cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r
+	4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU7knYUUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREAB2sElFsCDQBAs4
 
-usb_role_switch_get() and fwnode_usb_role_switch_get() look for a switch
-on the caller's parent device node or through device_connection.  That does
-not work when one controller exposes a role switch per connector endpoint:
-the switch is registered against the remote graph endpoint and the
-consumer, the connector, has no phandle to it.
+*** AI-assistance disclosure ***
+This message was prepared with the help of an LLM coding assistant; the
+author reviewed it and the facts below are checked against the trees quoted.
+The design decisions and any errors are the author's.
 
-Add usb_role_switch_at_endpoint(), which walks the caller's OF graph
-endpoints and matches a switch registered on the remote endpoint, and try
-it after the existing parent lookup.  A switch that is described by the
-graph but not registered yet comes back as -EPROBE_DEFER, as the rest of
-the role-switch API does, so the caller retries instead of concluding that
-the connector has no role switch at all.  There is no behaviour change for
-existing users: if nothing is registered against an endpoint the lookup
-falls through to the previous paths.
+Hello,
 
-This is needed by DWC3 designs where two Type-C receptacles share one High
-Speed data bus.
+a quiet status ping on this series, no action requested if it is simply
+queued: v5 was posted on 2026-11-13 and has three Reviewed-by tags (Abel
+Vesa, Dmitry Baryshkov, Konrad Dybcio).  As of today it is not in
+linux-next or in Linus' tree:
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- drivers/usb/roles/class.c | 45 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 45 insertions(+)
+  - drivers/gpu/drm/msm/msm_mdss.c still only has the single
+    reset_control_get_optional_exclusive(dev, NULL) call, without the
+    block-reset walk the series adds (2/3);
+  - mdss-common.yaml still documents a single "MDSS_CORE reset" for
+    "resets:" (1/3);
+  - sm8750.dtsi still lists a single reset for the mdss node,
+    <&dispcc DISP_CC_MDSS_CORE_BCR>, without MDSS_CORE_INT2_BCR (3/3).
 
-diff --git a/drivers/usb/roles/class.c b/drivers/usb/roles/class.c
-index edec139b68b5..ee186d542a10 100644
---- a/drivers/usb/roles/class.c
-+++ b/drivers/usb/roles/class.c
-@@ -157,6 +157,47 @@ usb_role_switch_is_parent(struct fwnode_handle *fwnode)
- 	return dev ? to_role_switch(dev) : ERR_PTR(-EPROBE_DEFER);
- }
- 
-+/*
-+ * Look up a role switch registered against the remote endpoint of one of the
-+ * caller's OF graph endpoints.  This is how a connector endpoint that shares a
-+ * USB data bus with another connector (for example two Type-C receptacles on a
-+ * single DWC3 controller, selected by a GPIO mux) finds its own role switch.
-+ */
-+static struct usb_role_switch *
-+usb_role_switch_at_endpoint(struct fwnode_handle *fwnode)
-+{
-+	struct fwnode_handle *ep, *remote, *parent;
-+	struct usb_role_switch *sw;
-+	bool available;
-+
-+	fwnode_graph_for_each_endpoint(fwnode, ep) {
-+		parent = fwnode_graph_get_remote_port_parent(ep);
-+		if (!parent)
-+			continue;
-+		available = fwnode_device_is_available(parent);
-+		fwnode_handle_put(parent);
-+		if (!available)
-+			continue;
-+
-+		remote = fwnode_graph_get_remote_endpoint(ep);
-+		if (!remote)
-+			continue;
-+		sw = usb_role_switch_match(remote, "usb-role-switch", NULL);
-+		fwnode_handle_put(remote);
-+		/*
-+		 * ERR_PTR(-EPROBE_DEFER) means the switch is described by the graph
-+		 * but not registered yet: pass it up so the caller defers instead of
-+		 * concluding that this connector has no role switch at all.
-+		 */
-+		if (sw) {
-+			fwnode_handle_put(ep);
-+			return sw;
-+		}
-+	}
-+
-+	return NULL;
-+}
-+
- /**
-  * usb_role_switch_get - Find USB role switch linked with the caller
-  * @dev: The caller device
-@@ -169,6 +210,8 @@ struct usb_role_switch *usb_role_switch_get(struct device *dev)
- 	struct usb_role_switch *sw;
- 
- 	sw = usb_role_switch_is_parent(dev_fwnode(dev));
-+	if (!sw)
-+		sw = usb_role_switch_at_endpoint(dev_fwnode(dev));
- 	if (!sw)
- 		sw = device_connection_find_match(dev, "usb-role-switch", NULL,
- 						  usb_role_switch_match);
-@@ -192,6 +235,8 @@ struct usb_role_switch *fwnode_usb_role_switch_get(struct fwnode_handle *fwnode)
- 	struct usb_role_switch *sw;
- 
- 	sw = usb_role_switch_is_parent(fwnode);
-+	if (!sw)
-+		sw = usb_role_switch_at_endpoint(fwnode);
- 	if (!sw)
- 		sw = fwnode_connection_find_match(fwnode, "usb-role-switch",
- 						  NULL, usb_role_switch_match);
--- 
-2.53.0
+  (Both trees carry a byte-identical msm_mdss.c, checked today.)
+
+If the series needs a rebase or a re-post to be picked up, say so and I
+will send a v6 on the current tree; if it is just waiting for a pull
+request window, please ignore this mail.
+
+One thing worth flagging while it is fresh: "[PATCH v3 07/11] drm/msm:
+mdss: Add support for MDSS on Nord" touches the same file, so whichever
+lands second will want a small rebase of adjacent hunks - not a conflict
+in the design sense.
+
+Thanks,
+Qianhui
+
+Series references:
+  v5 cover  <20261113155635.1677541-1-xiaqinghuan@mail.ustc.edu.cn>
+  1/3       <20261113155635.1677541-2-xiaqinghuan@mail.ustc.edu.cn>
+  2/3       <20261113155635.1677541-3-xiaqinghuan@mail.ustc.edu.cn>
+  3/3       <20261113155635.1677541-4-xiaqinghuan@mail.ustc.edu.cn>
 
