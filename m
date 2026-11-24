@@ -1,125 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.9
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795478664;
-	b=0l8erEtfXPkKmzXc+j/agdymhXEC7svYCrdFZyYQLZh9kEOvXUHMPMcD/RL7Mbl0c/cF
-	 KkQlUn2GB+ikaYi4Ml3XzNG/JVdaIexeSmAdnNf0YiFTr/j41N1yJ+05tt+1Jg7h/o/oH
-	 vS8f5gPjtuPlUQ6ZHtT+VVwfGQqJv0bW2D59DC80JmDDKMqsPP3xnRHB1158L8t5uRuAE
-	 v2ycZJXJHjCkq5o0Cb9wkoGLbMvtWKw5odySVUZip2GvtQaAQAI60EBQ6HAB0YEv+iOia
-	 kJ3mfu76C06joP6AwubuD+45hgYvHAdXDYBcSXvPjGbc+UiRvyKxwjgnY4YhWXrC2Cw==
+	t=1795479958;
+	b=flQDlSzegfRvXVJy/TWEfq8nH2Vkb9HjUI/mideAemUSfS1V5nhxb9AfuiKJC6nQAxTU
+	 pzKJ/phKGK/htlrAmd7r/xkeCn9FGApTBhRSFRrQ1aNW9ne57O2FRuY6o2TTvdcTxYDWe
+	 qXllPjPpyNk4Txuw4VuyzYL5oBWM56EWh6SL5jG9zsitslVwobL2np6CjABkeHJ+ZSEU3
+	 NISe9sNYUaxfsSA3bOawpLnbjw+9dni2aCpHTqXdlGCU5sH+K2OsaBc2eD3v+dKDIbk3E
+	 83SDd7ktkGvL9NgsiJEMopfY63pSYZ6xPZmcxUVwoegTxn2WgyNLZ0RQ6ZXHZ3kqM7A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795478664;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=tkSEjYs0iAZII4zNsyDNS7uDKaKgENnoiGQDdLvw080=;
-	b=puObbhrzs1e8GWh3JETgiOkHJLS867lJ4JXqfHALH9O80QQ9DKRT/hzvHUWVBTW0AniS
-	 F+iFiCKQI0IsepNq/oFFOreJNfzvnSVRcZVLEQ3KPnKGG0UO4MnEefYe/Gh0JiMUWujQ+
-	 KteGjKDZODK3KlMzM+K/uOpYVUR+f1AJDCL/+0rezj3vT2jTun1oHEtwMdmjvl2hDklq2
-	 85S45Ua90u8heMkPfCZCefvQP/fbAt285meVUxrFcWpHY0f6UgynN+oafwzQa4a2Za/51
-	 gQSXcGXqPHiNH69BcgSguxrsrhWfyK0rEcWoR8piuuBFihlOqMwKl/yHSN0Nz7Ihzog==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795479958;
+	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
+	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
+	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To;
+	bh=Kxj3LTKCk8n1ShsiLvXIwCrcjkbbdAXHYZZDDBMTS0o=;
+	b=05PSXuZGMb0FXIGxyw4m73xiVhGn9ECzUdww/ISrHbmr4h+1jifRXbu8qblFTjUcYfv/
+	 pXfSennvsMSuPs6uZ837pXY11RgMLoc9bK/y15b3zZtddLZ7nSqcGAfHDajy0m33t+2Kg
+	 db3ADa2H7iCM4IfwqUhKiIn6D7zwrOUQ21aP5nG77irRUmf9ddt8jPIjqr7xWwkv3Ln6b
+	 qdo2jSf9zZQNhmevfiNpS2jG1eW0eaugXVErXaBZNnJgPa9ARUbvyGCkQiPQsrXgXvGFx
+	 x3AndFXdN4Yi7WuFhmeL28580mIHTncONi/B3eOGodejXRSk4eWRNfLSI1ialaP4Kmw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=avSY7g7K;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Pom5NQ1D;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=intel.com;
+	spf=pass smtp.mailfrom=intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=YpBk1rkM;
+	arc=none smtp.remote-ip=192.198.163.9
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.9])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9397A606A6A4
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 00:04:23 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9397A606A6A4
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 51366606A321;
+	Tue, 24 Nov 2026 00:25:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 51366606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=avSY7g7K;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Pom5NQ1D
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ANJuqFe2862102
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 00:04:22 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=tkSEjYs0iAZ
-	II4zNsyDNS7uDKaKgENnoiGQDdLvw080=; b=avSY7g7K+veGUjaoH+V+9C6Dj9q
-	/3J37fz3iFIuXjNgbV+odze9uz5j6gvfLI/pXYl1+xn6I/SjUNGdx7jfbrmDEx5D
-	ppoz9gXGDMr8/MFAEUQ5m+jkZTsd6PFRtPlrOgel/MnN866r8L+4QlBwlvdODSXx
-	x7B/tzE2NjyHDpiIglB7ZDfLTXOwWqOD2KK9S+Pip8sZiHCcWzo33y9DRIhwv6QG
-	akhEF2BmRga6co4uRbY7XSF60UPDuAWu7YCQiY++gx/PMgN/A3eexBggQ6n4rXBo
-	tuyMFrEeBE8nyX7pggQzpyAFTcrUY3eaVsfD3RX5w3wjWRDrjbbDfM9zSqw==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j4m7utyj9-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 00:04:22 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-386a0f79047so3651146eec.1
-        for <linux-arm-msm@vger.kernel.org>; Mon, 23 Nov 2026 16:04:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795478662; x=1796083462; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=tkSEjYs0iAZII4zNsyDNS7uDKaKgENnoiGQDdLvw080=;
-        b=Pom5NQ1DlQM9WTClFG7Bx9gJcAQm5uhmSz6OLxzWKDH8eVyZbrLSEjbI5rcEbNSNu8
-         BVNIkXlpnedJdZtHIj7Dk+4P4bnwvP/t/u8fi5MwvZe5QMRYdu91fn+84C8TCGDr2WAC
-         bIjn1cDYFpr++GdaAh1DeFz/Xm94l6Cs4iVcxLCXv0CHVFWw22h3sWwrVEWpgRlfu008
-         1PQyL9h34Ut9uqurypf1SDjQ8kOaGpu9Fp2YGzz6b2nKYckLgfjuqVpVXnBc+78Y75No
-         FKPrXuYBirvjV4JE6wr+neGJXAc84Qmvdg+hVCui2by8NAdVioD7Xx2Xy9dGE7Nl4O/l
-         heYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795478662; x=1796083462;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tkSEjYs0iAZII4zNsyDNS7uDKaKgENnoiGQDdLvw080=;
-        b=ey1OayT5NrrpJYKwShM5Wd8hA4jCuz9yu52h50yhFLr1oB5a3MBSdsYLF2243UyZGu
-         loLV+K2BSigUEQfIQDM6K74ZHbEdwpIeizh24EjguFcNJplDOS4beejHFMdC0Jo7fJ/5
-         UQ+ujz9PJrN47nMTL4CoJawXoswgDvZUUpfYOV/zTnoVzRbQ2jF90vgzIsoUWgRr6nSR
-         27nf6GHOxMQxi/3KpfC0s9gtXjaottQbnEAa/4KVVAthGNFK7FOc3JqtAulIIQRHyb6h
-         xCCRS/G/v8jDa8K5PK7XCVBOMJCzjuTFiFCx9uozJBqe6jlFNTEoHsVPqQNflHGmGtZj
-         4UTQ==
-X-Forwarded-Encrypted: i=1; AL+hErGP8ohxVXI1TVyuGi852jTPLw62SL/dVlRTPk0guwfiofCJEWA3Uzz/8ogAdfL+x9DstdR2EYAuLBGev0tF@vger.kernel.org
-X-Gm-Message-State: APuU4Z/qOpAMtXsaXAMNCE7aM0sVyNjFuVGGV3GZTO+N6wAkCGnXRH3h
-	QgPTd4TtGlaslmAZpO4zb4MIOgccR1KIHQCWz9OULnLuHAQlmA2KNANrptnQKo8R/1JedXU69KK
-	/6gWOqwmhU5xUl8Y6sFPDuA0h7UBc7H6j7DGOw89/8my5G5ubaerzO9WuABtGuaE8wqYcr9UuNJ
-	ju
-X-Gm-Gg: AZFdTZdzWDfRNHTUDlH/vOxzOT8239rsUmSPWkSDOzzX2kRJnrIMYHAAuVRr9U8hjzn
-	CtrWEEBg3nbqOIAcCefI8ogqXQSz6aK65aIGVWkEJ80xq60FA8bhqDy2HVWuIyW6Pwa1f+V+0Co
-	BqbwDWwTX1DeUxfMjNDgKLDPvgyrw4sMSqfDQwPMPiBCQHIcoE9KZS8KlLzqv6MZsudM0ubOFN6
-	krfgRAuwG0EQDj2io/Wr7dEC3EmeezEAEBCAQrpWla5cLQJgH7/X031NWxvVdeNY0I3lRo/3L2M
-	rQ5RnLTJ3rbBir+UUxZ3PXguUFb2NCjPV2NNgiHJItQW04w/ZP0uvwNpCILGBnFUrGydykYceTD
-	dlv9epfGAZBMQBDQmmJPJ3mrT68eVQkse5EbovR9xopbV8a/Fc64LX7wTnMU4hdo78Fw5DTc8FX
-	9RLezeMR0nt0Ke4VO89/3kxsczJ4QBqF4bfqM=
-X-Received: by 2002:a05:7300:8816:b0:385:5b47:8aad with SMTP id 5a478bee46e88-38570451daemr14414828eec.19.1795478661467;
-        Mon, 23 Nov 2026 16:04:21 -0800 (PST)
-X-Received: by 2002:a05:7300:8816:b0:385:5b47:8aad with SMTP id 5a478bee46e88-38570451daemr14414791eec.19.1795478661002;
-        Mon, 23 Nov 2026 16:04:21 -0800 (PST)
-Received: from hu-scheluve-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e7f59sm41662125eec.6.2026.11.23.16.04.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 23 Nov 2026 16:04:20 -0800 (PST)
-From: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
-To: j.raczynski@samsung.com
-Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
-        edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
-        mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
-        netdev@vger.kernel.org, linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, cs0617.lee@samsung.com,
-        k.domagalski@samsung.com, k.tegowski@samsung.com,
-        abhishek.chauhan@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
-        sarosh.hasan@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com,
-        sagar.cheluvegowda@oss.qualcomm.com
-Subject: [PATCH net-next v2 3/3] include/stmmac: Increase max DMA/MTL channel count from 8 to 16
-Date: Mon, 23 Nov 2026 16:04:15 -0800
-Message-Id: <20261124000415.4067701-4-sagar.cheluvegowda@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261124000415.4067701-1-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20261124000415.4067701-1-sagar.cheluvegowda@oss.qualcomm.com>
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=YpBk1rkM
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1795479958; x=1827015958;
+  h=date:from:to:cc:subject:message-id:references:
+   mime-version:in-reply-to;
+  bh=nVAmdEDaDnYRQHSgXYadxkqn7jxNQZQ2b8Lekb4iy7U=;
+  b=YpBk1rkMpMyymwGqaUnfHgVnYj+Y3NcZRQM0Pxlq/MFAoNTQyIy2wLes
+   7E+uohyc/PcLc2tH2wRqRcUUn3/eT0FMr2SgM1HW9hdMnh5CUl95nVJRm
+   /lA/P82e65km376OIRyx8ug73j94jjVF3dPuX2IqlOMJZluNKOUM5zgej
+   AXupFwHxCxQp64fEf5y/YRERJtRZIk6rJQkcZD3XH3weK9JH9f/Ti1IQb
+   RfC7A8rXNkedC1R2H5wkBnPhV7qRKRwrmZm8gxN74JgAjBzkl3rL0NQl0
+   uS3MgSyxqV1RFr43sS/j+nh4q9Bi1MS4GVHAUA7Jrjx+BDB4vXp2rQeUS
+   Q==;
+X-CSE-ConnectionGUID: C7N8MUl1RtWcOLvTx+RtEA==
+X-CSE-MsgGUID: MgLs3Q7BRTydw/j9D9Jm0A==
+X-IronPort-AV: E=McAfee;i="6800,10657,11975"; a="4189354"
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="4189354"
+Received: from fmviesa005.fm.intel.com ([10.60.135.145])
+  by fmvoesa103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Nov 2026 16:25:57 -0800
+X-CSE-ConnectionGUID: k14Qo0u8TLu1N32wmi9GQw==
+X-CSE-MsgGUID: dPCKt2FpRF6mZjF3kBUgNA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,229,1787036400"; 
+   d="scan'208";a="11543163"
+Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
+  by fmviesa005.fm.intel.com with ESMTP; 23 Nov 2026 16:25:52 -0800
+Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
+	(envelope-from <lkp@intel.com>)
+	id 1xVeM1-00000001OBi-0g1j;
+	Tue, 24 Nov 2026 00:25:49 +0000
+Date: Tue, 24 Nov 2026 08:25:06 +0800
+From: kernel test robot <lkp@intel.com>
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+	Mark Brown <broonie@kernel.org>,
+	Liam Girdwood <lgirdwood@gmail.com>,
+	Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
+	Rob Herring <robh@kernel.org>,
+	Krzysztof Kozlowski <krzk@kernel.org>,
+	Conor Dooley <conor+dt@kernel.org>,
+	Bjorn Andersson <andersson@kernel.org>,
+	Konrad Dybcio <konradybcio@kernel.org>
+Cc: oe-kbuild-all@lists.linux.dev, Srinivas Kandagatla <srini@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
+	Shuah Khan <skhan@linuxfoundation.org>,
+	Randy Dunlap <rdunlap@infradead.org>, linux-sound@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+	linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 08/24] ASoC: codecs: wsa884x: register the die
+ temperature as a thermal zone
+Message-ID: <20261124081056.uJlgRhV6-lkp@intel.com>
+References: <20261122161437.5994-9-srinivas.kandagatla@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -129,65 +95,176 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-ORIG-GUID: 6zL7TOE6hrXoMXmKppda3STp9w7MOBNy
-X-Authority-Analysis: v=2.4 cv=KurYSmWN c=1 sm=1 tr=0 ts=6b04d486 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yx91gb_oNiZeI1HMLzn7:22 a=hD80L64hAAAA:8
- a=EUspDBNiAAAA:8 a=H7QzycyVpUVBSTYqnZAA:9 a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-GUID: 6zL7TOE6hrXoMXmKppda3STp9w7MOBNy
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTIzMDA5NSBTYWx0ZWRfXy03uUgcw1B8F
- s+o/unBsTCzKfwf/UmgHULvbh0Rcj7NVTdgVPDE2p3L85RQnES2EZSoW6fTJ5nx0kzJkWxHRH93
- 5/5POKVlUsKwfotAcn1EJyN9uplCUAo=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTIzMDA5NSBTYWx0ZWRfX7v6PfDPdQe9A
- iy8BkIB8GZse8qU0TfhYOIABS4cr+jakVSpmeDWh5zC1YBYlEzmae+560bX2ZHXvcnTkQkPRH2M
- Lhc7M2nNAYDz4SbfJB3oauY15FeEV8gBHh4JP1fbfO+Z7adhBLvAsn7LLC48/vlk0N9O5EIN5et
- h6IGU8ElW3HQTArDZVEFNIyGIgB9FD2q7RkjqVUf8p3rP1YdxDhqxYBVId+1IyQfNlD9p7oOtJl
- qactDwTHkY7u2lPQuqmkKuZqSlGWX+yNfla1G3zaOsu+BJ8CKYX5qrxwjbKorVR+H75Zxw2lxvN
- +YTlaf4lP+Rt2oxnR7cymFM+DT7f4NQCEtS5Hk6NXXMbxjNuIyjo9MCQ+Zi7im3+Y4yzYEkU0Bt
- iq+/EZ5mvCh7Z5qWiCsUUAG2JePndB+vCoCQwOjXZWXiZjcGEBw9Fyp+QOpcLyTH9OA7Nt5xUJ8
- 3A92ucBcoreNN23wfyQ==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-23_05,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 phishscore=0 spamscore=0
- malwarescore=0 adultscore=0 suspectscore=0 clxscore=1015 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611230095
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261122161437.5994-9-srinivas.kandagatla@oss.qualcomm.com>
 
-From: Jakub Raczynski <j.raczynski@samsung.com>
+Hi Srinivas,
 
-Newer XGMAC hardware does support up to 16 DMA/MTL queues.
-Add support for these after previous modifications of driver to accommodate
-for that.
+kernel test robot noticed the following build warnings:
 
-Co-developed-by: Chang-Sub Lee <cs0617.lee@samsung.com>
-Signed-off-by: Chang-Sub Lee <cs0617.lee@samsung.com>
-Signed-off-by: Jakub Raczynski <j.raczynski@samsung.com>
-Signed-off-by: Sagar Cheluvegowda <sagar.cheluvegowda@oss.qualcomm.com>
----
- include/linux/stmmac.h | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+[auto build test WARNING on next-20261120]
+[cannot apply to broonie-sound/for-next tiwai-sound/for-next tiwai-sound/for-linus robh/for-next v7.4-rc3 v7.4-rc2 v7.4-rc1 linus/master v7.4-rc4]
+[If your patch is applied to the wrong git tree, kindly drop us a note.
+And when submitting patch, we suggest to use '--base' as documented in
+https://git-scm.com/docs/git-format-patch#_base_tree_information]
 
-diff --git a/include/linux/stmmac.h b/include/linux/stmmac.h
-index 00be2df63d22..b91c8d069dc2 100644
---- a/include/linux/stmmac.h
-+++ b/include/linux/stmmac.h
-@@ -15,9 +15,9 @@
- #include <linux/platform_device.h>
- #include <linux/phylink.h>
- 
--#define MTL_MAX_RX_QUEUES	8
--#define MTL_MAX_TX_QUEUES	8
--#define STMMAC_CH_MAX		8
-+#define MTL_MAX_RX_QUEUES	16
-+#define MTL_MAX_TX_QUEUES	16
-+#define STMMAC_CH_MAX		16
- 
- #define STMMAC_RX_COE_NONE	0
- #define STMMAC_RX_COE_TYPE1	1
+url:    https://github.com/intel-lab-lkp/linux/commits/Srinivas-Kandagatla/ASoC-soc-pcm-add-multi_direction_codecs-link-flag/20261122-161415
+base:   next-20261120
+patch link:    https://lore.kernel.org/r/20261122161437.5994-9-srinivas.kandagatla%40oss.qualcomm.com
+patch subject: [PATCH v2 08/24] ASoC: codecs: wsa884x: register the die temperature as a thermal zone
+config: i386-buildonly-randconfig-1001-20261124 (https://download.01.org/0day-ci/archive/20261124/20261124081056.uJlgRhV6-lkp@intel.com/config)
+compiler: gcc-14 (Debian 14.2.0-19) 14.2.0
+reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261124/20261124081056.uJlgRhV6-lkp@intel.com/reproduce)
+
+If you fix the issue in a separate patch/commit (i.e. not just a new version of
+the same patch/commit), kindly add following tags
+| Reported-by: kernel test robot <lkp@intel.com>
+| Closes: https://lore.kernel.org/oe-kbuild-all/20261124081056.uJlgRhV6-lkp@intel.com/
+
+All warnings (new ones prefixed by >>):
+
+   sound/soc/codecs/wsa884x.c: In function 'wsa884x_probe':
+>> sound/soc/codecs/wsa884x.c:2248:60: warning: passing argument 3 of 'thermal_tripless_zone_device_register' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+    2248 |                                                            &wsa884x_tz_ops,
+         |                                                            ^~~~~~~~~~~~~~~
+   In file included from sound/soc/codecs/wsa884x.c:26:
+   include/linux/thermal.h:333:73: note: expected 'struct thermal_zone_device_ops *' but argument is of type 'const struct thermal_zone_device_ops *'
+     333 |                                         struct thermal_zone_device_ops *ops,
+         |                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+
+
+vim +2248 sound/soc/codecs/wsa884x.c
+
+  2143	
+  2144	static int wsa884x_probe(struct sdw_slave *pdev,
+  2145				 const struct sdw_device_id *id)
+  2146	{
+  2147		struct device *dev = &pdev->dev;
+  2148		struct wsa884x_priv *wsa884x;
+  2149		unsigned int i;
+  2150		int ret;
+  2151	
+  2152		wsa884x = devm_kzalloc_obj(dev, *wsa884x);
+  2153		if (!wsa884x)
+  2154			return -ENOMEM;
+  2155	
+  2156		mutex_init(&wsa884x->sp_lock);
+  2157	
+  2158		for (i = 0; i < WSA884X_SUPPLIES_NUM; i++)
+  2159			wsa884x->supplies[i].supply = wsa884x_supply_name[i];
+  2160	
+  2161		ret = devm_regulator_bulk_get(dev, WSA884X_SUPPLIES_NUM,
+  2162					      wsa884x->supplies);
+  2163		if (ret)
+  2164			return dev_err_probe(dev, ret, "Failed to get regulators\n");
+  2165	
+  2166		ret = regulator_bulk_enable(WSA884X_SUPPLIES_NUM, wsa884x->supplies);
+  2167		if (ret)
+  2168			return dev_err_probe(dev, ret, "Failed to enable regulators\n");
+  2169	
+  2170		ret = devm_add_action_or_reset(dev, wsa884x_regulator_disable,
+  2171					       wsa884x->supplies);
+  2172		if (ret)
+  2173			return ret;
+  2174	
+  2175		ret = wsa884x_get_reset(dev, wsa884x);
+  2176		if (ret)
+  2177			return ret;
+  2178	
+  2179		dev_set_drvdata(dev, wsa884x);
+  2180		wsa884x->slave = pdev;
+  2181		wsa884x->dev = dev;
+  2182		wsa884x->dev_mode = WSA884X_SPEAKER;
+  2183		wsa884x->sconfig.ch_count = 1;
+  2184		wsa884x->sconfig.bps = 1;
+  2185		wsa884x->sconfig.direction = SDW_DATA_DIR_RX;
+  2186		wsa884x->sconfig.type = SDW_STREAM_PDM;
+  2187	
+  2188		/*
+  2189		 * Port map index starts with 0, however the data port for this codec
+  2190		 * are from index 1
+  2191		 */
+  2192		if (of_property_read_u32_array(dev->of_node, "qcom,port-mapping", &pdev->m_port_map[1],
+  2193						WSA884X_MAX_SWR_PORTS))
+  2194			dev_dbg(dev, "Static Port mapping not specified\n");
+  2195	
+  2196		pdev->prop.sink_ports = GENMASK(WSA884X_MAX_SWR_PORTS - 1, 0) & ~BIT(WSA884X_PORT_VISENSE);
+  2197		pdev->prop.source_ports = BIT(WSA884X_PORT_VISENSE);
+  2198		pdev->prop.simple_clk_stop_capable = true;
+  2199		pdev->prop.sink_dpn_prop = wsa884x_sink_dpn_prop;
+  2200		pdev->prop.src_dpn_prop = wsa884x_src_dpn_prop;
+  2201		pdev->prop.scp_int1_mask = SDW_SCP_INT1_BUS_CLASH | SDW_SCP_INT1_PARITY;
+  2202	
+  2203		wsa884x_reset_deassert(wsa884x);
+  2204		ret = devm_add_action_or_reset(dev, wsa884x_reset_powerdown, wsa884x);
+  2205		if (ret)
+  2206			return ret;
+  2207	
+  2208		wsa884x->regmap = devm_regmap_init_sdw(pdev, &wsa884x_regmap_config);
+  2209		if (IS_ERR(wsa884x->regmap))
+  2210			return dev_err_probe(dev, PTR_ERR(wsa884x->regmap),
+  2211					     "regmap_init failed\n");
+  2212	
+  2213		/* Start in cache-only until device is enumerated */
+  2214		regcache_cache_only(wsa884x->regmap, true);
+  2215	
+  2216		if (IS_REACHABLE(CONFIG_HWMON)) {
+  2217			struct device *hwmon;
+  2218	
+  2219			hwmon = devm_hwmon_device_register_with_info(dev, "wsa884x",
+  2220								     wsa884x,
+  2221								     &wsa884x_hwmon_chip_info,
+  2222								     NULL);
+  2223			if (IS_ERR(hwmon))
+  2224				return dev_err_probe(dev, PTR_ERR(hwmon),
+  2225						     "Failed to register hwmon sensor\n");
+  2226		}
+  2227	
+  2228		pm_runtime_set_autosuspend_delay(dev, 3000);
+  2229		pm_runtime_use_autosuspend(dev);
+  2230		pm_runtime_mark_last_busy(dev);
+  2231		pm_runtime_set_active(dev);
+  2232		ret = devm_pm_runtime_enable(dev);
+  2233		if (ret)
+  2234			return ret;
+  2235	
+  2236		if (IS_REACHABLE(CONFIG_THERMAL)) {
+  2237			char tz_name[THERMAL_NAME_LENGTH];
+  2238			struct thermal_zone_device *tz;
+  2239	
+  2240			/*
+  2241			 * Register after runtime PM is enabled, as the zone is read
+  2242			 * right away. dev_name() is too long for a zone name.
+  2243			 */
+  2244			scnprintf(tz_name, sizeof(tz_name), "wsa-%d-%u",
+  2245				  pdev->bus->id, pdev->id.unique_id);
+  2246			tz = thermal_tripless_zone_device_register(tz_name,
+  2247								   wsa884x,
+> 2248								   &wsa884x_tz_ops,
+  2249								   NULL);
+  2250			if (IS_ERR(tz)) {
+  2251				dev_warn(dev,
+  2252					 "thermal zone '%s' registration failed (%ld); SP T0 kcontrol will read 0 for this codec\n",
+  2253					 tz_name, PTR_ERR(tz));
+  2254			} else {
+  2255				ret = devm_add_action_or_reset(dev,
+  2256							       wsa884x_tz_unregister,
+  2257							       tz);
+  2258				if (ret)
+  2259					return ret;
+  2260	
+  2261				thermal_zone_device_enable(tz);
+  2262			}
+  2263		}
+  2264	
+  2265		return devm_snd_soc_register_component(dev,
+  2266						       &wsa884x_component_drv,
+  2267						       wsa884x_dais,
+  2268						       ARRAY_SIZE(wsa884x_dais));
+  2269	}
+  2270	
+
 -- 
-2.34.1
-
+0-DAY CI Kernel Test Service
+https://github.com/intel/lkp-tests/wiki
