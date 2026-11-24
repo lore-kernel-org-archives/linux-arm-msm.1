@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795514705;
-	b=BNznlcCq3HEmeIdmbGIzmRFiZIhGYqxvhhZGJ57Swx6ygzg+pSe7x3biGM3PSlNYiZbA
-	 +FuqHJ9F6IoHND4VG/85bokjTIyeIsnjFBaW6yvERGP/6c0ri96aUULB4F59XBFTqIYl4
-	 wIZYZp/M+Ds7BNptguq0xgpz/pd+XZluhdUH66cRgikOI4S8NpjuPYLIy+8sdpmgbYvsw
-	 ZudlhVjAIhy11JJTEljRhoDZcsaAXufA8XlF2Vm5hvw+dGQ0iEIpSY0SWTUivEtp2Sc5Q
-	 y5rZMk6CPwcGStbbbA7BIEe8MF98BALFi07FZ/zHxjrt6ykmwLzh/p11y8plV2v24BQ==
+	t=1795514963;
+	b=hx4I/SwqtEoXskNQ3t2aWxWdeGFgTD6tdVmyWHctcIuEmKQuVuIvQQYMFMsw1srDqNcm
+	 GetTIib1dWMvvgrB/1TyR8uR6Ey9FUSKzBo5F4e8cnEBHFsVO+MOisyaAk3VNQZ/o5pT+
+	 7t06NeX5XIb1wfGIO+H6h4ALjNz0uAqGKJnxsKjRQoWEpVztU81KSfZpPb1di2+o2cyac
+	 fWHZKFTmUHJLfHkmgAf5ZqBkKw2VGoq3jHe1zhaWaz55eam/8qqkS9Vlm1YWpl78WjeQA
+	 KFs7Z+UpbT0fLMQ6mX4sHHIjnNDsszHbc0rtsvatAC2k6MizrpEs5HCP7E623jpcy6g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795514705;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795514963;
 	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
 	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
 	 Content-Type:Content-Transfer-Encoding;
-	bh=Wv9dA+sf5/8Q63ft+zrAakCfe38WDHhrpSJKBLpGMKY=;
-	b=z75t36muobOerjuTrNgxtfTV5w4iymCGabhFo6iY1WkYLsVf1oda9rbT7RBZVuV9Np5T
-	 vB3CKHHObW7Pw3ZiZ46wXGbgX7XBg+8WUGZkCZgDnB2IzVkv2rf5neVmek4+ikLV/fBbb
-	 1wY+dAkwkJJ8ZjrrvhMGiLPNZE2It0J2jcYAENDqzIufu4irOFuH+1OpJGBbZDE3m+UBR
-	 +btnVtH6DJXyt6EGF261p1CxMQLprU+n9VVa5a4oZ4Asr7B7A15J6kagXLjOFgcK+zVrb
-	 uw2ORaTguX8kl0GQ6fiYCGQRbyAZ80aPE9j2k7utUHaYMilevD1mh/rKiipYg8SXVIQ==
+	bh=dx8vxjZWnsbgG4OyU71SoxYLOY9RohQX5HPkxRRCWVA=;
+	b=Tbf6RJJ5dDxhEy+eiphoL/eNImaC1KNn4/zSmTyO2FumTPEFLZQ/zGcE0VOCRgW+geZI
+	 t3HG9I2+HV21oHy2Ksaj12WcDmHovQOE+KmxZdv4nvGN8zBqrxxYTr0j2MsqixtHTRLUG
+	 OhSNjj8YDmrKpbVXxZ85WaGF/OcpitMlggB3FXXlffcwr7i0mYpL+Sro1uXzq4VINtPwd
+	 Au1PoefEZuYneWbjhjtzCa4ahpCI/Pml7dxf7zkIyED66JzqwWeX53hXzNd4LMl7YCqZp
+	 8gmJUyHSXVBTvJtSiExDCTZsRU8jLxF4rGDBMbwOe3qt3ErsydOs8wDVJRk1/cSpN8A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AUIMs1Uq;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LbBpEqZn;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DB6B606A322;
-	Tue, 24 Nov 2026 10:05:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6449B606A31E;
+	Tue, 24 Nov 2026 10:09:23 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=AUIMs1Uq
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 905BE1F000D2;
-	Tue, 24 Nov 2026 10:05:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LbBpEqZn
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B42351F000EC;
+	Tue, 24 Nov 2026 10:09:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795514705;
-	bh=Wv9dA+sf5/8Q63ft+zrAakCfe38WDHhrpSJKBLpGMKY=;
+	s=k20260515; t=1795514963;
+	bh=dx8vxjZWnsbgG4OyU71SoxYLOY9RohQX5HPkxRRCWVA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=AUIMs1Uq/yugPsAAj5FDAinEXwZ6wdOBx9Va4DR+gBUuUttnzB0IvASNNQExy9RFv
-	 JMtmVsAXXwdT02bPRZWYk/i06vdDbnggoLwoKE6ohebCyH23uynEtEJCJBGJ0bijAN
-	 lf0yW/LFUMRw3BxXRpuBJo7JPPtlAFqQSIGJeywMae/S5WjXGjYoztjBbVBidx9v3D
-	 tTTBZs8/M4f0yjghamerYZ+WNy60Pm2HbYzRRPkcRmDNsuNVb1oVy1y2/6EGwfZpfp
-	 bGUtFncCvnw7bkzfnXp9/l6D7PpJbjta4n2LbSklnw5SxzQs/ltTe1+n6X4nBE1uIO
-	 IT2azGvsxpVZg==
-Message-ID: <8e9b2e56-2b63-4ece-92ed-968d41209790@kernel.org>
-Date: Tue, 24 Nov 2026 11:04:59 +0100
+	b=LbBpEqZn4ATZ6jR5EsC8SmmBjUHvtTB7Kd5I+NvWOx7M62+9l/6Oxti8PYjdh6jup
+	 lmn7yrJFlNsuZ81NpNimni0jBI22tXnbFHGtEHF48XbdLzXrYBnp/MYIONXoPsGym3
+	 LY1LP4rGYRHEKeOSR5DY87sI/bsHSJoB/4I8/PjRMCyEHRjWOFYCTTSankPAmS4yVy
+	 RERm8e07IUJprSXCNPtXVwQeq6hL/zZuGX8SKrD/NY7ynhp7yoiaf2o9POMbZXVYyo
+	 r2gkv6+s7uDIVidyl7mfX8egIGkYWnZhYFWS3yOxzeL3b8tGzRCQ84k3epons8Fkom
+	 D62DbvAKcO9tw==
+Message-ID: <58550e8a-481a-470e-bea4-93c39c8d736a@kernel.org>
+Date: Tue, 24 Nov 2026 11:09:18 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,20 +52,19 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] dt-bindings: media: qcom,mahua-iris: Add Mahua
- video codec
-To: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <20261123-mahua_iris_enable-v2-0-b1a16b16afca@oss.qualcomm.com>
- <20261123-mahua_iris_enable-v2-1-b1a16b16afca@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/5] dt-bindings: soc: qcom: eud: add the QCM2290 EUD
+To: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>,
+ Souradeep Chowdhury <quic_schowdhu@quicinc.com>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
+ Elson Serrao <elson.serrao@oss.qualcomm.com>
+References: <20261123-qcm2290-eud-v2-0-9bfc432dee07@oss.qualcomm.com>
+ <20261123-qcm2290-eud-v2-2-9bfc432dee07@oss.qualcomm.com>
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=krzk@kernel.org; keydata=
@@ -111,24 +110,29 @@ Autocrypt: addr=krzk@kernel.org; keydata=
  K9bCVaboTA2T77QYkRcRJYSsO1alGX0ome/hMLD1daXlkrNUp1HWa3K4iytLRXjCSIorWiGs
  n+q3krnpXu3TFkA8qtOFZMdnIiFuiq1yLT8hptsV5xh1TA2nsVvSYiaCr3q4s4BKjS/KrLDb
  qoxzw8ISjdUp4pA85vb6YLCmb39NgidD+7PmAr65lBNveIFynTgsja1rRQ4=
-In-Reply-To: <20261123-mahua_iris_enable-v2-1-b1a16b16afca@oss.qualcomm.com>
+In-Reply-To: <20261123-qcm2290-eud-v2-2-9bfc432dee07@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On 24/11/2026 07:44, Deepa Guthyappa Madivalara wrote:
-> Add a devicetree binding for the Iris3.9 video encoder and decoder block
-> found on the Qualcomm Mahua SoC. This is a single core derivative,
-> leveraging most of Glymur data with the clks, resets present only
-> for vcodec0 core.
+On 23/11/2026 17:42, Igor Opaniuk wrote:
+> The QCM2290 has the same Embedded USB Debugger as the SC7280: the EUD
+> CSRs and the mode manager register that the secure world writes on
+> behalf of the driver.
 > 
-> Signed-off-by: Deepa Guthyappa Madivalara <deepa.madivalara@oss.qualcomm.com>
-> ---
->  .../devicetree/bindings/media/qcom,mahua-iris.yaml | 200 +++++++++++++++++++++
->  1 file changed, 200 insertions(+)
+> On QCM2290 the mode manager additionally ignores the enable unless the
+> TCSR register TCSR_APSS_SPARE_REG1 is set first. The boot firmware does
+> the same before it enables the EUD, and the register is written through
+> the same secure IO service.
+> 
+> Add the compatible and a "qcom,tcsr-reg" property that points to that
+> register in the TCSR syscon. It is required on QCM2290 and not allowed
+> on the other EUDs.
+> 
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@oss.qualcomm.com>
 
-I have impression that there are like 5 different patchsets around
-Venus/Iris depending on each other or depending on something. Kind of
-same comment last time.
+
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
 
 Best regards,
 Krzysztof
