@@ -1,48 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.231.133.222
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795529209;
-	b=tFELrdPFEnVO753GRs6Il2BiOJ2gtXMRUzS+mUQdN0Lbtnu+58grswjJIzXfTjS4/Pti
-	 6yk/SChBNpQ7xmL+tuhkNNoU1154GUtdOA61CfahcRqyVfEpWwwXEmmRiJNj1EX8kZ6mi
-	 NG4Ea2ekzJZpMD6AIJueGKCUHi/5b6AaQPmWkbiLMCtQmpkbC+kmg7AurGDuO4x930toU
-	 ZpMCKqawDrvGZ4LRvdsvfYI9PfaCNg7dZ3eER9rEdDJmaPnqeqnZH1RsxYLlKOMpRHtEQ
-	 D2oHyn8db9dmMsub79UpFLLUSjC+uDmUz4JOV37p1dx9r3V/NBBUwRH2e2yElQqXTHw==
+	t=1795529942;
+	b=wT+wL78KCS0eGj8yBlAINDIfgIUpsyZfkPDY9tech7aiVGH9RvUZVLtH7BzZ9pvDEAsg
+	 qJx9nO9FFGf70B6Ua1Hl+oI9/PAvw0oaOtxHEggzWKy66EUZ/ZdcAijjGSMUxpT9gUnfT
+	 LyU5eTsRj1rdPTgkYiHwBF2AF+GqzAb/j2Mm/PuD4UuZkOXLzbw7DIx0QanWre3RJSpQ2
+	 +PPaYnZ9cSeuUKg+0KX0qZEMQe/deIji60GGfwJNfkvhMyPvqIByHXQ9Vlh9SrCPH8++f
+	 Kn4PqAG7Zlr1KW6DI8K4ZrfKn6zCPH3yexBM08oNHQx8Fe5syMB97LaFVwzO+ZWBjxg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795529209;
-	h=Received:DKIM-Signature:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=ome7MtfDmJxUwg0IIJcuaL9s3WvpoOw/F+488/56/Hk=;
-	b=qgB9caHzKLAmtHpflPK0l9JMoWnSduCL1G53tXvjf8Ajx5PlONVWJeRNPdoVJpwC97fp
-	 sB+CXigp8r+eDqBNSVBDgEqTqejc2vDzeHNEY8pKs08sg6HLucUC9oC7JJWFDF94wlcCl
-	 48xuWHQN29b8lTPb50rYwApHhh1DixxkrvFEAXxOI0JiSfa8GyqKdN2EuUASXItP5qzDx
-	 yfn9V2QpGKVabUEGN2i0QYjrTAi0QO6mlNI8uHPUleIiS4zuRhOCLfG8XeRgaRDKI6URr
-	 tnk6f1rucg4q383J/sIDAtNmwZixCYUkEFTAvx6hMK0AsEdtVKoLDt95tyZ+v4svKZQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795529942;
+	h=DMARC-Filter:DKIM-Signature:Received:DKIM-Signature:X-Virus-Scanned:
+	 X-Spam-Flag:X-Spam-Score:X-Spam-Level:X-Spam-Status:Received:
+	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding;
+	bh=NgxtZprDu56ARd6CagLqzzCr9sovN7v478GsqojgKOA=;
+	b=L2fryBqMvkHqYg3Ao4c5wE/iqi6iZc2EiTP+dnS8nGFWJlHANHqLCXNah7Tr0vnS8mHY
+	 Wf+BPOPcSoZ6/UC8EreOJddz/k1w5S1qZ+p34P8mOOW4UksjxG+FYQ2MUYcNferp61TDf
+	 w51CPUSTGk15VLz9q1rwIg5cRVV9e613RxdwHIz0JJjVF7zt/QQGilA/W2AO0wn3fBEMt
+	 jmMneoSNYuVwfbVka3jr0KUQafmgBv+mn8LJ3g0CMTbllCAEAp+s8WQ7a9WfIjtn90diI
+	 0MJ2qv81Gq5oUFvQydRUQwRtJyC6QHIfV53xUeKjeRG4yGQhhXNrH2FOeWhblZjM4Fw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R1t75HIV;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=renesp.com.br;
+	spf=pass smtp.mailfrom=renesp.com.br;
+	dkim=pass header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=ewqkwyDB;
+	dkim=fail reason="signature verification failed" header.d=tempos-project.org header.i=@tempos-project.org header.a=rsa-sha256 header.s=dkim header.b="lOL/cWvM";
+	dkim=fail reason="signature verification failed" header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=HdpXmoBF;
+	arc=none smtp.remote-ip=45.231.133.222
+Received: from mail.renesp.com.br (mail.renesp.com.br [45.231.133.222])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A83060A3814;
-	Tue, 24 Nov 2026 14:06:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A930606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 14:19:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6A930606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=renesp.com.br
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=renesp.com.br
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=R1t75HIV
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 3A4731F00AD3;
-	Tue, 24 Nov 2026 14:06:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795529208;
-	bh=ome7MtfDmJxUwg0IIJcuaL9s3WvpoOw/F+488/56/Hk=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc;
-	b=R1t75HIVUgGwed4MxVH03XMPsKv2JqX+GHESlBjGLx+mFrupW37TcwLtpW/IA6nyy
-	 /GFmTHsaPp9jqeignnTYbg8XAcb71Zl5d/p+/LAhAPYbtvE2tXJtRSJM+KmOhA23xo
-	 b+0f+BFZK7TG8t5hljheItWqdjAzmcymj4aeA0igJZQkzHalY4cmxSLLwwaJ+kOvbF
-	 nAwp7tHpgVZ6SjGdt2vXASSIAfiPlHOInPOc+nSrJhCgTdzUl6o2H9Fj4JbZnGQWfo
-	 SbOpJ4PyEg3keLzdMV05PlznAg+UhjGJw7KHRudCO04Qr3OYwNZ7lVIq8rdOofismK
-	 Vd3gRU0Moj2oA==
-From: "Lorenzo Stoakes (ARM)" <ljs@kernel.org>
-Date: Tue, 24 Nov 2026 14:02:56 +0000
-Subject: [PATCH v2 13/13] vhost-vdpa: convert mmap hook to mmap_prepare
+	dkim=pass (1024-bit key) header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=ewqkwyDB;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=tempos-project.org header.i=@tempos-project.org header.a=rsa-sha256 header.s=dkim header.b=lOL/cWvM;
+	dkim=fail reason="signature verification failed" (1024-bit key) header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=HdpXmoBF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=renesp.com.br;
+	s=2021; t=1795529937;
+	bh=FVk2svI83tFgdhTs3E2x/HB/PeflMMXHXcjvab7MxAs=;
+	h=From:To:Cc:Subject:Date:From;
+	b=ewqkwyDB8oHdFNqWpxuIeFr6ZuIftBIs5TUDfUTEvzvzQFe+kQSRrq6Ra5dn8OrZ4
+	 v5E+Ne1i1+5J5SfLkBS2VpW8zcKTiu3Bs1Tb0radT1rGBK6Yrbqvxuh8ZTD8G6upcZ
+	 sTrw/J67ftNR3ZrG7PASxNPpk/Ui76cSEmmGhxOo=
+Received: from renesp.vps (renesp.com.br [127.0.0.1])
+	by mail.renesp.com.br (Postfix) with ESMTP id 4jYlKs6gV4z3wvR
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 11:18:57 -0300 (-03)
+Authentication-Results: renesp.vps (amavis); dkim=pass (1024-bit key)
+ reason="pass (just generated, assumed good)" header.d=tempos-project.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
+	tempos-project.org; h=content-transfer-encoding:content-type
+	:mime-version:x-mailer:message-id:date:subject:to:from; s=dkim;
+	 t=1795529937; x=1798121938; bh=FVk2svI83tFgdhTs3E2x/HB/PeflMMXH
+	Xcjvab7MxAs=; b=lOL/cWvMk+c7e/hymzudJrO1x7FWwr6AICF9oLf7hbJ8g+OW
+	mamaNwCEvRfBIO0RVyhs3/PRgwXSXfh7qFaNYjosITfCdHUSRjT+iF+XdRMiLsts
+	0MVFaMkgTOeeLhlGBa4y7UKcEOj/UalohXTJvy56OyBk9fZo3pLATvxgG6DX4ceu
+	rykfZVsfiJQdaZU0TmztLHg2c+cGJfskFqB2h9e7E3T+vHm356T1y0qM7twbbvkB
+	Gj56QSVjmA8gPPAmjK7S9g3VPJryCr+7OpVh4n977+FmUjvbAfJSNGKU0l7KMkQV
+	kmp5a5ECRb8Dbc/nOqvbN81t4JRspYFGhNDWUw==
+X-Virus-Scanned: Debian amavis at renesp.vps
+X-Spam-Flag: NO
+X-Spam-Score: 2.21
+X-Spam-Level: **
+Authentication-Results: renesp.vps (amavis); dkim=fail (1024-bit key)
+ reason="fail (body has been altered)" header.d=renesp.com.br
+Received: from mail.renesp.com.br ([127.0.0.1])
+ by renesp.vps (renesp.vps [127.0.0.1]) (amavis, port 10026) with ESMTP
+ id eGrAlPR3tUYe for <linux-arm-msm@vger.kernel.org>;
+ Tue, 24 Nov 2026 11:18:57 -0300 (-03)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=renesp.com.br;
+	s=2021; t=1795529934;
+	bh=S28ReI6Fu+NyU6JY1E8Q+vtFT3DloD9P2EWTyT6ur+E=;
+	h=From:To:Cc:Subject:Date:From;
+	b=HdpXmoBF1t9YwGzf7v2aRFu0XczqjPINtk7NpBOynne/vCHbdzddue+HyqQznZq4R
+	 l1fKdEai4kXBsvQDQy1n248PZB4fRT2aFqW8IqKixj40vyUhvsWor/NunmqasBhir1
+	 L6BIJ9BQWVpkWAn89MFjOnjdJWXkuWqLPuaFu+0Y=
+Received: from rsp-x1 (unknown [178.20.90.158])
+	by mail.renesp.com.br (Postfix) with ESMTPSA id 4jYlKm1YZQz3wvJ;
+	Tue, 24 Nov 2026 11:18:51 -0300 (-03)
+From: =?UTF-8?q?Ren=C3=AA=20de=20Souza=20Pinto?= <rene@renesp.com.br>
+To: Srinivas Kandagatla <srini@kernel.org>
+Cc: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Anandu Krishnan E <anandu.e@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	stable@vger.kernel.org,
+	=?UTF-8?q?Ren=C3=AA=20de=20Souza=20Pinto?= <rene@renesp.com.br>
+Subject: [PATCH v2] misc: fastrpc: fix fastrpc_user leak on abnormal process exit
+Date: Tue, 24 Nov 2026 15:18:43 +0100
+Message-ID: <20261124141843.3967523-1-rene@renesp.com.br>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,132 +104,120 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261124-late-2026-mmap_prepare-v2-13-0b0d99d655f9@kernel.org>
-References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
-In-Reply-To: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
-To: Andrew Morton <akpm@linux-foundation.org>, 
- Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- Madhavan Srinivasan <maddy@linux.ibm.com>, 
- Nicholas Piggin <npiggin@gmail.com>, Michael Ellerman <mpe@ellerman.id.au>, 
- "Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, 
- "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>, 
- Shrikanth Hegde <sshegde@linux.ibm.com>, 
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, 
- Dexuan Cui <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>, 
- Jason Wang <jasowangio@gmail.com>, 
- =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>, 
- Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Jarkko Sakkinen <jarkko@kernel.org>, 
- Dave Hansen <dave.hansen@linux.intel.com>, 
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, 
- Borislav Petkov <bp@alien8.de>, x86@kernel.org, 
- "H. Peter Anvin" <hpa@zytor.com>, Jan Kara <jack@suse.com>, 
- Paul Moore <paul@paul-moore.com>, 
- Stephen Smalley <stephen.smalley.work@gmail.com>, 
- =?utf-8?q?Ondrej_Mosn=C3=A1=C4=8Dek?= <omosnacek@gmail.com>, 
- Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>, 
- Ryan Chen <ryan_chen@aspeedtech.com>, 
- Billy Tsai <billy_tsai@aspeedtech.com>, 
- Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Jens Wiklander <jenswi@kernel.org>, Sumit Garg <sumit.garg@kernel.org>, 
- Scott Branden <scott.branden@broadcom.com>, 
- Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
- Arnd Bergmann <arnd@arndb.de>, 
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
- Richard Cochran <richardcochran@gmail.com>, 
- David Woodhouse <dwmw2@infradead.org>, Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>
-Cc: ljs@kernel.org, xen-devel@lists.xenproject.org, 
- linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
- kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
- virtualization@lists.linux.dev, linux-sgx@vger.kernel.org, 
- selinux@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- linux-aspeed@lists.ozlabs.org, linux-arm-msm@vger.kernel.org, 
- op-tee@lists.trustedfirmware.org, netdev@vger.kernel.org, 
- linux-mm@kvack.org
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2537; i=ljs@kernel.org;
- h=from:subject:message-id; bh=N+qzvarBReEV4cRJsAvEDjekSINy/joij8VQmMMnGpQ=;
- b=owGbwMvMwCV2fu7ZrsZH9SKMp9WSGLJZZ0o8vLegK9dikmDZFhbDbGFDrSavY3cUZiWJFNvpx
- 5wXv8/SUcrCIMbFICumyPL8i/j+IJGweZ0X/N1g5rAygQxh4OIUgInEJzMy/PW8eWna9yvXPQW+
- +SxatMug7PudZW2LD+n8j3n/ocB19StGhukFquFZRov1Eu9xR6lFvWh5yOKQHaIvv8GK//TBGYm
- lPAA=
-X-Developer-Key: i=ljs@kernel.org; a=openpgp;
- fpr=E7F417BF5214569E89D04F46CF9DCD8A81E27F14
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Move from the deprecated mmap hook to the new mmap_prepare hook. The hook
-only validates the request and sets the VMA flags, operations and page
-protection.
+Since commit e85eb5feca8e ("misc: fastrpc: fix use-after-free of
+fastrpc_user in workqueue context"), each invoke context holds a
+reference on its fastrpc_user, while contexts left on the pending list
+(interrupted or timed out invocations) are only freed by
+fastrpc_user_free(). When a process dies with invocations in flight,
+this cycle leaks the user with all its maps and buffers. As the session
+is given back at release, the next process can get the same SMMU
+context bank with its IOVA space still in use and fail to map its
+buffers.
 
-Acked-by: Michael S. Tsirkin <mst@redhat.com>
-Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
+No thread can be in an ioctl on the file at release time, so drop the
+references of the pending contexts there instead of in
+fastrpc_user_free(). A context still waiting for the DSP response is
+freed when it arrives.
+
+Fixes: e85eb5feca8e ("misc: fastrpc: fix use-after-free of fastrpc_user i=
+n workqueue context")
+Cc: stable@vger.kernel.org
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Ren=C3=AA de Souza Pinto <rene@renesp.com.br>
 ---
- drivers/vhost/vdpa.c | 23 ++++++++++++-----------
- 1 file changed, 12 insertions(+), 11 deletions(-)
+Changes in v2:
+- Move the pending cleanup from fastrpc_user_free() to release instead of
+  duplicating it, and drop the forward declaration of
+  fastrpc_context_put() (Sashiko)
+- Link to v1: https://lore.kernel.org/r/20261124122011.2912030-1-rene@ren=
+esp.com.br
 
-diff --git a/drivers/vhost/vdpa.c b/drivers/vhost/vdpa.c
-index c912ac40ca37..c729efd108d0 100644
---- a/drivers/vhost/vdpa.c
-+++ b/drivers/vhost/vdpa.c
-@@ -1617,19 +1617,19 @@ static const struct vm_operations_struct vhost_vdpa_vm_ops = {
- 	.fault = vhost_vdpa_fault,
- };
- 
--static int vhost_vdpa_mmap(struct file *file, struct vm_area_struct *vma)
-+static int vhost_vdpa_mmap_prepare(struct vm_area_desc *desc)
- {
--	struct vhost_vdpa *v = vma->vm_file->private_data;
-+	struct vhost_vdpa *v = desc->file->private_data;
- 	struct vdpa_device *vdpa = v->vdpa;
- 	const struct vdpa_config_ops *ops = vdpa->config;
- 	struct vdpa_notification_area notify;
--	unsigned long index = vma->vm_pgoff;
-+	unsigned long index = desc->pgoff;
- 
--	if (vma->vm_end - vma->vm_start != PAGE_SIZE)
-+	if (vma_desc_size(desc) != PAGE_SIZE)
- 		return -EINVAL;
--	if ((vma->vm_flags & VM_SHARED) == 0)
-+	if (!vma_desc_test(desc, VMA_SHARED_BIT))
- 		return -EINVAL;
--	if (vma->vm_flags & VM_READ)
-+	if (vma_desc_test(desc, VMA_READ_BIT))
- 		return -EINVAL;
- 	if (!ops->get_vq_notification)
- 		return -ENOTSUPP;
-@@ -1642,12 +1642,13 @@ static int vhost_vdpa_mmap(struct file *file, struct vm_area_struct *vma)
- 		return -EINVAL;
- 	if (notify.addr & (PAGE_SIZE - 1))
- 		return -EINVAL;
--	if (vma->vm_end - vma->vm_start != notify.size)
-+	if (vma_desc_size(desc) != notify.size)
- 		return -ENOTSUPP;
- 
--	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
--	vm_flags_set(vma, VM_IO | VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP);
--	vma->vm_ops = &vhost_vdpa_vm_ops;
-+	desc->page_prot = pgprot_noncached(desc->page_prot);
-+	vma_desc_set_flags(desc, VMA_IO_BIT, VMA_PFNMAP_BIT, VMA_DONTEXPAND_BIT,
-+			   VMA_DONTDUMP_BIT);
-+	desc->vm_ops = &vhost_vdpa_vm_ops;
- 	return 0;
+Not changed from Sashiko's review of v1:
+- fastrpc_session_free() stays at release, as before this patch. Moving
+  it to fastrpc_user_free() makes a context the DSP never answers keep
+  its session forever: on QCS8275 this lost two of the three ADSP
+  sessions after an adsprpcd init failure. Reclaiming unanswered
+  contexts is left for a separate change.
+- Handle maps not released in fastrpc_context_free() is pre-existing:
+  they stay on fl->maps and are freed at close, which this patch makes
+  happen again on abnormal exit.
+
+Tested on a Qualcomm IQ-8275 EVK (QCS8275) with a 6.18-based kernel:
+a llama.cpp process using the CDSP was killed while invocations were in
+flight. Without the fix its ~1.8 GB of buffers stayed attached to its
+context bank, and the next process, given the same context bank, failed
+to map its own ("failed to map buffer"), leaking more memory on every
+retry. With the fix the buffers are released at close and the next
+process works. On mainline this is only build-tested (arm64, W=3D1).
+
+ drivers/misc/fastrpc.c | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
+index cdc2627bdaf2..23a5035654a5 100644
+--- a/drivers/misc/fastrpc.c
++++ b/drivers/misc/fastrpc.c
+@@ -554,22 +554,14 @@ static void fastrpc_channel_ctx_put(struct fastrpc_=
+channel_ctx *cctx)
+ 	kref_put(&cctx->refcount, fastrpc_channel_ctx_free);
  }
- #endif /* CONFIG_MMU */
-@@ -1659,7 +1660,7 @@ static const struct file_operations vhost_vdpa_fops = {
- 	.write_iter	= vhost_vdpa_chr_write_iter,
- 	.unlocked_ioctl	= vhost_vdpa_unlocked_ioctl,
- #ifdef CONFIG_MMU
--	.mmap		= vhost_vdpa_mmap,
-+	.mmap_prepare	= vhost_vdpa_mmap_prepare,
- #endif /* CONFIG_MMU */
- 	.compat_ioctl	= compat_ptr_ioctl,
- };
-
--- 
-2.56.1
+=20
+-static void fastrpc_context_put(struct fastrpc_invoke_ctx *ctx);
+-
+ static void fastrpc_user_free(struct kref *ref)
+ {
+ 	struct fastrpc_user *fl =3D container_of(ref, struct fastrpc_user, refc=
+ount);
+-	struct fastrpc_invoke_ctx *ctx, *n;
+ 	struct fastrpc_map *map, *m;
+ 	struct fastrpc_buf *buf, *b;
+=20
+ 	fastrpc_buf_free(fl->init_mem);
+=20
+-	list_for_each_entry_safe(ctx, n, &fl->pending, node) {
+-		list_del(&ctx->node);
+-		fastrpc_context_put(ctx);
+-	}
+-
+ 	list_for_each_entry_safe(map, m, &fl->maps, node)
+ 		fastrpc_map_put(map);
+=20
+@@ -1725,7 +1717,9 @@ static int fastrpc_device_release(struct inode *ino=
+de, struct file *file)
+ {
+ 	struct fastrpc_user *fl =3D (struct fastrpc_user *)file->private_data;
+ 	struct fastrpc_channel_ctx *cctx =3D fl->cctx;
++	struct fastrpc_invoke_ctx *ctx, *n;
+ 	unsigned long flags;
++	LIST_HEAD(orphans);
+=20
+ 	fastrpc_release_current_dsp_process(fl);
+=20
+@@ -1733,6 +1727,20 @@ static int fastrpc_device_release(struct inode *in=
+ode, struct file *file)
+ 	list_del(&fl->user);
+ 	spin_unlock_irqrestore(&cctx->lock, flags);
+=20
++	/*
++	 * Pending (interrupted or timed out) contexts can't be resumed anymore
++	 * and each holds a reference on the user: release them here to avoid
++	 * a cycle.
++	 */
++	spin_lock(&fl->lock);
++	list_splice_init(&fl->pending, &orphans);
++	spin_unlock(&fl->lock);
++
++	list_for_each_entry_safe(ctx, n, &orphans, node) {
++		list_del_init(&ctx->node);
++		fastrpc_context_put(ctx);
++	}
++
+ 	fastrpc_session_free(cctx, fl->sctx);
+ 	file->private_data =3D NULL;
+ 	/* Release the reference taken in fastrpc_device_open */
+--=20
+2.53.0
 
