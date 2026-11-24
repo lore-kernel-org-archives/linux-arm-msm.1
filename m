@@ -1,86 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.168.172.159
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795523326;
-	b=eFxcnqxvuahj4toLEq4j7OBjF356u0nDqO5hfEBLmtH+3/zxUYoE9FHwrNveI+5ruxzC
-	 1KC7yCg2+Xq7VKzmoiRiRpf1V7NUyP9cKiORio7m6+iPIVQybQFRhNogVwMkTZYkN43Zo
-	 F+XadZKUpb8dt0ZYdbbA2QSXyQJWht2gVrxA2eYtmHTaluXrWL/fjja8PEdq8q7FbQkNP
-	 wQ+OLIadOFUQB0sRwp3wJmU7nnACe6Unli4W9ogOb2RhnznHyjAi1RKqyfMJsAv/1S03h
-	 vb0KZG5/lvxNFhJiVq7LrBEG2NMhYThA62rkKqlKPRtn+a/BWGy+4JC4SJP/gVmOlcQ==
+	t=1795523379;
+	b=f6euDkGO2eIEpo1othOpLGdf9zq8dIoRP0a0iG5NrHA3I/x0B4b6CIB9mgRRyX2uIz9S
+	 SGZDPjpaS36lu7kMJPmSgO0tkoVfl8TVooY8IK4nkbGfa0gN8XVqXKVLwhpN5epZfBe3z
+	 6cg0CCU0Ld4ByF9rymtOVtK/p2oUACjOfrad97Aw+lB9exQ05jo14eZQszZ3NkGMdWal+
+	 jNZSJ+yCKJzucNVKG4EwsOJacGwebrK1/tvrn+BWvpR9/OtnGz1+TQrZEVwOZR47sl9ta
+	 QFsvhVFcDy1gpu7HuQs5/8c+7D1i8NtqDVKCYnEbn0gHnUf1iUzPbsXy6WajIrczNSA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795523326;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
-	b=TcukU9lKQ1nNZR6bxkZbCeuZz4k2DbWRhz9BjK+QbCp6BwSNfh5bTLbsPu+aq6l08vFJ
-	 h/WN/cvkaw4I08HyuFjS9lYr3UA0K9QKyuwsKpN45Tlabn3jCCPj9Tg9D/wevxCPIJEDe
-	 deidUvXLpxaJ/dgN04pl3P5D9ig0O1p5S9aUddEAuv4UajtHUxeUb1UqiNCJ7A9BgOmRx
-	 QnVAeNDFTIukCWntwP/yZYgVnnngAL+N0sCMvy5Yut6LBX+uC7tdLo5nKXPb31GdyljPe
-	 E10wsTBV6aij0cbp7zo4KpGKzcgYrd5HajTonvf0Pzxh2PVz8DeEv7HqcuGyM9qDAng==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795523379;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:DKIM-Signature:
+	 X-DKIM2-Info:DKIM2-Signature:X-DKIM2-Info:Message-Instance:
+	 X-ME-Sender:X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
+	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
+	 References:Subject:Content-Type:Content-Transfer-Encoding;
+	bh=J+iQqSqFu8ueiPUdhw6/IPHt38Wy3NcZWlRtWxtshi8=;
+	b=H6sndlGD/8SJAqfTfeb4kX6650/ViMXj9ejNXxCC3hBxvrB1lSn0xWD1TfBlJ0tmce4k
+	 fJaQInkj7/3OfIWp7Sn4kuMs51BKDdCJmPVGxLULHigI6aasNT0a52kD6eL+rRJmIk7OC
+	 p/NOiLZL0f//3cRCSJwXtttoFPi4K2Cp3JlbZLdfUl9q2xyTYguPU+60Ao2243TSykJTd
+	 c2nCb8HINvkxseoToudNMC9f0L7+IdRd33gQm1wACANpn/tZdFEOCHs9oKTxQhJl0Vfq+
+	 Co5yy13Z5thPge2T8iO6/Q6dh/0T4MFuneReXvbcx5kfSTLq/Njbe8KdTQN9XpnNGrg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mdeJc0zF;
-	arc=none smtp.remote-ip=209.85.128.41
-Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=arndb.de;
+	spf=pass smtp.mailfrom=arndb.de;
+	dkim=pass header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=TWEelBMh;
+	dkim=pass header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=KUDv68Fo;
+	arc=none smtp.remote-ip=103.168.172.159
+Received: from fhigh-a8-smtp.messagingengine.com (fhigh-a8-smtp.messagingengine.com [103.168.172.159])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E626606A682
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 12:28:45 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6E626606A682
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9B61C606A31E
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 12:29:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9B61C606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mdeJc0zF
-Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4bb6c7b6dbdso41228615e9.0
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 04:28:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795523324; x=1796128124; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
-        b=mdeJc0zFgMONR/NIr7+cJFXQYT9CzjbZVK8K5bHdLs5owNebF6BU6Lbm+9OJDMU10Y
-         yt7f+5sLgqYmVZIDmBpJ4ksEtISJb/I97RIHZbwO6MvpHEzvTiAk3fxKdlhe4KnzcOzj
-         ZywLle01PUQKQXASCQztj/WDuBw56a373qOxXHDEI8c2CClJsa5dYMIz6SPbcBJ6fGs6
-         EE8HLW5oohacke5/5JVwZ14wuPmHOaO5S/x37gkYucadKC7fjdMmkrsfH7WTbEm7GF7b
-         +sIlmr+BFFRDH+eHJlg/ADSXxq72+jMtqdO3N/xPxEpd4/V0unSmakepAaTOry33TdW2
-         vypQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795523324; x=1796128124;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
-        b=af8ImMmucL3PDEZYWdSZI3xJ41JTVrTB/lbw0Cu5JtreHqAN3daL7xv/ELMOKBX205
-         g+Ms6T3aeyHaX/zcXk1hAthgi3Mv0va0rgi3xB5/X3jjJvjrHzOps8uiA3d1i/X1TQ0p
-         WdIldZfn5vgsjAOv3hplkls+vK2atVk1Av1VSq55A9M42jlkLEzW3AG2jsInBs2OfL9/
-         2ap5RXYRhkPaJeI8KlEkO9SMRHz89gwN5rSmYVM7DOOL33FZDc4EAXERXgl04I1OUEGL
-         aL3zuGTvlbrbn72cEvqVPzZ6hfs5rM+uZT7sxPLcGxE6P7LXWeS42sssN4ZI998fv2EV
-         MX+g==
-X-Forwarded-Encrypted: i=1; AL+hErEkORsG2y4gtLT6sHA6S172obuSgrbcUWAAhm7VOm6evXFGZSRpBrRyzVoJx2cNB86cD6tb88KIqdP2Jp7X@vger.kernel.org
-X-Gm-Message-State: APuU4Z/hrEAs1lXTz6Mt7aTlVifHCbMtyV9A58FkY3s+d9m6RhoTiNjZ
-	qM1jkHgFQ4BjpBvkhmZR+W/pYbLTFXcuTFoQWXD198XP+kqnyuodSwbrwBUJpYsEFXI=
-X-Gm-Gg: AZFdTZc/Oz2wTnwKi4Jzdqh1XCc0y2tO7Cy0boQ+U2mbEUfYUMmrjfsRYeCwz3l1JGQ
-	NZtLpQlIa0lPuePZMCjLclqP74gHxJ466bTunU6fKjjh7QSXTT5vXCRrZn/DZ467xf/U308Qsu4
-	3T/aXTv8qXz/vQK1S9sk9sWcM9nh2Nid3g/9yo0WtMC7VvdqnI5ESOasryvvds94h+HUx0/YFGV
-	b6hw2u8NNThPJnfDDhgQKUkdQZL2x5u8jgEUT3laYsQhUEcD5SHcmyj/AkJ4vqLzLroY7FoqacP
-	elvGhdwanS3nFd9yy++sr00LegjiBpJbK1YBciYtslq0pUoFLKEtaJ+OvIqLYL11yby3Mc3YBwm
-	K6t611b7da2HP1b9I5If7Hsrs9G+1biULGQXCfyzHIPhVoWtpNqUZyzit8+mdbZjT9etw5lRifv
-	MgeP2kXGV6k0ahuDNPkNgJGzO3w5P0aKfYZikKhKH6+O+RYfk7Gt8zJVGrDoFNVX3i2Jb6qAwjF
-	OXxj0yc90wisFnGntJab+nj1xospbWvL3u20NZzL/WA9Q7u2dVuDhT6d9QT+SDYj26zxvru1IzT
-	OZyP5raPWCdC8O7luHYRoktLFZGz0hSluZSg8O+n0RY=
-X-Received: by 2002:a05:600c:1911:b0:4a1:7c56:d4e2 with SMTP id 5b1f17b1804b1-4bb8880cf84mr300507395e9.16.1795523323754;
-        Tue, 24 Nov 2026 04:28:43 -0800 (PST)
-Received: from [192.168.0.167] ([109.76.241.250])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8538b2c5sm432306495e9.5.2026.11.24.04.28.42
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Nov 2026 04:28:43 -0800 (PST)
-Message-ID: <08b9a714-278b-4e1c-81c8-59a60dba5916@linaro.org>
-Date: Tue, 24 Nov 2026 12:28:42 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=TWEelBMh;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=KUDv68Fo
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 7CC7C140026F
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 07:29:37 -0500 (EST)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Tue, 24 Nov 2026 07:29:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1795523373;
+	 x=1795609773; bh=J+iQqSqFu8ueiPUdhw6/IPHt38Wy3NcZWlRtWxtshi8=; b=
+	TWEelBMh0FTDWndXG9h99WCIweikG7I9a64OdBJD6D8p6rTFf++aZEzYjoSAxRPM
+	T5M5H/csms73IsuXbHLTt69hYF/+iY1k7GUIN+MiQt5+xVZAH//bdBsdwUlr7mcz
+	KelIFq4lj+hgJ0ejjXl7rk7bQtHr5+3IyEJzP5e/nF+zV9vk2U5iQkoD3+jBxX5U
+	xjjEMzzSVv4A/XtfzUQbhIcwO3v5PwbcM4t3zztayQGAzIqHXeLIjF+6pu4l95HW
+	jkvLHTcA/cPSaat4jdUrs3Obbf3r3nf6V38fmLC9w04o4nqr4Byv5oFfCHVKiR/V
+	+aYCqD+AZ/gXfUYk3Ldtug==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1795523373; x=
+	1795609773; bh=J+iQqSqFu8ueiPUdhw6/IPHt38Wy3NcZWlRtWxtshi8=; b=K
+	UDv68Fod38e+iYYgw8toeJiJUuw4XjFHfwHGTR+pdrsB8yGySCsv1zfspHUbT62T
+	/uzAusTwehz/G0rZ3aMw/sGrvO+4pQs2TGeDcAXzbo7te8ifjZ3CJBJZCvkZFqgR
+	OsjFpkmJG5sIpb+WX1e59OO1rgpj089a8u3sOGS0nE1XXFR5tj6T+Y2cog3Q4DHn
+	WTT5rEEeQpEDykibCaAQPio/9jLuQzWy43kHa1EjIzxzmaWozj5OPkcqNdNER6EE
+	99Q33YtcI+jb95ruYbrA0oV7gpxr26NLcYsXmm1gvdMa2zXQy6t59VlbS+L4zpZy
+	xqWogkW6uYQwIQu4d5Flw==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=arndb.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1795523373; d=arndb.de;
+	mf=PGFybmRAYXJuZGIuZGU+;
+	rt=PGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnPg==;
+	s=fm2:rsa-sha256:N3VAMvkiACpe+qRZpJZhjypYc3nYvq5SPcG9p+NU3Up2KfE
+	Fozws5JE4I8f64qztpCZ3OMjrtnnBg2R58au/TarB/A5DGIEZ0YjbwL5HLUS4Qi9
+	sLqSiVaTDY9UIu5cP7EjM/4+WMBt4o3R+kicfYlThs4yWabOLAH0tE5FyFgAg8uT
+	/Z6+Hcl6S+RtbaNL9sRDYdagr7wS0hCN37YZ4XGZFksmanTicvZKJEWq2zMQohU5
+	O87jrH7Rls4e0JZWAR+q2fvlHkqDRH1y9Jet8L1dSuhzK+bpZib1r32P81aC2QNu
+	7dkqH45F/s32R5dcBd8uUw3vMOBDjv2gJ8i2Hxg==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+	from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:WklWg/MW8eQ2MC5Fb5620cULF/sXGGKTHSpZE+gN7+E=:1G/CnskwFv+RglCFqnhH6hTuGBmU+PO8HsO4U9eyme8=;
+X-ME-Sender: <xms:KoMFa4je0nlSUfARc-BbSGPmD_m37zoRcewAW8qSjSqz53R2Umj1pA>
+    <xme:KoMFa73DpUPor78uez-FOBwOouREIecSOpsizt0EUiJvHirbz_FhzTgdYe8-yNGPV
+    4ydVibVJnVkzI64KKdOYcsGwJ592D-wN5X2Bo2J_RXKlnvEa8yRSpQI>
+X-ME-Proxy-Cause: dmFkZTE5BLTcSGrx6CgjWnbPMN13rozf/SDKrWFoLpRqU+yKgbciJ0ge7kBDE2fY2sfQN+
+    dYqCoarEUp+JyTD1ThRBIffIKGasaCVL7hzDEcyDhYkPOPaJR9DavnqIQMMEoZRB5/t5Fo
+    XuWHcIxMMntMm68AfbFfebl+haspdDOvLCj+e10OH62hXQ8wKlt1LmoFCNyCp6Y0woAsWM
+    8k1aKOe+FQKKC2dtACH17kAvr2/gbwjJeL6gGo+QsEeA2YuZK2Rehx03jsZZDjVQJZCWT8
+    1fCchFq5COOwPV89clN8+uQH9+qfeaELGEoAHYpUaNFZwJ+cABoVdBOCYq8zEBayScEPIL
+    xFGcfASXsTVIDaTnXK8ub2eSv8N3ybby1JA1P25GPGK/MxxAXu9sgxcfudTnK1R5fMNzgU
+    jkoLfl1BktkCU3HsStjfvdpc2+v6a6hESwZV1Fw6hWLeJ6Vnc7wPFQr/V3dxeR20rEEIoa
+    ninV5aKR1tzLJfdAjRW+V4z/yS9tYurBgBWRtLbXKpijFt7tKvyQv0h44cnOZM7w8ktIFR
+    ztku7545OaSmYa/Ut/V8taN0bPe1Pp9PAExn+g6XCZF3hZ1yLMaKQEPLR26Z9J4ANuba+C
+    NJ7okr7oitgeTH1RXnVrm0/POgYM7J2CCDUMzAC+bmtvVFbj9PLhPrK4lN3A
+X-ME-Proxy: <xmx:K4MFayPViB16_WZ2dCpDhxyQAzsWaJTSuJpQ3M0jMv6vurzBaeAmrQ>
+    <xmx:K4MFa2-pBjKEuv56_x7SPNdV7ehGE-Ykqm4FC1DEZHCNdFXySgzrMg>
+    <xmx:K4MFa0FHJFFPm2gNHLRkeMLjXi9WOmehEHCPsWT5Njot11LFXsIKWw>
+    <xmx:K4MFa1jN1PSXcGnwRmSLGGolceQBLkWvPBxwOnxlPz5YT_GRVPpAYQ>
+    <xmx:LYMFaww01QexLMy5bkvonj3UxkCjJQk4fCczS5DjiPqM1_lK2Nf8PA7E>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id E7AD832A009E; Tue, 24 Nov 2026 07:29:29 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,63 +115,82 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] media: qcom: camss: csid-340: Report the hardware SOF
- timestamp
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+X-ThreadId: AthCWVl4bt_o
+Date: Tue, 24 Nov 2026 13:29:09 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Abhinav Parihar" <abhinav.parihar@oss.qualcomm.com>,
+ "Srinivas Kandagatla" <srinivas.kandagatla@linaro.org>,
  linux-arm-msm@vger.kernel.org
-References: <20261123-camss-hw-ts-v1-0-7b62dda6d7a9@oss.qualcomm.com>
- <20261123-camss-hw-ts-v1-3-7b62dda6d7a9@oss.qualcomm.com>
- <c7fc67a6-e15f-40df-9c0a-7eae54e99d23@linaro.org>
- <CAFEp6-1otVCjNJgWLTiOMQpdy1t4qJUP6_NK0CuifrN+cOTTcA@mail.gmail.com>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <CAFEp6-1otVCjNJgWLTiOMQpdy1t4qJUP6_NK0CuifrN+cOTTcA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ quic_bkumar@quicinc.com, "Ekansh Gupta" <ekansh.gupta@oss.qualcomm.com>,
+ linux-kernel@vger.kernel.org, quic_chennak@quicinc.com,
+ dri-devel@lists.freedesktop.org
+Message-Id: <6db57a38-ddf9-4345-996b-82db8a790b7a@app.fastmail.com>
+In-Reply-To: <20261124120604.2640046-1-abhinav.parihar@oss.qualcomm.com>
+References: <20261124120604.2640046-1-abhinav.parihar@oss.qualcomm.com>
+Subject: Re: [PATCH v3] misc: fastrpc: Add cache maintenance for non-coherent platforms
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
-On 24/11/2026 12:20, Loic Poulain wrote:
->> On 23/11/2026 17:16, Loic Poulain wrote:
->>> +static u64 __csid_sof_timestamp(struct csid_device *csid, enum csid_iface iface)
->>> +{
->>> +     u32 lo, hi;
->>> +
->>> +     /*
->>> +      * The pair is latched on SOF rather than counting, so it can be read
->>> +      * one word at a time without tearing.
->>> +      */
->>> +     lo = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR0_SOF(iface));
->>> +     hi = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR1_SOF(iface));
->>> +
->>> +     return csid_timestamp_to_monotonic(csid, ((u64)hi << 32) | lo);
->>> +}
->>> +
->>>    static irqreturn_t csid_isr(int irq, void *dev)
->>>    {
->>>        struct csid_device *csid = dev;
->>> @@ -207,7 +234,7 @@ static irqreturn_t csid_isr(int irq, void *dev)
->>>                iface_val |= status;
->>>
->>>                if (status & CSID_IFACE_IRQ_INFO_INPUT_SOF)
->>> -                     csid_sof_event(csid, i, 0);
->>> +                     csid_sof_event(csid, i, __csid_sof_timestamp(csid, iface));
->>>        }
->> I think a callback in csid_sof_event() might be cleaner or some other
->> way to not have to replicate all of __csid_sof_timestamp() for each CSI
->> decoder.
-> I added it as a parameter because it is provided in much the same way
-> as the sequence number, given that the timestamp is directly related
-> to and coupled with it. So it is not clearly obvious why the sequence
-> number should be passed as a parameter while the timestamp should not.
+On Tue, Nov 24, 2026, at 13:06, Abhinav Parihar wrote:
+> Some platforms using fastrpc do not support DMA coherency on
+> HLOS. On such systems, explicit cache maintenance is
+> required to ensure data consistency for RPC argument buffers.
+>
+> Add cache maintenance for argument buffers when operating on
+> non-coherent platforms:
+> - Flush input buffers before invoking RPC to ensure CPU writes are
+>   visible to the DSP
+> - Invalidate output buffers after RPC completion to ensure DSP
+>   writes are visible to the CPU
+>
+> Introduce helper functions fastrpc_flush_args() and
+> fastrpc_inv_args() to perform the required dma-buf cache
+> operations. These are invoked only when the device is not marked
+> as DMA coherent.
+>
+> The coherency capability is determined using the "dma-coherent"
+> device tree property and stored per session context.
 
-But pretty much every hardware implementation will have to do the above 
-function. I'm asking for more functional decomposition.
+The dma-mapping abstraction is meant to hide this from drivers,
+why does this driver need to know?
 
-You could pass the hi/lo for example and make the sof_timestamp() 
-function common - called once from inside of csid_sof_event()
+> @@ -1078,6 +1086,54 @@ static int fastrpc_create_maps(struct 
+> fastrpc_invoke_ctx *ctx)
+>  	return 0;
+>  }
+> 
+> +static void fastrpc_flush_args(struct fastrpc_invoke_ctx *ctx)
+> +{
+> +	union fastrpc_remote_arg *rpra = ctx->rpra;
+> +	int i, inbufs;
+> +
+> +	inbufs = REMOTE_SCALARS_INBUFS(ctx->sc);
+> +
+> +	for (i = 0; i < ctx->nbufs; ++i) {
+> +		int raix = ctx->olaps[i].raix;
+> +		struct fastrpc_map *map = ctx->maps[raix];
+> +
+> +		if (raix + 1 > inbufs)
+> +			continue;
+> +		if (!map || !map->buf)
+> +			continue;
+> +
+> +		if (rpra[raix].buf.len && (ctx->olaps[i].mstart || 
+> ctx->olaps[i].do_cmo)) {
+> +			dma_buf_begin_cpu_access(map->buf, DMA_TO_DEVICE);
+> +			dma_buf_end_cpu_access(map->buf, DMA_TO_DEVICE);
+> +		}
+> +	}
+> +}
 
----
-bod
+This does not look like an appropriate interface: the driver
+should not have to worry about platform specific details
+of 'flush' or 'invalidate' and only access the data between
+'begin' and 'end' here. E.g. if there is an iommu or swiotlb,
+the buffer may become inaccessible again after 'end'.
+
+Can you change this to have separate loops to manage
+ownership before and after the access?
+
+      Arnd
