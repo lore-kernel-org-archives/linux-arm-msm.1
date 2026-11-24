@@ -1,56 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=95.215.58.210
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.168.172.156
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795545017;
-	b=XBe22qjGk461bAcMUQpO92UzhrOXZ8xF/9MzYLEKQqrEYAA78WZEJLUtWbEqCIr199Jr
-	 0yNT7O8weU9mRphODu0zgp4M3i3S1RWogbIiKwiOhle+kChoSSy918xOYV21w1qN2x4UF
-	 2c5hYnfpTd6HctXpNIr31rXBH7YRTOn2dV4SdZ5Fy2iICIvUOh2r++Qgrb6ptpD6GiQhC
-	 v48DjVfyXtoFzJzi8j2ANZuP3EACQh8jAiPWWJ4wwKV9hmQU1VRqhpUmJ3xg1BG8UFhz5
-	 28wUg5oIo0e+gSy7Aie17fktNCnSoajKY+8DjbxWTrn6Ll+ZraTGSM4op+sqDejhy+Q==
+	t=1795546429;
+	b=DGU75W4CoC5ON38aoo3gWF6nFC8mmsK22RkvNlcnttZnuCdE9rMjoHU9LVjz2pNoYgWr
+	 +X4Q8FOMuNJ0xMvzmUYDhP0QQddgThSmbPf4q6WwfhNS4if56TfI5LXdT6aNqsJ1BfW+D
+	 pT+0Rr1sihNzKHDBxE/YDlnPMP3U3LVuBiPf5N1kK6BEGabOdANYm2iOGmTP26EbkZ6BX
+	 zFFhu9Um0v7WfdyhFiyYR6wFqS1kmholqMds26Db8rNIn2cCNjjpyagP4f9wV/6UDm7/D
+	 LDnutdwQiok5elPLd8mypk4ka7aceCGPU9JEr5FEUbJudOSgQc01Yr16tBHJLw/Q9mw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795545017;
-	h=DMARC-Filter:X-Envelope-To:DKIM-Signature:X-Envelope-To:Received:
-	 X-Mizu-Trace-ID:X-Migadu-Flow:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=0K0WZc/39/LoeP518yVuoZSqLaQqIw4BwskJvntaZvY=;
-	b=azpLGaQkMjvQfSBla93fT0Avw/j/BJsSH45I8+YNWGN+1tyUrYH7iAWu2EuascxpNPrU
-	 pra9XTNjQZEccqge96KxZ2ABkotZRw4V9ZDY0oeVz6Po7CPwPpbbId+F0BdQ12sGoIMj+
-	 ZFdKW4bdwwbooYriC9ZGiTU87X7Pp7ce7xrvOm0nbcvaYxMYhWUMZo5qGjpBu6yxtdIFT
-	 w0fcadrjRo5ldHs1sTq/a+PG7E22MUqv3MpRohm90ftbgTT87bOClRSFkyJAK1qGRB880
-	 x5XVO1JM3DfmXK+MgrihkQYcBaZG8NnOHNDfg6ZwDF1hcKc/8khuW7FG6Oao0FtYhEg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795546429;
+	h=DMARC-Filter:Received:Received:DKIM-Signature:DKIM-Signature:
+	 X-DKIM2-Info:DKIM2-Signature:X-DKIM2-Info:Message-Instance:
+	 X-ME-Sender:X-ME-Proxy-Cause:X-ME-Proxy:Feedback-ID:Received:X-Mailer:
+	 MIME-Version:X-ThreadId:Date:From:To:Cc:Message-Id:In-Reply-To:
+	 References:Subject:Content-Type:Content-Transfer-Encoding;
+	bh=iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=;
+	b=rgdNnkb8EaCkZyGv7bKZS9nbJPzEfvjOZ835tXsswt+WFXs7sr5VD1o1l0DPH4bd8Sj8
+	 oDSql2CLVrYHEkvXNrZSSxFhJrkDAIYOxy1xKugNUSKU1vqS03tFd/YssUe1z2gVFtJd3
+	 K97fpS9E6BaHSWwLSKsljxY7+VfvshiSa1MOswEEVW2PjMg7Jon6pYL7rs5fYbWCoozdu
+	 paEwJ+B67aERNAH8EbqMjMEs1e8Gw7S98HJnVtorxeIihbr0/R0/K8Tfhda690RI6D7Os
+	 p1t2MV0QHC0cOBHq/RdyV3HYLB3JSFCdvDwfDrgETSQ/Vu5JJU3FUq0WxgEXCXBdvuA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=packett.cool;
-	spf=pass smtp.mailfrom=packett.cool;
-	dkim=pass header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=U4V8Lmxp;
-	arc=none smtp.remote-ip=95.215.58.210
-Received: from mta1.migadu.com (out-210.mta1.migadu.com [95.215.58.210])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=arndb.de;
+	spf=pass smtp.mailfrom=arndb.de;
+	dkim=pass header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b="fGXI/q/Y";
+	dkim=pass header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=huROl1+l;
+	arc=none smtp.remote-ip=103.168.172.156
+Received: from fhigh-a5-smtp.messagingengine.com (fhigh-a5-smtp.messagingengine.com [103.168.172.156])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 211BA606A32D
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 18:30:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 211BA606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=packett.cool
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=packett.cool
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 47027606A321
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 18:53:48 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 47027606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=arndb.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=arndb.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=packett.cool header.i=@packett.cool header.a=rsa-sha256 header.s=key1 header.b=U4V8Lmxp
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-DKIM-Signature: a=rsa-sha256; bh=5FzHrKNgD5lCIK6oHJu6SlDrdrGmdZHkQ/9jYR5U3ZU=;
- c=simple/simple; d=packett.cool;
- h=from:to:subject:date:message-id:mime-version:content-type; s=key1;
- t=1795545014; v=1; x=1796149814;
- b=U4V8LmxpaxCGNshsJQMp1cGqvNoMnmJ61t4agxFJvdLgGE89eKi6YbLla8aOfehsipx5T2n4
- HWgJRpfRw4kEL/JUvalPLYfgURfguVd29h0ePzJ+ABt6PfmU4mVx2A+tklIS53+6qnVmccIFIRH
- lJ9lYUAFK+VXQ+yp0WMIZ92HXIeR8Y6Hq8kbbS300vJs1kOadA1EumZjNH6XL+oXkQApGV+0/yD
- UhsbzpurWw/kKqi/HzhYt676/2jaGpRZAIc3VnbYxSfC0poxbBidkBNK452LjMuoVlceTOC4b69
- ag+p5cpx0e4I1v5YO6l/VHzqWhwltmPMbf4AUuuVCFnRA==
-X-Envelope-To: linux-arm-msm@vger.kernel.org
-Received: by smtp.migadu.com with ESMTPS id cf4f11413430c8c2;
-	Tue, 24 Nov 2026 18:30:12 +0000
-X-Mizu-Trace-ID: cf4f11413430c8c2
-X-Migadu-Flow: FLOW_OUT
-Message-ID: <87735cc2-3759-4b7b-a16d-8aa4911ea7fb@packett.cool>
-Date: Tue, 24 Nov 2026 15:30:04 -0300
+	dkim=pass (2048-bit key, unprotected) header.d=arndb.de header.i=@arndb.de header.a=rsa-sha256 header.s=fm2 header.b=fGXI/q/Y;
+	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm3 header.b=huROl1+l
+Received: from ams-compute-02.internal (ams-compute-02.internal [10.64.2.62])
+	by mailfhigh.phl.internal (Postfix) with ESMTP id 5948D1400225
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 13:53:47 -0500 (EST)
+Received: from ams-imap-03 ([10.64.2.23])
+  by ams-compute-02.internal (MEProxy); Tue, 24 Nov 2026 13:53:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arndb.de; h=cc
+	:cc:content-transfer-encoding:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm2; t=1795546424;
+	 x=1795632824; bh=iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=; b=
+	fGXI/q/YJJHPRt+gPRHUOreFU8JCB/tfsdHtsBhf3X18rgt21ZbX+26No5IKTAyj
+	AgCv1KdKfbX+I2Pn0iSzwyBZk/aTQmKDh3dYxkQQL/J3WM2z84vb6vO7x4DW8EGZ
+	sS/Wz7MJP+BtoLKLQr++7Yye1Hsyu2ULf9M/Y/cIxiPBp83DUaCzMY/wHmvrh3HQ
+	z0r0HeF0cnvWAkVDWpNLHekIzdnkWlD1MFqa+H5YTnUhFB6PA6aA1HC0BYrnek2G
+	nxpAYgIinmvsD/fk1yNzG29c7eKf94wnqayGmqr0U9/LtCL0vr89WbcpVgVwSl8H
+	4qYzW/d7q4DzqRxNHb/J/w==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1795546424; x=
+	1795632824; bh=iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=; b=h
+	uROl1+lk1kz0AnE8Bzw9moeUjMay7vJ5VuuqfueaPUl4m/AI84UJOgAisOoaqFn/
+	yCBo+vSL4a5lisI4l5/Z7saj2VUfqomUlV+2KVyBVQmUCOe3jgRYI6qYr4Y8R8jl
+	LJRf+DSl7GQbE5lW+g+FmCFL/3myijCtekiyTHImxIeNkj8OLVv/bdsJJh85iU2r
+	kJL7uUdjE61XSRiNNPNUtgWPIDQt/CfqMCs9Y72c8jKv8clrGSuuWvjDW+ZxoYRm
+	lUNq6g0Cq11j4GRLpY9a5Fciy4M+OD5s4ikjAzA6YUPUcczieH5Iq3irJUrRl+0o
+	JIyX3BUC16aX/QKYzqm+Q==
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=sign d=arndb.de a=rsa-sha256;
+DKIM2-Signature: i=1; m=1; t=1795546424; d=arndb.de;
+	mf=PGFybmRAYXJuZGIuZGU+;
+	rt=PGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnPg==;
+	s=fm2:rsa-sha256:ktxRva5YcaR1XzM2zxBqOdlL5CkoCM3uYxvX+zITwxRprMb
+	EF/uooPGHgBO5MZ4m7dmVa3Urddg2XcVTLb0CrMWpW4lUYAlXyda8RhdSqmUSY18
+	+/DyQ4krWIDtmDRRpFT50GzRveqgfDhkcBgGuVLiBL7GC2K2W3jV7PVKNRLy1iGh
+	/oAWafZxeRFf/0sjs1WYia6yqFaNGYM32lX9G6Xw/AQSC7NI0aWtVyCCHDlCdSDT
+	jbmtI5AKZjp713u5QIkamF+sui6OLlElKu37kpYoi9LeXT+dqBk6jVEaNc17G+Fw
+	ZfEm1Qs1RyLEhc9XSeWzSOiltrrzWmrZRlvo6pw==;
+X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-09;
+	repo=github.com/dkim2wg/interop; date=2026-11-03; sw=lmtpprox;
+	action=mi-m=1; hc=12;
+	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
+	from,in-reply-to,message-id,mime-version,references,subject,to;
+Message-Instance: m=1; h=sha256:JE9Pf+dIuvBMDyw467eQ/Tr4tyY4SBvJ9vbnWlDmBbU=:iJ0bZtF+M32WhmItWYj3FSa2ZiQSpvoOogcaFVHVH5I=;
+X-ME-Sender: <xms:NN0Fa5lZfMH0GpBjo4FIFqOt82WeXvEcO71uXdjmCA-N2thUNBatiw>
+    <xme:NN0Fa_pvDD3LDB1hOkMvebnpeZhjQXIK0f9ynC0uvxvma-6WyPByvi9RrkBtXqg9y
+    e_gVWNjeonSUqLlGosp6V90-QYv-zweVwSgzUpAtHBmrbfHPTWWgCM>
+X-ME-Proxy-Cause: dmFkZTGa89Pla2pwx0UHvBE2KEVG1Wwjhw7C4B1uLpGYODU+3QVMsGx/6XmpkdoJQ4Wdng
+    HJTQ5P6n+mDkd8Vd2SQqD6fTHTLkP7Wuqcj4e4FsRmjjuwJVAvdIAMxwY7PgDDXvm7pBQb
+    V+0M7Ws/ERhpYm8SiiloduyrTQZspJvg6qB1K46OCCPXGc+eEW+Hddr+7C00h0r6ZEOFYl
+    AEnzqIf48e5UMJEtOynuealgFc8qv49e4alT0/cDtM0pgI+fA63AVgOKJjxR0/XZ5jCWkf
+    ckqnEAFz7mzjehKRip86Ki3aHb//QV7agR0ciNvsOQftXZwZGwrw1biaGXQM2h508lVilu
+    dX1Rs8y5CwzC5NJ/X0naYSrSH/L5OxpOwwf5dMWqDQZcTdKTK/2PBgPmihT/fQy1TuHY6j
+    6M64lDHfRNX+gNElC1DL1ODauxSmwduu+m13I/SkB7IYOCXjuB2jqg7U4sW3fILD4Xxxix
+    /zzH26H2NJT/sw+csOTXwQOv0Ri5PI/gUUSUcz2DmXFV+dyZ2fG3dvBz4DLITo/r44riPy
+    Wkq3g4kLNXDJfPLtgJRoV3tB0JzWzIZNdWxrQK2e5XaTmoTp8JRX1v76d2nM+qmgUUFhFc
+    nvxsvy7PpPJFKIOSP8JO3v1DBFfZIowhnT7qZYA23jX7CcPrraaLXwRUkr+A
+X-ME-Proxy: <xmx:Nt0Fa2g9uImOLqunkhPoWGl1ltxY8JqHe77aesgUgd62JLxGu-1Ofw>
+    <xmx:Nt0Fa8Pc_Sbu-G_3abCwqPB7HUsT9kKEIkC0CdR_sFWt4SE3pgeVEw>
+    <xmx:Nt0Faxe5nGuWdBNu6u7jyT24MgZMbK0VdAI8O7B5j3SfiCxKfSR2AQ>
+    <xmx:Nt0Fa-y3V9ESX_COIXxaEavSOJ21EMmGaPaOG4nz8Qt9gqswRMc_CQ>
+    <xmx:ON0Fa2FN0OUPrjWXja9RK6szCLu_hXTZd05XGyCHHDqNdf-Ig_ZmCfL3>
+Feedback-ID: i56a14606:Fastmail
+Received: by mailuser.ams.internal (Postfix, from userid 501)
+	id 4968232A0099; Tue, 24 Nov 2026 13:53:40 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,74 +115,74 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] rtc: Add basic support for RTC via Surface System
- Aggregator Module
-To: Emfox Zhou <emfox@debian.org>, Maximilian Luz <luzmaximilian@gmail.com>,
- Alexandre Belloni <alexandre.belloni@bootlin.com>
-Cc: Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Hans de Goede <hansg@kernel.org>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-rtc@vger.kernel.org
-References: <20261104070441.74127-1-val@packett.cool>
- <20261104070441.74127-5-val@packett.cool> <1795439501.1366.emfox@debian.org>
-Content-Language: en-US
-From: Val Packett <val@packett.cool>
-In-Reply-To: <1795439501.1366.emfox@debian.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-ThreadId: Ai76fMdDSoMo
+Date: Tue, 24 Nov 2026 19:53:19 +0100
+From: "Arnd Bergmann" <arnd@arndb.de>
+To: "Lorenzo Stoakes" <ljs@kernel.org>,
+ "Andrew Morton" <akpm@linux-foundation.org>,
+ "Juergen Gross" <jgross@suse.com>,
+ "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
+ "Madhavan Srinivasan" <maddy@linux.ibm.com>,
+ "Nicholas Piggin" <npiggin@gmail.com>,
+ "Michael Ellerman" <mpe@ellerman.id.au>,
+ "Christophe Leroy" <chleroy@kernel.org>,
+ "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>,
+ "Shrikanth Hegde" <sshegde@linux.ibm.com>,
+ "Haiyang Zhang" <haiyangz@microsoft.com>, "Wei Liu" <wei.liu@kernel.org>,
+ "Dexuan Cui" <decui@microsoft.com>, "Michael S. Tsirkin" <mst@redhat.com>,
+ "Jason Wang" <jasowangio@gmail.com>,
+ =?UTF-8?Q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
+ "Xuan Zhuo" <xuanzhuo@linux.alibaba.com>,
+ "Jarkko Sakkinen" <jarkko@kernel.org>,
+ "Dave Hansen" <dave.hansen@linux.intel.com>,
+ "Thomas Gleixner" <tglx@kernel.org>, "Ingo Molnar" <mingo@redhat.com>,
+ "Borislav Petkov" <bp@alien8.de>, x86@kernel.org,
+ "H. Peter Anvin" <hpa@zytor.com>, "Jan Kara" <jack@suse.com>,
+ "Paul Moore" <paul@paul-moore.com>,
+ "Stephen Smalley" <stephen.smalley.work@gmail.com>,
+ =?UTF-8?Q?Ondrej_Mosn=C3=A1=C4=8Dek?= <omosnacek@gmail.com>,
+ "Joel Stanley" <joel@jms.id.au>,
+ "Andrew Jeffery" <andrew@codeconstruct.com.au>,
+ "Ryan Chen" <ryan_chen@aspeedtech.com>,
+ "'billy_tsai@aspeedtech.com'" <billy_tsai@aspeedtech.com>,
+ "Bjorn Andersson" <andersson@kernel.org>,
+ "Konrad Dybcio" <konradybcio@kernel.org>, "Abel Vesa" <abelvesa@kernel.org>,
+ "Jens Wiklander" <jenswi@kernel.org>, "Sumit Garg" <sumit.garg@kernel.org>,
+ "Scott Branden" <scott.branden@broadcom.com>,
+ "Broadcom internal kernel review list" <bcm-kernel-feedback-list@broadcom.com>,
+ "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
+ "Richard Cochran" <richardcochran@gmail.com>,
+ "David Woodhouse" <dwmw2@infradead.org>,
+ "Andrew Lunn" <andrew+netdev@lunn.ch>,
+ "David S . Miller" <davem@davemloft.net>,
+ "Eric Dumazet" <edumazet@kernel.org>, "Jakub Kicinski" <kuba@kernel.org>,
+ "Paolo Abeni" <pabeni@redhat.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+ linuxppc-dev@lists.ozlabs.org, kvm@vger.kernel.org,
+ linux-hyperv@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-sgx@vger.kernel.org, selinux@vger.kernel.org,
+ linux-arm-kernel@lists.infradead.org, linux-aspeed@lists.ozlabs.org,
+ linux-arm-msm@vger.kernel.org, op-tee@lists.trustedfirmware.org,
+ Netdev <netdev@vger.kernel.org>, linux-mm@kvack.org
+Message-Id: <3208cde3-c5cf-4888-88f7-c77d7b0e5940@app.fastmail.com>
+In-Reply-To: <20261124-late-2026-mmap_prepare-v2-8-0b0d99d655f9@kernel.org>
+References: <20261124-late-2026-mmap_prepare-v2-0-0b0d99d655f9@kernel.org>
+ <20261124-late-2026-mmap_prepare-v2-8-0b0d99d655f9@kernel.org>
+Subject: Re: [PATCH v2 08/13] soc: aspeed: convert LPC and P2A control mmap hooks to
+ mmap_prepare
+Content-Type: text/plain
 Content-Transfer-Encoding: 7bit
 
+On Tue, Nov 24, 2026, at 15:02, Lorenzo Stoakes (ARM) wrote:
+> Move from the deprecated mmap hook to the new mmap_prepare hook for both
+> the LPC control and P2A control drivers.
+>
+> Both remap a range of their reserved memory region, so use the PFN remap
+> mmap action to do so, retaining the -EAGAIN error on failure via the action
+> error override.
+>
+> Acked-by: Andrew Jeffery <andrew@codeconstruct.com.au>
+> Signed-off-by: Lorenzo Stoakes (ARM) <ljs@kernel.org>
 
-On 11/23/26 10:11 AM, Emfox Zhou wrote:
-> Hi Val,
->
-> Tested on a Surface Pro 8 (x86, Tiger Lake): this is not SPX/ARM-only, the
-> same SAM RTC sits behind the aggregator there. Two things came out of it.
-Didn't think anyone else would be interested though :) as the SPX is the 
-only machine with *no other working RTC at all*.
-> First, as posted the driver cannot bind on the x86 machines: 5/5 adds
-> ssam_node_rtc only to ssam_node_group_spx[], while the x86 devices come
-> from the ACPI-matched groups. With one line in ssam_node_group_sp8[],
->
-> 	&ssam_node_rtc,
->
-> "ssam:01:01:01:00:00" appears and the driver registers rtc2:
->
-> 	surface_rtc 01:01:01:00:00: registered as rtc2
->
-> It would be good to have the node in the other x86 groups as well. Note
-> that the node name will collide with the SPX one, so whichever lands
-> first keeps it.
-
-Well, I don't have all these machines to test on, so I wasn't very 
-confident about adding it to other groups. I could do it though, sure.
-
-> Second, set_time() needs a timezone compensation. The EC keeps UTC in the
-> SAM timestamp (CID 0x10), but also exposes _GRT (CID 0x1f), the same clock
-> plus the zone stored in the EC, and the firmware copies _GRT into rtc_cmos
-> at POST. Right after a cold boot here:
->
-> 	rtc0 read at boot	 1795199717
-> 	true UTC at boot	 1795170940
-> 	EC _GRT at boot		 1795199714	(zone +28800)
->
-> so CMOS came from _GRT, 8 h ahead of UTC. The write side shows the same:
-> after "hwclock -w -f /dev/rtc2" the SAM timestamp equals system UTC and
-> _GRT is then UTC + zone, so the next cold boot is off by the zone again.
-> Either write (UTC - zone), taking the zone from _GRT minus the timestamp,
-> or state that this RTC is local time and leave the conversion to user
-> space.
-Ack
-> Tested-by: Emfox Zhou <emfox@debian.org> # Surface Pro 8 (x86), with ssam_node_rtc added
->
-> Since the same RTC is on the x86 machines, the descriptions are no longer
-> accurate either: the commit message, the Kconfig help and the MAINTAINERS
-> entry all name the Pro X: [..]
-
-Sure, I'll change the names!
-
-
-Thanks,
-~val
-
+Acked-by: Arnd Bergmann <arnd@arndb.de>
