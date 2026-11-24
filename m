@@ -1,99 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.231.133.222
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795522862;
-	b=rtbE0fJYbH6yVxyGHbUwgt0DD6yv/4EDJx/zukX1S6YLcwyEXJsQd92f/ZXnQ0onS/FT
-	 vhv77Yg7zax15+o52rxQSKcNxG01FlifMGTkVJOmfN/0qwiesAL9gVqWCOzpl3MfDvj/g
-	 Rn3TIPk3pgKSqi1GCeXE+nNxJAahI3xoVG18MPTyC+jvHRQx7rzYjvAQymlFtZZL6EUka
-	 OcJ4HLMsTNycdwdzEQx4bQKrdjUjs9d8V0MT7EZdSvFJ9H+CZJSlfJocDqh/Zu/z69nGz
-	 IXVx9BGL5dB96BICdvLpjwyFABI6K9Cf8ZFPzEcEOjTI9Z2pn1OOoh5zjlmvPJlhebw==
+	t=1795523326;
+	b=eFxcnqxvuahj4toLEq4j7OBjF356u0nDqO5hfEBLmtH+3/zxUYoE9FHwrNveI+5ruxzC
+	 1KC7yCg2+Xq7VKzmoiRiRpf1V7NUyP9cKiORio7m6+iPIVQybQFRhNogVwMkTZYkN43Zo
+	 F+XadZKUpb8dt0ZYdbbA2QSXyQJWht2gVrxA2eYtmHTaluXrWL/fjja8PEdq8q7FbQkNP
+	 wQ+OLIadOFUQB0sRwp3wJmU7nnACe6Unli4W9ogOb2RhnznHyjAi1RKqyfMJsAv/1S03h
+	 vb0KZG5/lvxNFhJiVq7LrBEG2NMhYThA62rkKqlKPRtn+a/BWGy+4JC4SJP/gVmOlcQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795522862;
-	h=DMARC-Filter:DKIM-Signature:Received:DKIM-Signature:X-Virus-Scanned:
-	 X-Spam-Flag:X-Spam-Score:X-Spam-Level:X-Spam-Status:Received:
-	 DKIM-Signature:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Type:Content-Transfer-Encoding;
-	bh=RyHhsrrzIHpu+0Gu49skCk9R55WpAVNNdr7nqfZtoog=;
-	b=FM2S4xx58FmK1LWo+QLexiLm5ujmdkbWQ+rcRIQUNlc53jgdWOWAQj4jDyu29VimxWQV
-	 0CdIax/i2KW93QV0Q6E2T9y4upB//mYJP6ZumD0Ro/1rmrkyxYThSfn5mu1XgMBCGW430
-	 RHBNZYdwDBRaaYEAXCj7KJO/QvxIucTen9wTmSB/NakDIQCMSSAAGZ/6SG0nYkxNMNEGZ
-	 NVohqq2gBhYuJHswA8PPCQ+7+Zh7+hYZmCjY7EmXfG5BgCIHhI6bY9MH8W3Y4qJdjGvOH
-	 YnB6PYNgLq8ZPO7gPPudPAXLk/VHLgjZHdG2tFeOggLPwI9/DLMkNZjwmMNS/2LP9ZQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795523326;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
+	b=TcukU9lKQ1nNZR6bxkZbCeuZz4k2DbWRhz9BjK+QbCp6BwSNfh5bTLbsPu+aq6l08vFJ
+	 h/WN/cvkaw4I08HyuFjS9lYr3UA0K9QKyuwsKpN45Tlabn3jCCPj9Tg9D/wevxCPIJEDe
+	 deidUvXLpxaJ/dgN04pl3P5D9ig0O1p5S9aUddEAuv4UajtHUxeUb1UqiNCJ7A9BgOmRx
+	 QnVAeNDFTIukCWntwP/yZYgVnnngAL+N0sCMvy5Yut6LBX+uC7tdLo5nKXPb31GdyljPe
+	 E10wsTBV6aij0cbp7zo4KpGKzcgYrd5HajTonvf0Pzxh2PVz8DeEv7HqcuGyM9qDAng==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=renesp.com.br;
-	spf=pass smtp.mailfrom=renesp.com.br;
-	dkim=pass header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=onz3Z43l;
-	dkim=fail reason="signature verification failed" header.d=tempos-project.org header.i=@tempos-project.org header.a=rsa-sha256 header.s=dkim header.b=wo63T123;
-	dkim=fail reason="signature verification failed" header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b="O5hz/+Lj";
-	arc=none smtp.remote-ip=45.231.133.222
-Received: from mail.renesp.com.br (mail.renesp.com.br [45.231.133.222])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mdeJc0zF;
+	arc=none smtp.remote-ip=209.85.128.41
+Received: from mail-wm1-f41.google.com (mail-wm1-f41.google.com [209.85.128.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5FB40606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 12:21:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5FB40606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=renesp.com.br
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=renesp.com.br
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E626606A682
+	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 12:28:45 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6E626606A682
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=onz3Z43l;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=tempos-project.org header.i=@tempos-project.org header.a=rsa-sha256 header.s=dkim header.b=wo63T123;
-	dkim=fail reason="signature verification failed" (1024-bit key) header.d=renesp.com.br header.i=@renesp.com.br header.a=rsa-sha256 header.s=2021 header.b=O5hz/+Lj
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=renesp.com.br;
-	s=2021; t=1795522852;
-	bh=xIaQcj2s83xLPfozpMSbM0Bd40toJFIkUkAt/cxZJw4=;
-	h=From:To:Cc:Subject:Date:From;
-	b=onz3Z43l1TzZM+FjzmABcPxCE7UyvDPCTjleR/hbQCmrtSGNNpMPtK6loimZ+g2Lk
-	 0kO0+Hp8x8KD3tg9dyLNhH2FYQmTpxstocN5JjsZnHyuttie5c2PzTcilAlzS7A8uM
-	 iBFvMkPEOKdSqWn9/C4gMJgI8Z7EEuOuHAH+WjC4=
-Received: from renesp.vps (renesp.com.br [127.0.0.1])
-	by mail.renesp.com.br (Postfix) with ESMTP id 4jYhjc0n9Cz3wvK
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 09:20:52 -0300 (-03)
-Authentication-Results: renesp.vps (amavis); dkim=pass (1024-bit key)
- reason="pass (just generated, assumed good)" header.d=tempos-project.org
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=
-	tempos-project.org; h=content-transfer-encoding:content-type
-	:mime-version:x-mailer:message-id:date:subject:to:from; s=dkim;
-	 t=1795522845; x=1798114846; bh=xIaQcj2s83xLPfozpMSbM0Bd40toJFIk
-	UkAt/cxZJw4=; b=wo63T123bNKXnpGfDFco4Xx3vyko/abORdpp9zom6sviuKY3
-	a1nIiBO1En98wqdtKOfhw7SYE7wYt8dD0PnpiANknYhAy9lRUsGii28P+HQefOJT
-	VBFkkII+pk+arTh3AD+l3ptTJy8ODQMCFJdLUw5bxHya16waBDmFqvnUYCWfEayP
-	Lfr9JxU+0nAfg52vkRwNvZ/dk7o5uYOBQBL0Wb7HMlBTWQ7LN16788f0AJdW6XSr
-	DVyTRbXuqOR6PGlhd3QelBbuOXNaXzpCuzjl0MYDIQv5oOZ+S4qpeFal03xAkoqE
-	Iyl1rLDVSr82DdFyQb3wknAs2unMUdTM9lgJzQ==
-X-Virus-Scanned: Debian amavis at renesp.vps
-X-Spam-Flag: NO
-X-Spam-Score: 2.21
-X-Spam-Level: **
-Authentication-Results: renesp.vps (amavis); dkim=fail (1024-bit key)
- reason="fail (body has been altered)" header.d=renesp.com.br
-Received: from mail.renesp.com.br ([127.0.0.1])
- by renesp.vps (renesp.vps [127.0.0.1]) (amavis, port 10026) with ESMTP
- id KIf6VitDw5wf for <linux-arm-msm@vger.kernel.org>;
- Tue, 24 Nov 2026 09:20:45 -0300 (-03)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=renesp.com.br;
-	s=2021; t=1795522835;
-	bh=U8jsuGQrWb3zRrhzqCiAgcfxcu/AgiSD/CP5GlnXhWg=;
-	h=From:To:Cc:Subject:Date:From;
-	b=O5hz/+Lj32FDvO9vBL3FIcFU2QDWsknO/elqQxp1g7TLhy3Zc64fxsVqTD2LQrh5H
-	 eR6x9+Y11Tx6Lf8sQAErXAHMAE0adNpIvLSRL1Lb6nx8xXbW1sWrTgBPj+dUhhFZMA
-	 o+dHWF0YwuUjKJ94liyR6M+OPoeK6pDaXlFxZsaQ=
-Received: from rsp-x1 (unknown [178.20.90.158])
-	by mail.renesp.com.br (Postfix) with ESMTPSA id 4jYhjF09RLz3wvJ;
-	Tue, 24 Nov 2026 09:20:32 -0300 (-03)
-From: =?UTF-8?q?Ren=C3=AA=20de=20Souza=20Pinto?= <rene@renesp.com.br>
-To: srini@kernel.org,
-	gregkh@linuxfoundation.org,
-	arnd@arndb.de
-Cc: ekansh.gupta@oss.qualcomm.com,
-	anandu.e@oss.qualcomm.com,
-	linux-arm-msm@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	stable@vger.kernel.org,
-	=?UTF-8?q?Ren=C3=AA=20de=20Souza=20Pinto?= <rene@renesp.com.br>
-Subject: [PATCH] misc: fastrpc: fix fastrpc_user leak on abnormal process exit
-Date: Tue, 24 Nov 2026 13:20:11 +0100
-Message-ID: <20261124122011.2912030-1-rene@renesp.com.br>
-X-Mailer: git-send-email 2.53.0
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=mdeJc0zF
+Received: by mail-wm1-f41.google.com with SMTP id 5b1f17b1804b1-4bb6c7b6dbdso41228615e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 04:28:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1795523324; x=1796128124; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
+        b=mdeJc0zFgMONR/NIr7+cJFXQYT9CzjbZVK8K5bHdLs5owNebF6BU6Lbm+9OJDMU10Y
+         yt7f+5sLgqYmVZIDmBpJ4ksEtISJb/I97RIHZbwO6MvpHEzvTiAk3fxKdlhe4KnzcOzj
+         ZywLle01PUQKQXASCQztj/WDuBw56a373qOxXHDEI8c2CClJsa5dYMIz6SPbcBJ6fGs6
+         EE8HLW5oohacke5/5JVwZ14wuPmHOaO5S/x37gkYucadKC7fjdMmkrsfH7WTbEm7GF7b
+         +sIlmr+BFFRDH+eHJlg/ADSXxq72+jMtqdO3N/xPxEpd4/V0unSmakepAaTOry33TdW2
+         vypQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795523324; x=1796128124;
+        h=content-transfer-encoding:content-type:in-reply-to:content-language
+         :from:references:cc:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=eZhcQLcos0J5dvNvJuQcdaS5XfBtHybSILA8OS9MUy4=;
+        b=af8ImMmucL3PDEZYWdSZI3xJ41JTVrTB/lbw0Cu5JtreHqAN3daL7xv/ELMOKBX205
+         g+Ms6T3aeyHaX/zcXk1hAthgi3Mv0va0rgi3xB5/X3jjJvjrHzOps8uiA3d1i/X1TQ0p
+         WdIldZfn5vgsjAOv3hplkls+vK2atVk1Av1VSq55A9M42jlkLEzW3AG2jsInBs2OfL9/
+         2ap5RXYRhkPaJeI8KlEkO9SMRHz89gwN5rSmYVM7DOOL33FZDc4EAXERXgl04I1OUEGL
+         aL3zuGTvlbrbn72cEvqVPzZ6hfs5rM+uZT7sxPLcGxE6P7LXWeS42sssN4ZI998fv2EV
+         MX+g==
+X-Forwarded-Encrypted: i=1; AL+hErEkORsG2y4gtLT6sHA6S172obuSgrbcUWAAhm7VOm6evXFGZSRpBrRyzVoJx2cNB86cD6tb88KIqdP2Jp7X@vger.kernel.org
+X-Gm-Message-State: APuU4Z/hrEAs1lXTz6Mt7aTlVifHCbMtyV9A58FkY3s+d9m6RhoTiNjZ
+	qM1jkHgFQ4BjpBvkhmZR+W/pYbLTFXcuTFoQWXD198XP+kqnyuodSwbrwBUJpYsEFXI=
+X-Gm-Gg: AZFdTZc/Oz2wTnwKi4Jzdqh1XCc0y2tO7Cy0boQ+U2mbEUfYUMmrjfsRYeCwz3l1JGQ
+	NZtLpQlIa0lPuePZMCjLclqP74gHxJ466bTunU6fKjjh7QSXTT5vXCRrZn/DZ467xf/U308Qsu4
+	3T/aXTv8qXz/vQK1S9sk9sWcM9nh2Nid3g/9yo0WtMC7VvdqnI5ESOasryvvds94h+HUx0/YFGV
+	b6hw2u8NNThPJnfDDhgQKUkdQZL2x5u8jgEUT3laYsQhUEcD5SHcmyj/AkJ4vqLzLroY7FoqacP
+	elvGhdwanS3nFd9yy++sr00LegjiBpJbK1YBciYtslq0pUoFLKEtaJ+OvIqLYL11yby3Mc3YBwm
+	K6t611b7da2HP1b9I5If7Hsrs9G+1biULGQXCfyzHIPhVoWtpNqUZyzit8+mdbZjT9etw5lRifv
+	MgeP2kXGV6k0ahuDNPkNgJGzO3w5P0aKfYZikKhKH6+O+RYfk7Gt8zJVGrDoFNVX3i2Jb6qAwjF
+	OXxj0yc90wisFnGntJab+nj1xospbWvL3u20NZzL/WA9Q7u2dVuDhT6d9QT+SDYj26zxvru1IzT
+	OZyP5raPWCdC8O7luHYRoktLFZGz0hSluZSg8O+n0RY=
+X-Received: by 2002:a05:600c:1911:b0:4a1:7c56:d4e2 with SMTP id 5b1f17b1804b1-4bb8880cf84mr300507395e9.16.1795523323754;
+        Tue, 24 Nov 2026 04:28:43 -0800 (PST)
+Received: from [192.168.0.167] ([109.76.241.250])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8538b2c5sm432306495e9.5.2026.11.24.04.28.42
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 24 Nov 2026 04:28:43 -0800 (PST)
+Message-ID: <08b9a714-278b-4e1c-81c8-59a60dba5916@linaro.org>
+Date: Tue, 24 Nov 2026 12:28:42 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -103,77 +90,63 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/6] media: qcom: camss: csid-340: Report the hardware SOF
+ timestamp
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+References: <20261123-camss-hw-ts-v1-0-7b62dda6d7a9@oss.qualcomm.com>
+ <20261123-camss-hw-ts-v1-3-7b62dda6d7a9@oss.qualcomm.com>
+ <c7fc67a6-e15f-40df-9c0a-7eae54e99d23@linaro.org>
+ <CAFEp6-1otVCjNJgWLTiOMQpdy1t4qJUP6_NK0CuifrN+cOTTcA@mail.gmail.com>
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+Content-Language: en-GB
+In-Reply-To: <CAFEp6-1otVCjNJgWLTiOMQpdy1t4qJUP6_NK0CuifrN+cOTTcA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Since commit e85eb5feca8e ("misc: fastrpc: fix use-after-free of
-fastrpc_user in workqueue context"), each invoke context holds a
-reference on its fastrpc_user, while contexts left on the pending list
-(interrupted or timed out invocations) are only freed by
-fastrpc_user_free(). When a process dies with invocations in flight,
-this cycle leaks the user with all its maps and buffers. As the session
-is given back at release, the next process can get the same SMMU
-context bank with its IOVA space still in use and fail to map its
-buffers.
+On 24/11/2026 12:20, Loic Poulain wrote:
+>> On 23/11/2026 17:16, Loic Poulain wrote:
+>>> +static u64 __csid_sof_timestamp(struct csid_device *csid, enum csid_iface iface)
+>>> +{
+>>> +     u32 lo, hi;
+>>> +
+>>> +     /*
+>>> +      * The pair is latched on SOF rather than counting, so it can be read
+>>> +      * one word at a time without tearing.
+>>> +      */
+>>> +     lo = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR0_SOF(iface));
+>>> +     hi = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR1_SOF(iface));
+>>> +
+>>> +     return csid_timestamp_to_monotonic(csid, ((u64)hi << 32) | lo);
+>>> +}
+>>> +
+>>>    static irqreturn_t csid_isr(int irq, void *dev)
+>>>    {
+>>>        struct csid_device *csid = dev;
+>>> @@ -207,7 +234,7 @@ static irqreturn_t csid_isr(int irq, void *dev)
+>>>                iface_val |= status;
+>>>
+>>>                if (status & CSID_IFACE_IRQ_INFO_INPUT_SOF)
+>>> -                     csid_sof_event(csid, i, 0);
+>>> +                     csid_sof_event(csid, i, __csid_sof_timestamp(csid, iface));
+>>>        }
+>> I think a callback in csid_sof_event() might be cleaner or some other
+>> way to not have to replicate all of __csid_sof_timestamp() for each CSI
+>> decoder.
+> I added it as a parameter because it is provided in much the same way
+> as the sequence number, given that the timestamp is directly related
+> to and coupled with it. So it is not clearly obvious why the sequence
+> number should be passed as a parameter while the timestamp should not.
 
-No thread can be in an ioctl on the file at release time, so drop the
-references of the pending contexts there. A context still waiting for
-the DSP response is freed when it arrives.
+But pretty much every hardware implementation will have to do the above 
+function. I'm asking for more functional decomposition.
 
-Fixes: e85eb5feca8e ("misc: fastrpc: fix use-after-free of fastrpc_user i=
-n workqueue context")
-Cc: stable@vger.kernel.org
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Ren=C3=AA de Souza Pinto <rene@renesp.com.br>
+You could pass the hi/lo for example and make the sof_timestamp() 
+function common - called once from inside of csid_sof_event()
+
 ---
-Tested on a Qualcomm IQ-8275 EVK (QCS8275) with a 6.18-based kernel:
-a llama.cpp process using the CDSP was killed while invocations were in
-flight. Without the fix its ~1.8 GB of buffers stayed attached to its
-context bank, and the next process, given the same context bank, failed
-to map its own ("failed to map buffer"), leaking more memory on every
-retry. With the fix the buffers are released at close and the next
-process works. On mainline this is only build-tested (arm64, W=3D1).
-
- drivers/misc/fastrpc.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
-
-diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-index cdc2627bdaf2..09a2963d72f9 100644
---- a/drivers/misc/fastrpc.c
-+++ b/drivers/misc/fastrpc.c
-@@ -1725,7 +1725,9 @@ static int fastrpc_device_release(struct inode *ino=
-de, struct file *file)
- {
- 	struct fastrpc_user *fl =3D (struct fastrpc_user *)file->private_data;
- 	struct fastrpc_channel_ctx *cctx =3D fl->cctx;
-+	struct fastrpc_invoke_ctx *ctx, *n;
- 	unsigned long flags;
-+	LIST_HEAD(orphans);
-=20
- 	fastrpc_release_current_dsp_process(fl);
-=20
-@@ -1733,6 +1735,20 @@ static int fastrpc_device_release(struct inode *in=
-ode, struct file *file)
- 	list_del(&fl->user);
- 	spin_unlock_irqrestore(&cctx->lock, flags);
-=20
-+	/*
-+	 * Pending (interrupted or timed out) contexts can't be resumed anymore
-+	 * and each holds a reference on the user: release them here to avoid
-+	 * a cycle.
-+	 */
-+	spin_lock(&fl->lock);
-+	list_splice_init(&fl->pending, &orphans);
-+	spin_unlock(&fl->lock);
-+
-+	list_for_each_entry_safe(ctx, n, &orphans, node) {
-+		list_del_init(&ctx->node);
-+		fastrpc_context_put(ctx);
-+	}
-+
- 	fastrpc_session_free(cctx, fl->sctx);
- 	file->private_data =3D NULL;
- 	/* Release the reference taken in fastrpc_device_open */
---=20
-2.53.0
-
+bod
