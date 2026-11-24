@@ -1,87 +1,61 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.218.49
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=117.135.210.4
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795523760;
-	b=o1N1pcGWKWpNEbOWFFNlp2ibt3XNJl9f6EMOAH2gFg1nz0TY+lC3w5d9s8aGIWD36/1G
-	 vdzSWVWsELsCM32g51n9KHYDDZK1T3muAzzTsjPMXQOihWsybGzMuMmBLDaKkzyx+7n3c
-	 80ZWxDirn87lvnUVBeP1Bsblb4ZSr2SdA2+ft74ZBOun7YWeUY8fQWJmRyd0AjnCsdBSE
-	 8XOfAnHNoQIVdDWDoANv2cUuirnly42qRfm1cBHoK1iVUCxPO/TjAWzKCxER020AREaGa
-	 YOHTpsTG8BXCWGkWZ5oGm5/8AFUDZHpEszJA57TkUvEy2fw8Cv225X2Srvd6Ty4dFcA==
+	t=1795524269;
+	b=1Hf1Md1yaYCCjvw1q12jFAqJjGmwd/MTp38/eEzgv6Gw2DzsGsmUcteuJywvXg/9yaPf
+	 zQx0rmS8a3HmnhMao0kZx1u04i1ygAwiDpy2Ej9x0fcs2PvWxrqyETjOIvK1/vpzUUIKb
+	 qdHUXSbH87o4+Xf7w8lWIi1Qtw58bl6VhgmaGKWzISkyBwx4aFhrLgR7xhRRs2W1x+4gq
+	 93llxtR2lbBuacrqC5TgIp4Q3UznN/Vk0FlwqTDO5L4ZMMBmd2q5vn/dXBb7+qehTB/FH
+	 fCKp0dy6vWZv6gO8Fv1Ha7nzB7QIPErJ97dv0zr4HznklurR+v3cYtXesM4G3YxxnTA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795523760;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:References:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=A0JZ8rpuLBAnmoXP2EXMjipyYHstvEtP1ShZXzsUQ1o=;
-	b=5gp8WedSehZDBcXEMHd8JiUv9N8QWyEzvFubXB0A3UG7+GOrJvg5J/YypidN0PJQR+cL
-	 W4EnfihXrZZ210KhaSblgw0JRbxQPueiG9yfQj2MstMiZry5koFZrhini0BGMhkhxgA4F
-	 11SryIUZ5UuL8AShYbbD6xwWQBgZbWIR+afxy0fwyy2NAZrtxZ19svAD71K6W6qWZmGhZ
-	 CVkahqNjriH4JdG8r1iRYpeniXjXWYUpqTlKTlD1zyQxTSrMpI2mML7x9HYDGCXnX+SOi
-	 g8oUZ7AY2qFD1iN+wHYtkAlEK0bhYqCBoPHsIQpWD3jUcVRkPDSAVrvrCBdLxJ+IAgg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795524269;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=N3NTmfX35b2vV6UrMxA0DBPxvecP96wM7O5DoxJIPqY=;
+	b=KSmXBV53Uf9G767ZWNJnZjcDohs2vv1NEjx82vTfmVtzD/iPkW7yWx8oxhF7lQDLBz31
+	 PxPWckxVCyBZBKY9D/U9XKHptel46idOMn6KC10YyDLmLfdGqOkKpCIK0ufGDp3NVU6bw
+	 OhnhVJOmQHVGZf71XhFQV6yDsC57kgFjX9a1hu/ttvbHrmsoWf76A2phV04x7tLLlUvtJ
+	 0vVr1AGVHhjk1cVsUifeB5pYLuFoVEfGVIo4GqLt5UWBCsf9jkQ0Bo9TMNQof8Emh2Co0
+	 cjTTOCMjON2j3zG3g3nxUxyEXub3DvPe1eS4+o7rRsrZU9vXU+rTGfh3MHCM9tfJbYw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oGH5MxDT;
-	arc=none smtp.remote-ip=209.85.218.49
-Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=163.com;
+	spf=pass smtp.mailfrom=163.com;
+	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=l4dtxQ4R;
+	arc=none smtp.remote-ip=117.135.210.4
+Received: from m16.mail.163.com (m16.mail.163.com [117.135.210.4])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E61D2606A321
-	for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 12:35:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E61D2606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5CA0606A321;
+	Tue, 24 Nov 2026 12:44:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5CA0606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=oGH5MxDT
-Received: by mail-ej1-f49.google.com with SMTP id a640c23a62f3a-c515319dd89so525000666b.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 04:35:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795523758; x=1796128558; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=A0JZ8rpuLBAnmoXP2EXMjipyYHstvEtP1ShZXzsUQ1o=;
-        b=oGH5MxDTn+d8EiD6of2XuA66WykMNo9n4h4Uhdx54Kkx1dFVHhUULXYgtpoF0BnCRm
-         TZUkYi/GO+ktBWCOSerzr6XrHk0LVdCMqIe3OdtCnkeq3z9NKCaO4djuexke7K5p0Ed2
-         1lhkV+ggicW+lB48KjNL865PrjwbpXuvgbAGdkR8xo5X1z7ZmiR3klPJLknVc/uW9x+T
-         +Zc4Y0z/DVdFQPg+aRynpcBYKhu1Bc93iRLPBefei4XLwR2GnBKMkkA5jmGtpyzA5xlJ
-         vStQJobCc31gcwxhJp+unl3iwmKyEpMNxL02QreicRUNs+WoQ84k+Tvg++TluZaOvLmZ
-         ZiHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795523758; x=1796128558;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=A0JZ8rpuLBAnmoXP2EXMjipyYHstvEtP1ShZXzsUQ1o=;
-        b=GmmuqK+H6nRYwyJ11f3X7pW/xThbg975CBryHZSMqoT0KzJjgKGuxOdi1doSgyE0lS
-         knCJdccYT6Fhb4ImtiRcELkfzBQiuVCfRGJALexTxCda9cAABl2Wq4BUg8w1eA1xhfhB
-         qkWKLWxl1bfkS3AidT0wRBS3u++vGgtXmhWLAqDIYiXIP8yPK2LM617nB2PblYkuNopz
-         2F+i86VCaZcOQTZHru+ZJuNy/g4iXUkbWTS1BKWwSJtr7G4cwTtc7gSAt0jkj6MLP149
-         hiy9AHrD9BBI2kHeB7ZNlsKGRMcLC++v/tymRaJHYs2jNuGGtP37PUC9mmOJ6KxBLjmw
-         M5Aw==
-X-Forwarded-Encrypted: i=1; AL+hErHKQ5yul1qEZbk46gm9jmnuJQlOxYTWGsg/ASBG06lsSJhpYF/PIePh1D5kjkkFZlVT4yvxGicNuUA1jvKC@vger.kernel.org
-X-Gm-Message-State: APuU4Z/p9HQJ1hl8DyXvqisCobJQu33tt2cG0bfELOKH0SLeUUlJFe72
-	tb0yur/SRtiXKEsO3Ia7bGQlkKJtlid71CDQKob8MjkZ+S38uooEFnDb8pnszQswcFz10r8+ZRL
-	jcpgrrkg=
-X-Gm-Gg: AZFdTZei9IB6NNoggM0+QFjfmqx3Ecy2ZTStvW+xcmB5EZrDMtP6NW1bteh7CxDbPuO
-	8QMcPN4zfCWToPdi5YHjccj4TqEPNKOZKIpUfk29QB43yYjmtdVIkVirY6GNjhIK5FCs70ywCAb
-	p1sYcUzQO/N3nyFVS7OHa/jAAC7YpA5JZqNaDEQzCXgHyWrCb0nQ/Uxuet63s1T8BdBR5hj++Wn
-	Inm3EbpLNH9fIyL09gIt/teiaI7sR1gl0n0r8+B9WyE/enp5a/8xIiulnVP5mn70Gc7VmxvBay+
-	Iotk9i2Fibq5pPEDsckelihmFt3nJFo/kpR5FuP6QBX/p2U8w9omusseAfN9jA8RECCAs0/HxZ/
-	Z1wPVpif8wxLyIHA3oj5essxI2c8iDPE58CdFMVK9rs+gVsmwUxIoE3WWKpIO7cdPN8dye+S3VM
-	2iihQjITxsL3f3KJd2Stc4bN00jdTZ5HX7ir86RYeAtw8hpIWe2+rHA/TFybIcyJAX793xt8xk0
-	275tSmNM+kcjpEHrk2dp5WTVyojeIUUr5weZsUVry45+3n8gTKRV4lHDLIL80T43LF3EBOzLAvA
-	LdZHv1M23dIQ7svmowTQLeU/b3FjcX3gz49ktHz5zbA=
-X-Received: by 2002:a17:907:f812:b0:c50:d92b:6f40 with SMTP id a640c23a62f3a-c513a88a6b1mr1121542166b.20.1795523758207;
-        Tue, 24 Nov 2026 04:35:58 -0800 (PST)
-Received: from [192.168.0.167] ([109.76.241.250])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513afc42bbsm503065066b.61.2026.11.24.04.35.57
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 24 Nov 2026 04:35:57 -0800 (PST)
-Message-ID: <57fed113-9f79-41d3-96d8-725be5e58918@linaro.org>
-Date: Tue, 24 Nov 2026 12:35:56 +0000
+	dkim=pass (1024-bit key) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=l4dtxQ4R
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+	s=s110527; h=From:To:Subject:Date:Message-Id:MIME-Version; bh=N3
+	NTmfX35b2vV6UrMxA0DBPxvecP96wM7O5DoxJIPqY=; b=l4dtxQ4RqQ/yceEb/K
+	yIFCu72UhYrVxChs+mcZUOBVlFkrMejN174rUcGCMo7ToULhdap9F8BqnwlhmmUU
+	KbHIe8nnYA8RfTxV4RnPGFb+XjsBI3RQ8Q1mCsWEZRVe0gNKePSXsxd4qf1q7iM7
+	m92EUFefLeW6uxYikp8THgYyg=
+Received: from localhost.localdomain (unknown [])
+	by gzga-smtp-mtada-g1-2 (Coremail) with SMTP id _____wDXH4WDhgVrkSAEKA--.1379S2;
+	Tue, 24 Nov 2026 20:43:51 +0800 (CST)
+From: Hongxing Xu <xing1989093@163.com>
+To: Jeff Hugo <jeff.hugo@oss.qualcomm.com>
+Cc: Manivannan Sadhasivam <mani@kernel.org>,
+	mhi@lists.linux.dev,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	xing1989093@163.com
+Subject: Re: [PATCH 1/2] bus: mhi: host: Add debug port personality switching
+Date: Tue, 24 Nov 2026 20:43:18 +0800
+Message-Id: <20261124124319.2316-1-xing1989093@163.com>
+X-Mailer: git-send-email 2.40.0.windows.1
+In-Reply-To: <6b3fbc60-34ec-4b7e-bbc7-84a0ec5d496e@oss.qualcomm.com>
+References: <6b3fbc60-34ec-4b7e-bbc7-84a0ec5d496e@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,77 +65,94 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] media: qcom: camss: csid-340: Report the hardware SOF
- timestamp
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-References: <20261123-camss-hw-ts-v1-0-7b62dda6d7a9@oss.qualcomm.com>
- <20261123-camss-hw-ts-v1-3-7b62dda6d7a9@oss.qualcomm.com>
- <c7fc67a6-e15f-40df-9c0a-7eae54e99d23@linaro.org>
- <CAFEp6-1otVCjNJgWLTiOMQpdy1t4qJUP6_NK0CuifrN+cOTTcA@mail.gmail.com>
- <08b9a714-278b-4e1c-81c8-59a60dba5916@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <08b9a714-278b-4e1c-81c8-59a60dba5916@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:_____wDXH4WDhgVrkSAEKA--.1379S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxCF45Ww1rZFyfur1kJryftFb_yoWrXw4Dpa
+	nxGFZrJw4kJF4Skryv9F48GFWS9FZ7GF43GryDC345C398G34Svr1FqayYva47CryIqryj
+	vrZ8JF9xua4DZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x0pRYg4-UUUUU=
+X-CM-SenderInfo: 50lqwiqzyzimqt6rljoofrz/xtbC3wjfnGsFhoipFwAA3K
 
-On 24/11/2026 12:28, Bryan O'Donoghue wrote:
-> On 24/11/2026 12:20, Loic Poulain wrote:
->>> On 23/11/2026 17:16, Loic Poulain wrote:
->>>> +static u64 __csid_sof_timestamp(struct csid_device *csid, enum 
->>>> csid_iface iface)
->>>> +{
->>>> +     u32 lo, hi;
->>>> +
->>>> +     /*
->>>> +      * The pair is latched on SOF rather than counting, so it can 
->>>> be read
->>>> +      * one word at a time without tearing.
->>>> +      */
->>>> +     lo = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR0_SOF(iface));
->>>> +     hi = readl_relaxed(csid->base + CSID_TIMESTAMP_CURR1_SOF(iface));
->>>> +
->>>> +     return csid_timestamp_to_monotonic(csid, ((u64)hi << 32) | lo);
->>>> +}
->>>> +
->>>>    static irqreturn_t csid_isr(int irq, void *dev)
->>>>    {
->>>>        struct csid_device *csid = dev;
->>>> @@ -207,7 +234,7 @@ static irqreturn_t csid_isr(int irq, void *dev)
->>>>                iface_val |= status;
->>>>
->>>>                if (status & CSID_IFACE_IRQ_INFO_INPUT_SOF)
->>>> -                     csid_sof_event(csid, i, 0);
->>>> +                     csid_sof_event(csid, i, 
->>>> __csid_sof_timestamp(csid, iface));
->>>>        }
->>> I think a callback in csid_sof_event() might be cleaner or some other
->>> way to not have to replicate all of __csid_sof_timestamp() for each CSI
->>> decoder.
->> I added it as a parameter because it is provided in much the same way
->> as the sequence number, given that the timestamp is directly related
->> to and coupled with it. So it is not clearly obvious why the sequence
->> number should be passed as a parameter while the timestamp should not.
-> 
-> But pretty much every hardware implementation will have to do the above 
-> function. I'm asking for more functional decomposition.
-> 
-> You could pass the hi/lo for example and make the sof_timestamp() 
-> function common - called once from inside of csid_sof_event()
-> 
-> ---
-> bod
+Two questions, both pointing into this patch, so answering them together.
 
-Anyway yeah csid_sof_event() increments the seq_no itself so you could 
-just have a ts = csid->get_sof_ts(csid, ...); and functionally decompose 
-without passing hi/lo down the callstack too.
+> > +What:           /sys/bus/mhi/devices/.../debug_ports
+>
+> Why sysfs and not debugfs?
 
-Either option really.
+Because this is not a debugging aid. It is a documented ABI that end
+users and provisioning tools drive on a shipped system, and it has to
+remain available there.
 
----
-bod
+What userspace gains is the ability to bring up, on demand, a group of
+ports that a given firmware product configuration does not enable by
+default: the diagnostic interface, and the same applies to the ADB and
+AT ports. A single switch that creates or destroys that whole group is
+what is needed; poking channels one at a time is not. That is why it is
+described alongside the other controller attributes in
+Documentation/ABI/stable/sysfs-bus-mhi.
+
+debugfs cannot serve this, for two concrete reasons.
+
+The first is availability. CONFIG_MHI_BUS_DEBUG is a bool with no
+default, so it is off in the configurations product kernels ship, and
+it is a compile-time switch: with it disabled, debugfs.c is not built
+and the calls in mhi_register_controller() resolve to empty stubs. A
+user who needs these ports would have to rebuild the kernel to get at
+the control, which is not a usable interface.
+
+The second is capability. MHI's debugfs already exposes states, events,
+channels and devices, and all of them are read-only listings. There is
+no debugfs entry in MHI that can create or destroy an MHI device, so
+this is not a choice between two equivalent interfaces.
+
+There is also a security reason to keep these ports off unless they are
+wanted. The diagnostic and ADB ports on a WWAN module are a meaningful
+attack surface, and a module that does not need them should not be
+exposing them. Hiding that decision behind an interface that is absent
+on production kernels would defeat the point.
+
+> > + * @debug_ports: Whether the debug port personality is active, ...
+> > + * @debug_ports_pending: Latest personality requested from userspace,
+> > + *		 applied by debug_ports_work
+> > + * @debug_ports_work: Applies @debug_ports_pending from the ordered
+> > + *		      high priority workqueue, ...
+>
+> Are these optional?
+
+None of the three can be dropped for this feature to work, though none
+of them is populated by a driver either.
+
+debug_ports records the personality that is currently applied. It is
+read by mhi_chan_is_available() on every enumeration, which is what
+keeps a debug-only channel hidden while the commercial personality is
+active, and it backs the sysfs attribute so userspace can read back
+what is in effect. It belongs to the controller because the setting
+covers the controller as a whole.
+
+debug_ports_pending carries the value userspace has just written. The
+create and destroy work cannot run in the store function itself:
+channel devices are created and destroyed by the state transitions on
+the ordered hiprio_wq, and pm_mutex does not exclude those transitions,
+because a transition releases it before calling
+device_for_each_child(). So the work has to be queued on that same
+ordered workqueue, and by the time it runs it needs somewhere to read
+the request from. Keeping it separate from debug_ports also keeps
+"requested" and "applied" distinct while a switch is in flight.
+
+debug_ports_work is that work item. It is initialised in
+mhi_register_controller() next to the other work items, queued on the
+ordered workqueue, and flushed by the store so the write returns only
+once the ports exist.
+
+All three are zero-initialised, so a controller that declares no
+debug-only channel starts in the commercial personality and behaves
+exactly as before. I am happy to say so explicitly in the kernel-doc.
+
+Could I ask what you have in mind here? If the concern is that the docs
+should mark driver-populated fields as optional, these are not
+driver-populated and I can word it that way. If you would rather this
+state lived somewhere other than struct mhi_controller, I would like to
+know your preference before reworking it.
+
+Thanks
+
