@@ -1,122 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795631041;
-	b=xKr26D1c4VvnwwKRNihoBrtGM4bny3Rzb+T7PHBppp25KN0TGebvXa+ZGibMgVUt3Jvl
-	 Cs17Ii17oSeSBLmHrUMN/DvGpdzTfjnROMJ6pGjS/tshXbZyx4Urz//BoxS3hv9uRhWK8
-	 NemgnDtwndeRIRKphBL0EsY8rZTscSoXeiQhHWFxnXO2KExMl86nDRuH3po85IzctTW8k
-	 DoH3Vpv9uwJtQ29gakCnpBzGKyFPhFFbOOz4mTkvDzDaSyrNYzJyUjNsUu5jV6pCO7W7Y
-	 4w46C7PL1l14jnxk5ZFE6cZ2NbrAg9b0xgjtTKX9sDPBQWPvgNrzv2vjZ8kRkNVj/IQ==
+	t=1795631523;
+	b=Hc6A+0m6Hm7PxJr7qiNOlhgcDaJDNXt7TzRKNN1MRE0PIaQhnmZ5hUikc1kg1kF/EWe/
+	 rzhRyBwQRlb2TTloOYLDO4ssbaduMbIivO9qBsEAo12nO5EqmKplJOJXxbZv/FkU4VM0U
+	 Ss/n5uhdaPzBUH1OrGuFv4bu89nDYpMMc2xco10v7LO/AJJJDf/Oo8OUBO0C60ZmsNSD9
+	 WqD/5my8zxJ0o1NooSC7DCyT6JS0twLBJxZ9jlQMQfEOVmD6m1+fgHIEFRBj5ts3WsQZ+
+	 UGWoRznxeYOKtT4tmu6NAS6AvczIBk6Eddu485GDnILpUICOkA9KuwuBe4zn4wZRarw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795631041;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=9E9zgJnH76UW6IGTQ2QrZ6yug4fWhoaEl9dKIjsNC8Y=;
-	b=IkL49iEZnvwUDxnku3pDc3GzFnyfEC+SZqR2AkvfmZDNYK9rOBTfGg5JXMN1hLAYFCL3
-	 Eug+CiWOfPCDWLACezyyQQ7MJXa5vlhrMwUdPO9D3edhMYivFqg9Vsvq5k7kIShWhTatu
-	 VkEtsfW1N7nLuxJom1ryLh1VfotU1p2s44WE4VJU4BZV4IeNDmdu0LIUsA822G9jo7qNg
-	 XGLFpOatlL7+cEEJJL11h56D20dhRM4Fu4HRq7ChAyMk0QH158F+sUEYVU+y208lp1ccI
-	 r1VBIw4evn7Pk/TJybYynD6daOgBZr/pC4JPrFvsSkIsWWpDBh2yhW3UWmZ52OsYXTQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795631523;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=S20BW9Z/7VvXX4AsZLkPiNnBx6EdUHqcwU8r7UN+c8I=;
+	b=tWiRQm4/GTwxB6sbabjCBlkL48qaouzUHu2SLruhUlmXN6Gr+JzSv//qxv1eKLfncDVk
+	 VGuIjbrh/MChLtZALFyNxVLQG8oDb4dyvDrPCVnS1mQajGzBOnXDWWfkhCm0qilfDxW2Q
+	 0MufC4i5WulnO0xVeRTXadY1C1gXTF0WeKx+GGz8Krsp43NIizq0OU12DGs/K0nh6Vq1w
+	 doFKKHQhdB7mRxfOjQNYeKB89EAhk/K9UaQlOCUv0vleh13iYyeFqgwJQaCL1PnnAb4DS
+	 Qs13Z76SlO6SdXmE6bocEaQeGz/hKqYscw5kFDVuCD782oU5/i1YCrnhctovlgeXo7Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SqGYS5HT;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BUDTglo+;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=Lo8XJopf;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C757260A2618
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:24:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C757260A2618
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACBAC606A31E;
+	Wed, 25 Nov 2026 18:32:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org ACBAC606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SqGYS5HT;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BUDTglo+
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6APGQ6x6715126
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:24:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=9E9zgJnH76U
-	W6IGTQ2QrZ6yug4fWhoaEl9dKIjsNC8Y=; b=SqGYS5HTm1csOaxXxCMfFuXhn9Z
-	0cc2pROyHUvKtsedRPvVu2TJ4VQ+zO09gZm/lMX5FF+r+XVvNKj1ZZuVUltdlN+3
-	7+DtYym3TcOz6ParrlWos6hdJJimjQrHYcwR7ECOFF9SngKEoBQ9UGrK9qw5fDP/
-	843eEGNB71/OMDjMJECiZ/5DVRNtr4wDbhQ3XySS7NALWFRb5I3ZfCP3j8KzQx8J
-	IHNHc0wfE9NEa4POobVGTFJXr3JBhuogIk+Kowj6+PmUCw4oCfMdLxECtH1RPxCk
-	dQ5D6dU+JUCBBYR/Ywier+3jD5/Qo+CQZ3lZunpr8tZr8Eh8ZOgn4WB4oEA==
-Received: from mail-yw1-f198.google.com (mail-yw1-f198.google.com [209.85.128.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mqbm5qf-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:24:00 +0000 (GMT)
-Received: by mail-yw1-f198.google.com with SMTP id 00721157ae682-8b3ad0823c3so18521717b3.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:24:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795631039; x=1796235839; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9E9zgJnH76UW6IGTQ2QrZ6yug4fWhoaEl9dKIjsNC8Y=;
-        b=BUDTglo+2c5M9xNp3bSXFyoKp4mep1ERhhvVCkAMxz0gp6HgL0myBR/HjhPB1ZJKgr
-         oHrqxCJm+QoIFsAriioHtB6hJDjevBKNhl7o4neNU4Uojzkag4DGMI97swRJCH/uHCa7
-         g8TfQPH3dQgekN9aW2ZJspjtI8DP7IZxXP5CNUNCJ30rKoheKTaQZY7LX1TfhJw2XqQr
-         QdqOBt9lSRbS//0OwiqDm7Ebq0m26VJtzoam3854RlLGFI/DsdUMJDJ7pYEkRrP1lVPo
-         SWWnge15bddqbXeD6/4cVglprVBzTmXWtAuEbl2nI7qZ9Z1vM/AVkTnchbCoRHvHsjgU
-         xtWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795631039; x=1796235839;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9E9zgJnH76UW6IGTQ2QrZ6yug4fWhoaEl9dKIjsNC8Y=;
-        b=ANNnMcFyCKhvQ7iW96cointcWKjg4zWDNPYcA0/FHx5PpTkz+FZYdy+AjC0x2LAULV
-         +EItvyNkhA0hyQoptPaInnyY2WjVdRo2kCA5m9PahiRE7tpLn6ZWl0HcJpKLNbCb6DU1
-         gi8RNuv5AynE/W5hcadIrgMGBLvA75r9Av0d3zEt1hhB+8JgcrBvOzWlPgGJdNpHRUST
-         gnFcYPDUZ2bT4qiUVVvfSFEqZQzVyUsnE3D+6Yx/QV/1ODymgJJPPByRuzQbkjRabuWL
-         hAWiJ7n0evh4Z9ezrErUtROw7RcDzF2YSqMs6DR4P0PbwxN6cLTE3c2BInE6QafqXim5
-         LOJg==
-X-Forwarded-Encrypted: i=1; AL+hErH0VzC4ey48CWe/WWuvAGiXLozcXDY87w90Xc09p/fAY+h6VoesUf3DN++LDlN7bvghm7FZbtO4+jTF2u6E@vger.kernel.org
-X-Gm-Message-State: APuU4Z90EQJbd1Sy51d+7vVYvFS//HuNeHT6NUEngk+TAAoOii1cmJWZ
-	An9PRIJo2IblDte2a3qSF6uxxtN5vsZlRHSzXuJuhbhRWA3ULxuK2wl36J9ncuR9hJcmIhsB6mE
-	fmpvymmuCHS5J0F1vfA2YKY5JXuzirk3YSwcwh/eFTwSevMtPgL03yp//v9SMLUks+wse
-X-Gm-Gg: AZFdTZcTAG6pL8l9ovuK5u6gPGHf/spsOvqcvcCQk9YUQE4erxJ6OwzjTe2sfvqc5Mr
-	r3JsPFRCrTYzGESNDiFKiOX1ObWNJ1nXuy2dkD7vc9VTSwB4ag+bwxKZCJVvWj9qAZbYNREEvKq
-	NHSTL1EGJf1LoAqyNeuKCPwBv1L8SaF5UGb1INBPkKv9TiaZbKAJ42flvN9ph5u/Y+WQrHa8TtV
-	9PC9F3M+EXoxZlMhjZRTYzGCI3YomcDQcFhNIoJSX0c/cbBhT+fNThgR5R8TS0+0XRbDrvDRc6o
-	7vZt5PSjvkCZ41WNXYvN96K83OnuIqj+DooRKRmVaJPs4rShuivDI9Gdf1Gbu8L516x+OjOJkqr
-	D8hvo3bRnkxrlmaEEhnhqMI2YFLj3R6bIQO17sfGC+h7FMo54TYd6dhmgJDC4xKXZskL87JgOGS
-	Sy11io
-X-Received: by 2002:a05:690c:888:b0:8b4:dca4:56e7 with SMTP id 00721157ae682-8b5204d6981mr75798087b3.45.1795631039300;
-        Wed, 25 Nov 2026 10:23:59 -0800 (PST)
-X-Received: by 2002:a05:690c:888:b0:8b4:dca4:56e7 with SMTP id 00721157ae682-8b5204d6981mr75797867b3.45.1795631038670;
-        Wed, 25 Nov 2026 10:23:58 -0800 (PST)
-Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb42absm37185609f8f.1.2026.11.25.10.23.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 10:23:57 -0800 (PST)
-From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        linux-kernel@vger.kernel.org, Hitesh Patel <hitesh@ebytelogic.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
-        Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-Subject: [PATCH RESEND v2 10/12] media: qcom: camss: Enable streams API on SM8250
-Date: Wed, 25 Nov 2026 20:23:24 +0200
-Message-Id: <20261125182326.2767771-11-gjorgji.rosikopulos@oss.qualcomm.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261125182326.2767771-1-gjorgji.rosikopulos@oss.qualcomm.com>
-References: <20261125182326.2767771-1-gjorgji.rosikopulos@oss.qualcomm.com>
+	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=Lo8XJopf
+Received: from [IPV6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9] (unknown [IPv6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id 8BD405340269;
+	Wed, 25 Nov 2026 19:32:00 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1795631520;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=S20BW9Z/7VvXX4AsZLkPiNnBx6EdUHqcwU8r7UN+c8I=;
+	b=Lo8XJopfwjoZFvoKaunVwkHViLUDrAVVhsZReq+SMGa29Zs9w+7eKnivv+5/FwuUfYrGuU
+	SmbHUe5z5kPs9SiDY8nNjy/0ITQ98uxNShMQpH19fXUgAx2rscjUT5I5B/HVTbTnCER0XN
+	ybYcgfT5MH+M6ERZ/L+G2rOUzg4deeU=
+Message-ID: <cc9be68f-fdb2-401a-80f4-dc4fec6b5e3c@ixit.cz>
+Date: Wed, 25 Nov 2026 19:32:00 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -126,55 +60,155 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX3PNINaL4+bk5
- ZZyTIxSbCrHgTdrZMaC0hhantar8N+Dwf5qumv9pK+FV2JDxC7mhOilBTT27yP/qTm/9pWIoZ23
- 0u7Bd7Iwp/5t8LGeLB1AWaRwOZMaFVI=
-X-Authority-Analysis: v=2.4 cv=Bb9NQbt2 c=1 sm=1 tr=0 ts=6b0727c0 cx=c_pps
- a=g1v0Z557R90hA0UpD/5Yag==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22 a=EUspDBNiAAAA:8
- a=onitAmIIXR4QNx4LYmwA:9 a=MFSWADHSvvjO3QEy5MdX:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX68e1UUWIoEhx
- XgY8IXu++32It5dMxZZTipOynilHXH8trgi2NoZ3Io+QOmXwpm8m/8+F8sU0BkeJIz+VwlHGPTW
- h1dbjFXy1QfjtGfAk27VDhMSCyLsCSdpSXjVSiKaG1jKvrU8IWgwe8CJD8mV/iUf/4r0klfhW6h
- Yw7bl2ryRL38Da30bN6bwfHaYnWtBl7L2ZFAZQkKI7c1H7yLRQSQNeUOZWI2jIHC7JCEi6fvbRa
- He9BzrBkx58HIFxfgxO0C3D5cHD3END1kJg/2j86LMrl6gldn4kQ2EDSR+nmNIsyPOiJYC7iUjv
- GCL09VbEvXAzQfWPoRp6SmweUaxGyQyFZbUVtsGg13spj2kWegWecphd+N77tq8VTJkXo9efnWr
- 6bYkIJcb71LAqpXp8B6yThHD6UdbOOnTLSlC7EAVrfFcGFldHEvWfJ2b7U65nVm702D/XSgx/l8
- x14zlVnReHjcyEZIXhQ==
-X-Proofpoint-ORIG-GUID: qznOUsmU8WBARBNNy8RDKtfjTdKoNuMI
-X-Proofpoint-GUID: qznOUsmU8WBARBNNy8RDKtfjTdKoNuMI
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_04,2026-11-25_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250073
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] media: qcom: camss: Don't stream sub-devices upstream
+ of the sensor
+To: Gianluca Boiano <morf3089@gmail.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Sakari Ailus <sakari.ailus@linux.intel.com>,
+ Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, phone-devel@vger.kernel.org
+References: <20261123-b4-ccs-imx376-v1-0-2b26850a6f11@gmail.com>
+ <20261123-b4-ccs-imx376-v1-1-2b26850a6f11@gmail.com>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ xsFNBF5v1x4BEADS3EddwsNsvVAI1XF8uQKbdYPY/GhjaSLziwVnbwv5BGwqB1tfXoHnccoA
+ 9kTgKAbiXG/CiZFhD6l4WCIskQDKzyQN3JhCUIxh16Xyw0lECI7iqoW9LmMoN1dNKcUmCO9g
+ lZxQaOl+1bY/7ttd7DapLh9rmBXJ2lKiMEaIpUwb/Nw0d7Enp4Jy2TpkhPywIpUn8CoJCv3/
+ 61qbvI9y5utB/UhfMAUXsaAgwEJyGPAqHlC0YZjaTwOu+YQUE3AFzhCbksq95CwDz4U4gdls
+ dmv9tkATfu2OmzERZQ6vJTehK0Pu4l5KmCAzYg42I9Dy4E6b17x6NncKbcByQFOXMtG0qVUk
+ F1yeeOQUHwu+8t3ZDMBUhCkRL/juuoqLmyDWKMc0hKNNeZ9BNXgB8fXkRLWEUfgDXsFyEkKp
+ NxUy5bDRlivf6XfExnikk5kj9l2gGlNQwqROti/46bfbmlmc/a2GM4k8ZyalHNEAdwtXYSpP
+ 8JJmlbQ7hNTLkc3HQLRsIocN5th/ur7pPMz1Beyp0gbE9GcOceqmdZQB80vJ01XDyCAihf6l
+ AMnzwpXZsjqIqH9r7T7tM6tVEVbPSwPt4eZYXSoJijEBC/43TBbmxDX+5+3txRaSCRQrG9dY
+ k3mMGM3xJLCps2KnaqMcgUnvb1KdTgEFUZQaItw7HyRd6RppewARAQABzSBEYXZpZCBIZWlk
+ ZWxiZXJnIDxkYXZpZEBpeGl0LmN6PsLBlAQTAQgAPgIbAwULCQgHAgYVCgkICwIEFgIDAQIe
+ AQIXgBYhBNd6Cc/u3Cu9U6cEdGACP8TTSSByBQJl+KksBQkPDaAOAAoJEGACP8TTSSBy6IAQ
+ AMqFqVi9LLxCEcUWBn82ssQGiVSDniKpFE/tp7lMXflwhjD5xoftoWOmMYkiWE86t5x5Fsp7
+ afALx7SEDz599F1K1bLnaga+budu55JEAYGudD2WwpLJ0kPzRhqBwGFIx8k6F+goZJzxPDsf
+ loAtXQE62UvEKa4KRRcZmF0GGoRsgA7vE7OnV8LMeocdD3eb2CuXLzauHAfdvqF50IfPH/sE
+ jbzROiAZU+WgrwU946aOzrN8jVU+Cy8XAccGAZxsmPBfhTY5f2VN1IqvfaRdkKKlmWVJWGw+
+ ycFpAEJKFRdfcc5PSjUJcALn5C+hxzL2hBpIZJdfdfStn+DWHXNgBeRDiZj1x6vvyaC43RAb
+ VXvRzOQfG4EaMVMIOvBjBA/FtIpb1gtXA42ewhvPnd5RVCqD9YYUxsVpJ9d+XsAy7uib3BsV
+ W2idAEsPtoqhVhq8bCUs/G4sC2DdyGZK8MRFDJqciJSUbqA+5z1ZCuE8UOPDpZKiW6H/OuOM
+ zDcjh0lOzr4p+/1TSg1PbUh7fQ+nbMuiT044sC1lLtJK0+Zyn0GwhR82oNM4fldNsaHRW42w
+ QGD35+eNo5Pvb3We5XRMlBdhFnj7Siggp4J8/PJ6MJvRyC+RIJPGtbdMB2/RxWunFLn87e5w
+ UgwR9jPMHAstuTR1yR23c4SIYoQ2fzkrRzuazsFNBF5v1x4BEADnlrbta2WL87BlEOotZUh0
+ zXANMrNV15WxexsirLetfqbs0AGCaTRNj+uWlTUDJRXOVIwzmF76Us3I2796+Od2ocNpLheZ
+ 7EIkq8budtLVd1c06qJ+GMraz51zfgSIazVInNMPk9T6fz0lembji5yEcNPNNBA4sHiFmXfo
+ IhepHFOBApjS0CiOPqowYxSTPe/DLcJ/LDwWpTi37doKPhBwlHev1BwVCbrLEIFjY0MLM0aT
+ jiBBlyLJaTqvE48gblonu2SGaNmGtkC3VoQUQFcVYDXtlL9CVbNo7BAt5gwPcNqEqkUL60Jh
+ FtvVSKyQh6gn7HHsyMtgltjZ3NKjv8S3yQd7zxvCn79tCKwoeNevsvoMq/bzlKxc9QiKaRPO
+ aDj3FtW7R/3XoKJBY8Hckyug6uc2qYWRpnuXc0as6S0wfek6gauExUttBKrtSbPPHiuTeNHt
+ NsT4+dyvaJtQKPBTbPHkXpTO8e1+YAg7kPj3aKFToE/dakIh8iqUHLNxywDAamRVn8Ha67WO
+ AEAA3iklJ49QQk2ZyS1RJ2Ul28ePFDZ3QSr9LoJiOBZv9XkbhXS164iRB7rBZk6ZRVgCz3V6
+ hhhjkipYvpJ/fpjXNsVL8jvel1mYNf0a46T4QQDQx4KQj0zXJbC2fFikAtu1AULktF4iEXEI
+ rSjFoqhd4euZ+QARAQABwsF8BBgBCAAmAhsMFiEE13oJz+7cK71TpwR0YAI/xNNJIHIFAmX4
+ qVAFCQ8NoDIACgkQYAI/xNNJIHKN4A/+Ine2Ii7JiuGITjJkcV6pgKlfwYdEs4eFD1pTRb/K
+ 5dprUz3QSLP41u9OJQ23HnESMvn31UENk9ffebNoW7WxZ/8cTQY0JY/cgTTrlNXtyAlGbR3/
+ 3Q/VBJptf04Er7I6TaKAmqWzdVeKTw33LljpkHp02vrbOdylb4JQG/SginLV9purGAFptYRO
+ 8JNa2J4FAQtQTrfOUjulOWMxy7XRkqK3QqLcPW79/CFn7q1yxamPkpoXUJq9/fVjlhk7P+da
+ NYQpe4WQQnktBY29SkFnvfIAwqIVU8ix5Oz8rghuCcAdR7lEJ7hCX9bR0EE05FOXdZy5FWL9
+ GHvFa/Opkq3DPmFl/0nt4HJqq1Nwrr+WR6d0414oo1n2hPEllge/6iD3ZYwptTvOFKEw/v0A
+ yqOoYSiKX9F7Ko7QO+VnYeVDsDDevKic2T/4GDpcSVd9ipiKxCQvUAzKUH7RUpqDTa+rYurm
+ zRKcgRumz2Tc1ouHj6qINlzEe3a5ldctIn/dvR1l2Ko7GBTG+VGp9U5NOAEkGpxHG9yg6eeY
+ fFYnMme51H/HKiyUlFiE3yd5LSmv8Dhbf+vsI4x6BOOOq4Iyop/Exavj1owGxW0hpdUGcCl1
+ ovlwVPO/6l/XLAmSGwdnGqok5eGZQzSst0tj9RC9O0dXO1TZocOsf0tJ8dR2egX4kxM=
+In-Reply-To: <20261123-b4-ccs-imx376-v1-1-2b26850a6f11@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Set streams_enable on sm8250_resources so CSIPHY, CSID, and VFE
-register their streams-API subdev ops and probe with
-V4L2_SUBDEV_FL_STREAMS instead of the legacy .s_stream() path.
+On 23/11/2026 21:33, Gianluca Boiano wrote:
+> video_start_streaming() and video_stop_streaming() walk the media
+> pipeline from the video node upstream and call s_stream on every
+> sub-device they find, including every sub-device behind the one that is
+> linked to the CSIPHY. That is fine for a sensor that is a single
+> sub-device, but a sensor that consists of several sub-devices gets
+> s_stream called on each of them, not just on the one that is linked to
+> the CSIPHY.
+> 
+> The MIPI CCS driver is such a sensor: it exposes a pixel array, a binner
+> and a scaler sub-device, and the scaler (or the binner when there is no
+> scaler) is the one linked to the CSIPHY. Streaming is started by that
+> sub-device and covers the whole sensor. Calling s_stream also on the
+> binner and on the pixel array is at best redundant and, as the CCS
+> enable_streams operation only accepts the sensor's source pad, makes the
+> pixel array fail with -EINVAL, so streaming cannot be started.
+> 
+> This is not specific to CCS. Other drivers that have a sensor on one end
+> of a pipeline, e.g. ipu3-cio2, rkisp1, ti-cal, ipu6 and rcar-vin, start
+> only the sub-device that is directly connected to them and leave
+> propagating the start request upstream to that sub-device.
+> 
+> Do the same in CAMSS: after the first sub-device that is not part of CAMSS
+> (i.e. the one that was bound by the async notifier, which is the one whose
+> host private data points to the CSIPHY), stop walking the pipeline.
+> 
+> Signed-off-by: Gianluca Boiano <morf3089@gmail.com>
+> ---
+>   drivers/media/platform/qcom/camss/camss-video.c | 28 +++++++++++++++++++++++++
+>   1 file changed, 28 insertions(+)
+> 
+> diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+> index 0852eb6f1315..71ca16f15dab 100644
+> --- a/drivers/media/platform/qcom/camss/camss-video.c
+> +++ b/drivers/media/platform/qcom/camss/camss-video.c
+> @@ -249,6 +249,28 @@ static int video_prepare_streaming(struct vb2_queue *q)
+>   	return ret;
+>   }
+>   
+> +/*
+> + * video_subdev_is_external - Check if a pipeline sub-device is not part of CAMSS
+> + * @subdev: Sub-device in the pipeline
+> + *
+> + * camss_subdev_notifier_bound() sets the host private data of every external
+> + * sub-device it binds, i.e. the one that is linked to a CSIPHY, to the CSIPHY.
+> + * CAMSS sub-devices never have it set.
+> + *
+> + * Streaming is controlled from the video node, one CAMSS sub-device at a time.
+> + * The external sub-device is the end of that chain: the pipeline upstream of it
+> + * is not CAMSS' business, and the sub-device is responsible for starting and
+> + * stopping whatever else it is made of. Sensors that consist of several
+> + * sub-devices, such as MIPI CCS ones, are not expected to be controlled
+> + * separately for each of them.
+> + *
+> + * Return true if @subdev is not a CAMSS sub-device.
+> + */
+> +static bool video_subdev_is_external(struct v4l2_subdev *subdev)
 
-Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
----
- drivers/media/platform/qcom/camss/camss.c | 1 +
- 1 file changed, 1 insertion(+)
+Since it's oneliner, maybe inline here?
 
-diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-index ac12960264ad..77fa80dd79c4 100644
---- a/drivers/media/platform/qcom/camss/camss.c
-+++ b/drivers/media/platform/qcom/camss/camss.c
-@@ -5790,6 +5790,7 @@ static const struct camss_resources sm8250_resources = {
- 	.csiphy_num = ARRAY_SIZE(csiphy_res_8250),
- 	.csid_num = ARRAY_SIZE(csid_res_8250),
- 	.vfe_num = ARRAY_SIZE(vfe_res_8250),
-+	.streams_enable = true,
- };
- 
- static const struct camss_resources sc8280xp_resources = {
--- 
-2.34.1
+> +{
+> +	return v4l2_get_subdev_hostdata(subdev);
+> +}
+> +
+>   static int video_start_streaming(struct vb2_queue *q, unsigned int count)
+>   {
+>   	struct camss_video *video = vb2_get_drv_priv(q);
+> @@ -284,6 +306,9 @@ static int video_start_streaming(struct vb2_queue *q, unsigned int count)
+>   		ret = v4l2_subdev_call(subdev, video, s_stream, 1);
+>   		if (ret < 0 && ret != -ENOIOCTLCMD)
+>   			goto error;
+> +
+> +		if (video_subdev_is_external(subdev))
+> +			break;
+>   	}
+>   
+>   	return 0;
+> @@ -325,6 +350,9 @@ static void video_stop_streaming(struct vb2_queue *q)
+>   			dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
+>   			return;
+>   		}
+> +
+> +		if (video_subdev_is_external(subdev))
+> +			break;
+>   	}
+>   
+>   	video_device_pipeline_stop(vdev);
+> 
 
