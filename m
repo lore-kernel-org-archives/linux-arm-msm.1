@@ -1,45 +1,91 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=106.10.242.140
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795625392;
-	b=NkxNyeZgcKtlwDNPmb/1/vhloj8n9aVH7xGf2k7Xt5BJrroJH26/0fqbBEosB7v8Fl7V
-	 fA3qxpIGeWxZUtVI+pvZgS6kh216yspGd+BWI6N9cT03yEOEh/OCPb0PoNeuFucFSSPIP
-	 UpThilkAwdHS3OFtWI8dpZ1Jkpm1m+P+995wTW2UtW1B59w1fGgBKHA/6Zaw8qgmNjUAz
-	 Hbm4a+033n3H2WNjW+yviKKbWGuDVaQCWwA6Yz92LuH3CiPy957GTeXJa+XUEKl8dLyel
-	 QTmKoeRsmrRLr+nC4WbRXYJ0+L2AbSDe95BCiW0+YhqQLBLzssV4TU9or3b+paYdL3Q==
+	t=1795625604;
+	b=ZGdIxFa5Q+bJNhDeSvQAdWc13TmR66JkjU1al0CYD0lz+iChPui6zGJNEgRvRwzsixwD
+	 nJruOh2H+B+JVLyMdPEg4/+9kkAO1aDWTZ4SEs+lEZI1rAu/YqLTObi4h2UCPmLPKygSO
+	 HzbEWt7u7denSZFTLV5H5F2jgh7e/NpLqbi6BgjPyRou4BqOY3akqrtgISLCsiCWS6U7n
+	 tBgVV5fu1oRMgXjGBT1iIKd34CuzrUYCkNOmT8jpMUGSGDgK/MYcsKFUWgkVeUtiyQqlM
+	 Po4vtT7W//EBXParhoI5JOb68Tfdn5d5fjD9QvV9U0Y0G7hBVMLlJGmd/RvA0IhrIIg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795625392;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=64OLG8P0V/vt+DC2pOIDmvx8cJ65cBuW3hhgyyT0Ems=;
-	b=k5GlnYfVqF09ymH/MtGyJ5JCqxwGIfOsf3yTIam6MhDb+RYL9IbLzwCDYSQYsbXkXPDY
-	 kFGTJL1vxq4V3U2vZoMhUJtO3S75PmmMysCgfy02ySvePHVJP/4+LC+kutboeeU5DHgfn
-	 7kWojzLRMktY/9lR6bw3ZRHE+Fs7lPgxrLcPm0r1bHYx+JzaxtAjSuciOJN1euOUmCr6e
-	 uB/bCL3851w6Xv5jDHFXK38nRa0uC2+iXbHBbrRxaWVZniJg8cOZWZZircM5NRXcJt7Ox
-	 jXG3WajAJf/ScHvs91ya+y7UwuhygRHpba0B406FlWB/eAc5H7Q19xJAsLRYqruLALg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795625604;
+	h=DMARC-Filter:DKIM-Signature:X-SONIC-DKIM-SIGN:X-YMail-OSG:X-Sonic-MF:
+	 X-Sonic-ID:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=cORDD26qxIDDO7OrkN6/X50Dh9JdrNNXXKg+j/17MBQ=;
+	b=rhOaxWccrZC7PmWNXsa5x5t0UOAwxNCRRsKcZtRNbeBaAGYol59/oUCBbYR3WPXiJwvE
+	 Raw8LdGkAwVVR6Z2b1vLgYqYg8C/W535vHimvABIE1RFaFxbKN4YKfLXbuGjcg6q8othd
+	 XZXGCe52cuIXNYvmeanoGDFvppR8xb7+lxoYA8no20DrY6dbHA2ADWxXIVKEc4waPTbup
+	 ZtHA+kac8G4MFQ0cNIIx30sg/0iOuZhetCKPpt1Gbt7mRK2wB368XGOG+ph2KB9+f4OyT
+	 OmMJWd/JmLiVKpeHf4P0389G3bnm8tEEOYd2tm9aNGzrfwQLu5+4QqEo5KWXi0IVXKw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=H5LoiPZE;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=yahoo.com;
+	spf=pass smtp.mailfrom=yahoo.com;
+	dkim=pass header.d=yahoo.com header.i=@yahoo.com header.a=rsa-sha256 header.s=s2048 header.b=LRUG962T;
+	arc=none smtp.remote-ip=106.10.242.140
+Received: from sonic302-20.consmr.mail.sg3.yahoo.com (sonic302-20.consmr.mail.sg3.yahoo.com [106.10.242.140])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5407606A326;
-	Wed, 25 Nov 2026 16:49:52 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6AC03606A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 16:53:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6AC03606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=yahoo.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=yahoo.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=H5LoiPZE
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8EFDB1F000C0;
-	Wed, 25 Nov 2026 16:49:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795625392;
-	bh=64OLG8P0V/vt+DC2pOIDmvx8cJ65cBuW3hhgyyT0Ems=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=H5LoiPZEwvP7HnPA+yPxlM0TA5e7zWy0aoOpA4KgAyJdjpUqFR3UBhJ5jZ9oHZbch
-	 o9nDOCNfuKudS0waCP09gww9Ikqhj4ovPgtWnKVq//UAk2rOl/6cthgVuHBhYZQ0EW
-	 svV+Rqi5OX3iR0yKO4as0oU98Ab3Vd8MhLmec/Shb+BlL788Ctj4ba3XwhWYPgp2np
-	 YFck8Cgu+bydUTJZaAqauVaxYlo7Wf4dFsxyRZp+/VhrEXHwQRt2zGA8cG5Hunm3kI
-	 2TIj14FJIYdoRpYNs2+XUpmLr1sjTMzNAGO/FR4EM2od2cP45K9UjINOunI39ZDpHP
-	 vpTeK66MnTeWw==
+	dkim=pass (2048-bit key) header.d=yahoo.com header.i=@yahoo.com header.a=rsa-sha256 header.s=s2048 header.b=LRUG962T
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1795625601; bh=cORDD26qxIDDO7OrkN6/X50Dh9JdrNNXXKg+j/17MBQ=; h=From:To:Cc:Subject:Date:In-Reply-To:References:Content-Type:From:Subject:Reply-To:Content-Type; b=LRUG962Ts9EqIuEYzQhy92Lqhzw6pyq4htncAAGPooeMI/Yhbm2DYW97oPhcZCrU7doYPIn2CcJS/ViXXo9U/H4+qGqZ/Ct/bXiKUfZFftQiccATshUJoWv+To+pgplfVqtteKwbw7lvwbV/rXISWljrEVbUo8aZUXzdrIlNlEOLyswekpLri+flfROUoFyNEH+Iv9+/C2Kq1eHNwNEnLVQu0D55joByokfde/TfIwlcs+yveloDJJsjzyDUNenCOJXwHKmV3jjX1WIsoKMaDvV77dUTF/5og+4N+85LnSvbApZCK6UybPJlUWftu8cdBCsOQxia3hcBENyxF+x13Q==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1795625601; bh=zf6oefWhu2ozSG4ZL2siPJ2ibqTO3RQgRq18eO1LCBf=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=fQNx8ciXKaMPuY5pLOvYmFy5BjaCJBC5Au3p7aTH97U0qIC4/ZLvlJLPkMk40RmDPoTsyEoqnl71PVG8qX5ADO2p9JLEtwLkM35b+6g3DKZTTDeccZkfJ8tcgLCiv9HIQmHBwTpuArlZwlLWpDyWfIV07WCxogVJ4jJEOQB4vbFy3n/Rxbe4/PKNgn44dJL/H0uUJscBPpAADjULAg51JwoUh+0QTxYjew1Qil7qofl39I/uYxGo2GzQf3Jrp5G9ppyIvbUbReZI0GttGbEui4JSYdX1j4oYTrJBcvmySF3XSAnmu36qw57MGgRpBliLUnTeONqzkF0GX0i3qnOsJQ==
+X-YMail-OSG: rZM918UVM1n5g8ioN2E3NEfhd0mtcqyOi1f2RXjdYr0jg3UD0yrucf2Aqkm0VHO
+ HIFo5DiA7tyEmStxstz0Ql9Oob2oUVIBZUpWGkhvvzRTLkKRMz4beB6B9dbSQ6Nx7Yt8cFXDmudo
+ ArD73I5Cu2VRPwXt8QoU7M0DvREJvnl.jltKMdKGbYrck2hdRrikc9J2cgb_GGAItVQzF1SiAQEU
+ 1y4aA4Kcs6XQ2Tqx1gteRbcHXwIIEWbHJ1crm4S2.S7pmUhyviaPycxS7EaYGvZoEC5_1iQRuA2p
+ abRRKmmwQF37iqHAxFlGU5ZYGTOxOoTKBy6GofOn9E3QqFGzmyzgMBZ9N8qphSTLsyg.YAln_raU
+ ZIOHHYd8RFODx52s4IK2_x7lL5inzlbSKi0qO6vjhnY0V7l.7Td75ElDbJssdXnTBjqg.Ql56qPG
+ _lVaKhvf6eUMOWjgG0Xx7k8BbeEzfw9SkqvD551seaDlEzqgalQtkb4BscG05E0QAP47ifufBw4g
+ PKKPOhgv3dIDSyEhHqEPkSFnCU1z2XgKMbpROd6L02JHlVqfl8P3ajPtCAa.S.9oSoVhg04blb2v
+ 8M9WJ9VvbBhSucrRMCVnjnk5PElY73v7U7wHC1wlV4rhEuRfu1NiGqsOD4wvywpavIixiyWvdeAr
+ 8UrVO_GEYY8rjDVVErReMSiNzVkN.P8Z0hB_1qnXcVi_SISWQlZ42YB53f5UdCP4Ob8OotMmU84F
+ oY8OPHd.aYmxQLjuUP2ROry9PZ3caxGesQu4DGWpy7MHzKQxzcAY4Uk2jgY7SnQ.OPK1xGQTmwy.
+ ker2iOxu1gY0XPBv4Y5i40DBIHxH5PdnoUFw0cnZ1at7HorQjL3B8wc4anWixx3PHWNCl4j.Mr2c
+ ok7.D4Pr3JiYuhmiiizk4uunmL0Bu.3xW9umq62BAH7ul2XfEqWS82DmGjQjAl2dqm.4IIYfszkS
+ IKQ9AUPu1yg1GGufBvglGlIhdMcL2xur9_sZ4wmQg6c__6yQhtlPJ2LYArFuL_a2K_0GUm7uULZy
+ _U0UTKSUlOzTnqRg_Xv_HwEW135eD49zxb53t5S5fa8J7PyS0FFeZ_aJo4acaQOTe9BOHE4YK0QO
+ 8IwMc79Z.RCV05O9yJ5ro1yVGnTqNOqQ4RwwI1wecLTRaOLVE_b.pZM5wLiJJwK2grUvrjY4t19H
+ ZcmHCme4EUO5k8PZ6zTDoRgtEp9NGOL2JQeEYegCUbD90IIuMkTFyMZpLCsoTxgPq1zSlk4aUKye
+ 8VH3RUf5XydBt6oIcgZ4SMYftKKzebfS.PIXPYQLScX59xKQliBcSHtPWvx_dJN8uSUjVdY8Wjk8
+ SVUIQo0rD.aRcox6Ls4odW7u8qjC02idUQeNwgBPHHVXr_NWQDMvC16CYWZGtKWzpKgAUaKhujEy
+ rEQJ5.u9uhR_N2pLBH7J8K.xsetjfga4RZRme6eLa.6SbYymWE9IQX6GHCo38x985mlRSQPl40bk
+ q02ZCLOY_0GbXM71QGAeTpbf_dOxA66Ut_atqvvtBrT2WfMAlaGT5zS170JVL0mA0i8YL.Ma9Aso
+ .9ZPr7kGly11TA2JNvoJ7fEZpblR85RRv4t7FfT126zw1ddptao9x9pDGOn0eSEZcRZWT9iCU5Gt
+ nbO367F2ripIX0CVb9MwBHMDuIgOL96QMGGiS5V_6bnbqxPmX_uMOS.U6Rz1eokIhVXpcxvVj0Xf
+ 1KbYO2FbSF4FgoviQk_ZVQZahVuy6p05s8CibqF7nK45MHeXsOoyez7iIIjATfZl.GljSeP6RcXc
+ hjbvG7V8MWi_5MFVUkpqxrEAv6OMa.6mMIgzi16m3sUNqddskJW_BzAlQ3cvozhnSwZPnPrvnalH
+ pJWbKBn8yNmCponszz3M1IvhTnrdXowzpl3UJ2dXzmhdh4DLHw3XR0ZueZ8yzsuFmDMVAGZZGtYd
+ 0UrDkCphQ74a4DVWXSYtQNAC86TzyDQXne189ajWpO40b1LwQ6q.liHkr2HCQyzvmHyX3lVGe_3D
+ _.LW3OyRRcVe0BES1.TDLLLbgWiE06jjN60XWet0Q5jdU7ceaJWVM.hHMS17HSiWIS210edTu.kt
+ FSnk_HH6ntbRsHhJGkWUZL_PgB0ONu2IZQESiQdr9lt7I0Oz6X0Qc0LXlzTCmsqfzeCnpX0Xyfqa
+ k9JLucJc44hk_Otfqu13Y7fdtBUUhWq1E35.TAdubzCoAKVFfBriuTHcmICFLJKTNRUho81.wPAr
+ yq_KEcx4AYDQk.t5JTj7LRCte6l739QPhH0f2kuDZAfFiVw--
+X-Sonic-MF: <venkat.yadlapati@yahoo.com>
+X-Sonic-ID: bc66c019-719e-45fb-9873-4e73ac6cf6e1
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic302.consmr.mail.sg3.yahoo.com with HTTP; Wed, 25 Nov 2026 16:53:21 +0000
+Received: by hermes--production-sg3-5ff9d6888d-mt5tc (Yahoo Inc. Hermes SMTP Server) with ESMTPA ID 4d5a9904d5e5043914c879cb1da06d3f;
+          Wed, 25 Nov 2026 16:53:17 +0000 (UTC)
+From: Venkat Yadlapati <venkat.yadlapati@yahoo.com>
+To: konrad.dybcio@oss.qualcomm.com
+Cc: Georgi Djakov <djakov@kernel.org>,
+	Neil Armstrong <neil.armstrong@linaro.org>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] interconnect: qcom: Don't read back BCMs without an RPMh address
+Date: Wed, 25 Nov 2026 22:23:10 +0530
+Message-ID: <20261125165310.1409251-1-venkat.yadlapati@yahoo.com>
+X-Mailer: git-send-email 2.56.1
+In-Reply-To: <68573981-f9a0-480c-806a-0980cfbb6242@oss.qualcomm.com>
+References: <20261116-icc-bcm-readback-v1-1-36b533d66a69@yahoo.com> <68573981-f9a0-480c-806a-0980cfbb6242@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -49,66 +95,18 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] media: qcom: camss: tpg: Skip the unnamed test pattern
- menu entries
-From: bod@kernel.org
-To: George Neacsu <geocausa@gmail.com>
-Cc: Bryan O'Donoghue <bod@kernel.org>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>, linux-media@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- stable@vger.kernel.org
-In-Reply-To: <20261016-camss-tpg-menu-skip-v1-1-0a0a24e36316@gmail.com>
-References: <20261016-camss-tpg-menu-skip-v1-1-0a0a24e36316@gmail.com>
-Date: Wed, 25 Nov 2026 16:49:47 +0000
-Message-Id: <179562538779.462348.10497766296807730990.b4-reply@b4>
-X-Mailer: b4 0.17-dev-cdd92
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1294; i=bod@kernel.org;
- h=from:subject:message-id; bh=bCmQQ4xCxmxyTsgqO+Fyl7t/ecS15PDAtJNMfxXszCs=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrBxGsRXKqFB9Im0TwnQHVHPy+svq/qNqixbqN5
- w+ovsa0DY+JAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawcRrAAKCRAicTuzoY3I
- OrgqD/9z4/VgGGVC31GSC1ca1LvX0ZZeukfTdDrPAKqAUodKphzebkOUdaqtMMRVnBDbHYlCV1v
- VnxwAfbeCDGK5r1AnJz5p7aK2rOyfe2cHQ0v9TtPP5o8B7JCx2llgB4SusIWoYV4PxFPie57umI
- 7IWNHjdv57yKUpKqQzx1WsslPeZ8P+lSBZf4OHhzjH/WpmL2R9+541Ib1F4RufIis3IIAeJ475Y
- mEABlneR3WBv/EBg6UjrgJqQzyshTDpQ25GsGoGmDjF8CpzanHV+S1iAg2Bj/IbZqFHGVfdtLZg
- Qf5PkbijDMoBGuIH5xU/w+TXiwx2EVfVX1TclCp2OnkBFEIz64Lwx7vTR8H/DsGNytp5GtAAwam
- 8xGG/DBd2JduS6E/eV/F97I91yDv6ZuS9EsSR8J9KR+JWK+TEO5veMkavOsW6Bc8uQP1BK65qrd
- MB3CL03jjj4ocrPvONbmnwN002QkTuOcNIWFdYkPsA2Z3TGww4wg+egcxgE6C/R7hO1DyIfkTBq
- 04IILDXiNjqBqoO+H7BhE/Pyd03kQclTN+r75uqjOVQizeg1X6FfBPkHReaAMT1+6i3yJOzeW/X
- o3Xgrt7z31sbI1chIS/+xP5yHi84fjKQcAOF2i3sRn9Cm5597B8tlQF82C2gHx1NE4gi05gBqsa
- iYkh/1w76x+ZfvA==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On 2026-10-16 15:55 +0100, George Neacsu wrote:
-> The gen1 TPG names its test patterns in testgen_payload_modes[], which
-> is indexed by the hardware payload mode, so entries 3, 4, 7 and 8 are
-> NULL. The V4L2_CID_TEST_PATTERN menu is created with that array, a
-> maximum of TPG_PAYLOAD_MODE_NUM_SUPPORTED_GEN1 and no skip mask, so
-> setting the control to one of the gaps makes
-> v4l2_ctrl_type_op_validate() dereference a NULL name. The oops leaves
-> the control handler lock held, and a later rmmod of qcom-camss then
-> hangs in v4l2_ctrl_handler_free(). v4l2-compliance -m /dev/media0 does
-> both on X1E80100.
-> 
-> Skip the menu entries that have no name, so the core rejects those
-> values with -EINVAL and VIDIOC_QUERYMENU leaves them out.
-> 
-> Tested on the Surface Pro 11 (X1E80100) with next-20261015: the menu
-> lists 0, 1, 2, 5, 6 and 9, setting 3, 4, 7 or 8 returns -EINVAL,
-> v4l2-compliance -m /dev/media0 completes without an oops, and qcom-camss
-> unloads and loads again.
-> 
-> Fixes: 51fe835c485b ("media: qcom: camss: tpg: Add TPG support for multiple targets")
-> Cc: stable@vger.kernel.org
-> Assisted-by: Claude:claude-opus-5-5
-> Signed-off-by: George Neacsu <geocausa@gmail.com>
+On Wed, Nov 25, 2026 at 10:45:29AM +0100, Konrad Dybcio wrote:
+> Fix the driver instead, please.
 
-Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
----
-bod
+You mean a separate Molokai icc driver instead of reusing the
+Kaanapali one? Molokai also lacks QUP4, splits aggre_noc into
+aggre1/aggre2 and has different QoS offsets, so that would be a new
+binding + driver rather than just dropping QPC0.
 
+Or should qcom_icc_rpmh_probe() fail when qcom_icc_bcm_init() fails?
+
+Thanks,
+Venkat
