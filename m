@@ -1,45 +1,39 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795619335;
-	b=GKNSwMlsQoc3ZGK4KtnIhDLN2FCe0BpHbOv0N5hbFyrvGOasfPTwH3h7YKCJe+1qQyoH
-	 eXmi1a++tl12CLPK+oz8Im68vJgT/G/t9wRxDQ3c9b5unQXJ4f5wd/RJt9Z44OLjHm8ZG
-	 QHSBlm5jTVBZG375GloygpNItXi2g0vqodGLeXd34fTu7jQ68VWBdQ7qY66voNHiaP74S
-	 pU/F0QrE3XcKvYbD9fNZxusI17yxRpIasoCPmTri16EGEadbCABAzXd6QpifHAN4eXEIJ
-	 rpDqUillVEC75+Sqen0+8BuPeVTjitbt5bZMy3WhWmjrNmHiiJo5eGFGZnFFUNsGcKw==
+	t=1795619464;
+	b=lqgbMcrNIBmyXTaQ5NidVITUUrrYtzDmCSAZmOPVqDP0njhQ9yTQaVHwKBYBkKnMaRC7
+	 vlUdOc655JarQGin1BnUsOLiM8tQRf8zYyhYhMYqYoYTcXm+shU0HJjTi4aYfuwOJ3jjp
+	 yEzE3hi1Kkcbqq2XxNwYeoylnHx1JTw0LOVEvlxcldAK8tUWpNjeyRY4L3CiSx7Yv1jkl
+	 Lw6eboQlfRGRy0Bi80XyJFcOTrHnQDNSs9zkaTmMt+TF6fvLIllVnsT6mxqSSI6zUMErR
+	 32XF06ByraubV/3ZkvZm+oBdyQfk4+4+o7wcjoBh5CsFA+QgO0nagY2+45n14biU0TQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795619335;
-	h=Received:DKIM-Signature:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
-	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=LvgjPvk8DeOlK91/Sosy4546ele2H/cHuJLoH1Ls35Y=;
-	b=MNX5R0Ri+H/mnK5HVdTrHACf3bL2kisHnRJtFd6mgCr5ZeoLs5mZ3gYjYKFbQ0ZVyOSR
-	 SLmRjTUAH1W7FGF62ipt+bcSaN7ovh0ZEr4Kkq6L9vuc7z2vNNy/CmKyY707MmKEvRyy9
-	 f5TJrkZvldiNvfmrpOP9pEGz7SFhQCoMHVafSY2mI4I3fUlB+yMQoE+Jv4CCCbm23iJDD
-	 244XzBkdriuzhn+xwuBVXD5ELUD0immhutKA2zCSBilhB1piAofxHvDPK3/6cCkCCCmEL
-	 g9DANODm2Xr42mmgHlklQNlVNnb7QLx0KyjllN6tN9wWRZUVaYGbCsOwVMEfCAfl3XA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795619464;
+	h=DMARC-Filter:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=wKAzwlJaHvvZUc1GqVIsN3QLNoOjrdsYRfFTCyMKo78=;
+	b=W9jzANuwIKM/WSs0ITXwtLF9kTtDNNcAmjUxFomG/2PHvzehxMnf2s18WHYg9DlE5Oju
+	 /UwPS6m2NSIvSn+Mtgt+DPFT28Joz59FOMbI40Rw+V3c3Ykz4RnLpfm6kXKgSa8y6rlv7
+	 svqrQDTlKentE3ojK5v+PZe5EImIQDlZaYR4wbT7MPP5HKFUUyQSu4ygTJEH47RWE3lXO
+	 jVbh7/ESo5yvouPDqEWnGUF7Cdal2GaEoqXYcHCEHbooVfJL8Nja3dMbS4ZSI+Wj6h3dU
+	 cB73oGjdqIbc8rsQbSlUQv/+dfsD1ByoQ9gTW0wys7Y8T/wqukCFaTrQJ22bn0Otq3g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HcqH3MIv;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F578606A33D;
-	Wed, 25 Nov 2026 15:08:55 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HcqH3MIv
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D71EA1F000CA;
-	Wed, 25 Nov 2026 15:08:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795619335;
-	bh=LvgjPvk8DeOlK91/Sosy4546ele2H/cHuJLoH1Ls35Y=;
-	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=HcqH3MIvICwcckfWjaghuojxvt5GH/LPUozkye8C/Yo7kgcFMOwHyqR7sXQ5CTWvF
-	 hhwqlZ25IC9v2tk5ulhkqkJm6I018I7XREEdcrIWbKfriLQUd4Ns4ZZhFIBDBNP2uq
-	 Wv2iPOw9d4W9uYTmZV0/A6qd5CKyxXNbiQOF2Maatb8pdvm2YxX/+5weIvHaqSowSj
-	 H4vJxbWODg9ZCRmMwOVjs64N8BYZFkM5v11oO7QbCrHq6kyb2C3dXLEw8EdgqZYkap
-	 D2KbP4SUHYCe7yLdD6xTeIV2oE5QCADg1ip7U4Tepxw98HRfuyyGIUDGwaWufAa8G2
-	 kwDn9oFzSJiRw==
+	dmarc=pass header.from=krgm.moe;
+	spf=pass smtp.mailfrom=krgm.moe;
+	arc=none smtp.remote-ip=103.47.186.116
+Received: from krgm.moe (krgm.moe [103.47.186.116])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 8FDE3606A330;
+	Wed, 25 Nov 2026 15:11:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8FDE3606A330
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
+Received: from yuno-laptop.local (unknown [103.47.186.116])
+	by krgm.moe (Postfix) with ESMTPSA id C032583B;
+	Wed, 25 Nov 2026 20:40:58 +0530 (IST)
+From: SignKirigami <prcups@krgm.moe>
+Subject: [PATCH v2 0/2] Add Qualcomm Netrani RPMh interconnect support
+Date: Wed, 25 Nov 2026 23:10:27 +0800
+Message-Id: <20261125-netrani-interconnect-v2-v2-0-4eab92854137@krgm.moe>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,136 +45,67 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v5 5/6] media: qcom: camss: Take the link frequency
- from the CSI-2 transmitter
-From: bod@kernel.org
-To: Hitesh Patel <hitesh@ebytelogic.com>
-Cc: linux-media@vger.kernel.org, 
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- Bryan O'Donoghue <bod@kernel.org>, 
- Loic Poulain <loic.poulain@oss.qualcomm.com>, 
- Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>, 
- linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- ravi@ebytelogic.com
-In-Reply-To: <20260928121508.1404808-6-hitesh@ebytelogic.com>
-References: <20260928121508.1404808-1-hitesh@ebytelogic.com>
- <20260928121508.1404808-6-hitesh@ebytelogic.com>
-Date: Wed, 25 Nov 2026 15:08:50 +0000
-Message-Id: <179561933001.462348.7400383859710438706.b4-reply@b4>
-X-Mailer: b4 0.17-dev-cdd92
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4165; i=bod@kernel.org;
- h=from:subject:message-id; bh=Nt58v8O8xLAfhZwvg0hfnojmA4HCD154a8myCxoqgvI=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrBvoC54oZwXDhJDhh3DoAK8FnSjrqjj1myGrBj
- LzE0nai5CaJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawb6AgAKCRAicTuzoY3I
- OhUUD/9G+VNI2Bp4Cs5SkY6DGMLTz9kMgNZWjeql86oLiK0CFyADEjqRUeiCORpsYFNctV3473T
- yTPMRo99I0KIBScH7biT9sRUytWJRoJYYHGVfADHW0yMwCTjUIPdlN+tf1Wf45861UfFmsil4Wm
- Lo+Mor60xxA4GusLLk6E3TBK6h3qYGrRQyTQRQ5PE+UK5oQwz+1e5nrGfqLxtALl3XmkTsgstMf
- /MNk9gUWPFeh67E1DanbszFiyEKolvbOUwGvKRUukOuR62EZHeFXgIC368UzbvUDdDKjtGtBY9f
- YLg/Jz/CpfYsAoA/9jv53MkZuTDVZ4dCH1g3tGuuou9onWRcyWreEJXXLh8Vckjg9pxCNIxFoPy
- rFE/+l2x/frSnlAtkV81xHADwXuXcFSHNM6A1EP/VSaTv/kyuXsGoCCojKY9s1WxOgbu1jmhL57
- fXoOMcecAXbE/Efi2+KrDbefKUX4iiIviMcNwyKOqyuVDkkp60hrpd9MHAnzDeQ8acIlYel3NTf
- 4TExbCGQ1gxxDR4om3ZhGAcdH5VVQaLOqqb9EcoAsx+qyCrlXnz+289bkC1Z5q6N0+Gb38VHBT9
- RNsoSwexPpate+fUiTlkgM3KOCVMacXWhmxBV1/vffVyxt2VNuUrmsdRHMWRteyjn43P0hypDkY
- Xjd402ABYuP/Zow==
-X-Developer-Key: i=bod@kernel.org; a=openpgp;
- fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqEMAyF4atI1gZsRBGvIi60xjEuoqRVBPHu0
+ 3GWH7z33xDYhAO02Q3GpwTZNIHyDPwy6IdRpmSggmrnqELlaIMKikY2v6myj3gSNlPZOKK6mKm
+ E9N6NZ7nectf/HY5xTetfDp7nC+AhnxJ7AAAA
+X-Change-ID: 20261125-netrani-interconnect-v2-8d3812260f23
+To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, SignKirigami <prcups@krgm.moe>
+Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+X-Mailer: b4 0.15.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1744; i=prcups@krgm.moe;
+ h=from:subject:message-id; bh=S8jIpqyqn7BsyDavqg3O6s2rA7TOYn5AWPi0OemCYMw=;
+ b=owEBCQL2/ZANAwAIAUNLJdlxtMKiAcsmYgBrBvp9NP3a+0QskKMgJ9UsbQPR16O+fSLdFOpki
+ OYJX92u/l2JAc8EAAEIADkWIQQKI/ZJLAWGn9r1JLZDSyXZcbTCogUCawb6fRsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDIACgkQQ0sl2XG0wqJ9dQwAqazwc5IbYeyrwA+hM21sjOmIptwBuaA
+ qVBCPmN8cDkkQch2fCOc3ExFwpn50BsUvmF5IdOOqbVRp5fMxPWfh7l1RbJvBdy6h4n9Ez4Kcrq
+ 05ZQZIu2bSOLrzOVbfVs9VBAw9C+lyLOt4mCLFqSZ3SRqTowiHkQmSeeIhmLy/8fYTYQffxXND1
+ HhdiKchnYbtjFs+jxuYTLYKD0x8gK6tsRfNs5D0tL+Lv7sbdxRJu2EgApco04jT0oFPrOm7x3qw
+ 8bSKsYBN5QAqnu8GB2VJUvubCA3bPIeaCfXpI/u/kaM5cfVcxHnV3cGw5skqmW6Ukui3Gc1s+4r
+ WqliYpNBxO3hbmxonsCZ0IeFDwMXUZjZpGOpYWB84TpiClGSgrylYlqGeqHcjeqhx/3P+AXZ1Nf
+ l6wgBzCs5W7hxG4C/JPiVp0NhtZebG5pQStUiT46ouOP1LXH7EWieOoiJ67W1AyaucYwiH1sePE
+ yTx3pOsLHO/r3PP8UQSdydMZCunC6JX
+X-Developer-Key: i=prcups@krgm.moe; a=openpgp;
+ fpr=0A23F6492C05869FDAF524B6434B25D971B4C2A2
 
-On 2026-09-28 17:45 +0530, Hitesh Patel wrote:
-> camss_get_link_freq() walks the pipeline up to an entity with the
-> MEDIA_ENT_F_CAM_SENSOR function and reads the link frequency there.
-> The CSIPHY settle count and the CSID clock are then derived from it.
-> 
-> The frequency the receiver has to be programmed for is the one on the
-> CSI-2 bus, which belongs to whatever drives that bus. When the sensor
-> is wired straight to the CSIPHY that is the sensor, and the walk gives
-> the right answer. When a CSI-2 to CSI-2 bridge sits in between, such
-> as a GMSL or FPD-Link deserializer, the bridge re-times the data onto
-> its own output at its own rate: it may aggregate several sensors onto
-> one link, forward one sensor at a different rate, or generate a test
-> pattern with no sensor at all. The sensor's rate is then not what
-> arrives at the SoC, and the CSIPHY does not lock.
-> 
-> The walk can also fail before reaching a sensor. A deserializer has
-> one sink pad per serial link and the walk always follows pad 0; a
-> sensor attached to any other link is never found and streaming is
-> refused with "Cannot get CSI2 transmitter's link frequency".
-> 
-> Add camss_find_transmitter_pad(), which stops at the first entity that
-> is not a CAMSS receiver, i.e. at the external subdev feeding the
-> CSIPHY, and ask that pad with v4l2_get_link_freq(). The helper queries
-> the transmitter through .get_mbus_config first and falls back to its
-> V4L2_CID_LINK_FREQ and V4L2_CID_PIXEL_RATE controls, so a bridge and a
-> bare sensor are both handled by the standard mechanism.
-> 
-> camss_get_pixel_clock() reads V4L2_CID_PIXEL_RATE and describes the
-> same bus, so it uses the transmitter pad as well. For a sensor
-> connected directly to a CSIPHY the transmitter is the sensor, so
-> neither the pad found nor the value returned changes.
-> 
-> camss_find_sensor_pad() stays for the frame skip query in the gen1 VFE,
-> which is a genuine sensor operation and whose result that VFE does
-> program into the hardware.
+Add the devicetree bindings, interconnect port-ID header, and RPMh provider
+driver for Qualcomm Netrani (SM7435). The series registers twelve interconnect
+providers and sends aggregate bandwidth votes through BCMs in the applications
+RSC.
 
-This commit log is a wall of text. Please whittle it down to a few
-scrutable statements.
-
-The code is straight forward so a commit log as verbose as this smells of
-AI gen. It's filler when what is required is information.
-
-> Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
-> ---
->  drivers/media/platform/qcom/camss/camss.c | 80 +++++++++++++++++++----
->  1 file changed, 69 insertions(+), 11 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 23f3cc30a1..79facd0133 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4619,28 +4619,86 @@ struct media_pad *camss_find_sensor_pad(struct media_entity *entity)
->  	}
->  }
->  
-> +/*
-> + * camss_is_receiver_subdev - Test whether a subdev is a CAMSS CSI-2 receiver
-> + * @camss: CAMSS device
-> + * @sd: Subdevice to test
-> + *
-> + * Return true for a CSIPHY or CSID belonging to @camss, false for anything
-> + * else, in particular for the external subdev transmitting to them.
-> + */
-> +static bool camss_is_receiver_subdev(struct camss *camss,
-> +				     struct v4l2_subdev *sd)
-> +{
-> +	unsigned int i;
-> +
-> +	for (i = 0; i < camss->res->csiphy_num; i++)
-> +		if (sd == &camss->csiphy[i].subdev)
-> +			return true;
-
-TPG should be included in this disjunction list.
-
-> +	for (i = 0; i < camss->res->csid_num; i++)
-> +		if (sd == &camss->csid[i].subdev)
-> +			return true;
-> +
-> +	return false;
-> +}
-> +
-> +/*
-> + * camss_find_transmitter_pad - Find the pad of the CSI-2 transmitter
-> + * @entity: Media entity in the current pipeline
-> + *
-> + * Walk the pipeline upstream through the CAMSS receiver subdevs and return the
-> + * source pad of the first entity that is not one of them: the CSI-2
-> + * transmitter driving the SoC.
-
-This text really reads weirdly - looks like LLMese.
-
-"Walk the pipeline of CAMSS subdevices. Return the source-pad of the first
-entity that is not a CAMSS subdevice. That entity will be the CSI-2
-trasmitter driving the CSI decoder."
 ---
-bod
+Changes in v2:
+- Make the binding self-contained by replacing the undefined parrot codename
+  with Netrani (SM7435), using the standard RPMh description, and linking to
+  the interconnect port-ID header.
+- Document the new port-ID header as part of the devicetree ABI.
+- Remove provider clocks from the binding because this implementation votes
+  bandwidth only and does not access NoC registers or configure QoS.
+- Expand the driver changelog to explain the bandwidth-only design.
+- Add the ARM64/COMPILE_TEST dependency and default ARCH_QCOM.
+- Enable CONFIG_INTERCONNECT_QCOM_NETRANI in the ARM64 defconfig.
+
+v1: https://lore.kernel.org/all/20261124-netrani-interconnect-v1-v1-0-bb5efdb229cd@krgm.moe
+
+---
+SignKirigami (2):
+      dt-bindings: interconnect: Add Qualcomm Netrani RPMh interconnect bindings
+      interconnect: qcom: Add Netrani RPMh interconnect support
+
+ .../bindings/interconnect/qcom,netrani-rpmh.yaml   |   77 +
+ arch/arm64/configs/defconfig                       |    1 +
+ drivers/interconnect/qcom/Kconfig                  |   13 +
+ drivers/interconnect/qcom/Makefile                 |    2 +
+ drivers/interconnect/qcom/netrani.c                | 1723 ++++++++++++++++++++
+ .../dt-bindings/interconnect/qcom,netrani-rpmh.h   |  169 ++
+ 6 files changed, 1985 insertions(+)
+---
+base-commit: 3fd56a2833c22f62eb84297d0dbd47739632f1a0
+change-id: 20261125-netrani-interconnect-v2-8d3812260f23
+
+Best regards,
+--  
+SignKirigami <prcups@krgm.moe>
 
