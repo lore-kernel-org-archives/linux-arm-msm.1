@@ -1,110 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.41
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795601472;
-	b=RU1TDQLwGJCFE6FeyOCUbVBXrCOwomhrkvWV6C0V5/jnG04dja497HJu/f8OD9Eoq1Ev
-	 2atvXNEVd+d1BPtMZa9WguBrSBn6Km58WzqxjRNfLLCZatgXbNBUB84rPl8iN5iNRnlQL
-	 pAyX7Oyos8JZE/vrrsHdn2D0MRq4H4YeM+PKrY6zeM+5wTTx0shSK77p2fJs/0pTdmtLC
-	 ohkrJZcooR6PkN2O5Ulyx6klJIsAp1skJYmOoW6I/BNmzlsJoFj7EcpmOu/xsFNy0/b/V
-	 sgpVGRd5qCpDmzLpfZsJ7tr2mQqWGFg58Yb4Fv0TupB4HnB0OHoICuJOwE6cH7jeBEg==
+	t=1795601588;
+	b=InWQ/6JP3dAa43U0Q1tDjfQVrHUQCZvngTiP/dB/wrwGOrVE4p0Yr+oqRvckebuK7KCx
+	 kmxaO1PrJYM27b7dOuBcRhOYESH+pPvyZ9R6nlJem2p2NHqQmlwSZu+p2dWaZ12roSwhB
+	 6mmeu/BKQeWVE8GtzLxkiRHQH4VtRyqgynVGqFbVj0CF3Qp6/ztoq1dHP3Bt4ZE66BYXq
+	 8xSQMMbo2VJNTdqHgbhjOqsCWZ5FTqKJvRxDmxYsYJl72RGu/2drtfgS1xfrDg79bzEuz
+	 V2/y/n16BoVphL4jiua0fWKqgu5LWoas9NkY+DSuZnkSJS7ZPAKacangbLmLdZTWomQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795601472;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=JgcgT2ipWJ2y4mvlC42PtcSP9A6DEckQPx5rrYOfk0g=;
-	b=AASoaVP1MgKUUc3QjBjhuEMgVgjfp0lq6YDxUbwX/AZsRPtQgrQSKTXj/jTHYwOul5j7
-	 Q+keWuuCUlo76nY/BLOvr2GX6pj3U3NXAh7u8TF1xAwr/f4A+ls7FcQmBnN77ohrQj68o
-	 udV9TPVCmE3uega6+LqYGChSTo/4B00UqLX3upeRWb82nqQ06/5mIsEuwgagDAkCrwOBQ
-	 Ynt1ywMRL28YC+oQ62HW0DbXFK3SJzArGMpgOO0A45c/PWEMgiQbs37tw02k+/ZD2zhk1
-	 VFBcWCx051HDbou5sEDXZR9z1XQN3b36QUSyZ/l9kA25I5qfG0dArKCTIfEInzHJwqg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795601588;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key;
+	bh=0m7khPEiz30Rha/KLLauj8YmgXwFrxSFcaLFsZWMMU4=;
+	b=cUebwLy5aheZ5SHCCl5HXuGvngUi1KSFLK9+pNE9grGeFrJusVMloiEKJByXWrDUe5u9
+	 VW9SjH986Te8mOD2lz8v64G0uyo2mBWjiyE9iUBpr5PtvMVHiS4wsmojJapDAXgcFFTVu
+	 2/Hz5sy+VuIjlLqTD6jhjuIG5P2M1nLvyRqOu1VLvYo4uP1h2JVZ/y1rgQee9eSvdGTju
+	 c/uVuVKk1EO9JR5MNT4AWCiT7qj/F4fQItoa4SJQJ5ycaBIbh2CmFRzxgNoXteqYipTGw
+	 DjLe3yYDpiV1HkGGE+yRPtP6gMV3gpkryPfhvhCWBfeyjP4j5w6SGQ+X6n982L8pLiw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XMjLozre;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RVRYn5rk;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=BiS9y+L1;
+	arc=none smtp.remote-ip=209.85.221.41
+Received: from mail-wr1-f41.google.com (mail-wr1-f41.google.com [209.85.221.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFACB606A326
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:11:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BFACB606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4DAA606A329
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:13:07 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4DAA606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=XMjLozre;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=RVRYn5rk
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mLDl4131181
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:11:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	JgcgT2ipWJ2y4mvlC42PtcSP9A6DEckQPx5rrYOfk0g=; b=XMjLozreDz8YnShd
-	T2K7aVz/9tDfu+Hv4BLU1M6xdfCWHACfDZgpOydPe0kHfW3eayn9Wx/rVDKUiLv2
-	B6cHEXQdIsZZ5y6ef/H2sJZ7ms5HNd3b87IqvslZYkxuw/Ybj+LxOu9iIVsocRft
-	NdKnZ13Qzu8XeKw4kfoDyRlvfi4fbs9fS8U0RYLHXYp06UJlnP1R3Yuiq6ZPXdO8
-	9uyb7Jbo36oxNWynGdfTi9GnHHKnHiL/01TvMW41N30jndCapiaxrtc0wZLKl3zQ
-	aTKWKcb6lZzXRzOp+KoAb/5aVBhdBClQruV0Uea2wa2xIqI3w5qdBoxun7QKkTlB
-	GVY85g==
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vuhra13-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:11:10 +0000 (GMT)
-Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b3a74ee77fso3658435a91.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 02:11:10 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=BiS9y+L1
+Received: by mail-wr1-f41.google.com with SMTP id ffacd0b85a97d-4a32576da88so3187523f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 02:13:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795601469; x=1796206269; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=JgcgT2ipWJ2y4mvlC42PtcSP9A6DEckQPx5rrYOfk0g=;
-        b=RVRYn5rkf+0VVEq8gtKYFJFguuSfkaLBWwsb1Mei2ph88+EQ0wK1pDtCimXelCBIqJ
-         ANmBYUTrl+XG8UpY2psdoaXTE4mz1N1/pLGUdb98Wx425SwJPM4jftmbBN1dPVdoWk1P
-         h9WCmW/iJetKmgrOM4QFhhU38f3iJHkfoUtiHatx77k/idmaHLWfvgJNyY573advkBLY
-         fZJoT11zgsPNRHbJlPUMI3Wa0kd5sJs3XvIk9W1p/z16SEiwkq+Ix7+39FPR5BS3aDo7
-         r6HW5KvHs/Ju3hWQ0zxc2bUkD9gDDRk4U9X6mieVPd2LDL1VBlcCm5yrOQyNCuSfoxJo
-         +sbA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795601469; x=1796206269;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=linaro.org; s=google; t=1795601586; x=1796206386; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=JgcgT2ipWJ2y4mvlC42PtcSP9A6DEckQPx5rrYOfk0g=;
-        b=FlVqVzQggs0T0TGwZHfiyZuRma511B7mRkqjymPYjepMRw7n8G+MRKi00T9oSFYTtP
-         XmNVedKmajClMu2rLMbS0GSzm7KNVQC9J+zi4+HlUmYxhdqrAB8oe8b2PNkBTLys919z
-         M/psw0Eqnt6+SFRN6PbJgpY5cWp3vy6pp1aaV5wrFuTv2MNVB4Q2eFBwn80MD/RyGvgY
-         Kw2j5GfybO2uDJlw6NVFmT/30fRNLhdzgNzZO82QFRjEXfm6X6vmpWk7sDaEhJeyDX/b
-         f303S/Mrtk/oW6clOSZd5uC4jMjbynzdWoCqQHOF3/pCpjlwnd1D711BzFWhnkqTXJAr
-         ixGw==
-X-Gm-Message-State: APuU4Z/WTXgPBmaN/Xhoth6zjM1AL0Ize8XvKzqK90bxa0RLG2S3rqpf
-	IpTL49EPfiAs6x8drWXmWVFAuSmb8GXi566mci3NlTbHj5r8UShvNyeOkalvSunIH98fmv6YHRu
-	/jhxLgTP4PJE5jbGhCIPIGou+js6c8UDkVeSz9UNns1rIdJI9p0syupDPYlLuM9IT/6fB
-X-Gm-Gg: AZFdTZdwfGoQeQTEIP0wdPR927fqqb7LO89LBxgKlj+J0MpaxFeR3d06vLaHzrX3ZjK
-	4a2YxpbcliAc8YJ2k4zDs9jKC3GyyDGbKrwDFVvzCIJoW+P4dJJp4xF0E3IObQc4venpx3kyR8h
-	tfpupi3N2PFYHrZsTwtP7/szyVm8wI6T5+4VlPTLFYmaRElP/ezJJ1iLtLUARyDHgrYcuGevkX0
-	f7IKcQ8E38Q2D/9e9WICBCUsA2FEAg+ZN+G0WuHknVYUQEO4k+kr/k2OQxgYrxVSOgX2xDQI1rO
-	8m4gkjBA9ZRf0S74xQeCsArUWiYGmi4NuiZ8Bo8qpww33fxS/Fdyt5Ri6GRI6osWhSrt2c34496
-	O41nv8qE/rnChpo6pDDSDwMejacstvbft5+RFZHj+h4g0AwZC9r4mvAMjFb31iDm8Ibb9QDTSb2
-	Glc9WcivAMg7uvWAHYRaqLLlEma0z7WAwoYnl5Ug==
-X-Received: by 2002:a17:90b:1802:b0:3ac:a139:1b13 with SMTP id 98e67ed59e1d1-3b41c93ccf9mr16179600a91.29.1795601469369;
-        Wed, 25 Nov 2026 02:11:09 -0800 (PST)
-X-Received: by 2002:a17:90b:1802:b0:3ac:a139:1b13 with SMTP id 98e67ed59e1d1-3b41c93ccf9mr16179571a91.29.1795601468716;
-        Wed, 25 Nov 2026 02:11:08 -0800 (PST)
-Received: from [10.133.33.142] (tpe-colo-wan-fw-bordernet.qualcomm.com. [103.229.16.4])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b4dfbe54a2sm5931651a91.17.2026.11.25.02.11.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 02:11:08 -0800 (PST)
-Message-ID: <f2cc0d77-3a5d-4d82-a697-456488bee6cf@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 18:11:03 +0800
+        bh=0m7khPEiz30Rha/KLLauj8YmgXwFrxSFcaLFsZWMMU4=;
+        b=BiS9y+L118TIRP/O0b4oS4RsYpCngmE+0RVEsHN1hRbh4oZ/at9HnPZK7uA9x38xNE
+         gkPyonDnsXNpbGOibvyBwiN35fQEg/U121wyqkep1i9z1bPZ5s+RuGcmN1PxIGA6aYcq
+         1X8IYy+AxaG7SyEf3+W+jrq0ynXilC4OqgWz30AH1k61a/FvEq0aDvIPO6WaXlGtF0SV
+         qryaCDQL8fNkIx9mDDbAKoQd+gSIDIsE5ePnYZCHD7eZ6lwGHZxGJSFK+tZo/new5x0d
+         /YrNeC4hYrZsGD63r+dRLOPUXtt0mmiJMydCG7x2v41A0At/tjQ0548tXkthjhiGdri7
+         /rXQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795601586; x=1796206386;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0m7khPEiz30Rha/KLLauj8YmgXwFrxSFcaLFsZWMMU4=;
+        b=FTk48WVy4UqEmky40XRuhc0HTGRqWTWoUjKakr/X6y/OU+3LyJarEw77g2sgKBs2el
+         jruv+FEZm/a09Ivx7J4uxRJSCwEs/zU3JC8zg7QzVqG8YuddOuVDAXX2Yj/XacOXehLW
+         ZXgj76ZRADMEfVGZKlzOnSH+rls0gkXRe20SecQE6+YiAuHG8RrrJjOZl/flXp9o99PZ
+         nNBcQSnJP2TQ+coIh8eABmyXD0rtp71QixueRZqnueqYtDzTiiBToUMa9kwrpYwFjdWV
+         gJrnoeNAgk3rpAkSSmNtdnRw6KmfXo1/qTDlJt/WYvk26eETjh+5ifQIANe7VOrpJKgb
+         TvcQ==
+X-Forwarded-Encrypted: i=1; AL+hErEEA1lReywCxW+FxD6DtVRraEMuaGnghovWWlo0s6DnCtIEAV2UtBl7lhkhtqwWmRMQKac2UGN/vlGKcY7/@vger.kernel.org
+X-Gm-Message-State: APuU4Z+2K0V8LDWch3GyxqgJYgMtpzKAwbdEUmro4LLGwfxILLzNtcuY
+	1+UotuSJKKnmPr2rUhRleCS0H15Yo3Hkbp66mkysB9uXOh9Jnz3SWIzDGfkXW4nJSwY=
+X-Gm-Gg: AZFdTZdBDovdIJDNGjwL0CFAT1iEaB1hAt7PrwcWoOWcXTkp56GgRoE8Io3jVUAgXor
+	WOr2CFfi8+ASW3dSJm7w4Z6C7csCR1kOymBdaDWkTgQ4nSOPELA4AnvhmS/+q9W+UMo/7Gyet0C
+	enW45FzEFlq2gUp85UNi15lq3FoIMebu8ZmhV+U74kEwSyGea81ousmzCTdnPOgMukRM5Y0XpYt
+	uydACIgo6QBx3NvM1D/u8qGMhqQLhBeqZ6B9aYI+Y1lIGwM3m0XQ3CB3rX+cswk9RwvkVSRvrxd
+	U6Kl58rEaVYzoLZgl4M2qBE9JPLMC4W13MRIxk2c1z7qlYUsMDb9NmXZ37aNV4+5Iuog5pJgiCy
+	SOGgOHolpB4a/6SQfFPqgqJkiEXSIiDA05eSX98PskZSdsVBXBqvciuh9bH7u3CrXzIUOW+QLxp
+	YwZzqNXXw0XJXciXPpVsGE051k6P6JGXM/wna+JQxLmM1WsrP+XlJHUKJUZwLhysS2jAmYP+aDP
+	G9+Qc72D2hGqqE1XsW9fRDxLs7cwJjt5l1Z5eVY/GRTa9QoOiaraiYB3RmHsFkcNLvjlvP0bb+g
+	64nf6iU8q8gzGXRWHkgOIhT1cCPKxXrJVQdYDRRNLzb8qKz/bA==
+X-Received: by 2002:a05:6000:1865:b0:4b8:75e5:301d with SMTP id ffacd0b85a97d-4b875e5306amr7387173f8f.0.1795601586248;
+        Wed, 25 Nov 2026 02:13:06 -0800 (PST)
+Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4abbd84e661sm31713382f8f.18.2026.11.25.02.13.05
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 02:13:05 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Date: Wed, 25 Nov 2026 11:13:00 +0100
+Subject: [PATCH v2 1/2] media: qcom: iris: gen2: subscribe to the picture
+ type on the encoder instance
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,105 +93,154 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: dts: qcom: shikra: Mark cti_riscv device as failed
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Paul Walmsley <pjw@kernel.org>,
-        Palmer Dabbelt <palmer@dabbelt.com>, Albert Ou <aou@eecs.berkeley.edu>,
-        Alexandre Ghiti <alex@ghiti.fr>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-riscv@lists.infradead.org
-References: <20261116-disable_riscv_cti_for_shikra-v1-1-d7cc81f901e0@oss.qualcomm.com>
- <30485a94-cc85-4c64-8593-a2218a3aa59d@oss.qualcomm.com>
-Content-Language: en-US
-From: Jie Gan <jie.gan@oss.qualcomm.com>
-In-Reply-To: <30485a94-cc85-4c64-8593-a2218a3aa59d@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=FPmOVOos c=1 sm=1 tr=0 ts=6b06b43e cx=c_pps
- a=0uOsjrqzRL749jD1oC5vDA==:117 a=nuhDOHQX5FNHPW3J6Bj6AA==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=C-wyTywGbBTeqauinx8A:9 a=QEXdDO2ut3YA:10
- a=mQ_c8vxmzFEMiUWkPHU9:22
-X-Proofpoint-GUID: 8M7Pt9DrVVonVz0VYhqCn7a8prmEn1gT
-X-Proofpoint-ORIG-GUID: 8M7Pt9DrVVonVz0VYhqCn7a8prmEn1gT
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfX4QnfzwQtUHoa
- AMsiS93Tl5IG1MMUvIdQjI5C13dn2gXFpdC8WyIBTdUB364kai76hZ+BElYMtXKDzgkg5csC8H+
- BEXbyTTTBgP88lAVZtj49Wk5YHaKl8A=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0MCBTYWx0ZWRfX1CuqBM7C7tZj
- XswMDpkUTkfr4ol4SagQj41fKl7thDMtZmGrWtNGF2cbt+0gf2tqg6Gr7v0gwfB9+bZFnBaFp9/
- yVccl3R1pum/3zQn0vOpzmabtJHkysqqTaNjnKSDfrFvDf2s5Md1POmUbzTw35bB9+fipdugsVQ
- XjwG4+K4pcKO0Q6XG9rPRHsfIUWFsuplYA90S3boILvyCcs0SLPJ52EtU8wiknNcSK+ABH6wwhd
- 9lHQsZPkL1HJEfcXmdEM9b9CoiZ35WZteOcWopbb3fC79tnd154amr0gS7YppgO522ZDUWVKu8h
- OsDwVw2vu78EVnZAIwCd4x8+x5g/FYF5wIJ37Hju3a8FppVHdlHV+IKm8VCt4/2RUWpl5ahnVnV
- pXeSqPoA0z/gitwhKW0JslsPAiasRKFcvyWh5XTJKMC9D3FKxUDlE194Ajol8MSTIiUu2LNJZqR
- TKivilKt+N2zmYR4ziA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 suspectscore=0 impostorscore=0
- priorityscore=1501 adultscore=0 phishscore=0 clxscore=1015 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250040
+Message-Id: <20261125-topic-iris-encoder-fixes-v2-1-fe6af9761f83@linaro.org>
+References: <20261125-topic-iris-encoder-fixes-v2-0-fe6af9761f83@linaro.org>
+In-Reply-To: <20261125-topic-iris-encoder-fixes-v2-0-fe6af9761f83@linaro.org>
+To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Hans Verkuil <hverkuil+cisco@kernel.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5466;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=UV1P82q5MEsZSCbv4RL6iiC5cp7Sf9M19lFf+zkJyBM=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBrSvoAM77i46zPuYqHDGTaAe5WgLoMQukeX+jO5Z
+ E8nPLZKJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawa0rwAKCRB33NvayMhJ0Ua4EA
+ ChMIGi8rCsWnbUWh14gNKJulszTw2Oyg6Q1iTDYks3VZW1VHe+aMsEwVi+YQWCzJBk8bht6BKuyzUM
+ trSoODLzLaJxT5kaRUA4AdVqB/FIHEvoKy8vnvTp1c3vwrmvChGQEcomEZjwi+xWBK63N/+FbaJFAK
+ sO2+smYhrL8jcQFu21wXNqR2F9P5X+Gf4kD5+mcW/+plpk6WqXsdy2AsMA58X7t5u5d0bDbg7wraaO
+ mBLeCdbz6IceA4F9Y4hvJIE8UbnAOL2AVJcqmRW2E2XgvRAIjiZ5GFk9Jv5GeykdgOC2TkGkn9vf3P
+ weraHrvXjOOHY65EDN67/BoFmeWAEt64DXpPxO+MSFW5RF3HaVV7FJj/SlOxoh/gzcf2bB6PlNT1lh
+ TAoYmyShmedCPcb4jCoTUw/F1SFzzmBB8x61N80kfbHjdZVdJkHQBYvjgTvYvR3CQYBAvnCHp9Gvhq
+ t1asEgyndVZldmbIS5Bx1/4IIS5H/YftwbCYZJMQE2wT+I3dyi1/zB1der8A6v2wiZOD0qUjF7obJY
+ fLRY2oE6nRUtwYuqOZ5C8NQ/JRW//eAv+JhBkuGwZ/5PqECuS1ZCVKCIXfhkIGxHMjXWi7ZpaEQuOI
+ gCCWMGWPqKkSUCAW4ppXVGRkWDPjnspzZCoIou8U7xw3+UptElWWsEJeSKjA==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
+The GEN2 iris expects the HFI_PROP_PICTURE_TYPE for the encoded
+buffers, but HFI_PROP_PICTURE_TYPE is never subscribed for the
+ENCODER instance in iris_hfi_gen2_subscribe_property().
 
+Add the necessary tables along the vdec input and output properties
+table for the GEN2 hardware.
 
-On 11/25/2026 5:53 PM, Konrad Dybcio wrote:
-> On 11/16/26 12:03 PM, Jie Gan wrote:
->> The cti_riscv device is suspected to have a clock vote issue on the
->> KVM enabled path, which causes the device to crash during bootup. Mark
->> the node with status = "fail" for now to avoid the crash.
->>
->> Fixes: eed738c6dd0c ("arm64: dts: qcom: shikra: Add coresight nodes")
->> Signed-off-by: Jie Gan <jie.gan@oss.qualcomm.com>
->> ---
-> 
-> That would mean Gunyah is enabling some clock that the TZ itself isn't,
-> which would be solveable through a clock driver patch. Do we have more
-> details here?
->
+The tables are aligned with the vdec and downstream iris driver
+implementation subscribing to HFI_PROP_NO_OUTPUT for the input
+queue and HFI_PROP_PICTURE_TYPE for the output queue.
 
-We are currently debugging this issue. What we have found so far is that 
-the RISC-V core is not powered on when the AMBA bus attempts to read the 
-PID from the device registers, which causes the system to crash.
+Fixes: 92e007ca5ab6 ("media: iris: Add V4L2 streaming support for encoder video device")
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+ drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 23 ++++++++++++++++++++++
+ .../platform/qcom/iris/iris_hfi_gen2_command.c     | 15 +++++++++-----
+ .../platform/qcom/iris/iris_platform_common.h      |  5 +++++
+ 3 files changed, 38 insertions(+), 5 deletions(-)
 
-Normally, the RISC-V core is powered on by remoteproc much later in the 
-boot sequence. However, we have not observed this issue with either the 
-UEFI or ABL boot stack.
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+index 79bbd06ef8d2..3b0fb408f05d 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2.c
+@@ -1906,6 +1906,14 @@ static const u32 sm8550_vdec_subscribe_output_properties_av1[] = {
+ 	HFI_PROP_WORST_COMPLEXITY_FACTOR,
+ };
+ 
++static const u32 sm8550_venc_subscribe_input_properties[] = {
++	HFI_PROP_NO_OUTPUT,
++};
++
++static const u32 sm8550_venc_subscribe_output_properties[] = {
++	HFI_PROP_PICTURE_TYPE,
++};
++
+ static const u32 sm8550_dec_ip_int_buf_tbl[] = {
+ 	BUF_BIN,
+ 	BUF_COMV,
+@@ -1985,6 +1993,11 @@ const struct iris_firmware_data iris_hfi_gen2_data = {
+ 	.dec_output_prop_av1_size =
+ 		ARRAY_SIZE(sm8550_vdec_subscribe_output_properties_av1),
+ 
++	.enc_input_prop = sm8550_venc_subscribe_input_properties,
++	.enc_input_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_input_properties),
++	.enc_output_prop = sm8550_venc_subscribe_output_properties,
++	.enc_output_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_output_properties),
++
+ 	.dec_ip_int_buf_tbl = sm8550_dec_ip_int_buf_tbl,
+ 	.dec_ip_int_buf_tbl_size = ARRAY_SIZE(sm8550_dec_ip_int_buf_tbl),
+ 	.dec_op_int_buf_tbl = sm8550_dec_op_int_buf_tbl,
+@@ -2032,6 +2045,11 @@ const struct iris_firmware_data iris_hfi_milos_data = {
+ 	.enc_output_config_params_size =
+ 		ARRAY_SIZE(sm8550_venc_output_config_params),
+ 
++	.enc_input_prop = sm8550_venc_subscribe_input_properties,
++	.enc_input_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_input_properties),
++	.enc_output_prop = sm8550_venc_subscribe_output_properties,
++	.enc_output_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_output_properties),
++
+ 	.dec_input_prop = sm8550_vdec_subscribe_input_properties,
+ 	.dec_input_prop_size = ARRAY_SIZE(sm8550_vdec_subscribe_input_properties),
+ 	.dec_output_prop_avc = sm8550_vdec_subscribe_output_properties_avc,
+@@ -2920,6 +2938,11 @@ const struct iris_firmware_data iris_hfi_gen2_ar50lt_data = {
+ 	.enc_output_config_params_size =
+ 		ARRAY_SIZE(sm8550_venc_output_config_params),
+ 
++	.enc_input_prop = sm8550_venc_subscribe_input_properties,
++	.enc_input_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_input_properties),
++	.enc_output_prop = sm8550_venc_subscribe_output_properties,
++	.enc_output_prop_size = ARRAY_SIZE(sm8550_venc_subscribe_output_properties),
++
+ 	.dec_input_prop = sm8550_vdec_subscribe_input_properties,
+ 	.dec_input_prop_size = ARRAY_SIZE(sm8550_vdec_subscribe_input_properties),
+ 	.dec_output_prop_avc = sm8550_vdec_subscribe_output_properties_avc,
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c b/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
+index 388a36ff2b07..6131d22c579f 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_gen2_command.c
+@@ -1059,12 +1059,17 @@ static int iris_hfi_gen2_subscribe_property(struct iris_inst *inst, u32 plane)
+ 
+ 	payload[0] = HFI_MODE_PROPERTY;
+ 
+-	if (inst->domain == ENCODER)
+-		return 0;
+-
+ 	if (V4L2_TYPE_IS_OUTPUT(plane)) {
+-		subscribe_prop_size = core->iris_firmware_data->dec_input_prop_size;
+-		subcribe_prop = core->iris_firmware_data->dec_input_prop;
++		if (inst->domain == ENCODER) {
++			subscribe_prop_size = core->iris_firmware_data->enc_input_prop_size;
++			subcribe_prop = core->iris_firmware_data->enc_input_prop;
++		} else {
++			subscribe_prop_size = core->iris_firmware_data->dec_input_prop_size;
++			subcribe_prop = core->iris_firmware_data->dec_input_prop;
++		}
++	} else if (inst->domain == ENCODER) {
++		subscribe_prop_size = core->iris_firmware_data->enc_output_prop_size;
++		subcribe_prop = core->iris_firmware_data->enc_output_prop;
+ 	} else {
+ 		switch (inst->codec) {
+ 		case V4L2_PIX_FMT_H264:
+diff --git a/drivers/media/platform/qcom/iris/iris_platform_common.h b/drivers/media/platform/qcom/iris/iris_platform_common.h
+index cddab9a9c375..cf5ae420f646 100644
+--- a/drivers/media/platform/qcom/iris/iris_platform_common.h
++++ b/drivers/media/platform/qcom/iris/iris_platform_common.h
+@@ -303,6 +303,11 @@ struct iris_firmware_data {
+ 	const u32 *dec_output_prop_av1;
+ 	unsigned int dec_output_prop_av1_size;
+ 
++	const u32 *enc_input_prop;
++	unsigned int enc_input_prop_size;
++	const u32 *enc_output_prop;
++	unsigned int enc_output_prop_size;
++
+ 	const u32 *dec_ip_int_buf_tbl;
+ 	unsigned int dec_ip_int_buf_tbl_size;
+ 	const u32 *dec_op_int_buf_tbl;
 
-One possibility is that the RISC-V core is powered on during UEFI or ABL 
-and remains powered on when control is handed over to the kernel.
-
-Thanks,
-Jie
-
-> Konrad
-> 
->>   arch/arm64/boot/dts/qcom/shikra.dtsi | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/arch/arm64/boot/dts/qcom/shikra.dtsi b/arch/arm64/boot/dts/qcom/shikra.dtsi
->> index 0a95ad5a5582..5f5a786fbd2c 100644
->> --- a/arch/arm64/boot/dts/qcom/shikra.dtsi
->> +++ b/arch/arm64/boot/dts/qcom/shikra.dtsi
->> @@ -3996,6 +3996,7 @@ cti@982b000 {
->>   			clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
->>   			clock-names = "apb_pclk";
->>   			label = "cti_riscv";
->> +			status = "fail";
->>   		};
->>   
->>   		tpdm@9860000 {
->>
->> ---
->> base-commit: 84abb955b1015477aa11a96e2f3ac1b938b77f48
->> change-id: 20261116-disable_riscv_cti_for_shikra-574ac8895dea
->>
->> Best regards,
+-- 
+2.34.1
 
