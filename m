@@ -1,47 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795565364;
-	b=R51RCESbVyFVBTqEH9LICg32hIAFiwe2ijRkXpkalq52EwdBFcrWe463NDSNMObcrm4P
-	 ApfUnxNfaNBn/LTTFT10YduFVOJZvxUz3NnxuRfYhQ3RR1wbR3EewQCXyJp4QQkZNsXog
-	 HoK9nOGPqHNwP1oGI8nE/0X+zu3hpPNNrzPcry19qoTz8OqSvbN8vVw3dWRxYt7GX0Oww
-	 W3k0uorG1l+wTYF9LuRZU7jdnnOiNTaKhPGu2TuAecu9ga5XtgWY/iUUdg8sy9JsuG9iv
-	 aG0oBGR3aCy/EkJM0kcukXAUGJue79bxnjqMfYBwSkgKN63ZH1uymkwXpvNg57iXuiA==
+	t=1795565367;
+	b=PvdJqA+N4KG+/qW8mmTKukSGkPvxFGC+PPRR+wfTldnhA7dXZ1QMaiUu2NXY9PfYs/T5
+	 atW3jQNZw7aJjkq1dLHmwTmg2rRm7biLmq6TmgHiQD4KLhuDXl4XhPU4UvQD9cwSCgH6q
+	 U8KKV/Fxb+6i61pHPC/mjq4rMWBlHxy44ffNksKW0dsQFdSyf9azBNkX4gzy3A4enQu71
+	 WdEhT5spUxV3hPjpQAOdvUI5g+Twwb3oObln8wh3fLWU7ZTzIXJl2zs/l/utv4HQ3CmtM
+	 g5t38K5yMIQVHpsTb4elYj1QSKtys2pmM5pbJdpJ77FcA688PJZT7GpAyFlw5RYWwIA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795565364;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795565367;
 	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
 	 In-Reply-To:References:X-sashiko-severity:Content-Type:
 	 Content-Transfer-Encoding:MIME-Version;
-	bh=rsXTtReWmAlr2TN0IozOLiOE8/fqHvyQ7TmPrFjU4hU=;
-	b=W43sRFfH15l7mOBW+4mnT5cd97cNXrVFO6JubDzMqMXNNdhmFFkoJ8Rn+bvHfXUHMYDq
-	 9R1sjns6haLLwEEQBEQXcFp4s9yH7mDs1EDLu1D2slGIo3C0HnFxfhZjzpGTVuAgZjHwE
-	 3jvYDQGb+Qf1PVyomHIGwZ7TeF7qQRvE2+LpbR0gjdDjJR/N1r8MMZ/9g1aUKchFtCBin
-	 vUglDq9EkSu2cMf7pMj4/a80XynoOGC9chJSkFoCDqxnyisj6dYP35Qgt/H+3qM6Ddwlf
-	 LvCJh2B+FYYlKRNEzMCjWQXiGGBa7zGOcYy8rDbeMBCn37hvhytnic6jLA/IFjT3BFg==
+	bh=SlEO7AG/xoBdanHyLcbNyPfkti5alnKG1VL7DPC5IJg=;
+	b=MHXrEMgai+HEBa6LfXxLOcBxdNEQn711lfbXhAnlXiBHCKaeK+4Snp6OTPsiO+4CVjCI
+	 SsZARsoz8Zt1u07F92yUv/etUbK2N25RjpCND7m+jh3OUWSaSWiK0dGS2R0NzAQARF7V7
+	 Fg04lyUhp+u6hS/QMe/sabpRfORsXwykCjSrptsE/CL0E+dMdNbb7e/IKY0tH0H06w49u
+	 +GILKnGcnbMwkzy1nOLX+j8BNDMLUpuiMuuyiwK/2Pdp8MeWwPm7GBPJb1OZe9+hAeOTm
+	 Oc5MGpTKZolu/lRdBDqn56WxoZedR3H2w5ayQ8d1Pk9C5gPqfLbUhcj0U5JtRQJvjjw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="D+zLfT/Q";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=odh4ycun;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB966606A32D;
-	Wed, 25 Nov 2026 00:09:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 09849606A33F;
+	Wed, 25 Nov 2026 00:09:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=D+zLfT/Q
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 43F341F000D2;
-	Wed, 25 Nov 2026 00:09:23 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=odh4ycun
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5F73F1F0089F;
+	Wed, 25 Nov 2026 00:09:25 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795565364;
-	bh=rsXTtReWmAlr2TN0IozOLiOE8/fqHvyQ7TmPrFjU4hU=;
+	s=k20260515; t=1795565366;
+	bh=SlEO7AG/xoBdanHyLcbNyPfkti5alnKG1VL7DPC5IJg=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=D+zLfT/Q5hSPSnYw/mfJZsi2EYa/liVgN0SXBKV9rL/6k6oZlMIUVIelS+5Rc5t9Y
-	 NbesPCcZ76ygs4412nrSJ4VbB7XwV0Vu/0joVcaB7VqYC6GvQx0cnhsapXY9z4D6HO
-	 nwAw0Qe2OpkyauyOZQt3SXPT7Q7oRoPiDzKQlxlmoHIML2xlZSyu/92URmwCeUhf/9
-	 WjRyTGiPlrTGinZchs+ZruPErotwbpJ1RpUgipAuRaPaMgbC2CYm110J/TdhtRVy2O
-	 bJIxiU2JSjvS8EC/pVNo9IDeS/v0vb6VZUlnNrEzxXIk/wuFqC4Gjx32i+jtiWwNhF
-	 T3kE6XJ3Skfxw==
-Subject: Re: [PATCH net-next v2 2/3] net/stmmac/dwxgmac: Extend MTL/DMA
- support to 16 queues
+	b=odh4ycun0vP81AgfR+TAVVmdt5EvllvtLqYpb+NfquwNQah9O7DNKC+DrZqbNzLWY
+	 nzWOEVc4RwMqp3H0E16VEXQ/ceQ/EMow71rEIuDD9FoaHuH2pUQYFpF1Hu9cuRiBG9
+	 5xRtiZLAVY2d+US8Y5CjQ5YizjbhI1MJr4m72LYZrSAcQcpaEEcMfvmkqKX2W/ZoIf
+	 E7QvDPhz0FC22GOPPQF+1YNxvdOHEmz/oLZNaINrF90t1yEVn3dBGWVn9retJLEoZ1
+	 cNvXyxVq66QNFUMeU5JAtMgQfOhR1iHMMtIa6dVvapvAt5fNzCS0fNDlNqQdubObVV
+	 fBPB1RBuH8WXg==
+Subject: Re: [PATCH net-next v2 3/3] include/stmmac: Increase max DMA/MTL
+ channel count from 8 to 16
 From: netdev-bot+sashiko@kernel.org
 To: sagar.cheluvegowda@oss.qualcomm.com
 Cc: j.raczynski@samsung.com, maxime.chevallier@bootlin.com,
@@ -54,11 +54,11 @@ Cc: j.raczynski@samsung.com, maxime.chevallier@bootlin.com,
  k.domagalski@samsung.com, k.tegowski@samsung.com,
  abhishek.chauhan@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
  sarosh.hasan@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com
-Date: Wed, 25 Nov 2026 00:09:22 +0000
-Message-ID: <179556536283.3135.8042221243416854963@kernel.org>
-In-Reply-To: <20261124000415.4067701-3-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20261124000415.4067701-3-sagar.cheluvegowda@oss.qualcomm.com>
-X-sashiko-severity: High
+Date: Wed, 25 Nov 2026 00:09:24 +0000
+Message-ID: <179556536493.3135.4615910736838398111@kernel.org>
+In-Reply-To: <20261124000415.4067701-4-sagar.cheluvegowda@oss.qualcomm.com>
+References: <20261124000415.4067701-4-sagar.cheluvegowda@oss.qualcomm.com>
+X-sashiko-severity: Medium
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -71,10 +71,10 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 
-Thank you for your contribution! Sashiko AI review found 3 potential
+Thank you for your contribution! Sashiko AI review found 5 potential
 issue(s) to consider.
 
-Critical: 0 · High: 1 · Medium: 0 · Low: 2
+Critical: 0 · High: 0 · Medium: 3 · Low: 2
 
 If you believe none of the issues are legitimate, please reply to each
 issue of Medium severity or higher and explain why the AI is wrong.
@@ -82,102 +82,187 @@ If any of them are legitimate and you plan to respin, please let patchwork
 know by including "pw-bot: cr" as a separate line at the end of your reply
 (one such reply per series is enough).
 
-- [High] dwxgmac2_tx_queue_prio() in
-  drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c still only handles…
-- [Low] The commit message says "The only caller,
-  stmmac_rx_queue_dma_chan_map(), walks the queues below…
-- [Low] The commit body of "net/stmmac/dwxgmac: Extend MTL/DMA support to
-  16 queues" contains revision history that only makes sense on the…
+- [Medium] tc_setup_cbs() (stmmac_tc.c:343) checks the CBS queue only
+  against tx_queues_to_use.
+- [Medium] With up to 16 TX queues, tc_setup_dwmac510_mqprio()
+  (stmmac_tc.c:1456-1464) checks only that offset+count <=…
+- [Medium] dwxgmac2_tx_queue_prio() (dwxgmac2_core.c:140-155) handles
+  only TX queues/TCs 0..7.
+- [Low] net: stmmac: 3-bit queue mask truncation in
+  EST_SZ_CAP_HBFQ_MASK()
+- [Low] net: stmmac: signed shift overflow in dwxgmac2_rx_queue_enable()
+  for queue 15
 
 --
 
-net/stmmac/dwxgmac: Extend MTL/DMA support to 16 queues
+include/stmmac: Increase max DMA/MTL channel count from 8 to 16
 
-This commit extends dwxgmac2_map_mtl_to_dma() to cover 16 MTL/DMA queues.
-It adds the XGMAC_MTL_RXQ_DMA_MAP2 and XGMAC_MTL_RXQ_DMA_MAP3 registers
-ahead of raising the maximum queue count. Queue indices that are out of
-range now trigger a WARN_ON() and return.
+This commit raises MTL_MAX_RX_QUEUES, MTL_MAX_TX_QUEUES and STMMAC_CH_MAX
+from 8 to 16 so that newer XGMAC hardware with up to 16 DMA/MTL queues can
+use all of them.
 
-> The only caller, stmmac_rx_queue_dma_chan_map(), walks the queues
-> below rx_queues_to_use, which the devicetree parser limits to
-> MTL_MAX_RX_QUEUES. A queue above 15 is therefore a driver bug, not
-> bad input.
+> diff --git a/include/linux/stmmac.h b/include/linux/stmmac.h
+> index 00be2df63d220..b91c8d069dc28 100644
+> --- a/include/linux/stmmac.h
+> +++ b/include/linux/stmmac.h
+> @@ -15,9 +15,9 @@
+>  #include <linux/platform_device.h>
+>  #include <linux/phylink.h>
+>  
+> -#define MTL_MAX_RX_QUEUES	8
+> -#define MTL_MAX_TX_QUEUES	8
+> -#define STMMAC_CH_MAX		8
+> +#define MTL_MAX_RX_QUEUES	16
+> +#define MTL_MAX_TX_QUEUES	16
 
 [Severity: Low]
-Is stmmac_rx_queue_dma_chan_map() really the only caller?
-dwxgmac2_rss_configure() in dwxgmac2_core.c also calls
-dwxgmac2_map_mtl_to_dma() directly. It does not go through the
-stmmac_map_mtl_to_dma() callback:
+Can stmmac_mac_enable_rx_queues() now evaluate a signed shift into the
+sign bit?
 
-dwxgmac2_rss_configure() {
+Both dwxgmac2_rx_queue_enable() and dwxlgmac2_rx_queue_enable() in
+drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c do:
+
+	else if (mode == MTL_QUEUE_DCB)
+		value |= 0x2 << XGMAC_RXQEN_SHIFT(queue);
+
+XGMAC_RXQEN_SHIFT(x) is defined as ((x) * 2). With MTL_MAX_RX_QUEUES
+at 16, rx_queues_to_use can be 16, and stmmac_mac_enable_rx_queues()
+then passes queue 15, giving 0x2 << 30. Since 0x2 is a plain int, this
+shifts a 1 into bit 31. That is undefined behaviour in C and can be
+flagged by CONFIG_UBSAN_SHIFT.
+
+MTL_QUEUE_DCB is the default rx queue mode, so this would be hit on
+every interface bring-up through stmmac_hw_setup() on a 16-queue
+XGMAC/XLGMAC configuration.
+
+The register value most likely still comes out right with the kernel's
+compiler flags. Could these constants be made unsigned (0x2U, or
+FIELD_PREP() with XGMAC_RXQEN(queue)) as part of the preparatory
+changes before the limit is raised?
+
+[Severity: Low]
+Now that tx_queues_to_use can be larger than 8, does est_irq_status()
+still report the right queue on a head-of-line blocking event?
+
+In drivers/net/ethernet/stmicro/stmmac/stmmac_est.c:est_irq_status(),
+the EST_HLBF handling does:
+
+	value = readl(est_addr + EST_FRM_SZ_CAP);
+	hbfq = (value & EST_SZ_CAP_HBFQ_MASK(txqcnt)) >>
+		EST_SZ_CAP_HBFQ_SHIFT;
+
+txqcnt is priv->plat->tx_queues_to_use, passed down from
+stmmac_common_interrupt(). EST_SZ_CAP_HBFQ_MASK() in stmmac_est.h only
+knows about up to 8 queues:
+
+	(_val > 4 ? GENMASK(18, 16) :
+	 _val > 2 ? GENMASK(17, 16) :
+	 BIT(16));
+
+For txqcnt 9..16 the mask stays 3 bits wide and bit 19 is dropped.
+An HLBF event on queues 8..15 is then logged in the "EST: HLB(size)
+Queue %u" message as queue 0..7. That points the user at the wrong
+queue when debugging a taprio schedule.
+
+The impact is limited to the diagnostic message. Should
+EST_SZ_CAP_HBFQ_MASK() gain a _val > 8 ? GENMASK(19, 16) branch? Can
+you confirm the HBFQ field in EST_FRM_SZ_CAP really widens to 4 bits on
+the 16-queue XGMAC cores?
+
+[Severity: Medium]
+Now that tx_queues_to_use can be larger than 8, can tc_setup_cbs() program
+per-TC registers that do not exist on XGMAC?
+
+In drivers/net/ethernet/stmicro/stmmac/stmmac_tc.c:tc_setup_cbs(), the
+only bound on the CBS queue is:
+
+	/* Queue 0 is not AVB capable */
+	if (queue <= 0 || queue >= tx_queues_count)
+		return -EINVAL;
+
+The queue is then used directly as a traffic class index. dwxgmac2_qmode()
+does:
+
+	writel(0, ioaddr + XGMAC_MTL_TCx_ETS_CONTROL(channel));
+
+dwxgmac2_config_cbs() also writes XGMAC_MTL_TCx_SENDSLOPE(),
+XGMAC_MTL_TCx_QUANTUM_WEIGHT(), XGMAC_MTL_TCx_HICREDIT(),
+XGMAC_MTL_TCx_LOCREDIT() and XGMAC_MTL_TCx_ETS_CONTROL() using that same
+queue. XGMAC has at most XGMAC_MAX_TC (8) traffic classes, and
+dma_cap.numtc can be lower than that.
+
+At the same time, dwxgmac2_dma_tx_mode() puts the queue into a 3-bit
+field:
+
+	value |= FIELD_PREP(XGMAC_Q2TCMAP, channel);
+
+That means queue 9 is served by TC1. TC1's shaper is never touched, and
+the tc command still returns success.
+
+The path is:
+
+  tc qdisc replace ... cbs ... offload 1
+    stmmac_setup_tc()
+      tc_setup_cbs()
+        stmmac_dma_qmode() -> dwxgmac2_qmode()
+        stmmac_config_cbs() -> dwxgmac2_config_cbs()
+
+The earlier commit "net: stmmac: separate the TC count from the queue
+count on XGMAC" described this as writes to TC registers that do not
+exist. It bounded the resume replay in stmmac_configure_cbs() by
+stmmac_num_tc():
+
+	for (queue = 1; queue < num_tc; queue++) {
+
+However, tc_setup_cbs() is still bounded only by tx_queues_to_use. As a
+result, CBS state saved for queues >= num_tc is also silently not
+restored.
+
+Should tc_setup_cbs() reject queues >= stmmac_num_tc() as well?
+
+[Severity: Medium]
+With more than 8 TX queues, can dwxgmac3_fpe_map_preemption_class()
+silently truncate both the TC number and the preemption class?
+
+tc_setup_dwmac510_mqprio() only checks offset + count against
+tx_queues_to_use. It therefore accepts num_tc up to 16 and queue ranges
+that include queues 8..15. It then reaches this code in
+drivers/net/ethernet/stmicro/stmmac/stmmac_fpe.c:
+
+dwxgmac3_fpe_map_preemption_class() {
     ...
-	for (i = 0; i < num_rxq; i++)
-		dwxgmac2_map_mtl_to_dma(hw, i, XGMAC_QDDMACH);
+		for (u32 i = 0; i < count; i++) {
+			val = readl(priv->ioaddr + XGMAC_MTL_TXQ_OPMODE(offset + i));
+			writel(u32_replace_bits(val, tc, XGMAC_Q2TCMAP),
+			       priv->ioaddr + XGMAC_MTL_TXQ_OPMODE(offset + i));
+		}
     ...
 }
 
-Here num_rxq is rx_queues_to_use. That value can also come from ethtool
-set_channels, not only from the devicetree parser.
+XGMAC_Q2TCMAP is GENMASK(10, 8), so TC 8..15 alias onto hardware
+TC 0..7.
 
-By the end of the series both paths are limited to at most 16 queues, so
-the WARN_ON() still can't fire from either one. The reasoning in the
-message is what is off, not the behaviour.
+The preemption class is written with:
 
-Could the commit message mention this second caller, given that the
-WARN_ON() justification rests on the single-caller argument?
+	writel(u32_replace_bits(val, preemptible_txqs, FPE_MTL_PREEMPTION_CLASS),
+	       priv->ioaddr + XGMAC_MTL_FPE_CTRL_STS);
 
-> bad input. v2 reported it with netdev_err() through hw->priv_data,
-> but that back-pointer was only added by v2 1/3, which this series
-> replaces, and a log line from a void callback does not stop the
-> caller from carrying on. Use WARN_ON() instead: it needs no
-> net_device and its backtrace points at the caller.
+FPE_MTL_PREEMPTION_CLASS is GENMASK(15, 8), so bits 8..15 of
+preemptible_txqs are dropped. For example, with num_tc 2, TC1 on queues
+8-15 and TC1 marked preemptible, preemptible_txqs is 0xFF00 and 0 is
+written to the field.
 
-[Severity: Low]
-This isn't a bug, but this text refers to "v2 1/3" and to an
-hw->priv_data back-pointer. Neither will exist in the tree once the
-patch is merged.
+When num_tc is 0, the default restore loop writes i, up to
+tx_queues_to_use - 1, into the same 3-bit XGMAC_Q2TCMAP field.
 
-Could the version history go below the --- separator? The technical
-reason for WARN_ON() (it needs no net_device and the backtrace points at
-the caller) can stay in the message.
+No error is returned to the user in any of these cases. Should the
+mqprio/FPE path reject configurations that do not fit these register
+fields?
 
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> index e50c0f4c482d0..8aa69647a207d 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c
-> @@ -259,9 +259,26 @@ static void dwxgmac2_map_mtl_to_dma(struct mac_device_info *hw, u32 queue,
->  	void __iomem *ioaddr = hw->pcsr;
->  	u32 value, reg;
->  
-> -	reg = (queue < 4) ? XGMAC_MTL_RXQ_DMA_MAP0 : XGMAC_MTL_RXQ_DMA_MAP1;
-> -	if (queue >= 4)
-> +	switch (queue) {
-> +	case 0 ... 3:
-> +		reg = XGMAC_MTL_RXQ_DMA_MAP0;
-> +		break;
-> +	case 4 ... 7:
-> +		reg = XGMAC_MTL_RXQ_DMA_MAP1;
->  		queue -= 4;
-> +		break;
-> +	case 8 ... 11:
-> +		reg = XGMAC_MTL_RXQ_DMA_MAP2;
-> +		queue -= 8;
-> +		break;
-> +	case 12 ... 15:
-> +		reg = XGMAC_MTL_RXQ_DMA_MAP3;
-> +		queue -= 12;
-> +		break;
-> +	default:
-> +		WARN_ON(1);
-> +		return;
-> +	}
+[Severity: Medium]
+Does dwxgmac2_tx_queue_prio() handle queues 8 and above?
 
-[Severity: High]
-The commit message says the dwxgmac functions are being prepared for 16
-queues before the macro is raised. However, dwxgmac2_tx_queue_prio() in
-the same file still handles only 8 entries:
-
-dwxgmac2_tx_queue_prio() {
+drivers/net/ethernet/stmicro/stmmac/dwxgmac2_core.c:dwxgmac2_tx_queue_prio() {
     ...
 	reg = (queue < 4) ? XGMAC_TC_PRTY_MAP0 : XGMAC_TC_PRTY_MAP1;
 	if (queue >= 4)
@@ -189,64 +274,31 @@ dwxgmac2_tx_queue_prio() {
     ...
 }
 
-At this patch ARRAY_SIZE(tx_queues_cfg) is still 8. The later patch
-"include/stmmac: Increase max DMA/MTL channel count from 8 to 16" makes
-it 16. After that, can the mqprio paths in stmmac_tc.c call this
-function with queue indices 8 to 15?
+For queues 8..15 the sub-index becomes 4..11. For queues 8..11, prio is a
+u32 shifted by 32..56 bits. For queues 12..15, XGMAC_PSTC() also expands
+to a GENMASK() past bit 63. Both are undefined behaviour.
 
-Both tc_mqprio_config_queue_prio() and stmmac_reset_tc_mqprio() run this
-loop:
+On x86-64, queues 12..15 end up overwriting the TC4..TC7 fields of
+XGMAC_TC_PRTY_MAP1.
 
-	for (i = 0; i < ARRAY_SIZE(priv->plat->tx_queues_cfg); i++) {
-		...
+These calls can now be reached from tc_mqprio_config_queue_prio() and
+stmmac_reset_tc_mqprio(). Both loop over ARRAY_SIZE(tx_queues_cfg), which
+is now 16, and do:
+
 		if (i < priv->plat->tx_queues_to_use)
 			stmmac_tx_queue_prio(priv, priv->hw, prio, i);
-	}
 
-tx_queues_to_use can be 16 there. The devicetree limit is
-MTL_MAX_TX_QUEUES, and XGMAC_HWFEAT_TXQCNT is a 4-bit field plus 1.
-Neither loop is bounded by qopt->num_tc or dma_cap.numtc.
+Neither loop is bounded by num_tc. By contrast, the boot-time
+stmmac_mac_config_tx_queues_prio() is bounded by stmmac_num_tc().
 
-For i = 8 to 15, queue is 4 to 11 after the subtraction. The expression
-prio << XGMAC_PSTC_SHIFT(queue) then shifts a u32 by 32 to 88 bits. For
-i >= 12, XGMAC_PSTC(queue) expands to GENMASK() with bit positions of 64
-and above. Both shifts are undefined behaviour, and UBSAN reports them
-as shift-out-of-bounds.
+The path is:
 
-The hardware also ends up programmed wrongly:
+  tc qdisc add ... mqprio ... hw 1 mode channel
+    tc_setup_dwmac510_mqprio()
+      tc_mqprio_config_queue_prio()
+        stmmac_tx_queue_prio() -> dwxgmac2_tx_queue_prio()
 
-  - For i = 8 to 11, the mask truncates to 0 in the u32, so nothing is
-    written.
-  - For i = 12 to 15 on x86-64 and arm64, the shift counts wrap. The
-    write then likely lands on the PSTC4 to PSTC7 fields of
-    XGMAC_TC_PRTY_MAP1 and overwrites the priorities already set for
-    TCs 4 to 7, usually with 0.
-
-A CAP_NET_ADMIN user triggers this by adding an mqprio qdisc with
-hardware offload:
-
-ndo_setup_tc
-  -> tc_setup_dwmac510_mqprio()
-    -> tc_mqprio_config_queue_prio()
-      -> stmmac_tx_queue_prio()
-        -> dwxgmac2_tx_queue_prio()
-
-XGMAC uses dwmac510_tc_ops, whose setup_mqprio is
-tc_setup_dwmac510_mqprio(). Removing the qdisc runs the same loop
-through stmmac_reset_tc_mqprio().
-
-The earlier patch "net: stmmac: separate the TC count from the queue
-count on XGMAC" bounds the rx_queue_prio callers and
-stmmac_mac_config_tx_queues_prio(). These two mqprio callers seem to
-have been missed, so writes to TC_PRTY fields for TCs that don't exist
-can still happen on XGMAC.
-
-Should these loops be bounded by the TC count? Alternatively, should
-dwxgmac2_tx_queue_prio() reject queue >= 8?
-
->  
->  	value = readl(ioaddr + reg);
->  	value &= ~XGMAC_QxMDMACH(queue);
+Should these mqprio loops also be limited to stmmac_num_tc()?
 
 [ ... ]
 
