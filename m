@@ -1,89 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795612179;
-	b=HbeFiC09SbzBWkxOWPrhzn4hiBp7ZtXngNOMXsTKeFTCYBofXVErgpgwc40y2rziqTle
-	 wYIOwZLNCDnafIOH20Akctcg7VTSianfMuBl9KTsT1kYfsg/2l/WnTZAZ4Hld5/ICVE/B
-	 t8X4f41KAxS6V9OxNUvC8K5/jlnrDl6t9vjXqp+1DNHqKUQX2ovP4smj5WkkjLSDcUFMy
-	 PWOky3NvhZR8Tulpk+Rw4THJhGljuKlu9KfHRdLuE1v1czMEPq52YBhCxPBmelRa47nZd
-	 evCIc9CUtR+KdhVUelpUCkwsAPG2kpvRQCzyLWbP6ttV1tpj64XAzEkZPpxVt2KtbjQ==
+	t=1795612180;
+	b=XwZXdtT7EZCzKDNJXaqK1qJWaIBm3YMJDQ+K5qEJzt9Yaho8i5sHTrwu9Pd9sRIlQrIA
+	 8ah3465o+wZtWdVeeAz6Pd34LJMb/pDbJzpNytxrGrShAS7vihR2Xc3rBY+7EG741OWLZ
+	 OZA4XR0OStAmGq8eNliAaHbZpTxgtBRdLmOTt2FNGQl3QLuBdOJihnrDB6sWz+wECtT/s
+	 Yc6aEiUKfoDPbPnXFO/ym0OuJdZN1prsZZRglihsDX29mBxH/hOVp/oDl4k7u+b9oNrVj
+	 fZBhmEgwMAKRMn9hYcRsDhLf019w9f4OUzF4MkqKp74Qrt+5fwt0PFEYYyZgZAX3LkQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795612179;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795612180;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=gm2/ObuxDVgUAne35bqkJz27tcih45Pf//RuGwaqhd0=;
-	b=EowHpLJhZi2rMnU5cicCyqaR2Ff1s3yXbAI8Sz5FnnkxUcrXU2SIoLpmVREzzXrK3/Yg
-	 8ybu+wZmp2s/PQ/7PPLn85UMqkTf5U83wPFHbK7YjbqbS32ZFpbp4qYiZRE/hwyeTvir1
-	 g9JcBD/rHAhpOHK0msR5FXBAF4D9f4tBxUnrSQbDDegVO40k+wz2IMB45aqN2zDk7RHfx
-	 ZdbX6LYefcIX0pIJPTyf3bX4t/PIQy6mMQDIMZJluqf0XsjK0gSXu4dXOSSCJAsqyAw6F
-	 s7g8gKFeagXCR0ryBvUgreTOh3SbCQp2YkaGTKGCGhZH98VGjoGByUQTiYm/RsCV4lg==
+	bh=7j+iyCxJKN1obNbNOrxIJ9oVQ476N5sWokxiMnxruLE=;
+	b=1GWmF6Jhu8gBf4X7zddrbB4C6m90BdIul80oTS+KPaWBuL/EnDGYx1h12DS77ytyHcz3
+	 RVe1U3R12Wo9ObKooCgButXwzHCwqIBf5PG378McX25JSNHRV7u98ahb5Tj0ErFj8tS+6
+	 c8PhamK5RP5DKhiLyldH6dr5zscKSWhyTlvdHG/IZyLBs86ALG56kP4oS1n/QpgdoBhGw
+	 I7CjnKdo7X/4IU8ayj2qBEC0I8vhs6fJ6v6SsL8Le8WsVMosDawYQ7CQ4TgTWEYinAYNp
+	 cRwTNbEewI/ppXiCjc3iWrqJGm2ZklxTl04uqglL0AduI//ki7qPZ/AqSxl4wpsLd0w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lG6It37v;
-	arc=none smtp.remote-ip=209.85.221.45
-Received: from mail-wr1-f45.google.com (mail-wr1-f45.google.com [209.85.221.45])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=EhTKowDz;
+	arc=none smtp.remote-ip=209.85.221.52
+Received: from mail-wr1-f52.google.com (mail-wr1-f52.google.com [209.85.221.52])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37B0A606A327
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1F1E606A335
 	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 13:09:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37B0A606A327
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C1F1E606A335
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lG6It37v
-Received: by mail-wr1-f45.google.com with SMTP id ffacd0b85a97d-48dee593f18so5371007f8f.3
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=EhTKowDz
+Received: by mail-wr1-f52.google.com with SMTP id ffacd0b85a97d-491f34b4e0fso2634697f8f.2
         for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 05:09:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795612177; x=1796216977; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1795612178; x=1796216978; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gm2/ObuxDVgUAne35bqkJz27tcih45Pf//RuGwaqhd0=;
-        b=lG6It37vJI1yamReOdJgOu4DK+G/otcskTVwxP4z2pIcqBlDCabM5BnM30nJmEsu1i
-         icfnRjApC/nuwIhQP/PQiJEFGNG4NXjQi8qT4sf8e0k0gIRioJ2GgvbGIsg2ZjI5ef27
-         7V2InBkbuOSqyWYlm9Q9x3BIp2/BHpJivZqr5z43RbQX5qUi0DKNLH+b4HN8VJiWxFCa
-         1P7y5u08FIEpYYIkpSk6QDJs1K+u2ZnI8XJYzF1HcTeRRT/MvwP+AdVjh/6oh6G++unW
-         qDMfPr1wjyiO7rqqDzUfNGQ4YMibBX2rPInuHQl/M7JEypT21/dxVmdtLquKzlHSnKyb
-         rbxw==
+        bh=7j+iyCxJKN1obNbNOrxIJ9oVQ476N5sWokxiMnxruLE=;
+        b=EhTKowDzx6/OG0YjNneQAMFEi+zARg4WGBIsT73NISRMszHlnLPf5l5cx5TzD2ezUb
+         s2W2+f3j/Wn6uPBJrWaqKaPjDV2uyYKqWZT7uoujvPXSp9cGUPa8Vbl8epCEMRQyouX9
+         4klf8CEjRg6EvSi//IMzYTQAxGSYuRMerSwMW6oUMPT5mvS5l9/2gmuHPuGJvW2tD/Ec
+         vC2ol8AqF/R9Vv58JmUyHY8OzHzGe5n8uDc6Zyon8hFgs5/+woUzGbpkZKzsS6+oVaTM
+         IyzW94/Ia4Y4YeqAxxorrNZDMfjd7SCgqCugaX8tBOnyJ4p4DoPB6dqXNIDPLEnobJdQ
+         1fzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795612177; x=1796216977;
+        d=1e100.net; s=20260707; t=1795612178; x=1796216978;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gm2/ObuxDVgUAne35bqkJz27tcih45Pf//RuGwaqhd0=;
-        b=Ar6RCOK70fpLMpwLrkNykkJu6lUnvUYTu9OftaQHO6PmGKqlyyudiY5a1I9GQ9n422
-         1xZdncrxXhUc1QOMA/j/3nN8Tlv+VHoC41Lqs+g+WLUfIxlWjHBgt5+a2Hx/N6nCHOkl
-         iBy49UeCYeEq6Er1disQCtlvv1K6nvfWGznbNM4unUoJkjHlpvbWHrTUspbgAPkPIpmI
-         V1Del+fYmZrlkBsICQfQXBUuk9zidN9EDmzDjrL13lNGX7VsFqMvw4u5+SBaxRSDsnDB
-         em/NoGZCwjC9mW7JG+7EBsrT4huUbJrUOs3R6nzen8WYrWtD23Emxlcb6GCuku9v3ecM
-         Q6Nw==
-X-Forwarded-Encrypted: i=1; AL+hErFxHQxgV9SmyKPN1iy551kmQrCynDQSJQTs8xiEMfGZV/VYTvAd39jSEWrAa6E4+GmnKPWNvfnOX7uBCOiK@vger.kernel.org
-X-Gm-Message-State: APuU4Z8eivkCbmFnBoxhaXXEe7QpxpLPKKKOdWORu4N3o44NSI84pzqE
-	C1W9oIoSYimFZ1EKMTEjjuwTWg/qg/WQNn3hXohcy1q9oUGzsjQH10QDWyyrfv78v0s=
-X-Gm-Gg: AZFdTZe7T/AN0qH67jsQ3WSD+TAiR/koJWyQ6qjhRi+vujH+vB0SAuNVZGkzgmaVBfA
-	0Vc7a/wIOc1df2A+c4i8DXYq7IfNkbv4aWzrYIXoxZywr286TTAfKjG86eYB0YA2H6TM8urha7F
-	k/Tbo2GSd3e01uWpyh4FIEWaxw6HPbjl3JC2qjgzfg2o+KE9tgY6zrqFUb6v0qU8kxUmzBtt5zC
-	keQTH+qbMYEiukN/kgxuKKTRjSF8pmpblNqnr3QwNB2E61bWfYqn+gHU5rHdLNxLxeublrc7wLz
-	VypO9/ANaOm97nUDO+Kw4WjQTNSZppQDw/8hzoLkGabux4hx2rzWIq4B4E9voVh7oixMykz3Qro
-	Nq0MD9Orj25Ck0uL3Wlr9wTPTCRiOz3YjadSNeJayCmgpoHIHOFt1/KNgoL/oBIEAOjsxeLKHaA
-	gNHH6oOVLGcNzkfr2nv6J3qG1skESNZIHS4Z/zFyRdn88YSdPaMgt2QtozGGSuxe10GW4WKToXu
-	HDJu2D5seq0QNwnqEP+AxzBB2gfC5aNmQ9xPpFV0kPpEgRAPvWgf4qiG7l9v3iBLQEqCbQQonoe
-	XIJbkR4UyCKDGsevyki+94vzJFJ+MQpybciFYJ6v33VGQriExg3Bkc1E5BPALT/7oFE0Gqs=
-X-Received: by 2002:a5d:5f51:0:b0:48e:f10:ceb8 with SMTP id ffacd0b85a97d-4abb2168e0emr36120520f8f.11.1795612177309;
-        Wed, 25 Nov 2026 05:09:37 -0800 (PST)
+        bh=7j+iyCxJKN1obNbNOrxIJ9oVQ476N5sWokxiMnxruLE=;
+        b=PPcs6I6jel3ndkcLsrOp+miOkuvbOquu9SsAQ+JkQZR846zKusXmUMe2wjZwLBlEcG
+         MM7PRbzE+C+I66irzzkI6ZVhyj+gNfsMyoZeHInr3AvfJ5LdROIrXjwiMMBGV/7cEzdy
+         fVDyYe6tmzVZehd90Qg5hNoUaO8rI6ryeL6pgt8ijMOXLtR4hKd9D7ClN6Xmsbb8O8lH
+         XC9tUX9dOltVTsxGXh9UcQVqPQlaUACsXXjs1YFtTRbyIDUXM1rVVpbHJEM2+u0x4Tmw
+         iKo/XV+3UpPoBXXIC8lLKlx4mHsuwBo7udYIo8EdDMpWp7LKY0Ec7lqVy6aLRmfz7drc
+         /QmQ==
+X-Forwarded-Encrypted: i=1; AL+hErFnKI8ku74+DekL9NC45EejJAJd/LHH8VJKs4pDY7/CTgH1fGY4RThbKfMU4026J1wtzY0R8kqB9VIAyDf3@vger.kernel.org
+X-Gm-Message-State: APuU4Z99kEk2KeBGPkSQ7dzyBmPYNfhCDoGoT8jqJhAN8wRiIQfhwpzr
+	RhYhf3FbIKI/w/QC/N7t6WcahEpIhiBpbSF8JBBu2Eu9xnP/GyZZZX0zhm5l0C/mxLk=
+X-Gm-Gg: AZFdTZcwp3VFPH2WsgdEzW+TxLzBTND3iKPqsRzikurR92vow+lM4Fc2PPw/+p0gsFE
+	+RGMzHliAFTc1U3yWGEEcXZqwLYBLMRYfrBa9/dKZFVRjuM0paeDYZMZ+qbA/YAopfVSWNM8wWt
+	ZSHVggLlFRojN5Gf0q7eoMb4XQy5XJcVbfetPY/8Bs7QE6fo2Q+WqHPz3KEjmNhzPvVEzCAGywz
+	QM1ABYSWGN3AzSZqfPq69st/R4aBSx47fGxyRHcWfmKV5YPBBBIv6E3VCfL0OpINPQrhMlTau04
+	YNIYJogKgAsp1xjRJqCyfakXraUPvr6CsWYAX4ktxnxAaxyu0tjJrA/N+AqNaGM6SzLXSvlxCeP
+	V+WF0C3OqrsCmjcIVbWtMS3f49xt3xpM17cONkTka8Dmu1fSQ3ZNBQ6dt4n3TM5WR/IIkFIeTDE
+	VJuey4ISAoZv5cUMBMCGY5jchHKvAqLUjYXJ7X559dp6SouACwerDIZ5VqZrRtecomlL2NsgvAJ
+	Klvrv4YY7iQejaSXaSEON07kDV86J74mwQa6r1Hb93WmpCg4OBxfeyMmJZauS7UlwJKb6EraxVq
+	Cej0VGbnKrN8Q6duLS/U+dAlUzHjGSsg2hM1BUUa9gWUBZ0r1bbLlo1Tm0XBrrgOwihq740=
+X-Received: by 2002:a05:6000:4808:b0:4a9:760f:1843 with SMTP id ffacd0b85a97d-4abb0d51e12mr34353972f8f.27.1795612178043;
+        Wed, 25 Nov 2026 05:09:38 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab658e2c8csm35240355f8f.2.2026.11.25.05.09.36
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab658e2c8csm35240355f8f.2.2026.11.25.05.09.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 25 Nov 2026 05:09:37 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 25 Nov 2026 14:09:28 +0100
-Subject: [PATCH 01/11] media: iris: vdec: accept V4L2_DEC_CMD_START on a
- running decoder
+Date: Wed, 25 Nov 2026 14:09:29 +0100
+Subject: [PATCH 02/11] media: iris: restart the buffer sequence numbers at
+ each STREAMON
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-topic-iris-decoder-drc-fixes-v1-1-58b9f6b3fe86@linaro.org>
+Message-Id: <20261125-topic-iris-decoder-drc-fixes-v1-2-58b9f6b3fe86@linaro.org>
 References: <20261125-topic-iris-decoder-drc-fixes-v1-0-58b9f6b3fe86@linaro.org>
 In-Reply-To: <20261125-topic-iris-decoder-drc-fixes-v1-0-58b9f6b3fe86@linaro.org>
 To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
@@ -110,56 +110,56 @@ Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
  Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1399;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1383;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=u9wQoclOz0uA+9WaQA0dbU1U3jch7fedoVMeG3ZnpKY=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBt4LQk+Q+UXmBx4UgVks0ZzBgcSVpIQ+k3gbiAfy
- xeSJArmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawbeCwAKCRB33NvayMhJ0Q+AEA
- DCYIOVh40OZ30H4xA20IfLQLl2JsnIHa8iLhGa53IkzMZW2GZs8FY/GWfG2wlFSridLk6xlfIbzl+g
- iCfrgefirxxj1DCxbcNj6UbUwtbR+0VGQ0JxEukC6JkqMSxce3qeeGzCX19zGakp7asQFeRNRvqNFp
- OEBErh1Qe7pjMLWDf+UWYlzrpSEXOt9FHa9ddPI9++0tBiGR398VI78IcFI6nrMkHENiN0CyvE2Abr
- p017BwkbmqP841VUUCF3kzzpwqHuDCYabkr1IvoluitWxFZWFcZ4Do3gbuD4/XXSG9QtKOaA7riWoa
- E1F6RptUxHicK6o4NynaJ4B+5FKxHgTTBqvvEfj/3n5dob4fPs21MDmlaFSxn7cMAUWJ8ALpyJWtVP
- JbGULrl+GOwi5/nBiJDYLo8CnXy+sUNlzjh5JJQvXKzb3nMvshrLSFaI+xweGE0FNNugW1KOaWocnj
- OW2FYckeJolHmF7ZpzHxaPzIz/NF3wrikcyAm7AS+0iMrfFl6hV2uQIW+JILS9q7i5ZZxmOkvBkziq
- ic8+HmVuqE98NoL5+9TSawkWm4I+MCgFPi/CcrG4fzr0DzwaaTNfgUWSSkIYu3n1cdLNc2/luTlKH7
- c0MzE+e6wDHxpg8T8PGeibcuIaNHLVu00rGmD1hJ4ZA751+KrjN14OkyXf9A==
+ bh=xfhCJPfj+HQzhgU+bAL70IYvzzbzMmf2vG9VFnrCgEI=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBt4LYofO1WutbbJhxzJ+OJv8HgNEJH3O1B4oanNz
+ fraYMzGJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawbeCwAKCRB33NvayMhJ0aaBD/
+ 9M80Ada0ARWG+VVjmaT6D6TG4wJjyYnva6RYZn/tiSxtwnQK1rhi2r1MDPYV0d8I/WP9ny/TDJvjvu
+ 5Dxr0M+DQ5p8KUbKdWvD5FcpmAGTNetvnuHacIggt/t2Inh5UgBbSoUaSnSQS8Lr4x0dGG8caaDxjV
+ 64jWkmyOYy+Bo1VP4KO1FK0iEXJutNU74sNUUExOHA5xjgvla3oejxb6UgU3nPBl9+nZ5unKfZrVji
+ 4bJ3Vs9TX9j0uwcxaQB8fROT8Xcx9K5udbBjMNySnSJYuP029dAdgHOaWnq7oBqG/hAouaXeELTIMd
+ Qx3nBvSSKd1KiXI4JdiwqSsLqQgCdHOAAAyeXPZ2LnlFOwXYdGkV9vWrXX12I7zL7UOc8YBrsh8zuK
+ H9i7b327qEvUKem1+E0Q1lVaOHgMaf8P3WfiNV+oEhe45PdqmiQyMtHPnCl3N9vC/j4qsllxPivq4k
+ 3nxSG6InU2hDJzdcgtq6PMrwE5BhIRGQ+rrb/CQy/tf4wHFHl5t4lgoKi2Ypgty55CyqMjOviR4rPJ
+ 0UwamQtYXJB6sEYK2j6Zx5p+D/DDpiZnGDKUkW3a2u6nhdW2W/LdmNs2MP/svpk0deuS/3K54/0bMG
+ mHPwzElSMl/0HfJ0IWKnYl6SEZ5kG3/KSVFGhVvQN50yxWbnenaSluHVpdeA==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-V4L2_DEC_CMD_START on a running decoder is not an error: the specification
-only makes it fail with -EBUSY while a drain is in progress, and
-v4l2_m2m_decoder_cmd() returns 0 for it.
+The buffer sequence count starts at zero when a queue starts streaming.
+The OUTPUT and CAPTURE counters are only zeroed when the instance is
+allocated, so after a STREAMOFF/STREAMON on either queue, e.g. to complete
+a source change or for a seek, v4l2-compliance warns:
 
-iris_allow_cmd() only accepts START while a source change or a drain is
-pending. v4l2-compliance completes a source change with
-STREAMOFF/STREAMON(CAPTURE), which restarts the decoder, then sends START
-and fails on the -EBUSY.
+  warn: v4l2-test-buffers.cpp(470): got sequence number 12, expected 0
 
-Return 0 for START when no source change or drain is pending.
+Reset the counter of a queue when it starts streaming.
 
-Fixes: d09100763bed ("media: iris: add support for drain sequence")
+Fixes: 17f2a485ca67 ("media: iris: implement vb2 ops for buf_queue and firmware response")
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/media/platform/qcom/iris/iris_vidc.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ drivers/media/platform/qcom/iris/iris_vb2.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
-index 931221564a33..7b5a607f94ba 100644
---- a/drivers/media/platform/qcom/iris/iris_vidc.c
-+++ b/drivers/media/platform/qcom/iris/iris_vidc.c
-@@ -601,6 +601,11 @@ static int iris_dec_cmd(struct file *filp, void *fh,
- 	if (inst->state == IRIS_INST_DEINIT)
- 		goto unlock;
+diff --git a/drivers/media/platform/qcom/iris/iris_vb2.c b/drivers/media/platform/qcom/iris/iris_vb2.c
+index 2460778c408d..426810c848a4 100644
+--- a/drivers/media/platform/qcom/iris/iris_vb2.c
++++ b/drivers/media/platform/qcom/iris/iris_vb2.c
+@@ -181,11 +181,13 @@ int iris_vb2_start_streaming(struct vb2_queue *q, unsigned int count)
+ 		goto error;
  
-+	/* No source change or drain to resume */
-+	if (dec->cmd == V4L2_DEC_CMD_START && inst->state != IRIS_INST_ERROR &&
-+	    !(inst->sub_state & (IRIS_INST_SUB_DRC | IRIS_INST_SUB_DRAIN)))
-+		goto unlock;
-+
- 	if (!iris_allow_cmd(inst, dec->cmd)) {
- 		ret = -EBUSY;
- 		goto unlock;
+ 	if (V4L2_TYPE_IS_OUTPUT(q->type)) {
++		inst->sequence_out = 0;
+ 		if (inst->domain == DECODER)
+ 			ret = iris_vdec_streamon_input(inst);
+ 		else
+ 			ret = iris_venc_streamon_input(inst);
+ 	} else if (V4L2_TYPE_IS_CAPTURE(q->type)) {
++		inst->sequence_cap = 0;
+ 		if (inst->domain == DECODER)
+ 			ret = iris_vdec_streamon_output(inst);
+ 		else
 
 -- 
 2.34.1
