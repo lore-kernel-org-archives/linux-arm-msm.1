@@ -1,104 +1,59 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795596436;
-	b=xtnM8kXoYg3GBnBWWcfEbf3zlI2O6T3ywI5ztlRBViz/U3xvXY8gUg931gT1TTYmzFBZ
-	 WdLTWZftxjoUdzGHotWFnXAEf6HUReeQyAa1JaXnd4w2Ez3xliMbbziXnVYaOhcmUCmmM
-	 KCePcXpE3skNTms0bDHOqICYhQYzfFDSu2m9BZOChgCCJUt+8Klpap/uSgvcFzkvnbUEn
-	 CYdfyDFlz9atlInUXfdP6m+2aCykv18c/jyFhIwk9iJW4eqcb9WV7KUR0X3Oh8Ziw4sWb
-	 rLCgBQ4aCopPLXRLu15NZpREW4opKN7RhXIXy0aruR8pRLmt4qrTRJTloE5ZX47yQ/w==
+	t=1795596476;
+	b=XfwziGqeNvmQsEONlFQrB6ksDnlTvl2cXDfOYMxQT1yc20kRHepG4ofudU0rmOejj453
+	 3XEaRb6DTOjXS80ohmvqMHfyBUmPjm/nx56Vt0MurYo65l12VftFZLXMxAWtlgyosG+3i
+	 dvOYQT6aPIFSyx2LXMyyp6juUvu5v8pKas5RA092TsMNKI1m/BOujOx3iTdbU0wnie50d
+	 mhiZAlWDKyPaMvttmlM+c5p/D6z5kjOl3NcIzatLBWHsGKjKp8KkkyAaIh6aiFm2p4c7z
+	 8y2j9kbGErElK7oG4cmz+qyApsDUvvO0UNtSlXASdKbu4JBbdEqvnpoVetg9kdgWevQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795596436;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=9JczosLg+2tleGLZ5rgCSANI1AUwxWfmCJsgr8HB+Wc=;
-	b=3/QZR7iSAsPSbjdAwW3CzzzjqF65StkfPnE5XRx72GvO313+UO5EAzVgj5Bx8bJ6VtUy
-	 /6rcFMhkejcbETYF2gt/pIOqf8oAJjSavV9pyee2gIZb6sKWgWxy3aeP5EL1xe28beQ3p
-	 qpk+l6Z1kP1tK42z69AFEXF2xjDLznasynQslnHoEP8e9gbfFprIb23qa36H04Aus4SU4
-	 fBt+fIdYFOCU6QOYW+o6NDfcWQbE7Uf7QZsI/zWXviK6c2LNKeuBoHghZNlb2+9zgpfA0
-	 aayQDEMgdU8o3Acf2Vne7Nnq67XvT7xJUwF6Ic2080SwOmuCndxDmn8XWmQYsqiL41w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795596476;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=BoIN1YPmv8DT6xKw8t/C48kGStRshqPRywrtEu/9tJw=;
+	b=lO9FIW73umIsdBMNyGx27HRK1MUMHvkia3bWcfFZH1387+47/vo1g0gbot8eV1O2oZlo
+	 UOC/0tyUqxvXLBuJYAngJUiK1C6VOqKWHiOtkNqMSODpPixPYxFO6dd9f4O+We0C19h3J
+	 pVEJllqP5oW7pl/RRo/ujksrp6+wB3+2zOLQ9sAJdFFJjRpyylxwBp29SHSih+bxthXbt
+	 imOs59OqM1ZZJTnC9vxsGtB5LevVGxelZvbXpJoAIomsWhwPpludgAVrTCHAzzRvcKAta
+	 Ah4M8fa4jB8UnFOgjuuUQF+RqO8YWI+hALUeskf1p/vzS5Sjco10w2BJDqInUN0+X2w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=K0NlGyfj;
-	arc=none smtp.remote-ip=209.85.128.46
-Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a1Yq5IUJ;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DD66606A323
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:47:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2DD66606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id A6C5C606A32C;
+	Wed, 25 Nov 2026 08:47:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=K0NlGyfj
-Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4bba5e17728so3603475e9.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:47:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795596435; x=1796201235; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=9JczosLg+2tleGLZ5rgCSANI1AUwxWfmCJsgr8HB+Wc=;
-        b=K0NlGyfjGbdsgVftf6yhorm4vLUo1t9RKlAFZqCeGpWY95ifrSNlBMEvJt8g36o3zA
-         mOSI+K5NZHGiZWPJI82G3yXKlGWnXFHUZsZO8KkXkOKPzsVAHH2KvvX/RKs+THnjzXIf
-         xLj3aDZ88CsVZsaay+0xHYa64btplUhlmmnnjpcV8K4JfHlhCVgWlCbMIwLF7PDQB0N4
-         FwGxsELcIVT0GAKexwXwroYw6u4NItk9jqDiAuKZvpFdMbsAezHIapq7KDvSJp4FCQYp
-         mbkjkTtyVn41YtrPpToJR65tZUNW0Nfp18yN9rqjMq1NVZ5pjCg0ndrsaBmB4oH3hpAn
-         AHFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795596435; x=1796201235;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=9JczosLg+2tleGLZ5rgCSANI1AUwxWfmCJsgr8HB+Wc=;
-        b=B5I9j7d8FftJB+TNsM5caiTogfIj8EA/Dsu0EjMy0Bwz8j6IvJxkSe3O5l0IKbl1Wi
-         bNwq/MiChTefnuDgIeQOWezmbxAY9V8e8f711IzzYcI3giAgJZ1fPfgEUiO2jT6gQx/S
-         iCiBJDVgQDZYwF1JU/7fnc9hU/ED2nP5QXXy0sc36hEJeD4PklOvE+oOJljmaBGO3O4H
-         Sw2t+F8IBPPzrJ9t3kHRmSd/4GykDZRSa9QmLdCJsKCy0OmZms5T8SqUt48cWavb9CIU
-         9dCovx6raS68xN8E2KJxpV7AyaPd2R5d+4FEvphC6QAj3TZxO93SuNj1t7vd9p/nwdJc
-         9omg==
-X-Forwarded-Encrypted: i=1; AL+hErGmARoLd/4Hoh0HViaH7rgnke1XxJ5v45j62ZYDMevDb++82lOujqYlr9aekWfrRS/SAvc+7D3t8xi393TC@vger.kernel.org
-X-Gm-Message-State: APuU4Z+Zmh8fhQtSLPqrKRQks3+loepyCTBuakl0gLP3wxgpqr7fEM74
-	esdbjxiyxmLDYj4RVrsHmfbOntxPiPP4qmPsMqVutw7efYN3jYIqV5U=
-X-Gm-Gg: AZFdTZeYNtvxS3pXh4z6upK6mTWYyqdGtGq9woGtF3KZK4pyiEF0zjbufN5i7Vvb1/M
-	gxYbN+MPfhT+O9BioAnfqZ+lLgJ7YV+y3Yy/+eiVoQ7tfx/920xusDAe6/O5av6FMj58fcYcgE/
-	NOIJsjptKlWtyzTHtCQB6pS+2GLJx2Zxc3oUC3HlAqJ+6crubMNDFZxF1jPT2NkqdmILOI5DTTx
-	eoQNyrm1mGiJuu/Xb9QpSvBgaBzvrGAzDNF/BXGuPJKE7apmGgf6usUWqukFKDlxOWQ71lovSO2
-	Mg9sdS9KvrP1QSAR0pXB+4nc4KIYNeYLuG8jixBgfFI4l2TgjQ4GszxT/Dl8oiRSBteCqrMN3+z
-	WVa1ChBc7pM0tnZiZY/7Bpew/eZp8CGPmwqSV0sBpEzXNsUFFjeLdMAGVnPeyEhL6YBTfnXH16/
-	KWhvmgUA5dXCtZ4DkVGzKp9d6e4yMdMyx5fEakF9uigLctNdcMSrqRKoRZxIvA3xlFCL3Bt1R7l
-	PNapY7e51fW4alEz/2pFHUbYL2DL79rMjnyzuU6qtPMa4Nh28zM3pcfMoTGLRS5GNnIn312jDQL
-	7dWlXLEuu5MCqgvR0sc3+j//dDBIWufBRjDrcZqxiAdI+ICXJGONp+aTq5GPKluheh3J
-X-Received: by 2002:a05:600c:6092:b0:4a1:d537:1c8d with SMTP id 5b1f17b1804b1-4bb8892bb67mr320913895e9.19.1795596434483;
-        Wed, 25 Nov 2026 00:47:14 -0800 (PST)
-Received: from book4-arch.fritz.box ([77.39.161.58])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb8d4f9aa8sm465183985e9.4.2026.11.25.00.47.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:47:14 -0800 (PST)
-From: Nicola Nicodemo <nicola084@gmail.com>
-To: opensource@grische.xyz,
-	Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>
-Cc: Daniel Lezcano <daniel.lezcano@oss.qualcomm.com>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	Dmitry Baryshkov <lumag@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>,
-	linux-pm@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/2] thermal/drivers/qcom/tsens: Drop __init from the ->init callbacks
-Date: Wed, 25 Nov 2026 09:46:11 +0100
-Message-ID: <20261125084611.11437-1-nicola084@gmail.com>
-X-Mailer: git-send-email 2.56.1
-In-Reply-To: <20261104145740.2623473-1-opensource@grische.xyz>
-References: <20261104145740.2623473-1-opensource@grische.xyz>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a1Yq5IUJ
+Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 67F7A1F000C0;
+	Wed, 25 Nov 2026 08:47:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795596476;
+	bh=BoIN1YPmv8DT6xKw8t/C48kGStRshqPRywrtEu/9tJw=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=a1Yq5IUJe5h2DOmnzMol/EHpXS/c7m73PJJ7A4ixGizh9qQlaXNc9cIv2gbKKJNEZ
+	 YWXS2zZ+hvbEGuM+ujAJVM9e2EfrXsNjKgEAhthifSb+5jfiCzYvaWimZUYgYXlmL7
+	 orQXbm2rbIKfkGx+lYz2NogM6WgJePltruEYNnUh152gmv3aCHd0gMxzyDRFJRtbaz
+	 Y/Yt0o7y9OsMxmexCv+ti/tzVEJXqVrbn6J1BJxrcX6PKs+uMYpUaUb4IpKN8rJgU5
+	 LZgqScUkOVOiKbNnDAnh4+u4Gcu6R/wWbWoZjzhFnOOg0qU+Df74tA7a8RRaWiyDqg
+	 +qs9uDIGkNaww==
+Date: Wed, 25 Nov 2026 09:47:52 +0100
+From: Bartosz Golaszewski <brgl@kernel.org>
+To: Vinod Koul <vkoul@kernel.org>, 
+	Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+	Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Shawn Guo <shengchao.guo@oss.qualcomm.com>, 
+	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, devicetree@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, 
+	Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>, Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: Re: [PATCH v3 0/3] phy: qcom: Describe the AHB2PHY bridge clock on
+ Nord
+Message-ID: <3e7tzpibli7hi3rb6fhrcfczndwwpjg7hlto5tajxwneap6bar@pj4dgukcl3gm>
+References: <20261117-qcom-nord-ahb2phy-clk-v3-0-ce5ee1073208@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,24 +63,44 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261117-qcom-nord-ahb2phy-clk-v3-0-ce5ee1073208@oss.qualcomm.com>
 
-On this boot path, 7.3 with CONFIG_QCOM_TSENS=m and qcom_tsens in the
-initramfs, Samsung Galaxy Book4 Edge 14" (X1E80100, NP940XMA):
+On Tue, Nov 17, 2026 at 10:06:27AM +0100, Bartosz Golaszewski wrote:
+> On Nord, the register space of all the USB PHYs (the two USB3-DP QMP
+> PHYs and the three eUSB2 PHYs) sits behind the AHB2PHY_0 bridge, which
+> is gated by NE_GCC_AHB2PHY_CLK. None of the PHYs currently describe or
+> enable that clock, so clk_disable_unused() gates it before the PHYs are
+> initialized. The PHY init sequences then never reach the hardware and
+> the controllers fail to come up:
+> 
+>   dwc3-qcom a600000.usb: DWC3 controller soft reset failed.
+>   dwc3-qcom a600000.usb: error -ETIMEDOUT: failed to initialize core
+>   xhci-hcd xhci-hcd.2.auto: can't setup: -110
+> 
+> As a result, USB on Nord only works when booting with clk_ignore_unused.
+> 
+> An earlier attempt marked the clock always-on in the NE GCC driver. This
+> series instead makes the PHYs consumers of the bridge clock, so it is
+> only kept enabled while a PHY is in use:
+> 
+>  - Patch 1 adds a fifth "cfg_ahb" clock to the Nord QMP USB3-DP PHY
+>    binding. No driver change is required.
+>  - Patches 2 and 3 add a "bus" clock to the Nord eUSB2 PHY binding, and
+>    Nord-specific match data in the snps-eusb2 driver that enables it
+>    alongside the "ref" clock.
+> 
+> This should go into v7.4.
+> 
+> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+> ---
 
-Without the series, the probe is deferred and the retry from
-deferred_probe_work_func jumps into the module's freed .init.text,
-on every boot:
+Vinod,
 
-  Unable to handle kernel execute from non-executable memory at virtual address ffffc2f2779b4150
-  pc : 0xffffc2f2779b4150
-  lr : tsens_probe+0x170/0x670 [qcom_tsens]
-  Workqueue: events_unbound deferred_probe_work_func
+This series is reviewed and the only sashiko comment is a suggestion.
+This is the final dependency for supporting USB on Qualcomm Nord. Could
+you please consider queueing it?
 
-With the series applied (same kernel config, same initramfs), it boots;
-all four controllers probe and every thermal zone reads normally. The
-compatible is qcom,x1e80100-tsens / qcom,tsens-v2, so this exercises
-init_common() via ops_generic_v2, i.e. patch 1; patch 2's callbacks are
-not used on this SoC.
-
-Tested-by: Nicola Nicodemo <nicola084@gmail.com> # X1E80100, CONFIG_QCOM_TSENS=m
+Thanks in advance,
+Bartosz
