@@ -1,11 +1,11 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795593625;
-	b=qfV1QUSz2faljdcRc8vYG4QA2raD6D9WZzK9OAs/HIoH+unOkaWxFDsvnxp9yeFj7YJd
-	 ue3ySlTHxlWqZ2i7yrJw5+rdz6oePz9UdEtbPPdV6aA7tGqB1tpHd/rKEcZWjzXSdpn3D
-	 u2wEbaysmhDH1zOL/59EU5Y7YnWXy6rS2272LgdR3MCC2Cp4ARkGjm227gPvo4q5jMu6G
-	 a3QImZo2iYa1PU7EgE4No+sbyA2NG+6FAvbIx+H21nEzqSOMqD2XOx6SYFPWK9VFy3CY0
-	 qmCaLSuXWyfe533sZhG/3KBolGXxqPqH9gLPBdZ22VS8xesHBIW7FPu5HWx6saBWAXw==
+	b=rWgWZwFwgOW0ZL4dsjvn3f4si1gjp5s0pRBLbsVvOH1dw36T5iJ/dmJyQj5Bpwl6DsKJ
+	 QWX+nzIVWpaD8eT9YY+PvNP3zUl+z1NqxCzGBzYsPmB2A0e8MlGN1kbpKsKf8mtHf0IdZ
+	 JxoGjx8lzzUkiBxlgi6/tjaQuRtYy1xhJCvOJt1kyZxUlN7eCoJRMa3xu5YvmPF0aUtEK
+	 6dSC0ViRihii1d3as3kk8CTslQ1ydP8G92T1slIXX9uN8e81Z7H9LfboZgD448s/BWYe/
+	 X2aiBkiwuc8UhreFLL7X8/W0lmEB4DmEORq64vJXKeICSfUs05E4cCtuDfwGVYSNstg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795593625;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
@@ -13,79 +13,79 @@ ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	 X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:Subject:Date:
 	 Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Authority-Analysis:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
 	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=L//rJ27NYEGRNl9DwAU81I8HdLBTfl2e192CabOszjA=;
-	b=iYfog+7RNoCR/bZW9FWjBnWpb/PwplwYDoUFDVZa4QUHEBT6dKXw8s6OqWRWHSoCYjB2
-	 qGf0gROr6C4tqUc2EpX7pqebr53/fNOhNAwm/3qwMcqucrJKJNAiXX+su6p978+Ljql+8
-	 oybdWhJxXsa5Tti5TP6e1R2LO3BvtqZXqufclWhBhV6cF9ob4a9x5Kq5ZJyJMUcWNc5QH
-	 ryiTNQF/7RTjtaySrobQO15N2qb/n1mmrNNb3UiHok+1Z1rNkRbGpvbctAYQpBr1CF7HU
-	 2FOqjmpApuzfatXjkU3xpSfdRmG50b43dplLIqsxNdeh+gi9vuNLHSfaTBn0NPDlluQ==
+	bh=E8makF8FM1RabaNV+Vat/DWzk+BJa7APz9oiRRwMMUc=;
+	b=xgtbIwbr+Iukl7DgRg8/uacQyFv1sQ9yuQQhXsIf6RD5FkCdftLEeEoCc5bgb1ZfyrIh
+	 JevSpXaAHUG8pxNmZrDAP1YyUEKB8wV9pTtHENwgK/qtZpX1sGcm0xg5KNpdOGBkCsooC
+	 no9Pf5eE+rxNiqPj90PlzGN/TkaExq68gf6hQv0IbP/AUNi2G5VeZiYyj1Tu6hsRJrFvr
+	 Ecq5fORIbHNhjtwIz2PCbZt1FmZcpn+Yi8cxQcq1JNbx/OkctnSFWs58bt3q6rdPoY3+r
+	 BGBPOynP2zKXa53vZgQek3ZACNzZ2vNzhuz8w+p5kaowZhCh00enBS97x513VNKnbVw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=fail reason="signature verification failed" header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SEC0NXLt;
+	dkim=fail reason="signature verification failed" header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MB1nAShb;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23DC960A2630
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6406D60A2634
 	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:00:25 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 23DC960A2630
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6406D60A2634
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=SEC0NXLt
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP68o1A3807889
+	dkim=fail reason="signature verification failed" (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=MB1nAShb
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP68XIK300008
 	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:00:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=L//rJ27NYEG
-	RNl9DwAU81I8HdLBTfl2e192CabOszjA=; b=SEC0NXLtc6yoKbBMoLrovlZxJNV
-	SVd7q2QiEKS2AdZes5SLqDaaGgiQW5yt7yhcg+ZA8hJz7rPgSgi+i6M4QnCICPKS
-	e5YcCUIl3ACdbrlRhdPdTj/qVDtobbCPn9xmJ7SZz4Dzwh4kTD+5fMm1NVBl0A/s
-	Dj0b9zTdEM+nN0hglqqt0DLDZAYMoK3nlPwZyKHMT2wCkTCmqreVqFk40gsl5Lsm
-	4wWZsDGtMSog9Qc7k3OFivLS3CTdM/fl8XoCrXtrBQ7e3JPBc0ORvk7hIY6EWAjY
-	FaE93WMyOh19QavRZUpbNNev/eKlRqHMClbe03Tg5KZLfZD3J43mKi3hfDA==
+	:mime-version:references:subject:to; s=qcppdkim1; bh=E8makF8FM1R
+	abaNV+Vat/DWzk+BJa7APz9oiRRwMMUc=; b=MB1nAShb0YngRFbK/b2GGN+iqoj
+	x0NLSeiX2LpC+1Nk+pwZ4eOpeVamc3tCac0ZhZRVI2a+Pyg+O/OnLEqvM2L4OjEV
+	j7fF9FpvURfwX1msXv++ubB4evykAeiwQGSvN2pBLRcApmbBVDdtYTTEsBNIfzAG
+	O/xhSrGHbXne5IshdA6rAu5FVWwjysdklV9Q+IIvm6ccvms4onJ51YVh3KEuaz2R
+	yFfgBKdZqn2KkAodn9KJhnPc3lETh2qzHclqD1OmMufVWu0SZ1hI6aWgKXBxnqHF
+	BfFkOQI+1V/PbHPvXoVDy4OlwXAsmrTMN6zSexymVTxVRNcdqQYJst43Ocw==
 Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5cxkbm5x-1
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5n6rsfam-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
 	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:00:24 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93cb7f9bb86so1057603485a.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:00:24 -0800 (PST)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93909014c85so1029231385a.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:00:23 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1795593623; x=1796198423;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=L//rJ27NYEGRNl9DwAU81I8HdLBTfl2e192CabOszjA=;
-        b=T8ie6lsGv17PrYreK/jNaU5amHA9i7il3WhYBM9dXfJFV1sK1jeeyS9WN0um8jzcZn
-         R2b96H3NdrAV/zPGCuN5Xny5m8EXYLJWEshlcMHOPLb4kzI11l/SKlrYtOfUXZhKe4se
-         xi4/RNilpB4IjgxcF16rNSn9lvkJadBdWj6wQ1BAzVIoOdms+B9Z65iLUYP7LLWHZ67t
-         H1IMCWWcuwJXvd7gcy3L2aSi/+H9rkVrFoSV/SnL3nz+Y1CX9cMFy4yGIQsWBonGgG/W
-         dEcp5hH1hJBJbV07cKDX9MXOuQHk39oSG+tCz5RWWTYXIcEobe1256NoHHJHgel+r9rp
-         Nqqg==
-X-Forwarded-Encrypted: i=1; AL+hErG6L3vmoRaV0ERHLptB7gkNHJNw+LxF68bsiY4EW5+dXfy7BqFyCjn+krHquifugESKv6Dkg7aaaQqZz0i4@vger.kernel.org
-X-Gm-Message-State: APuU4Z9MqEIk0DnAc1nDvwrkt/iBlD48VxgFG2k409V9vTQSFFaY6Gau
-	rUvFTkJfqITkDMyy9Y/blTYjqGKFe1pfzSPC5knaTIFmpEa88fbMS4VDgr1EjAhC/QdgkDF/cnG
-	GrIaDPUqcudTwd8E83MQ7QQMPfddBsHfqWBJFSle/nTIvoztK0+Cd0NDcvbI1mOX9SnS9
-X-Gm-Gg: AZFdTZf0QluZyEN5a5sS5CUpj8ljtD/6KhLWOE5UNPcw+l4an1T1aN0mwa0jMd4GJN+
-	CsmHJLy2KLQoOQSTTZ5/p9eSDEEjKmoatmf+/EsGkM8XqnXlKEeEth5+s9boQkrzQACJI6wEEQ+
-	c+co+T9miTSzS005DqXbXGI3B8l5nfgNctc4J59koWhSP3gbWzUwAO2qP0hGnWcW8rykb/BvJ+G
-	3JV8VlZ1geUDFwj7pB2hlzzmTWjx7S3tu4IWWqsfflABl7n6ycnJT97I0Ty2jA5KgH0bBV7IwAT
-	nHzF7RhQ3XlAYmlbmC82VTtvHxUkrNvwK63tsBnjOE5qC+t/ELEBPsqZYhoQGK/n1OrQNJstJj0
-	MTwW5n3Y4Q4H8AicY1Tdy3qIopIz7D7An
-X-Received: by 2002:a05:620a:46a9:b0:949:730b:53e9 with SMTP id af79cd13be357-949ba98d292mr2980046785a.31.1795593623289;
-        Wed, 25 Nov 2026 00:00:23 -0800 (PST)
-X-Received: by 2002:a05:620a:46a9:b0:949:730b:53e9 with SMTP id af79cd13be357-949ba98d292mr2980035485a.31.1795593622230;
-        Wed, 25 Nov 2026 00:00:22 -0800 (PST)
+        bh=E8makF8FM1RabaNV+Vat/DWzk+BJa7APz9oiRRwMMUc=;
+        b=KT585sy+gP78u4NFJzw0GwtOe+mjRwguwV2Hgo/pq+dForO146nah2eWkuNmiW8X1u
+         t5WwFvn8wYPMXUQodcvcmjweCFTbEinSEQvufJ5s8/dH3X5p2qvSpz4hecywWapX6fYD
+         v+XOM7tUt5FymHlViFC7zuMqYbqk+JprnNkkuV1MigPoj5liBg/kpmNrglkqphyryneP
+         kSvUzWrYCm3ocW97p2tI1dHRcaOs50+qZtw0owhwE6saER/s64WH6iiQD1CKa6yTfBSR
+         msR+GPSOFych4J9tOVOPSX2EuCAaH2hf4/ai6vheunpMot9RvbanyMBt165UfN2XdTXz
+         AijA==
+X-Forwarded-Encrypted: i=1; AL+hErFIL5t2OrlHpSbT4t4x2Aw8z07mWrPxhN/AktxVnz/7AX04P77ip8Iy6JUvbfpHLoHvGEfSQyYqLEie/Nbu@vger.kernel.org
+X-Gm-Message-State: APuU4Z/CyCLTdJVmj9JzCGkQR090eOgqoxg4ipv78cO548UnNLeRI2dS
+	dWKAXWNkLpfA7WtG6fz8/URwXOeIroqR8pufGO1SK17ZXyiIdUiQlXvOLNIDxVZxRi9yuVpLTcg
+	oWP7VbwoWLH9G2eDNUOnprXPUa0C2Du9IUF9YI3yynMvG3fbLfJbXDuH33/AKPbVQL6q0
+X-Gm-Gg: AZFdTZcBpGxBjBHR5OmrY3cR1ji6SoWIC6WrNFHAW4pm3y8qwCoNI4KZAM+6d3pRGWa
+	Z3bjr7UunhcLzYUPN1dsToRy53yEQj2Lir9D7mgTyZnwv6wvvbKxcYVa+sFk0IveZVpIJoWiNH7
+	VA/8UTl1tSijKPBeKroJcOaR3vsxyAdPaiJHFGKPjXJsYM90g5r7ykgzGlX3EwuytVNHnXTUOWd
+	rPgqjuNdyj3RuoG6gIdt7cqct6eueY9AzvJWKJucNBjBw8giG9VhSfmLIJ5v/TdVG3OIos4LxMT
+	LE3CwQUz4m4CTS35b5nVfGbTY5D9S/vw432+nJ+VE8rX8NoZIphWN40kOrM2SJ8IMJ/kJ+SNuXJ
+	ce+dW2MKZWXloDLup1Q==
+X-Received: by 2002:a05:620a:f04:b0:949:3ba5:15d1 with SMTP id af79cd13be357-949ba8239b2mr2982726485a.4.1795593619798;
+        Wed, 25 Nov 2026 00:00:19 -0800 (PST)
+X-Received: by 2002:a05:620a:f04:b0:949:3ba5:15d1 with SMTP id af79cd13be357-949ba8239b2mr2982709285a.4.1795593618711;
+        Wed, 25 Nov 2026 00:00:18 -0800 (PST)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853a9846sm585912015e9.11.2026.11.25.00.00.20
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853a9846sm585912015e9.11.2026.11.25.00.00.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 00:00:21 -0800 (PST)
+        Wed, 25 Nov 2026 00:00:17 -0800 (PST)
 From: Gjorgji.Rosikopulos.gjorgji.rosikopulos@oss.qualcomm.com
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>,
@@ -96,9 +96,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
         Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
         Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-Subject: [PATCH v2 09/12] media: qcom: camss: Add streams API support in camss-video
-Date: Wed, 25 Nov 2026 09:59:58 +0200
-Message-Id: <20261125080001.2540101-10-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH v2 07/12] media: qcom: camss: Add streams API support in tpg subdev
+Date: Wed, 25 Nov 2026 09:59:56 +0200
+Message-Id: <20261125080001.2540101-8-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -112,214 +112,455 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzMSBTYWx0ZWRfX9QSUDTxxX4S8
- nNZtByUU6gYpoKrJEoXKG0kSQATCeQNKStmbFmtNUIVkysQpBWDGy2hiWiRS8pyRNDnPYIsmQOJ
- KAYG8OGgZDMG96HPP5WWUyPELZO9EcY9+qv11SuTYZsckbxNev2Lofcvm3R+plMmhyUfQZR7l/d
- ITdWTgUMe31X3MBDCfHnPN5NIK4BkTMs0qtriigxeI5Eq5zmToh67gt0dVzfyaRm4QzRSUQPcBO
- OOf49gb4hQtS9QGMPHMozjMakGEBMpYriMIX1q2ibaTOtHo7dYO9BcTkZaaF9Je3pA/ImhIP1vf
- soHe4VRGBWeK9Uz4V6ctyX1P4hElgjYL+LQsQMY2Pr227gu1HFEg77jsSNGd6JnTxFv9VLl/DdN
- Hig9azSvFsxW3STJCYr7BzBXln3OfOzCg/BDOCCQigtf+x9zUt3/cq1ufKS335YU9tNkgMPLeEK
- 38mdB9SIP4xGmyA+xYw==
-X-Proofpoint-GUID: B1nklsPDdlwyhxzhIWrCnAemvLbHR4Qi
-X-Proofpoint-ORIG-GUID: B1nklsPDdlwyhxzhIWrCnAemvLbHR4Qi
-X-Authority-Analysis: v=2.4 cv=TLbQ2Fla c=1 sm=1 tr=0 ts=6b069598 cx=c_pps
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzMSBTYWx0ZWRfX0qMh07d3Fxz4
+ xXrkW0oT3xPnoz5p9eCcD/ycKc20nITqSE2M0rESL4yu7XcybyAj9lMxZxTLH+IvZRydLYgvVqo
+ /Tg05w3aNLPCABvXn3tI/LSnvTmXarK4uhqlGeJjVxsSMim2MtbMOR9tRcIpuT4MTtskIzY3EHO
+ LaTOSSYQCh0GzDkfflqd6MsN0zL20pWSd4y7hHXAEG4XeXAV6MQGww2saLVHKVAL/z1Sb7DgqMk
+ 9Mzz/XfuHiHr10VE3ymKDmV8NbijEF84Xgsj4gOE5aIKdEvb+xSlREodcuiYpM9vIXZjhZoBIi1
+ 4/XxFYW2y/MUAMXaBSpAlO8dW5o0EIxQfaICkd953w4lg93I0yEwfb9aBn1TS6Sg9RcPWfIb21v
+ mvRAT3diyOXck4y7Uc17pwUqtrCTnMac06Kh+aPTtUo/7Dlpfb1uD+6MyiexbwWaEigohM4P7F0
+ 7Kh1WlsebbhFb5msWDg==
+X-Authority-Analysis: v=2.4 cv=Voa2kO2n c=1 sm=1 tr=0 ts=6b069598 cx=c_pps
  a=HLyN3IcIa5EE8TELMZ618Q==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8 a=ZovgdgjKAAAA:8
- a=KYIyY8g0vu4ecJsuFiIA:9 a=bTQJ7kPSJx9SKPbeHEYW:22 a=VOxKbm1zgHvARWIDjr3b:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzMSBTYWx0ZWRfX7N39oAzEF2Uc
- lEHd6Q+yYFT3+dL0feUlDWXr0Exj8dZsl8/401cUwSCGzHev/OHrq9OSbvJ9RQeOXd596WgDdvJ
- pUNBf7s66+pvLLYpdoqoIS8JiJ7dck8=
+ a=eoimf2acIAo5FJnRuUoq:22 a=EUspDBNiAAAA:8 a=CAsIyaI2BfGF7LVpe1AA:9
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-GUID: yLqm66PWv0qN7irY_x9706th5El7QlGT
+X-Proofpoint-ORIG-GUID: yLqm66PWv0qN7irY_x9706th5El7QlGT
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzMSBTYWx0ZWRfX/5F2u0nlNzW1
+ crc6DQmSQOcNtAHbM1tPdStYMMlUMYcP1W8dc/XDwpH4xQf3eCUsUmGklm9hyhb2ECGA/fACW9B
+ 2Ppfd3m9MjN+QBgPsZcFySzJzXnXhhg=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 spamscore=0 clxscore=1015 suspectscore=0
- malwarescore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0 bulkscore=0
+ impostorscore=0 malwarescore=0 clxscore=1015 bulkscore=0 lowpriorityscore=0
+ adultscore=0 spamscore=0 priorityscore=1501 suspectscore=0 phishscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250031
 
 From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 
-Prefer the streams API when starting/stopping the capture pipeline:
-if the subdev directly connected to the video device's pad supports
-.enable_streams/.disable_streams, use it instead of walking the whole
-subdev chain and calling .s_stream() on each one.
+Add support for the TPG subdevice to generate multiple concurrent
+virtual channels under the streams API. Replace the single fmt field
+with a per-stream array sized MSM_TPG_MAX_STREAMS and track the set
+of active streams in a new enabled_streams bitmask.
 
-The legacy walk is kept as a fallback (video_start/stop_streaming_legacy())
-for subdevs that do not implement the streams API, so platforms that
-have not opted in keep working unchanged.
+Add tpg_pad_enable_streams()/tpg_pad_disable_streams() pad ops that
+update enabled_streams and (re)configure the hardware, a
+tpg_get_frame_desc() implementation that reports one CSI-2 frame
+descriptor entry per active route with VC equal to the stream index,
+and a tpg_init_state() internal op that sets up one default route per
+stream.
 
-Co-developed-by: Hitesh Patel <hitesh@ebytelogic.com>
-Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
 Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 ---
- .../media/platform/qcom/camss/camss-video.c   | 119 ++++++++++++++----
- 1 file changed, 94 insertions(+), 25 deletions(-)
+ .../platform/qcom/camss/camss-tpg-gen1.c      |  63 +++---
+ drivers/media/platform/qcom/camss/camss-tpg.c | 179 +++++++++++++++++-
+ drivers/media/platform/qcom/camss/camss-tpg.h |   6 +-
+ 3 files changed, 205 insertions(+), 43 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
-index 0852eb6f1315..7f7212996c4a 100644
---- a/drivers/media/platform/qcom/camss/camss-video.c
-+++ b/drivers/media/platform/qcom/camss/camss-video.c
-@@ -249,26 +249,27 @@ static int video_prepare_streaming(struct vb2_queue *q)
- 	return ret;
- }
+diff --git a/drivers/media/platform/qcom/camss/camss-tpg-gen1.c b/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
+index d29de5f93c18..22fdeef8e76f 100644
+--- a/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
++++ b/drivers/media/platform/qcom/camss/camss-tpg-gen1.c
+@@ -5,6 +5,7 @@
+  *
+  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+  */
++#include <linux/bitops.h>
+ #include <linux/io.h>
+ #include <linux/kernel.h>
  
--static int video_start_streaming(struct vb2_queue *q, unsigned int count)
-+/*
-+ * video_start_streaming_legacy - Walk the whole subdev chain and enable
-+ *                                streaming via .s_stream()
-+ * @video: Video device
-+ * @sink_pad: Video device's own (single) pad
-+ *
-+ * Fallback used when the subdev directly connected to @sink_pad has no
-+ * .enable_streams op. Mirrors the pre-streams-API pipeline walk: each
-+ * subdev's pad 0 is assumed to be its sink pad, and streaming is started
-+ * one subdev at a time via .s_stream() rather than the streams API.
-+ *
-+ * Return 0 on success or a negative error code otherwise
-+ */
-+static int video_start_streaming_legacy(struct camss_video *video,
-+					struct media_pad *sink_pad)
- {
--	struct camss_video *video = vb2_get_drv_priv(q);
--	struct video_device *vdev = &video->vdev;
--	struct media_entity *entity;
-+	struct media_entity *entity = sink_pad->entity;
- 	struct media_pad *pad;
- 	struct v4l2_subdev *subdev;
- 	int ret;
+@@ -106,13 +107,16 @@ static int tpg_stream_on(struct tpg_device *tpg)
+ 	u8 payload_mode = (tg->mode > TPG_PAYLOAD_MODE_DISABLED) ?
+ 			   tg->mode - 1 : 0;
+ 	u8 lane_cnt = tpg->res->lane_cnt;
+-	u8 vc, dt, last_vc = 0;
++	u8 vc, last_vc = fls64(tpg->enabled_streams) - 1;
+ 	u32 val;
  
--	ret = video_device_pipeline_alloc_start(vdev);
--	if (ret < 0) {
--		dev_err(video->camss->dev, "Failed to start media pipeline: %d\n", ret);
--		goto flush_buffers;
--	}
+-	for (vc = 0; vc <= MSM_TPG_ACTIVE_VC; vc++) {
+-		last_vc = vc;
 -
--	ret = video_check_format(video);
--	if (ret < 0)
--		goto error;
--
--	entity = &vdev->entity;
- 	while (1) {
- 		pad = &entity->pads[0];
- 		if (!(pad->flags & MEDIA_PAD_FL_SINK))
-@@ -283,6 +284,42 @@ static int video_start_streaming(struct vb2_queue *q, unsigned int count)
+-		input_format = &tpg->fmt;
++	/*
++	 * The hardware generates traffic for VC 0 up to last_vc as a
++	 * contiguous block, so every VC in that range must be configured
++	 * with a valid format, not just the ones actually streaming.
++	 */
++	for (vc = 0; vc <= last_vc; vc++) {
++		input_format = &tpg->fmt[vc];
+ 		format = tpg_get_fmt_entry(tpg->res->formats->formats,
+ 					   tpg->res->formats->nformats,
+ 					   input_format->code);
+@@ -120,7 +124,8 @@ static int tpg_stream_on(struct tpg_device *tpg)
+ 			return -EINVAL;
  
- 		ret = v4l2_subdev_call(subdev, video, s_stream, 1);
- 		if (ret < 0 && ret != -ENOIOCTLCMD)
-+			return ret;
-+	}
+ 		/* VC configuration */
+-		val = FIELD_PREP(TPG_VC_n_CFG0_NUM_ACTIVE_DT, MSM_TPG_ACTIVE_DT) |
++		val = FIELD_PREP(TPG_VC_n_CFG0_VC_NUM, vc) |
++		      FIELD_PREP(TPG_VC_n_CFG0_NUM_ACTIVE_DT, 0) |
+ 		      FIELD_PREP(TPG_VC_n_CFG0_NUM_FRAMES, 0);
+ 		writel(val, tpg->base + TPG_VC_n_CFG0(vc));
+ 
+@@ -136,31 +141,29 @@ static int tpg_stream_on(struct tpg_device *tpg)
+ 		writel(TPG_COLOR_BARS_CFG_STANDARD, tpg->base + TPG_VC_n_COLOR_BARS_CFG(vc));
+ 
+ 		/* DT configuration */
+-		for (dt = 0; dt <= MSM_TPG_ACTIVE_DT; dt++) {
+-			val = FIELD_PREP(TPG_VC_m_DT_n_CFG_0_FRAME_HEIGHT,
+-					 input_format->height & 0xffff) |
+-			      FIELD_PREP(TPG_VC_m_DT_n_CFG_0_FRAME_WIDTH,
+-					 input_format->width & 0xffff);
+-			writel(val, tpg->base + TPG_VC_m_DT_n_CFG_0(vc, dt));
+-
+-			val = FIELD_PREP(TPG_VC_m_DT_n_CFG_1_DATA_TYPE, format->data_type);
+-			writel(val, tpg->base + TPG_VC_m_DT_n_CFG_1(vc, dt));
+-
+-			if (tpg->hw_version == TPG_HW_VER_2_0_0) {
+-				val = FIELD_PREP(TPG_VC_m_DT_n_CFG_2_PAYLOAD_MODE, payload_mode) |
+-				      FIELD_PREP(TPG_V2_0_0_VC_m_DT_n_CFG_2_USER_SPECIFIED_PAYLOAD,
+-						 TPG_USER_SPECIFIED_PAYLOAD_DEFAULT) |
+-				      FIELD_PREP(TPG_V2_0_0_VC_m_DT_n_CFG_2_ENCODE_FORMAT,
+-						 format->encode_format);
+-			} else if (tpg->hw_version >= TPG_HW_VER_2_1_0) {
+-				val = FIELD_PREP(TPG_VC_m_DT_n_CFG_2_PAYLOAD_MODE, payload_mode) |
+-				      FIELD_PREP(TPG_V2_1_0_VC_m_DT_n_CFG_2_USER_SPECIFIED_PAYLOAD,
+-						 TPG_USER_SPECIFIED_PAYLOAD_DEFAULT) |
+-				      FIELD_PREP(TPG_V2_1_0_VC_m_DT_n_CFG_2_ENCODE_FORMAT,
+-						 format->encode_format);
+-			}
+-			writel(val, tpg->base + TPG_VC_m_DT_n_CFG_2(vc, dt));
++		val = FIELD_PREP(TPG_VC_m_DT_n_CFG_0_FRAME_HEIGHT,
++				 input_format->height & 0xffff) |
++		      FIELD_PREP(TPG_VC_m_DT_n_CFG_0_FRAME_WIDTH,
++				 input_format->width & 0xffff);
++		writel(val, tpg->base + TPG_VC_m_DT_n_CFG_0(vc, 0));
 +
-+	return 0;
-+}
++		val = FIELD_PREP(TPG_VC_m_DT_n_CFG_1_DATA_TYPE, format->data_type);
++		writel(val, tpg->base + TPG_VC_m_DT_n_CFG_1(vc, 0));
 +
-+static int video_start_streaming(struct vb2_queue *q, unsigned int count)
-+{
-+	struct camss_video *video = vb2_get_drv_priv(q);
-+	struct video_device *vdev = &video->vdev;
-+	struct media_pad *sink_pad = &vdev->entity.pads[0];
-+	struct media_pad *src_pad;
-+	struct v4l2_subdev *subdev = NULL;
-+	int ret;
++		if (tpg->hw_version == TPG_HW_VER_2_0_0) {
++			val = FIELD_PREP(TPG_VC_m_DT_n_CFG_2_PAYLOAD_MODE, payload_mode) |
++			      FIELD_PREP(TPG_V2_0_0_VC_m_DT_n_CFG_2_USER_SPECIFIED_PAYLOAD,
++					 TPG_USER_SPECIFIED_PAYLOAD_DEFAULT) |
++			      FIELD_PREP(TPG_V2_0_0_VC_m_DT_n_CFG_2_ENCODE_FORMAT,
++					 format->encode_format);
++		} else if (tpg->hw_version >= TPG_HW_VER_2_1_0) {
++			val = FIELD_PREP(TPG_VC_m_DT_n_CFG_2_PAYLOAD_MODE, payload_mode) |
++			      FIELD_PREP(TPG_V2_1_0_VC_m_DT_n_CFG_2_USER_SPECIFIED_PAYLOAD,
++					 TPG_USER_SPECIFIED_PAYLOAD_DEFAULT) |
++			      FIELD_PREP(TPG_V2_1_0_VC_m_DT_n_CFG_2_ENCODE_FORMAT,
++					 format->encode_format);
+ 		}
++		writel(val, tpg->base + TPG_VC_m_DT_n_CFG_2(vc, 0));
+ 	}
+ 
+ 	/* Global TPG control */
+diff --git a/drivers/media/platform/qcom/camss/camss-tpg.c b/drivers/media/platform/qcom/camss/camss-tpg.c
+index 5764a60fa34c..a7ef6d2bb4e8 100644
+--- a/drivers/media/platform/qcom/camss/camss-tpg.c
++++ b/drivers/media/platform/qcom/camss/camss-tpg.c
+@@ -200,22 +200,78 @@ static int tpg_set_stream(struct v4l2_subdev *sd, int enable)
+ 				"could not sync v4l2 controls: %d\n", ret);
+ 			return ret;
+ 		}
 +
-+	ret = video_device_pipeline_alloc_start(vdev);
-+	if (ret < 0) {
-+		dev_err(video->camss->dev, "Failed to start media pipeline: %d\n", ret);
-+		goto flush_buffers;
-+	}
-+
-+	ret = video_check_format(video);
-+	if (ret < 0)
-+		goto error;
-+
-+	src_pad = media_pad_remote_pad_first(sink_pad);
-+	if (src_pad && is_media_entity_v4l2_subdev(src_pad->entity))
-+		subdev = media_entity_to_v4l2_subdev(src_pad->entity);
-+
-+	if (subdev && v4l2_subdev_has_op(subdev, pad, enable_streams)) {
-+		ret = v4l2_subdev_enable_streams(subdev, src_pad->index, BIT_ULL(0));
-+		if (ret < 0)
-+			goto error;
++		tpg->enabled_streams = BIT_ULL(0);
 +	} else {
-+		ret = video_start_streaming_legacy(video, sink_pad);
-+		if (ret < 0)
- 			goto error;
++		tpg->enabled_streams = 0;
  	}
  
-@@ -297,16 +334,27 @@ static int video_start_streaming(struct vb2_queue *q, unsigned int count)
- 	return ret;
+ 	return tpg->res->hw_ops->configure_stream(tpg, enable);
  }
  
--static void video_stop_streaming(struct vb2_queue *q)
-+/*
-+ * video_stop_streaming_legacy - Walk the whole subdev chain and disable
-+ *                               streaming via .s_stream()
-+ * @video: Video device
-+ * @sink_pad: Video device's own (single) pad
-+ *
-+ * Fallback used when the subdev directly connected to @sink_pad has no
-+ * .disable_streams op. Mirrors the pre-streams-API pipeline walk: each
-+ * subdev's pad 0 is assumed to be its sink pad, and streaming is stopped
-+ * one subdev at a time via .s_stream() rather than the streams API.
-+ *
-+ * Return 0 on success or a negative error code otherwise
-+ */
-+static int video_stop_streaming_legacy(struct camss_video *video,
-+				       struct media_pad *sink_pad)
++static int tpg_pad_enable_streams(struct v4l2_subdev *sd,
++				  struct v4l2_subdev_state *state,
++				  u32 pad, u64 streams_mask)
++{
++	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
++	bool start = !tpg->enabled_streams;
++	int ret;
++
++	if (pad != MSM_TPG_PAD_SRC)
++		return -EINVAL;
++
++	tpg->enabled_streams |= streams_mask;
++	if (!start)
++		return tpg->res->hw_ops->configure_stream(tpg, 1);
++
++	ret = v4l2_ctrl_handler_setup(&tpg->ctrls);
++	if (ret < 0) {
++		tpg->enabled_streams &= ~streams_mask;
++		return ret;
++	}
++
++	ret = tpg->res->hw_ops->configure_stream(tpg, 1);
++	if (ret)
++		tpg->enabled_streams &= ~streams_mask;
++
++	return ret;
++}
++
++static int tpg_pad_disable_streams(struct v4l2_subdev *sd,
++				   struct v4l2_subdev_state *state,
++				   u32 pad, u64 streams_mask)
++{
++	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
++
++	if (pad != MSM_TPG_PAD_SRC)
++		return -EINVAL;
++
++	tpg->enabled_streams &= ~streams_mask;
++
++	/*
++	 * Growing the active VC range live is safe, but shrinking it while
++	 * the generator is still running for the remaining VCs corrupts its
++	 * state machine. Only touch the hardware when the last VC disables.
++	 */
++	if (tpg->enabled_streams)
++		return 0;
++
++	return tpg->res->hw_ops->configure_stream(tpg, 0);
++}
++
+ static struct v4l2_mbus_framefmt *
+ __tpg_get_format(struct tpg_device *tpg,
+ 		 struct v4l2_subdev_state *sd_state,
+-		 unsigned int pad,
++		 unsigned int pad, u32 stream,
+ 		 enum v4l2_subdev_format_whence which)
  {
--	struct camss_video *video = vb2_get_drv_priv(q);
--	struct video_device *vdev = &video->vdev;
--	struct media_entity *entity;
-+	struct media_entity *entity = sink_pad->entity;
- 	struct media_pad *pad;
- 	struct v4l2_subdev *subdev;
- 	int ret;
++	if (pad != MSM_TPG_PAD_SRC || stream >= MSM_TPG_MAX_STREAMS)
++		return NULL;
++
+ 	if (which == V4L2_SUBDEV_FORMAT_TRY)
+-		return v4l2_subdev_state_get_format(sd_state,
+-						    pad);
++		return v4l2_subdev_state_get_format(sd_state, pad, stream);
  
--	entity = &vdev->entity;
- 	while (1) {
- 		pad = &entity->pads[0];
- 		if (!(pad->flags & MEDIA_PAD_FL_SINK))
-@@ -320,13 +368,34 @@ static void video_stop_streaming(struct vb2_queue *q)
- 		subdev = media_entity_to_v4l2_subdev(entity);
+-	return &tpg->fmt;
++	return &tpg->fmt[stream];
+ }
  
- 		ret = v4l2_subdev_call(subdev, video, s_stream, 0);
--
--		if (ret) {
--			dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
--			return;
--		}
-+		if (ret)
-+			return ret;
- 	}
+ static void tpg_try_format(struct tpg_device *tpg,
+@@ -282,7 +338,7 @@ static int tpg_get_format(struct v4l2_subdev *sd,
+ 	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
+ 	struct v4l2_mbus_framefmt *format;
  
+-	format = __tpg_get_format(tpg, sd_state, fmt->pad, fmt->which);
++	format = __tpg_get_format(tpg, sd_state, fmt->pad, fmt->stream, fmt->which);
+ 	if (!format)
+ 		return -EINVAL;
+ 
+@@ -299,10 +355,13 @@ static int tpg_set_format(struct v4l2_subdev *sd,
+ 	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
+ 	struct v4l2_mbus_framefmt *format;
+ 
+-	format = __tpg_get_format(tpg, sd_state, fmt->pad, fmt->which);
++	format = __tpg_get_format(tpg, sd_state, fmt->pad, fmt->stream, fmt->which);
+ 	if (!format)
+ 		return -EINVAL;
+ 
++	if (fmt->which == V4L2_SUBDEV_FORMAT_ACTIVE && tpg->enabled_streams)
++		return -EBUSY;
++
+ 	tpg_try_format(tpg, &fmt->format);
+ 	*format = fmt->format;
+ 
+@@ -326,6 +385,69 @@ static int tpg_init_formats(struct v4l2_subdev *sd,
+ 	return tpg_set_format(sd, NULL, fh ? fh->state : NULL, &format);
+ }
+ 
++static int tpg_get_frame_desc(struct v4l2_subdev *sd, unsigned int pad,
++			      struct v4l2_mbus_frame_desc *fd)
++{
++	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
++	struct v4l2_subdev_state *state;
++	struct v4l2_subdev_route *route;
++	unsigned int i = 0;
++
++	if (pad != MSM_TPG_PAD_SRC)
++		return -EINVAL;
++
++	state = v4l2_subdev_lock_and_get_active_state(sd);
++	fd->type = V4L2_MBUS_FRAME_DESC_TYPE_CSI2;
++
++	for_each_active_route(&state->routing, route) {
++		const struct tpg_format_info *format;
++
++		format = tpg_get_fmt_entry(tpg->res->formats->formats,
++					   tpg->res->formats->nformats,
++					   tpg->fmt[route->source_stream].code);
++		if (IS_ERR(format))
++			continue;
++
++		fd->entry[i].stream = route->source_stream;
++		fd->entry[i].flags = 0;
++		fd->entry[i].bus.csi2.vc = route->source_stream;
++		fd->entry[i].bus.csi2.dt = format->data_type;
++		i++;
++	}
++
++	fd->num_entries = i;
++	v4l2_subdev_unlock_state(state);
++
 +	return 0;
 +}
 +
-+static void video_stop_streaming(struct vb2_queue *q)
++static int tpg_init_state(struct v4l2_subdev *sd, struct v4l2_subdev_state *state)
 +{
-+	struct camss_video *video = vb2_get_drv_priv(q);
-+	struct video_device *vdev = &video->vdev;
-+	struct media_pad *sink_pad = &vdev->entity.pads[0];
-+	struct media_pad *src_pad;
-+	struct v4l2_subdev *subdev = NULL;
-+	int ret;
++	struct tpg_device *tpg = v4l2_get_subdevdata(sd);
++	struct v4l2_subdev_route routes[MSM_TPG_MAX_STREAMS];
++	struct v4l2_subdev_krouting routing = {
++		.num_routes = ARRAY_SIZE(routes),
++		.routes = routes,
++	};
++	struct v4l2_mbus_framefmt fmt = {
++		.code = MEDIA_BUS_FMT_SBGGR8_1X8,
++		.width = 1920,
++		.height = 1080,
++	};
++	unsigned int i;
 +
-+	src_pad = media_pad_remote_pad_first(sink_pad);
-+	if (src_pad && is_media_entity_v4l2_subdev(src_pad->entity))
-+		subdev = media_entity_to_v4l2_subdev(src_pad->entity);
++	for (i = 0; i < ARRAY_SIZE(routes); i++) {
++		routes[i].sink_pad = MSM_TPG_PAD_SRC;
++		routes[i].sink_stream = i;
++		routes[i].source_pad = MSM_TPG_PAD_SRC;
++		routes[i].source_stream = i;
++		routes[i].flags = V4L2_SUBDEV_ROUTE_FL_ACTIVE;
++		tpg->fmt[i] = fmt;
++	}
 +
-+	if (subdev && v4l2_subdev_has_op(subdev, pad, disable_streams))
-+		ret = v4l2_subdev_disable_streams(subdev, src_pad->index, BIT_ULL(0));
-+	else
-+		ret = video_stop_streaming_legacy(video, sink_pad);
++	return v4l2_subdev_set_routing_with_fmt(sd, state, &routing, &fmt);
++}
 +
-+	if (ret)
-+		dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
-+
- 	video_device_pipeline_stop(vdev);
+ static int tpg_s_ctrl(struct v4l2_ctrl *ctrl)
+ {
+ 	struct tpg_device *tpg = container_of(ctrl->handler,
+@@ -433,16 +555,36 @@ static const struct v4l2_subdev_pad_ops tpg_pad_ops = {
+ 	.set_fmt = tpg_set_format,
+ };
  
- 	video->ops->flush_buffers(video, VB2_BUF_STATE_ERROR);
++static const struct v4l2_subdev_pad_ops tpg_streams_pad_ops = {
++	.enum_mbus_code = tpg_enum_mbus_code,
++	.enum_frame_size = tpg_enum_frame_size,
++	.get_fmt = tpg_get_format,
++	.set_fmt = tpg_set_format,
++	.get_frame_desc = tpg_get_frame_desc,
++	.enable_streams = tpg_pad_enable_streams,
++	.disable_streams = tpg_pad_disable_streams,
++};
++
+ static const struct v4l2_subdev_ops tpg_v4l2_ops = {
+ 	.core = &tpg_core_ops,
+ 	.video = &tpg_video_ops,
+ 	.pad = &tpg_pad_ops,
+ };
+ 
++static const struct v4l2_subdev_ops tpg_streams_v4l2_ops = {
++	.core = &tpg_core_ops,
++	.video = &tpg_video_ops,
++	.pad = &tpg_streams_pad_ops,
++};
++
+ static const struct v4l2_subdev_internal_ops tpg_v4l2_internal_ops = {
+ 	.open = tpg_init_formats,
+ };
+ 
++static const struct v4l2_subdev_internal_ops tpg_streams_internal_ops = {
++	.init_state = tpg_init_state,
++};
++
+ static const struct media_entity_operations tpg_media_ops = {
+ 	.link_setup = tpg_link_setup,
+ 	.link_validate = v4l2_subdev_link_validate,
+@@ -453,12 +595,15 @@ int msm_tpg_register_entity(struct tpg_device *tpg,
+ {
+ 	struct v4l2_subdev *sd = &tpg->subdev;
+ 	struct device *dev = tpg->camss->dev;
++	bool streams_api = tpg->camss->res->streams_enable;
+ 	int ret;
+ 
+-	v4l2_subdev_init(sd, &tpg_v4l2_ops);
+-	sd->internal_ops = &tpg_v4l2_internal_ops;
++	v4l2_subdev_init(sd, streams_api ? &tpg_streams_v4l2_ops : &tpg_v4l2_ops);
++	sd->internal_ops = streams_api ? &tpg_streams_internal_ops : &tpg_v4l2_internal_ops;
+ 	sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE |
+ 		     V4L2_SUBDEV_FL_HAS_EVENTS;
++	if (streams_api)
++		sd->flags |= V4L2_SUBDEV_FL_STREAMS;
+ 	snprintf(sd->name, ARRAY_SIZE(sd->name), "%s%d",
+ 		 "msm_tpg", tpg->id);
+ 	sd->grp_id = TPG_GRP_ID;
+@@ -497,15 +642,27 @@ int msm_tpg_register_entity(struct tpg_device *tpg,
+ 		goto free_ctrl;
+ 	}
+ 
++	if (streams_api) {
++		ret = v4l2_subdev_init_finalize(sd);
++		if (ret) {
++			dev_err(dev, "Failed to finalize subdev: %d\n", ret);
++			goto media_cleanup;
++		}
++	}
++
+ 	ret = v4l2_device_register_subdev(v4l2_dev, sd);
+ 	if (ret < 0) {
+ 		dev_err(dev, "Failed to register subdev: %d\n", ret);
+-		media_entity_cleanup(&sd->entity);
+-		goto free_ctrl;
++		goto subdev_cleanup;
+ 	}
+ 
+ 	return 0;
+ 
++subdev_cleanup:
++	if (streams_api)
++		v4l2_subdev_cleanup(sd);
++media_cleanup:
++	media_entity_cleanup(&sd->entity);
+ free_ctrl:
+ 	v4l2_ctrl_handler_free(&tpg->ctrls);
+ 
+@@ -515,6 +672,8 @@ int msm_tpg_register_entity(struct tpg_device *tpg,
+ void msm_tpg_unregister_entity(struct tpg_device *tpg)
+ {
+ 	v4l2_device_unregister_subdev(&tpg->subdev);
++	if (tpg->camss->res->streams_enable)
++		v4l2_subdev_cleanup(&tpg->subdev);
+ 	media_entity_cleanup(&tpg->subdev.entity);
+ 	v4l2_ctrl_handler_free(&tpg->ctrls);
+ }
+diff --git a/drivers/media/platform/qcom/camss/camss-tpg.h b/drivers/media/platform/qcom/camss/camss-tpg.h
+index 7fb35a97dd06..5a6e9e726716 100644
+--- a/drivers/media/platform/qcom/camss/camss-tpg.h
++++ b/drivers/media/platform/qcom/camss/camss-tpg.h
+@@ -26,8 +26,7 @@
+ #define ENCODE_FORMAT_UNCOMPRESSED_24_BIT	0x7
+ 
+ #define MSM_TPG_PAD_SRC		0
+-#define MSM_TPG_ACTIVE_VC		0
+-#define MSM_TPG_ACTIVE_DT		0
++#define MSM_TPG_MAX_STREAMS		4
+ 
+ #define TPG_MIN_WIDTH   1
+ #define TPG_MIN_HEIGHT  1
+@@ -89,11 +88,12 @@ struct tpg_device {
+ 	struct camss_clock *clock;
+ 	int nclocks;
+ 	struct tpg_testgen_config testgen;
+-	struct v4l2_mbus_framefmt fmt;
++	struct v4l2_mbus_framefmt fmt[MSM_TPG_MAX_STREAMS];
+ 	struct v4l2_ctrl_handler ctrls;
+ 	struct v4l2_ctrl *testgen_mode;
+ 	const struct tpg_subdev_resources *res;
+ 	u32 hw_version;
++	u64 enabled_streams;
+ };
+ 
+ struct camss_subdev_resources;
 -- 
 2.34.1
 
