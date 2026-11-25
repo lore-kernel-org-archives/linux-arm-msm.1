@@ -1,56 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795597652;
-	b=v70V61wDroKdOHdSjLc+IXrUwdAhHFRj/hqRscbFwabg84s0inCx6vsPtls1INWaCgS/
-	 2z2tmwVgZKRoowxpSDMCwAA9wWRJ7MrFI7QEVRnPdPVWU2VjlidMwxvkDiRw3+lYjsDts
-	 Nx5WtO+Kqgy5m6jgcOrfbRnhfF/qwZtq/RTPB/sKyUuopnbhDbWHK8GAJMdegU/jrrsNF
-	 LOYOADv6KkBxSo8AL87LAumpENYb91iCz73sY40Ul+TXlD+MWknq5XrK3vZZueNDDCkyw
-	 w9Gk+xAo9MEx/VUENad/aiqJQdsZgBKBW7J1CgWwUx6ZbOCB1qQg30h0z5iYv53j2pg==
+	t=1795597665;
+	b=QFeAd7aspJKV0E8UcRKi0SjeTu6E7MlCiI8o2ruO0JOoKm88lAdSbmGa7lLIoQxaujns
+	 A4PUFa2d5ABuFj+Bm3GpTQEMZy3ejDQD5OTFxf9xztiwjk8QEglnB/4wgudyStQ/TKCpN
+	 1air4D+tBupvfAZAI3GtUiOPR0qleIQdiGnPzLDgNlsmWY7qFmu9GzlnpKwEumVR83XQ2
+	 w3KtRgqocArF/CgDxU5EQ3p2py+qhDBx//5k4qeHO90nyB1L5JvlqM2ksVTlQl/Vl2xWE
+	 Q4HT7lCf/voSML9W7OH0cP2kCw8DPYm72DLNoJaj/KyI8i5dvufSRpoKtVaf6T3/7LQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795597652;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	 MIME-Version:X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=vycvynL9eYvQ22hro9Cx4sxJ4Ghk9f1KZTKnvjOxUV4=;
-	b=2/xlrOZvEr1GU406yONz1ne5i872sj7ch9BkhBWe3DqhrM8SZX/EcN4E5XZjRzdcjy/y
-	 ZTIEjt01gPqqkcfJ5InV7SJwzNPX5GoysXlhytXAM3SRbGMw22L+qpVjWF+ZpdRG4awwN
-	 lt0XWofW5D5CxSBV9zgeMb5KYYNg0NW1F8cbXc+CKXPcPtRCuHKiY9c8gLjUXu8PB3Do/
-	 F42ufedEZD9j5tAygyi2yi9R0kUoWV4V0avwGAs6dni37xs3TrFB94sDlV7QkVs6MetyF
-	 DF7yfV2Ji7qVcLJVT8SkgwDipO+ZG76mrjAAHCeY2+UytRq98OluLDLvm1rQcJpmpDQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795597665;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=JbFjtNWWTKC1BbORibQeDjAoB7n26eQHzhKA8Pohz4w=;
+	b=jXbk5lKN/4Rnmv8jmKX/Z0cmSdIDZ770L4Hib5JSUKIFzddHOoK/ZrZARjD/So27TSi0
+	 SMzNYv4V1NjA4Yrq/N0oBd94Li+W/0LHiK1lp9xJBKdvrhtDetfraHUJ1XQShiz9FsqEm
+	 UNL4LIr0eCeOlgU9AX93251l1dEqGdbnWp+lCjcDRXnt8x+JuC8iiFt2iQ7lqp+oReMHE
+	 yAh5hir/hNx03616Vk0h2IN4jbOgSeYGJsLOlANDFqM7YMj03jmK6vKwmcIxDBt2WRRLD
+	 6xp8GrTPZ+C9BeaUDbVZydMwP4rn+gUcldn86U2+HoHLPO+YBDMljvnEcCim7RVSA6A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=N5+7pqH0;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9F03606A31E;
-	Wed, 25 Nov 2026 09:07:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C9F03606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fNVD3cgM;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MsFTBxK+;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F96B606A326
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:07:44 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8F96B606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=N5+7pqH0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fNVD3cgM;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=MsFTBxK+
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP68ewg1617088
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:07:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	JbFjtNWWTKC1BbORibQeDjAoB7n26eQHzhKA8Pohz4w=; b=fNVD3cgM34B4gPxT
+	E1UqbEwqyXMf9dZr+DGGozrZkWlcFONDD6cGM2JkGYqO9/bN3M64ZdxQ0+BARvyj
+	XoczQLcRZRSqn+nGcdiYOg/KuvnLOs/A5sYUb5EN1z7a510KT60lCbOn7GoXZcTM
+	TaNhZuaFdGpMdGaAXxaCim3lSN79hRU2/5mecKERJQ6sCXxl1ROK55hVV2D+g2ca
+	qIQ/nu6tJB2cDnftA/Soz6CN4mibqYo27PkPA0wjIv1AjWioQwjQrjfMzunBsTlm
+	nSnrfn2azHJTxjYXLnhEbnacrUKG41A0lu9e/jLl/Lm0m/Tb9I5vEK9//y48285x
+	IVAu6w==
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com [209.85.216.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5effuhqf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:07:43 +0000 (GMT)
+Received: by mail-pj1-f72.google.com with SMTP id 98e67ed59e1d1-3b45655b428so4557686a91.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 01:07:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:Content-Type:Content-Transfer-Encoding:
-	MIME-Version; bh=vycvynL9eYvQ22hro9Cx4sxJ4Ghk9f1KZTKnvjOxUV4=;
-	b=N5+7pqH0CI3OCLI5bMKzUDs6ywmsuNbMYwW5TuyLnoHSMFche+lJHkHOw2Jy8e
-	mUs7oVwrQz2vNSmVaFDwVUOsmHdl+8uauScTWeHt2xyyKZZFvk8fl+GzaIyse0MK
-	PfzGqpxn8LzEfPxGHBmcsdZ1X+rp5MHgY/bW7jpE5dWj0=
-Received: from [127.0.1.1] (unknown [114.214.177.196])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgB37TE+pQZrMrj2AA--.694S2;
-	Wed, 25 Nov 2026 17:07:10 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: Kees Cook <kees@kernel.org>
-Cc: Tony Luck <tony.luck@intel.com>,
- Guilherme G. Piccoli <gpiccoli@igalia.com>, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 0/2] pstore/ram: refuse zones overlapping the initrd
-Date: Wed, 25 Nov 2026 17:07:09 +0800
-Message-ID: <179559762994.96050.5409562801088468974@mail.ustc.edu.cn>
-In-Reply-To: <20261116040049.434247-1-xiaqinghuan@mail.ustc.edu.cn>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+        d=oss.qualcomm.com; s=google; t=1795597662; x=1796202462; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JbFjtNWWTKC1BbORibQeDjAoB7n26eQHzhKA8Pohz4w=;
+        b=MsFTBxK+83n2e4QMK2DxegXkTEhwoWNmHziRSIbPClvRYZBQRt7LTJXpncT15ykS7h
+         boW2Rbr1M5ym0W3/LLMUJW4Nhr2LnJ61hXRQgnRq2wUYgH/kifxjulkgAWSdSiGugHmv
+         zxSxI8QahQQ2IK1G0BLNFZn+dV/OsDjfW+UaIoC5hz4CqChiA/MAwha6KBBo0KY/Y6Rp
+         EDfSD+YecsdgjFFsxpEnCofJLw1Yjk4EWOF4Wnm/1aVryCyH2PJesOTlG1Hj+w/Jh5p+
+         RQXOZL35kb64lDMIbfyfDWZsjBvntp2t10z5IkFNMOuevcmr84tESXeAhlF56VUUKrmG
+         k06g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795597662; x=1796202462;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JbFjtNWWTKC1BbORibQeDjAoB7n26eQHzhKA8Pohz4w=;
+        b=NfaHDImSXtCyIUakDtgSiONFVn85AhYQnn94p0XnVPZw2upKnRrJz3Ba/1GYxWrzu0
+         i/Ecyn33paNxhHBANZVWpKmkl+4nl1aOt/ViSFjKvEJUJiNlKDJFGn2IX3zMv8BaXEt6
+         WC5oz5Z1F2v3VSaksqPna0mc13EMUAhL1LYL7OLm9EkWaIgDHLiNKiXEaxUUmPjL2Fim
+         JWMtV7DM5+WCG9gyotN8DYmXQnT1n5QUQ3wtXde2iYba0zBEk6j/mvd/4Y0k5rWI0nLo
+         CuUEGLAoC8knaBG4FdokwdkqiwKIkvj0J+3Y8Mc3M57S8XBavsE9RiuXkK0HscU3wv/3
+         lK8g==
+X-Forwarded-Encrypted: i=1; AL+hErHyhX3qDdgaOuk+8rCPagdfaSeYxf+hyLQdT1Cf+jLbIXE0PgGxdx+DZWXSoQRdCsL1GM6DHg2P7hf4C/35@vger.kernel.org
+X-Gm-Message-State: APuU4Z+ZI3TvbbXmD37EIqwNgBwnFfS6i0K3r0prpkdHptu89zwBAKHi
+	6C6Tv62H6vXKbMItB2NvO5/fv/LaqDO5mQGtcMOBzkplURMa0LIlE0r8iSKJjjV+LPSHVWlm8Dw
+	P5myYZ7iYIqDMAWn3wJ7vtc/G5FX8Et54xEEyalTUeuT8mLYjMrxdJVIEO1/GKgYGCzqs
+X-Gm-Gg: AZFdTZfQ/7C8rK9/c/jv9hsqzlLDzIjhweb5p4y9afSkRURQP1+GpA9IDXRt5BJOtjZ
+	3bjT9nE8d9N96MAkS7G7kIU2XeMdJOuNSvQ2wMtiRYcmtQyhjtoXU2vQaXUsO7ywa/wm5n0LjHR
+	/GY+wBe/RIyDvo5i0FrX1QAJFcp+v8ViKN+9bJ2kcdW/AcAtXZjW28HSLU0O05A0ve+QZ6lXWeu
+	rxfgTdLYn7mWbGPlGDaDRj/+3wsYgZG3yEq3ymoalaP425WeOtEF2XPAHeUzHNxdqveHgjwHYRz
+	6FoiGHo57PvhFzwMgx0n4PmSVAr2Xeywri21rl4ic3xbwp78ilp3EQAoI131qd1vl8oM92crxiv
+	w9V8acqBc0eGtriIo7rfDTZbZ31IcHsFm5nRkBojKxJnd48frSrWycpyiZYynrVTI7Hvw+FtYBs
+	/3
+X-Received: by 2002:a17:90b:4d89:b0:3b4:3c33:3e5d with SMTP id 98e67ed59e1d1-3b43c334caemr8256635a91.67.1795597662547;
+        Wed, 25 Nov 2026 01:07:42 -0800 (PST)
+X-Received: by 2002:a17:90b:4d89:b0:3b4:3c33:3e5d with SMTP id 98e67ed59e1d1-3b43c334caemr8256260a91.67.1795597651179;
+        Wed, 25 Nov 2026 01:07:31 -0800 (PST)
+Received: from [192.168.1.12] ([223.230.5.36])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b420e1307csm25769550a91.7.2026.11.25.01.07.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Nov 2026 01:07:30 -0800 (PST)
+Message-ID: <42920cf2-1587-47a9-a53d-d604bfb22b76@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 14:37:19 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,57 +116,119 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-CM-TRANSID:3pYKCgB37TE+pQZrMrj2AA--.694S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7CF1DXrW8trykKryfCFWxJFb_yoW8XFy8pF
-	W3tryjyw4kKr40v3y8Ar40qw1ayrWfXa15XF15JryDA3Z8WF1IvFW0kwn8XFW5Xrn3W34Y
-	vFW5XasrC3Z8ZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUkIb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
-	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkF7I0En4kS14v26r126r1DMxAI
-	w28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr
-	4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxG
-	rwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8Jw
-	CI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2
-	z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU86c_3UUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 23/25] accel/qda: Add DSP capability query
+To: Arnd Bergmann <arnd@arndb.de>, Oded Gabbay <ogabbay@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Srinivas Kandagatla
+ <srini@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Dave Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
+        Philipp Stanner <phasta@kernel.org>,
+        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Krzysztof Kozlowski
+ <krzk@kernel.org>, rob.clark@oss.qualcomm.com,
+        Jason Gunthorpe <jgg@ziepe.ca>
+Cc: lingtong@qti.qualcomm.com, cacar@qti.qualcomm.com,
+        sandheep@qti.qualcomm.com, Bharath Kumar <bkumar@qti.qualcomm.com>,
+        Chenna Kesava Raju <chennak@qti.qualcomm.com>,
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-media@vger.kernel.org, linaro-mm-sig@lists.linaro.org,
+        Bharath Kumar <quic_bkumar@quicinc.com>,
+        Chenna Kesava Raju <quic_chennak@quicinc.com>,
+        Ekansh Gupta <ekangupt@qti.qualcomm.com>
+References: <20261102-v4-v4-0-88f2f24a5f0b@qti.qualcomm.com>
+ <20261102-v4-v4-23-88f2f24a5f0b@qti.qualcomm.com>
+ <23d04f27-dd2d-414b-acc1-27e46538bfcb@app.fastmail.com>
+Content-Language: en-US
+From: Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>
+In-Reply-To: <23d04f27-dd2d-414b-acc1-27e46538bfcb@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=eo5KXYpX c=1 sm=1 tr=0 ts=6b06a55f cx=c_pps
+ a=RP+M6JBNLl+fLTcSJhASfg==:117 a=7CQlB+x2kvO/AZ184d7fkw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=Uvs7DDoz1aZytBm4-AQA:9 a=QEXdDO2ut3YA:10 a=iS9zxrgQBfv6-_F4QbHw:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfXw6jarT8FySak
+ B3dMiO12V2KzeRMwfH8XqGGYcc/dhK5etlJ0cGkByXUjYmWVPS5PSqvRq/ROHDiLxlGpefSldGx
+ loM3uN6TQM7XIFOYCxtnRIr2od/dWcyOFM0KwIz0qVMefN/rQXSONGn5mRdfUZzeOe4AMsIZ3/p
+ gEXkUcEHLoL6i/aiZp0Pssmlv2maiygrJnufj+4Udcy4xoLxJXjl46zW1W8gFuZe/fawwXnKGK4
+ 81gdy3samGphCdT6R0XfcOQulKXxO01BMsVYyYSsTdmNGk4dDBYJZGtBILqctvUKimQ2pCKGlYW
+ Z635CT1YAO5pTXlH7lB5FDx1FY7pVqBMuAJvqaAmjLdtqfTsKGuKX47xTGNwXw82dcUm5w/MWeu
+ /0XSzLxiMftUkRzoHwex5OPVqs/7LEgOlfq7fQId9ACjsYNKhKDalSXaWoA0US2+8YEfKXcBCfy
+ 75HU1OU0a2uPvH0Jhmg==
+X-Proofpoint-GUID: TtPWXg6ybP14ja8fQLYOOYAY5M7ZQOIz
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfX6wqENZn9KSNn
+ dfEw3hPB0gQqBDt6sHYw22uw5r1PovY5yjx6ocsTR53F75vIxyARFweiXRK9Wi91kimMqa+SEmb
+ 1yNfaB+Z5HoG9oclZQB3LI/aNxkTBTI=
+X-Proofpoint-ORIG-GUID: TtPWXg6ybP14ja8fQLYOOYAY5M7ZQOIz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 adultscore=0 lowpriorityscore=0 malwarescore=0
+ phishscore=0 impostorscore=0 suspectscore=0 clxscore=1015 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250036
 
-Hello Kees,
+On 02-11-2026 14:16, Arnd Bergmann wrote:
+> On Sun, Nov 1, 2026, at 23:21, Ekansh Gupta wrote:
+> 
+>>   *
+>>   * This structure is used with DRM_IOCTL_QDA_QUERY to query device attributes
+>> - * based on @query_type.
+>> + * based on @query_type. @dsp_name and @cap share storage, as only one query
+>> + * is made per call.
+>>   */
+>>  struct drm_qda_query {
+>>  	__u32 query_type;
+>> -	__u8 dsp_name[16];
+>> +	union {
+>> +		__u8 dsp_name[16];
+>> +		struct {
+>> +			__u32 attribute_id;
+>> +			__u32 capability;
+>> +		} cap;
+>> +	};
+>>  };
+> 
+> I think it would be better to make this separate ioctl commands
+> instead of a multiplexer for each thing you query. ioctl numbers
+> are cheap, but complexity is not.
+> 
+>     Arnd
+Apologies for the delay in responding.
 
-A short ping on this series (posted 2026-11-16, no reply so far): is the
-shape acceptable, or would you rather see the overlap handled somewhere
-else?
+I'd prefer to keep a single query ioctl, and likewise a single
+SET_OPTION ioctl, for these reasons:
 
-The problem in one paragraph: on this board the bootloader places the
-initrd at a physical address of its own choosing and cannot see the
-device tree reservations, so the buffer can land inside a ramoops zone.
-The zone is registered a few milliseconds later and the console writes
-over the initrd, which then fails to unpack ("invalid magic at start of
-compressed archive").  2/2 skips such a zone for that boot and says which
-one was dropped; 1/2 is the helper that reports the initrd's physical
-range.
+1. Precedent:
+A selector-based query ioctl is the established DRM/accel pattern, e.g.
+DRM_IOCTL_AMDGPU_INFO, DRM_IOCTL_AMDXDNA_GET_INFO,
+DRM_IOCTL_IVPU_GET_PARAM and DRM_IOCTL_PANFROST_GET_PARAM.
 
-Open questions I would rather have answered by you than guessed:
+2. Extensibility:
+More queries and options are expected. With one ioctl, each is just a
+new selector value. Separate ioctls would mean a new ioctl number, uapi
+struct and shim mapping for every small addition.
 
-- Layer: the check lives in the ramoops probe because that is where the
-  zone becomes dangerous.  If you would prefer it at the reservation /
-  memblock level instead, I will move it.
-- Cc: stable: I left it out, as it needs a bootloader and a device tree
-  that disagree about memory.  Say the word if it belongs there.
-- The one limitation is documented in the code: a module loaded after the
-  initrd is gone cannot see the overlap and gets no protection.
+3. Safe evolution:
+Unknown selectors return -EINVAL, so userspace can detect an older
+kernel and fall back. I'll also keep the struct size fixed (padded
+union) so adding a type never changes the ABI.
 
-I am happy to resend as v2 with whatever you ask for; nothing here is
-pressing enough to justify nagging, so this is the only ping unless you
-would like another.
+To address the complexity concern, v5 will document each query type's
+payload in the uapi header, and fields unused by a type must be zero.
 
-Disclosure: this series and this message were prepared with the help of an
-LLM coding assistant; the reproduction, the measurements and the decision
-to send are mine.
-
-Best regards,
-Qianhui Xu
-
+Thanks,
+Ekansh
