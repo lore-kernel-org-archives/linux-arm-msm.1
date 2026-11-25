@@ -1,110 +1,66 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795565231;
-	b=igTNJ2fJHlAWHzJszLI51NSfMmqmgCzya7ZeqBQSdRpE1bQ7LihJ7fgCT4Qf1UWsoNCa
-	 PrDqU82EzuwKEez1mEpnv/wWsRtvgnr9WzGCgK+m2G527jYjTTOtKwtp7Ec4NfpzChHLu
-	 k0a5t1ZKMEf8D1doJWq3WpVZ3CkSoRm+2gOQtogNiTXdcOp3GeK4Etyys8ltFFc7nVdwg
-	 MvgJXXw23dM8hzUzSQMdL36nHfb/hbkHlLliK1DSYsSk2gai0HN8QmbuICz7D4aD7UTGI
-	 6w3mKr0vd+bj2RGMasttqnrsXL/J/JaePCEbkd4bl3TZLdpyrt+ZjORtdy5yKLgOa7w==
+	t=1795565363;
+	b=vjN/X/HZ6gdIgny2dp55JynKrApahqVN9nFu2BWipurKRRzH9VFc326gMNY/liN42jSr
+	 FZaGz1DAktsgqAQYHNg0sYROkyaw10tBi+rxx5bfjGJEGlhAUA82/dia7EhitQlO0JZkm
+	 afNpr81EdiHQXGc53tPGCW1k8bt5oUOM/NOdiuLsqt7VDGG4qAZmuNu1Cm0rXnJjiGwBF
+	 4crHw2+rC3MR1TmYrtkMhX4u03IrlTUgntdo1C+hp7NzL0bewJcWMp2z0SOia0XwXwc0z
+	 fvcgpAybQ/0CL/u7CDXAwMYl3Utj4IVthtJQ6+sm9edSpMJ5ZUBWv4cH2jFkOR9Zr7g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795565231;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
-	 In-Reply-To:To:Cc:X-Mailer:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=D/hUcXy7mz/8ruNJCrFS9KeNwdisy1nQImE0w8zagUg=;
-	b=DqTwpmJFuYGX2Hxp+q5k4rbZgrCvN95OdhjT0btPKh4XMwSlA8UChLML6BJU0WaTIflz
-	 fq7PNDm9tq0U1bfkV8sKAfdcyW8P/ytrKLKwnZL3yOt9wRNpsczahSGhBubN+SIoIf+XP
-	 noeajBQDVU2CXqI52S69AkBgiADVb42DWlP1RFihayUmzjgNacwNpwFZnNaL0EBm43lp2
-	 cY8BxjHs0RDhOWgSQirILuLuav1Tlixkk3VetwsC+T0BP/e2kO/rZXKZOtwOL1gSz7UHe
-	 4yQHRSz2MJJplq+jTH0Aq+WVRhQzYl8g9eqEjQKqiRwu0MSmaCW9XFLZX4wSptxc2Ww==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795565363;
+	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
+	 In-Reply-To:References:X-sashiko-severity:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=uyQvLyfxi3krPyIKXwFwrrrzE4BwtXe5ANPqZmDzHnU=;
+	b=cmOhtAHX9k5aqyyqAHZk7IeVXghTi6EioJDDDIDVHgZefNIDY4i+IBV1/4/qTmO/yg9x
+	 XkwG+CceEQvT8uA9dme6WbEjN5hCLoyyQYnoFDvICdrtJ9PF+sRlakS5TWETHaHDMBgOe
+	 fyuHEOPpeXnx9/lAP66PNndV08WaxHM8zUTz8Gs7+ezhA5+gFeyfXZ2tsjtA0RkH1BUEd
+	 BCSOePoy2g+RJdPy3BngcENls2HX436VMuz/Ln9BT3hqXg3WYfZKi10smoHs5RI104Xvr
+	 fKOpR42GM2edF8t66SdWuFpiqjoXwPeUWW+Wu1/JTXeNVogw+HMMXWHZ39wK76NvqKQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PwL8TO8o;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="aq0/tsr2";
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UN0diSFN;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6472D606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:07:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6472D606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0D77D606A31E;
+	Wed, 25 Nov 2026 00:09:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PwL8TO8o;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aq0/tsr2
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AOMb4Jl3275040
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:07:10 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	D/hUcXy7mz/8ruNJCrFS9KeNwdisy1nQImE0w8zagUg=; b=PwL8TO8ot3tWUnvx
-	sNdJRJn3ibfZXBJxMGbGv2hR7ZEZ8JiAQmiVOKJXZ3b0+XjfyCI5NSVz19/HMycA
-	16crRKv0PUBqtxSx2I/MIdambV42GW5XX0O2uQ3ve2KdhmHGq79H00dAUNLTRIBA
-	o/+IrpR+gq4iaesmmj3+vZTGLRH9ke/Rv+F9PYTHlS6dNwcxSgUjZfeYcoCtdE3M
-	rtqsTyRUYW5R1V4vTTnJulgKbI35zaflTfRxTXIEsXQpWDTl+qxMdG/aNtpmHnjb
-	shdCFROr3TDvE5r1tgnmiBmn5UqReH5ne4RkqdeNC8P4BWZABdr+S5WMfCdtjN5G
-	l5w/mw==
-Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5gnf8uqk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 00:07:10 +0000 (GMT)
-Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-341eff9e381so8047905eec.1
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 16:07:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795565229; x=1796170029; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=D/hUcXy7mz/8ruNJCrFS9KeNwdisy1nQImE0w8zagUg=;
-        b=aq0/tsr2pgmbQPem9LHoaleCuFtXeLqvm5OLumyqOjMz4LAPU42rtQj+Nlz6K05zWh
-         ZnMpIsiySiMT44GJgx/4GrnZ69Pw9t3L2d40w1e+v9RoEU6sVnvoOxZjmMX3Pbr3jgZl
-         +MAy3emXjKrDpledr0otH6RBKN5GzHWSxHjLy3Iqn00XI4ddLFElwz9FKrYGEabEomZX
-         SAC0vFJCN/F1HuePQpOUqZfV9N0V8xNEzVND2CMDG5tQ2ro/r+oabAOvV1ePuKjY7cbo
-         EMsBF10xjf+dc1BkmWGtRpOSd4U32KiMS3OxIn7aVwF56u6xBAzyRDFPQO2PJagA6xsV
-         RB5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795565229; x=1796170029;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=D/hUcXy7mz/8ruNJCrFS9KeNwdisy1nQImE0w8zagUg=;
-        b=fQM+ksNbMyBfE+hmItol6krU33XgSQJy3/rB0pCxoO+xZED94pOAIp/+jKrbzhPpTc
-         6K1B43sqzzRw46aaApFJxMeQrUaT8nDeuRc/8bHT+5TqCH2JCiIOBfLKrUmAZ+YBdkXS
-         QtheTJkzEHqhxTVbZydR+b7WLvAsH8IWVF5d10MiREbEUyPQ+53LrnHqJnwwuAlYmQAm
-         GRXycuicJPJNnUO/IAeghnto6Dg3LEVs5limQQLsNKoSuFkUuyxWLk0ZEAifmBBr6B7M
-         HXp9ZLzdyDp8vI3+rprbUKNHD+NAwVCs9ufb5ZKtOEnkst6MIPm8hXpNIqCKf07Nmbmw
-         B97w==
-X-Gm-Message-State: APuU4Z+ocEhI/7BXxsushedh32j9C+TAFrjCsfoKsb+jt8Dpph2pJFW7
-	ohWM0d3G1gsHDBwqoOCrFd3Qo1CC2Y+NLhDhCp34T1h+vTqpuVF3pFEsHiCU4w4YM1X+6L3pGE1
-	EuvXuCEI+mQhULb7hXpMx8ntnpt2Q/5/yb8lumSJwjNx1cx8x2m875GJ03iOFjzsl33TS
-X-Gm-Gg: AZFdTZfrza8UK3VlHDII9TMaZLTtNavQazHPFsFshJpa/e/iruil+aGrsUOyvkfAZvD
-	76jsHoOusS7XbBkn3qpru3pLfg+n5TZ/ooS6v81WCW5oSwneiPhOwzvVFHlQFOBZsExb8asuMPP
-	05bCQP09MGps++WKyHpB52Su+TfckAdndKwEEsxEO8ijcbhwLZ6FZClKZsNU59jis1Gm1O+0b9T
-	KqnJ9lARJehLjez2FWIwooopx+r4FgE+Duzmg5Uh3e67p/R7hxnQpx96etYu5JIo/whHuajs3jH
-	08pAz8ZppmThbBxU1xhblV/hKMRWTcaOGnrJUn2DcAE2GDq0ZG+BYzKmbTJjHFRyPEaBIHMVrTU
-	LO8LDtOk3SRVbZBdMYEBETzbwhwdXeWe0jIy27xnk1wqEVao4eV77I1AByg==
-X-Received: by 2002:a05:693c:88d4:20b0:386:a8de:2bfc with SMTP id 5a478bee46e88-386a8de2f67mr9191495eec.6.1795565229014;
-        Tue, 24 Nov 2026 16:07:09 -0800 (PST)
-X-Received: by 2002:a05:693c:88d4:20b0:386:a8de:2bfc with SMTP id 5a478bee46e88-386a8de2f67mr9191445eec.6.1795565228315;
-        Tue, 24 Nov 2026 16:07:08 -0800 (PST)
-Received: from [10.213.99.236] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385677c371esm47494708eec.23.2026.11.24.16.07.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 16:07:08 -0800 (PST)
-From: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 05:36:44 +0530
-Subject: [PATCH 4/4] misc: fastrpc: expose unsigned PD node for
- compute-capable HPASS
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=UN0diSFN
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F10F1F000C4;
+	Wed, 25 Nov 2026 00:09:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795565362;
+	bh=uyQvLyfxi3krPyIKXwFwrrrzE4BwtXe5ANPqZmDzHnU=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=UN0diSFN81K7qt/M4VQqt+luXZaeDT7Aiz8E6Bg8kzHo8vLE1StK15YYwY9HaMPd/
+	 vZcbxXOSWKLNoQ+nei2BGUEetlz5iqFobaXWz/m49YYFLYIuXJFnCsSn5nkdBUxNzs
+	 sKiT/yKH2Gj+LKENrP/Pg5tvC8duxGGNzHBbE9XYvaMxtAQTBP+r92ix59deosQ8nu
+	 IwQ/Y27aBOJiSMFYa0Rf5Buf7axJI2QjQNz5Ywe/9Tv6pmllLVU4DxKPV+7mxNOtes
+	 qCOm9AYnRPPgUMDuFTTBKthG2gRc1PitJ0f10UhmlCnk8Nud/EaqPayQu28+qGf4iD
+	 yIea858x2DCFg==
+Subject: Re: [PATCH net-next v2 1/3] net: stmmac: separate the TC count from
+ the queue count on XGMAC
+From: netdev-bot+sashiko@kernel.org
+To: sagar.cheluvegowda@oss.qualcomm.com
+Cc: j.raczynski@samsung.com, maxime.chevallier@bootlin.com,
+ andrew+netdev@lunn.ch, davem@davemloft.net, edumazet@kernel.org,
+ kuba@kernel.org, pabeni@redhat.com, mcoquelin.stm32@gmail.com,
+ alexandre.torgue@foss.st.com, netdev@vger.kernel.org,
+ linux-stm32@st-md-mailman.stormreply.com,
+ linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, cs0617.lee@samsung.com,
+ k.domagalski@samsung.com, k.tegowski@samsung.com,
+ abhishek.chauhan@oss.qualcomm.com, lorenzo.bianconi@oss.qualcomm.com,
+ sarosh.hasan@oss.qualcomm.com, hongmei.xu@oss.qualcomm.com
+Date: Wed, 25 Nov 2026 00:09:20 +0000
+Message-ID: <179556536060.3135.11757028491068273686@kernel.org>
+In-Reply-To: <20261124000415.4067701-2-sagar.cheluvegowda@oss.qualcomm.com>
+References: <20261124000415.4067701-2-sagar.cheluvegowda@oss.qualcomm.com>
+X-sashiko-severity: High
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,122 +70,220 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-fastrpc-hpass-support-v1-4-cb1d46b29e3b@oss.qualcomm.com>
-References: <20261125-fastrpc-hpass-support-v1-0-cb1d46b29e3b@oss.qualcomm.com>
-In-Reply-To: <20261125-fastrpc-hpass-support-v1-0-cb1d46b29e3b@oss.qualcomm.com>
-To: Srinivas Kandagatla <srini@kernel.org>,
-        Ekansh Gupta <ekansh.gupta@oss.qualcomm.com>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        devicetree@vger.kernel.org, quic_bkumar@quicinc.com,
-        quic_chennak@quicinc.com, dmitry.baryshkov@oss.qualcomm.com,
-        Anandu Krishnan E <anandu.e@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAwMCBTYWx0ZWRfX8ffqmvOJMjKx
- A2cI0NXQlSViMLjKbx3T9VQhIs84ZwuZl7GUOVCQ35QFfDgAuo99owGHXiPKCgnWVa2Jcg/pXN7
- m4+9LcJm51jLE+9WsG9dDyeLLSiyrJU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAwMCBTYWx0ZWRfX3CV+NR055u8H
- 280l/IP2h4mr/bz3QTf9nAVFqVbvZQoMGC+KOVnAqFvnu2PCImGig0sMOO41RjLJ9JXUKwQGCgf
- ALGTFMJ8Tav/8gC+wUqFp0+KuF5iDvIaUhUF8Lt7HN2H2RcFteF75NaZPUtu/1Uw2xRHBwy8nHZ
- 2ASImZbHHavLbUEz1pqWTnhs6Ql6XDCn9MKFjnop1s95oKn7d7hYKn+50H2ptaJNbwOlqVSM0Wh
- i5sDwAfLAYKTN/cGP7xBnU25cH8hvAZvasvlkpFpqQxTojS91uAqdGJO+oHRHXn2S/S9Se+HDAh
- k2sbk2lyTlUerV/t9Hm3sqsVzNzMIaDnLInZrZ9efmXnIzqvRwS2JNL/lVvpUaWRWF3nXYoArSG
- yY8P4EuDQrj3Lg/Z6GPuT1jCDssPGVtnU4+9vfeusjquQwtwlBw0StFoVY81taOPg0HX+RbLTCq
- cw6bkjlRHxBaUud/w5Q==
-X-Authority-Analysis: v=2.4 cv=f/Xdl+yM c=1 sm=1 tr=0 ts=6b0626ae cx=c_pps
- a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22
- a=EUspDBNiAAAA:8 a=QoXsROH1H4pbOw3JdpEA:9 a=QEXdDO2ut3YA:10
- a=scEy_gLbYbu1JhEsrz4S:22
-X-Proofpoint-GUID: 3qemaDIM0ou8q01PBjGAzbsaG-OcYQr0
-X-Proofpoint-ORIG-GUID: 3qemaDIM0ou8q01PBjGAzbsaG-OcYQr0
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-24_06,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 adultscore=0 suspectscore=0 priorityscore=1501
- malwarescore=0 bulkscore=0 clxscore=1015 phishscore=0 impostorscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611250000
 
-HPASS (high-performance audio subsystem) is a distinct hardware block
-from the LPASS-class ADSP, described in the devicetree with its own
-"hpass" label. Depending on the firmware image it loads, an HPASS
-domain can run either an audio image or a compute image. When it runs
-a compute image it offloads user compute workloads and therefore
-needs a non-secure node for unsigned PD offload, in addition to the
-secure node; an audio image needs only the secure node.
+Thank you for your contribution! Sashiko AI review found 3 potential
+issue(s) to consider.
 
-The image type is reported by the DSP in its capability attributes,
-which are now queried at probe time. Use that cached capability: when
-an audio-PD domain reports a compute image, register both the secure
-and non-secure nodes and enable unsigned PD support. When the
-capability query did not complete, retain the existing domain-id based
-gating.
+Critical: 0 · High: 2 · Medium: 1 · Low: 0
 
-Signed-off-by: Anandu Krishnan E <anandu.e@oss.qualcomm.com>
----
- drivers/misc/fastrpc.c | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
 
-diff --git a/drivers/misc/fastrpc.c b/drivers/misc/fastrpc.c
-index 59ef755feeaf..eb107d0f2bc2 100644
---- a/drivers/misc/fastrpc.c
-+++ b/drivers/misc/fastrpc.c
-@@ -88,6 +88,14 @@
- #define FASTRPC_MAX_DSP_ATTRIBUTES (256)
- #define FASTRPC_MAX_DSP_ATTRIBUTES_LEN (sizeof(u32) * FASTRPC_MAX_DSP_ATTRIBUTES)
- 
-+/* remote_dsp_attributes[] index reporting the DSP's image configuration */
-+#define DSP_IMAGE_CONFIG_ATTR_IDX (14)
-+
-+/* enum dsp_image_config: values reported at DSP_IMAGE_CONFIG_ATTR_IDX */
-+#define FASTRPC_DSP_COMPUTE		(1)
-+#define FASTRPC_DSP_COMPUTE_LITE	(2)
-+#define FASTRPC_DSP_AUDIO		(3)
-+
- /* Retrives number of input buffers from the scalars parameter */
- #define REMOTE_SCALARS_INBUFS(sc)	(((sc) >> 16) & 0x0ff)
- 
-@@ -2713,12 +2721,22 @@ static int fastrpc_register_devices(struct fastrpc_channel_ctx *cctx,
- {
- 	struct device *rdev = &rpdev->dev;
- 	int err, i;
-+	bool compute_lite = false;
-+
-+	/* An audio-PD domain (e.g. HPASS) running a compute image also
-+	 * needs an unsigned PD node, same as CDSP/GDSP.
-+	 */
-+	if (cctx->valid_attributes &&
-+	    cctx->dsp_attributes[DSP_IMAGE_CONFIG_ATTR_IDX] == FASTRPC_DSP_COMPUTE_LITE)
-+		compute_lite = true;
- 
- 	switch (cctx->domain_id) {
- 	case ADSP_DOMAIN_ID:
- 	case MDSP_DOMAIN_ID:
- 	case SDSP_DOMAIN_ID:
- 	case HPASS_DOMAIN_ID:
-+		if (compute_lite)
-+			goto unsigned_capable;
- 		cctx->unsigned_support = false;
- 		err = fastrpc_device_register(rdev, cctx, cctx->secure, cctx->domain);
- 		if (err)
-@@ -2726,6 +2744,7 @@ static int fastrpc_register_devices(struct fastrpc_channel_ctx *cctx,
- 		break;
- 	case CDSP_DOMAIN_ID:
- 	case GDSP_DOMAIN_ID:
-+unsigned_capable:
- 		cctx->unsigned_support = true;
- 		err = fastrpc_device_register(rdev, cctx, true, cctx->domain);
- 		if (err)
+- [High] The patch limits the CBS replay in stmmac_configure_cbs()
+  (stmmac_main.c:3560) to stmmac_num_tc().
+- [High] The patch limits stmmac_mac_config_tx_queues_prio()
+  (stmmac_main.c:3622) to stmmac_num_tc() because TC_PRTY (PSTC) is per…
+- [Medium] The patch is meant to stop the driver assuming one TC per
+  queue on XGMAC, but the register that actually assigns a queue to a TC…
+
+--
+
+net: stmmac: separate the TC count from the queue count on XGMAC
+
+This adds stmmac_num_tc(). It bounds the per-TC register writes (TX queue
+weight, CBS replay, TC_PRTY) by the number of TCs the XGMAC reports
+instead of by tx_queues_to_use. It also limits the ETS loop to 8 TCs and
+bounds the per-priority registers (Qx_TX_FLOW_CTRL, PSRQ) by
+STMMAC_NUM_PRIO_QUEUES.
+
+Link: https://lore.kernel.org/netdev/20260601162537.553512-2-j.raczynski@samsung.com/
+
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac.h b/drivers/net/ethernet/stmicro/stmmac/stmmac.h
+> index fcc395321816f..24bbe72e00719 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac.h
+> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac.h
+
+[ ... ]
+
+> @@ -441,6 +446,18 @@ static inline bool stmmac_check_timestamp_cap(struct stmmac_priv *priv)
+>  	return priv->dma_cap.time_stamp || priv->dma_cap.atime_stamp;
+>  }
+>  
+> +/* Most cores have one traffic class per queue, but newer XGMAC can have more
+> + * queues than traffic classes (the number of TCs is reported by the HW
+> + * feature register).
+> + */
+> +static inline u32 stmmac_num_tc(const struct stmmac_priv *priv)
+> +{
+> +	if (!priv->dma_cap.numtc)
+> +		return priv->plat->tx_queues_to_use;
+> +
+> +	return min_t(u32, priv->dma_cap.numtc, priv->plat->tx_queues_to_use);
+> +}
+
+[Severity: Medium]
+When numtc is smaller than tx_queues_to_use, which TC do the queues at
+or above numtc end up on? The register that assigns a queue to a TC
+still maps one TC per queue. In dwxgmac2_dma_tx_mode() in dwxgmac2_dma.c:
+
+	/* Use static TC to Queue mapping */
+	value |= FIELD_PREP(XGMAC_Q2TCMAP, channel);
+
+The default map that dwxgmac3_fpe_map_preemption_class() in
+stmmac_fpe.c restores does the same:
+
+	for (u32 i = 0; i < priv->plat->tx_queues_to_use; i++) {
+		val = readl(priv->ioaddr + XGMAC_MTL_TXQ_OPMODE(i));
+		writel(u32_replace_bits(val, i, XGMAC_Q2TCMAP),
+		       priv->ioaddr + XGMAC_MTL_TXQ_OPMODE(i));
+	}
+
+So queues numtc..N-1 are mapped to TC indexes the hardware does not
+implement. Weights, CBS and TC_PRTY are now programmed only for TCs below
+numtc, so those queues point at TCs that either have no scheduling state
+or do not exist.
+
+XGMAC_Q2TCMAP is GENMASK(10, 8). The later patch in the series
+("include/stmmac: Increase max DMA/MTL channel count from 8 to 16") makes
+channels 8..15 reachable. Would FIELD_PREP() then wrap them silently onto
+TC0..7?
+
+The driver code doesn't show how the hardware handles Q2TCMAP >= NUMTC,
+so the exact effect on scheduling is uncertain.
+
+There is also a pre-existing issue that this patch did not introduce:
+the field is OR-ed in rather than replaced. This runtime path:
+
+stmmac_bump_dma_threshold()->stmmac_set_dma_operation_mode()->
+    dwxgmac2_dma_tx_mode()
+
+can OR the channel number into a Q2TCMAP value that mqprio or FPE set
+earlier. For example, TC 1 OR channel 2 gives TC 3.
+
+> diff --git a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> index ca4c7fb11b73f..5d02f7034a7af 100644
+> --- a/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+> +++ b/drivers/net/ethernet/stmicro/stmmac/stmmac_main.c
+
+[ ... ]
+
+> @@ -3548,12 +3552,12 @@ static void stmmac_set_tx_queue_weight(struct stmmac_priv *priv)
+>   */
+>  void stmmac_configure_cbs(struct stmmac_priv *priv)
+>  {
+> -	u8 tx_queues_count = priv->plat->tx_queues_to_use;
+> +	u8 num_tc = stmmac_num_tc(priv);
+>  	u32 mode_to_use;
+>  	u8 queue;
+>  
+>  	/* queue 0 is reserved for legacy traffic */
+> -	for (queue = 1; queue < tx_queues_count; queue++) {
+> +	for (queue = 1; queue < num_tc; queue++) {
+>  		mode_to_use = priv->plat->tx_queues_cfg[queue].mode_to_use;
+>  		if (mode_to_use == MTL_QUEUE_DCB)
+>  			continue;
+
+[Severity: High]
+The replay path is now bounded by num_tc, but is the runtime CBS path
+still unbounded? tc_setup_cbs() in stmmac_tc.c only checks against
+tx_queues_to_use:
+
+	u32 tx_queues_count = priv->plat->tx_queues_to_use;
+	...
+	/* Queue 0 is not AVB capable */
+	if (queue <= 0 || queue >= tx_queues_count)
+		return -EINVAL;
+
+It then passes queue straight to stmmac_config_cbs(). On XGMAC that call
+reaches dwxgmac2_config_cbs(), which uses the queue number as the TC
+index:
+
+	writel(send_slope, ioaddr + XGMAC_MTL_TCx_SENDSLOPE(queue));
+	writel(idle_slope, ioaddr + XGMAC_MTL_TCx_QUANTUM_WEIGHT(queue));
+	writel(high_credit, ioaddr + XGMAC_MTL_TCx_HICREDIT(queue));
+	writel(low_credit, ioaddr + XGMAC_MTL_TCx_LOCREDIT(queue));
+	...
+	writel(value, ioaddr + XGMAC_MTL_TCx_ETS_CONTROL(queue));
+
+With numtc < tx_queues_to_use, a cbs offload qdisc on a queue >= numtc
+still writes TC registers that don't exist. The later patch in the
+series raises MTL_MAX_TX_QUEUES to 16. Since numtc is at most 8, queues
+8..15 on any 16-queue XGMAC are then affected as well.
+
+The commit message says:
+
+    The checks are in the callers, which can return an error to the user,
+    instead of in the callbacks, which are void.
+
+tc_setup_cbs() returns int. Should it also reject queue >=
+stmmac_num_tc()?
+
+The runtime and replay paths also disagree now. tc_setup_cbs() leaves
+tx_queues_cfg[queue].mode_to_use as MTL_QUEUE_AVB, so the queue goes back
+to AVB mode on reopen or resume. This loop stops at num_tc, though, so
+the slopes and credits for that queue are not replayed.
+
+After resume, won't the hardware state differ from both the pre-suspend
+state and tx_queues_cfg[]?
+
+The later patches in the series don't appear to touch stmmac_tc.c.
+
+[ ... ]
+
+> @@ -3611,9 +3616,10 @@ static void stmmac_mac_config_rx_queues_prio(struct stmmac_priv *priv)
+>   */
+>  static void stmmac_mac_config_tx_queues_prio(struct stmmac_priv *priv)
+>  {
+> -	int i;
+> +	u32 num_tc = stmmac_num_tc(priv);
+> +	u32 i;
+>  
+> -	for (i = 0; i < priv->plat->tx_queues_to_use; i++)
+> +	for (i = 0; i < num_tc; i++)
+>  		stmmac_tx_queue_prio(priv, priv->hw,
+>  				     priv->xmit_qdisc.prio[i], i);
+>  }
+
+[Severity: High]
+This bounds one caller of the tx_queue_prio callback by num_tc. What
+about the two mqprio callers in stmmac_tc.c? Both stmmac_reset_tc_mqprio()
+and tc_mqprio_config_queue_prio() still do:
+
+		priv->xmit_qdisc.prio[i] = prio;
+		if (i < priv->plat->tx_queues_to_use)
+			stmmac_tx_queue_prio(priv, priv->hw, prio, i);
+
+tc_mqprio_validate_chan_mode() requires a 1:1 TC-to-queue map, but it
+never compares qopt->num_tc with dma_cap.numtc.
+
+dwxgmac2_tx_queue_prio() uses the index directly as a TC slot:
+
+	reg = (queue < 4) ? XGMAC_TC_PRTY_MAP0 : XGMAC_TC_PRTY_MAP1;
+	if (queue >= 4)
+		queue -= 4;
+
+	value = readl(ioaddr + reg);
+	value &= ~XGMAC_PSTC(queue);
+	value |= (prio << XGMAC_PSTC_SHIFT(queue)) & XGMAC_PSTC(queue);
+
+On an XGMAC with numtc < tx_queues_to_use, setting up or tearing down
+mqprio would still program PSTC fields for TCs that don't exist.
+
+Once the series raises MTL_MAX_TX_QUEUES to 16, indexes 8..15 become
+4..11 after the subtraction, and XGMAC_PSTC_SHIFT() gives 32..88. Is that
+an out-of-range shift of the u32 prio (UBSAN shift-out-of-bounds)? Does
+XGMAC_PSTC() also go past bit 31, so the priority mapping for those TCs
+is silently lost?
+
+The paths also disagree after this change. mqprio programs
+xmit_qdisc.prio[] for every queue in use, but this function replays only
+the first num_tc entries on open or resume.
+
+Should the mqprio paths use stmmac_num_tc() as well? The later patches in
+the series don't appear to change these callers.
 
 -- 
-2.34.1
-
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261124000415.4067701-1-sagar.cheluvegowda%40oss.qualcomm.com
