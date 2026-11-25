@@ -1,127 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795608511;
-	b=4aTlGtMeBzXIBK9sPBliGIOkKBEhsnEze2Greunswph3A6hGhYYNt97qaW5VZnvP2DVr
-	 xtjlJmq8vfd8SeG49iuRLmzs+QoS5PT1ATIbzIA4h99RsQy0IymsHanpwnkRHxrB8iTTM
-	 IaH3NGF/lYfOEMHeXTbv8csiUw2IYeP8nUnE6VTTPbxpHFtGx1P1bwdX5bsKCDeNxvF3F
-	 5jXVK3W4IKGfhBGPxgZnxEWE1EFJkyVTelPRurpWzMiAs+vNYqReu+1kHL6uQVDWbFgoB
-	 I4iSLmTBeJUjsA8ENTUJZqn1kggeaSxmmbKFXtE4XMCC75Bqa4iLSkfC/Dl3Ih6b0uQ==
+	t=1795609768;
+	b=MSpSOdir8hnr8oDuKLS2ks0PwhD83Fq+bd9KNefvzrqFZyYDduKQf/zEs4ap8LTY+8U2
+	 /o7oWKC21Xa5rH51CmmoYEeIZxHCGiDpergkbxNqg7V8hBSq+IzWAFUrvxBzb1RXCj0Qv
+	 DxWtWTryCK5Jxg3E186ND08e6vqvYTnAtQKjpQjJBf+lwYnw8EP8snxM33oD5Rc159hxr
+	 iYUE8NBgATHmnprDhtHyq+tL8U5QWxlZwCcDgrUeeSXI17yQL4+YiDcuu21F2kCUPLTXt
+	 JaTGGyRBctK9qTZWbzdBw1RdvLvkY2JBVeBeUN0dvbyitijpOOFMJFnSF+sIq+2DDFg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795608511;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795609768;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:
-	 Message-ID:From:To:Cc:Subject:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-Proofpoint-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
 	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=A52KNemyd1lh3piMmkcLWrwLaiXp9XsA8b/MHTMptd4=;
-	b=XrhLW+ixYj3Ztn1m0qRLoTJTW7e5H7DX8lqk6ar4lOKl0iuImsAROP8pO2ckG+JbHt8n
-	 E4ldBkYlBsur9IAiULZxwNNZN0FF6dTW+bpwbKgivZUe/A3fsKbhA8XtVK6rAI2vkZ+rU
-	 DhR7WdmuxJDyB85ep5I5jpiydYUc79RfRYJT9laYpbkPpI9g2FtK6vvDNeQOlWFfB838a
-	 heABV4/YpjkTJRCRzW65trESilzL1x1huFNAptn+PZpTNBo8W6Ztfhb4jAuznCzOVPC3Q
-	 Djl2CF3uNqt1ydWJePdqfvtf5OOXnGls6QaTEuFJEI/icMfdS7MetjoQufen8oPvTZg==
+	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=T5n9P9Rk3sw0uyrSlgak95rJRdejRe3OTzZ6wjZE9yM=;
+	b=JbpE/BL9yf0mRgbTfhO928PSdevcB79fo0HuE/3hOcCpBHIMaFsxQTpSWu83JXar51fa
+	 haIwzIsKMXjzPMp/K0edyf+z8RhC7p/pNk9ubK9p2usmYpPXZNFlyL0/dXS003YE8rEoN
+	 XVoyyJJyBxXOjMZduQCak6hT0x58n304MvdqeX91FseI/QSDF6oRo0aAL8cBeF2YvaTC2
+	 CSG9ZNkxQKaOy4TjtzKDcZEBT6vv4IjaxyLlxrNYa2rT0T/EUPFQ7ZKkPTEC3Om9JBFBC
+	 hkv1w99W0a9Lel6gXAR4ref6yWQDLQ7YjY4PiLdwZdThs8urshU1B8O8ugWzZypzoeg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Ivfm1BHV;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QGS1tGjg;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DzYk3oav;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T04zh+K4;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 828F0606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:08:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 828F0606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 55BDF606A321
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:29:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 55BDF606A321
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Ivfm1BHV;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=QGS1tGjg
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9ml8j3611447
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:08:30 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DzYk3oav;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=T04zh+K4
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mTXx4034187
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:29:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	A52KNemyd1lh3piMmkcLWrwLaiXp9XsA8b/MHTMptd4=; b=Ivfm1BHVPxURJ6yV
-	Orc5orEenCkxgRcTQcovJR3CPHAujhR+fg5bRYSrk5NgPFw+fhoUN+ZHlSiaGUeV
-	PbGqgQG9CacghHgQ3AY2HAx4jS2sFs/o3/NRnn8AU4+l8bx99T0O9l+yYvE8Ltka
-	c3k7Nun3bxfcCbP4lq8Ycly/Yd86R6L++NcYjphAfZG+eXUTKPQAvHirrAw2WktJ
-	ByKG5ViYXYzxp3j4h6bVSQ8VQDjUXiikOCGyf07M+a1LfRGcdYFu24K8l9WYy4jJ
-	OfIc2cYsS1WRLCKW2dzt1DBFTZBDp9gUrnEcT6bFObMUXr17ss9oP9gB0pT45h0S
-	8vxELA==
-Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5gnsbhex-1
+	T5n9P9Rk3sw0uyrSlgak95rJRdejRe3OTzZ6wjZE9yM=; b=DzYk3oav/XGIb1h4
+	QiDlmQvm4HgUI5yT1Ux/rTqSMvDxeewckfrTHHcvGuXda7GElQK2GjTdqypPbVqJ
+	uApOjh6sLUAdFHptLPZJR6WNbp6OHul5FkryLr4ZKe/AsJ10o/9pmpRYzl2/m7zG
+	VXvVN3qm0gcZ6TIwh7e7lDxdoaeRxdUARIpmVxsSRKHb3T3bpDt5jYSZ0cvD2pT9
+	lxDpOLUnD3WGnsdXU4O7MdXLuZXfNOfhdFBT/n/boRtKs73SRXdbG6NF5wC4FAwq
+	IRUrVMKBsszC8XwE0VaHDSV1bFA3CgJlzeQQUes7Ciq3woaYQKd+7C89pFCpZPTS
+	e8V5MA==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mqbjrgq-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:08:30 +0000 (GMT)
-Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-93f26dd2165so1406445385a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 04:08:30 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 12:29:26 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-9493e89d4f9so820454985a.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 04:29:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795608509; x=1796213309; darn=vger.kernel.org;
-        h=mime-version:content-transfer-encoding:content-type:references
-         :in-reply-to:subject:cc:to:from:message-id:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=A52KNemyd1lh3piMmkcLWrwLaiXp9XsA8b/MHTMptd4=;
-        b=QGS1tGjgF8DnFVcBnFE37ko8j9xxWSnV5svzUKRxUZsnTBvHoIcU6763YZm28m2xgm
-         g66scvjCL5lfBptRmrBH3vfMu44mIfXSKpp3pqEutI7bUkl6sb+rfg6ZX5V6Ex5qbsEO
-         RIPUWie2QfvQ2VNDHgXcTRqP32P8Hl8d1U7CUhWs6yEXjsCRMcyPm6QDTm8sZgKhwny5
-         YLf60YFnZcSH9CKw9BYa3IQ5Cnni/zKj3CCPEJofERFOMM8YzxUI0UfZjs6vNSZP9j+r
-         JH1NSK9Qvk69AuctKTym9Guql2bGGa7lsgJ/tTUpQbf8ab6SkNjaRJscP/IZWcSwBJLv
-         +s5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795608509; x=1796213309;
-        h=mime-version:content-transfer-encoding:content-type:references
-         :in-reply-to:subject:cc:to:from:message-id:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=oss.qualcomm.com; s=google; t=1795609765; x=1796214565; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=A52KNemyd1lh3piMmkcLWrwLaiXp9XsA8b/MHTMptd4=;
-        b=PQcObs4EdcblQ13Kf8pGTMU180TY0Fu+cNQypT8CJbgzyn8WNi9LWD5LiKMDTrijod
-         VjWZfWv/QZtW2LIbAb8eh/vORbSIaZ/nJn/BETiOcRLLtUNHRilrQ89EoYqFo04TVFjq
-         fmxK6FAHCDSjbnvHnbleuRkl4UheHAzb5wtQaP//RH3kpEI6ZgKCXhNzcVC/CHeVQpCD
-         fYawiRkYxjZxWhrxgg/uTyGdWkX8neSm5SUWx7nGZwCbU5zpBWM9EmHLwupsKN/uKgk7
-         DqoyfBzheN0DjC0z1GsYyiV1m6peRAnGdkdjBcZQV/VUmxlZi7QAwAU/AxUCLZTrcCQq
-         LYJA==
-X-Forwarded-Encrypted: i=1; AL+hErHxksDUzKuUo0Fu7xxva3GMvquYxEGXiPTS+rpaW6cAuwx/RR+Ix0Gl2TwLAkHPqcdOyKXzbxOFNwwPhIEE@vger.kernel.org
-X-Gm-Message-State: APuU4Z8riSOvR1PpoX1TKk9cYmRgRxfdCZ9U0Cj/+jWNR/MqZ+eocQon
-	D+jGWH+JE4YW0IoLG6r0HONCYBxohIkTubH11yp1yYWIRKsvk20Bi3ZrdU1zJcqtSpKZ8Si0h4i
-	SlWCj1HP311USfcBW0reBoBRpBQxRZXk86T9c0YG9iUWGd5BU3LB/+ozCajovjbapMtRV
-X-Gm-Gg: AZFdTZcGq62XlUY/6cXqtOmeP4jtrZRZQ9JFMbmIhRYpxQsoiy9+fObtUbMIulp8hJj
-	q+zWYJ1bCYtWuK8hiIPvw5qTJ3/DaKNvRNAm+w8qLJQeA+W1iCUvX7f8rydGhyBFJrAIT8GBIN+
-	AWGGrw3UniQweC2mJ35U1FLZdYgiMJ/gtVVND4qc07FvAS7N5W9wtmS0CY6k6XDUA4yLTTRr1V+
-	uHsK1K2Rv3h3Air1jrDQeSgu87acICQJ2KZ+WmorFJVTJwYP6+656F7EDGnwEJV5SZZzSbInKkq
-	vgSteoaxsmJiNor/5kU/QA2TjoTkYpRa58y77erc+TL8sT35gxeml66Pf5VlbKf54j4yBLAb664
-	JbEqhsaay1O9PFc0quFBFAFAY1+1w0k5gm/MUtKQbVA/8vn7KfbP/xGFvfOHi4lizLBK6h8wPd7
-	EHH82vtuJvnw==
-X-Received: by 2002:a05:690c:4d02:b0:8b0:97f5:a858 with SMTP id 00721157ae682-8b520500410mr60654377b3.59.1795608073443;
-        Wed, 25 Nov 2026 04:01:13 -0800 (PST)
-X-Received: by 2002:a05:690c:4d02:b0:8b0:97f5:a858 with SMTP id 00721157ae682-8b520500410mr60653907b3.59.1795608072387;
-        Wed, 25 Nov 2026 04:01:12 -0800 (PST)
-Received: from localhost ([120.244.9.31])
-        by smtp.gmail.com with ESMTPSA id 00721157ae682-8b52030df7bsm72480227b3.31.2026.11.25.04.01.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 04:01:12 -0800 (PST)
-Date: Wed, 25 Nov 2026 07:01:06 -0500
-Message-ID: <0daf9fd673e2e4e148a8205c752763c0.guodong.xu@oss.qualcomm.com>
-From: Guodong Xu <guodong.xu@oss.qualcomm.com>
-To: Ian Rogers <irogers@google.com>
-Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
-        Simona Vetter <simona@ffwll.ch>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        llvm@lists.linux.dev, Elkin Cruz <elkin@google.com>
-Subject: Re: [PATCH] drm/msm/dp: Return MODE_BAD instead of -EINVAL from
- mode_valid callbacks
-In-Reply-To: <20261119171046.1536673-1-irogers@google.com>
-References: <20261119171046.1536673-1-irogers@google.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+        bh=T5n9P9Rk3sw0uyrSlgak95rJRdejRe3OTzZ6wjZE9yM=;
+        b=T04zh+K4/KwrpR5ZcUVldclJx+uJwwSqYBHO8GffKVKQOO2xzEt6AmPoC+SRPsC8bv
+         44uJxPkesXX5xiEDqk+SrfEmyz5XP3AIX9mzuX6sbdodyajnxxpjS4PNEATKuK1qLmvC
+         Zd1P82GG+T4gJk+KSP1z5Kcpm3RKMwa/WSjdz6MHkJpep0HTMbv47SHL9obIxCPAQ7oR
+         CYbgWK5mbIiny7usbYsOhEPxUUJHTxSUYjIRc+NpgO+6dIpUwiJuR9QaQL6TsaIsGa6D
+         qP69l83qrMG1mU9xRVszD8ABHZZ55wbiOaHncMf2eLFsqIWwLoDiWAu8YDDFrZmJKibN
+         aHHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795609765; x=1796214565;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=T5n9P9Rk3sw0uyrSlgak95rJRdejRe3OTzZ6wjZE9yM=;
+        b=aPYY3Bl/ACBX9t0x3h8J6m7JRID1jY7RD2Gck343okQpSC05pSZKcw7dkI5V4oXtoX
+         Tyl5EyocRghrekjedGgW2c5grnDCNMxRdUtCmLQWYwezQU1LWsHTygltSftcUUu1tL0c
+         BnWJOkGNtqSf0KFKTkDwlFz4g6fvI3BsAZkRZBB6owYveAUyXLqZk2SN6RxV10a10vDk
+         uyXHY17J7Oxs4Nczz9xl9clquRkoYrgD0XSDK5PaV2ivbWJf6VCT6H9eGdYKl2xd3Nb3
+         qXTt0y77eoSICrbeh9PzalW90KSEzkyd4ki16bqK4iGAwVnCHm/9cJHquuRsH/B3RmNx
+         7nlw==
+X-Forwarded-Encrypted: i=1; AL+hErEWv4yw1wS6bLFsE8mssru/WcUQ6VjG+uxzuHrXQEZR7RCt8FouLgyoq1Uy9Si23AUQ5tihzK5CfNj2yUMK@vger.kernel.org
+X-Gm-Message-State: APuU4Z8DDITw0MfCcFRUh/p3piyUMiFsclgTsTEQsneZQw9T0kw3dxlZ
+	qEkh9QOGZ+yaeNFTICIRZqSy5rjvCNrmieJDeRxrxzOWivhs7dhj75mriC7PKFjUVA5HHtgx4t0
+	9Bko03je3NX1zbgKL55a5Ji1JGCGtdKS3aqt6JRyS5Zo4zlNbXFp7OWuT2rSfSx93EVWP
+X-Gm-Gg: AZFdTZcz7kM1ObOfh7PWaWyf/kh/iyJ+VasrrFHK135bJy7Zt6Ctp6TIxk04gXaT33J
+	UuBsL76AYTznU+LWK+Mb0l1UM9jvwMj+jM5ydF5oRzzvYutd2L5c8vq71/TgawYFiKrcZgPvyXs
+	y4VC+AFORbQ8YMvfcw0FmN9czmKVQ2Kms0ieufnAOEvecnRUP1qIOyCo6e1a9dQxetUZ163OXar
+	X8Qcw+pRUvnPQAv9W0Him2np3j9fS0JNoohDMJvTTfC/KPLGSQuIiMT7cPtHtt1Bu0ZJ/yd95o4
+	fyM7tPNgTzwzxa9/pW6LDe4MfCufot6729Pq9T3jpCZUBITh8Z7/4uB84pEYcAektj1JG5SjSyV
+	uy8HQDTYOx0lfFI0nvsPmq8/0/Um8SS2JHg9/oeovz9P0FZbi0QMfLEulSZEaKo12EfgdKof/Vz
+	TS0S6mQpvDt45Ezw==
+X-Received: by 2002:a05:620a:4046:b0:949:6476:91df with SMTP id af79cd13be357-949ba9b395bmr3433140785a.27.1795609765458;
+        Wed, 25 Nov 2026 04:29:25 -0800 (PST)
+X-Received: by 2002:a05:620a:4046:b0:949:6476:91df with SMTP id af79cd13be357-949ba9b395bmr3433137785a.27.1795609765059;
+        Wed, 25 Nov 2026 04:29:25 -0800 (PST)
+Received: from [192.168.25.64] ([94.155.124.210])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b10b5f6sm31886868f8f.34.2026.11.25.04.29.23
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Nov 2026 04:29:24 -0800 (PST)
+Message-ID: <3dd61a59-2376-414d-a136-287e2c26a3d6@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 14:29:22 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -131,111 +116,153 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-Proofpoint-GUID: gjj1qQLkISyDWPo5-HKAouVAa34SpaNO
-X-Authority-Analysis: v=2.4 cv=G+SJgNk5 c=1 sm=1 tr=0 ts=6b06cfbe cx=c_pps
- a=HLyN3IcIa5EE8TELMZ618Q==:117 a=r1R2P697X4eI0gH+iewh9A==:17
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/7] media: v4l2-event: Allow drivers to provide the
+ event timestamp
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Cc: linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+References: <20261125-camss-hw-ts-v2-0-24c955e43d75@oss.qualcomm.com>
+ <20261125-camss-hw-ts-v2-1-24c955e43d75@oss.qualcomm.com>
+Content-Language: en-US
+From: "Gjorgji Rosikopulos (Consultant)"
+ <gjorgji.rosikopulos@oss.qualcomm.com>
+In-Reply-To: <20261125-camss-hw-ts-v2-1-24c955e43d75@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0OSBTYWx0ZWRfX+X/nBxOyo7Q8
+ jA2/VuWAIhdzNxZyHFolP0dZvi++0q8+iHVr97MPpkBuUzlANixDwDeI7jPKfMjAvMJXY3NdLlr
+ mck3mjr57vYt9/xhSnZVGBoKMlCJcz4=
+X-Authority-Analysis: v=2.4 cv=Bb9NQbt2 c=1 sm=1 tr=0 ts=6b06d4a6 cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=eGCDHFSXubCXFTSSGhjuOA==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=1XWaLZrsAAAA:8 a=Grc5UNRC2ANbGX2BYm4A:9 a=QEXdDO2ut3YA:10
- a=bTQJ7kPSJx9SKPbeHEYW:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0OCBTYWx0ZWRfX3lOuVm7q8rKX
- fOQMP8hSBOmlaMhcgwim3auMpls1QT5dRgSEjhfIrYyTmuSU5yqXi69xR1IgFJ/apJRRrlAa674
- AxAEnMi8h9e5gfL02TB//7JstHRsLRY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0OCBTYWx0ZWRfX4OvnoLW+NkNU
- N3uNVHYgDd14utSXriM7rmxfOd8vv0C803JgYa6jJZOw/0HUeJ8InvXLjEeCUVobYLZfr9Rg2I0
- BMm2LXArFsD/8aqY/HQL2q6eOu8rjY2wS/xv5S7UepJ7i+yzU0YB/M/uT2zL1wrfmkQoDcVO1HO
- sWaP09Kk72ngeTQJaHcMzcAQFI84AS0Z0Sod4u0p32+uWtlYXnC9zRFFHdlKaWggEw6gUIFvHxg
- SWT9R0aXchV9/J18DwOxoXaxqOSD0RqY17DUJARO0z0Te3H6WjyU13hHEikWESVEWLJKO9nQXYY
- YoAY3Vfu6LcNnkAxvIB1QspC/ZSEcuwlx+hVZkuJg/Sd1nwQ47xnVIxqdKvG+sl62fVDfqpKF4I
- Ic5RXRIkr2apTjjB2U5OzrwyPSnRsuQWbgQNz2XQ9jwioEsBU72DcwzIAc1p2Ok6nZq8J/t5HOM
- u1Qknrv20H3za7YFO+A==
-X-Proofpoint-ORIG-GUID: gjj1qQLkISyDWPo5-HKAouVAa34SpaNO
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=H5SKo5UfUjvo3ROSXWYA:9 a=QEXdDO2ut3YA:10
+ a=NFOGd7dJGGMPyQGDc5-O:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0OSBTYWx0ZWRfX1sO8V0C0hUx/
+ tB1ELWncag8xl2EPvTEshZyl3uVZSZ56ok+N2NyC75lhGb7VNkysnhwts5KmD3/WQ8CiOqgGr+v
+ hJvhIpVxcLKEEPwuftgBN3ia844qSaN1VQXksSkFnqEuvFC3ZRxE2n8sZwIkc7G7MEchaqyknk2
+ d8jJSqOfUoWJoi1s99aeXumogYdsEOxoKE63+yROF7woHIcXL8FSEdM4jp7PFx5CMVKYbwEJxnG
+ /ej7vYUcQGe/fP4G3RaXuQBJ60xK6CRTooQ3eXWu7oX+El7jJsxkjNQCnHdiQRXxCxYVoN2pQPG
+ jw1iiGUMR14VU1YH+iYEOv/uwzRhgQMm5SiXL+2U1qqUEzZ7Zk7A5cvceVo7zUZpd8fUAlEjW5U
+ ZFY8TCqf2lgdbIToJRJzQ+uggZmdntwZ7k5P9dzYSnzvmvpSgzbJMxR0CZwqnrrxteN/wD0Uczq
+ vMR84uev5kk3ix5yVQA==
+X-Proofpoint-ORIG-GUID: QhSN0cMd_2ywMAG6sxRm6T-XnKSQfXoo
+X-Proofpoint-GUID: QhSN0cMd_2ywMAG6sxRm6T-XnKSQfXoo
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 clxscore=1011 bulkscore=0 phishscore=0 malwarescore=0
- lowpriorityscore=0 adultscore=0 priorityscore=1501 spamscore=0 suspectscore=0
+ spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
+ malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250048
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250049
 
-Hi Ian,
+Hello,
 
-On Thu, 19 Nov 2026 09:10:46 -0800, Ian Rogers wrote:
-> msm_dp_display_mode_valid() and msm_edp_bridge_mode_valid() have
-> return type enum drm_mode_status, but return -EINVAL (-22) when dp,
-> dp->connector, or mode->clock is zero/NULL. If a mode with zero pixel
-> clock is validated and pruned, passing -22 to
-> drm_get_mode_status_name() computes a negative array index and fires
-> WARN_ON().
-
-Thanks for the patch. At this moment, both checks are dead code:
-drm_mode_validate_basic() rejects clock == 0 before any bridge
-.mode_valid() runs, and dp and dp->connector are set up before a
-mode can be validated.
-
->
-> Return MODE_BAD instead of -EINVAL in both callbacks.
->
-> Found via Clang -Wassign-enum on an x86_64 allyesconfig build.
-> Verified by building drivers/gpu/drm/msm/dp/dp_display.o and dp_drm.o
-> with LLVM=1 W=1 (-Werror) and -Wassign-enum; not runtime-tested on
-> Qualcomm Snapdragon DP/eDP hardware.
->
-> Fixes: c943b4948b58 ("drm/msm/dp: add displayPort driver support")
-> Fixes: 05d001352733 ("drm/msm/dp: use the eDP bridge ops to validate eDP modes")
-> Signed-off-by: Ian Rogers <irogers@google.com>
+On 11/25/2026 12:19 PM, Loic Poulain wrote:
+> The timestamp reported to userspace for a V4L2 event is taken when the
+> event is queued, which for an event signalling a hardware occurrence is
+> only as good as the latency between the two. A CSI decoder able to latch
+> the start-of-frame against the system counter knows that time to within a
+> few microseconds, whereas the interrupt handler that gets to queue the
+> event can be hundreds of microseconds late and is not consistent about
+> it.
+> 
+> Take the timestamp from the event when the driver filled it in, falling
+> back to the current time when the field is cleared. Drivers have had no
+> reason to set it so far, and every in-tree caller either uses a
+> designated initialiser or memsets the event, so the field reads as zero
+> everywhere today.
+> 
+> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 > ---
->  drivers/gpu/drm/msm/dp/dp_display.c | 2 +-
->  drivers/gpu/drm/msm/dp/dp_drm.c     | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-> index c0c150e2c575..51649b584573 100644
-> --- a/drivers/gpu/drm/msm/dp/dp_display.c
-> +++ b/drivers/gpu/drm/msm/dp/dp_display.c
-> @@ -759,7 +759,7 @@ enum drm_mode_status msm_dp_display_mode_valid(struct msm_dp *dp,
->
->  	if (!dp || !mode_pclk_khz || !dp->connector) {
+>  drivers/media/v4l2-core/v4l2-event.c | 20 ++++++++++++++++++--
+>  include/media/v4l2-event.h           |  9 ++++++++-
+>  2 files changed, 26 insertions(+), 3 deletions(-)
+> 
+> diff --git a/drivers/media/v4l2-core/v4l2-event.c b/drivers/media/v4l2-core/v4l2-event.c
+> index 9dd2aaa95a67406bda3a257325442888895ed088..a35646c3a5c89febeb072d691ffd7853d9af714a 100644
+> --- a/drivers/media/v4l2-core/v4l2-event.c
+> +++ b/drivers/media/v4l2-core/v4l2-event.c
+> @@ -150,6 +150,22 @@ static void __v4l2_event_queue_fh(struct v4l2_fh *fh,
+>  	wake_up_all(&fh->wait);
+>  }
+>  
+> +/*
+> + * Hardware able to timestamp the event itself reports that time in the event,
+> + * which is more accurate than the moment the driver gets to queue it. Fall
+> + * back to the current time for the drivers that leave the field cleared.
+> + */
+> +static u64 v4l2_event_ts(const struct v4l2_event *ev)
+> +{
+> +	struct timespec64 ts = {
+> +		.tv_sec = ev->timestamp.tv_sec,
+> +		.tv_nsec = ev->timestamp.tv_nsec,
+> +	};
+> +	u64 ns = timespec64_to_ns(&ts);
+> +
+> +	return ns ? ns : ktime_get_ns();
+> +}
 
-msm_dp_display_mode_valid() is a helper shared across files. None of
-the three conditions can be true today, but it may get more callers
-in the future, so keeping the check there looks fine to me.
+I think it makes sense to add an additional field for hardware-based timestamps.
+Converting the timestamp to the monotonic time domain introduces precision loss,
+so it's better to expose both to userspace and let userspace decide what to do with
+them.
 
->  		DRM_ERROR("invalid params\n");
-> -		return -EINVAL;
-> +		return MODE_BAD;
+~Gjorgji
 
-Why not MODE_ERROR? It matches "invalid params" better.
+> +
+>  void v4l2_event_queue(struct video_device *vdev, const struct v4l2_event *ev)
+>  {
+>  	struct v4l2_fh *fh;
+> @@ -159,7 +175,7 @@ void v4l2_event_queue(struct video_device *vdev, const struct v4l2_event *ev)
+>  	if (vdev == NULL)
+>  		return;
+>  
+> -	ts = ktime_get_ns();
+> +	ts = v4l2_event_ts(ev);
+>  
+>  	spin_lock_irqsave(&vdev->fh_lock, flags);
+>  
+> @@ -173,7 +189,7 @@ EXPORT_SYMBOL_GPL(v4l2_event_queue);
+>  void v4l2_event_queue_fh(struct v4l2_fh *fh, const struct v4l2_event *ev)
+>  {
+>  	unsigned long flags;
+> -	u64 ts = ktime_get_ns();
+> +	u64 ts = v4l2_event_ts(ev);
+>  
+>  	spin_lock_irqsave(&fh->vdev->fh_lock, flags);
+>  	__v4l2_event_queue_fh(fh, ev, ts);
+> diff --git a/include/media/v4l2-event.h b/include/media/v4l2-event.h
+> index 3a0e2588361cf451b3dbfc63dfab99550d13cf6a..076f788e0469ae4666c60344e5ea73a698352134 100644
+> --- a/include/media/v4l2-event.h
+> +++ b/include/media/v4l2-event.h
+> @@ -102,6 +102,11 @@ int v4l2_event_dequeue(struct v4l2_fh *fh, struct v4l2_event *event,
+>   * .. note::
+>   *    The driver's only responsibility is to fill in the type and the data
+>   *    fields. The other fields will be filled in by V4L2.
+> + *
+> + *    Drivers whose hardware timestamps the event more accurately than the
+> + *    moment the driver gets to handle it may also fill in the timestamp
+> + *    field, as a CLOCK_MONOTONIC time. It is left alone if non-zero, so such
+> + *    drivers must zero-initialize the whole &struct v4l2_event.
+>   */
+>  void v4l2_event_queue(struct video_device *vdev, const struct v4l2_event *ev);
+>  
+> @@ -116,7 +121,9 @@ void v4l2_event_queue(struct video_device *vdev, const struct v4l2_event *ev);
+>   *
+>   * .. note::
+>   *    The driver's only responsibility is to fill in the type and the data
+> - *    fields. The other fields will be filled in by V4L2.
+> + *    fields. The other fields will be filled in by V4L2. As for
+> + *    v4l2_event_queue(), a non-zero timestamp field is taken as the
+> + *    CLOCK_MONOTONIC time of the event.
+>   */
+>  void v4l2_event_queue_fh(struct v4l2_fh *fh, const struct v4l2_event *ev);
+>  
+> 
 
->  	}
->
->  	msm_dp_display = container_of(dp, struct msm_dp_display_private, msm_dp_display);
-> diff --git a/drivers/gpu/drm/msm/dp/dp_drm.c b/drivers/gpu/drm/msm/dp/dp_drm.c
-> index c1e4147bfef1..dd4e8426cfe0 100644
-> --- a/drivers/gpu/drm/msm/dp/dp_drm.c
-> +++ b/drivers/gpu/drm/msm/dp/dp_drm.c
-> @@ -251,7 +251,7 @@ static enum drm_mode_status msm_edp_bridge_mode_valid(struct drm_bridge *bridge,
-
-This one is a static bridge callback.
-
->
->  	if (!dp || !mode_pclk_khz || !dp->connector) {
-
-As explained above, none of the three conditions can be true here.
-It is dead code.
-
->  		DRM_ERROR("invalid params\n");
-> -		return -EINVAL;
-> +		return MODE_BAD;
->  	}
-
-My suggestion is to drop the entire if() check block.
-
-BR,
-Guodong
-
->
->  	if (msm_dp_wide_bus_available(dp))
-> -- 
-> 2.56.1.708.g77570a6a1d-goog
