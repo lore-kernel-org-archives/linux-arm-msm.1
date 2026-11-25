@@ -1,88 +1,88 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.54
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795624135;
-	b=veIYIKch1RHJbpjdg9b7QI5MnP81Cg05HLhLQF8MlvWIV/ACExeyuyM0r66V/b7KVE22
-	 bjhuKH1O61XPNhuEobhyX+mq/7d3I19sbjjmyMdfmN/wMBA2A6d872uWR8iRt630v6sM7
-	 47eRNiYs0aDcdg28EqYWj5KvoqQX79ol2HB+Y5nYbCJ8LO05kGt6ZtpCFJpin+TW4el3Q
-	 6MBfcweK5RR59u92DlVlAJIypo6QkRjO5oDkOgV5IvncpGEjBobFeqshVoAmE7K8/eeEN
-	 5o91bEAn+NmaSZU787aKYoK6NlRS045fRQZHBbbHmzOgIwFBMDvGhlCVxgrmwPy0pMg==
+	t=1795624137;
+	b=KnuIzxTOLBF3N/9/mW4G1yjabMhqNXlihV871g/wVRJFhfMq7yC9PxporQVA21WFoHBO
+	 HBYyk7D3HWBNUNDayicsY2Aa+QNqc0EfAALlklVymT/WL/V/4NWFpaMKUciUjPiSQxepK
+	 h9PUdS9R214LF1J3H6KApHchfJV7hWPH+HTLgrDU8QFg/ycnFM5kZWhgYxa6xGXDiiEeF
+	 UEyjxud7bpcMNB0B1WcOPrtomaD3/yvBBuUb3QS4oRgv5GAnXGR3mixMbFTuq6qkKL7kX
+	 QUsUidrmsWsJ962wpZRy14gLNUYWtHHocGaXjpPK36oVzxmBisARtMBNROR18yVDKNw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795624135;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795624137;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key;
-	bh=/coGxf+TvCt6CYyWE3tU4VBa2tGsxrO7OX/byIc4o4c=;
-	b=BZQT7dkx9J2IXHdknsKmlCW5fuwsw4mP+8d66gIlCvW7/TSCce/hSegt5qDU2cib5/L1
-	 0IGeounYyb3ls8S4+9FyeTEmRRPXw2ui+Gta0TcZRxmJHaBhJJY81rN/k6L8uyPnAq3y/
-	 S5zo0sGnWWZzgqZkh9Ln3H82hMF4H1X4PddSNOjL4dbGQdhsAflNg+b0KixaKXHy5T1f8
-	 rR13rlJCYoqSxjKNRsXC7+8Hd64vu7blWQNKJO5lV2tU6ZzPaDG9sypxxzP51vLo3YsDy
-	 eR/uwF/Z4aq4oAWQvTDfL5dbkgE5dqyZHQMROBM/x2bAt8ofsGH8uUfPw7KgAW+O/gA==
+	bh=dgcQq5x/Y8QFhx80+Eu+QadOSuCUE1CUEnmcqVfNUk4=;
+	b=n43UuX72zmoSJ3alm5DgmVarKd+qV5EUTh5JFudOCAMOOIn8FYlCfBQcVBbz1PpAkMtA
+	 cAhb1w9zJOkaU2wi7pvYZ3N26YeuFLePFq+4vQCTvD9kFOyuO0G5XJyYTx2jPRU7ydaYz
+	 Z79T92e/tIoPpSRcpQie+H9kWxQUxmMtoxIKz80e+07OemkshPJhmmwcEGMzHnDmsZ+jv
+	 FdK2YWr5++dBsD3uOkwdh3bYGqaSdXTlgFpE5GwO5GK2a7w3mSuGa2w3IYSKNdZlcRrJd
+	 Y6U+Q43hikEWhqheYAQr7S3DBe+EMPwIyb8d79graRNnPPbPPjJg40Yw0WCqsBJYeHA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=none header.from=thegoodpenguin.co.uk;
 	spf=pass smtp.mailfrom=thegoodpenguin.co.uk;
-	dkim=pass header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=lB9qYEvq;
+	dkim=pass header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=M7Ja1AuV;
 	arc=none smtp.remote-ip=209.85.128.54
 Received: from mail-wm1-f54.google.com (mail-wm1-f54.google.com [209.85.128.54])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3872D606A33B
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 16:28:55 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3872D606A33B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69048606A31E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 16:28:57 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69048606A31E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=thegoodpenguin.co.uk
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=lB9qYEvq
-Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4a2000d5fb1so34881395e9.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:28:54 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=thegoodpenguin-co-uk.20260707.gappssmtp.com header.i=@thegoodpenguin-co-uk.20260707.gappssmtp.com header.a=rsa-sha256 header.s=20260707 header.b=M7Ja1AuV
+Received: by mail-wm1-f54.google.com with SMTP id 5b1f17b1804b1-4bb55cda775so37798925e9.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 08:28:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=thegoodpenguin-co-uk.20260707.gappssmtp.com; s=20260707; t=1795624133; x=1796228933; darn=vger.kernel.org;
+        d=thegoodpenguin-co-uk.20260707.gappssmtp.com; s=20260707; t=1795624136; x=1796228936; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/coGxf+TvCt6CYyWE3tU4VBa2tGsxrO7OX/byIc4o4c=;
-        b=lB9qYEvq1aq8iOrrMA7Sx04sw/vYKvALTLOlLDY2KO92Cr0N6JlcOIDx3UXVdpHF+C
-         kw5WAXUfVhSvJ2xxY2h0UtIM4rbV/wII68xV51MBe1wpI1tUdE0u8y+CklsF2IrEHwLf
-         3ZNGg4QBrfbFwII6I/tucEdzt6kCZDZvN2rW6F74LA7YdZ+b1biJNF41efElFfN/KRmf
-         wlOvN7xll33UcQ5IwewzQz0dOkCWvnmB2H3aGwFkfBPmiTSICQJFksGJ85+Myi2V/nwt
-         GxejVEqHYlDEuHGnikccmjn0t/jjChiia07XhyQ+vM8aahkCHjwes7+f23BunF/p1Akv
-         AXbg==
+        bh=dgcQq5x/Y8QFhx80+Eu+QadOSuCUE1CUEnmcqVfNUk4=;
+        b=M7Ja1AuVeoTnyB9RFWfQgwgxmrXhovapQSDTqFdDe/H3GNmks+5G+Y8h126tI4bDRC
+         CGqnWVxzvwmw5bPwaYmH7vIajDu6p5aY0JlCGB/sB2xoy+Qf6mMRjn7xXCz4WatyQliT
+         Pg4ZVjN4qnNsbAsOpRD0E80PBC9utkVvB/Au6vos32uomnmIt+hWiz1tH0mQHYMHeT7k
+         VQ4qkFZhB5/qClO7ygQ+2jYQz446RIr3o8chXvrtLqsWQ7pgDZlgXN0O/bzaSN+INWT3
+         7Q3iW4EVd4OUrUGDQM/LQBVpBxphPEyNQef/1/IWpLF+NTinFscXPmAZ+yom1Bfp/WsT
+         BhZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795624133; x=1796228933;
+        d=1e100.net; s=20260707; t=1795624136; x=1796228936;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=/coGxf+TvCt6CYyWE3tU4VBa2tGsxrO7OX/byIc4o4c=;
-        b=risAIC0vF1V6G9MZnPB8//lre6WKdOj/j3YhZMIlVa/t6DoDun8SwnOp3qjEpj9oe6
-         3Oem3X3HExWLRxG3OGf1tPixKhlUQbUUtMDWSPJflWBFnm36YD6CvcuNazdhkbdCr7Uq
-         /K3O3rBtk9L9sBRYfj8YlDxiz7rTybQQ/ECWHzUP6fj1pJdDk+9i9d6GOOLkKskM+Wk0
-         gSNZbirxeBSfz3a6qhwSHQpUdnX6O/4S7grmM4/Vfh9J/TPe7+FDzLhqxva2HaOgNhrv
-         5iEsjWxXdyMuk/Qb8i+dYfh07v39njZSP50Ropejx3GyIDiTa+POM2M3y0nCxDj7dOrM
-         GB2A==
-X-Forwarded-Encrypted: i=1; AL+hErFyrIHfkqdzhGdEupSpDtRGglnjOwpAkSDx2tjc6laPZHaAsufEcJmhZ1WOixUssYsRSMmcr4EmAo/8SNLW@vger.kernel.org
-X-Gm-Message-State: APuU4Z8lUR/bp9AVeOmQMHv249ChX2c+Hi+9m91NqbK5XF0h0bVJf1k/
-	ibRmztuqXwlm3zCi3s6v1rgOXlbiqxx+a9dphjuumD+vFR5CQNCTrqIXzMAnIbfiiQs=
-X-Gm-Gg: AZFdTZeKfGq0DvOnFBZX3fDHOmN8SYiNFD2UldUDAU4Ga54aG3KWgvgXKtIftMBEzST
-	AYEbnunlglpNDliRl//HisCvN2vYo91PngN6J2Z/uMmHlvVDVn4BduoczVR61sibWQkWluya6jh
-	2JcMYPvj5eYJ7YdiobYSHM0qpJho2pY0ImL+EV8rcSTac4VMuG4UUNNYG0LeUNNpjWyYwpTDKJc
-	JnkNT+cM/puOYi7laH1dq/utsey2n7+fUPg4bDVaAMx8Cc2L7oRhIoz8EPcJzPNYNQZ3pTnv2V9
-	dY8oIgoEPQrimIa1sJOJdyUPz+iWZ6H+54urVnlo815OtMxqzll4jWdJbOrn5URauAnakm3QVhY
-	7Y6ZzYksiuonVrJEI3fv0v+mB44jqOWD0Bhf8dUHF6HyaEHrZGwdCstBVbJWZY8BcFumio0soeD
-	QpApacKH3IA1TmA/uvVifemonD7AY3b7oeYyg4pLgkj8Bouv7JT17BNHOd/81VI00muNg5bM4+A
-	AD5EIg2ooUW/qZZ3zDZYVpGgrezozpdOMNeWwyDBRrhdnLltpeB4BGMK80cQepOZDFpE3zPuCgt
-	JDJw54gi949zhXwhpuM4u5Lk+lFbJMBLujbDpJ81Otvibg==
-X-Received: by 2002:a05:600c:3b8a:b0:4a3:59c9:a754 with SMTP id 5b1f17b1804b1-4bb8892da25mr367217635e9.22.1795624133592;
-        Wed, 25 Nov 2026 08:28:53 -0800 (PST)
+        bh=dgcQq5x/Y8QFhx80+Eu+QadOSuCUE1CUEnmcqVfNUk4=;
+        b=JuViRXMD6QI+X2Vcuz1O+UhsFwh5YiuNEVm4SgVfqcKTaMz1YnpOHyj21RqoYzvw6b
+         rnPfhLuYrtvCKHP/LRdQI5jjg+f05JfuOWs5BUEUkJeqtDsr/ivcQdBDGy5Xhbvirv68
+         ++0bqAhsKIVlGa9wNlCOt/IAYsPcN0dCP6IxZHnJCLmbMB1WUCB3RhdzV4Cc5snzeBrb
+         16V41pMMQfzVBSq8UG7gTNdM0ZR0nrCbsdETf/6ClI1UjoQwgm4/WrmBNQxulEq+XnM7
+         Mj0LlcxiqfUvBgKLobGTfw3FX7nGZr3tLMuJPZDnp6ioe4B85qrO1NqE158FiXzh8Lh+
+         PwHQ==
+X-Forwarded-Encrypted: i=1; AL+hErEtjpZICpOQEDkwHHh7S8/cNYu5z48MmJ/3afwkU0INvXywW8XdinxbLaubpaVNnGVg2m+Okq5nJCAqL1L8@vger.kernel.org
+X-Gm-Message-State: APuU4Z+iYwSF4ImefXS6Ws5Dx0u6OxadJ7mF40iGGNb/ynVjeqn7T75J
+	vtXk9hcBMnG107Zk7v2Fe9/0jwLBSOSuqzK3NHnO63efsKedto1xE6BQJwbFExHaONU=
+X-Gm-Gg: AZFdTZfqLa2neUHQBDUfeERRZJeu8R3yb6fSw0hrzMiF77Y7Dx93aQdb149SK1WjzbT
+	VVnbXK3Ys6iPz+8QlXBUJwGN/u19y4YDY6U9MnQrfjsqx+n7I4jz+wgKBb/o3tvc6llBmsSnAcA
+	e5DVlucebBfRjJ2yYSO/KnljCjDb8Ev0Xhe5GpO6yZrxhpIAl8LyF3fOTOcMrofRjSLzWqZWunV
+	HrfRQXqFlNGkqN2lh9B3RAXxp1wsTUQWTV1Ni9UVXYlhmlKjLBoYhbOn4AMvvOq4df09ar6Zm2v
+	g+krSo3Xptsn2jQXoakVtOjA+da30F2YMg1tBUE9u8DQvnGrjLCGYW59ZEE+uteIxspjnEiXKqQ
+	qbZ2D1S/hxtxwtcZvUoEZnu3et3dU7bhRttP3l78pqjzNZwZLNSamnruv4easziMbMqPR9wD/dK
+	4nHrwGuXoOGnWNZlnhR16/nsX0Aw+JtIHL+neetpf5yP4nIgcEw8AQav/UsMfkqrxZ8GZ2qWSWB
+	WEDeJJZAw8ItAAsZWTLgxD48t34ZXAdDVCF04E6L1eNxePLOtKjpodZdm5QKWfJv0wuB0pRVrt2
+	/sca7Ib0OPA2EeqtUltztt1xeHFrVQ+ufB+A4IwPnuKN3U2d6dj2ggzw5UU2LxT5Kqk=
+X-Received: by 2002:a05:600c:468b:b0:4bb:5fd1:92aa with SMTP id 5b1f17b1804b1-4bb888160c2mr388121675e9.15.1795624135909;
+        Wed, 25 Nov 2026 08:28:55 -0800 (PST)
 Received: from [10.42.0.1] ([2a00:23c7:1d1a:9c01:f716:ba19:8aaa:f1c2])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853368d3sm527336375e9.1.2026.11.25.08.28.51
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb853368d3sm527336375e9.1.2026.11.25.08.28.53
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 08:28:53 -0800 (PST)
+        Wed, 25 Nov 2026 08:28:55 -0800 (PST)
 From: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
-Date: Wed, 25 Nov 2026 16:28:33 +0000
-Subject: [PATCH 07/10] mtd: hyperbus: Unify list terminator for *_device_id
+Date: Wed, 25 Nov 2026 16:28:34 +0000
+Subject: [PATCH 08/10] mtd: maps: Unify list terminator for of_device_id
  lists
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
@@ -95,7 +95,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261125-acpi-mtd-v1-7-42ad2f645bee@thegoodpenguin.co.uk>
+Message-Id: <20261125-acpi-mtd-v1-8-42ad2f645bee@thegoodpenguin.co.uk>
 References: <20261125-acpi-mtd-v1-0-42ad2f645bee@thegoodpenguin.co.uk>
 In-Reply-To: <20261125-acpi-mtd-v1-0-42ad2f645bee@thegoodpenguin.co.uk>
 To: Miquel Raynal <miquel.raynal@bootlin.com>, 
@@ -156,11 +156,11 @@ Cc: linux-mtd@lists.infradead.org, linux-arm-kernel@lists.infradead.org,
  Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>, 
  =?utf-8?q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795624113; l=1400;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795624113; l=2018;
  i=pzalewski@thegoodpenguin.co.uk; s=20260430; h=from:subject:message-id;
- bh=MqS4iZQmtSnMUE+1CE4BRTfcmZv4r/EuEiyu/lunNWQ=;
- b=RjOJCajFiP9KV73PmMUa7M74MYmvCY+UYchwJ0DItvXMOOEvWaLyZVGGPGplnX/bvY7hOn58V
- ubNzVDoXbvxCV3x0jZyFUwCc4fN8Q5ycQmLU63Q+/GExIGSiHODobkY
+ bh=qZ3dtpaE4yo6DqKw2ZZxvSONBhZmYTuwo6Yz4wDKiAA=;
+ b=uXOj27KlhNAZizznn9ogyLPuEGUV9GthH9XWkHXihalhOuNlIXntNNK6vnlTDONhse9U1m2BX
+ wgOwv22X4fNCfrJ4kS4rB81GgUoV5JAjSZu8Y1OsSvN/EQwWtziAtg6
 X-Developer-Key: i=pzalewski@thegoodpenguin.co.uk; a=ed25519;
  pk=vHq4n9IonORH2GTzLv8r6CWAFHzgfBuNkQPXA8NSly0=
 
@@ -171,36 +171,59 @@ these to the common style with other *_device_id arrays.
 
 Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
 ---
- drivers/mtd/hyperbus/hbmc-am654.c | 2 +-
- drivers/mtd/hyperbus/rpc-if.c     | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ drivers/mtd/maps/lantiq-flash.c      | 2 +-
+ drivers/mtd/maps/physmap-versatile.c | 4 ++--
+ drivers/mtd/maps/sun_uflash.c        | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/mtd/hyperbus/hbmc-am654.c b/drivers/mtd/hyperbus/hbmc-am654.c
-index acbcc3b55d86..bac24d9ca02b 100644
---- a/drivers/mtd/hyperbus/hbmc-am654.c
-+++ b/drivers/mtd/hyperbus/hbmc-am654.c
-@@ -255,7 +255,7 @@ static const struct of_device_id am654_hbmc_dt_ids[] = {
- 	{
- 		.compatible = "ti,am654-hbmc",
+diff --git a/drivers/mtd/maps/lantiq-flash.c b/drivers/mtd/maps/lantiq-flash.c
+index 519126abb9a5..1ee15d50bd7f 100644
+--- a/drivers/mtd/maps/lantiq-flash.c
++++ b/drivers/mtd/maps/lantiq-flash.c
+@@ -177,7 +177,7 @@ static void ltq_mtd_remove(struct platform_device *pdev)
+ 
+ static const struct of_device_id ltq_mtd_match[] = {
+ 	{ .compatible = "lantiq,nor" },
+-	{},
++	{ }
+ };
+ MODULE_DEVICE_TABLE(of, ltq_mtd_match);
+ 
+diff --git a/drivers/mtd/maps/physmap-versatile.c b/drivers/mtd/maps/physmap-versatile.c
+index 2e779111bf79..9d308c4f21e5 100644
+--- a/drivers/mtd/maps/physmap-versatile.c
++++ b/drivers/mtd/maps/physmap-versatile.c
+@@ -58,7 +58,7 @@ static const struct of_device_id syscon_match[] = {
+ 		.compatible = "arm,realview-pbx-syscon",
+ 		.data = (void *)REALVIEW_FLASHPROT,
  	},
--	{ /* end of table */ }
+-	{},
 +	{ }
  };
  
- MODULE_DEVICE_TABLE(of, am654_hbmc_dt_ids);
-diff --git a/drivers/mtd/hyperbus/rpc-if.c b/drivers/mtd/hyperbus/rpc-if.c
-index 9eacc9ec7382..a0917f407d7a 100644
---- a/drivers/mtd/hyperbus/rpc-if.c
-+++ b/drivers/mtd/hyperbus/rpc-if.c
-@@ -165,7 +165,7 @@ static void rpcif_hb_remove(struct platform_device *pdev)
+ /*
+@@ -77,7 +77,7 @@ static const struct of_device_id syscon_match[] = {
  
- static const struct platform_device_id rpc_if_hyperflash_id_table[] = {
- 	{ .name = "rpc-if-hyperflash" },
--	{ /* sentinel */ }
+ static const struct of_device_id ebi_match[] = {
+ 	{ .compatible = "arm,external-bus-interface"},
+-	{ },
 +	{ }
  };
- MODULE_DEVICE_TABLE(platform, rpc_if_hyperflash_id_table);
  
+ static int ap_flash_init(struct platform_device *pdev)
+diff --git a/drivers/mtd/maps/sun_uflash.c b/drivers/mtd/maps/sun_uflash.c
+index cac780cd23f9..2960cebdb0dd 100644
+--- a/drivers/mtd/maps/sun_uflash.c
++++ b/drivers/mtd/maps/sun_uflash.c
+@@ -138,7 +138,7 @@ static const struct of_device_id uflash_match[] = {
+ 	{
+ 		.name = UFLASH_OBPNAME,
+ 	},
+-	{},
++	{ }
+ };
+ 
+ MODULE_DEVICE_TABLE(of, uflash_match);
 
 -- 
 2.53.0
