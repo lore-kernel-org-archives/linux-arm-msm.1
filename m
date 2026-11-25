@@ -1,112 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795627677;
-	b=4YI8Sz5OIBJFHYn1ZqBJNDK8P0P426suyRTWr4aziooUeldHhMtQqisKzzho9rRP2Sbn
-	 vrUYQivVgQyaSxjm/zWzs8LfTTEC+NNS0qPwuZAqO4bncpuQzJQlDbXivs/3BQSE5ZJl1
-	 ada5ZrYyVSRNgWZaOmNm+9JU6I5sPfdfmFqWI6cc9txmXpXLfyZ2rwgro1xtllpHfL7hS
-	 HkdN3T9xgP7Q5TQ9JgYRMI5NFRl31AqHBEL//IR3Zq/aHyVKSM7rhy6K2IPZaL5ESZFIt
-	 QreWLl7cx+nPuRFuHjGMjGtBpV1TLmVelHKPvRs6iKAlBgZRoi+i7sAdwEk0YUIOUuw==
+	t=1795628308;
+	b=Z7RJ/vSWB5S6UgA6J5IYS8cjWoxVSybv7+HoSQ8toO14xpq2JzhrYXHgOgsFuQR/j4Kr
+	 M1Zo49pB977MH+hrobj6JYGESoLDLGv4xOfldy2A806wTaWvXaZFU8EhmbUfvDtdTSgDQ
+	 x6VakQCP0DN9JGRfQlO2wAPnRpCCTKpzcVuN/eWPPPwXCBBFPajsxxqCjkUv+mugYam10
+	 Kww21hJahtfuyWmhz7MDfwNVwRbfe3qm9LaXGnH3QWBLtxyXT5zJPx92hTcBqbO/4CrsL
+	 IvF0hpzJJFMYY0fVdTb/SIm0NCfe49tqgS78hsWWkr5PKnOccOfbHzV6okIZs8dHnRg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795627677;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=Hxe1hUMQD6Om17EZrzzZYp5JnZNWIVHMAuKszjIh1ys=;
-	b=vpV8GXxcujZvjQWLaF1W0ToPxoNcxRbTs1PXUUO02SfsXIzXDpI9SO9S6lSuOiRlbz0X
-	 BsfTNbj5o1KBd07u+CYkIUnMcob0A/A2jvf3RIEX7tsZD8v3DdH86TdqTS0wB7TxKnhMG
-	 LyFcyVvGcu0GxqsJ494u9VjuW9uvD3I/aa+C9uhflOxEQbZ/NhXIYkBOMBCeKsOmexydU
-	 LCyZ24kxuoH6W1nl7aBiqrS+O359LhTPyrdBTrEKgHwVal7vEoTbJISuI+9omRjmV519/
-	 IZq2I+dljLuDTBGH72g/TEt6Po0igV06pEiZFMSJkwGXJrJpJK7DaCZvOkkJ/EoRhnQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795628308;
+	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Jc2fT23SPWqHr6nIykatx49BNkv061JXFi2XlfZIV5I=;
+	b=FX6GjCTNhtSKsm5opLn8WdEz9/Vnx6JAKgJPm+6sLey8yYAx+b9mykcdEoEHW+6j3L6w
+	 mfD6u8gOV506CWtxg6gIUwz4Vb4IevPT/CDjp9tK9kgcnsQ06mSP1m1KjmzOgTtv7mezk
+	 5I/HvkGBV5S3DAndzEOK8vkatlQNopZXdr7g+hXhNZ2VFpH40T1MueypVA+fRx8aU3R6o
+	 JYwRefi0jsjVag/ILptEXhXv0TM4lXF/2bJyLGFIVXPhciZRYiXdoxXiMTmHROsgdP3xv
+	 SXfxiZJhukjau2713ihVm9L5Svk3QolSeaU1Ghe9BMOe57uyjk/3IGWa5mlju4n9lvw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nb4Awnp0;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XoX02d1B;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=ixit.cz;
+	spf=pass smtp.mailfrom=ixit.cz;
+	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=vz6eljYw;
+	arc=none smtp.remote-ip=84.42.129.46
+Received: from ixit.cz (ixit.cz [84.42.129.46])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF233606A321
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:27:56 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EF233606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94355606A326;
+	Wed, 25 Nov 2026 17:38:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94355606A326
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nb4Awnp0;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=XoX02d1B
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6APGQEVB3007851
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:27:55 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	Hxe1hUMQD6Om17EZrzzZYp5JnZNWIVHMAuKszjIh1ys=; b=nb4Awnp0hqP/e/hi
-	3Vw3PzSH44nAdrLZHbko8m0uhZhOldbE4fozp4vbp/Sn4glQ9o2t9btxPEu1ykoq
-	XFYnMDT3R1MESVFuv1E2cm+14zmci0ZMTSXE+v0ZHWM3+MgPQa5U5q9m9uk1U7Wz
-	nmLA0iArnAfqPfySix1tcgGNpsFkzatgIIHjfeYzWx/YJxeigXqCU45sMUWRrmU4
-	w3kCYpjOpfzFlXQ8THClL51LlTiPomW8ta3knvWKCe50ZUQjKLtLdmL9D7Uxs7Tk
-	StaQrT3CZSVkcXv6dFTseicfkWcT3+Z1j8Dsh45PCEbDixSrsA0OOZ5J2yKtirWQ
-	tn6QeA==
-Received: from mail-vk1-f198.google.com (mail-vk1-f198.google.com [209.85.221.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vukt1jy-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:27:55 +0000 (GMT)
-Received: by mail-vk1-f198.google.com with SMTP id 71dfb90a1353d-5ecd4f564d3so1805243e0c.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:27:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795627675; x=1796232475; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Hxe1hUMQD6Om17EZrzzZYp5JnZNWIVHMAuKszjIh1ys=;
-        b=XoX02d1BEZUlKyBKzCoWWZfww18njx9MWnIKeaDOsEpX0fOjX3znrqghysYe3ccrSi
-         G25/P30C+hYL7PCnGXGKguV+rNogDR/bcF5tQJt2BEri+ptSSOnOFTE2PYD4U1d1j1FA
-         Ekn98msX9Pax2A2GAlnjhOKesrL00IEc8oaZ6HeiXPTnY8z//vmiu9dYwLj4nhf3p2D6
-         Nv+6an40QgDoAA8v5J7BfRS7u67swaJ5NEpae4uvVY/rHh4y8h0ZBaMjjgJuW3ENGHzT
-         HxG5485aBpRoKXUb/T53clZavf6ogDMn2Ra19FypG8adS3nyn9bhacLERlBPZAFLPvRB
-         BU5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795627675; x=1796232475;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Hxe1hUMQD6Om17EZrzzZYp5JnZNWIVHMAuKszjIh1ys=;
-        b=ajIgtgWqkb58W4LUycPF1KDbvaQsCms6KEKeyurPcf6VX+WIbAcchJ6x7WutMOGQw8
-         slAv9aEwaf2qKP+NrK4VchlEeocY+W/QqEDL0TCr2G5Hp+70b72IWXYo9K+W/CzjM1Fn
-         kPTtzvG1SijoxHIzrrr8mk5OLnGdhB56BZ9Fg780E8nN+kzkgUduAvAYftvsLTZQ6Luv
-         R08FDu7vqgWEZ/T9d8zINTXwBOyK9ARsp1dYGWl6TD83TqTgOWnJZdmT1onnbGMEpzlc
-         TccbmnAjLd6sZaOonWTcZLIY/Z2T133MJeGP+EnAai2pkR4Q82Wi0/arurEackvlVVAZ
-         DzLg==
-X-Forwarded-Encrypted: i=1; AL+hErFZOqkhKrVg6Uwc5Y5IGTaDRGXXc3c8vuR16QcQUQfIbvE7DW7hTJ7KLeVifq0pohfY/vQcCWsTNthslSmj@vger.kernel.org
-X-Gm-Message-State: APuU4Z8FPSinaAUsq72R/PIU/+Fsai4DNmMfUkkG6S1yyhKhe1OfN4Ht
-	t8YC8T7OEVtzJIY+QVPdwmcM0GOS9SVkiIr4V8BQDo0T1ckM9NrXtrtb5ltRzVfCZLDGCq4iZny
-	g5tBQTa+PgboAjMTM60X8awfaqHgIPktb1TpddOwRBvAQ5U4E+I086f4J78R7maUPBF1m
-X-Gm-Gg: AZFdTZeEenx6U0vRpw9Nbj3j5qeJ5piKJ5JyPFTQi/8x/8Nr4WaEnpFxtmN+6BoyG9U
-	pE3hX2ty7zIfpd2oPvnW9IwU0ujYkoD88UP1Ymk34Dppx76oRMHGGN37QYYouQEjF5y6stspUQI
-	KK3CKxIhvtMzAu6Zx0ed5gZi3ykrchnWayYKeFSRXpBNIqA8k80yPUUyZks4pIbdt4kwHS1EIAk
-	ZCWmPNonPoR1aY4X942VjgEFPpmS66eD6pDvxhRFJUPeYhDZuOkNY5D39VmU+Tc/UYSDh9SlbFS
-	xsFRKv+s5HOcUoR7B4PVtsgDZN3MI/t4eSFtpCtKrRZgFZ5OTbNudnVGFLzXQzwLa8HCwHL1MHx
-	xeHShQJHixu6orRD/afFIm9lr0RWYDHVFDHkBpA1OiozK2aKYZMia71L8ZY4AXIzkg50t/Oxu2f
-	ezlrM1Vxjna0cx
-X-Received: by 2002:a05:6122:1352:b0:5ec:e7e:27d6 with SMTP id 71dfb90a1353d-5ee8aeb4a3bmr10304540e0c.4.1795627674911;
-        Wed, 25 Nov 2026 09:27:54 -0800 (PST)
-X-Received: by 2002:a05:6122:1352:b0:5ec:e7e:27d6 with SMTP id 71dfb90a1353d-5ee8aeb4a3bmr10304533e0c.4.1795627674371;
-        Wed, 25 Nov 2026 09:27:54 -0800 (PST)
-Received: from [192.168.1.31] ([85.196.172.179])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513acff65bsm695470466b.4.2026.11.25.09.27.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 09:27:53 -0800 (PST)
-Message-ID: <f53cfee8-3fee-443a-aad9-cf0c36e21848@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 19:27:52 +0200
+	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=vz6eljYw
+Received: from [IPV6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9] (unknown [IPv6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	(No client certificate requested)
+	by ixit.cz (Postfix) with ESMTPSA id E82FF53402F6;
+	Wed, 25 Nov 2026 18:38:24 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
+	t=1795628305;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Jc2fT23SPWqHr6nIykatx49BNkv061JXFi2XlfZIV5I=;
+	b=vz6eljYwfoF4hl31mO8OMR8yWufis/ML2BxifwgqeIAYVH97dvFmsuVdJWgA0gZT5Y58V3
+	inXPK4a7sjHC9/YYssW/e+uzH2qny9d4EmVU6g2TIVKNtN+DJFFfTLnqzZZPZjgtV3IwEC
+	kfW6lEuobSwehOtIO53WT7TIjU1d//E=
+Message-ID: <72548a95-f009-465f-ac04-b1b09ea4d1ae@ixit.cz>
+Date: Wed, 25 Nov 2026 18:38:24 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,228 +61,117 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 00/12] media: qcom: camss: add V4L2 subdev streams API
- support
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        linux-kernel@vger.kernel.org, Hitesh Patel <hitesh@ebytelogic.com>,
-        Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
-        Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>
-References: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
-Content-Language: en-US
-From: "Gjorgji Rosikopulos (Consultant)"
- <gjorgji.rosikopulos@oss.qualcomm.com>
-In-Reply-To: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v3 02/10] dt-bindings: display: panel: samsung,s6e3ha8:
+ Add AMB630QY01 panel
+To: Krzysztof Kozlowski <krzk@kernel.org>
+Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+ Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
+References: <20261108-crosshatch-panel-v3-0-87dd4ec4f7cc@ixit.cz>
+ <20261108-crosshatch-panel-v3-2-87dd4ec4f7cc@ixit.cz>
+ <20261109-tacky-busy-kelpie-cbd5be@quoll>
+Content-Language: en-US, cs-CZ
+From: David Heidelberg <david@ixit.cz>
+Autocrypt: addr=david@ixit.cz; keydata=
+ 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
+In-Reply-To: <20261109-tacky-busy-kelpie-cbd5be@quoll>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Authority-Analysis: v=2.4 cv=KfVHIgYD c=1 sm=1 tr=0 ts=6b071a9b cx=c_pps
- a=1Os3MKEOqt8YzSjcPV0cFA==:117 a=Q/e3f29T3Hw2hnAEzBPF7w==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=GL0DwK9HbhsTW42qer0A:9 a=QEXdDO2ut3YA:10
- a=hhpmQAJR8DioWGSBphRh:22
-X-Proofpoint-ORIG-GUID: H7Kuc7H-OJTSAXe3ew-C-w6gYx4j2Ey8
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA2OSBTYWx0ZWRfX9E1n25DYToUJ
- U1VLHeIAQuG6vxzsScQseJIau8SWFnkQfmSo8IBzqUfO4ZgcwFXHVLTjkHyAUvcHlyIjj9bYXNj
- AyLpSbLAxgbJj3z0zfCBOjWgavegzPM=
-X-Proofpoint-GUID: H7Kuc7H-OJTSAXe3ew-C-w6gYx4j2Ey8
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA2OSBTYWx0ZWRfXzxa81WB/P7KA
- CGG/vVvpOkD1jKmwyp5OgwIConhSlhDGCpu+M0phpnWfTi6+ct1i6jj0334qdq/bf8VKQC5kylO
- n97D5pqF1R/YZL/NMOifu+X+kVKdUVeZ4OCU7omO4nGmDFacNmC2tHrc0R/MbRBBCKnRvlMTLHn
- 2Ds1SY9grcYBhf6X/5DWhE2vV/Zce2or5nEtDfYU6vdUwgqNU0tkGgSGYLJ3exgYA+oPb2sDcXn
- hs0/6G3rbLFJbR0ckrsX/Gb/Y3m2Ed5SWSYBtkUdMEROvce6ENmz7JEdHPWEEYKXC4vi/llp4VY
- YIOJxS4Dim8brfBztiLPmkLMUS4SJg++BNBEH7zSxGkdyDzgGHhNxuzihwtLuM2P2H6dNPkRT9D
- K2lHKwQ5WCP+P37M0uJQkXaqVhqGpdWh8UgcGZpgxbEkTFfYDfBFmYakN2K6oAauloLjx89+hWY
- ldDbdfuD/LUeOIPW6RA==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_04,2026-11-25_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
- impostorscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250069
 
-I will RESEND the series it seems my from entry in gitconfig was somehow corrupted...
+On 09/11/2026 13:30, Krzysztof Kozlowski wrote:
+> On Sun, Nov 08, 2026 at 12:32:23PM +0000, David Heidelberg wrote:
+>> The Google Pixel 3 XL (crosshatch) uses a Samsung AMB630QY01 6.3"
+>> 1440x2960 flexible AMOLED panel.
+>>
+>> Signed-off-by: David Heidelberg <david@ixit.cz>
+>> ---
+>>   .../bindings/display/panel/samsung,s6e3ha8.yaml    | 41 ++++++++++++++++++----
+>>   1 file changed, 34 insertions(+), 7 deletions(-)
+>>
+>> diff --git a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
+>> index ca250b1b91712..dcf347fe5ca83 100644
+>> --- a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
+>> +++ b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
+>> @@ -7,48 +7,75 @@ $schema: http://devicetree.org/meta-schemas/core.yaml#
+>>   title: Samsung s6e3ha8 AMOLED DSI panel
+>>   
+>>   description: |
+>>     The s6e3ha8 is a display driver IC used in 1440x2960 AMOLED panels from
+>>     Samsung Mobile Displays (SMD).
+>>   
+>>     Known panels:
+>>       - AMB577PX01, 5.77", Samsung Galaxy S9 (samsung,s6e3ha8-amb577px01)
+>> +    - AMB630QY01, 6.3", Google Pixel 3 XL (samsung,s6e3ha8-amb630qy01)
+>>   
+>>   maintainers:
+>>     - Dzmitry Sankouski <dsankouski@gmail.com>
+>>   
+>> +required:
+>> +  - compatible
+>> +  - reset-gpios
+>> +  - vdd3-supply
+>> +  - vci-supply
+> 
+> I see no reason why order of this schema should be re-invented. See
+> every other binding or example-schema.
 
-Apologies for that.
+Sorry about it, I guess I messed up fixuping moving the pieces.
 
-On 11/25/2026 9:59 AM, "Gjorgji Rosikopulos gjorgji.rosikopulos"@oss.qualcomm.com wrote:
-> From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+Fixed in next rev.
+David
+
 > 
-> This series adds V4L2 subdev streams API support to the CAMSS driver.
-> 
-> Each subdevice gains streams-aware enable_streams/disable_streams pad
-> ops alongside the existing legacy (non-streams) subdev ops, guarded by
-> a new per-instance streams_enable resource flag.
-> 
-> Patch 1 is a standalone bug fix on CSID gen3, found during RB8 multi-VC
-> testing: CSID reset used to program CSID_BUF_DONE_IRQ_MASK with one
-> write per enabled VC instead of accumulating the bits into a single
-> write.
-> 
-> Patch 2 factors a pad-to-port helper out of csid_get_sof_seq(), used by
-> later patches.
-> 
-> Patches 3-9 add the CSIPHY/CSID/TPG/VFE/camss-video mechanism:
->  - CSIPHY: passthrough routing and shared D-PHY lane enable/disable
->    gated on stream-count transitions, dispatching between the generic
->    PHY framework and the legacy PHY backend.
->  - CSID: configure_stream() is reworked to take a port_mask and a
->    per-port {vc, dt} config array shared by all six CSID backends
->    (gen2, gen3, 340, 4-1, 4-7, 680), then the CSID subdev itself gains
->    per-source-pad routing (a single sink stream propagated to every
->    source pad by default, remappable for multi-VC sensors) and VC/DT
->    discovery via get_frame_desc.
->  - TPG: the single fmt field becomes a per-stream array, so the
->    generator can drive several concurrent virtual channels, with one
->    get_frame_desc entry per active route.
->  - VFE: streams-aware pad ops. VFE lines are inherently single-consumer
->    (vfe_link_setup() enforces one link per pad), so no refcounting is
->    needed there.
->  - camss-video: the video device pipeline walk now checks, via
->    v4l2_subdev_has_op(), whether the directly-connected subdev supports
->    enable_streams/disable_streams; if so it issues a single top-level
->    call instead of manually walking the pipeline one subdev at a time
->    with .s_stream(). Falls back to the existing legacy path unchanged
->    when the remote subdev doesn't support the streams API, so no other
->    platform is affected.
-> 
-> Patches 10-12 set streams_enable per SoC: SM8250, SA8775P, and SC7280
-> (dispatched through the legacy PHY backend on SC7280, since it has no
-> camss child node named "phy", so camss_detect_legacy_phy() puts it in
-> legacy PHY mode). Every other platform keeps using the legacy
-> non-streams subdev ops, so these are a no-op everywhere else.
-> 
-> A practical benefit of the CSID routing change (patch 6) is routing
-> flexibility for multi-VC sensors: the CSID's routing table maps sink
-> streams to source pads/streams via userspace-configurable
-> v4l2_subdev_route entries instead of a fixed pad<->VC assignment, so a
-> sensor emitting multiple virtual channels can have each VC directed to
-> a different RDI output (and thus a different VFE line/video node)
-> with a set_routing call, rather than being constrained to whatever
-> fixed mapping the driver hardcodes.
-> 
-> When a sink stream is shared by multiple source pads/streams, CSID
-> only enables the corresponding upstream CSIPHY stream on the first
-> source stream that needs it, and only disables it once the last
-> remaining source stream using it is disabled. Enabling or disabling
-> additional consumers of an already-active shared stream is a no-op
-> upstream, so no consumer can double-enable or prematurely disable a
-> stream still in use by another. This also avoids ever hitting v4l2
-> core's own -EALREADY re-enable gate.
-> 
-> Verified on RB8/SA8775P hardware, driving the CSID test-pattern
-> generator directly (no sensor), for 1, 2 and 3 concurrent virtual
-> channels through CSID to separate VFE RDI lines. Entity/video node
-> names below are resolved via `media-ctl -d /dev/media0 -e <entity>`.
-> 
-> NOTE: the V4L2 subdev streams API is disabled by default with the
-> static bool v4l2_subdev_enable_streams_api in
-> drivers/media/v4l2-core/v4l2-subdev.c. it must be set to true to
-> use the stream API and reproduce the testing below:
-> 
-> 1 VC:
->   media-ctl -d /dev/media0 --reset
->   media-ctl -d /dev/media0 -l '"msm_tpg0":0->"msm_csid0":0[1]'
->   media-ctl -d /dev/media0 -R '"msm_csid0"[0/0->1/0[1]]'
->   media-ctl -d /dev/media0 -V '"msm_tpg0":0/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":0/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":1/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -l '"msm_csid0":1->"msm_vfe0_rdi0":0[1]'
->   media-ctl -d /dev/media0 -V '"msm_vfe0_rdi0":0[fmt:SBGGR8/1920x1080]'
->   v4l2-ctl -d <tpg-subdev> --set-ctrl=test_pattern=9
->   v4l2-ctl -d <rdi0-video> --set-fmt-video=width=1920,height=1080,\
->     pixelformat=BA81 --stream-mmap=5 --stream-count=20 \
->     --stream-to=vc0.raw
-> 
-> 2 VCs (vc1 added in parallel):
->   media-ctl -d /dev/media0 --reset
->   media-ctl -d /dev/media0 -l '"msm_tpg0":0->"msm_csid0":0[1]'
->   media-ctl -d /dev/media0 -R '"msm_csid0"[0/0->1/0[1],0/1->2/0[1]]'
->   media-ctl -d /dev/media0 -V '"msm_tpg0":0/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_tpg0":0/1[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":0/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":0/1[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":1/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -l '"msm_csid0":1->"msm_vfe0_rdi0":0[1]'
->   media-ctl -d /dev/media0 -V '"msm_vfe0_rdi0":0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -V '"msm_csid0":2/0[fmt:SBGGR8/1920x1080]'
->   media-ctl -d /dev/media0 -l '"msm_csid0":2->"msm_vfe0_rdi1":0[1]'
->   media-ctl -d /dev/media0 -V '"msm_vfe0_rdi1":0[fmt:SBGGR8/1920x1080]'
->   v4l2-ctl -d <tpg-subdev> --set-ctrl=test_pattern=9
->   v4l2-ctl -d <rdi0-video> --set-fmt-video=width=1920,height=1080,\
->     pixelformat=BA81 --stream-mmap=5 --stream-count=20 \
->     --stream-to=vc0.raw &
->   v4l2-ctl -d <rdi1-video> --set-fmt-video=width=1920,height=1080,\
->     pixelformat=BA81 --stream-mmap=5 --stream-count=20 \
->     --stream-to=vc1.raw &
->   wait
-> 
-> 3 VCs: same as the 2 VC case, plus a third route
-> '0/2->3/0[1]' from "msm_csid0":3 to "msm_vfe0_rdi2", and a third,
-> concurrently-started v4l2-ctl capture on that line's video node
-> (vc2.raw).
-> 
-> All three cases captured the expected, exact frame byte count on
-> every VC with no dmesg Oops/BUG/WARNING/overflow output. Additional
-> early-stop and staggered-start variants of the 3 VC case (one VC
-> starting/stopping while the others keep streaming) were also run and
-> passed.
-> 
-> These changes apply on top of v7.4-rc1.
-> 
-> Changes since v1:
-> - Incorporate Loic comment for csid and extend configure_stream
->   instead of adding new enable/disable stream api.
-> - Incorporate Bryan comment for moving stream_enable in per SoC
->   resources.
-> - Add Hitesh changes for SC7280
-> - Drop the fix for csid to each vfe link. It is part of another
->   series:
->   Link: https://lore.kernel.org/all/20261122-camss-routing-fixes-v1-0-0deeeaca2622@kernel.org/
-> - Incorporate Bryan comment and remove csid lite check for port
->   mapping and add route to each port. Although not functional for
->   full VFE/IFEs, this is more likely to be fixed in the near future.
-> 
-> Depends-on:https://lore.kernel.org/all/20261107-v4l2-frame-sync-v3-0-e5bf7073a35d@kernel.org/
-> 
-> Gjorgji Rosikopulos (11):
->   media: qcom: camss: csid_gen3: Fix multi-VC buf-done IRQ mask
->   media: qcom: camss: Add csid pad to port helper
->   media: qcom: camss: Add streams enable field to camss resources
->   media: qcom: camss: Add streams API support for CSIPHY
->   media: qcom: camss: Add per-port config to CSID configure_stream
->   media: qcom: camss: Add streams API support in CSID subdevice
->   media: qcom: camss: Add streams API support in tpg subdev
->   media: qcom: camss: Add streams API support for VFE
->   media: qcom: camss: Add streams API support in camss-video
->   media: qcom: camss: Enable streams API on SM8250
->   media: qcom: camss: Enable streams API on SA8775P
-> 
-> Hitesh Patel (1):
->   media: qcom: camss: Enable streams API on SC7280
-> 
->  .../platform/qcom/camss/camss-csid-340.c      |   5 +-
->  .../platform/qcom/camss/camss-csid-4-1.c      |   3 +-
->  .../platform/qcom/camss/camss-csid-4-7.c      |   3 +-
->  .../platform/qcom/camss/camss-csid-680.c      |   7 +-
->  .../platform/qcom/camss/camss-csid-gen2.c     |  54 +-
->  .../platform/qcom/camss/camss-csid-gen3.c     |  51 +-
->  .../media/platform/qcom/camss/camss-csid.c    | 521 +++++++++++++++++-
->  .../media/platform/qcom/camss/camss-csid.h    |  22 +-
->  .../media/platform/qcom/camss/camss-csiphy.c  | 249 ++++++++-
->  .../media/platform/qcom/camss/camss-csiphy.h  |   1 +
->  .../platform/qcom/camss/camss-tpg-gen1.c      |  63 ++-
->  drivers/media/platform/qcom/camss/camss-tpg.c | 179 +++++-
->  drivers/media/platform/qcom/camss/camss-tpg.h |   6 +-
->  drivers/media/platform/qcom/camss/camss-vfe.c | 119 +++-
->  .../media/platform/qcom/camss/camss-video.c   | 119 +++-
->  drivers/media/platform/qcom/camss/camss.c     |   3 +
->  drivers/media/platform/qcom/camss/camss.h     |   1 +
->  17 files changed, 1273 insertions(+), 133 deletions(-)
-> 
+> Best regards,
+> Krzysztof
 
