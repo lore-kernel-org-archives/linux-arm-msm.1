@@ -1,91 +1,82 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.13
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=192.198.163.16
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795643863;
-	b=Tz4XzWPGee4WMkyTXm8yriUvcwD5XEushVNNuWw+G8CbC8HaLbxJdTt7Vds604mTOFlZ
-	 ddbl+bSGPEM3KnrQOrkpsssT3MlqZQc8MdQWSiMBxCR7ohwnBYIJ9T/lq3BrqMwgyeCpW
-	 h0DDRaHolbU4VU+aQOWZ/MspFZ6GQ2GnP1S95ujwX7EC76i8Wl8cYfYEiqfkovwfmFVAJ
-	 T32iPmvsA1Od3tfSw0BxvMQ+nWaiSEWc6zdwLsFbhszIom3Sr/5jg5kE6s7iz1qnQ5Fuu
-	 3yXfVFFm4S8cMHqL77x4ay0jMmvWXk3p/hd3QL1l40g4LnH3081Nc6Sx/wyBt0D2UEg==
+	t=1795644262;
+	b=NmGhop6nfpfwkHXOthxG7IWHhcOke4LIlvvCe9ifbFhXHH2ElpPV4+A0juXVle9fCzPD
+	 MP7yuglpIoTviup5Oz1nanmojD+JXayIFfbBo4773thneK4U7XE+M2jf1OHg2CAaEhv+W
+	 quqiOh5xqr8Ktf9k+B8XYgoq9l6/zcJyoPPgvCvvWY3cBuZvlqlL0WkbEc7o0IHCAe961
+	 KiHgyjhId3Z/j5KclWr8CDTYPUs5VHGtCjLJi1h5R2VnK2yYtRIpcaaFdu38LwIqyIl7W
+	 gKGY+tZTpBOsldD7rZ5ikWdUq6S9AY17bxMt/iUkk5lwAk+PgKpBA+R6SUUQiGHk9yw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795643863;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795644262;
 	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
 	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:Received:Date:From:To:
-	 Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To;
-	bh=fQSJlq2AB9gSSiRXHYp7CIMNPJd6C/z8QNb96gGU/Io=;
-	b=rV1Vag7PD/Mt7qMkBieB/nksmd/rUg1WzCS1vBwslYcovJQAV7Q6pfEgHtzN4U+Hwk+P
-	 eb2/SnOyIsMPoHPgBjyEQO/cIjs7CmcREOnYrUcRWccv9oVlJDZ9IwMuU3pbMCJ4V2XLA
-	 NFh/d14f01TZCBX9Rr0CUstk7qmqAZCXpx0iGOUpYo7n2QcC2K4AvUiaCWwLCEzLmREWq
-	 +onEW+vt+E++FfBWpVARFH9VGt4n9OBpp8a18g9GNIWdGSM4oLKWy7eKF8qkDyHMqdVke
-	 7rqP64ZZBbFJpX+w0uCjFDaeM2ibLvkUVpKG36JmO8Obgk3DxC9fLRfXUKLtJHPWtyA==
+	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:Date:To:cc:
+	 Subject:In-Reply-To:Message-ID:References:MIME-Version:Content-Type;
+	bh=u6Qy1eP9AXMcS0YGdzUTIkDgXFyVXYB9cu5EHurdTks=;
+	b=LCquvQPP76sPyPwwC+FtDYckSVV3n0mmKdyX1eepPOq1B5F76h0wV8J5mBmlrbM/5E2z
+	 LoPQFfVma+9u0QpDOyDvvOFYZzeYsZTJ9TXF/XyOHUCyCKfZdSiDd54Jyh7L8K7a+R/4k
+	 pfsXyUPiVKEfkfR9E1cv6Dj/VugEF7UHHpWbd044zgHT3jTmDyfSY7sbTqEkHmT+EIPXv
+	 /ey0at4aOywP5hOYqkHY79u4PlbVwJHXrpCiEPkC1NyvRqqbq/7Jf+9qZIEpp4b/BBSjv
+	 Yrxmk37pj/fKRrmWEfs+m2pEhB4AE+PEhlFzs5W4TAItdQyui5Lgn4UTjHIHwIeLibA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=dvWh1JfU;
-	arc=none smtp.remote-ip=198.175.65.13
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.13])
+	dmarc=pass header.from=linux.intel.com;
+	spf=pass smtp.mailfrom=linux.intel.com;
+	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ZbO7NfeI;
+	arc=none smtp.remote-ip=192.198.163.16
+Received: from mgamail.intel.com (mgamail.intel.com [192.198.163.16])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 114AF606A321;
-	Wed, 25 Nov 2026 21:57:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 114AF606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 93CE1606A31E;
+	Wed, 25 Nov 2026 22:04:21 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 93CE1606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linux.intel.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linux.intel.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=dvWh1JfU
+	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=ZbO7NfeI
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
   d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1795643862; x=1827179862;
-  h=date:from:to:cc:subject:message-id:references:
-   mime-version:in-reply-to;
-  bh=pZh7FPy1aRkXInOd3Z/lqy51P/H4KfXJDCzy5vYW68Y=;
-  b=dvWh1JfUPT3iCHVmrASvgn4ZpXZk16048LVbpXkJg6pMZ/Q88TCOpvVp
-   99psw2SvAAPgszw3xqe4zFDgKNX3wdrUaiQutwnhDMwKDqkgGmKCXoAjq
-   GCQr4/x1hrj5JnT3LYH+EoVpqcTZ4r7q9RaDeW19D+knSn4wBAUZ8ll+O
-   GzzpC0l2bHYTTi/m8LAUVSfsR9DGSVy+mzw8W2Du5BKgOs1PAo/CTiK3J
-   Ls+WyrockeVN13pOSMpjWkKHLowvBimkWrdum4osMQgSQ9sCsG8/NlDIm
-   gz8OkIPmnB0sdReyB+Vp/2sv/INX8WRr6E/HUqYFFxYDWVKV1GiDyC4pN
-   A==;
-X-CSE-ConnectionGUID: Wg2/JX6AQNicn62bB38vpg==
-X-CSE-MsgGUID: 7tmkhYjsQ3uu9jg74MV95g==
-X-IronPort-AV: E=McAfee;i="6800,10657,11977"; a="4446498"
+  t=1795644262; x=1827180262;
+  h=from:date:to:cc:subject:in-reply-to:message-id:
+   references:mime-version;
+  bh=lMb/80yw09Qli5cfDrBkjICNjWURWuysaW0via6gAjw=;
+  b=ZbO7NfeI+HtIVC0uW49+RWyMxgF/MfGXsAAqeXQS5Q6OjNjLm9BbqsT1
+   79nHYDnSDzkJLShDFxGTaxouGSM1OjRoK9WqIQr7idM3EWp6ELJbBaxEe
+   j5wNII8RjGIK/M+Tu9R7mWiroG6qKClC9IFZ++h3Kq1zuRzMEG2J64zBp
+   /BFxemq2VJPkSNgSPW5GVLr/2rf65UTLGvF+0s3kwLg+kV9oBMrmlPl/4
+   hRGsJ0Hp9HJF31OYfDdn0tMmx+un59DbPQxd4NS+x8tLuPT4VvSmv+CPY
+   95SXYQB+OgqihPRDGE/BX4n1470gdkGfBenqZ4dMQM/5Op+h/GCIgx5Te
+   w==;
+X-CSE-ConnectionGUID: 09qw/9rPTJO4N08m5dXS5g==
+X-CSE-MsgGUID: 9n9Bg7ZMRGO0FF31sqS8Ig==
+X-IronPort-AV: E=McAfee;i="6800,10657,11977"; a="4563375"
 X-IronPort-AV: E=Sophos;i="6.27,233,1787036400"; 
-   d="scan'208";a="4446498"
-Received: from fmviesa010.fm.intel.com ([10.60.135.150])
-  by orvoesa105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2026 13:57:42 -0800
-X-CSE-ConnectionGUID: HkRkHbzMTgG06ER/z44mbw==
-X-CSE-MsgGUID: s2DEfbL2R6S8bPeeGAfkTQ==
+   d="scan'208";a="4563375"
+Received: from fmviesa012.fm.intel.com ([10.60.135.152])
+  by fmvoesa110.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2026 14:04:19 -0800
+X-CSE-ConnectionGUID: hRJzoclMT/W8IYj4zEVe+w==
+X-CSE-MsgGUID: 66Ir4qgUSgaFnUxE/Zb+WA==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="6.27,233,1787036400"; 
-   d="scan'208";a="12569558"
-Received: from lkp-server01.sh.intel.com (HELO 0caa9d2d175c) ([10.239.97.150])
-  by fmviesa010.fm.intel.com with ESMTP; 25 Nov 2026 13:57:37 -0800
-Received: from kbuild by 0caa9d2d175c with local (Exim 4.98.2)
-	(envelope-from <lkp@intel.com>)
-	id 1xWKze-00000001Sji-1nMK;
-	Wed, 25 Nov 2026 21:57:34 +0000
-Date: Thu, 26 Nov 2026 05:57:26 +0800
-From: kernel test robot <lkp@intel.com>
-To: Hikmah Gumelar <hikmahgumelar@gmail.com>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: llvm@lists.linux.dev, oe-kbuild-all@lists.linux.dev,
-	linux-media@vger.kernel.org, devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org, u.kleine-koenig@baylibre.com,
-	Hikmah Gumelar <hikmahgumelar@gmail.com>
-Subject: Re: [PATCH v4 3/7] media: i2c: add s5k5e8 image sensor driver
-Message-ID: <20261126053002.F2AZOt2m-lkp@intel.com>
-References: <20261125123146.379057-4-hikmahgumelar@gmail.com>
+   d="scan'208";a="13646383"
+Received: from ijarvine-mobl1.ger.corp.intel.com (HELO localhost) ([10.245.244.96])
+  by smtpauth.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2026 14:04:14 -0800
+From: =?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Date: Thu, 26 Nov 2026 00:04:10 +0200 (EET)
+To: Abel Vesa <abel.vesa@oss.qualcomm.com>
+cc: Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>, 
+    Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+    Conor Dooley <conor+dt@kernel.org>, Hans de Goede <hansg@kernel.org>, 
+    Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
+    Bjorn Andersson <andersson@kernel.org>, 
+    Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+    devicetree@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>, 
+    platform-driver-x86@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+    Hans de Goede <johannes.goede@oss.qualcomm.com>
+Subject: Re: [PATCH v2 2/4] platform: arm64: lenovo-thinkpad-t14s: Add Gen
+ 7 EC support
+In-Reply-To: <20261123-t14s-gen7-ec-v2-2-3420a6202366@oss.qualcomm.com>
+Message-ID: <f575410d-f0be-5ad5-834f-3b1c59109c53@linux.intel.com>
+References: <20261123-t14s-gen7-ec-v2-0-3420a6202366@oss.qualcomm.com> <20261123-t14s-gen7-ec-v2-2-3420a6202366@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,180 +86,405 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261125123146.379057-4-hikmahgumelar@gmail.com>
+Content-Type: text/plain; charset=US-ASCII
 
-Hi Hikmah,
+On Mon, 23 Nov 2026, Abel Vesa wrote:
 
-kernel test robot noticed the following build errors:
+> The embedded controller of the ThinkPad T14s Gen 7 uses the same
+> register layout and event codes as the Gen 6 one, but a different set
+> of I2C commands. Going by the ACPI EC accessors in the Gen 7 firmware:
+> 
+>   - register read:  write {0x80, reg}, then write {0x80} + read 1 byte
+>   - register write: write {0x81, reg, val}
+>   - event read:     write {0x84, 0x00}, then write {0x84} + read 1 byte
+> 
+> With the Gen 6 commands the EC never reports any event and the LED
+> and keyboard backlight accesses have no effect.
+> 
+> Describe the bus accessors and event read per variant and add one for
+> the Gen 7. The multi-message Gen 7 reads are done with the I2C bus
+> locked, as the Gen 6 ones already are.
+> 
+> Besides the protocol, the Gen 7 differs in a few other places:
+> 
+>   - there is no second keyboard backlight register and, when cycled
+>     with Fn+Space, the keyboard backlight also reports level 3;
+>   - the mic mute LED is a generic LED (id 0x0e) instead of a bit in the
+>     audio register;
+>   - Fn+F12 reports its own event code (0x19);
+>   - suspend is signalled through bit 5 of register 0xcf instead of the
+>     Gen 6 modern standby register, and the firmware makes the power and
+>     lid logo LEDs glow while suspended;
+>   - a few hotkeys which already come in through the I2C-HID keyboard
+>     (volume, mute and some Fn+Fxx combinations) also raise an EC event,
+>     and the firmware reports some status events nobody acts upon.
+> 
+> Handle those differences and treat the Gen 7 only events as known ones,
+> ignoring the duplicate hotkey events.
+> 
+> Co-developed-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> Signed-off-by: Hans de Goede <johannes.goede@oss.qualcomm.com>
+> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> ---
+>  drivers/platform/arm64/lenovo-thinkpad-t14s.c | 197 ++++++++++++++++++++++++--
+>  1 file changed, 186 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/platform/arm64/lenovo-thinkpad-t14s.c b/drivers/platform/arm64/lenovo-thinkpad-t14s.c
+> index 7a875877c8f3..cc7713aeac8e 100644
+> --- a/drivers/platform/arm64/lenovo-thinkpad-t14s.c
+> +++ b/drivers/platform/arm64/lenovo-thinkpad-t14s.c
+> @@ -17,7 +17,9 @@
+>  #include <linux/interrupt.h>
+>  #include <linux/leds.h>
+>  #include <linux/lockdep.h>
+> +#include <linux/minmax.h>
+>  #include <linux/module.h>
+> +#include <linux/mutex.h>
+>  #include <linux/regmap.h>
+>  #include <linux/slab.h>
+>  #include <linux/pm.h>
+> @@ -26,8 +28,20 @@
+>  #define T14S_EC_CMD_ECWR	0x03
+>  #define T14S_EC_CMD_EVT		0xf0
+>  
+> +/*
+> + * The Gen 7 (Snapdragon X2) EC uses a different command set over I2C, as
+> + * described by the ACPI EC accessors in its firmware (RDEC, WREC, QEVT).
+> + */
+> +#define T14S_GEN7_EC_CMD_RD	0x80
+> +#define T14S_GEN7_EC_CMD_WR	0x81
+> +#define T14S_GEN7_EC_CMD_EVT	0x84
+> +#define T14S_GEN7_EC_LED_MIC_MUTE	0x0e
+> +
+>  #define T14S_EC_REG_LED				0x0c
+>  #define T14S_EC_REG_KBD_BL1			0x0d
+> +#define T14S_EC_REG_MODERN_STANDBY_GEN7		0xcf
+> +/* Gen 7 DSDT sets this bit on Windows modern standby entry */
+> +#define T14S_EC_MODERN_STANDBY_GEN7_ESLS	BIT(5)
+>  #define T14S_EC_REG_MODERN_STANDBY		0xe0
+>  #define T14S_EC_MODERN_STANDBY_ENTRY		BIT(1)
+>  #define T14S_EC_MODERN_STANDBY_EXIT		BIT(0)
+> @@ -41,6 +55,7 @@
+>  #define T14S_EC_EVT_NONE			0x00
+>  #define T14S_EC_EVT_KEY_FN_4			0x13
+>  #define T14S_EC_EVT_KEY_FN_F7			0x16
+> +#define T14S_EC_EVT_KEY_FN_F12_GEN7		0x19
+>  #define T14S_EC_EVT_KEY_FN_SPACE		0x1f
+>  #define T14S_EC_EVT_KEY_TP_DOUBLE_TAP		0x20
+>  #define T14S_EC_EVT_AC_CONNECTED		0x26
+> @@ -67,6 +82,18 @@
+>  #define T14S_EC_EVT_KEY_FN_F11			0x7a
+>  #define T14S_EC_EVT_KEY_FN_G			0x7e
+>  
+> +/* Gen 7 only */
+> +#define T14S_GEN7_EC_EVT_HKEY_1010		0x14
+> +#define T14S_GEN7_EC_EVT_HKEY_1011		0x15
+> +#define T14S_GEN7_EC_EVT_HKEY_1017		0x1c
+> +#define T14S_GEN7_EC_EVT_STATUS_35		0x35
+> +#define T14S_GEN7_EC_EVT_DYTC			0x3c
+> +#define T14S_GEN7_EC_EVT_STATUS_40		0x40
+> +#define T14S_GEN7_EC_EVT_STATUS_4B		0x4b
+> +#define T14S_GEN7_EC_EVT_STATUS_4E		0x4e
+> +#define T14S_GEN7_EC_EVT_HKEY_1016		0x76
+> +#define T14S_GEN7_EC_EVT_HKEY_1015		0x7b
+> +
+>  /* Hardware LED blink rate is 1 Hz (500ms off, 500ms on) */
+>  #define T14S_EC_BLINK_RATE_ON_OFF_MS		500
+>  
+> @@ -83,6 +110,7 @@
+>  enum t14s_ec_led_status_t {
+>  	T14S_EC_LED_OFF =	0x00,
+>  	T14S_EC_LED_ON =	0x80,
+> +	T14S_EC_LED_GLOW =	0xa0, /* Gen 7 only, only works for power and lid LEDs */
+>  	T14S_EC_LED_BLINK =	0xc0,
+>  };
+>  
+> @@ -93,9 +121,18 @@ struct t14s_ec_led_classdev {
+>  	struct t14s_ec *ec;
+>  };
+>  
+> +struct t14s_ec;
+> +
+> +struct t14s_ec_variant {
+> +	const struct regmap_bus *regmap_bus;
+> +	int (*read_evt)(struct t14s_ec *ec, u8 *val);
+> +};
+> +
+>  struct t14s_ec {
+>  	struct regmap *regmap;
+>  	struct device *dev;
+> +	const struct t14s_ec_variant *variant;
+> +	enum led_brightness mic_mute_cache;
+>  	struct t14s_ec_led_classdev led_pwr_btn;
+>  	struct t14s_ec_led_classdev led_chrg_orange;
+>  	struct t14s_ec_led_classdev led_chrg_white;
+> @@ -206,6 +243,85 @@ static int t14s_ec_read_evt(struct t14s_ec *ec, u8 *val)
+>  	return ret;
+>  }
+>  
+> +static int t14s_gen7_ec_cmd_read(struct t14s_ec *ec, u8 cmd, u8 arg, u8 *val)
+> +{
+> +	struct i2c_client *client = to_i2c_client(ec->dev);
+> +	u8 req[2] = { cmd, arg };
+> +	struct i2c_msg msgs[2] = {
+> +		{ .addr = client->addr, .flags = 0, .len = 2, .buf = &req[0] },
+> +		{ .addr = client->addr, .flags = I2C_M_RD, .len = 1, .buf = val },
+> +	};
+> +	int ret;
+> +
+> +	i2c_lock_bus(client->adapter, I2C_LOCK_SEGMENT);
+> +
+> +	/* Send cmd + arg */
+> +	ret = __i2c_transfer(client->adapter, msgs, 1);
+> +	if (ret < 0)
+> +		goto out;
+> +
+> +	/* Resend the cmd byte + read the value */
+> +	msgs[0].len = 1;
+> +	ret = __i2c_transfer(client->adapter, msgs, 2);
+> +	if (ret < 0)
+> +		goto out;
+> +
+> +	ret = ret == 2 ? 0 : -EIO;
 
-[auto build test ERROR on next-20261124]
-[cannot apply to robh/for-next linuxtv-media-pending/master media-tree/master linus/master v7.4-rc4 v7.4-rc3 v7.4-rc2 v7.4-rc4]
-[If your patch is applied to the wrong git tree, kindly drop us a note.
-And when submitting patch, we suggest to use '--base' as documented in
-https://git-scm.com/docs/git-format-patch#_base_tree_information]
+Aren't these literal 2 same as ARRAY_SIZE(msgs) ? (x2)
 
-url:    https://github.com/intel-lab-lkp/linux/commits/Hikmah-Gumelar/clk-qcom-gcc-msm8953-fix-csi_phytimer_clk_src-100MHz-parent/20261125-193140
-base:   next-20261124
-patch link:    https://lore.kernel.org/r/20261125123146.379057-4-hikmahgumelar%40gmail.com
-patch subject: [PATCH v4 3/7] media: i2c: add s5k5e8 image sensor driver
-config: hexagon-randconfig-1000-20261126 (https://download.01.org/0day-ci/archive/20261126/20261126053002.F2AZOt2m-lkp@intel.com/config)
-compiler: clang version 21.1.8 (https://github.com/llvm/llvm-project 2078da43e25a4623cab2d0d60decddf709aaea28)
-reproduce (this is a W=1 build): (https://download.01.org/0day-ci/archive/20261126/20261126053002.F2AZOt2m-lkp@intel.com/reproduce)
+I wish we could use guard() of the i2c lock.
 
-If you fix the issue in a separate patch/commit (i.e. not just a new version of
-the same patch/commit), kindly add following tags
-| Reported-by: kernel test robot <lkp@intel.com>
-| Closes: https://lore.kernel.org/oe-kbuild-all/20261126053002.F2AZOt2m-lkp@intel.com/
-
-All errors (new ones prefixed by >>):
-
->> drivers/media/i2c/st-mipid02.c:847:19: error: call to undeclared function 'devm_cci_regmap_init_i2c'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-     847 |         bridge->regmap = devm_cci_regmap_init_i2c(client, 16);
-         |                          ^
->> drivers/media/i2c/st-mipid02.c:847:17: error: incompatible integer to pointer conversion assigning to 'struct regmap *' from 'int' [-Wint-conversion]
-     847 |         bridge->regmap = devm_cci_regmap_init_i2c(client, 16);
-         |                        ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   2 errors generated.
 --
->> drivers/media/i2c/thp7312.c:2097:20: error: call to undeclared function 'devm_cci_regmap_init_i2c'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
-    2097 |         thp7312->regmap = devm_cci_regmap_init_i2c(client, 16);
-         |                           ^
->> drivers/media/i2c/thp7312.c:2097:18: error: incompatible integer to pointer conversion assigning to 'struct regmap *' from 'int' [-Wint-conversion]
-    2097 |         thp7312->regmap = devm_cci_regmap_init_i2c(client, 16);
-         |                         ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-   2 errors generated.
+ i.
 
+> +out:
+> +	i2c_unlock_bus(client->adapter, I2C_LOCK_SEGMENT);
+> +	return ret;
+> +}
+> +
+> +static int t14s_gen7_ec_write(void *context, unsigned int reg,
+> +			      unsigned int val)
+> +{
+> +	struct t14s_ec *ec = context;
+> +	struct i2c_client *client = to_i2c_client(ec->dev);
+> +	u8 buf[3] = { T14S_GEN7_EC_CMD_WR, reg, val };
+> +	int ret;
+> +
+> +	ret = i2c_master_send(client, buf, sizeof(buf));
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> +
+> +static int t14s_gen7_ec_read(void *context, unsigned int reg,
+> +			     unsigned int *val)
+> +{
+> +	struct t14s_ec *ec = context;
+> +	u8 result;
+> +	int ret;
+> +
+> +	ret = t14s_gen7_ec_cmd_read(ec, T14S_GEN7_EC_CMD_RD, reg, &result);
+> +	if (ret)
+> +		return ret;
+> +
+> +	*val = result;
+> +	return 0;
+> +}
+> +
+> +static const struct regmap_bus t14s_gen7_ec_regmap_bus = {
+> +	.reg_write = t14s_gen7_ec_write,
+> +	.reg_read = t14s_gen7_ec_read,
+> +};
+> +
+> +static int t14s_gen7_ec_read_evt(struct t14s_ec *ec, u8 *val)
+> +{
+> +	return t14s_gen7_ec_cmd_read(ec, T14S_GEN7_EC_CMD_EVT, 0x00, val);
+> +}
+> +
+> +static const struct t14s_ec_variant t14s_ec_variant = {
+> +	.regmap_bus = &t14s_ec_regmap_bus,
+> +	.read_evt = t14s_ec_read_evt,
+> +};
+> +
+> +static const struct t14s_ec_variant t14s_gen7_ec_variant = {
+> +	.regmap_bus = &t14s_gen7_ec_regmap_bus,
+> +	.read_evt = t14s_gen7_ec_read_evt,
+> +};
+> +
+>  static void t14s_ec_write_sequence(struct t14s_ec *ec, u8 reg, u8 val, u8 cnt)
+>  {
+>  	int i;
+> @@ -318,6 +434,9 @@ static int t14s_kbd_bl_set(struct led_classdev *led_cdev,
+>  	if (ret < 0)
+>  		return ret;
+>  
+> +	if (ec->variant == &t14s_gen7_ec_variant)
+> +		return 0;
+> +
+>  	val = FIELD_PREP(T14S_EC_KBD_BL2_MASK, brightness);
+>  	ret = regmap_update_bits(ec->regmap, T14S_EC_REG_KBD_BL2,
+>  				 T14S_EC_KBD_BL2_MASK, val);
+> @@ -338,7 +457,11 @@ static enum led_brightness t14s_kbd_bl_get(struct led_classdev *led_cdev)
+>  	if (ret < 0)
+>  		return ret;
+>  
+> -	return FIELD_GET(T14S_EC_KBD_BL1_MASK, val);
+> +	/*
+> +	 * When cycled with Fn+Space, the Gen 7 EC also uses 3 for the high
+> +	 * level, which looks the same as 2.
+> +	 */
+> +	return min(FIELD_GET(T14S_EC_KBD_BL1_MASK, val), 2);
+>  }
+>  
+>  static void t14s_kbd_bl_update(struct t14s_ec *ec)
+> @@ -383,7 +506,10 @@ static enum led_brightness t14s_mic_mute_led_get(struct led_classdev *led_cdev)
+>  	struct t14s_ec *ec = container_of(led_cdev, struct t14s_ec,
+>  					  led_mic_mute);
+>  
+> -	return t14s_audio_led_get(ec, T14S_EC_MIC_MUTE_LED);
+> +	if (ec->variant == &t14s_ec_variant)
+> +		return t14s_audio_led_get(ec, T14S_EC_MIC_MUTE_LED);
+> +
+> +	return ec->mic_mute_cache;
+>  }
+>  
+>  static int t14s_mic_mute_led_set(struct led_classdev *led_cdev,
+> @@ -391,8 +517,19 @@ static int t14s_mic_mute_led_set(struct led_classdev *led_cdev,
+>  {
+>  	struct t14s_ec *ec = container_of(led_cdev, struct t14s_ec,
+>  					  led_mic_mute);
+> +	int ret;
+>  
+> -	return t14s_audio_led_set(ec, T14S_EC_MIC_MUTE_LED, brightness);
+> +	if (ec->variant == &t14s_ec_variant)
+> +		return t14s_audio_led_set(ec, T14S_EC_MIC_MUTE_LED, brightness);
+> +
+> +	ret = regmap_write(ec->regmap, T14S_EC_REG_LED,
+> +			   T14S_GEN7_EC_LED_MIC_MUTE |
+> +			   (brightness ? T14S_EC_LED_ON : T14S_EC_LED_OFF));
+> +	if (ret < 0)
+> +		return ret;
+> +
+> +	ec->mic_mute_cache = brightness ? LED_ON : LED_OFF;
+> +	return 0;
+>  }
+>  
+>  static enum led_brightness t14s_spk_mute_led_get(struct led_classdev *led_cdev)
+> @@ -444,6 +581,7 @@ static const struct key_entry t14s_keymap[] = {
+>  	T14S_EC_KEY_ENTRY(FN_F10, KEY_SELECTIVE_SCREENSHOT),
+>  	T14S_EC_KEY_ENTRY(FN_F11, KEY_LINK_PHONE),
+>  	T14S_EC_KEY_ENTRY(FN_F12, KEY_BOOKMARKS),
+> +	T14S_EC_KEY_ENTRY(FN_F12_GEN7, KEY_BOOKMARKS),
+>  	T14S_EC_KEY_ENTRY(FN_SPACE, KEY_KBDILLUMTOGGLE),
+>  	T14S_EC_KEY_ENTRY(FN_ESC, KEY_FN_ESC),
+>  	T14S_EC_KEY_ENTRY(FN_TAB, KEY_ZOOM),
+> @@ -478,7 +616,7 @@ static irqreturn_t t14s_ec_irq_handler(int irq, void *data)
+>  	int ret;
+>  	u8 val;
+>  
+> -	ret = t14s_ec_read_evt(ec, &val);
+> +	ret = ec->variant->read_evt(ec, &val);
+>  	if (ret < 0) {
+>  		dev_err(ec->dev, "Failed to read event\n");
+>  		return IRQ_HANDLED;
+> @@ -501,6 +639,7 @@ static irqreturn_t t14s_ec_irq_handler(int irq, void *data)
+>  	case T14S_EC_EVT_KEY_FN_4:
+>  	case T14S_EC_EVT_KEY_FN_F8:
+>  	case T14S_EC_EVT_KEY_FN_F12:
+> +	case T14S_EC_EVT_KEY_FN_F12_GEN7:
+>  	case T14S_EC_EVT_KEY_FN_TAB:
+>  	case T14S_EC_EVT_KEY_FN_F10:
+>  	case T14S_EC_EVT_KEY_FN_N:
+> @@ -553,6 +692,23 @@ static irqreturn_t t14s_ec_irq_handler(int irq, void *data)
+>  	case T14S_EC_EVT_KEY_FN_D:
+>  		dev_dbg(ec->dev, "FN + D - toggle privacy guard mode\n");
+>  		break;
+> +	case T14S_GEN7_EC_EVT_DYTC:
+> +	/*
+> +	 * Keys which send an EC event which the DSDT maps to a HKEY, which
+> +	 * also send a key-press over I2C-HID, so ignore the EC event.
+> +	 */
+> +	case T14S_GEN7_EC_EVT_HKEY_1010:
+> +	case T14S_GEN7_EC_EVT_HKEY_1011:
+> +	case T14S_GEN7_EC_EVT_HKEY_1015:
+> +	case T14S_GEN7_EC_EVT_HKEY_1016:
+> +	case T14S_GEN7_EC_EVT_HKEY_1017:
+> +	/* Status events the Gen 7 firmware does not act upon either */
+> +	case T14S_GEN7_EC_EVT_STATUS_35:
+> +	case T14S_GEN7_EC_EVT_STATUS_40:
+> +	case T14S_GEN7_EC_EVT_STATUS_4B:
+> +	case T14S_GEN7_EC_EVT_STATUS_4E:
+> +		dev_dbg(ec->dev, "EC event 0x%02x\n", val);
+> +		break;
+>  	default:
+>  		dev_info(ec->dev, "Unknown EC event: 0x%02x\n", val);
+>  		break;
+> @@ -572,9 +728,13 @@ static int t14s_ec_probe(struct i2c_client *client)
+>  		return -ENOMEM;
+>  
+>  	ec->dev = dev;
+> +	ec->variant = i2c_get_match_data(client);
+> +	if (!ec->variant)
+> +		ec->variant = &t14s_ec_variant;
+> +
+>  	i2c_set_clientdata(client, ec);
+>  
+> -	ec->regmap = devm_regmap_init(dev, &t14s_ec_regmap_bus,
+> +	ec->regmap = devm_regmap_init(dev, ec->variant->regmap_bus,
+>  				      ec, &t14s_ec_regmap_config);
+>  	if (IS_ERR(ec->regmap))
+>  		return dev_err_probe(dev, PTR_ERR(ec->regmap),
+> @@ -618,8 +778,15 @@ static int t14s_ec_suspend(struct device *dev)
+>  
+>  	led_classdev_suspend(&ec->kbd_backlight);
+>  
+> -	t14s_ec_write_sequence(ec, T14S_EC_REG_MODERN_STANDBY,
+> -			       T14S_EC_MODERN_STANDBY_ENTRY, 3);
+> +	if (ec->variant == &t14s_ec_variant) {
+> +		t14s_ec_write_sequence(ec, T14S_EC_REG_MODERN_STANDBY,
+> +				       T14S_EC_MODERN_STANDBY_ENTRY, 3);
+> +	} else {
+> +		regmap_assign_bits(ec->regmap, T14S_EC_REG_MODERN_STANDBY_GEN7,
+> +				   T14S_EC_MODERN_STANDBY_GEN7_ESLS, 1);
+> +		t14s_led_set_status(ec, &ec->led_pwr_btn, T14S_EC_LED_GLOW);
+> +		t14s_led_set_status(ec, &ec->led_lid_logo_dot, T14S_EC_LED_GLOW);
+> +	}
+>  
+>  	return 0;
+>  }
+> @@ -628,8 +795,15 @@ static int t14s_ec_resume(struct device *dev)
+>  {
+>  	struct t14s_ec *ec = dev_get_drvdata(dev);
+>  
+> -	t14s_ec_write_sequence(ec, T14S_EC_REG_MODERN_STANDBY,
+> -			       T14S_EC_MODERN_STANDBY_EXIT, 3);
+> +	if (ec->variant == &t14s_ec_variant) {
+> +		t14s_ec_write_sequence(ec, T14S_EC_REG_MODERN_STANDBY,
+> +				       T14S_EC_MODERN_STANDBY_EXIT, 3);
+> +	} else {
+> +		regmap_assign_bits(ec->regmap, T14S_EC_REG_MODERN_STANDBY_GEN7,
+> +				   T14S_EC_MODERN_STANDBY_GEN7_ESLS, 0);
+> +		t14s_led_set_status(ec, &ec->led_pwr_btn, T14S_EC_LED_ON);
+> +		t14s_led_set_status(ec, &ec->led_lid_logo_dot, T14S_EC_LED_ON);
+> +	}
+>  
+>  	led_classdev_resume(&ec->kbd_backlight);
+>  
+> @@ -637,13 +811,14 @@ static int t14s_ec_resume(struct device *dev)
+>  }
+>  
+>  static const struct of_device_id t14s_ec_of_match[] = {
+> -	{ .compatible = "lenovo,thinkpad-t14s-ec" },
+> +	{ .compatible = "lenovo,thinkpad-t14s-ec", .data = &t14s_ec_variant },
+> +	{ .compatible = "lenovo,thinkpad-t14s-gen7-ec", .data = &t14s_gen7_ec_variant },
+>  	{}
+>  };
+>  MODULE_DEVICE_TABLE(of, t14s_ec_of_match);
+>  
+>  static const struct i2c_device_id t14s_ec_i2c_id_table[] = {
+> -	{ .name = "thinkpad-t14s-ec" },
+> +	{ .name = "thinkpad-t14s-ec", .driver_data = (kernel_ulong_t)&t14s_ec_variant },
+>  	{ }
+>  };
+>  MODULE_DEVICE_TABLE(i2c, t14s_ec_i2c_id_table);
+> 
+> 
 
-vim +/devm_cci_regmap_init_i2c +847 drivers/media/i2c/st-mipid02.c
-
-642bb5e88fed89e Mickael Guene 2019-04-09  803  
-642bb5e88fed89e Mickael Guene 2019-04-09  804  static int mipid02_probe(struct i2c_client *client)
-642bb5e88fed89e Mickael Guene 2019-04-09  805  {
-642bb5e88fed89e Mickael Guene 2019-04-09  806  	struct device *dev = &client->dev;
-642bb5e88fed89e Mickael Guene 2019-04-09  807  	struct mipid02_dev *bridge;
-642bb5e88fed89e Mickael Guene 2019-04-09  808  	u32 clk_freq;
-642bb5e88fed89e Mickael Guene 2019-04-09  809  	int ret;
-642bb5e88fed89e Mickael Guene 2019-04-09  810  
-4dd10fbbeb9c337 Kees Cook     2026-10-28  811  	bridge = devm_kzalloc_obj(dev, *bridge);
-642bb5e88fed89e Mickael Guene 2019-04-09  812  	if (!bridge)
-642bb5e88fed89e Mickael Guene 2019-04-09  813  		return -ENOMEM;
-642bb5e88fed89e Mickael Guene 2019-04-09  814  
-642bb5e88fed89e Mickael Guene 2019-04-09  815  	bridge->i2c_client = client;
-642bb5e88fed89e Mickael Guene 2019-04-09  816  	v4l2_i2c_subdev_init(&bridge->sd, client, &mipid02_subdev_ops);
-642bb5e88fed89e Mickael Guene 2019-04-09  817  
-642bb5e88fed89e Mickael Guene 2019-04-09  818  	/* got and check clock */
-642bb5e88fed89e Mickael Guene 2019-04-09  819  	bridge->xclk = devm_clk_get(dev, "xclk");
-642bb5e88fed89e Mickael Guene 2019-04-09  820  	if (IS_ERR(bridge->xclk)) {
-642bb5e88fed89e Mickael Guene 2019-04-09  821  		dev_err(dev, "failed to get xclk\n");
-642bb5e88fed89e Mickael Guene 2019-04-09  822  		return PTR_ERR(bridge->xclk);
-642bb5e88fed89e Mickael Guene 2019-04-09  823  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  824  
-642bb5e88fed89e Mickael Guene 2019-04-09  825  	clk_freq = clk_get_rate(bridge->xclk);
-642bb5e88fed89e Mickael Guene 2019-04-09  826  	if (clk_freq < 6000000 || clk_freq > 27000000) {
-642bb5e88fed89e Mickael Guene 2019-04-09  827  		dev_err(dev, "xclk freq must be in 6-27 Mhz range. got %d Hz\n",
-642bb5e88fed89e Mickael Guene 2019-04-09  828  			clk_freq);
-642bb5e88fed89e Mickael Guene 2019-04-09  829  		return -EINVAL;
-642bb5e88fed89e Mickael Guene 2019-04-09  830  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  831  
-642bb5e88fed89e Mickael Guene 2019-04-09  832  	bridge->reset_gpio = devm_gpiod_get_optional(dev, "reset",
-642bb5e88fed89e Mickael Guene 2019-04-09  833  						     GPIOD_OUT_HIGH);
-642bb5e88fed89e Mickael Guene 2019-04-09  834  
-61c03b631b74a38 Chuhong Yuan  2019-10-17  835  	if (IS_ERR(bridge->reset_gpio)) {
-61c03b631b74a38 Chuhong Yuan  2019-10-17  836  		dev_err(dev, "failed to get reset GPIO\n");
-61c03b631b74a38 Chuhong Yuan  2019-10-17  837  		return PTR_ERR(bridge->reset_gpio);
-61c03b631b74a38 Chuhong Yuan  2019-10-17  838  	}
-61c03b631b74a38 Chuhong Yuan  2019-10-17  839  
-642bb5e88fed89e Mickael Guene 2019-04-09  840  	ret = mipid02_get_regulators(bridge);
-642bb5e88fed89e Mickael Guene 2019-04-09  841  	if (ret) {
-642bb5e88fed89e Mickael Guene 2019-04-09  842  		dev_err(dev, "failed to get regulators %d", ret);
-642bb5e88fed89e Mickael Guene 2019-04-09  843  		return ret;
-642bb5e88fed89e Mickael Guene 2019-04-09  844  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  845  
-6223dafa3c9111d Alain Volmat  2023-11-25  846  	/* Initialise the regmap for further cci access */
-6223dafa3c9111d Alain Volmat  2023-11-25 @847  	bridge->regmap = devm_cci_regmap_init_i2c(client, 16);
-6223dafa3c9111d Alain Volmat  2023-11-25  848  	if (IS_ERR(bridge->regmap))
-6223dafa3c9111d Alain Volmat  2023-11-25  849  		return dev_err_probe(dev, PTR_ERR(bridge->regmap),
-6223dafa3c9111d Alain Volmat  2023-11-25  850  				     "failed to get cci regmap\n");
-6223dafa3c9111d Alain Volmat  2023-11-25  851  
-642bb5e88fed89e Mickael Guene 2019-04-09  852  	bridge->sd.flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
-642bb5e88fed89e Mickael Guene 2019-04-09  853  	bridge->sd.entity.function = MEDIA_ENT_F_VID_IF_BRIDGE;
-04d170b288b3404 Alain Volmat  2023-11-25  854  	bridge->sd.internal_ops = &mipid02_subdev_internal_ops;
-642bb5e88fed89e Mickael Guene 2019-04-09  855  	bridge->sd.entity.ops = &mipid02_subdev_entity_ops;
-642bb5e88fed89e Mickael Guene 2019-04-09  856  	bridge->pad[0].flags = MEDIA_PAD_FL_SINK;
-642bb5e88fed89e Mickael Guene 2019-04-09  857  	bridge->pad[1].flags = MEDIA_PAD_FL_SINK;
-642bb5e88fed89e Mickael Guene 2019-04-09  858  	bridge->pad[2].flags = MEDIA_PAD_FL_SOURCE;
-642bb5e88fed89e Mickael Guene 2019-04-09  859  	ret = media_entity_pads_init(&bridge->sd.entity, MIPID02_PAD_NB,
-642bb5e88fed89e Mickael Guene 2019-04-09  860  				     bridge->pad);
-642bb5e88fed89e Mickael Guene 2019-04-09  861  	if (ret) {
-642bb5e88fed89e Mickael Guene 2019-04-09  862  		dev_err(&client->dev, "pads init failed %d", ret);
-04d170b288b3404 Alain Volmat  2023-11-25  863  		return ret;
-04d170b288b3404 Alain Volmat  2023-11-25  864  	}
-04d170b288b3404 Alain Volmat  2023-11-25  865  
-04d170b288b3404 Alain Volmat  2023-11-25  866  	ret = v4l2_subdev_init_finalize(&bridge->sd);
-04d170b288b3404 Alain Volmat  2023-11-25  867  	if (ret < 0) {
-04d170b288b3404 Alain Volmat  2023-11-25  868  		dev_err(dev, "subdev init error: %d\n", ret);
-04d170b288b3404 Alain Volmat  2023-11-25  869  		goto entity_cleanup;
-642bb5e88fed89e Mickael Guene 2019-04-09  870  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  871  
-642bb5e88fed89e Mickael Guene 2019-04-09  872  	/* enable clock, power and reset device if available */
-a74e17ca6443260 Alain Volmat  2024-10-08  873  	ret = mipid02_set_power_on(&client->dev);
-642bb5e88fed89e Mickael Guene 2019-04-09  874  	if (ret)
-642bb5e88fed89e Mickael Guene 2019-04-09  875  		goto entity_cleanup;
-642bb5e88fed89e Mickael Guene 2019-04-09  876  
-642bb5e88fed89e Mickael Guene 2019-04-09  877  	ret = mipid02_detect(bridge);
-642bb5e88fed89e Mickael Guene 2019-04-09  878  	if (ret) {
-642bb5e88fed89e Mickael Guene 2019-04-09  879  		dev_err(&client->dev, "failed to detect mipid02 %d", ret);
-642bb5e88fed89e Mickael Guene 2019-04-09  880  		goto power_off;
-642bb5e88fed89e Mickael Guene 2019-04-09  881  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  882  
-642bb5e88fed89e Mickael Guene 2019-04-09  883  	ret = mipid02_parse_tx_ep(bridge);
-642bb5e88fed89e Mickael Guene 2019-04-09  884  	if (ret) {
-642bb5e88fed89e Mickael Guene 2019-04-09  885  		dev_err(&client->dev, "failed to parse tx %d", ret);
-642bb5e88fed89e Mickael Guene 2019-04-09  886  		goto power_off;
-642bb5e88fed89e Mickael Guene 2019-04-09  887  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  888  
-642bb5e88fed89e Mickael Guene 2019-04-09  889  	ret = mipid02_parse_rx_ep(bridge);
-642bb5e88fed89e Mickael Guene 2019-04-09  890  	if (ret) {
-642bb5e88fed89e Mickael Guene 2019-04-09  891  		dev_err(&client->dev, "failed to parse rx %d", ret);
-642bb5e88fed89e Mickael Guene 2019-04-09  892  		goto power_off;
-642bb5e88fed89e Mickael Guene 2019-04-09  893  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  894  
-a74e17ca6443260 Alain Volmat  2024-10-08  895  	/* Enable runtime PM and turn off the device */
-a74e17ca6443260 Alain Volmat  2024-10-08  896  	pm_runtime_set_active(dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  897  	pm_runtime_get_noresume(&client->dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  898  	pm_runtime_enable(dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  899  
-a74e17ca6443260 Alain Volmat  2024-10-08  900  	pm_runtime_set_autosuspend_delay(&client->dev, 1000);
-a74e17ca6443260 Alain Volmat  2024-10-08  901  	pm_runtime_use_autosuspend(&client->dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  902  	pm_runtime_put_autosuspend(&client->dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  903  
-642bb5e88fed89e Mickael Guene 2019-04-09  904  	ret = v4l2_async_register_subdev(&bridge->sd);
-642bb5e88fed89e Mickael Guene 2019-04-09  905  	if (ret < 0) {
-642bb5e88fed89e Mickael Guene 2019-04-09  906  		dev_err(&client->dev, "v4l2_async_register_subdev failed %d",
-642bb5e88fed89e Mickael Guene 2019-04-09  907  			    ret);
-642bb5e88fed89e Mickael Guene 2019-04-09  908  		goto unregister_notifier;
-642bb5e88fed89e Mickael Guene 2019-04-09  909  	}
-642bb5e88fed89e Mickael Guene 2019-04-09  910  
-642bb5e88fed89e Mickael Guene 2019-04-09  911  	dev_info(&client->dev, "mipid02 device probe successfully");
-642bb5e88fed89e Mickael Guene 2019-04-09  912  
-642bb5e88fed89e Mickael Guene 2019-04-09  913  	return 0;
-642bb5e88fed89e Mickael Guene 2019-04-09  914  
-642bb5e88fed89e Mickael Guene 2019-04-09  915  unregister_notifier:
-3c8c153914812a9 Sakari Ailus  2021-03-05  916  	v4l2_async_nf_unregister(&bridge->notifier);
-3c8c153914812a9 Sakari Ailus  2021-03-05  917  	v4l2_async_nf_cleanup(&bridge->notifier);
-a74e17ca6443260 Alain Volmat  2024-10-08  918  	pm_runtime_disable(&client->dev);
-a74e17ca6443260 Alain Volmat  2024-10-08  919  	pm_runtime_set_suspended(&client->dev);
-642bb5e88fed89e Mickael Guene 2019-04-09  920  power_off:
-a74e17ca6443260 Alain Volmat  2024-10-08  921  	mipid02_set_power_off(&client->dev);
-642bb5e88fed89e Mickael Guene 2019-04-09  922  entity_cleanup:
-642bb5e88fed89e Mickael Guene 2019-04-09  923  	media_entity_cleanup(&bridge->sd.entity);
-642bb5e88fed89e Mickael Guene 2019-04-09  924  
-642bb5e88fed89e Mickael Guene 2019-04-09  925  	return ret;
-642bb5e88fed89e Mickael Guene 2019-04-09  926  }
-642bb5e88fed89e Mickael Guene 2019-04-09  927  
-
--- 
-0-DAY CI Kernel Test Service
-https://github.com/intel/lkp-tests/wiki
