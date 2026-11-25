@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795577295;
-	b=JpbrJpDB4aocVZpkFqwqZnxWec5sKbYJCD0NewkLGup/DOncfQqOtyO0OpM4PQZL4Pi8
-	 hEiIAbvr8Xt2162qCv1BJzWFZ0kJZg5x4ITNhCzFIpG2ruQtqJRaeOR5OkosrtKOAFAvK
-	 LjkgQGOWJLKJ5r7lU5Gr7KDlu0KrEAh7u8sQOQlxFJ+KjQc8OUsqT8wA7tAsI1bbgIm9c
-	 O3NbOBnei62Pu280xDSElzZ35w0CKWkSE/SOakMkLNn/35QFnO7F0MMIDVeaFPDV2/dMw
-	 hzukudCeteaqe1YPdw/11qXIO7pcS6SXkYkaOIxDK89OqfVfMeRquguMVc7Iyv4l7mg==
+	t=1795577298;
+	b=JHiDF4kE/FO78al13GJ4q3tPUHwDUlUGAeQssmS1kb23XCwq+NwT5EQWuaYWwd2XIEhp
+	 nmg6FoR+IIlfYHQ3Jdcy0v84wM4E+e8NEsEEhRoQ89/KTvITK8HRf0996Bdax+Qk1MrQC
+	 XWxzpok9MnNUjV+s0DAkBZqLlwQwMthDnlPxDINJnTmYw65j9CKO35gXORtJlFV1tcZ1N
+	 8mFObH1qZuZOlQtq+3pErBJ84h0k95gFbuvin4HOg5rYRs9UVp+7Y+qdYjtg0fyKglTt7
+	 qMghsX/icAoeyUSbCq/5kp3iBklrlpcfO5yOJFVwQydj6z076MFTud4kJfJdw7fMbsg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795577295;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795577298;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
 	 Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=sG4IjzQzTOsq8+1nteR/Dqn0VR6TUjyjIc18rbJBV9s=;
-	b=cTl6NI26DtT8z+Sg0vrSP9Yw0b6g7qeg9cefjxdmxhfL5iS9JLdtPJmsEciP0YVy6oLu
-	 56QbL5mmpym7dmvIssl1ZAB80klGXTQ7yn6EuioOP8qaCr8iR3vk7wwp9ykPKX+DOYiWB
-	 aOGqUCKug7HXw5h5tW/WUD6GgN7gl6nee5vOpb6yD7w3Ts4d6O7/L2PlcU4BqcD1/v53q
-	 p25zLEN0bq1f0wAw374eseNmBwhxZ//w0uZdTwkpnz/C5x0I0IY8WMOkh6mHSeEZfp2lF
-	 b4SMzIsRIOGLUvQuAObNMdXa/QtKAMgrmkYNgYWmT8BMYjwErQgM6ixYBq3AjGJiOpw==
+	bh=neRHwZ4PcekzFePF+ojssqeeGgodG3OmNINdD0aY8HA=;
+	b=UnhEN5Gjs5yZ9ediCFFPdjviqjBMlnsYWIg2pPxkN4rqtc+BXzaetZFm2JQdyd2Eysi0
+	 Eg5ho1HxIdy/gLc/js5mmST4H9t1Pm5kwofi+HcwEEa+t0p7yUMmOUICrSxAS7jFVJAls
+	 pCnsAuZMlGUdtlD3qOD8l/H/T1Mt+iyfcKB1tIxFLi1Mjg/r+8zWv3MoKK0dYobYT5C+3
+	 tOU3CSK3GQm+mg6dc1tkTU7RMlBmoxu1fmNMI9aNLkz7pJN/uoELgLyTHBHKn5CTbuDQj
+	 EnyQdeUs6hw27e1FFyM491TWllVJY8bDlG7GI4pIXhmYniyIGD3qE9X3ElT7uyOaJxA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Pva+qH5L;
-	arc=none smtp.remote-ip=209.85.221.46
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DO6pHosa;
+	arc=none smtp.remote-ip=209.85.128.46
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C693C606A6BD
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:28:14 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C693C606A6BD
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3705E60A2617
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:28:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3705E60A2617
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Pva+qH5L
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-492fcbfaa88so3392186f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 19:28:14 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DO6pHosa
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4b467581b98so50746875e9.0
+        for <linux-arm-msm@vger.kernel.org>; Tue, 24 Nov 2026 19:28:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795577293; x=1796182093; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795577295; x=1796182095; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sG4IjzQzTOsq8+1nteR/Dqn0VR6TUjyjIc18rbJBV9s=;
-        b=Pva+qH5LwkfRhY/HwbuWQ54KdZoI9qwiM2ANNoQjop+Al1lt+Gs2GjJHLVhyECm8Z1
-         2CChIklgFlF83RjXCGNzKTVjFdbIyeakGRqfM7vpIyAAloWFT6JAbfBg9/toCxKyOlJd
-         xe0Y9nRMliTY7LRnF7+Xl+8iFb1uRZCZFwR3KGlkBm34l64abBXecw4P5+rjfmTV2VXH
-         S8WeMlhR7JMXkJYiJrNVOx6dvwMRwMhrxKlkUGvXrWB8DEsZczOtWRAzorpvWKnS3P0v
-         aEtnkYsRgeclvDywKMKzvJBSAM0phfesoeu8/WVlmJsi2EO9R+BLhgV4C0eCkJJdYtuJ
-         YWzQ==
+        bh=neRHwZ4PcekzFePF+ojssqeeGgodG3OmNINdD0aY8HA=;
+        b=DO6pHosaxxqrpccKrSJnjdVXALPYMtpPcSi1pUA0qN9jaVlU6etkRGLZ1pOgRRrxYs
+         sGnLrXYrEocytcKJ0Rac1EQxJ6JH5nPIgwkk7COeD7IM4bW/KOPrP/unNErGoy2FxCDX
+         HJcffQitxBBhF3eZRlDGkCTgQIOMCad8li7DIlhb+GltXgvIdsxGKp2xbyEcLJiNipbv
+         R9BOyhwQ0hlF2mC9BcmdixWD8pFcWnn34lx9f0lhSsCRzzuzQpiwQm48I+AOZhAhWZBl
+         oMtg7Swc8JqAE29KMO7aJHD5LEq3vj+AhvyTRFT7hQEZeiDoZbt4Vz3u+y0C4IwoOeAT
+         jyJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795577293; x=1796182093;
+        d=1e100.net; s=20260707; t=1795577295; x=1796182095;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=sG4IjzQzTOsq8+1nteR/Dqn0VR6TUjyjIc18rbJBV9s=;
-        b=lDUQhccSCWhlL6aZ59tHmkYEqEn6Z3NlhuQWAcHYIKceXdfuUfQq7kAP8rltv7uZpT
-         L5Of7qSWE78njjeGypop4knjTgfXjxst+77CbGlS1rVFDw9ZU6W9EHvpj9lcr47ibrIq
-         LLQvfIO2JFI4LxeLXW9kRRKArUzClM3fsTpPDGAKha6qky4AW8jN7wgb5obknK9SQKyc
-         Dzn5Ve58Adigw1Y9d9g/ZvzxpYT78lKRC7bg/lWHpGjRDEcp5rAJjUtz4/0IeXhOTkaG
-         7IguTJvvEvAuHP1GfbRD7pUzYhJAnbWs4B0j8yAdUvbMWBgic7IZigJSPu1WK1u+mjmB
-         jRDA==
-X-Gm-Message-State: APuU4Z9wSJ5qPMWsxHz8nObZlGbeuztY81a0ty5TR3yWJ5dfPLUOlAzh
-	OBQz4JoIBIau5Mk0Qztzhm1B2GK0A7fCuAptHQE/TzWOW5kyYgQIIOvvELHgeB0hyzs=
-X-Gm-Gg: AZFdTZe3wLmmtatziYCt2W7aPVDiZY4UgnHxmbssU8oSCCB8Xs3Iu24aQgId/wuOzAg
-	al8BFDak4BLOZqAqqk1U1/vUrNfoG/NwIPTr/T9Be0EsKo2WoarFZKRgAakbZiGj35vZfsWHBkj
-	S3sNwA6HXrx5KHc3jJY7K9AvnoLV6ChSWXnt0b+h10Sa9J7KgsuQZXQiW5mFV8ZrgpNpglmFNsU
-	QIZ+DaJM9kC+xETNCteBVP5ZZZT3f1z6sNRhcLHCc2hRSzi/qwXrj9OKMXC65XoF7u5JM7gMiBK
-	50nWT4MZLxvUR2q6WMqRgOLueZvz1h9qiEN20MS6WYanQSDDTSBNEtYwrUnaYXNM9KWH9E9kePu
-	iCqRDpOnG/6pDFrQsUDfDmYeeaMropu/lk097MF8pP3m0wr3Ym34URha44l2+dN5dzxQ+f6Ybma
-	R3vkDbnBFAqGio3o2u4LOgQQvTCKOQz/Xc4uDRN/vYc6bbQR2c6tA6Z16f5kf5XFXbGTTIjxzc3
-	qoBUB7/ux5eGHpC6wGynhnpeLbdmaz3Iar8KeHMtf20/pahFyXOAaXNVRw2IVf40tPTkgxC+Jai
-	lHtfU+buKGJaX/MlfBQ6KGvzGlE+OWOwMCNc2gxvv88O+jDFdF75HubvwRoByzszgqFj2oheopb
-	odnz/gXPiF7InnuJxWC3Vb0oun8wVdKM=
-X-Received: by 2002:a05:6000:2913:b0:4a8:7115:fa08 with SMTP id ffacd0b85a97d-4abb0f3c202mr33671845f8f.13.1795577293140;
-        Tue, 24 Nov 2026 19:28:13 -0800 (PST)
+        bh=neRHwZ4PcekzFePF+ojssqeeGgodG3OmNINdD0aY8HA=;
+        b=jpCzAWeefM2p0mCK0gzOB2D6PoZ9nBZZ1y/SsgvSzgOK+YZVY74uF2Eb4am47Oyuav
+         DPxl837KSOyQvuhxQ9Oj5jbP+Ik3TBLbYeA+MDlK67iBt+U4iA0uouSj4XxBTuGHOkdv
+         tdsSzNhZqnHWGpjwcgmpurAJOph0xuKIiXmZihe6tkfPfAMKMqYCYfnzalpGGvbP5teB
+         TtrlO4qf9PpRdux0aIscGkXwY+VxKvV86oVHlWhRUNGRc1bJJngAe4MGF8CflrYPUMCb
+         p9wBO+L/NWIfBIsMYwkAizrEOE67kjdla8Zt3Xgvke5YqbBBsCts8ne01hjQHpQShawN
+         U82w==
+X-Gm-Message-State: APuU4Z9O+Xgw/ji+7NqXjhcn4slvQTvzBZXhjsmCGjem9DkRuYGcX7S2
+	1L3ccsoNIwRo+iRPuFw/WvxAmQO4YcSpXaq2YU2fbOAfCcaTKBVo7DPYtx+JUbAitFM=
+X-Gm-Gg: AZFdTZdXxlt5F4x0WE9Wu6malceDwzDa1HxPoJzpcgvu1lD5V22D8e7m+ds18HsW0Sh
+	b8GqJ9yR64s+91BQM6wLK1t8hNj/TEWzApzbJA55pTzxf8qL4PTtFslwPj6C8SjdgudmtVnrgwf
+	kcNPP6nSQMxyxAYsRyRjTrV5ywPqMGpmUcpn8LXK0iK4mYnJPm2cKdrqSfJfT7MDNMu9UlffVTX
+	SR901Eq9jIhuvtRPth8NVFewkZnnOtYvIeKqnajAdbLoLtIM216+goc5ggEQbw0wrta1G0mOnhJ
+	Hb2EJRsUQ2RXg90gkyfoSXKkRCKiDqiEP6yhSJHirbdykLnSdfJCgk55cZb9POz9suN4Hcj7Xxr
+	AAPBRUCEIbfo+iN89VvGwsLzpTNS+pr4mqP8AdblPguyBWWKIn2tVF6TJ0ESJmNao3dj/aMDvmM
+	SmSWpddiG8aaZyrC99IhX5sVWdL3TTdlvHOF24r0lxYePnrHTdkemh95O9vMtGAtpdKFhOSTViB
+	WppvRFCbH6K5AJiTIsRB8cRHkwU45f1M9FJkXCyw0DDAAcykBz0JkEqIgP14bxlfVWkIGGMPw7H
+	Jzl6zOtQgt8t05PF857G4l44VLdNPP8Io7zArkomcrndgNJ09uE3HDKfxZT/hUEdzv5MPfE+DMd
+	Zh7d1jWk40L0An9dr6aBPgvyeWWksGpw=
+X-Received: by 2002:a05:600c:3e0e:b0:4bb:6a5a:783d with SMTP id 5b1f17b1804b1-4bb88929c63mr304761965e9.18.1795577295489;
+        Tue, 24 Nov 2026 19:28:15 -0800 (PST)
 Received: from DESKTOP-BJ3EVC4.lan (178-164-182-185.pool.digikabel.hu. [178.164.182.185])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fe48sm28918822f8f.23.2026.11.24.19.28.10
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fe48sm28918822f8f.23.2026.11.24.19.28.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 24 Nov 2026 19:28:12 -0800 (PST)
+        Tue, 24 Nov 2026 19:28:14 -0800 (PST)
 From: Abdur Rofik <rofikcoga@gmail.com>
 To: linux-arm-msm@vger.kernel.org
 Cc: devicetree@vger.kernel.org,
@@ -93,9 +93,9 @@ Cc: devicetree@vger.kernel.org,
 	Neil Armstrong <neil.armstrong@linaro.org>,
 	Dmitry Torokhov <dmitry.torokhov@gmail.com>,
 	Abdur Rofik <rofikcoga@gmail.com>
-Subject: [PATCH v6 4/6] dt-bindings: input: touchscreen: add LG SW42902
-Date: Wed, 25 Nov 2026 04:28:00 +0100
-Message-Id: <20261125032802.8460-5-rofikcoga@gmail.com>
+Subject: [PATCH v6 5/6] Input: touchscreen: add LG SW42902 support
+Date: Wed, 25 Nov 2026 04:28:01 +0100
+Message-Id: <20261125032802.8460-6-rofikcoga@gmail.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20261125032802.8460-1-rofikcoga@gmail.com>
 References: <20261125032802.8460-1-rofikcoga@gmail.com>
@@ -110,111 +110,433 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Document the LG SW42902 I2C touchscreen controller, including
-its interrupt, reset GPIO, power supplies, and panel touch properties.
+Add basic multitouch support for the SW42902 controller. Implement the
+power and reset sequence using regulator supplies and use the firmware
+already present in controller flash; no firmware update is performed.
 
 Signed-off-by: Abdur Rofik <rofikcoga@gmail.com>
 ---
- .../input/touchscreen/lg,sw42902.yaml         | 72 +++++++++++++++++++
- MAINTAINERS                                   |  6 ++
- 2 files changed, 78 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml
+ MAINTAINERS                         |   1 +
+ drivers/input/touchscreen/Kconfig   |  13 +
+ drivers/input/touchscreen/Makefile  |   1 +
+ drivers/input/touchscreen/sw42902.c | 360 ++++++++++++++++++++++++++++
+ 4 files changed, 375 insertions(+)
+ create mode 100644 drivers/input/touchscreen/sw42902.c
 
-diff --git a/Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml b/Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml
-new file mode 100644
-index 0000000000000..e8ef2d325635d
---- /dev/null
-+++ b/Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml
-@@ -0,0 +1,72 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/input/touchscreen/lg,sw42902.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: LG SW42902 Touchscreen Controller
-+
-+maintainers:
-+  - Abdur Rofik <rofikcoga@gmail.com>
-+
-+description:
-+  The LG SW42902 is an I2C capacitive touchscreen controller used on the
-+  LG V60 (timelm).
-+
-+allOf:
-+  - $ref: touchscreen.yaml#
-+
-+properties:
-+  compatible:
-+    const: lg,sw42902
-+
-+  reg:
-+    maxItems: 1
-+
-+  interrupts:
-+    maxItems: 1
-+
-+  reset-gpios:
-+    maxItems: 1
-+    description: Active-low hardware reset
-+
-+  vcl-supply:
-+    description: 3.3 V power supply
-+
-+  vdd-supply:
-+    description: 1.8 V power supply
-+
-+required:
-+  - compatible
-+  - reg
-+  - interrupts
-+  - reset-gpios
-+  - vcl-supply
-+  - vdd-supply
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/gpio/gpio.h>
-+    #include <dt-bindings/interrupt-controller/irq.h>
-+
-+    i2c {
-+        #address-cells = <1>;
-+        #size-cells = <0>;
-+
-+        touchscreen@48 {
-+            compatible = "lg,sw42902";
-+            reg = <0x48>;
-+
-+            interrupts-extended = <&tlmm 39 IRQ_TYPE_LEVEL_LOW>;
-+
-+            reset-gpios = <&tlmm 38 GPIO_ACTIVE_LOW>;
-+            vcl-supply = <&reg_ts_vcl>;
-+            vdd-supply = <&reg_ts_vdd>;
-+
-+            touchscreen-size-x = <1080>;
-+            touchscreen-size-y = <2460>;
-+        };
-+    };
-+...
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 6a41a0690d9f0..8c88429e647ba 100644
+index 8c88429e647ba..3585dbff41be9 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -15211,6 +15211,12 @@ F:	Documentation/ABI/testing/sysfs-platform-lg-laptop
- F:	Documentation/admin-guide/laptops/lg-laptop.rst
- F:	drivers/platform/x86/lg-laptop.c
+@@ -15216,6 +15216,7 @@ M:	Abdur Rofik <rofikcoga@gmail.com>
+ L:	linux-input@vger.kernel.org
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml
++F:	drivers/input/touchscreen/sw42902.c
  
-+LG SW42902 TOUCHSCREEN DRIVER
-+M:	Abdur Rofik <rofikcoga@gmail.com>
-+L:	linux-input@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/input/touchscreen/lg,sw42902.yaml
-+
  LG SW43103 PANEL DRIVER
  M:	Abdur Rofik <rofikcoga@gmail.com>
- S:	Maintained
+diff --git a/drivers/input/touchscreen/Kconfig b/drivers/input/touchscreen/Kconfig
+index 9b9ae8ac3f7fd..6a70a20383ffa 100644
+--- a/drivers/input/touchscreen/Kconfig
++++ b/drivers/input/touchscreen/Kconfig
+@@ -1299,6 +1299,19 @@ config TOUCHSCREEN_SURFACE3_SPI
+ 	  To compile this driver as a module, choose M here: the
+ 	  module will be called surface3_spi.
+ 
++config TOUCHSCREEN_SW42902
++	tristate "LG SW42902 touchscreen"
++	depends on I2C
++	depends on GPIOLIB
++	help
++	  Say Y here if you have an LG SW42902 touchscreen
++	  connected to your system (e.g. LG V60).
++
++	  If unsure, say N.
++
++	  To compile this driver as a module, choose M here: the
++	  module will be called sw42902.
++
+ config TOUCHSCREEN_SX8654
+ 	tristate "Semtech SX8654 touchscreen"
+ 	depends on I2C
+diff --git a/drivers/input/touchscreen/Makefile b/drivers/input/touchscreen/Makefile
+index bfd9de83389d8..1ee2590014535 100644
+--- a/drivers/input/touchscreen/Makefile
++++ b/drivers/input/touchscreen/Makefile
+@@ -86,6 +86,7 @@ obj-$(CONFIG_TOUCHSCREEN_STMPE)		+= stmpe-ts.o
+ obj-$(CONFIG_TOUCHSCREEN_SUN4I)		+= sun4i-ts.o
+ obj-$(CONFIG_TOUCHSCREEN_SUR40)		+= sur40.o
+ obj-$(CONFIG_TOUCHSCREEN_SURFACE3_SPI)	+= surface3_spi.o
++obj-$(CONFIG_TOUCHSCREEN_SW42902)	+= sw42902.o
+ obj-$(CONFIG_TOUCHSCREEN_TI_AM335X_TSC)	+= ti_am335x_tsc.o
+ obj-$(CONFIG_TOUCHSCREEN_TOUCHIT213)	+= touchit213.o
+ obj-$(CONFIG_TOUCHSCREEN_TOUCHRIGHT)	+= touchright.o
+diff --git a/drivers/input/touchscreen/sw42902.c b/drivers/input/touchscreen/sw42902.c
+new file mode 100644
+index 0000000000000..0724f8a9c0bc9
+--- /dev/null
++++ b/drivers/input/touchscreen/sw42902.c
+@@ -0,0 +1,360 @@
++// SPDX-License-Identifier: GPL-2.0-only
++/*
++ * Copyright (c) 2026 Abdur Rofik <rofikcoga@gmail.com>
++ * LG SW42902 touchscreen, as used by LG V60 (timelm).
++ * Register protocol and report layout derived from the LGE vendor driver
++ * (Copyright (C) 2015 LGE, author hoyeon.jang@lge.com).
++ * This driver uses the controller's existing flash firmware.
++ */
++
++#include <linux/delay.h>
++#include <linux/gpio/consumer.h>
++#include <linux/i2c.h>
++#include <linux/input/mt.h>
++#include <linux/input/touchscreen.h>
++#include <linux/interrupt.h>
++#include <linux/module.h>
++#include <linux/of.h>
++#include <linux/pm.h>
++#include <linux/regulator/consumer.h>
++#include <linux/slab.h>
++#include <linux/unaligned.h>
++
++#define SW42902_MAX_CONTACTS	10
++#define SW42902_REPORT_SIZE	(12 + 24 + 12 * SW42902_MAX_CONTACTS)
++#define SW42902_IC_STATUS	0x600
++#define SW42902_VERSION		0x642
++#define SW42902_DEVICE_CTL	0xc00
++#define SW42902_INTERRUPT_CTL	0xc01
++#define SW42902_DRIVING_CTL	0xc03
++#define SW42902_SERIAL_SPI_EN	0xfe4
++#define SW42902_DRIVING_STOP	0x04
++#define SW42902_DRIVING_U3	0x8303
++
++static const char * const sw42902_supplies[] = {
++	"vcl",
++	"vdd",
++};
++
++struct sw42902 {
++	struct i2c_client *client;
++	struct input_dev *input;
++	struct touchscreen_properties prop;
++	struct gpio_desc *reset;
++	struct regulator_bulk_data supplies[ARRAY_SIZE(sw42902_supplies)];
++	bool suspended;
++	u8 report[SW42902_REPORT_SIZE];
++};
++
++static int sw42902_read(struct sw42902 *ts, u16 reg, void *data, u16 len)
++{
++	u8 command[] = { (reg >> 8) | (len > 4 ? 0x20 : 0), reg & 0xff };
++	struct i2c_msg msgs[] = {
++		{ .addr = ts->client->addr, .len = sizeof(command),
++		  .buf = command },
++		{ .addr = ts->client->addr, .flags = I2C_M_RD,
++		  .len = len, .buf = data },
++	};
++	int error;
++
++	error = i2c_transfer(ts->client->adapter, msgs, ARRAY_SIZE(msgs));
++	if (error < 0)
++		return error;
++	return error == ARRAY_SIZE(msgs) ? 0 : -EIO;
++}
++
++static int sw42902_write(struct sw42902 *ts, u16 reg, u32 value)
++{
++	u8 command[6] = { 0x40 | (reg >> 8), reg & 0xff };
++	int error;
++
++	put_unaligned_le32(value, command + 2);
++	error = i2c_master_send(ts->client, command, sizeof(command));
++	if (error < 0)
++		return error;
++	return error == sizeof(command) ? 0 : -EIO;
++}
++
++static void sw42902_release_contacts(struct sw42902 *ts)
++{
++	int i;
++
++	for (i = 0; i < SW42902_MAX_CONTACTS; i++) {
++		input_mt_slot(ts->input, i);
++		input_mt_report_slot_state(ts->input, MT_TOOL_FINGER, false);
++	}
++	input_mt_sync_frame(ts->input);
++	input_sync(ts->input);
++}
++
++static irqreturn_t sw42902_irq(int irq, void *data)
++{
++	struct sw42902 *ts = data;
++	struct input_dev *input = ts->input;
++	u32 status, header;
++	unsigned int count, i;
++	int error;
++
++	error = sw42902_read(ts, SW42902_IC_STATUS, ts->report,
++			     sizeof(ts->report));
++	if (error) {
++		dev_err_ratelimited(&ts->client->dev, "report read failed: %d\n", error);
++		sw42902_release_contacts(ts);
++		return IRQ_HANDLED;
++	}
++
++	status = get_unaligned_le32(ts->report + 4);
++	header = get_unaligned_le32(ts->report + 8);
++	/* Only normal absolute-touch reports; ignore pen/gesture/debug IRQs. */
++	if (((status >> 16) & 0xf) != 5 || (header & 0xff))
++		return IRQ_HANDLED;
++
++	count = (header >> 8) & 0x1f;
++	if (count > SW42902_MAX_CONTACTS) {
++		dev_warn_ratelimited(&ts->client->dev, "invalid contact count: %u\n", count);
++		sw42902_release_contacts(ts);
++		return IRQ_HANDLED;
++	}
++
++	/* A palm report cancels all active fingers. */
++	if (header & BIT(31)) {
++		sw42902_release_contacts(ts);
++		return IRQ_HANDLED;
++	}
++
++	/* Pre-scan for palm report to avoid queueing partial touch events */
++	for (i = 0; i < count; i++) {
++		const u8 *contact = ts->report + 36 + 12 * i;
++		u32 a = get_unaligned_le32(contact);
++
++		if ((a & 0x1f) == 15) {
++			sw42902_release_contacts(ts);
++			return IRQ_HANDLED;
++		}
++	}
++
++	for (i = 0; i < count; i++) {
++		const u8 *contact = ts->report + 36 + 12 * i;
++		u32 a = get_unaligned_le32(contact);
++		u32 b = get_unaligned_le32(contact + 4);
++		u32 c = get_unaligned_le32(contact + 8);
++		unsigned int id = a & 0x1f;
++		unsigned int event = (a >> 16) & 3;
++
++		if (id >= SW42902_MAX_CONTACTS || (event != 1 && event != 2))
++			continue;
++
++		input_mt_slot(input, id);
++		input_mt_report_slot_state(input, MT_TOOL_FINGER, true);
++		touchscreen_report_pos(input, &ts->prop, a >> 18, b & 0x3fff, true);
++		input_report_abs(input, ABS_MT_PRESSURE, (b >> 14) & 0xff);
++		input_report_abs(input, ABS_MT_TOUCH_MAJOR, (c >> 4) & 0x3fff);
++		input_report_abs(input, ABS_MT_TOUCH_MINOR, c >> 18);
++	}
++
++	input_mt_sync_frame(input);
++	input_sync(input);
++	return IRQ_HANDLED;
++}
++
++static void sw42902_power_off(void *data)
++{
++	struct sw42902 *ts = data;
++
++	if (ts->suspended)
++		return;
++
++	gpiod_set_value_cansleep(ts->reset, 1);
++	usleep_range(1000, 2000);
++	regulator_bulk_disable(ARRAY_SIZE(ts->supplies), ts->supplies);
++	ts->suspended = true;
++}
++
++static int sw42902_power_on(struct sw42902 *ts)
++{
++	int error;
++
++	error = regulator_bulk_enable(ARRAY_SIZE(ts->supplies), ts->supplies);
++	if (error)
++		return error;
++
++	usleep_range(10000, 11000);
++	gpiod_set_value_cansleep(ts->reset, 0);
++	/* Docomo downstream DT specifies a 90 ms hardware reset delay. */
++	msleep(90);
++
++	return 0;
++}
++
++static int sw42902_start(struct sw42902 *ts)
++{
++	u8 version[4];
++	int error;
++
++	error = sw42902_read(ts, SW42902_VERSION, version, sizeof(version));
++	if (error)
++		return error;
++	if (version[2] != 10 || (version[3] & 0xf) != 4) {
++		dev_err(&ts->client->dev, "unexpected chip/protocol: %u/%u\n",
++			version[2], version[3] & 0xf);
++		return -ENODEV;
++	}
++
++	error = sw42902_write(ts, SW42902_SERIAL_SPI_EN, 0);
++	if (error)
++		return error;
++	error = sw42902_write(ts, SW42902_DEVICE_CTL, 1);
++	if (error)
++		return error;
++	error = sw42902_write(ts, SW42902_INTERRUPT_CTL, 1);
++	if (error)
++		return error;
++	error = sw42902_write(ts, SW42902_DRIVING_CTL, SW42902_DRIVING_STOP);
++	if (error)
++		return error;
++	msleep(30);
++	error = sw42902_write(ts, SW42902_DRIVING_CTL, SW42902_DRIVING_U3);
++	if (error)
++		return error;
++
++	return 0;
++}
++
++static int sw42902_probe(struct i2c_client *client)
++{
++	struct device *dev = &client->dev;
++	struct sw42902 *ts;
++	struct input_dev *input;
++	int error, i;
++
++	if (!i2c_check_functionality(client->adapter, I2C_FUNC_I2C))
++		return -EOPNOTSUPP;
++	if (client->irq <= 0)
++		return dev_err_probe(dev, -EINVAL, "missing interrupt\n");
++
++	ts = devm_kzalloc(dev, sizeof(*ts), GFP_KERNEL);
++	if (!ts)
++		return -ENOMEM;
++	ts->client = client;
++	i2c_set_clientdata(client, ts);
++
++	ts->reset = devm_gpiod_get(dev, "reset", GPIOD_OUT_HIGH);
++	if (IS_ERR(ts->reset))
++		return dev_err_probe(dev, PTR_ERR(ts->reset), "reset GPIO\n");
++
++	for (i = 0; i < ARRAY_SIZE(sw42902_supplies); i++)
++		ts->supplies[i].supply = sw42902_supplies[i];
++
++	error = devm_regulator_bulk_get(dev, ARRAY_SIZE(ts->supplies), ts->supplies);
++	if (error)
++		return dev_err_probe(dev, error, "failed to get regulators\n");
++
++	input = devm_input_allocate_device(dev);
++	if (!input)
++		return -ENOMEM;
++	ts->input = input;
++	input->name = "LG SW42902";
++	input->id.bustype = BUS_I2C;
++	input_set_abs_params(input, ABS_MT_POSITION_X, 0, 1079, 0, 0);
++	input_set_abs_params(input, ABS_MT_POSITION_Y, 0, 2459, 0, 0);
++	input_set_abs_params(input, ABS_MT_PRESSURE, 0, 255, 0, 0);
++	input_set_abs_params(input, ABS_MT_TOUCH_MAJOR, 0, 16383, 0, 0);
++	input_set_abs_params(input, ABS_MT_TOUCH_MINOR, 0, 16383, 0, 0);
++	touchscreen_parse_properties(input, true, &ts->prop);
++	error = input_mt_init_slots(input, SW42902_MAX_CONTACTS,
++				    INPUT_MT_DIRECT | INPUT_MT_DROP_UNUSED);
++	if (error)
++		return error;
++
++	error = sw42902_power_on(ts);
++	if (error)
++		return error;
++
++	error = devm_add_action_or_reset(dev, sw42902_power_off, ts);
++	if (error)
++		return error;
++
++	error = devm_request_threaded_irq(dev, client->irq, NULL, sw42902_irq,
++					  IRQF_ONESHOT | IRQF_NO_AUTOEN,
++					  dev_name(dev), ts);
++	if (error)
++		return error;
++
++	error = sw42902_start(ts);
++	if (error)
++		return dev_err_probe(dev, error, "controller initialization failed\n");
++	error = input_register_device(input);
++	if (error)
++		return error;
++	enable_irq(client->irq);
++	dev_info(dev, "SW42902 initialized using existing flash firmware\n");
++	return 0;
++}
++
++static int sw42902_suspend(struct device *dev)
++{
++	struct sw42902 *ts = i2c_get_clientdata(to_i2c_client(dev));
++
++	if (ts->suspended)
++		return 0;
++
++	disable_irq(ts->client->irq);
++	sw42902_release_contacts(ts);
++	sw42902_write(ts, SW42902_DRIVING_CTL, SW42902_DRIVING_STOP);
++	sw42902_power_off(ts);
++
++	return 0;
++}
++
++static int sw42902_resume(struct device *dev)
++{
++	struct sw42902 *ts = i2c_get_clientdata(to_i2c_client(dev));
++	int error;
++
++	if (!ts->suspended)
++		return 0;
++
++	error = sw42902_power_on(ts);
++	if (error)
++		return error;
++
++	ts->suspended = false;
++
++	error = sw42902_start(ts);
++	if (error) {
++		sw42902_power_off(ts);
++		return error;
++	}
++	enable_irq(ts->client->irq);
++
++	return 0;
++}
++
++static DEFINE_SIMPLE_DEV_PM_OPS(sw42902_pm_ops, sw42902_suspend, sw42902_resume);
++
++static const struct of_device_id sw42902_of_match[] = {
++	{ .compatible = "lg,sw42902" },
++	{ }
++};
++MODULE_DEVICE_TABLE(of, sw42902_of_match);
++
++static const struct i2c_device_id sw42902_ids[] = {
++	{ .name = "sw42902" },
++	{ }
++};
++MODULE_DEVICE_TABLE(i2c, sw42902_ids);
++
++static struct i2c_driver sw42902_driver = {
++	.driver = {
++		.name = "sw42902",
++		.of_match_table = sw42902_of_match,
++		.pm = pm_sleep_ptr(&sw42902_pm_ops),
++	},
++	.probe = sw42902_probe,
++	.id_table = sw42902_ids,
++};
++module_i2c_driver(sw42902_driver);
++
++MODULE_AUTHOR("Abdur Rofik <rofikcoga@gmail.com>");
++MODULE_DESCRIPTION("LG SW42902 touchscreen driver");
++MODULE_LICENSE("GPL");
 -- 
 2.39.5
 
