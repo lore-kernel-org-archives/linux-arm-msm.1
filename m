@@ -1,180 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.229.12
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795629752;
-	b=GNamNncyjcvt3W25PYd1l+Yfa9EG9uRcY89tcQkbzdhkEY9eXmvJBDyW91yVm1Dk/58x
-	 QTw5xD3fVNZKXLRlvLM87MEAf5UVxmOiHNa5acKCdEPhwCwOQxC9RN1V3RU6pZ3KjBKCz
-	 NKnxhN3Jc+voWt4QM/P+Bqr0gq+vl0eKEW0vAuh/bnNL3S/m6pclhpF7LxH7+a6A7AgLh
-	 VuvkWuwIM8jCePM31z9xfiOtQe254+dwTcBnu7mIY1BgVlkwWBa1dsUbGT5AwxcIcZOzr
-	 45obF0lkeLKpyy9xL7mKcp094CzsWFCfYd3Y5z2ycBwstMMC7W7iYOOzLSCu/r4NG9Q==
+	t=1795630375;
+	b=DvaTvaUCNc/yIwsbCg1b1d472yIqlzbugyr/P7y95tsCqUXj9MZUcENGC+hskStRJi24
+	 V5+kXVC7SxmOz1T2s7xSQSZd+Rllum5QRE+KV8W1Vgko8baAtSif5SftjRU6L5dH9O/ra
+	 zS5KKIZOMW8g4ediRSl0BUIsd1O+H3BV7foKF1BQtLgQ7h8pBbWQ/jsN29hzfJjIp+oFn
+	 twcRjq1+qcaIHjatVqSqXF2WjG/JU0MuylIqzN7sBYWJt0UlQFhdw+F+Q6yFWPgz5XI5u
+	 dMcTGc/jZEmYP376o28ilz3GI87avgVxa0VyF+8OjSxyDCwNn+pPJaL/qnHjRQVHpug==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795629752;
-	h=DMARC-Filter:DKIM-Signature:Received:Received:From:To:CC:Subject:
-	 Thread-Topic:Thread-Index:Date:Message-ID:References:In-Reply-To:
-	 Accept-Language:Content-Language:X-MS-Has-Attach:X-MS-TNEF-Correlator:
-	 x-ms-publictraffictype:x-ms-traffictypediagnostic:
-	 x-ms-office365-filtering-correlation-id:x-ld-processed:
-	 x-ms-exchange-senderadcheck:x-ms-exchange-antispam-relay:
-	 x-microsoft-antispam:x-microsoft-antispam-message-info:
-	 x-forefront-antispam-report:
-	 x-ms-exchange-antispam-messagedata-chunkcount:
-	 x-ms-exchange-antispam-messagedata-0:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-OriginatorOrg:
-	 X-MS-Exchange-CrossTenant-AuthAs:X-MS-Exchange-CrossTenant-AuthSource:
-	 X-MS-Exchange-CrossTenant-Network-Message-Id:
-	 X-MS-Exchange-CrossTenant-originalarrivaltime:
-	 X-MS-Exchange-CrossTenant-fromentityheader:
-	 X-MS-Exchange-CrossTenant-id:X-MS-Exchange-CrossTenant-mailboxtype:
-	 X-MS-Exchange-CrossTenant-userprincipalname:
-	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
-	bh=GeUjGYJL4PALjYceCyp224ORorBllon9uh1dwU1Ob9g=;
-	b=rZ0+6MVk4fJyhlqwJ6lsD8/XLqd8GtJjPhBQjsvu9XNT5aAb2aVIkKj6BXaUuy6vVALb
-	 BvVB5jGFjoYeFPSoMXXf3ofWpq2EE3niosq76Bzp1vs5ZK6hRsjwMBWx4wJQPwQ9YDGlQ
-	 ASgUypKDdo5B4V0mp1SHikP4bi2i5OnE6fz4ncZuo7UEOEw3dKWNJGWxGQ1BXtER3wGIm
-	 mvuofqHbQJf5CCC28mUw8ej0MxXYFEkCV25mJ0hKR502gMP0CT71KX1bWUOL9TwBgwg6a
-	 AAppVINt5oDMOwA+LkE0MzG4GaGuv9rQvDe8NPFKFeDv/a1MBi3B70ZOeDH65RFVQhA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795630375;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=1kb4MkqJfJ01MWxX0WLE/KCVtYTRmoNOlVQyKbSTlqo=;
+	b=LASiMfge3WVdIaFvo1ZfRZne9Dd9EvD7di8/mkiO8vWlRYPhgCZBBetu19o1UzsJ6bsy
+	 HS/szCUTSOhNgvjlOzIQlAUX3X2nisbTOT/6URSY8c2WCSrYOWcxQ+mtIcIuSu02IJgZe
+	 RLyBkcvcYafjX2acw7MRFiM9xv7ZzR7x5OtAChUkTdIfZf0Z12dO9Nl5fLg7s5UzFiU0w
+	 j5j6W5op32C9Syt282VWzz8IZ5UxarcV1QUKSDGN3fYw7OtJpfrOYhejjb7O5Xqwg4Ktb
+	 eBkiFZwfYY7SrQguMAh/seI5WgQh7cpIkmA1Qm1dEEvTyqKX8bbVbidqBksY6cgzcPA==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=bp.renesas.com;
-	spf=pass smtp.mailfrom=bp.renesas.com;
-	dkim=pass header.d=bp.renesas.com header.i=@bp.renesas.com header.a=rsa-sha256 header.s=selector1 header.b=R94wr7SI;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.229.12
-Received: from TY3P286CU002.outbound.protection.outlook.com (mail-japaneastazon11010012.outbound.protection.outlook.com [52.101.229.12])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JQsZWzkd;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 255EA606A323;
-	Wed, 25 Nov 2026 18:02:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 255EA606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=bp.renesas.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=bp.renesas.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0C970606A334;
+	Wed, 25 Nov 2026 18:12:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=bp.renesas.com header.i=@bp.renesas.com header.a=rsa-sha256 header.s=selector1 header.b=R94wr7SI
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oGjCayexn8PY1xwZznQXOmeKE60BaZ1KOsJ//3p1rsckaLW2DxefkH6eS/59eWsz7WS60BC3fbj+wzq6KCjh9gkgWBVsvBFgZOMPYPUNkePmygkYw3H/9lhkgiukqYfX8cMpTX6OkdQ+BEVeqwiyaqHwm28e61ItU/POEW+wAkWw3euEeFnJsTA60y4DCjKFQUAf5c4aGPZMBh25apSuaFai+fovw2myqnKiXKNIb71Mlkqhu2s954+W0dgSS2Eu5Crzo8Fwn5Y//FongCfa1khEwnIzl98dwKQShsniq8siPy2MieOk0BcJ/epFsyVIgj5zDVL0cgD+FFcBfHWL6Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GeUjGYJL4PALjYceCyp224ORorBllon9uh1dwU1Ob9g=;
- b=C2ImF31fZCQik7OpDQvdLkelLiBB/WsSwOruZAnFeSP3ji1iRCboQE9qn71u9ZlhjslJtBfwNWL1pCXikCf1MtfXSliTVlsJzDep3QkxnVr+dV69/PLU0VdXcumMa3SJ+VSfRprgeCvBmIif9BudwBUoSTA3NJTpglBKkkbhg6vmMIA7DzaAoVNZBc/j34F3NtMSYbiTlinx3tGrv4Hy3ffn/VGAkjtSLf50AOX7vwCazuAXDQemBbsgIphYHViI3ssfA2zpB4H/orHj5iEzH1Mne0P49H2w5Us41CnxYulS0VQS1eXuQXrJdPAPxtu7H0d4CbpkTcPeuOcuOM26Rg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=bp.renesas.com; dmarc=pass action=none
- header.from=bp.renesas.com; dkim=pass header.d=bp.renesas.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bp.renesas.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GeUjGYJL4PALjYceCyp224ORorBllon9uh1dwU1Ob9g=;
- b=R94wr7SIWi1wEzSnkDAvN47fF4EczJ47KMARRJrwmtyt6jjB9IcweLH/EA8znapRiX9JUOTUaTowf1w1DwqsonPjfCdV8QTA8Pc9wpgXCf9dPJoS49fOUKvv5q7S0DtE9b5Ol6rntTjBdmMJX8bm1zCdH6vHgzq1WvJ2ZUPgyyM=
-Received: from TYYPR01MB6603.jpnprd01.prod.outlook.com (2603:1096:400:e0::9)
- by TYWPR01MB12075.jpnprd01.prod.outlook.com (2603:1096:400:43f::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.7; Wed, 25 Nov
- 2026 18:02:26 +0000
-Received: from TYYPR01MB6603.jpnprd01.prod.outlook.com
- ([fe80::145b:b854:162:2e7f]) by TYYPR01MB6603.jpnprd01.prod.outlook.com
- ([fe80::145b:b854:162:2e7f%5]) with mapi id 15.21.0662.004; Wed, 25 Nov 2026
- 18:02:26 +0000
-From: Biju Das <biju.das.jz@bp.renesas.com>
-To: wsa+renesas <wsa+renesas@sang-engineering.com>
-CC: Lee Jones <lee@kernel.org>, "linux-kernel@vger.kernel.org"
-	<linux-kernel@vger.kernel.org>, =?iso-8859-2?Q?Micha=B3_Miros=B3aw?=
-	<mirq-linux@rere.qmqm.pl>, =?iso-8859-2?Q?Niklas_S=F6derlund?=
-	<niklas.soderlund+renesas@ragnatech.se>,
-	=?iso-8859-2?Q?Uwe_Kleine-K=F6nig_=28The_Capable_Hub=29?=
-	<u.kleine-koenig@baylibre.com>, Aaro Koskinen <aaro.koskinen@iki.fi>, Adrian
- Hunter <adrian.hunter@intel.com>, Aidan MacDonald
-	<aidanmacdonald.0x0@gmail.com>, Al Cooper <alcooperx@gmail.com>, Alex Dubov
-	<oakad@yahoo.com>, Allen Pais <allen.lkml@gmail.com>, Apelete Seketeli
-	<apelete@seketeli.net>, Aubin Constans <aubin.constans@microchip.com>, Binbin
- Zhou <zhoubinbin@loongson.cn>, Broadcom internal kernel review list
-	<bcm-kernel-feedback-list@broadcom.com>, Cavium Inc <support@cavium.com>,
-	Christian Loehle <christian.loehle@arm.com>, Florian Fainelli
-	<florian.fainelli@broadcom.com>, Geert Uytterhoeven
-	<geert+renesas@glider.be>, Georgi Djakov <djakov@kernel.org>, Guangshuo Li
-	<lgs201920130244@gmail.com>, Heiner Kallweit <hkallweit1@gmail.com>, Hiroshi
- DOYU <Hiroshi.DOYU@nokia.com>, Huacai Chen <chenhuacai@kernel.org>, Jaehoon
- Chung <jh80.chung@samsung.com>, Jan Glauber <jan.glauber@gmail.com>, Jarkko
- Lavinen <jarkko.lavinen@nokia.com>, Jerome Brunet <jbrunet@baylibre.com>,
-	Josua Mayer <josua@solid-run.com>, Juha Yrjola <juha.yrjola@nokia.com>, Kamal
- Dasu <kamal.dasu@broadcom.com>, Kevin Hilman <khilman@baylibre.com>,
-	Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>, Prabhakar Mahadev
- Lad <prabhakar.mahadev-lad.rj@bp.renesas.com>, Lars-Peter Clausen
-	<lars@metafoo.de>, "linux-amlogic@lists.infradead.org"
-	<linux-amlogic@lists.infradead.org>, "linux-arm-kernel@lists.infradead.org"
-	<linux-arm-kernel@lists.infradead.org>, "linux-arm-msm@vger.kernel.org"
-	<linux-arm-msm@vger.kernel.org>, "linux-mips@vger.kernel.org"
-	<linux-mips@vger.kernel.org>, "linux-mmc@vger.kernel.org"
-	<linux-mmc@vger.kernel.org>, "linux-omap@vger.kernel.org"
-	<linux-omap@vger.kernel.org>, "linux-renesas-soc@vger.kernel.org"
-	<linux-renesas-soc@vger.kernel.org>, Martin Blumenstingl
-	<martin.blumenstingl@googlemail.com>, Neil Armstrong
-	<neil.armstrong@linaro.org>, Paul Cercueil <paul@crapouillou.net>, Phil
- Blundell <pb@handhelds.org>, Pierre Ossman <drzeus@drzeus.cx>, Pramod Gurav
-	<pramod.gurav@linaro.org>, Ritesh Harjani <riteshh@codeaurora.org>, Robert
- Richter <rric@kernel.org>, Samuel Ortiz <sameo@openedhand.com>, Shawn Lin
-	<shawn.lin@rock-chips.com>, Tony Lindgren <tony@atomide.com>, Ulf Hansson
-	<ulfh@kernel.org>, Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-Subject: RE: [PATCH 00/13] mmc: Assorted bug fixes across MMC host drivers
-Thread-Topic: [PATCH 00/13] mmc: Assorted bug fixes across MMC host drivers
-Thread-Index: AQHde39EmwGk/BJHN0mctvCzIQKx+bc+zFjwgAAaWwCAADAc0A==
-Date: Wed, 25 Nov 2026 18:02:25 +0000
-Message-ID:
- <TYYPR01MB66030F3A816556D40E658BB986432@TYYPR01MB6603.jpnprd01.prod.outlook.com>
-References: <20261123191703.179283-1-lee@kernel.org>
- <OS3PR01MB65968B3C9FD48C0A7515AA1986432@OS3PR01MB6596.jpnprd01.prod.outlook.com>
- <awb59uLiTOEfLaSm@shikoro>
-In-Reply-To: <awb59uLiTOEfLaSm@shikoro>
-Accept-Language: en-GB, en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=bp.renesas.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: TYYPR01MB6603:EE_|TYWPR01MB12075:EE_
-x-ms-office365-filtering-correlation-id: 35baa816-a6d6-48d2-62e1-08df4b1e4356
-x-ld-processed: 53d82571-da19-47e4-9cb4-625a166a4a2a,ExtAddr
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|23010399003|7416014|376014|366016|4143699003|18002099003|22082099003|10067099003|11063799006|56012099006|261026121527099003|38070700021;
-x-microsoft-antispam-message-info:
- rtgwF68RK+AVuhV74y0yc9+6h5WeyzxUJrcdHM4/wtnzg6SonvrcC/sPFobQEyDcirtdHXXgpROILTtCs1aS754wGpGdkuM6R+pg+/b6fzYhjDMnhDI39k9+iUZnE7351iefnVRbXQNCsJN6EZnb7mcxx2hD5IySpHScwLvLhwb02cR07pbRDKjQ//L5DxlDUJJKuoec/unvhc68CeetbIH5ReeV3RqzWHA9/dN+PD0ekSwN+wWtDNCSGBuD7QblJrnV5iVEMOEeir3kmGVjEsPs6abL3IjE8H9b4F4pIqGvpSL3De8HtslYvIbgUovjLRW6Ym+sOZ36aMZ/0NkM1jiU9p6xxPbAH2bbwvP4hcdO+muMv8nvW+I86ooDEzDxGQlNQvJJ7eWCI5EypbSXx8pFSTdizNVc0hbcaRN4O582kOlsdwEaGXIe8ANAcRjkVbBiBN9QvcVQijPA0iY2nc4N/YRkOmz17dzU6/GUnAc+pLXI6a3SIQbguKSi0NTQJOkglmywY5iuaakOYNd1orkvjBH0eYGdZddethWwq1hSi6n552LTNGMdZpzy330vCKlmXUkUQcVfBnMD7L2OfySeNWu6CWU4xbltnNNGuyEP7Hsa/cW9xjQ5nM3POVXYNEnPy4D8KnIlgveO+GY1iNg9XueifaF+5VkbMJrQFkjuKh4sV++fW1Z513a7gbjW6wJetcdAC0+f9GTWvM45k8CE8BiP8/2vjxgUdpgwjpI=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYYPR01MB6603.jpnprd01.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(7416014)(376014)(366016)(4143699003)(18002099003)(22082099003)(10067099003)(11063799006)(56012099006)(261026121527099003)(38070700021);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-2?Q?Mreph5UG7Qm9M9v7K0UwmMM0YzXGjWgARYLeLRjXaYZ7G9Xm7pbr//vDp2?=
- =?iso-8859-2?Q?9TPx4TORE2jbYdn+FYjU14RxDCVDtgN8k7jXbaAlo3ZS20xAI3WUQBI+Tn?=
- =?iso-8859-2?Q?cgdCWSlEVzM4/aIY2CEznrn4w0oSyA59Udd5SaCG3MIH/mVQcVBSGmt13H?=
- =?iso-8859-2?Q?HGibRDfBXIfytrCiboDe1NnCNmyVzLwbHBoEq6NdBVZ6TreGAYDSkTeeFT?=
- =?iso-8859-2?Q?W6flec9uKLaUkEvLwk8w6Xq1MsMAwVPQiFJGOq24/gV6qcySXe/QQnVvlP?=
- =?iso-8859-2?Q?GS+wWO8wvOATT95N6A8GnEb0esgdgaCz6IfpxpJv5gItIwcub7P+xnGHO5?=
- =?iso-8859-2?Q?VBydLK40esIzFP1HPfTnfzBqTk3p+6xBDiFuQTrh6xc4tZGso3yEBzIDqP?=
- =?iso-8859-2?Q?e8M907QATuUA/f0wiDiXHtu3VjoRz74XNbZ5WjVs7Foo556U2tw9HXy6OQ?=
- =?iso-8859-2?Q?wPzVMm2C1Rf/bGHI0rh3ub+egYGgRGM+AvSJCR3JQ75SDB8iv2SGwsOuhz?=
- =?iso-8859-2?Q?iXZW+AdPFu0DsdNJFOzoJJ5ehOePmo11zZaP24WvZmZz/XMUTrObSluiyr?=
- =?iso-8859-2?Q?g/LBwPbQl9CCSvTV/phNqLBGJSD0mtev7Yf68Ap+mnhBf8nA1SemBdTrI9?=
- =?iso-8859-2?Q?e9+Ogm+2EbHuHumHnDkfTLsK5RAnKYmp/qEWJNX4aooAKzjraNpdAk0R4f?=
- =?iso-8859-2?Q?nXcJaR3hiCH0c7Q/sSy7Ex+zsvUVFpIbObTqKk3xc67rmvQhze4euEDh2p?=
- =?iso-8859-2?Q?tbIzRZ3+H82Yn+I0h6VHDT+RMwYViQlSWQkVbVGPQyiEu64s2kHHb5xNWV?=
- =?iso-8859-2?Q?RvqDJvdaSiD0iEqVY7gu2ii2OKBSnhEx97b/xcPJi9sOfVDx8Da6RwGZha?=
- =?iso-8859-2?Q?ieojSC4Es6orKNttCzTpb9yf2IzGk+NHHMKIFq2jMdlt6TKOir3lU3LjP8?=
- =?iso-8859-2?Q?wNE1IKInvzO8PX2pUC520/6N0Xkqru/g+zVHm1GCPvmFYZy1HLR6dUYHve?=
- =?iso-8859-2?Q?VLZ2Wkyy56fCNUHXk2qOPcZhzwHCtBr+UiIC62qUTI8BGYYwP87eM2Unbx?=
- =?iso-8859-2?Q?ImBtgPhES57FbszgSbrXqDMkRml67RdPmaS/vroNi7IyETAN2H8TgDQ51U?=
- =?iso-8859-2?Q?+eJTTvm90YQGZjBd9LMhgJfmD1saXGWNtbRNfO6fE0U3BaQc+OzcfmTnbZ?=
- =?iso-8859-2?Q?c6KizA9H9PKQz7dSofHpHpwCHUDVwG6T8M4UYCiXmWWD+R9QSn5aeIEETS?=
- =?iso-8859-2?Q?PdXx6ydS4BZY/idm6IFph5FWIfM8VfGH0WEcr+K++x+dNnQlsBSDCrtQgT?=
- =?iso-8859-2?Q?LXr21hYx0Q+kVepf1zQTiQ+SNiyCgzhBy+uYoB+Qoj+6rhnm9CveFCpU0E?=
- =?iso-8859-2?Q?G6uIJxvwvxm5/b6Lx6EzcW7aG7OgbFeLQRFF54+it+4r33td/Q4WEjfg8A?=
- =?iso-8859-2?Q?Yv7I0aJ+wa8HftxWoaz33/2EjVNOee6pYJ6XlkO7zoqvBEZVZi2uBACM3G?=
- =?iso-8859-2?Q?8e/NiyunGCs4YZ6tYmRpdM8vesEoypYYiB9erM8dbPCSrE6mIK9Cema+kf?=
- =?iso-8859-2?Q?mb4NtODhSIRpUkHcHWKljQ287gWklH51bL43vBjJ2N8VgeO4YJxKeRqC50?=
- =?iso-8859-2?Q?FhePVGYqSuLWp4EwWpyEbz4T6B98sfn2uU6FDVns9tPWyUiYYcevl3QDQI?=
- =?iso-8859-2?Q?iM8kDaIa18B0ArnrFUABTCN3DbhsIsO480cO22j5OocHi14eiNkINuWm5d?=
- =?iso-8859-2?Q?/w6gB+fMglN1OjMEMDuVnKIGGSAxDYFcz9MyJsWfcf//iesmf0wu+wx36Q?=
- =?iso-8859-2?Q?n1WyYwk7lQ=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-2"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JQsZWzkd
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795630374;
+	b=OCeSVYDy0f85IHjMqbCVMtOwlhxwaeSm9cOqI8fawfl6fO00g4LrS4mJkXss/+RVY7LY
+	 DhKgbPBpfwtRpCnBsm1Ij7MlQrMIGbEGQVOAmu/OO25WXatsZITDCaWe6i8UXPhI8kwzS
+	 stlww6SjVMM6fXsEziFzyFdgdrW7FWp+UvlWooNSXiKxQOBY7EEdtn9dxTlepQ3nctZ9X
+	 IdMSGScDYtstDGlDfIMxIN3C7qZs7LYFYLN/fzl6NKXo2i6CYcLeUyuqJwSBuBoejtiX2
+	 csB0hxbKeAW93jgli1xc7WgonrspaCCNuDNFgixRgB0tk6kUMNXw3fLFPXWvzx1Ha3Q==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795630374;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=1kb4MkqJfJ01MWxX0WLE/KCVtYTRmoNOlVQyKbSTlqo=;
+	b=FHsi31VVhNiXYUTtIVh1QGX1PZQpSf1Eazy1oA5btgpt3zvOiFq60pkU37kSX3vZUfit
+	 lJr2I7ICk+Aco038Rk8wR0oXyWtBF0dCRy8Y0KORPu37soIeFfXtidixBMgoLk7yFRi5D
+	 iVscqxqwpH9mFWOFLkVeHpRxybwjji64mtaiDpIDlmZViZorQjrCrvI5Wz2EJo3syL/v8
+	 n2YacqlCPYEHshRoL3qUoYgTh2JD6LmfQ1Rxs2KnX6ENEcwO4XuJECnVI/mebOGLJVDz7
+	 5SteeiTBsXaYxXN34O908omQFTkHrTAmJjTzzCmCG4sMk8LiMT1aZGI69tMhS4stBow==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id EE4981F000C6;
+	Wed, 25 Nov 2026 18:12:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795630374;
+	bh=1kb4MkqJfJ01MWxX0WLE/KCVtYTRmoNOlVQyKbSTlqo=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=JQsZWzkdWXi5dM+i8fWnKduKyihc8sdnsrNHJK44B7oF9XeJ1PkooRY/fx6oxheOd
+	 feJbgR+otNQphSbeN+5vdHmL0d932lTNUXEf/PHVN1DMxYhvUI7dj5fiJn3yWE7U3S
+	 /GiPREmiIYmR8h/+L+dUnduEqLomJC25jH3P6LjRd+YnebzwXsgoiNBuddcKOtyq49
+	 GOpHNoeXHV/OttH+YtLzW3LSQABRXOGTqXYHxVTeul5wFGpaNT7uR4RBMTYa3qv9FX
+	 EXNjg3NOm6lUnVQOoYb8Be/ZCXxS5O27dpd1diZ4rpHUOLlqGarwwK1ni7CTh7Ra5m
+	 hnLbqRCe3+vHw==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 737A74CF69;
+	Wed, 25 Nov 2026 18:12:48 +0000 (UTC)
+From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
+Date: Wed, 25 Nov 2026 19:12:45 +0100
+Subject: [PATCH v4 1/9] dt-bindings: display: panel: s6e3ha8: Adjust to
+ reflect the DDIC and panel used
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -184,37 +83,139 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-OriginatorOrg: bp.renesas.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: TYYPR01MB6603.jpnprd01.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 35baa816-a6d6-48d2-62e1-08df4b1e4356
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Nov 2026 18:02:26.0231
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 53d82571-da19-47e4-9cb4-625a166a4a2a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: YFgqRNVoAO7pFsZSuXHdlATS9oED7vihFqGkHNkuPnMa8DbOW4gDeOw0fWRjVPHeycBIBVZvxW/845W5Q1R5Ff5e+LLUdq1uIewe2CqifGs=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYWPR01MB12075
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261125-crosshatch-panel-v4-1-120adc58e737@ixit.cz>
+References: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
+In-Reply-To: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
+To: Dzmitry Sankouski <dsankouski@gmail.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>, 
+ Simona Vetter <simona@ffwll.ch>, 
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
+ Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: Marco Mattiolo <marco.mattiolo@hotmail.it>, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
+ David Heidelberg <david@ixit.cz>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3098; i=david@ixit.cz;
+ h=from:subject:message-id;
+ bh=izTTRiBpx1JipD+dbLjNqF77ZbLX4nMkT+eXkb5bPYw=;
+ b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBrByUehr4emA3qeY3gQxZgr/wAfiHOTvNYwo+Kc
+ YOA1+5sXx2JAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCawclHgAKCRBgAj/E00kg
+ cq2ZD/9ZtNuvtR/a/J56Ln883I8IIqwF8RZlVQb30sIuL9c0rKrIfCxazKZ+poIZKG+p041E1lb
+ Z6LNCHtUlmYo/Y0v+L0WjDHKAIdcURh7AeP4YoBfIOssgbIu0zbSI5wsv1Hnyx023dsUpavnxYz
+ vMv55atqo2FnMDQCMZkfiEV0YEzAaCLG2MDvL23KDP3G6uwp2VBuC9WJbh/AFcE3IVHel8LafRj
+ 9aK0MrvrD/UMSjffJKLxk/ffmT1w4gyn+43Z4NxkK8IEHaf3/NXhrNo9vvVhQWaHWiavhv1uA5j
+ D2m6ivG4wU8asYllkq6NgZtoLrj3mnN7JfOoH1lqdVZBQQDy2vf8qnVc0BtlpDZz82IPz+uoN7r
+ tFybrJD4AkuVoDaVg2acPCzvDu+ickmrBgLpZrR1aaSuI7kbDLfPOqsADirmKWIMhWJukIOUPA9
+ TTTpaIC5R+fCj4ga+JtUEN+ERsJ7b/Hu8/p6BAwZF9Hy2Kp5UADscWB5qfUqp7y/x7Q3EknRDmk
+ BFuyA3tbGSjp+TBJKD3/a4y0bc+PYp3u7aRa6K6R7yurC77bnAPC//UwM/bSt0rvLmE/wtQ0sEp
+ zOL9fHs1DS7peLZBsB8vLFHZ/M73x9xIRilsGcUSPDt7EmnDYXLWQZelYLUlORfxRxAnYgwPJ8x
+ 60gjP/EteLBSagw==
+X-Developer-Key: i=david@ixit.cz; a=openpgp;
+ fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
+X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
+X-Original-From: David Heidelberg <david@ixit.cz>
+Reply-To: david@ixit.cz
+Content-Transfer-Encoding: 7bit
 
-Hi Wolfram,
+From: David Heidelberg <david@ixit.cz>
 
-> -----Original Message-----
-> From: wsa+renesas <wsa+renesas@sang-engineering.com>
-> Sent: 25 November 2026 15:09
-> Subject: Re: [PATCH 00/13] mmc: Assorted bug fixes across MMC host driver=
-s
->=20
->=20
-> > > Cc: Wolfram Sang <wsa+renesas@sang-engineering.com>
->=20
-> I plan to review the Renesas related changes early next week.
+S6E3HA8 is the DDIC, while the panel used on the Samsung Galaxy S9 is
+the Samsung AMB577PX01. Introduce a compatible reflecting that using
+established practice 'vendor,ddic-panel' format. Adjust the example,
+and deprecate the DDIC-only samsung,s6e3ha8 compatible as
+the DDIC isn't able to auto-detect the panel attached anyway.
 
-Thanks.
+We're going to introduce another panel with different sequence, so keep
+calling original panel sequence just by the DDIC name is confusing.
+While we're at it, we can cleanly fix reversed GPIO polarity.
 
-FYI, I just done mmc_test read/write performance on both SD/eMMC
-interfaces RZ boards.
+Update the polarity to better match newly introduced compatibles with
+fixed logic.
 
-I have n't tested SDIO
+Signed-off-by: David Heidelberg <david@ixit.cz>
+---
+ .../bindings/display/panel/samsung,s6e3ha8.yaml         | 17 ++++++++++++-----
+ 1 file changed, 12 insertions(+), 5 deletions(-)
 
-Cheers,
-Biju
+diff --git a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
+index 00ce5a4e1c6be..ca250b1b91712 100644
+--- a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
++++ b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
+@@ -1,28 +1,35 @@
+ # SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
+ %YAML 1.2
+ ---
+ $id: http://devicetree.org/schemas/display/panel/samsung,s6e3ha8.yaml#
+ $schema: http://devicetree.org/meta-schemas/core.yaml#
+ 
+ title: Samsung s6e3ha8 AMOLED DSI panel
+ 
+-description: The s6e3ha8 is a 1440x2960 DPI display panel from Samsung Mobile
+-  Displays (SMD).
++description: |
++  The s6e3ha8 is a display driver IC used in 1440x2960 AMOLED panels from
++  Samsung Mobile Displays (SMD).
++
++  Known panels:
++    - AMB577PX01, 5.77", Samsung Galaxy S9 (samsung,s6e3ha8-amb577px01)
+ 
+ maintainers:
+   - Dzmitry Sankouski <dsankouski@gmail.com>
+ 
+ allOf:
+   - $ref: panel-common.yaml#
+ 
+ properties:
+   compatible:
+-    const: samsung,s6e3ha8
++    oneOf:
++      - const: samsung,s6e3ha8-amb577px01
++      - const: samsung,s6e3ha8
++        deprecated: true
+ 
+   reg:
+     maxItems: 1
+ 
+   vdd3-supply:
+     description: VDD regulator
+ 
+   vci-supply:
+@@ -44,23 +51,23 @@ examples:
+   - |
+     #include <dt-bindings/gpio/gpio.h>
+ 
+     dsi {
+         #address-cells = <1>;
+         #size-cells = <0>;
+ 
+         panel@0 {
+-            compatible = "samsung,s6e3ha8";
++            compatible = "samsung,s6e3ha8-amb577px01";
+             reg = <0>;
+             vci-supply = <&s2dos05_ldo4>;
+             vddr-supply = <&s2dos05_buck1>;
+             vdd3-supply = <&s2dos05_ldo1>;
+             te-gpios = <&tlmm 10 GPIO_ACTIVE_HIGH>;
+-            reset-gpios = <&tlmm 6 GPIO_ACTIVE_HIGH>;
++            reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
+             pinctrl-0 = <&sde_dsi_active &sde_te_active_sleep>;
+             pinctrl-1 = <&sde_dsi_suspend &sde_te_active_sleep>;
+             pinctrl-names = "default", "sleep";
+ 
+             port {
+                 panel_in: endpoint {
+                     remote-endpoint = <&mdss_dsi0_out>;
+                 };
+
+-- 
+2.55.0
+
+
