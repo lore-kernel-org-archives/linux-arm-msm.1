@@ -1,79 +1,120 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795636225;
-	b=Zsg5pUaZepcjN4JaUkz2kMuHhYPsbR6A5ufBzl+P7shSjPwBHTowZPGAlqy3Kzx13pvg
-	 2Lwoqv+Dm6U8aIxStjuf06Ew3jzJbqr64zQFKuztQPpM3pVMG8b/yoHKSsASOBUvdYY2g
-	 n8yf0zoNmgn4pzZoAJkcVGi16GB+MRhWlGkchlPKMhqPGh7dm94FSURJyzVOx8dQuNj0x
-	 pn1CWMaIzYh0KPL4O2OPARs0T2X/ulCD61OJYVzgHBFU0Lh/CdnzgQveXZ09ZsjrU3EvA
-	 Ltg3xje+JHsMx5iAPqMkAuiPQZPJ9WZJsQf/WgaYlrOPEw0GbH9ltG5WGGhQE0qivhw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795636225;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=VhO90SLyIbQBaRSyTllaC2yRuF0DVldYIy7jSq8Rzfk=;
-	b=boAH01qOPgQymKbDkMXhBojlOJQuJb3SBWDWFiF2T7AnZQNTe7B3DuWgbSiKoJhAnm6Q
-	 YtI9isw27t3Z0A6OYsY+OGZXFGBeRw7iqsQ12foTLmZ2s7QKJKqcTnV4TJEn8nZeALJfT
-	 DHp1wkF3kUux4NuVPQUlludapVaej6MvzGAPaVpLe4Yl4dlFuGdBkB6ShzlhVoqPL6Iw6
-	 zFA7hqGQQNkZGnmh2LSh7PdzdDMmrjwlW5OuUPhza0uklwP7LxIzA39B5zlGRe7z85HPM
-	 abJ7YgsTAQ8/H4P96WDF4oC5pJwXm6/y4Cmt0ZWHR+qc9eu8h4/H6aYx632ocNepoTA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LnyjzxLQ;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A688606A31E;
-	Wed, 25 Nov 2026 19:50:25 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LnyjzxLQ
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795636225;
-	b=QmW0EGlcd6BLGkQlzdDSthmSNieRtQje6pceHVFiZpkdedRDspU8KCgUI3u46SExgFKW
-	 NzxqMLUQMNStsn8BP2Kv2QVQlToSRm6/aXgmEElWXNN7Y3WeVfAUT9gnz4WVgx6q77xtP
-	 cLBV7lMp7p5YTum0T7A9w2Rg7M9jlOel21WYOLs6h0JALEoWpeU2sKS1tUBzrSQRrRSoE
-	 ji5cwExbIaCNp/VIw1snM1v+SieWiAHDgQcrni5Myqufdhkg7bmz0qsmDpL3opGIo8MPC
-	 ilUzuU7gyL/G7jouiX3X1X6vJeIWS6R4FEbbRPA4rbB1TZjIDnKOmp0Y6VYJZMS3csg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795636225;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=VhO90SLyIbQBaRSyTllaC2yRuF0DVldYIy7jSq8Rzfk=;
-	b=yvNClgTak6trbYMMkPuaghDZa13gtdbq3bSJWFf0JdeM5hSGutm14ySwN664KcW54hWY
-	 TBBEyGgwCt0MoacPr15riSsTe3XMMklOg0DA6ejXXF7fYFsFtKHfbqw2Cf4Mo1zloxymg
-	 p8u5JqvGLtnPNxayxAm9ZIMoZHXtf+kPj/uh/k0tWO2jydbnSvq+snFg1uCCiqD9o6kGQ
-	 6QacTGeoBG8hRQ30QmhVqGBw5ied0GQImb67gqpYnVSaxrp5l82D2ZuIOTB1IsU4ol5/t
-	 SED/+7KCXKEFUk4Ldj9w0WG8wwK4HXZrQaOrzuOesDaVAIUOHJynC1QcaKLwzITxufQ==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795636360;
+	b=y3ZLYYLnNM7X733EiclGIvVlJnuPyFWD73zYcthKSyExJvZznFl4bEoa4YR1uDieT8Wn
+	 dThnGq5jpAUR8O/vyXza5NPwU61lw/LKPPi/c2SrcCj7GgHE3kpbqmU/NHsRASHLK9R14
+	 Q9DMmLmygdjM54e1ju2/ou8H6XGO34HFHBoTyo3rKElKocgyANgicYudfoIO/5SdNj+xx
+	 aXBPLA48OyZP6IxMY/WQXyVuM2C9XnZx1qi+Uj3NdXfsY8oMSop/HdGJkVePYC9a2cM3U
+	 MT5F2i+FywNgYoyySjb1HEWg3M8+ok55hHGaYkG18sgOjQFkaIA72a/XJys581UVMUA==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795636360;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
+	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=lRl8a2c+F775fiXICpW/PScHe8VmAp8qGYbgkcFxwMA=;
+	b=l5xPgqP+wiYKPrrWP+LcdvQDzVv7wWnkam7Iegq4I/xXe8fnMIK5FxiEjzfeDoUH0g10
+	 M80CS7hxdRyygcdYjNKo6n92a9jzAKYvFLDL0ckgwDDCmGJsdYW94ydZ7q+lI0NYIP5EX
+	 jFpZRcGTzpQjzxLrOzQZ3SMlHtC0Y8viXAeX9aM7600hxWbhnmH7dQMeGGuYxlrFuUfRh
+	 UHdLbOw+7Meh/UnxH8jABhZs8ZpVov7z1YspB12uBOQue0VDMjPDPr/RRL7CZIQsM7ZH/
+	 C/nV+TByH1l3f6W+C96zbZxMiJXVb92MIwjK6iI3sk53QMvsrx686TiJUOQzETMERKg==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="H/LTMWGw";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EDvZgpZP;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 736951F000E1;
-	Wed, 25 Nov 2026 19:50:10 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795636225;
-	bh=VhO90SLyIbQBaRSyTllaC2yRuF0DVldYIy7jSq8Rzfk=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=LnyjzxLQfFv+fu1uPB9AgI4isvEqNMIcjQjRKIo191/0srCbqSvGi2tS6aIqwCPQi
-	 YNKLAUNBhW3PqXugRNGfLRLbgfRn7mLHpO5Cyh7PV8GrTaueJK+V8WwGDRZn1zLSMi
-	 2635Q5qp/6P7bWu5qI9SCwJtYP2PdMrN7N6XNjoWstLKttBCbo8kK47knm8GPaibKk
-	 8edp5599PkMfj7oY245L7NVoAjCB0ASO11EUVh4j4/tBWJVxnSjXR64SMbe4xyYLoc
-	 QErG4kU+uGwzoLceo+rQfBjiRmsQlb9A8xeA+aGy3TGqddPn5wCOwGDErJKVsXK09F
-	 gc3wAJGKs2ANw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id F3E134D00D;
-	Wed, 25 Nov 2026 19:50:09 +0000 (UTC)
-From: Victor Mora via B4 Relay <devnull+vjmoralesmora.protonmail.com@kernel.org>
-Date: Wed, 25 Nov 2026 20:50:03 +0100
-Subject: [PATCH] phy: qcom: edp: Fix v8 PLL and SSC configuration for RBR,
- HBR and HBR2
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A0B5606A31E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 19:52:40 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4A0B5606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=H/LTMWGw;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EDvZgpZP
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6APJAt4T3367494
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 19:52:39 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:date:from:message-id:mime-version
+	:subject:to; s=qcppdkim1; bh=lRl8a2c+F775fiXICpW/PScHe8VmAp8qGYb
+	gkcFxwMA=; b=H/LTMWGwpLj4JnzWOodswvm27tbYjNKHCSyk3agPibFXS44LUs/
+	SLl2ElF0+fpNXQaCXxFEs2zZlPGR328IJSf1iRk4e74gNARICRzRUC9Dp08wh26b
+	xpLeEKtHT4b713wC2YE3IZUahzLIXXA15+VyOT6qkbM39879E/u7K1vajUAOkqpF
+	j2u/Bg7PKqnHKSCEt78iG++qT9PbmJwCBu0MbO5rIeS9S8ZU9+N1g2UZV+ODESpj
+	beGBkB9DwhLkxJFcoqvkam1+6py1H9qhUSLAdZ+B9Hc4vx0bBWROYQ9d4TYpqLLX
+	707wqksJm2IWlDddM/A8eVTBf0oOVzamM/w==
+Received: from mail-qv1-f72.google.com (mail-qv1-f72.google.com [209.85.219.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vuktjt1-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 19:52:39 +0000 (GMT)
+Received: by mail-qv1-f72.google.com with SMTP id 6a1803df08f44-92179251e32so21608296d6.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:52:39 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795636358; x=1796241158; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=lRl8a2c+F775fiXICpW/PScHe8VmAp8qGYbgkcFxwMA=;
+        b=EDvZgpZP/8Wy2yKHCu/KzpebFeNF6c0ZFMzytVNHzSo49GNvDSNfJWWdNeHKvOsAWv
+         gRXLElZVT4AcRc0yViP/C+cnFDm6WJeFLEZFzhDc5PyG9/1eEzZfrxr4RxrDGLZ0S6XA
+         GYyCxbn96zqG12KiXMiaPPBaEA7csLpd5fqdbU2bXKD5yboGewGm0gSggDPC9seM+ikb
+         s4DYamKaLqCCvbYFKkcxswoD0X4Q2hS7yM/wuI6gfuhul6oPtUAdt5rNFKLE2ERQuSoj
+         T+xBpwirvTc8OBl+72bqCpEIU2SZTQ+6RQECRsLmPaDcZs2Z9bZfTtEbWnX4AjJ6RkoC
+         VPXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795636358; x=1796241158;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lRl8a2c+F775fiXICpW/PScHe8VmAp8qGYbgkcFxwMA=;
+        b=RUDKWgFsZxYjqTHojl1fAfn5vpY0S+9DwChfQjsShOJ7t/Gl+cG6yPWD278q2QoAd4
+         /NqBiHKJyn5tCUc4RqXB46s/FXrz5XDal8kQ/xdvh2qUXkjjXXoPQbeGVCtyBZ4iNZR7
+         rVfW9weq0gPLLASSlScXoNTh88uGjYUJoEO+HtYsSmDLixkaKQQ85q4N/67E0mVM3MHA
+         tOdOlw+BrMxtMvEDp0jWdW9P0UBYWNX+ZfxiHoXVVJ2viwr2guvY+oAzIsolHZNuhAa+
+         RAX0wdSMPXlgDt4j6za/qoizeBZ2B3CX55haBxbVuc3MlzjqTAzVJ7LYejACW5BuOG6g
+         yVfg==
+X-Forwarded-Encrypted: i=1; AL+hErGA0nEfE/blZR91U+OGEr9OrEXDXF+D2DQpoAHV8HaDP9QcQfvJRrPAFl4a2SY/lP25xmAoyWjlvnJCkFxr@vger.kernel.org
+X-Gm-Message-State: APuU4Z+Y3+3Bop3Sd7zvYMZzZORSMEzISLKjvOjFB9MUhA4SydRWwZYa
+	7cqG4nwYeSTj3QcDzQs2fDkxTSlfWLU9QnPZMyjDqChjP4dceQVcVE+lfayfQj+MEZMUIRYmqrY
+	ICzT2n8NZGdRacZtrbSjoTuidpQQ5eAVRuFA2Ii49sG9lF2mEBrMVgWQquTMJD3YJojMgjkmIZm
+	/q
+X-Gm-Gg: AZFdTZd8UiPyIyfmqwgIbrVOAamry0DwhEEJK1s+wGd6Z0cQ5D4DDNWDCZY3JbI2B0I
+	x0DRYtza99GrsefvQW0ssgBcC6dFJbs2e2jTIIcPxu4O9kJFpn2gfIVvzmDfnRF4tcgmafGrKB0
+	sC2x7y+M37/OwQZtGpUibcffcDB8A5HrtBCR+hLKvenkY/U0W6KsjazzwvvPYh3gLCMjkgyiwKH
+	MWtR64/Axxy4qWMlzmVrj9fevHNR7PFuyVisznHB1o+2ONrrukMncixfRlWggJ9nOK7BhDvPAMP
+	/5nOrguCf5E0y6Q5swD32kn2W6coFqFI9GnJPXaKABgI5HvBXv69mdhdThTRyUhh8ZQr3GMMLuK
+	t8jmM1Qn8gRIUS3xOBYayihmGAe+mzXqPmj2mK0dYx5Bb1+guhxr9/8G25eD+KGqz
+X-Received: by 2002:a05:620a:260a:b0:947:7f5e:2b64 with SMTP id af79cd13be357-949ba969faemr3131218385a.18.1795636358450;
+        Wed, 25 Nov 2026 11:52:38 -0800 (PST)
+X-Received: by 2002:a05:620a:260a:b0:947:7f5e:2b64 with SMTP id af79cd13be357-949ba969faemr3131214785a.18.1795636358031;
+        Wed, 25 Nov 2026 11:52:38 -0800 (PST)
+Received: from debian ([5.133.47.210])
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb884ab091sm774316205e9.11.2026.11.25.11.52.36
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 11:52:37 -0800 (PST)
+From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+To: Lee Jones <lee@kernel.org>, Pavel Machek <pavel@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>
+Cc: Abel Vesa <abelvesa@kernel.org>, Griffin Kroah-Hartman <griffin@kroah.com>,
+        Luke Macken <luke@phorex.org>, Srinivas Kandagatla <srini@kernel.org>,
+        linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+Subject: [PATCH v2 0/3] qcom: PMK8850 LPG backlight on Mahua T14s
+Date: Wed, 25 Nov 2026 19:52:23 +0000
+Message-ID: <20261125195226.1563577-1-srinivas.kandagatla@oss.qualcomm.com>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,227 +124,67 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261125-glymur-edp-pll-v1-1-068a4d95a12f@protonmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQyNT3fScytzSIt3UlALdgpwc3WRzkyTLZLPUFINEUyWgpoKi1LTMCrC
- B0bG1tQCM71O1YAAAAA==
-X-Change-ID: 20261125-glymur-edp-pll-c74b9c6ed0a5
-To: Vinod Koul <vkoul@kernel.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, 
- linux-kernel@vger.kernel.org, Ritesh Kumar <ritesh.kumar@oss.qualcomm.com>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Nabige Aala <nabige.aala@oss.qualcomm.com>, 
- Gopikrishna Garmidi <gopikrishna.garmidi@oss.qualcomm.com>, 
- Victor Mora <vjmoralesmora@protonmail.com>
-X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795636209; l=6678;
- i=vjmoralesmora@protonmail.com; s=20261125; h=from:subject:message-id;
- bh=qVbeo/jP78rlkyjkxHPovLbmwjPdXqdr2Ue/1EwP/2o=;
- b=+ywXwrPPjb5pfkkpk1XDX9PZr6m2OwvqvR9SZ2xGaU8iOYC9NLdiQ1069m1bnukja57np3O6F
- 7oXHRwpncKaBCRktkO56BnmJKYlkyX94swPyZjU/Y6zlGloBUeaZViu
-X-Developer-Key: i=vjmoralesmora@protonmail.com; a=ed25519;
- pk=xX1yECoFrpZB2EbulsFDxl+S7K3ggttCl3mCaW5rSV8=
-X-Endpoint-Received: by B4 Relay for vjmoralesmora@protonmail.com/20261125
- with auth_id=1642
-X-Original-From: Victor Mora <vjmoralesmora@protonmail.com>
-Reply-To: vjmoralesmora@protonmail.com
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Authority-Analysis: v=2.4 cv=KfVHIgYD c=1 sm=1 tr=0 ts=6b073c87 cx=c_pps
+ a=7E5Bxpl4vBhpaufnMqZlrw==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=VwQbUJbxAAAA:8
+ a=EUspDBNiAAAA:8 a=eNx2SGrOvgKyolGvBP8A:9 a=pJ04lnu7RYOZP9TFuWaZ:22
+X-Proofpoint-ORIG-GUID: lj6yGImp3fZ6vCnkzOb5Rs1W5J_dtKQF
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA3OSBTYWx0ZWRfX0W3GzEarGGOE
+ 9WEEt5fWDWkgUIlJFhMD1GRMVLqhp2uU7rsLVPsv20BtMKBWU85vGS5fElo5emaNEun3T8LVmH5
+ qSZmltDP/Ys4Z0Y8CDoHTECIsXDl+CY=
+X-Proofpoint-GUID: lj6yGImp3fZ6vCnkzOb5Rs1W5J_dtKQF
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA3OSBTYWx0ZWRfXwPe5i0fljqlS
+ 4R5wPT+gM4j34/zp5deh08q08FVs1HOfon4/vT7+yAHOVD+ZppjfrqoWNKCDQNQ6o+WZK6d0KIz
+ N2gD6e/1R6vfzalJU5VPmf1/Kq/0fFoixrCUr7LXqWt62ZlZlPVNtuJyCFCK2eN9bSvbjVuXOKP
+ J7sHzhAuDFf6D+s2CWWW7x5m4DNdBn/zGcZG/ilQxV53cgGTVCQyRO4aQardocKGbCmv5J4Oga3
+ RZHCYrun0HBolHUMixbY0+x3hzNDQyWLaK4hTd9Ee76BuBgA+slQO8voJKSOw8+rn8834jrRgUb
+ oZ6kivbh4GevbmPBLEy9ym03YO/kPURxhvmwcmHtPTlgFqSf27I5X+aPWVTZepKzs3pubsJPrG3
+ reYl2WXsMlsVtVI3tcSDUHLnBn2ox+RpqfGNX5B1h4Ws2oKjjT9PaFS5cKuEIJiIobHMMyt+WYW
+ O2/B3J9/DVsJQcJEraQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-25_05,2026-11-25_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ impostorscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250079
 
-From: Victor Mora <vjmoralesmora@protonmail.com>
+Wire the eDP backlight on the Lenovo ThinkPad T14s Gen 7 (Mahua) through
+the LPG/PWM channel on the PMK8850 sleep-clock PMIC. The PMK8850 PWM
+block is register-compatible with PMK8550, so list qcom,pmk8550-pwm as
+a fallback compatible; no new driver match entry is needed.
 
-On Glymur, the eDP PHY PLL does not lock at RBR, HBR and HBR2, leaving
-the panel black. qcom_edp_com_configure_pll_v8() uses values for those
-rates that do not match the v8 DP PLL programming sequence, VCO_TUNE1/2
-are fixed to the HBR3 values, and the same SSC step size is used for
-every rate.
+Changes in v2:
+- 1/3 binding: use qcom,pmk8550-pwm as a fallback compatible for
+      qcom,pmk8850-pwm instead of listing it as a standalone compatible
+      (Lee). Krzysztof's v1 Acked-by dropped since the compatible
+      structure changed; re-requesting ack. Tested-by not applied
+      here (bindings have nothing runtime to test).
+- Drop the driver patch; the fallback compatible matches the existing
+  qcom,pmk8550-pwm entry in lpg_of_table[] (Lee).
+- 2/3 pmk8850 dtsi: use the two-string fallback form "qcom,pmk8850-pwm",
+      "qcom,pmk8550-pwm"; pick up Reviewed-by from Konrad and Tested-by
+      from Luke.
+- 3/3 mahua-t14s: pick up Reviewed-by from Konrad and Tested-by from
+      Luke.
 
-Use the per-rate values from the v8 DP PHY tables posted for the QMP
-combo PHY [1], which use the same QSERDES COM register layout, and
-program VCO_TUNE1/2 and BIN_VCOCAL_HSCLK_SEL_1 per rate.
+v1: https://lore.kernel.org/all/20261015194732.64428-1-srinivas.kandagatla@oss.qualcomm.com
 
-Tested on a Lenovo IdeaPad Slim 5 13Q8Y11 (Snapdragon X2 Plus,
-X2P-42-100) with a CSW MND307QS3-1 1920x1200 eDP panel, using a local
-devicetree based on kalambo-crd.dts. Without this patch the panel
-stays black. With it, and with the PHY status read from 0x114 instead
-of 0x0e0 (needed separately on this machine, see the Nord series [2]),
-link training succeeds at HBR (2.7 Gbps), 2 lanes. RBR, HBR2 and HBR3
-were not tested on hardware (the panel supports up to HBR).
+Srinivas Kandagatla (3):
+  dt-bindings: leds: qcom-lpg: add qcom,pmk8850-pwm compatible
+  arm64: dts: qcom: pmk8850: add PWM node
+  arm64: dts: qcom: mahua-t14s: wire backlight through pmk8850 pwm
 
-Link: https://lore.kernel.org/r/20260828-glymur-phy-v3-v3-3-8e73ce7c4636@oss.qualcomm.com # [1]
-Link: https://lore.kernel.org/r/20261116-nord-drv-dt-v3-9-e3d3bf0e2c49@oss.qualcomm.com # [2]
-Fixes: add66a6673bc ("phy: qcom: edp: Add Glymur platform support")
-Assisted-by: LLM
-Signed-off-by: Victor Mora <vjmoralesmora@protonmail.com>
----
-Hi,
+ .../bindings/leds/leds-qcom-lpg.yaml          |  4 +++
+ .../mahua-lenovo-thinkpad-t14s-gen7-lcd.dts   | 26 ++++++++++++++++---
+ arch/arm64/boot/dts/qcom/pmk8850.dtsi         |  7 +++++
+ 3 files changed, 33 insertions(+), 4 deletions(-)
 
-On Glymur, the eDP PHY PLL doesn't lock at RBR/HBR/HBR2, so the panel
-on my laptop stays black. This patch uses the per-rate values from the
-v8 DP combo PHY table update [1].
 
-Ritesh, Abel: could you confirm the eDP PHY should use the same values
-as the combo DP PHY?
-
-On this laptop the panel also needs the PHY status register at 0x114
-instead of 0x0e0. Since the Nord series [2] adds the per-SoC
-phy_status_reg field, I'll suggest setting it there for Glymur rather
-than sending a conflicting patch.
-
-I couldn't find an existing fix on the list; apologies if this is
-already being handled internally.
-
-[1] https://lore.kernel.org/r/20260828-glymur-phy-v3-v3-3-8e73ce7c4636@oss.qualcomm.com
-[2] https://lore.kernel.org/r/20261116-nord-drv-dt-v3-9-e3d3bf0e2c49@oss.qualcomm.com
-
-Thanks!
----
- drivers/phy/qualcomm/phy-qcom-edp.c                | 68 ++++++++++++++++------
- .../phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h  |  1 +
- 2 files changed, 50 insertions(+), 19 deletions(-)
-
-diff --git a/drivers/phy/qualcomm/phy-qcom-edp.c b/drivers/phy/qualcomm/phy-qcom-edp.c
-index a3c893f72908..d7813cd8d5df 100644
---- a/drivers/phy/qualcomm/phy-qcom-edp.c
-+++ b/drivers/phy/qualcomm/phy-qcom-edp.c
-@@ -914,15 +914,20 @@ static int qcom_edp_com_configure_ssc_v8(const struct qcom_edp *edp)
- 	u32 step1;
- 	u32 step2;
- 
-+	/* Per-rate SSC step sizes from the v8 DP PLL programming sequence */
- 	switch (dp_opts->link_rate) {
- 	case 1620:
--	case 2700:
--	case 8100:
--		step1 = 0x5b;
-+		step1 = 0x83;
- 		step2 = 0x02;
- 		break;
- 
-+	case 2700:
- 	case 5400:
-+		step1 = 0x18;
-+		step2 = 0x02;
-+		break;
-+
-+	case 8100:
- 		step1 = 0x5b;
- 		step2 = 0x02;
- 		break;
-@@ -953,31 +958,53 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
- 	u32 code1_mode0;
- 	u32 code2_mode0;
- 	u32 hsclk_sel;
-+	u32 vco_tune1_mode0;
-+	u32 vco_tune2_mode0;
- 
-+	/*
-+	 * Per-rate PLL values from the v8 DP PLL programming sequence, as
-+	 * used for the v8 DP PHY in the QMP combo PHY driver.
-+	 */
- 	switch (dp_opts->link_rate) {
- 	case 1620:
- 		hsclk_sel = 0x5;
--		dec_start_mode0 = 0x34;
--		div_frac_start2_mode0 = 0xc0;
--		div_frac_start3_mode0 = 0x0b;
--		lock_cmp1_mode0 = 0x37;
--		lock_cmp2_mode0 = 0x04;
--		code1_mode0 = 0x71;
--		code2_mode0 = 0x0c;
-+		dec_start_mode0 = 0x54;
-+		div_frac_start2_mode0 = 0x00;
-+		div_frac_start3_mode0 = 0x06;
-+		lock_cmp1_mode0 = 0x1c;
-+		lock_cmp2_mode0 = 0x02;
-+		code1_mode0 = 0x8d;
-+		code2_mode0 = 0x27;
-+		vco_tune1_mode0 = 0xfe;
-+		vco_tune2_mode0 = 0x00;
- 		break;
- 
- 	case 2700:
--		hsclk_sel = 0x3;
--		dec_start_mode0 = 0x34;
--		div_frac_start2_mode0 = 0xc0;
--		div_frac_start3_mode0 = 0x0b;
--		lock_cmp1_mode0 = 0x07;
-+		hsclk_sel = 0x4;
-+		dec_start_mode0 = 0x46;
-+		div_frac_start2_mode0 = 0x00;
-+		div_frac_start3_mode0 = 0x05;
-+		lock_cmp1_mode0 = 0x08;
- 		lock_cmp2_mode0 = 0x07;
--		code1_mode0 = 0x71;
--		code2_mode0 = 0x0c;
-+		code1_mode0 = 0xf6;
-+		code2_mode0 = 0x20;
-+		vco_tune1_mode0 = 0xae;
-+		vco_tune2_mode0 = 0x02;
- 		break;
- 
- 	case 5400:
-+		hsclk_sel = 0x3;
-+		dec_start_mode0 = 0x46;
-+		div_frac_start2_mode0 = 0x00;
-+		div_frac_start3_mode0 = 0x05;
-+		lock_cmp1_mode0 = 0x10;
-+		lock_cmp2_mode0 = 0x0e;
-+		code1_mode0 = 0xf6;
-+		code2_mode0 = 0x20;
-+		vco_tune1_mode0 = 0xae;
-+		vco_tune2_mode0 = 0x02;
-+		break;
-+
- 	case 8100:
- 		hsclk_sel = 0x2;
- 		dec_start_mode0 = 0x4f;
-@@ -987,6 +1014,8 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
- 		lock_cmp2_mode0 = 0x15;
- 		code1_mode0 = 0x14;
- 		code2_mode0 = 0x25;
-+		vco_tune1_mode0 = 0xa0;
-+		vco_tune2_mode0 = 0x01;
- 		break;
- 
- 	default:
-@@ -1022,11 +1051,12 @@ static int qcom_edp_com_configure_pll_v8(const struct qcom_edp *edp)
- 	writel(0x00, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE_CTRL);
- 	writel(0x1f, edp->pll + DP_QSERDES_V8_COM_BIAS_EN_CLKBUFLR_EN);
- 	writel(0x00, edp->pll + DP_QSERDES_V8_COM_CORE_CLK_EN);
--	writel(0xa0, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE1_MODE0);
--	writel(0x01, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE2_MODE0);
-+	writel(vco_tune1_mode0, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE1_MODE0);
-+	writel(vco_tune2_mode0, edp->pll + DP_QSERDES_V8_COM_VCO_TUNE2_MODE0);
- 
- 	writel(code1_mode0, edp->pll + DP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE1_MODE0);
- 	writel(code2_mode0, edp->pll + DP_QSERDES_V8_COM_BIN_VCOCAL_CMP_CODE2_MODE0);
-+	writel(hsclk_sel, edp->pll + DP_QSERDES_V8_COM_BIN_VCOCAL_HSCLK_SEL_1);
- 
- 	return 0;
- }
-diff --git a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
-index 93edabb830af..870835656f8f 100644
---- a/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
-+++ b/drivers/phy/qualcomm/phy-qcom-qmp-qserdes-dp-com-v8.h
-@@ -45,6 +45,7 @@
- #define DP_QSERDES_V8_COM_CORE_CLK_EN			0x170
- #define DP_QSERDES_V8_COM_CMN_CONFIG_1			0x174
- #define DP_QSERDES_V8_COM_SVS_MODE_CLK_SEL		0x180
-+#define DP_QSERDES_V8_COM_BIN_VCOCAL_HSCLK_SEL_1	0x1a0
- #define DP_QSERDES_V8_COM_CLK_FWD_CONFIG_1		0x2f4
- #define DP_QSERDES_V8_COM_CMN_STATUS			0x314
- #define DP_QSERDES_V8_COM_C_READY_STATUS		0x33c
-
----
-base-commit: 495f98f8dc61da7c5d9ad11ac7d07ee2cd2154cc
-change-id: 20261125-glymur-edp-pll-c74b9c6ed0a5
-
-Best regards,
+base-commit: 9437046953b2fb3bf55b36582450ea0267df82a7
 -- 
-Victor Mora <vjmoralesmora@protonmail.com>
-
+2.53.0
 
