@@ -1,111 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795603989;
-	b=XJLH1Gn4Z51NAId6xOPGJzbNMFKEYCK4Z4CEwbfkq+N0CTSFAR44utsyVdKBCbmt/J8p
-	 kzMvWzDzuCaRJEJwmIHaz0ljl7H8/uGHbjKqTCp/pMKAvmwDr5hnKZrOi4FA9Lz3au1Vr
-	 mdbnvKDRJR07UjbqkZCaFaZEqG/wARO83WkMbT89xfzsZ7sgg+P9Y5DFzolk1+zHsFku/
-	 mL5jI4UYoG1EsFduURD5eFlxsghc8DOIeZoI7Z3V4HctAl+/av0DJgusI8c1yoTr5UPfn
-	 t5s5spxzWsgIUL/r1FSKjo8NIBGpce7NtS458Nvy7/b3w3+xv42DHYw7N4yqvVQkq5A==
+	t=1795604019;
+	b=UDJ1BRfWQ78G37DP5bcz0gqaJ9JbLVav0DN5sfamrZYZJ1YCQHUik/dL4Ypx/HE/QM8Y
+	 H46iIm74QOhAmGGzZ42CJ93eXlaR0zGYkLAR75AoWm63b4KPYoDjzv9ABT+6N/6fgOEqP
+	 cbxKkthKRTmFsVo44LFAc2IyZxFj9Y1WLnM1wkAFAwlY5NYJoAGRQxJcE04o/Xw1L+A+7
+	 ClruR4kDmihOwGIa4g4/Ttfh4q+kzQg06CHbOdf4S2zFGcZGjdvfkOmNWvux/4hp+1yB8
+	 sPjYNlOVilblfTnm3KPxjRhZ8h8hdc0fgcv78VDis8ggC5V/qA4j+xXwHuKJjHOSZfg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795603989;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=FebbI9F5mjaTpQVwpaWCeaxrYNjsbfM5/tqyvZhTU4w=;
-	b=4x96vomF1BdHylOp4B9mhY8HKJT5tci3Z6+CKSQqS2/gqSZN7/grm8T+UP7RleUEaUuw
-	 1jL0oxhzm7E0uUpJ4bvVnxcOsNizSmUUDV4I+gdL6ER3uYY1ktCkcY6bKq0Xd9JfvglQg
-	 rHpzicIyJ6AF38h8fhye15nDJXSaML5ORP00KLlqlCpbZ7pPQ+zZgdUFSHJrB5jrBH9Ke
-	 P/wyyHWP9JlmQgDFtX8STJDx5n05qQ7WnRT2sdIku6EqhaFGfbtEVokxuDu6QldL64oRE
-	 rdzUB/cj1khwAc6ZmCf+qEhMoRjblfW7QDsQh/3E6SvuyHzja1CzWaAERmpQnIChkIQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795604019;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 Content-Language:From:In-Reply-To:Content-Transfer-Encoding:
+	 X-CMS-MailID:X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:
+	 X-CMS-RootMailID:References;
+	bh=tWsJdisCnNUTJmEHgS/h0WoUaEKuAhcAElbM1LpemB4=;
+	b=YGWxfey4BMxjratGYTn65HPDSanvf5fFA5/WnkZ/o+MPX33Q9ylhsQOhY6i02VKiwsfw
+	 Als9IBJfqNiPObKeE13HYxGDW8feD1P0TXnqlHipkVaLl+K2C/EtFWQ2CmxFk60NLWNbt
+	 X0/cJOh+wvrlvOyHJt6s6AWjT/bU3quMeu87/EdGemklxI32ZeWswzsJRFV/p76upeqpC
+	 u4SZaKLVFxLcLIpJhuU8SB/s6HSq/8j4K9rAWnSAWYJmO20kdz0+HAt2BaUC7Hj9b57It
+	 1r8W9P3zE7+4AtgIKrxUdG71fJn4K5MsHQjdM1vgHG2ciHwFPax0lK5jIKGfk4mOssA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lBEkQFga;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h0N6JBTu;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=samsung.com;
+	spf=pass smtp.mailfrom=samsung.com;
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=PsX7C6IN;
+	arc=none smtp.remote-ip=210.118.77.11
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C69E606A327
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:53:08 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6C69E606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F2C78606A323
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:53:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org F2C78606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=lBEkQFga;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=h0N6JBTu
-Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mTn44034177
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:53:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	FebbI9F5mjaTpQVwpaWCeaxrYNjsbfM5/tqyvZhTU4w=; b=lBEkQFgas7Td87xj
-	PgUMKCXYiObvlo2EfLiAxp8KoE/szjO0b6T8LjOQSnkFKFOE3hAxgjDE65uVONjb
-	vftvXpejW2kREFvhQ591qFGCLo1Rnwvsm+xnPcDldNA6IxQSg7fImdyXSo0q2f4Y
-	pyB+LAo0dUSj2Qx+ZYtLCWJDDd9OAaVCLfiwEeoHtqmYb6Dmafm6vQ0x9ASB6umD
-	8+V+wqp3fpMH0V3RvExvJoX2obuj+19E6GkPz+dR3YeHSDOKvODytk4MSQ97wliU
-	azcMMIGs52cFiInelru1HseH9/VI3JzU8CsMnrgdyjFgtBr9TCdCYJ96JVoekx3B
-	ahD1Yw==
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5mqbjcuq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:53:07 +0000 (GMT)
-Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-93f1f1f2ecfso48585785a.3
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 02:53:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795603986; x=1796208786; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=FebbI9F5mjaTpQVwpaWCeaxrYNjsbfM5/tqyvZhTU4w=;
-        b=h0N6JBTu0lax4pHp8LamZmCeGfPqCeQU1V8UgBymAIExJJjh9AwFje2RcdHdrPQz71
-         vM2MDUgAloCNRPLMkTUR7ONFoSxHfbVAg/h3GzapxotqETfdQuCKxgd9mHlDLa8XycBA
-         ZQs2UoRUQKeOa5gW/BdLZ7SKfZtDtTTV4phQ8GTAUIbM1PE2npSwnMA0yEY7EOdbMSwN
-         uHvrSivt45SllGL1VH5tz6cHILvjYdWpcTLu4haQ3C9MsLg1zIXZTSsWvjVg/9I3DWSL
-         dXzFf4AtDehX0bttwwXIQUgSydXUmEWgWsi+FNa8lc5E0zUtdvrmO30Ov1+VbQ0tqHCH
-         uAgQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795603986; x=1796208786;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FebbI9F5mjaTpQVwpaWCeaxrYNjsbfM5/tqyvZhTU4w=;
-        b=swc3drrTaf6mwJs7QL+42sismDZB+1bFntF2zNaQxL4YR2lr61gEtPuJtr0NuT7Gqb
-         Vgre2rjC4tMRr1PcnF7iLUuGmEUlJrjQmk9TtE+rmPElotkSLNTOCwEc91OAZEY0dvEq
-         TNR9PLqhOMWCCj4VZnSyyKArC6X/0U9RagnF1Ew6dk2mJvRnkIIZOpKtX02MLy072Lag
-         lzcByrpvndko1IpalsLH0y5jPNzwN8zUhB1cZZORrXsx4uA8m3VhHvr3syzSZlbOG3qD
-         u3TP0uqfiLb2oGD9c77mggxMksxt36xEqUfOpXPzkMVC0hzMxE3Urji5DKju6zZDHzuI
-         9ORg==
-X-Forwarded-Encrypted: i=1; AL+hErGrjP2jf1iZK4mptxyZGTyM2d01b3YR1zDpGoxfhhGQw20eOPoevNaqsuQaR5BR7gx8Lt1HnmOpSeThKuzw@vger.kernel.org
-X-Gm-Message-State: APuU4Z8mpm3R1jpu9El4h9JVGIcou0k6cwnT/JX0kuAI27TvmN0XvNNn
-	OC3OCVHdgrkYnZosHPy2EG4K46F97LK0rKuzOJMoYZJ+vaSeEozI144qiaJTqMKOOlMkyaRdl7H
-	ca4ctyYFFbuO7AKAZ4A8yCMvNa31wjx0R14O73U15pk6AgvUV8kEGaRN2sUFh3VEJaeWs
-X-Gm-Gg: AZFdTZdNdsRgzxb6uln/dsGaRpIZkUJ9M4ScQ0RlTG7giIwzgS2tVMcAENbnpXB9p0d
-	vwW8zNT0yBqPPkEvPaWq/+PNea3YqRJdGnAlR1d4fw7yeYQVP3o8rt0iSE0GBOQ5Kx7XssG1K8A
-	b+u07crirtPivLLYTIrLSEDcOMY724WHT3xaIcBYVyTLA6eiATO9t8S5LjhfmZQXsrYsttOkK4Q
-	10LThuv5mmlIhjfh+cu7VGZgfKFXnCYettb0umU5AW2QCBVXV76VOnY3SIwkcB35vNCLHqckPGk
-	yhnThuu3b0Vti/uHuNI9fFYe2xqX+90njwv7SO9bqrNn7W+DKtWrpM5BTCw5y3TnEg1eW1p3RSq
-	yaUvKOZZKtOb2K7I2oJWsnS8V7hsgzjIvXwuye1f1LsRQu42sa950IT4xlDVivoNNVNxzSes=
-X-Received: by 2002:a05:620a:a786:20b0:949:6e6a:e85c with SMTP id af79cd13be357-949ba997457mr3195146285a.4.1795603986546;
-        Wed, 25 Nov 2026 02:53:06 -0800 (PST)
-X-Received: by 2002:a05:620a:a786:20b0:949:6e6a:e85c with SMTP id af79cd13be357-949ba997457mr3195141985a.4.1795603986021;
-        Wed, 25 Nov 2026 02:53:06 -0800 (PST)
-Received: from [192.168.226.72] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513afe85ecsm617587866b.70.2026.11.25.02.53.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 02:53:05 -0800 (PST)
-Message-ID: <15cde6af-0b9f-4a0f-9d21-4e5ca9107a67@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 11:53:02 +0100
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=PsX7C6IN
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261125105329euoutp01e6cbe27873547e9dfd20749dae044f1f~rRFU58xfy3158631586euoutp01h
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:53:29 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261125105329euoutp01e6cbe27873547e9dfd20749dae044f1f~rRFU58xfy3158631586euoutp01h
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1795604009;
+	bh=tWsJdisCnNUTJmEHgS/h0WoUaEKuAhcAElbM1LpemB4=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=PsX7C6INOyWU4uuDG73v92fRc2SubDa3of/cmL5XL0D+qJ1asJZ6ANKUG4VUbyqPF
+	 b4CxQnlAFa/vv60WVDhCKsGzpNQ9zjshiMoF6TvD90Ua6Q5Yln3zqnmnCwey0qdd5c
+	 b+HGgl7O+oHluQiPMBONVljN6l2LsEbv18+sxGlQ=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20261125105329eucas1p2d715a0441207737ec107c34452539dea~rRFUpzE1D2395023950eucas1p2R;
+	Wed, 25 Nov 2026 10:53:29 +0000 (GMT)
+Received: from [106.210.134.192] (unknown [106.210.134.192]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261125105328eusmtip2ff03c8fe75050c8ba766a658a48b487b~rRFT-6FMT2375323753eusmtip2r;
+	Wed, 25 Nov 2026 10:53:28 +0000 (GMT)
+Message-ID: <c5dc8e9c-7fcf-44cd-8ed1-65c70d8c8bdd@samsung.com>
+Date: Wed, 25 Nov 2026 11:53:27 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,94 +64,101 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/3] phy: qcom-mipi-csi2: Add Hawi support
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
-        Loic Poulain <loic.poulain@oss.qualcomm.com>,
-        Robert Foss
- <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
-        Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>, Bryan O'Donoghue <bod@kernel.org>,
-        Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: Suresh Vankadara <svankada@qti.qualcomm.com>,
-        Vikram Sharma <vikram.sharma@oss.qualcomm.com>,
-        linux-i2c@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-media@vger.kernel.org,
-        Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-References: <20261125-hawi-maili-camss-v5-0-1483b7f68dce@oss.qualcomm.com>
- <20261125-hawi-maili-camss-v5-3-1483b7f68dce@oss.qualcomm.com>
+User-Agent: Betterbird (Windows)
+Subject: Re: [PATCH 1/4] soundwire: qcom: always set master port_params.num
+To: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Vinod Koul
+	<vkoul@kernel.org>
+Cc: Bard Liao <yung-chuan.liao@linux.intel.com>, Pierre-Louis Bossart
+	<pierre-louis.bossart@linux.dev>, Srinivas Kandagatla <srini@kernel.org>,
+	linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	stable@vger.kernel.org
 Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261125-hawi-maili-camss-v5-3-1483b7f68dce@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+In-Reply-To: <20261125103825.936939-2-srinivas.kandagatla@oss.qualcomm.com>
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0MyBTYWx0ZWRfX1aWKPrziJ7GX
- xxdPn72ufgzI7ajjNdOanqi62Mp6QVIVna8mIo78KH411nHMioATTLIiG2EC2k+UujCBXpnLHAa
- LC6vTuak//P+puBW/BRJKmURawQUH8Q=
-X-Authority-Analysis: v=2.4 cv=Bb9NQbt2 c=1 sm=1 tr=0 ts=6b06be13 cx=c_pps
- a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
- a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=Olo7VrpVOdv4N-DtMm0A:9 a=QEXdDO2ut3YA:10
- a=IoWCM6iH3mJn3m4BftBB:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0MyBTYWx0ZWRfX7K95InMxW2+u
- 7zyzyOEiBalyJ6XRdR0PD6ArJEWwBbT4cw1kNJFvHdMk5NsRaFWt9k7BwMYP/19gqd783o6oICG
- uLP2Pe+EugWR5WJ/VgH9t6+Ma4P+3Ot0p8bLTkOq9QEN4eW5v0kZ7vyZqJGf40ptaWoKvJ08/aL
- 1EdKOI6y+ej6JXZTDfbHY+DQmM2/7ZmUWrKV/Rvl356ja3af1LIH7LPXSB+LyA2ul35zqcsB+PB
- 40IFWlLdm0TiQ3cEvfh+Rk7Yjl+xznx5gqmrflXnInocpZ8VzEeCLdiPvlW1GBT3fAeKyHfHlej
- hmvx0RN+uormH1XXmZeOeb+xGXL2SubXhc1ZcpcVJiEo96AvYY4G00CwFMm0+WoG7mh4xjMdf/w
- kg330msrMi4TV7+yVD0ERG3CnWUuUdPkkRbJDuKlqUElGOoV5hmofIWT69r6f4+eZT2Tlvr/kqy
- 5d87Tfi8FuJYk6DP/zw==
-X-Proofpoint-ORIG-GUID: doGZnW_RrkAbzJWHY79rozdF57VU-IQm
-X-Proofpoint-GUID: doGZnW_RrkAbzJWHY79rozdF57VU-IQm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 adultscore=0 clxscore=1015 priorityscore=1501 impostorscore=0
- malwarescore=0 lowpriorityscore=0 bulkscore=0 phishscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250043
+X-CMS-MailID: 20261125105329eucas1p2d715a0441207737ec107c34452539dea
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20261125103844eucas1p19032e975aa03f8926e30212a5c3184a0
+X-EPHeader: CA
+X-CMS-RootMailID: 20261125103844eucas1p19032e975aa03f8926e30212a5c3184a0
+References: <20261125103825.936939-1-srinivas.kandagatla@oss.qualcomm.com>
+	<CGME20261125103844eucas1p19032e975aa03f8926e30212a5c3184a0@eucas1p1.samsung.com>
+	<20261125103825.936939-2-srinivas.kandagatla@oss.qualcomm.com>
 
-On 11/25/26 7:25 AM, Nihal Kumar Gupta wrote:
-> From: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-> 
-> Add support for the Hawi 2nm CSI-2 D-PHY.
-> 
-> Reuse the Kaanapali lane table and adjust the data-lane CTRL0 value
-> from 0x8e to 0x8c for Hawi-specific tuning. This prevents potential
-> stream stalls and SMMU faults.
-> 
-> Signed-off-by: Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>
-> Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+On 25.11.2026 11:38, Srinivas Kandagatla wrote:
+> qcom_swrm_compute_params() populates p_rt->port_params only when the
+> DT entry for that master port carries a valid word-length. If the DT
+> marks word-length as SWR_INVALID_PARAM, port_params is left
+> zero-initialised and the subsequent dpn_set_port_params() callback
+> sees port_num == 0, tripping the port_target() sanity check on the
+> capture path. The callback then also writes bps - 1 = 0xffffffff to
+> DPn_BLOCK_CTRL_1(offset, 0), which is outside the DPn register range.
+>
+> Split the per-port assignment: always set num/flow_mode/data_mode so
+> that the callback receives a semantically correct port identifier,
+> and only derive bps from the DT when a word length is given. Guard
+> the callback so no register write is issued when bps is unset, and
+> bound-check p_rt->num against ctrl->nports before indexing
+> ctrl->pconfig[].
+>
+> Reported-by: Marek Szyprowski <m.szyprowski@samsung.com>
+> Closes: https://lore.kernel.org/all/20261125091150.2145177-1-m.szyprowski@samsung.com/
+> Fixes: 128eaf937adb ("soundwire: qcom: add support to missing transport params")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
+
+This fixes the issue I've observed.
+
+Tested-by: Marek Szyprowski <m.szyprowski@samsung.com>
+
+
 > ---
->  drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c | 136 +++++++++++++++++++++
->  drivers/phy/qualcomm/phy-qcom-mipi-csi2-core.c     |   1 +
->  drivers/phy/qualcomm/phy-qcom-mipi-csi2.h          |   1 +
->  3 files changed, 138 insertions(+)
-> 
-> diff --git a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-> index ed40934d67eaeba0c6ac7ac75324ac6292fe7d9e..5d91303e0df2e8c5bca3ea8fa2bb831429a8f1ff 100644
-> --- a/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-> +++ b/drivers/phy/qualcomm/phy-qcom-mipi-csi2-3ph-dphy.c
-> @@ -162,6 +162,126 @@ mipi_csi2phy_lane_regs lane_regs_x1e80100[] = {
->  	{.reg_addr = 0x0c64, .reg_data = 0x7f, .param_type = CSIPHY_SKEW_CAL},
->  };
+>  drivers/soundwire/qcom.c | 19 ++++++++++++-------
+>  1 file changed, 12 insertions(+), 7 deletions(-)
+>
+> diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+> index 65add9a74ffd..95444eee4c0b 100644
+> --- a/drivers/soundwire/qcom.c
+> +++ b/drivers/soundwire/qcom.c
+> @@ -1209,6 +1209,9 @@ static int qcom_swrm_port_params(struct sdw_bus *bus,
+>  	struct qcom_swrm_ctrl *ctrl = to_qcom_sdw(bus);
+>  	u32 offset = ctrl->reg_layout[SWRM_OFFSET_DP_BLOCK_CTRL_1];
 >  
-> +/* 2nm 2PH 2p5Gbps 4 lane DPHY mode, Kaanapali table with data-lane CTRL0 0x8c */
+> +	if (!p_params->bps)
+> +		return 0;
+> +
+>  	return qcom_swrm_port_reg_write(ctrl, p_params->num,
+>  					SWRM_DPn_BLOCK_CTRL_1(offset, p_params->num),
+>  					p_params->bps - 1);
+> @@ -1341,15 +1344,17 @@ static int qcom_swrm_compute_params(struct sdw_bus *bus, struct sdw_stream_runti
+>  
+>  	list_for_each_entry(m_rt, &bus->m_rt_list, bus_node) {
+>  		list_for_each_entry(p_rt, &m_rt->port_list, port_node) {
+> +			if (p_rt->num == 0 || p_rt->num > ctrl->nports) {
+> +				dev_err(ctrl->dev, "master port %d out of range\n", p_rt->num);
+> +				return -EINVAL;
+> +			}
+>  			pcfg = &ctrl->pconfig[p_rt->num];
+>  			p_rt->transport_params.port_num = p_rt->num;
+> -			if (pcfg->word_length != SWR_INVALID_PARAM) {
+> -				sdw_fill_port_params(&p_rt->port_params,
+> -					     p_rt->num,  pcfg->word_length + 1,
+> -					     SDW_PORT_FLOW_MODE_ISOCH,
+> -					     SDW_PORT_DATA_MODE_NORMAL);
+> -			}
+> -
+> +			p_rt->port_params.num = p_rt->num;
+> +			p_rt->port_params.flow_mode = SDW_PORT_FLOW_MODE_ISOCH;
+> +			p_rt->port_params.data_mode = SDW_PORT_DATA_MODE_NORMAL;
+> +			if (pcfg->word_length != SWR_INVALID_PARAM)
+> +				p_rt->port_params.bps = pcfg->word_length + 1;
+>  		}
+>  
+>  		list_for_each_entry(s_rt, &m_rt->slave_rt_list, m_rt_node) {
 
-nit: 2ph and DPHY are synonymous, if you rename the struct to something
-like lane_regs_hawi_dphy, we no longer need this comment.
+Best regards
+-- 
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
 
-As for the override, if its meaning is well-known (the difference is bit1
-being set or not), we can add some sort of a booelan override instead of
-duplicating the table, maybe
-
-Konrad
