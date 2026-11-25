@@ -1,89 +1,89 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.45
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795607651;
-	b=A+JaPrJPKaECyrvyWbQsXEFRjlZIZ9QYe9QGzwIbysMk5Sv5mRlAqMI5VV/lkCWX0r0y
-	 BB8+O8k6OieU28GPbo6JYmmHKLlIBcfC12PpnGf9NZ2n5KnF2EHtsOGmGdn+lmpZBJ2VU
-	 PWivFtnghsrK2WMIJOzXSlQ4vt913nFQ0RwZWtKpN4wZKLuHpr+HD4drMQ6vPxzrnEURf
-	 OuhcB9LM5JZe1sK1N0jq6XC+rItTh3AJF6gx9KcQaRIyBS20bL+PzvqL9YNXdMsJZY52U
-	 4LTHLvlDfoO4XaDp5fjHUJuUMtvnKSJDmQaZdlgGicgxXkbbv/FCQL36oG4fTnTZ6lA==
+	t=1795607652;
+	b=lmnXxQJj3Fn5RLPrJHxUScdUmCAPjzrMUTqbNsJYtuenZyd7zBjYPrHIteT4PjIH8Xqi
+	 BDHVri/WnKNLpP+qOTrqqc5JeTIeMyCqjmIS1kIhJfineKlNuruGmSKy8RLkLu/tD8tKi
+	 DJdCTc18HUqy7hZzYC0vRwLolH/12V9zAmjNGaeG3LlQAmHBqJ33t99SFS5h2ZK4inlZ4
+	 tuqYJgQ2aYK72A1ChT5dv45Eg/E4uFhA/g9loNx2pLME29QxSvW34bmyovyaENZ0fVPTi
+	 d289dtXsHLOM/CHvaOiXGaFKhXxyQzn1HZk+gjTJKrXmF5vx0xvwKtUZp7v/6ts7buA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795607651;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795607652;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
-	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Date:Subject:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:Message-Id:
+	 References:In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:
 	 X-Developer-Key;
-	bh=zRhT31ysuaijJ/dU24/Je9/a2fWEfgQAeCCZFcrzdQI=;
-	b=I4vbZU2oEL0FrA3Ozt62b5S3I9ODf8v2CcIEtJC+rG8hfboTH8wiFS4xHSHttt+hSH1d
-	 lwwUah8TRvEH4KziYjFnDD2EJ5LdA/1OxZsxP321rTUbs2wO+2cYwEjaMddcyYNcmZFB6
-	 V9/mrR72OUJfgFmJKCtCmF/i8lJZsGt44ZJgk0w9O2GjESS+zC6RcB+9CJ+RUJE4Swvvf
-	 +NdTCyGIpV82CaYSS0hyyA0qDyLmd3rbsU1L8Zt25bUANv3hMgOjU6ShqL3sAvFKNh1ZK
-	 POhfmRd0rGvzmD2718tBOk1k8+uy8Dtj8ph4LPKezycAAKoVh4v/LP7yGaMnXIsF7bg==
+	bh=g7LcynNB6KsqQ3Sm1DOtIB+KNFt0Q7hnCKCPUOmoAYU=;
+	b=1qatmAwqy5RuWxhkg+kPxdgHwWQs4UYYYjgKPDRxxPpw6UbI3SQLWmv9ntZOpdAAaVpn
+	 eiJS+iZtPoUcHl+qsLXvGUzJcBzNe7js9+HCJvrOapOgkq7qYojfRCIdbEAt+vzOlMyOM
+	 QY/97cAjGqHH+mkbz13grS2bRTjiRZLQ2Cbt7D7gwgB0UFlHdZ/Fq1CeYRGDcNXuDtVsV
+	 FVApgIvU2Ry5iXX7hiUhZuaQ06L2Jl+ZUCdiGow8bggZ6UaoQt7S9QD/yMnZNQgDFfOBq
+	 MzbnzUEhmyXm+hHHUFDqVerlwRSH9ru/BjINv7X4PlZ45aiy7bKrAos9hD6BZN6rb6g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=STIQ9xx0;
-	arc=none smtp.remote-ip=209.85.128.45
-Received: from mail-wm1-f45.google.com (mail-wm1-f45.google.com [209.85.128.45])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=r2BlTQ1O;
+	arc=none smtp.remote-ip=209.85.128.46
+Received: from mail-wm1-f46.google.com (mail-wm1-f46.google.com [209.85.128.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 201C4606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BDF3E606A327
 	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:54:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 201C4606A321
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org BDF3E606A327
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=STIQ9xx0
-Received: by mail-wm1-f45.google.com with SMTP id 5b1f17b1804b1-4bb70074ab2so60721665e9.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:54:10 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=r2BlTQ1O
+Received: by mail-wm1-f46.google.com with SMTP id 5b1f17b1804b1-4a5b2be99a8so48229825e9.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:54:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795607649; x=1796212449; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=zRhT31ysuaijJ/dU24/Je9/a2fWEfgQAeCCZFcrzdQI=;
-        b=STIQ9xx0NMRYYAanmIAcl43MIStvuWVS9AmIs+ZA+QBeKIL1D+7lReKBMQB3Cv5SB7
-         +rPyW2mjEfH5+4xw5Z0CodMMdZU/QAlqdh0uamGjn1AWiA3pt3J1lwj2zsBbvv0MXo1T
-         CBGyR/n3QfrVg7VTNP51eE/wqi7XkMwnQx3V/dkc5ZY7GWXIfZpv/Pl19yQMvnOvUybT
-         wHMne/8O1aHQguG/UNuMyIwFMIM0MGcVIB1nJZLXVA5hYAvysF9r2I+gZMabXtlqZE2W
-         8D25DSGlyZWsuJ9pJ/gvtGDGz9l3v/S/f2beKrGo8Yy6nMBDitVUfDvmA4+mDZw44oFh
-         6Rjw==
+        d=linaro.org; s=google; t=1795607650; x=1796212450; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=g7LcynNB6KsqQ3Sm1DOtIB+KNFt0Q7hnCKCPUOmoAYU=;
+        b=r2BlTQ1ODZHTW4wBKFyaMsbyU6HzThflaC4woqT5PDSQ2mAoTkoxGVwVsWk18P2Tyv
+         imb3uo5btmY3RHB6a+VliEUUauc8CY3Ukc5bYXCoxJLKL4xVxwvbsiUSSKBjwCAsRWBp
+         yvO1TgKrTsJ9//z4BEtGFYQHUm1ivjgigk+aDCxguSg3P3ebgev86OEBlNDVzUDOP3jJ
+         HIvKgUA4dGE/6uCnLwA1+DpHDycVA8fGxSrGFlBDNNX4/8+tdGFTpJq2mGAxeeDGxMZx
+         pGgN+AWxYC7wubouCBrOYlyBpwSFIJhssK899GwtXYOeyVgr5YdsBd9jdpLHq0sO5/5O
+         ZOKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795607649; x=1796212449;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=zRhT31ysuaijJ/dU24/Je9/a2fWEfgQAeCCZFcrzdQI=;
-        b=lbETGpnW5fsEUxVBIdiLPbk7XFVwJSnBRPAyKn7kFI/50I4jQyIoyoywN59BYppvPQ
-         FZy4I2766Ex8FN9Z6zOP/AW22TDgrPvaeFQcRFqFPqBYF39Dhd25b5bF59UtdrsxsXd8
-         GBrbV3IIFEXJHunbmAeZ43PzAqaRWZNw90yzR1jqg3TfsZPupe5iVYpTHULFR/2Vh30m
-         qwyWfCse7hMkRlRyAHuxFgiHJpRboChKaYPXYCfSAHaMdHUhaHoDGAGe41MxL3W9mzja
-         tGGlcQRPOMZcaSFsI46SVpEoGON9lanGi2HnmvvgCHDIbOM7XWvH+wyH5wKGF3EY5NoM
-         L53g==
-X-Gm-Message-State: APuU4Z8YK9fVzKIrf1XDfC2lfSxX+0XXnq7ikIfqvBTVjIMq6QqgjKOF
-	NiFCURzzhnNPbxo8PzIaw2ISaTdO0RU3GKpJnm8chGzvARWwkjW6xH4lC0OgK4jNygvRp56AyRy
-	+aEdZRM3quA==
-X-Gm-Gg: AZFdTZddr6D+k0adfR9/+p3c1BhBW7l+tGXOGg209YBF8QAMYNTRJK3WeAPnbMy2+7+
-	ew6BbKP1swGE107gk9kkiqa6vAmwyjMlKBdjVOML4Uly/OTvilzzf+PcK6hD0kvfFxNUcwj4IVL
-	je+vPqyzpfdrJVQkyy/Ag7iP3WRhF+vvJUH+UiLojdp8gHBApqKl8gQ2Ap81rVcSZe8JQHRTXE4
-	j1hx4R2kKshw+BJ86k/EqyPwQgSkBAZfvWVAp+CojhjD+tKHp2F2UdvaW/wbzCkxLtM/yTCkk0C
-	ah9y67rOFTqS8slhSJc5riLcEoJwxPQ9rJwOs/DudqJm8vUgmIFtnbbmI7LH35d1l6JLh3fgwN4
-	rrXZzuRk7+DNjTTZC8M3IOrvLdM2ga3tb6E/3WHOzw9bLFV2ccIse9Q8exwLkDpu8/Vp7uRVFZp
-	l1hwaNHZ6JSO+Ww89688cmGLavmh4P+DM9lyCFvLQfr6rMBzAK4ouWacldZEBjpTfPCFxApYNiB
-	Gdua0UOgjDSZXpW9yqCU7wUpxKjersu7FzyjD8PDFYSXSye8rJTbAB7YgFU2jsFZDV+ECowV2Zk
-	5bcqCazr6u2+NEdqmzDf49g2xt4iL4VJsQMDSXP10BYQop5sxw==
-X-Received: by 2002:a05:600c:4e87:b0:4a3:59c9:a758 with SMTP id 5b1f17b1804b1-4bb88922c81mr357192965e9.32.1795607649300;
-        Wed, 25 Nov 2026 03:54:09 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795607650; x=1796212450;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=g7LcynNB6KsqQ3Sm1DOtIB+KNFt0Q7hnCKCPUOmoAYU=;
+        b=AalBlub3WCJKAZRY75j03a4SFn1SZ51NBTlKaa5po+1z5x1El9SNK7qlwetxwZcJRZ
+         HvjZMllfU+03aF4q8DrvEjesNUl4UobE4r/3EqSiQlqCeWZWbnr/Iv0yf/O3UisINPCt
+         SKJGHCDFROeexoAYZaa+xvtTUnTjxX+ZW1Un31PPqoi5dRPDlR96zHPjfsWrg5ryIbTM
+         r/6gSBc9ydLHRpbz63KL1NCEPlYA1C/4FgAuZpxchluMzE1dc/gZIIzp0G/twJYM0D9V
+         7NIZkT6I0LL2O2PMJRfMFd1SRp2MEqxor/Rb2bWSk3Djny/EEXJyPSgKUhFRovEue1HO
+         Udyg==
+X-Gm-Message-State: APuU4Z/Fi0j3hv0XXQE8JofIqMbSFAfuTXgUD2iFWY5/GYmgRo9sxE0d
+	BmBIYkAkGVvh+fV5VdD9bqItjD1SlApmIwdyHqmd6jwxPjeISRKicI/oRAvOaHaOvMadRPxN1gn
+	VnryuQs3DRA==
+X-Gm-Gg: AZFdTZfD1Db+nHGfZEGMQaSkWnAb/zqborLi6ER7E7p7fmc+nDexE429hSlQ5qCRDdY
+	1nhgDYulW4zc9EmxPQkmE5dnGYmAm46qutf81sMSQ4cHu9NpuzOGnht8mTStsBlR/p4irzRFYNP
+	igUE8u1IlIZQKxlxujVafh2xqSxHQ1YWitftcziav8jPfpTsQ+Wx/mFjUnSyjMYfYWeSOykWXRH
+	Ztju6YBPwjSqncV+2tK3XZ1WmY8D+SsuJUimn6hIh/HY+VEcdFsPRKrGtqMtyLQyuqLUj6bHM2x
+	tY7uuD8kS3FvFDykC7CWfSMF4qREdLi5PlXvk6t2QWZ3BpZF8aCAgMZ8K6JVEVadC989HYyC1GY
+	KCrG/ij/rYPLY+r8I9SUwAWKiGdzbSXCmNf83Q5137D6vZaVr3Gt6QTZpXexPYhLe9RKNLR1bj0
+	sQvz3ItEGaby3Cy58sSTyvX3WIPEC4pocJeRsL/qITiEx+RuEYp1HuXsRYJ/46kr6JR5izEAusD
+	PmkU83dbw1LVn6TqGx2VdrY6ThNgAXFHmHbJbahj0dB73y5Nv64gvN/1AgYHu763u0wCoYZeBGi
+	K/JHk7LQIwRLSSMlOu31dEZlrqeYqo64o+G22ZF4SeA7o6itQg==
+X-Received: by 2002:a05:600c:4584:b0:4a7:c366:d791 with SMTP id 5b1f17b1804b1-4bb887e266amr340859115e9.1.1795607650183;
+        Wed, 25 Nov 2026 03:54:10 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:106d:1080:8261:5fff:fe11:bdda])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88f643adsm234073615e9.1.2026.11.25.03.54.08
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88f643adsm234073615e9.1.2026.11.25.03.54.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 25 Nov 2026 03:54:09 -0800 (PST)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH 0/3] arm64: qcom: sm8650-valve-deckard: enable Type-C
- controller
-Date: Wed, 25 Nov 2026 12:54:05 +0100
-Message-Id: <20261125-topic-sm8650-deckard-tcpm-v1-0-4af33e89ea9e@linaro.org>
+Date: Wed, 25 Nov 2026 12:54:06 +0100
+Subject: [PATCH 1/3] arm64: dts: qcom: pm8550b: add USB VBUS regulator and
+ Type-C nodes
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,10 +95,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAF3MBmsC/yXMQQ6CMBBA0auQWTsJLbRar0Jc4HTU0QBNpxoTw
- t2tunyL/1dQzsIKx2aFzC9RWeYKs2uAbuN8ZZRYDba13hjrsCxJCHU6eNdiZHqMOWKhNGHf9fv
- ggzO2C1D7lPki7997OP2tz/OdqXyHsG0f8W8w130AAAA=
-X-Change-ID: 20261125-topic-sm8650-deckard-tcpm-434796951239
+Message-Id: <20261125-topic-sm8650-deckard-tcpm-v1-1-4af33e89ea9e@linaro.org>
+References: <20261125-topic-sm8650-deckard-tcpm-v1-0-4af33e89ea9e@linaro.org>
+In-Reply-To: <20261125-topic-sm8650-deckard-tcpm-v1-0-4af33e89ea9e@linaro.org>
 To: Bjorn Andersson <andersson@kernel.org>, 
  Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
  Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
@@ -106,46 +105,93 @@ To: Bjorn Andersson <andersson@kernel.org>,
 Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org, 
  Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1095;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2488;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=OAXA7tv4rQ41VW9EpqmMAyss+JFEaIBUrOpUPjQ/e7k=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBsxffJFCCf4SjJ6kjvsBe4Nw6WEg7EtnDjNo5wfQ
- 3K21DP6JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawbMXwAKCRB33NvayMhJ0RFCD/
- 9hQ/gSbyCYyoWiKCMEkj5sYTOduIW2b+m3fCc4EB40ALq4l7YpVQAUcKGd7VNqU2IpXj9a26YhEGxL
- 3guozDUgWvjahoe2DtESN1erI/5bxN7o0sW29F48ZdlrtJyLqxLWRahIIWo+ytQMR5+trGt/EObPi9
- dLN37xoBRb2DirBHpM1gabZCfy4m8pKamNVAd/iBO9MARKXYYPZTZRokjSXtibTcJEsxe965cROsdX
- Rqn/hUKr9DXSqKeEM58Tn5DQgXVMzD49LFPwbJ+0VIX0edgx0LtnXWbotQ5jWXgLK7J/U66WB2zxz5
- jH4cy/Z6XC1IWDGVjA5Mv3unJvBsnlojnl6L4EAG9bfmtx56apNajlHGIiZIgRc8ekXCMlutWSHUPl
- i+fQ3I0PVon13LlKYw7qUCz0Q0d9b4zRVQzl7Er+uZ4y8kEWjozXMGYHO760f9pMyFk7Ea6vxrVsMT
- lGYquJ/R2y+hvccM+S96QJCNlGpje2GXQ2sbiihmuEO7+VYa1bLis7aCcbaaKNpwziZfY9vfU41a7R
- 0Dlf+rEOaRkVyTSpeEcUufRgKbaNIZzUZxqvtLWoc71yYvcqTa8szHbyg5QTUvgYOj21k5MJRcIStJ
- O+yPj+3oZ1/ctuhXL5mMl+QsAUuZG93x/+yrkY0U6tx8wBygzfkW6vuzDIHg==
+ bh=h9OPg5RS+nfOLWxynP/fUsMok8GdZyNzCl08eoWjKnY=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBrBsxfGIuHF4Sx/7sjaBBBlGxsf+TxsL+5CqwjzAJu
+ OjNv2WWJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCawbMXwAKCRB33NvayMhJ0Wb8EA
+ CkxJYGzSVWwut77rmwPHe22a/KxTlPpY+ldKxWHGXpdt0iDjwx7jX6UgZ0gbI5e9dh47eCPGIPGSW+
+ B+P5710m8dDn5McpDt0mYSPUrCJl5JOupqAIi/MiK0NsExOOWAnHeKXXZe91N00m0HcCg95Q6+Fk0L
+ MG8MiCdh51WldW1tsbzxfBTDQas+mmG/pZu9GtZ+VUtspnO9VP4p0MPb6n+5NyBjq34uQO7FKGnMnC
+ PqY5bpE969VZWKUNQgQ73rUxStWgB0A/ixQOLtUmQS8esxIl+JocTA8ohYUfAcND2uA8/f3uUlBAwU
+ IP2FngtB5UeR6aoKwsEy7FbP8KlBbcBDjdfEv8eGlRDPfTnCy9zJB8UqWtfX7zlu1JrxdmVk944YgE
+ pTh1pqFNVAVYe4vDbR9aRcgPxS6TfUVNNgeHYP2QsRdgOMb+npvwLsMHqOMAm+1Z58j7Fsuvm399Uy
+ 8i5h6mJWM+w1EJ9VMxCZ7BsJt+Owr6lpB1PgXIkJzZawHdX/Ts1/YgPgC8ThcR5h0GQ1DXDPPARgH4
+ gLhIPnu/0dvI6l0PxpHUBcAenYehvgoJ+lsExi/woNrH7D9JFI/CpujjhzIcSxRbM9a/YhvkT2WExz
+ +ByjL3+87Gu7xr5X2mLGfWP/VRrnOM+JFR0dBISnkYkXpAdrI/O7s2ZylLgQ==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 
-Describe the PM8550B OTG VBUS boost and the Type-C port controller,
-set a regulator as always-on and enable the Type-C controller and
-PHY on the PM8550b for the Valve Deckard headset.
+Describe the PM8550B OTG VBUS boost and the Type-C port controller with
+its PD PHY, both disabled by default.
 
-Depends on:
-- https://lore.kernel.org/all/20261125-topic-sm8x50-pm8550b-tcpm-v1-1-f54040ccbbaa@linaro.org/
-- https://lore.kernel.org/all/20261120-topic-sm8x50-pm8550b-usb-vbus-v1-0-bbda7b708359@linaro.org/
+They are only usable when the PMIC Type-C block is not already driven by
+the ADSP firmware through pmic-glink, typically when Linux runs at EL2.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Neil Armstrong (3):
-      arm64: dts: qcom: pm8550b: add USB VBUS regulator and Type-C nodes
-      arm64: dts: qcom: sm8650-valve-deckard: set BOB2 as always-on
-      arm64: dts: qcom: sm8650-valve-deckard: add Type-C connector
+ arch/arm64/boot/dts/qcom/pm8550b.dtsi | 47 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
 
- arch/arm64/boot/dts/qcom/pm8550b.dtsi             | 47 ++++++++++++++++++++
- arch/arm64/boot/dts/qcom/sm8650-valve-deckard.dts | 52 ++++++++++++++++++++++-
- 2 files changed, 98 insertions(+), 1 deletion(-)
----
-base-commit: 392248352ef971b473b50349ca834e5942bc404e
-change-id: 20261125-topic-sm8650-deckard-tcpm-434796951239
+diff --git a/arch/arm64/boot/dts/qcom/pm8550b.dtsi b/arch/arm64/boot/dts/qcom/pm8550b.dtsi
+index 74d23b8970f4..feb2395e920a 100644
+--- a/arch/arm64/boot/dts/qcom/pm8550b.dtsi
++++ b/arch/arm64/boot/dts/qcom/pm8550b.dtsi
+@@ -45,6 +45,53 @@ pm8550b_temp_alarm: temp-alarm@a00 {
+ 			#thermal-sensor-cells = <0>;
+ 		};
+ 
++		pm8550b_vbus: usb-vbus-regulator@2700 {
++			compatible = "qcom,pm8550b-vbus-reg";
++			reg = <0x2700>;
++			regulator-min-microamp = <1000000>;
++			regulator-max-microamp = <3000000>;
++			status = "disabled";
++		};
++
++		pm8550b_typec: typec@2b00 {
++			compatible = "qcom,pm8550b-typec", "qcom,pm8150b-typec";
++			reg = <0x2b00>,
++			      <0x2d00>;
++			interrupts = <0x7 0x2b 0x00 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2b 0x01 IRQ_TYPE_EDGE_BOTH>,
++				     <0x7 0x2b 0x02 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2b 0x03 IRQ_TYPE_EDGE_BOTH>,
++				     <0x7 0x2b 0x04 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2b 0x05 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2b 0x06 IRQ_TYPE_EDGE_BOTH>,
++				     <0x7 0x2b 0x07 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x00 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x01 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x02 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x03 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x04 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x05 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x06 IRQ_TYPE_EDGE_RISING>,
++				     <0x7 0x2d 0x07 IRQ_TYPE_EDGE_RISING>;
++			interrupt-names = "or-rid-detect-change",
++					  "vpd-detect",
++					  "cc-state-change",
++					  "vconn-oc",
++					  "vbus-change",
++					  "attach-detach",
++					  "legacy-cable-detect",
++					  "try-snk-src-detect",
++					  "sig-tx",
++					  "sig-rx",
++					  "msg-tx",
++					  "msg-rx",
++					  "msg-tx-failed",
++					  "msg-tx-discarded",
++					  "msg-rx-discarded",
++					  "fr-swap";
++			status = "disabled";
++		};
++
+ 		pm8550b_gpios: gpio@8800 {
+ 			compatible = "qcom,pm8550b-gpio", "qcom,spmi-gpio";
+ 			reg = <0x8800>;
 
-Best regards,
---  
-Neil Armstrong <neil.armstrong@linaro.org>
+-- 
+2.34.1
 
