@@ -1,106 +1,106 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795631038;
-	b=p0EC8P/HunBC74KOZfNzPwnn5cMeh9pfni4N80K5EBPqIYqrhmZOfzcnE6YXi8EX6XvD
-	 +6jOq0lwDwssxGKJ23FnDyh2KCK1ybwvaab6MNf1PXcriBih0c/3CfMRttDa0sKR9XK5I
-	 lObLWFTsPMnnTrXHEOopkEl4zWLXNSQgFePF9I9HwpK0En3QFz2ffMvtD2/Sa1i47/ExO
-	 xSkFwNBOqlN8twN5TzqhwCj2suLLI+WbDNXqQeFQ3S2C0ZTi8qiuUNyfRqJSk6e2Z9oqd
-	 y35s9N+KBtj6XOUq4LjMuCCLZr5ENYvGaM6bykQdee373rOmZRwNKBO1HNIktz79exA==
+	t=1795631039;
+	b=RBY5k0YdA+sJj3Rat/v+X/Le5bNOiqin52ThYtt5TvGXLTW9ivzyLMH6E6u6yR+F8DaA
+	 K+0Yl16UQdvLdFIWl0YxbLCkVVP8C7wXEV5ATX0DQvOaURtusZyd1HUSFbUSA6GOA1yzB
+	 /ZqSdXo477pyef15kORdmLJ0jy/rCLyBTHSX9BOy76SLUh5gQtnJ0vJD5dOo0p4oiTR+5
+	 WKEBmIQItpSDWUdVHSX1UaSR+rPdPk7rt5866Pq4HLye6qqCz+zAroVmGohX6VNgsCmA/
+	 ZrXyXUq4Omeq3r1n4Cd5iTk3TH7kuJFbrbEj1UdLnrJqsVRv0exN1ZbjtID5+S+V7CQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795631038;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795631039;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
 	 Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=z1XeamohrIedhgwmhNg4I8r5d4kbVDxOY6/Z0j0BI1k=;
-	b=Z2wATChSoxwjTgKSCZI3kFMe9/JzBysIuCC9R1QB0AH0d1Kd5tuaxVVDJfbVNBBDkG2a
-	 jdMdk1REi/Cr5QvUQT8wR05mZoNLsIZTydzrDenfXzCmVXTWuUrMb55i41UsH9QC2m3jS
-	 W413VuvUoQNZVd9z97SpzrbGeuPjZtwE9Kv8rAbWiHXE8KKCUQ89IEtNQfWjkVpzBfvMe
-	 tULZlk7o0f/W4Xw5RAitYn9PDbxPNpMR7L5Jk/p75o9iw469DopqiWub8f97Z3BCgVl4/
-	 9aNDRmVqTzE4NFQDUWZp8cLpM+j1eym7FqeTTz3cBxXQefDjwGQaYyC+aITAEznNYag==
+	bh=iBl3ztGie3scC2+QPz/6CcWsyfMw4xdKCUkFMvo4SHE=;
+	b=BOt4VZPqoDjLb6p1qoF6/Ia19wMf1e1ZsQPyncoFMU5+li/zYz8xxBp5XDh82N8VPV1F
+	 OzYq1CHrOP/coNnBn9ExW71MiYoLCbTiL0yG3HfqIqVe4HsS1scIJ/suFowyoLv4yIh6A
+	 kRiZVhPi5D4fGS26i6CRZiTIC+xFYPCBWFLyLr4fQ6Zyw+bKoRJAvcTxWZVb2NuemcN8G
+	 gnEErN6Sz/81JkJ9mG7+ilpma37liSP9VhxPgsKiWzl+CMb+p9akSbD00WcqbEShoz31T
+	 ke2BGgVyEqnPiqbYceUysBXhldqTSqE0IqWL5OhjY7pFp1KqaAJtsM9a3LUhN4uPl0w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p4C4b9Yt;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WwT3XJ22;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=L8EX9VIE;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NhDqjmxW;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7A31E606A68F
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7A31E606A68F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D75560A260D
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D75560A260D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=p4C4b9Yt;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=WwT3XJ22
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6APGQJqL3008006
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:56 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=L8EX9VIE;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NhDqjmxW
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6APGQ7iC291189
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:date:from:in-reply-to:message-id
-	:mime-version:references:subject:to; s=qcppdkim1; bh=z1XeamohrIe
-	dhgwmhNg4I8r5d4kbVDxOY6/Z0j0BI1k=; b=p4C4b9YtZLiMszAJOqJfAz7m8Sa
-	qIQNrznzZnGVQTg2CVo/t54ikZFaF+toxVq8a1Sw5RtSXv762PhhNuWRBSIirBEU
-	1ePL7h5qzzoN8Q23/tV3oJPjXwuC24+8UfjvOOv+PTZ9Eu8xDRXbIg3jndSeeOlZ
-	mcKw9wMfTQFSLZUBL6W2c1n0JMmMlKG6yFhkXqnDXKUa0PnQIhBsKfzetN/++Iib
-	UvTFWJcBs6QQAjftFtm/qlOwY2uB3YaavR+94il9iKEj3rJ8EL36saXXfwEOZHid
-	EBdyvLVyooRoVQhMboClGw84AazeF2518BYcpui8WtzrhUJdPj6QzsMQoXQ==
-Received: from mail-yx1-f71.google.com (mail-yx1-f71.google.com [74.125.224.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vukt8qw-1
+	:mime-version:references:subject:to; s=qcppdkim1; bh=iBl3ztGie3s
+	cC2+QPz/6CcWsyfMw4xdKCUkFMvo4SHE=; b=L8EX9VIEamhHga1wDYGfXKO1tDR
+	uo9Gm0tAiok0DKT24f/GrPcopVnhZq+vPJGXwuXs1GH9uJj/cXd+9obNKP8g8NCy
+	r7uPAbbKjaHexEKDga94X/EzDAmmJgv5jzlDr3dF6tZ1XBUFeNRgeKO6pdgeqvhB
+	wN1QBQCuCwgvzX+4tyboQYpX7F6U5LI3ee14c9k6xhc6nNZYS3JHwEhB2nJaS3/d
+	xpSZqbU4/8oyhVfBEyfrO5asYNE/ZzbHZap3wS/Wkn+eudxyRZzGK7icKXrKPzr6
+	oQLOt80rpZKZ8im12XJpkEE/gewTh17dPET7L7umEmD8AsO12z0N6cxaDdw==
+Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j61ahs0b8-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:56 +0000 (GMT)
-Received: by mail-yx1-f71.google.com with SMTP id 956f58d0204a3-679f81d5d7bso10073842d50.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:23:56 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:23:58 +0000 (GMT)
+Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f20addba1so937609585a.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:23:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795631036; x=1796235836; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795631038; x=1796235838; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=z1XeamohrIedhgwmhNg4I8r5d4kbVDxOY6/Z0j0BI1k=;
-        b=WwT3XJ22LNMFhG2g14/ft3r5qQHGJ6gs0D5a0S/44E+n/R7yNMkxVJnUM4e+lU5mmg
-         OwYBd93A0Zvp7b4/Lc8LRo9OJMqhHq6qbjzxdCRUDj57Gwl7IHMQev2Yffg2I/fivYd0
-         kZ9YoWODWSgNm0X8hwsYEeKvuxGeKvQ8zksycBM8A1H5z4SaQEvDoY8o+IuqsPE+KryF
-         PKTgHOMtFq1IOJUsAP6eo3aTcdtl7AL85YY0GLdoFHQsbl4+pjB0c0pKRIt2JSPDJ52j
-         v+tSqHNg5JNT154TdNzGLiAqllFtFSUlpWx7P+VpmRgVDIS1ChTkI79lHwKhD63n1C2D
-         rLNA==
+        bh=iBl3ztGie3scC2+QPz/6CcWsyfMw4xdKCUkFMvo4SHE=;
+        b=NhDqjmxW74JdhnfNYj/mJVPdLHMAzsoyHWNHyPiut4alqiPSWNhUWMGEZvnBDmL99Z
+         2jZbcKe2hgFy2YI8iMJFinKCnPK70W1qlY72NJq/dkXJtitHPd39yoqq6iVgmEImxoaG
+         UhHtC5PjyRx0fw1NGNsGtfMLnVFzOYzfp9KJfP1GvEC9OYgowh61OjV8otirmy6RhPD+
+         NHYXWhcasxCRjLc/g/CmuHVRn81QnzA7L06tTqa31/q+9ua0LTPBweExcqWV6bgf+lk4
+         1uzVfuaR86VkS/nAMOWX0ClHZfpXQd0vdEFo3eDeNRN441uGnzcLK6NUHKwjsyAMHOWu
+         vsZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795631036; x=1796235836;
+        d=1e100.net; s=20260707; t=1795631038; x=1796235838;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=z1XeamohrIedhgwmhNg4I8r5d4kbVDxOY6/Z0j0BI1k=;
-        b=iHdzF1l+xc924swai24QldofYKYSfPtiySDWmQ3Td/pK6H2YRApeNziSwp+Db19v08
-         ZLr2Fv/NamifBji7QsqHu3rYA4bmMcUODEopsoH+maLVfW1BHgv+DpIlQVD0Ajpt7bSC
-         3T9/uqY2L0HVIBWtlpfLreGNKQYrhqVNLYitpN5/hv+CLetZ9sOMJG8p/ldhSXw60yUZ
-         rrjOBd/5wQ96W08lojyKXQktOAWpfVYM0NUmT1Wovx+df8QdPtmObXQO2BiVxBDwiHsL
-         jNkTU8nPbmBLoNq7HgvvvKXJhSCozS58uzCL3PaItGUP6BElRS7a9YWQFvg5RwvFm1u4
-         otQA==
-X-Forwarded-Encrypted: i=1; AL+hErEiPAzvhRNVYd60Z4+3cz3dFJXr6k5a7D5AM3pGZNW2YISshm4wgqpii8G2hhFNG72bO4B2GP/HA8uafoJv@vger.kernel.org
-X-Gm-Message-State: APuU4Z+LoJgqkaDCT06/kkUl91dCQJz2puUVRD0WOwf8787h/IPiF63b
-	VgKgC3MxZ+6t/Jc0fElGO0IsU0bpB7IAFxfASY+9i0RSiMRf6vO+4SkPD1vFapPDzmZIFmj3z0V
-	Xbnte9q+2O2f6Z4LNGAm/z7fCVkQpjLUfnU5K/eShsiCBeCYwTDw0VseRa0yh6eKYUi2W
-X-Gm-Gg: AZFdTZf5bK/k1o/7BkQrruBfizfrjMAHwVmnuf+kMelVhbEvCJX3tLWW3o92eAaiJG0
-	WN6SqN9C87KWitdW2zbTdRbTuNefz/PkUQmssb4E7wa9RoSnw4CLWp9aZzz1I2sOOPmUSnCjqQY
-	oHpMn/+1JFJN/trjuHwWFx5BGkAkIpm6cq74NqHwWb2jgMQT7Ug2kBJYHvPOeZtctqG+DFZD4IS
-	RpvNyr3y4e67AMQaApv4fjwNo+689zT0v1xggl3BlNgCneSg36jMWrGO/vi7ubV/vWph20P+pJB
-	GIWK5Y5eUryvKQiWMUMHtOR3BsKPiOA/6ecCro7XUy2XnWQ8BhfIoG4kg44ANR0Z5SwJkLgxdVw
-	AteGWAN/hkIXQspYdkda5XkLXvr5C1N1QU+0xK1NOptRguRmB+vYe4rY5rVRHG/rsaQD4lBLQ2P
-	gA0IQq
-X-Received: by 2002:a05:690e:191d:b0:67d:e4c3:d85e with SMTP id 956f58d0204a3-67df43f3412mr6388665d50.46.1795631035838;
-        Wed, 25 Nov 2026 10:23:55 -0800 (PST)
-X-Received: by 2002:a05:690e:191d:b0:67d:e4c3:d85e with SMTP id 956f58d0204a3-67df43f3412mr6388655d50.46.1795631035276;
-        Wed, 25 Nov 2026 10:23:55 -0800 (PST)
+        bh=iBl3ztGie3scC2+QPz/6CcWsyfMw4xdKCUkFMvo4SHE=;
+        b=nlDSgDTde7vvmidh2ZLONmpMk0ADQT4JZRdEKtyQ/5sH5eKFtcN4Epgt46uCu19QVT
+         q6tUqV0KxNv3FznxWuQyyVlpvOQOY0FtLYjLrFu9fur9KQadVacimRL6QQlm/Yp3zOWV
+         ptBxXWtcS98A8KPAPF442MiqKUMeNq7QIFoUlEmmUYJGS+m8P5GEx6IyapgwkUZkr5DO
+         2Bw/DPFT+dXdc76Z0b5Wry2WdTsX067N4DXoeZFRRMiUulXYjxO6acIU2786sx01OoDx
+         S0M3fx/zpPKyP1P94GQlMb8W6vgqmGW2pkncwnR5TACVifu/+MrmMJvx0cz3KgiWclms
+         lRgA==
+X-Forwarded-Encrypted: i=1; AL+hErFAv4+ppPnx/HFUVjzBIjVxQa/kq+egQwvXd9p8gVWCPKYzruyYcx7pHFu41rF5a3KNQGNxzELCGZ5PHcrG@vger.kernel.org
+X-Gm-Message-State: APuU4Z+wOVzX/iJrSWWi8gXdNn4HJoKXXwtrmGljmm1b10SqgTrmpn7b
+	9mUrGgpsH+YikZ0GLOOuo7GVZglofCBSvEWPLZ4oPOQdaPNAyQ5nqudvYS7RD36Fe2RdiMpZWFL
+	fD65AjyQuXvWWUHOMklJ5Y64u2puDNCy9UCuaCkVjZvpaGxz3eMOuYLg2LhYpr49S2FV/
+X-Gm-Gg: AZFdTZdy9FQieaItS0HHiVlz96kb5d/vn2PctoEsgKa5k5Uz3sq7Bs5LmHIAlQhl25A
+	Dxt6Gx/Cy+tW9uGa2ez0dCnxhlHcrUfMXILhK8Ig49eJkeig56RD5hjUibspx/LpnhZM2yHR0hm
+	iRAMZarDROXZsHjrYbg2GbA8Cc3p/2N2WLw1jDmrr9FQh+HmIqQtdrC8bIsDuCt+6A0lQWWw5YP
+	b71eyhyWj/xyto3U2xLS9sq0JgXg07r7hgDYDbcTuNHHpg4LBIvn9gQELNBUbiwLRSv59PtAiw8
+	snZh+/T45hFEg4gyBS2JO5qwkJRIMLcx8DtTKvqJyQQbRQhSJZL8tVa6y2F15M+gZIGbiJztFZ5
+	ZIgSGc/2mKlyIk0lLc8XsUPCAMs1qOcHA5KWxZm+2lX9lIfhECMiIpncjrV9EDiaHdR70Gh1Bt1
+	BUZS74
+X-Received: by 2002:a05:620a:6603:b0:949:8d0d:6f66 with SMTP id af79cd13be357-949baa15529mr2853758585a.68.1795631037581;
+        Wed, 25 Nov 2026 10:23:57 -0800 (PST)
+X-Received: by 2002:a05:620a:6603:b0:949:8d0d:6f66 with SMTP id af79cd13be357-949baa15529mr2853753585a.68.1795631037101;
+        Wed, 25 Nov 2026 10:23:57 -0800 (PST)
 Received: from lin-0843.qualcomm.com ([212.136.9.4])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb42absm37185609f8f.1.2026.11.25.10.23.53
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb42absm37185609f8f.1.2026.11.25.10.23.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 10:23:54 -0800 (PST)
+        Wed, 25 Nov 2026 10:23:56 -0800 (PST)
 From: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>,
@@ -111,9 +111,9 @@ Cc: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
         Atanas Filipov <atanas.filipov@oss.qualcomm.com>,
         Jigarkumar Zala <jigarkumar.zala@oss.qualcomm.com>,
         Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
-Subject: [PATCH RESEND v2 08/12] media: qcom: camss: Add streams API support for VFE
-Date: Wed, 25 Nov 2026 20:23:22 +0200
-Message-Id: <20261125182326.2767771-9-gjorgji.rosikopulos@oss.qualcomm.com>
+Subject: [PATCH RESEND v2 09/12] media: qcom: camss: Add streams API support in camss-video
+Date: Wed, 25 Nov 2026 20:23:23 +0200
+Message-Id: <20261125182326.2767771-10-gjorgji.rosikopulos@oss.qualcomm.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20261125182326.2767771-1-gjorgji.rosikopulos@oss.qualcomm.com>
 References: <20261125182326.2767771-1-gjorgji.rosikopulos@oss.qualcomm.com>
@@ -127,227 +127,213 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Authority-Analysis: v=2.4 cv=KfVHIgYD c=1 sm=1 tr=0 ts=6b0727bc cx=c_pps
- a=ngMg22mHWrP7m7pwYf9JkA==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
+X-Proofpoint-GUID: BxCW9z502hDsi0MQ3ZVUT0Qx6greZJ01
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX8bDQxRPFXhAJ
+ JwZMMbMmrnpFH2m3EC/7mdhSPkCu3CqLRGP+Wsk9gum5qRaq6NYWVUmTHmYFNC0HBxX5su8LAnO
+ xM7lysAJzNKfz9O6kSJsSwXZY76kOR4=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX1xnFER+TlbzG
+ YJNrsFLjxxr6rRSTTwA82MP+9iqYM/eB5CSe5XDFdYKKOXI+Xzrh59nxT1AOcCnWNh9Bls0RmVW
+ 8roFOnONTMIzJSvZ/V+b8pEyLLrBKOKtO24NplzmDIqoER5B/fDqy53I0dTu9zDic4YplSgNxAq
+ JMuE4Zki7b1GqM0Py0qkRGPhCxgxRPxB1Xtojktsio7jCbnpxKKLMnmi2MtUkTd8/oPKNTTm9LF
+ uTZnHRX+S9eG2UjemX03831gWYdXjwKNlXuKHbsHlhfyTHgAdyRd84lXcBYTngKTf5UIzHE6gYD
+ 1FoYPORZZ77plVOfcpPyRNWRndvkiwfEXIEHV10TPpl1AgkCAHK8Ls+aeyPKePhqs2tOGJwCqyI
+ qSskr+nXG220IW+F7xJcYAX5IVsQSNVfuiFybFNCmsZBUhXCpy6KW9nl2QHfJiK9zwP0RStXoXm
+ uJxpMfrF6l0NQWlTP9A==
+X-Proofpoint-ORIG-GUID: BxCW9z502hDsi0MQ3ZVUT0Qx6greZJ01
+X-Authority-Analysis: v=2.4 cv=BbxNQbt2 c=1 sm=1 tr=0 ts=6b0727be cx=c_pps
+ a=qKBjSQ1v91RyAK45QCPf5w==:117 a=dNlqnMcrdpbb+gQrTujlOQ==:17
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22 a=ZovgdgjKAAAA:8
- a=EUspDBNiAAAA:8 a=pvsxG-_YmC7UNMcg_GoA:9 a=yHXA93iunegOHmWoMUFd:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22 a=ZovgdgjKAAAA:8
+ a=EUspDBNiAAAA:8 a=KYIyY8g0vu4ecJsuFiIA:9 a=NFOGd7dJGGMPyQGDc5-O:22
  a=VOxKbm1zgHvARWIDjr3b:22
-X-Proofpoint-ORIG-GUID: ZvvRDze5jAp2UQirGHCN3dswwiag1o-A
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX0sQTOSA2IpRZ
- hIBjEPTU2Rl33XTIsT0R5tcUULL+FIbCHW2/qMe3BEyV371jGy4vJGvnY/DOmsBxTFBYe9SmQyN
- iRjbqOUsJg0SXICsr57fKBa8wMfbxKw=
-X-Proofpoint-GUID: ZvvRDze5jAp2UQirGHCN3dswwiag1o-A
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA3MyBTYWx0ZWRfX3jU1lBYwcJfw
- Fz7ueQix3Zy8YhER7QsToJpcvH5krxQiV5XA4iY0c3pzF1R5ZrZXGJzoVoGk0JlIyh5SKk6u5RY
- rqFhtbXimssYqUah6MZ7l4Z99aYIX4qw7lzIZHP9QFrhXUYrcVqE+OSlvA7JAKlJfLBFouVjMRo
- 3LWjDn3Y7cPPIsoigikK00uDyZERM/Cq0jk7gK9BnWFHeZ90/gtYrB+g62waF2O7ro4cNRL2Y+W
- nzXh6jMcozxFuseax3rSQM76a8GsZkgyaaT7qFXWei4HHktkSLqCZR+27W5YOUcVyFCBd1flQGX
- lhgerU9itrbXDcTTz48UIcTXtdxua9OFG7rkOfeATK7grfVGGqtkbDgxGWHBo540oHSJ2HayIQy
- N4LR3KX1758Y/Vki21ZDPhLqvKxogChD4c+elOfKs8fEiWlKPsqBTpEkW6obc/YD4V11esdzcJl
- xr1Mo0XxwA2DCbbtv7w==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_04,2026-11-25_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
- impostorscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0
+ clxscore=1015 bulkscore=0 adultscore=0 suspectscore=0 impostorscore=0
+ priorityscore=1501 malwarescore=0 spamscore=0 phishscore=0 lowpriorityscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250073
 
-Implement the V4L2 subdev streams API (enable_streams/disable_streams)
-on VFE lines, selected per SoC via camss->res->streams_enable.
+Prefer the streams API when starting/stopping the capture pipeline:
+if the subdev directly connected to the video device's pad supports
+.enable_streams/.disable_streams, use it instead of walking the whole
+subdev chain and calling .s_stream() on each one.
 
-VFE lines are inherently single-consumer (vfe_link_setup() enforces
-one link per pad, and each line exposes only the implicit stream 0 of
-a non-streams subdev), so no local refcount is needed. Local and
-remote teardown are both attempted unconditionally on disable, on a
-best-effort basis: a failure on either side is logged and does not
-skip the other side's teardown, since there is no way to roll back a
-partially disabled pipeline.
+The legacy walk is kept as a fallback (video_start/stop_streaming_legacy())
+for subdevs that do not implement the streams API, so platforms that
+have not opted in keep working unchanged.
 
 Co-developed-by: Hitesh Patel <hitesh@ebytelogic.com>
 Signed-off-by: Hitesh Patel <hitesh@ebytelogic.com>
 Signed-off-by: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
 ---
- drivers/media/platform/qcom/camss/camss-vfe.c | 119 +++++++++++++++++-
- 1 file changed, 117 insertions(+), 2 deletions(-)
+ .../media/platform/qcom/camss/camss-video.c   | 119 ++++++++++++++----
+ 1 file changed, 94 insertions(+), 25 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-index da373024c847..31ee3a0d3717 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-@@ -1996,6 +1996,104 @@ static const struct v4l2_subdev_ops vfe_v4l2_ops = {
- 	.pad = &vfe_pad_ops,
- };
+diff --git a/drivers/media/platform/qcom/camss/camss-video.c b/drivers/media/platform/qcom/camss/camss-video.c
+index 0852eb6f1315..7f7212996c4a 100644
+--- a/drivers/media/platform/qcom/camss/camss-video.c
++++ b/drivers/media/platform/qcom/camss/camss-video.c
+@@ -249,26 +249,27 @@ static int video_prepare_streaming(struct vb2_queue *q)
+ 	return ret;
+ }
  
+-static int video_start_streaming(struct vb2_queue *q, unsigned int count)
 +/*
-+ * vfe_pad_enable_streams - Enable one or more streams on the source pad
-+ * @sd: VFE V4L2 subdevice
-+ * @state: V4L2 subdevice state
-+ * @pad: Pad number
-+ * @streams_mask: Bitmask of streams to enable
++ * video_start_streaming_legacy - Walk the whole subdev chain and enable
++ *                                streaming via .s_stream()
++ * @video: Video device
++ * @sink_pad: Video device's own (single) pad
 + *
-+ * VFE lines are inherently single-consumer (vfe_link_setup() enforces one
-+ * link per pad, and each line exposes only the implicit stream 0 of a
-+ * non-streams subdev), so no local refcount is needed here.
++ * Fallback used when the subdev directly connected to @sink_pad has no
++ * .enable_streams op. Mirrors the pre-streams-API pipeline walk: each
++ * subdev's pad 0 is assumed to be its sink pad, and streaming is started
++ * one subdev at a time via .s_stream() rather than the streams API.
 + *
 + * Return 0 on success or a negative error code otherwise
 + */
-+static int vfe_pad_enable_streams(struct v4l2_subdev *sd, struct v4l2_subdev_state *state,
-+				  u32 pad, u64 streams_mask)
-+{
-+	struct vfe_line *line = v4l2_get_subdevdata(sd);
-+	struct vfe_device *vfe = to_vfe(line);
-+	struct media_pad *sink_pad = &line->pads[MSM_VFE_PAD_SINK];
-+	struct media_pad *remote_pad = media_pad_remote_pad_first(sink_pad);
-+	int ret;
-+
-+	line->output.state = VFE_OUTPUT_RESERVED;
-+	ret = vfe->res->hw_ops->vfe_enable(line);
-+	if (ret)
-+		return ret;
-+
-+	if (remote_pad) {
-+		ret = v4l2_subdev_enable_streams(media_entity_to_v4l2_subdev(remote_pad->entity),
-+						 remote_pad->index, BIT_ULL(0));
-+		if (ret) {
-+			vfe->res->hw_ops->vfe_disable(line);
++static int video_start_streaming_legacy(struct camss_video *video,
++					struct media_pad *sink_pad)
+ {
+-	struct camss_video *video = vb2_get_drv_priv(q);
+-	struct video_device *vdev = &video->vdev;
+-	struct media_entity *entity;
++	struct media_entity *entity = sink_pad->entity;
+ 	struct media_pad *pad;
+ 	struct v4l2_subdev *subdev;
+ 	int ret;
+ 
+-	ret = video_device_pipeline_alloc_start(vdev);
+-	if (ret < 0) {
+-		dev_err(video->camss->dev, "Failed to start media pipeline: %d\n", ret);
+-		goto flush_buffers;
+-	}
+-
+-	ret = video_check_format(video);
+-	if (ret < 0)
+-		goto error;
+-
+-	entity = &vdev->entity;
+ 	while (1) {
+ 		pad = &entity->pads[0];
+ 		if (!(pad->flags & MEDIA_PAD_FL_SINK))
+@@ -283,6 +284,42 @@ static int video_start_streaming(struct vb2_queue *q, unsigned int count)
+ 
+ 		ret = v4l2_subdev_call(subdev, video, s_stream, 1);
+ 		if (ret < 0 && ret != -ENOIOCTLCMD)
 +			return ret;
-+		}
 +	}
 +
 +	return 0;
 +}
 +
++static int video_start_streaming(struct vb2_queue *q, unsigned int count)
++{
++	struct camss_video *video = vb2_get_drv_priv(q);
++	struct video_device *vdev = &video->vdev;
++	struct media_pad *sink_pad = &vdev->entity.pads[0];
++	struct media_pad *src_pad;
++	struct v4l2_subdev *subdev = NULL;
++	int ret;
++
++	ret = video_device_pipeline_alloc_start(vdev);
++	if (ret < 0) {
++		dev_err(video->camss->dev, "Failed to start media pipeline: %d\n", ret);
++		goto flush_buffers;
++	}
++
++	ret = video_check_format(video);
++	if (ret < 0)
++		goto error;
++
++	src_pad = media_pad_remote_pad_first(sink_pad);
++	if (src_pad && is_media_entity_v4l2_subdev(src_pad->entity))
++		subdev = media_entity_to_v4l2_subdev(src_pad->entity);
++
++	if (subdev && v4l2_subdev_has_op(subdev, pad, enable_streams)) {
++		ret = v4l2_subdev_enable_streams(subdev, src_pad->index, BIT_ULL(0));
++		if (ret < 0)
++			goto error;
++	} else {
++		ret = video_start_streaming_legacy(video, sink_pad);
++		if (ret < 0)
+ 			goto error;
+ 	}
+ 
+@@ -297,16 +334,27 @@ static int video_start_streaming(struct vb2_queue *q, unsigned int count)
+ 	return ret;
+ }
+ 
+-static void video_stop_streaming(struct vb2_queue *q)
 +/*
-+ * vfe_pad_disable_streams - Disable one or more streams on the source pad
-+ * @sd: VFE V4L2 subdevice
-+ * @state: V4L2 subdevice state
-+ * @pad: Pad number
-+ * @streams_mask: Bitmask of streams to disable
++ * video_stop_streaming_legacy - Walk the whole subdev chain and disable
++ *                               streaming via .s_stream()
++ * @video: Video device
++ * @sink_pad: Video device's own (single) pad
 + *
-+ * Local and remote teardown are both attempted unconditionally on a
-+ * best-effort basis, matching the convention used by other streams-API
-+ * drivers (e.g. dw-mipi-csi2rx, ds90ub960, cdns-csi2rx): a failure on
-+ * either side is logged and does not skip the other side's teardown, since
-+ * there is no way to roll back a partially disabled pipeline. If the local
-+ * disable also failed, its error takes precedence in the return value.
++ * Fallback used when the subdev directly connected to @sink_pad has no
++ * .disable_streams op. Mirrors the pre-streams-API pipeline walk: each
++ * subdev's pad 0 is assumed to be its sink pad, and streaming is stopped
++ * one subdev at a time via .s_stream() rather than the streams API.
 + *
 + * Return 0 on success or a negative error code otherwise
 + */
-+static int vfe_pad_disable_streams(struct v4l2_subdev *sd, struct v4l2_subdev_state *state,
-+				   u32 pad, u64 streams_mask)
-+{
-+	struct vfe_line *line = v4l2_get_subdevdata(sd);
-+	struct vfe_device *vfe = to_vfe(line);
-+	struct media_pad *sink_pad = &line->pads[MSM_VFE_PAD_SINK];
-+	struct media_pad *remote_pad = media_pad_remote_pad_first(sink_pad);
-+	int ret;
-+
-+	ret = vfe->res->hw_ops->vfe_disable(line);
-+
-+	if (remote_pad) {
-+		struct v4l2_subdev *remote_sd = media_entity_to_v4l2_subdev(remote_pad->entity);
-+		int remote_ret;
-+
-+		remote_ret = v4l2_subdev_disable_streams(remote_sd, remote_pad->index, BIT_ULL(0));
-+		if (remote_ret) {
-+			dev_err(vfe->camss->dev,
-+				"Failed to disable stream on remote pad: %d\n", remote_ret);
-+			if (!ret)
-+				ret = remote_ret;
-+		}
-+	}
-+
-+	return ret;
++static int video_stop_streaming_legacy(struct camss_video *video,
++				       struct media_pad *sink_pad)
+ {
+-	struct camss_video *video = vb2_get_drv_priv(q);
+-	struct video_device *vdev = &video->vdev;
+-	struct media_entity *entity;
++	struct media_entity *entity = sink_pad->entity;
+ 	struct media_pad *pad;
+ 	struct v4l2_subdev *subdev;
+ 	int ret;
+ 
+-	entity = &vdev->entity;
+ 	while (1) {
+ 		pad = &entity->pads[0];
+ 		if (!(pad->flags & MEDIA_PAD_FL_SINK))
+@@ -320,13 +368,34 @@ static void video_stop_streaming(struct vb2_queue *q)
+ 		subdev = media_entity_to_v4l2_subdev(entity);
+ 
+ 		ret = v4l2_subdev_call(subdev, video, s_stream, 0);
+-
+-		if (ret) {
+-			dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
+-			return;
+-		}
++		if (ret)
++			return ret;
+ 	}
+ 
++	return 0;
 +}
 +
-+static const struct v4l2_subdev_pad_ops vfe_streams_pad_ops = {
-+	.enum_mbus_code = vfe_enum_mbus_code,
-+	.enum_frame_size = vfe_enum_frame_size,
-+	.get_fmt = vfe_get_format,
-+	.set_fmt = vfe_set_format,
-+	.get_selection = vfe_get_selection,
-+	.set_selection = vfe_set_selection,
-+	.enable_streams = vfe_pad_enable_streams,
-+	.disable_streams = vfe_pad_disable_streams,
-+};
++static void video_stop_streaming(struct vb2_queue *q)
++{
++	struct camss_video *video = vb2_get_drv_priv(q);
++	struct video_device *vdev = &video->vdev;
++	struct media_pad *sink_pad = &vdev->entity.pads[0];
++	struct media_pad *src_pad;
++	struct v4l2_subdev *subdev = NULL;
++	int ret;
 +
-+static const struct v4l2_subdev_ops vfe_streams_v4l2_ops = {
-+	.core = &vfe_core_ops,
-+	.pad = &vfe_streams_pad_ops,
-+};
++	src_pad = media_pad_remote_pad_first(sink_pad);
++	if (src_pad && is_media_entity_v4l2_subdev(src_pad->entity))
++		subdev = media_entity_to_v4l2_subdev(src_pad->entity);
 +
- static const struct v4l2_subdev_internal_ops vfe_v4l2_internal_ops = {
- 	.open = vfe_init_formats,
- };
-@@ -2067,6 +2165,7 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
- 	struct v4l2_subdev *sd;
- 	struct media_pad *pads;
- 	struct camss_video *video_out;
-+	bool streams_api = vfe->camss->res->streams_enable;
- 	int ret;
- 	int i;
- 
-@@ -2077,7 +2176,7 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
- 		pads = vfe->line[i].pads;
- 		video_out = &vfe->line[i].video_out;
- 
--		v4l2_subdev_init(sd, &vfe_v4l2_ops);
-+		v4l2_subdev_init(sd, streams_api ? &vfe_streams_v4l2_ops : &vfe_v4l2_ops);
- 		sd->internal_ops = &vfe_v4l2_internal_ops;
- 		sd->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
- 		if (i == VFE_LINE_PIX && vfe->res->is_lite == false)
-@@ -2107,10 +2206,18 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
- 			goto error_init;
- 		}
- 
-+		if (streams_api) {
-+			ret = v4l2_subdev_init_finalize(sd);
-+			if (ret) {
-+				dev_err(dev, "Failed to finalize subdev: %d\n", ret);
-+				goto error_reg_subdev;
-+			}
-+		}
++	if (subdev && v4l2_subdev_has_op(subdev, pad, disable_streams))
++		ret = v4l2_subdev_disable_streams(subdev, src_pad->index, BIT_ULL(0));
++	else
++		ret = video_stop_streaming_legacy(video, sink_pad);
 +
- 		ret = v4l2_device_register_subdev(v4l2_dev, sd);
- 		if (ret < 0) {
- 			dev_err(dev, "Failed to register subdev: %d\n", ret);
--			goto error_reg_subdev;
-+			goto error_subdev_cleanup;
- 		}
- 
- 		video_out->ops = &vfe->video_ops;
-@@ -2154,6 +2261,10 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
- error_reg_video:
- 	v4l2_device_unregister_subdev(sd);
- 
-+error_subdev_cleanup:
-+	if (streams_api)
-+		v4l2_subdev_cleanup(sd);
++	if (ret)
++		dev_err(video->camss->dev, "Video pipeline stop failed: %d\n", ret);
 +
- error_reg_subdev:
- 	media_entity_cleanup(&sd->entity);
+ 	video_device_pipeline_stop(vdev);
  
-@@ -2164,6 +2275,8 @@ int msm_vfe_register_entities(struct vfe_device *vfe,
- 
- 		msm_video_unregister(video_out);
- 		v4l2_device_unregister_subdev(sd);
-+		if (streams_api)
-+			v4l2_subdev_cleanup(sd);
- 		media_entity_cleanup(&sd->entity);
- 	}
- 
-@@ -2187,6 +2300,8 @@ void msm_vfe_unregister_entities(struct vfe_device *vfe)
- 
- 		msm_video_unregister(video_out);
- 		v4l2_device_unregister_subdev(sd);
-+		if (vfe->camss->res->streams_enable)
-+			v4l2_subdev_cleanup(sd);
- 		media_entity_cleanup(&sd->entity);
- 	}
- }
+ 	video->ops->flush_buffers(video, VB2_BUF_STATE_ERROR);
 -- 
 2.34.1
 
