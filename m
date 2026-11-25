@@ -1,60 +1,129 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795627272;
-	b=r91IAkrwxBhVPRRcYxY0DgWF4+rlRrC03NHcc7a86lbXMPkeZKvwXBBP1jVwnje4KTrn
-	 A89M44z56mbodzAVrb1Qan4B1Zhn7o72j9OoxHK1rYSHeYzFJOBV6XmUgUByS3iuoWZ6H
-	 z6ROUOYkCzURA5htrZl3jVfhllFet6Cv0luvNT1SdWCYlRIkR8Fe7csWMomfSKt5mccvZ
-	 TnZDxkoyqDwbXfE3sBvsyo++TRd8FrOk9GwuXplUBKU+Q2vVTIsknpBlTdJUk+V6OE2r9
-	 yP1ZeIDX8kaLfgEoGBcOgxKi6NFy5920HQw0Ex3TRudV81BXkMLUgz93GGNazGgRyaQ==
+	t=1795627314;
+	b=pBAS/5zJ4/gu5QPhxBWMM1ZaY71un8g6fdKQEO1uouK5y8iiBsrxfvzBTd+f2Ducr2Wb
+	 dRdfuaT8DhgS1PHcP6H+05dP7UYsVwXUfSgGhogbVSbeq7fOt03Cx1IItHxVofh0VLxt/
+	 BreviJNLlMDBpjjwvt5SicUSDs9xbMR6bqypOS8sR1lj6MuVtXux6nk0CK68B4+HvYu3o
+	 /ndvD347nch5S65RS49ynZMZ0rNlG4QkARiOfiTuJkECcUt4aAPLbiywq4K+RmOc2Tsoe
+	 01wlJL+Lpsp6xwYEp17ci1DyD1XvuFuOcwxvXXTtPKHsaZ+tQC8fRdoXikHRrUdqA4A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795627272;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
-	 Content-Language:From:In-Reply-To:Content-Transfer-Encoding:
-	 X-CMS-MailID:X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:
-	 X-CMS-RootMailID:References;
-	bh=7b7m/DkpgEDQ+oJfz1rrmLJybl8GZzhKw2nRd5M9D9I=;
-	b=uCtuEW8xEBISDe9P3mVL7wPUKaB301Mnw1v56GM4bqQ/aNXAIOy+bU04fJ/l3UlB+aeF
-	 ibvcYXQgSUdhrD7swuo1iD3BQlw9/ZANJ1re7cCaxHZUEF9AuE5gNpGC1GcyigL0b8pYL
-	 2ntOYN9535ZqbEe1nGsiLWRuWSm3Q7ycW/xL1lIFYMDCzYKqxSLcuD+gcGxgRBK7GR+v9
-	 O3aD7jBTP9fJxRZfvHgKBaOLqBt/EMBRgjxIzYiSU56TvLGII6/H71BZydlfaFwqCiO99
-	 Opt7wChs/h5IdbvZPq/Sj2Fc0C9i5KrQwgI3Fr8nx/vygEExIeiCoPRtWMI+rzRv1tQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795627314;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=ENdJgXbQROCmKdJO5EaJi6MoXgKwvTQsbT7XHtvuy1s=;
+	b=PnatGhk+WJexFsRIwq53oIc7PGPFlLvpiQSiWrnYGiewfJh/GnjepAzB5opgijVWBhyG
+	 bw+xOONfDomqYB2DyFHDh8SsAW7MWsweWftT3pYoBfDTVsGpXNopusFe7NbKs7zh5j35V
+	 n0fF3XgODzzz+CbYiyJisTTC6Ppg3CnZsRk0jxaT9lbRz1kIQzPgTCf28OX5FEDqDQsh5
+	 doNdJu00Q8PneawuCSaplcUtnx4EvcpPUpSysA1V9/G0Qb18xtBQeDQze+69CIfuCSlk7
+	 xe/J9OU4wBPJ5mtYbYuJ8KG5Iz0QILlavcMhZVuruGY2V8emO/kW07+8t94lbZYap3Q==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=OEi1ZWWc;
-	arc=none smtp.remote-ip=210.118.77.12
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=baylibre.com;
+	spf=pass smtp.mailfrom=baylibre.com;
+	dkim=pass header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=O2Q9k62R;
+	arc=none smtp.remote-ip=209.85.128.52
+Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 287E9606A32D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:21:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 287E9606A32D
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94E6A606A329
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:21:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94E6A606A329
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=baylibre.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=baylibre.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=OEi1ZWWc
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261125172109euoutp026095bd8ebdf36ba0ea75d063fb156652~rWXzby3HF3142831428euoutp02z
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:21:09 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261125172109euoutp026095bd8ebdf36ba0ea75d063fb156652~rWXzby3HF3142831428euoutp02z
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1795627269;
-	bh=7b7m/DkpgEDQ+oJfz1rrmLJybl8GZzhKw2nRd5M9D9I=;
-	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
-	b=OEi1ZWWcaRDpTvP7CQulCBO/V49BJJgF86ryhAJXC5TgpZw4nuounp1poXWbcq9gM
-	 RaBAjfHKNacLXwS77OQipOMC8F/QJSM8DUNTWI0l0tXv3OEOR9J4XC8uYtAEdCb6OM
-	 69YhLX8W6BEeRRwkbZKlthpnlLDrPbsFipJRiToE=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261125172108eucas1p124b2bc0d3a1d4e2073e0f604d173d1df~rWXzGb1fk2718127181eucas1p1h;
-	Wed, 25 Nov 2026 17:21:08 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261125172107eusmtip29e62e06ad679156e3763d3a649334c3f~rWXxmyPNQ0516905169eusmtip2u;
-	Wed, 25 Nov 2026 17:21:07 +0000 (GMT)
-Message-ID: <a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
-Date: Wed, 25 Nov 2026 18:21:06 +0100
+	dkim=pass (2048-bit key) header.d=baylibre.com header.i=@baylibre.com header.a=rsa-sha256 header.s=google header.b=O2Q9k62R
+Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4a35a60499eso47899795e9.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:21:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre.com; s=google; t=1795627312; x=1796232112; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ENdJgXbQROCmKdJO5EaJi6MoXgKwvTQsbT7XHtvuy1s=;
+        b=O2Q9k62RlVFg4OKwGxOkVt681Enav+V5SL9h+JaY55nhxng/Hjevm6wB40DZnXbdqK
+         /n1aJwFKxSnab9rmFsaNjnGc01ZTnrUqeg/mGiO8UTFufzkkpOWQTJ2ya6D8hGjMZEjz
+         Nq4YyHQGciJKXpTkvosbzdidaOq/LtbVFTqa41QUhAh5Z2wsKAqpMP6Pak+S1S+n6Uj7
+         YgGd75Zu/sEL31B93TpR4BvmuF7++Dnvbl4I94/CpIpOazJ+W0z8C1xKF+5sKJCtDtfd
+         eI8+5O/i4x7e9OoPUsoYVaXemK7dnyw3lXxBVOvLZ3nzcn0GAREIUEA7iKsiNVaI6DG0
+         o0Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795627312; x=1796232112;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ENdJgXbQROCmKdJO5EaJi6MoXgKwvTQsbT7XHtvuy1s=;
+        b=BkvKO/RMa1jHzUxlldZhbuM3lZJTrg4olTHTd452UXzjz9+tRQwHOeZf0s22BOpKGM
+         8yPZNeexHZn0I3a6IHcYf5tg1XGnVr1s1db/eAsIndaKnTyxqrzpy3TQZesI9sNAC31e
+         OzM+Vd2rDYBFj4WD1GRi+nJNLjAsq9hXqjFeIa5uYZjIHkP44G8zepnELma50yOQddvF
+         No990/LrMgbMZiKcCjxW8nQ75aUNXV7TDmNDTgRK+TSvGl1udXljaefTK00rXEKvokZ/
+         uUz56TTaH10eGWoFHAM1fy9JVhF2SOZ4Q/lvdwSs0nDUPHkDDjKTC/BYBCW9bmqo2E+7
+         t5vw==
+X-Forwarded-Encrypted: i=1; AL+hErF9ozKF0zOR1NwRTgAMG9EOqx0eEyHBvgMEFJzwzuufeAlilFsK9+nZdxWpgIRZ0s2afb9NIxsS80wOT0C2@vger.kernel.org
+X-Gm-Message-State: APuU4Z8qKyjDNs4JLwuQFi6FQ49yQ6ImxJEWfls+Z+AzGTBgcKkiJ9D9
+	U+qR5VkdUaQ0E8kFWuocxded+SvdZQhjWHx97V2j4sOrBxcCLYljCiEsEEN4V9/QarY=
+X-Gm-Gg: AZFdTZc5MyNURieIpNe0mF4dM6IV9QCHtDmu2Mrwzy5mH/AnhiyZO6f6YItObVAcut/
+	VEO0ZnVITPtUC2kflbwcAUAyZDxgWgCXYljvK28iOxxYxFaCH47OiVNdom3EjiqR9TvNShYDV4Z
+	sDlExxDJxDC/7olRo/rTjT/WSVg7tLVKvcNjhcuu6vTHK1bwO7Xy8ZFfCVbYiDPSkNsi/6VUe6t
+	yELe8JVHx3cY+sGtVfelnJg8InnacBlk1s6+wEyycM4UKABJgljA4JTuPTan0diDJzWoe8NBuvz
+	7Sei2xHNtmCnEW8uP2+ZQIqWFBHh93URmLKMmB98WBoBUIM72Ln3hZIDCwcZ1Rlsa1tqmhmLNsV
+	JxXu588JQRkDfrr3C+wSoiZmqwWKK+mfPjb0vE5Ko/kc6B947cYsxnhLIzxinJr+w/ErDzukp1o
+	op2CDetCYlSitv098BXKzmeQYZHEDl/tvpQuu2o3wYnAbDzVMITK/h4jCXtw3YPAQrIUoTuo0kf
+	mT6/UHi35RNcuYIWth5oXPKyQ9FvvxfUFIMu+DbO2boHfSFRqOspR/qQSSh45PEDShrbZ91vzw5
+	SnDaZyXP/mQEJ9kjBrf+zn2XEdgPMQ0iCM04FJaF2NwlBvE1xFDtCFgPwvLkF+yoxt7Tuk6gntu
+	pd2tGjcv7WSkyp1LR
+X-Received: by 2002:a05:600c:1547:b0:4a2:397:73f6 with SMTP id 5b1f17b1804b1-4bb8880974amr419686485e9.8.1795627311811;
+        Wed, 25 Nov 2026 09:21:51 -0800 (PST)
+Received: from localhost (p200300f65f19a904452474b9d670397a.dip0.t-ipconnect.de. [2003:f6:5f19:a904:4524:74b9:d670:397a])
+        by smtp.gmail.com with UTF8SMTPSA id 5b1f17b1804b1-4bb853b216esm590410475e9.12.2026.11.25.09.21.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 09:21:50 -0800 (PST)
+Date: Wed, 25 Nov 2026 18:21:50 +0100
+From: Uwe =?utf-8?Q?Kleine-K=C3=B6nig?= <u.kleine-koenig@baylibre.com>
+To: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>, 
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>, 
+	Pratyush Yadav <pratyush@kernel.org>, Michael Walle <mwalle@kernel.org>, 
+	Takahiro Kuwano <takahiro.kuwano@infineon.com>, Vladimir Zapolskiy <vz@mleia.com>, 
+	Robert Jarzmik <robert.jarzmik@free.fr>, Alexander Usyskin <alexander.usyskin@intel.com>, 
+	Joern Engel <joern@lazybastard.org>, Madhavan Srinivasan <maddy@linux.ibm.com>, 
+	Michael Ellerman <mpe@ellerman.id.au>, Nicholas Piggin <npiggin@gmail.com>, 
+	"Christophe Leroy (CS GROUP)" <chleroy@kernel.org>, "Ritesh Harjani (IBM)" <ritesh.list@gmail.com>, 
+	Shrikanth Hegde <sshegde@linux.ibm.com>, Michal Simek <michal.simek@amd.com>, 
+	Nicolas Ferre <nicolas.ferre@microchip.com>, Alexandre Belloni <alexandre.belloni@bootlin.com>, 
+	Claudiu Beznea <claudiu.beznea@tuxon.dev>, Brian Norris <computersforpeace@gmail.com>, 
+	Kamal Dasu <kamal.dasu@broadcom.com>, 
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, William Zhang <william.zhang@broadcom.com>, 
+	Anand Gore <anand.gore@broadcom.com>, Kursad Oney <kursad.oney@broadcom.com>, 
+	Florian Fainelli <florian.fainelli@broadcom.com>, =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>, 
+	Ray Jui <rjui@broadcom.com>, Scott Branden <sbranden@broadcom.com>, Han Xu <han.xu@nxp.com>, 
+	Paul Cercueil <paul@crapouillou.net>, Harvey Hunt <harveyhuntnexus@gmail.com>, 
+	Keguang Zhang <keguang.zhang@gmail.com>, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>, 
+	Liang Yang <liang.yang@amlogic.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+	Kevin Hilman <khilman@baylibre.com>, Jerome Brunet <jbrunet@baylibre.com>, 
+	Martin Blumenstingl <martin.blumenstingl@googlemail.com>, Matthias Brugger <matthias.bgg@gmail.com>, 
+	AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, Frank Li <Frank.Li@nxp.com>, 
+	Sascha Hauer <s.hauer@pengutronix.de>, Pengutronix Kernel Team <kernel@pengutronix.de>, 
+	Fabio Estevam <festevam@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>, 
+	Heiko Stuebner <heiko@sntech.de>, Maxime Coquelin <mcoquelin.stm32@gmail.com>, 
+	Alexandre Torgue <alexandre.torgue@foss.st.com>, Chen-Yu Tsai <wens@kernel.org>, 
+	Jernej Skrabec <jernej.skrabec@gmail.com>, Samuel Holland <samuel@sholland.org>, 
+	Stefan Agner <stefan@agner.ch>, Lucas Stach <dev@lynxeye.de>, 
+	Thierry Reding <thierry.reding@kernel.org>, Jonathan Hunter <jonathanh@nvidia.com>, 
+	Jacky Huang <ychuang3@nuvoton.com>, Shan-Chun Hung <schung@nuvoton.com>, 
+	Tudor Ambarus <tudor.ambarus@linaro.org>, Linus Walleij <linusw@kernel.org>, 
+	Kyungmin Park <kyungmin.park@samsung.com>, linux-mtd@lists.infradead.org, 
+	linux-arm-kernel@lists.infradead.org, linuxppc-dev@lists.ozlabs.org, imx@lists.linux.dev, 
+	linux-mips@vger.kernel.org, linux-amlogic@lists.infradead.org, linux-kernel@vger.kernel.org, 
+	linux-mediatek@lists.infradead.org, linux-arm-msm@vger.kernel.org, 
+	linux-rockchip@lists.infradead.org, linux-stm32@st-md-mailman.stormreply.com, 
+	linux-sunxi@lists.linux.dev, linux-tegra@vger.kernel.org
+Subject: Re: [PATCH 04/10] mtd: spi-nor: Unify of_device_id list terminator
+Message-ID: <awcY_FIcD-Lt0_am@monoceros>
+References: <20261125-acpi-mtd-v1-0-42ad2f645bee@thegoodpenguin.co.uk>
+ <20261125-acpi-mtd-v1-4-42ad2f645bee@thegoodpenguin.co.uk>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,74 +133,81 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH] Revert
- "iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper"
-To: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, will@kernel.org,
-	robin.murphy@arm.com, honghuan@amd.com, Leon Romanovsky <leonro@nvidia.com>,
-	Jason Gunthorpe <jgg@ziepe.ca>
-Cc: joro@8bytes.org, prakash.gupta@oss.qualcomm.com, iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Content-Language: en-US
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-In-Reply-To: <20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
-Content-Transfer-Encoding: 7bit
-X-CMS-MailID: 20261125172108eucas1p124b2bc0d3a1d4e2073e0f604d173d1df
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
-X-EPHeader: CA
-X-CMS-RootMailID: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
-References: <CGME20261125135138eucas1p141ba6b5e09623562e2033e290fba811c@eucas1p1.samsung.com>
-	<20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
-
-On 25.11.2026 14:51, Sibi Sankar wrote:
-> This reverts commit 1acce29926d93f3eba427696fe3da6451504dae2.
->
-> Before this commit, dma_iova_destroy() unmapped through
-> __iommu_dma_iova_unlink(..., free_iova=true), which set
-> iotlb_gather.queued from cookie->fq_domain, skipped iommu_iotlb_sync()
-> and freed the IOVA with the queued gather, exactly like
-> __iommu_dma_unmap(). After it, dma_iova_destroy() calls
-> dma_iova_unlink() and then dma_iova_free():
->
->   - dma_iova_unlink() never marks its gather as queued and always calls
->     iommu_iotlb_sync() after iommu_unmap_fast().
->   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
->     the IOVA goes straight back to the allocator through
->     free_iova_fast() and never through queue_iova().
->
-> DMA-FQ domains therefore get strict invalidation on this path. That
-> includes the block layer's blk_rq_dma_map() path, which NVMe uses for
-> all data transfers, so iommu.strict=0 has no effect on NVMe I/O.
->
-> hw/sw details: Qualcomm Glymur CRD: SMMUv3 with no RANGE_INV,
-> 	       4K pages; NVMe SSD on PCIe Gen5 x4
->
-> Fio sequential read/write numbers:
->   Domain                          seq write    seq read
->   DMA (strict)                    2694 MiB/s   2693 MiB/s
->   DMA-FQ (lazy), flush queue      2707 MiB/s   2803 MiB/s
->     bypassed (this regression)
->   DMA-FQ (lazy), flush queue      10.6 GiB/s   11.9 GiB/s
->     used by dma_iova_destroy()
->
-> Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
-> Cc: stable@vger.kernel.org # v7.3+
-> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="vscxo3nc4bzujlaw"
+Content-Disposition: inline
+In-Reply-To: <20261125-acpi-mtd-v1-4-42ad2f645bee@thegoodpenguin.co.uk>
 
 
-The performance data clearly shows that the flush queue was there for
-the reason. Together with this revert it would probably make sense to
-apply the v1 of the reverted patch:
+--vscxo3nc4bzujlaw
+Content-Type: text/plain; protected-headers=v1; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH 04/10] mtd: spi-nor: Unify of_device_id list terminator
+MIME-Version: 1.0
 
-https://lore.kernel.org/all/20260701092033.422867-1-honghuan@amd.com/
+On Wed, Nov 25, 2026 at 04:28:30PM +0000, Pawel Zalewski wrote:
+> Unify the list terminator to have a single space between the brackets and
+> no trailing comma. This change doesn't introduce any diffs between
+> pre/post to the compiled binaries of the modified drivers and just aligns
+> these to the common style with other *_device_id arrays.
+>=20
+> Signed-off-by: Pawel Zalewski <pzalewski@thegoodpenguin.co.uk>
+> ---
+>  drivers/mtd/spi-nor/controllers/hisi-sfc.c  | 2 +-
+>  drivers/mtd/spi-nor/controllers/nxp-spifi.c | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/mtd/spi-nor/controllers/hisi-sfc.c b/drivers/mtd/spi=
+-nor/controllers/hisi-sfc.c
+> index 4f6631950a5b..01048ca46a60 100644
+> --- a/drivers/mtd/spi-nor/controllers/hisi-sfc.c
+> +++ b/drivers/mtd/spi-nor/controllers/hisi-sfc.c
+> @@ -474,7 +474,7 @@ static void hisi_spi_nor_remove(struct platform_devic=
+e *pdev)
+> =20
+>  static const struct of_device_id hisi_spi_nor_dt_ids[] =3D {
+>  	{ .compatible =3D "hisilicon,fmc-spi-nor"},
+> -	{ /* sentinel */ }
+> +	{ }
+>  };
+>  MODULE_DEVICE_TABLE(of, hisi_spi_nor_dt_ids);
+> =20
+> diff --git a/drivers/mtd/spi-nor/controllers/nxp-spifi.c b/drivers/mtd/sp=
+i-nor/controllers/nxp-spifi.c
+> index 30fe2d414f07..71ee50eb1a71 100644
+> --- a/drivers/mtd/spi-nor/controllers/nxp-spifi.c
+> +++ b/drivers/mtd/spi-nor/controllers/nxp-spifi.c
+> @@ -440,7 +440,7 @@ static void nxp_spifi_remove(struct platform_device *=
+pdev)
+> =20
+>  static const struct of_device_id nxp_spifi_match[] =3D {
+>  	{.compatible =3D "nxp,lpc1773-spifi"},
 
-Leon, do You see any other option?
+If you touch this struct you can also add spaces after { and before }.
+But that's a nitpick, ignore at will.
+
+> -	{ /* sentinel */ }
+> +	{ }
+>  };
+>  MODULE_DEVICE_TABLE(of, nxp_spifi_match);
 
 Best regards
--- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
+Uwe
 
+--vscxo3nc4bzujlaw
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEP4GsaTp6HlmJrf7Tj4D7WH0S/k4FAmsHGSsACgkQj4D7WH0S
+/k73ogf7BALXlCQ8r5M8ZULyZTCXZBckvup39sfY/19fBNNwXXunI63allBA3oeS
+J2HDGz0wNdZ2/y1iggGBavEtOaE6mVsBVcm3jdJ97l/vwZ/DzZ18bG17D+lOa6o0
+Kukj1hQ5Q2qvFM8u49aHT99Zp8isHlf3GpEqLzOnphUzqGPj4/9xiIWC887HPgq0
+Nfab1Mu6GBOwgze0VnJbpJfJ4rOA6Bz+tZOVjrFqShym3ZSG1ADwwM4HkOixY93y
+2Z/oy3nqZHXEeEEg9uml7t299pECJEma5xTr5gSqY9g8tcQXvO8QVWh+dTUSYLTO
+i5jse6iRjG93iBKa+gKKv3oEi8y83Q==
+=PjDZ
+-----END PGP SIGNATURE-----
+
+--vscxo3nc4bzujlaw--
