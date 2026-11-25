@@ -1,117 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.208.177
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795612740;
-	b=vOU88ZrKelvFUbYaflOctc+fSuMsRKPqwCEZYGOingVLprIoLZhR8h50hSE5DC2oVPIw
-	 N28UEFpnzOHj4ExS5IasFIdjoFz3ZrIaYbez+BYbZKDKYB+5fH8PD0OQ1dEokmBGlwOdf
-	 d/Rx8iJEZIKyvjFvyWofPevcfjFPvSW6wFs0F0IMnESW2iu2W11pr8WMV23rDBV2LdSuj
-	 CaQlvFBLV4RqdHIUjjVjC5Dmtr4379txmrXKGKYqqpW/7Tj78Da3ZfVTG+zlQpEajsa5i
-	 1XBfS95Y9ktfPGWsiRdqcVHtA3PkqPmBjKe1gfM+nwhwJHUOYLdafvJZJs82XWE7yZw==
+	t=1795612794;
+	b=iGEDQ4iTrvIMzbTNUhoKdLtQRTrGEN8IJkvATqrjuF7fJfhdb9MtVcBQzCUdoVEx+nZj
+	 PcIdavFa2nd+x9EXHk7psEoYp68oImFIIFDAPEJ/DUhyhm4DUCwAM7Hq0VVojbuRwg2iE
+	 /5+990vmPBAqwFoGJMqtzN8XoqxjIilzYb1xwWyduoz33Txn9P9dkUx2FNpB8AXGZAB59
+	 A4z5rVeOTRV2Q5B75/8MK99Y4DqaJuewrcbU4SF/D67dBcRzMssUlAamWZCeyyRFjnT4c
+	 SQgzb1zbAUK02b5yi3LBVuLvKy1A14O9zaLWoHM5T8COedDup4ySoGyjviKmnhIvkTg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795612740;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:To:Cc:
-	 Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=G0ooHOIdzseAgTBm3ZwB4VCQg1gdMWvjZh4vVjC8WUg=;
-	b=OOEzgCGlrZW87NNu5WSFy3qkvrwR3WOG1AxNdlcpS4lCTpZYC/IEFkby8lCiWYCPepjz
-	 yDo8VVenWdxpEvoJuxwN48EDZIzg4sf7gy9j5FoQTWII0CoIvkYHgzq5qUM42/WkQan92
-	 3TVZH6VmgIAjdd9MAnU0TgOcPCoXkIXqqSwgHEgSExGZmgSXSv8fK2/+1quDje6QFgRRJ
-	 vLNkoDlL6X6qNt573cmD+KqSqlxK4Ebw0tbFyb6QjoEvOwzVaWtIiYMCFwlRy+dFJYnTb
-	 1Zi33huQkT99X5cZZ741Usq07ug559HL7/CibLR+VXjCiUeGqZhyPgPPkboSIw0+yGw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795612794;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
+	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
+	bh=Fl956CFnusiWXQc3uAwBS9T3Hg6fgxOgNH0XW3/nmQA=;
+	b=cBkNuqKDADnMN6w5afoMct6hbZWXa1jaouWzNjKwCyhsHh41IPDnVFi0okfd6k1OqAxd
+	 4D+rve4yr8igDxDJzcFQAirUQpAnoAc9YqkSdbbT5tJ78YoMhfOqvWxf64i7qrErxRFJE
+	 t1lJR9bkZWem14ddav35Ud8Oi5mYXH50geyuZDgduAaBoAGRgxOXdxotLgvGERgVEhKHa
+	 bj9A9kbInt+baDLJdDYZVtOIo1dodR5cSpbhkap7ItmZBy/Z7CC2JqXzwf/K3k6bMG0nk
+	 sUsoKp6P8BUvsNcGinPmGPL2OqHnXJ0XauEnXz7BawP4Z/1Rg41LVaCgvbjk8IKZtmw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iFMdSavS;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Bi4OCm6P;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ILuQghNM;
+	arc=none smtp.remote-ip=209.85.208.177
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 69B4D606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 13:19:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 69B4D606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84D9B606A331
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 13:19:53 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 84D9B606A331
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=iFMdSavS;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Bi4OCm6P
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mNgM555513
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 13:18:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:date:from:message-id:mime-version
-	:subject:to; s=qcppdkim1; bh=G0ooHOIdzseAgTBm3ZwB4VCQg1gdMWvjZh4
-	vVjC8WUg=; b=iFMdSavSoklC8ZWJzQs3vecWrTqmuWKu3WWcfvYnOuo9Ehf2OcR
-	gSyIZ7aNh9JrBsYngVKO6Cr2ZFU5uoUW64X1TpHqbbVbOU4IBHckTNIrCBjj9xAq
-	QoK3K4Q6jUyNHuWvDT1/3A4XhHy+LeSeya3MlsTzxpu9dWT32UNHZ/B2yEVQ1Gdy
-	iOhOpmYdki1tf1tQJbcKdXJEqSlSsk33AZtNu0gjjkxPCyByT+dVA9ahbyCvGitS
-	U/zwzC8C6CqtGhK04GVXYuDTv/evPkqQdZLNGFOwPFzAde0KKgcX+MxASapRpnA1
-	u7+6fjbsBELWfBw0xojIfeE4pVBT2sSzKEQ==
-Received: from mail-ua1-f72.google.com (mail-ua1-f72.google.com [209.85.222.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vvnryad-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 13:18:59 +0000 (GMT)
-Received: by mail-ua1-f72.google.com with SMTP id a1e0cc1a2514c-99081ea787eso3444674241.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 05:18:59 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ILuQghNM
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-3adfe7a31dfso4297991fa.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 05:19:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795612738; x=1796217538; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=G0ooHOIdzseAgTBm3ZwB4VCQg1gdMWvjZh4vVjC8WUg=;
-        b=Bi4OCm6PpuK8XYxEvgMgwQCadfVN+EY+7QpLd3ORtXcMmxbAg0/cRSVUjK1nT4IzjF
-         9EsyhTvOK2piA3K0+OhVy66hv/0aaRi+3l0YYOdeeORwEuiEFZJyKkyQY5qmmLq9eEDt
-         /sFduekv0N9mHXe+flPAtRslfEOu2f722++xqlZ2m4JQtq87vL8iYuCp/bGtCMaZMvKg
-         STbxKCuO2g/EtHJmzCNhsk5+QARTK+iqSMfJ2lDse3FiY8eiLOgN05UNXd0tpkA3xhTn
-         hzg/crGAfimg9oTveF/8qKgV43HzELshgNLMDAJWWMVncv1UPX10wmdXoComwLM4myIF
-         OOIg==
+        d=linaro.org; s=google; t=1795612792; x=1796217592; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Fl956CFnusiWXQc3uAwBS9T3Hg6fgxOgNH0XW3/nmQA=;
+        b=ILuQghNMwvkL0bm9aeT569/Ym7SzQa4pqK08RYBZT4EzBUF2+k8lhxS/smdjZKhSRF
+         JBy6h/wKV8UV4DUaR/eJqD4yozp3+S/GMh2WTs0aM1OXCyQ8KGS1MDCorERJ3bq133Hb
+         jM01FDGQGFBWbrkxjCqI1geFLIiVRGznW5blhrWgcqluY9mjPoJ3gl5PrKe2pCdlSRXL
+         K/+VqRmkWzjBKf6WJvM0ateaBp//iCaZVvpp3S8iK5xqH+Y9mmMYpXlgk1pm2D/cKUnC
+         0TSfBL6fE6kGdixXJk8f710+rW4pyXpxPko7Fyi3naHt1zaynDac1j6LsrnJFYZD53hu
+         Fk/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795612739; x=1796217539;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=G0ooHOIdzseAgTBm3ZwB4VCQg1gdMWvjZh4vVjC8WUg=;
-        b=xclxSaSB/3Onnk2xbKxJT3NSuuJfTrsG/Cs6f121dnmCv8kHlM6otcKFAZoAKKJRbv
-         xl/g8dSJy9btcV3tW6xl3S50ZS+ltLq8ox+gQ3B+2qHRnHQi5V4bLpYuVb45Bd7I8wPG
-         4e4ktrDxUM8r7Sy3h6xZIIA7vhsOvASODCppjmw8rtPeq7KfxGz7olDosGuVdqB5x4U6
-         UA3T4DziL+qR+fOHUow/jPmrAlxxktQ9bBbP2Ay7cSDVHDDu2DR5x3lmsKeLrOL0DOVN
-         A7krZvhGJrQF9lodLrg5vxTzfs6dbl5lrLQBa5LWnGb3N9/qVswUjegsTWx402TArHF3
-         5smg==
-X-Forwarded-Encrypted: i=1; AL+hErGHMeoeS2GpxzghA2nBR7ZRD09J31u9532GSAFAmeDDrboyP/RAi+zB1+Y1KZ4jKEFiT7Am04efWgJ+BVcC@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Vpoz99XPZoqOwHiwrG33f9qOlkGmSvv2cS5WWxNiK5TN4tQyJ
-	6cog0co1mR8oe5n1wCvjQpWsIb2bVERjYx3ejEpdMSz2fwpNU35bp3jgztEm2TAe9EaKhv+n1MY
-	u/t61BGe3IsqTfWdGz3wgXRuxrZE68hERQ8gZL2owStDmwCqUoYLlyhBGrUemLvbmWtOh
-X-Gm-Gg: AZFdTZe+BGttXNkFdQ5fcke9Oji3nilYXNTt8X2LYSJuvfozSVzcFMre2E+GZ0tzbfz
-	pZ/Rxv+fsJmo6hPgk29NIdTv/ROWGXLk800UmKFtQU4YU/61FTL3a83FFBltVbcFuzr0qfdUjHC
-	OyId7Kiq1dI+IXL01bsbGib3aN2DKnRFOZqFg9KESr//Rn12HzETBa8/Z5QEBbNIn2sodi+LSFr
-	Zpho/BJT6oD6kG5hxDD0hh4skgx9LIL/pVEBNtSuSfh5gqC76cuBnNR2KGjMAV8ziSK7GWcnOdL
-	VJ7DFHqbj5sI9lHKQMswOkWn92ugdz6mhouEbHE53LbH0aBFdl/PkGL7VGjzV8LyKHXwVDcD7f/
-	5ulKH9usfbzzCT5jJ1iyJMQ0pmS2O6PHfnXiYh75wy+XVzNdn7YwcT1o0KC0VZA1w
-X-Received: by 2002:a05:6122:4fa0:b0:5ee:48a1:7a4b with SMTP id 71dfb90a1353d-5ee8afe028cmr9900481e0c.23.1795612720389;
-        Wed, 25 Nov 2026 05:18:40 -0800 (PST)
-X-Received: by 2002:a05:6122:4fa0:b0:5ee:48a1:7a4b with SMTP id 71dfb90a1353d-5ee8afe028cmr9898738e0c.23.1795612696151;
-        Wed, 25 Nov 2026 05:18:16 -0800 (PST)
-Received: from debian ([5.133.47.210])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88f148aasm205035365e9.0.2026.11.25.05.18.13
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 05:18:14 -0800 (PST)
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-To: andersson@kernel.org, sboyd@kernel.org, bmasney+clk@redhat.com,
-        jbrunet+clk@baylibre.com, robh@kernel.org, krzk+dt@kernel.org,
-        conor+dt@kernel.org
-Cc: abel.vesa@oss.qualcomm.com, abelvesa@kernel.org,
-        taniya.das@oss.qualcomm.com, konrad.dybcio@oss.qualcomm.com,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Subject: [PATCH v4 0/4] clk: qcom: Add LPASS clock controllers for Glymur
-Date: Wed, 25 Nov 2026 13:17:53 +0000
-Message-ID: <20261125131757.1163466-1-srinivas.kandagatla@oss.qualcomm.com>
-X-Mailer: git-send-email 2.53.0
+        d=1e100.net; s=20260707; t=1795612792; x=1796217592;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Fl956CFnusiWXQc3uAwBS9T3Hg6fgxOgNH0XW3/nmQA=;
+        b=L711XKwatTJDqpae8LDCQg43Yx/ovYfQ6vUuCExLMXH7NY3ydpc9MxM3SAd54kqpSb
+         57O3ye9JEET6RBWPD19BEGGlM9DwHczfD3nC6LWe3wBAA+DjQM7HYHG7J8+ZREhPbV/r
+         h4wPgWsOzjz1imSFgEzsq5yGGABYFHsGt4i0Ko7XimOhDJsgOnPUMterEPnVJ6MIGgtc
+         muCXJnZzgBaATfyiVLqBCaC+MDibhIA5bvB7eA5LNWwLbQpYY70YBaSVWlreIS7JKrtd
+         pN0BCG/ZKClu5fA3lLXedN6D3ZNllCmsqBjqo2J8+kgwywMxTUuBm3zlkeHUvkGs69S9
+         SNww==
+X-Forwarded-Encrypted: i=1; AL+hErGqBBeKwBv90ROAxiBnThQIAngqyDPMFjBQ65fEQr5cQVtNv8+xks4o+d3o6glLeVRfYTlwuXhsvG9GLFPU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+j4Wt2HEPbS6+hSNBou3sAeVjvaeJsDxWlpHejAp6yRaLYUs+n
+	FkGEYVQi7XpVpsivKytpBRbszcIcWik+WCu6WlzcOZSwcppLd2jiYMsHt7XM0XRo1B0=
+X-Gm-Gg: AZFdTZcXkvd9a0hy7OIGfaEugQBF5GXx8CHcFzn3KVc1s8aPWgNHBxoI9IXgd/r6ahk
+	cKlDqgkfEm3IT+uFNeFGydxeSShkDehpe69YOkPP8NKEIz6DUETSbGUcpKKOb6pY/X8bB7Rwcb0
+	NLVmO6xRVMM02O5ZT/NtE8S2Nz1ArNwyqi3SUG1wDLs6lIHAhCpXpjO3Cl+PHySxQp9rHj7nWis
+	2zCz+PMW2UP5eAVbgdlSglamtLw6LPnzuPVu5KQoRqX2KOGwEMrquS05jm00ZVR1K19v1l7mj8o
+	mycyv9ktT0s1R1BVnoGMy7w9hCRFq0xd0rOQOk/Pz/baWIrzdmPv6MBa5uGlTWEvi5VmGRI32OZ
+	go+hmlIfxyoia4RFR42T9PpFclRjOnzoEAkxl8kki7roZIfN4rBBJLJVWH2aUT04P2oVotLSIZg
+	k6qTIhNJ/q5Ocl7+hGSDsfigzaSdVC7KpQyLqkOt7iyvxS8zo8o8oovN5wyWmGouNoxXFb1GF3l
+	43RrbGxc22H+RdRc4Dono/czbuofwR8T3XiSBuDoUepk6u7WEeiNVNUFRyzNTRSUCse/fErrT5Y
+	HIRSBGVQZ+vbK6N3JbN1dq7bF5w/qUFN9j7hKTbP5+Wg887hn5NiHcIUQ3wqw/lu+qIzDchO3vo
+	QvG9cOzzyuhh8p9se2IyEtNRujkxZ
+X-Received: by 2002:a05:6512:31c3:b0:5bf:e6a1:3115 with SMTP id 2adb3069b0e04-5c1bc76a33fmr7069607e87.2.1795612791602;
+        Wed, 25 Nov 2026 05:19:51 -0800 (PST)
+Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bd0177f7sm4448777e87.33.2026.11.25.05.19.50
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Nov 2026 05:19:51 -0800 (PST)
+Message-ID: <c4c72389-2a8e-4278-8667-cdd4d8f72225@linaro.org>
+Date: Wed, 25 Nov 2026 15:19:50 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -121,86 +91,148 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA1MiBTYWx0ZWRfX8subIYVDFbRy
- HUCThY35pBCUza1W6H0cFSzCFtqd/4orrkaa9vFwQF6EN195DIqIbCGPi4/Xo75FM8hK7BJaK9b
- beuKOvgCl84WnAPHeeBK8brfP88J4XOEsLFDzdRbyXIoEHFZwh61wOfV7qbhDVv3d4aijjDsVq4
- RPF21v4dzJeNzG1amGPvsDUlVj59aI8tZ8xFFxTHqASDi8Y6p/g1MOV62ux3ZbG5FhEEhA0OfSf
- YPAEQr9VRFnt5jcneCiQmP8BTM/SYkxIXx/8SlvoDf9jggogcF0FPjQ4AXeihBDCCAVJcqkr2VK
- HO3kBy2d3EHeDQ2l5gRxIzXUp1Awjf2Yr3/cuWFcUoZ0T2tppdmhTD0QwejWi1mG5cHbO6VKNkR
- bgroKnXRkMdlwyS0Fn6H1GkXkTY+H35tr2b6rvz1fOel5Yzyo0QfOcAtgCP82uxy1Af+o5pG4AK
- nGZvWhecw5xE4pfyB6w==
-X-Proofpoint-ORIG-GUID: OH2rod_sp6KbmbnDiH4wpWCLDmXd99Yp
-X-Proofpoint-GUID: OH2rod_sp6KbmbnDiH4wpWCLDmXd99Yp
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA1MiBTYWx0ZWRfXyRIK76azOTKL
- kWtCvY4x/i5vLPPUJjdgVEWwr8OzmueCgl2aSkiVExKnsR652KRlZB5fMvJbijimOkZzFKv3gRn
- 4xP2z2CTm3UDbuaUxY6lZNcQtf3YWfI=
-X-Authority-Analysis: v=2.4 cv=R4mWitRX c=1 sm=1 tr=0 ts=6b06e043 cx=c_pps
- a=ULNsgckmlI/WJG3HAyAuOQ==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=VwQbUJbxAAAA:8
- a=EUspDBNiAAAA:8 a=tj6v_WFbzlxhzRuvkX0A:9 a=1WsBpfsz9X-RYQiigVTh:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 adultscore=0 clxscore=1015
- impostorscore=0 spamscore=0 phishscore=0 priorityscore=1501 malwarescore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250052
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v7 17/23] arm64: dts: qcom: sm8750-qrd: Enable S5KJN1
+ camera sensor
+To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Loic Poulain <loic.poulain@oss.qualcomm.com>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, Robert Foss
+ <rfoss@kernel.org>, Andi Shyti <andi.shyti@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ Frank Li <Frank.Li@nxp.com>
+Cc: linux-phy@lists.infradead.org, linux-media@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-i2c@vger.kernel.org
+References: <20261114-add-support-for-camss-on-sm8750-v7-0-8ff2a11835f6@oss.qualcomm.com>
+ <20261114-add-support-for-camss-on-sm8750-v7-17-8ff2a11835f6@oss.qualcomm.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20261114-add-support-for-camss-on-sm8750-v7-17-8ff2a11835f6@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This series adds the two LPASS clock controllers found on Glymur:
-LPASS AUDIOCC (SoundWire RX and WSA1..4 resets) and LPASSCC (the TX
-SoundWire reset). Q6DSP owns most LPASS clocks via Q6PRM, so only
-resets are exposed here -- enough for the LPASS audio macros and the
-SoundWire compute-mode controller to leave reset.
+Hi Wenmeng.
 
-The programming model is a near-exact match for the existing SC8280XP
-controllers, so patches 1 and 2 extend qcom,sc8280xp-lpasscc.yaml with
-the two Glymur compatibles instead of creating a new YAML file (per
-Krzysztof's v1 review).
+On 11/14/26 13:29, Wenmeng Liu wrote:
+> Enable CAMSS, CCI1 and CSIPHY3 on the SM8750 QRD board. The S5KJN1
+> camera sensor is connected to CCI1 I2C bus 0, uses MCLK3 at 24 MHz and
+> connects to CSIPHY3 over a 4-lane D-PHY link.
+> 
+> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+> ---
+>   arch/arm64/boot/dts/qcom/sm8750-qrd.dts | 72 +++++++++++++++++++++++++++++++++
+>   1 file changed, 72 insertions(+)
+> 
+> diff --git a/arch/arm64/boot/dts/qcom/sm8750-qrd.dts b/arch/arm64/boot/dts/qcom/sm8750-qrd.dts
+> index 75927e1f7b9ab0316781c64dbcc82d3394c414f6..c92a1f3c47bd5cbae26854614682c3bc7daa0398 100644
+> --- a/arch/arm64/boot/dts/qcom/sm8750-qrd.dts
+> +++ b/arch/arm64/boot/dts/qcom/sm8750-qrd.dts
+> @@ -7,6 +7,7 @@
+>   
+>   #include <dt-bindings/gpio/gpio.h>
+>   #include <dt-bindings/leds/common.h>
+> +#include <dt-bindings/media/video-interfaces.h>
+>   #include <dt-bindings/regulator/qcom,rpmh-regulator.h>
+>   #include "sm8750.dtsi"
+>   #include "pm8010.dtsi"
+> @@ -858,6 +859,70 @@ vreg_l7n_3p3: ldo7 {
+>   	};
+>   };
+>   
+> +&camss {
+> +	status = "okay";
+> +};
+> +
+> +&camss_csiphy3_in_port {
+> +	camss_csiphy3_inep: endpoint {
+> +		data-lanes = <1 2 3 4>;
+> +		remote-endpoint = <&csiphy3_out_ep>;
+> +	};
+> +};
+> +
+> +&cci1 {
+> +	status = "okay";
+> +};
+> +
+> +&cci1_i2c0 {
+> +	camera@56 {
+> +		compatible = "samsung,s5kjn1";
+> +		reg = <0x56>;
+> +
+> +		reset-gpios = <&tlmm 109 GPIO_ACTIVE_LOW>;
+> +		pinctrl-0 = <&cam_mclk3_default &cam3_reset_default>;
+> +		pinctrl-names = "default";
+> +
+> +		clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
+> +		assigned-clocks = <&cambistmclkcc CAM_BIST_MCLK_CC_MCLK3_CLK>;
+> +		assigned-clock-rates = <24000000>;
+> +
+> +		vdda-supply = <&vreg_l4m_2p8>;
+> +		vddd-supply = <&vreg_l2m_1p056>;
+> +		vddio-supply = <&vreg_l5m_1p8>;
+> +
+> +		port {
+> +			s5kjn1_out_ep: endpoint {
+> +				data-lanes = <1 2 3 4>;
 
-Changes in v4:
-- 1/4, 2/4: add "qcom:" to the subject (Rob).
-- 1/4: pick up Reviewed-by from Rob.
-- 2/4: pick up Acked-by from Rob.
+'data-lanes' property can be removed from here.
 
-Changes in v3:
-- 1/4, 2/4: extend the existing qcom,sc8280xp-lpasscc.yaml with the
-            Glymur compatibles rather than adding a new YAML file;
-            drop qcom,glymur-lpasscc.yaml; update title / description
-            / See-also (Krzysztof, v1).
-- 3/4: bump max_register to 0x3020 to cover the WSA3 / WSA4 reset
-       offsets at 0x300c / 0x301c (Konrad, sashiko-bot).
-- 3/4, 4/4: pick up Reviewed-by from Taniya and Konrad.
+> +				link-frequencies = /bits/ 64 <700000000>;
+> +				remote-endpoint = <&csiphy3_in_ep>;
+> +			};
+> +		};
+> +	};
+> +};
+> +
+> +&csiphy3 {
+> +	vdda-0p9-supply = <&vreg_l1f_0p88>;
+> +	vdda-1p2-supply = <&vreg_l3g_1p2>;
+> +
+> +	status = "okay";
+> +};
+> +
+> +&csiphy3_in_port {
+> +	csiphy3_in_ep: endpoint {
+> +		bus-type = <MEDIA_BUS_TYPE_CSI2_DPHY>;
+> +		clock-lanes = <0>;
+> +		data-lanes = <1 2 3 4>;
+> +		remote-endpoint = <&s5kjn1_out_ep>;
+> +	};
+> +};
+> +
+> +&csiphy3_out_port {
+> +	csiphy3_out_ep: endpoint {
+> +		remote-endpoint = <&camss_csiphy3_inep>;
+> +	};
+> +};
+> +
+>   &gpu {
+>   	status = "okay";
+>   };
+> @@ -1081,6 +1146,13 @@ &tlmm {
+>   	/* reserved for secure world */
+>   	gpio-reserved-ranges = <36 4>, <74 1>;
+>   
+> +	cam3_reset_default: cam3-reset-default-state {
+> +		pins = "gpio109";
+> +		function = "gpio";
+> +		drive-strength = <2>;
+> +		bias-disable;
+> +	};
+> +
+>   	sdc2_card_det_n: sd-card-det-n-state {
+>   		pins = "gpio55";
+>   		function = "gpio";
+> 
 
-Changes in v2:
-- 3/4: drop <linux/mod_devicetable.h> and <linux/of.h>, switch probe
-       to device_get_match_data(), lower-case reset offsets (Taniya).
-- 3/4, 4/4: pick up Reviewed-by from Abel.
+Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
-v3: https://lore.kernel.org/all/20261002194436.1275056-1-srinivas.kandagatla@oss.qualcomm.com
-v2: https://lore.kernel.org/all/20260925084635.112399-1-srinivas.kandagatla@oss.qualcomm.com
-v1: https://lore.kernel.org/all/20260922184425.56114-1-srinivas.kandagatla@oss.qualcomm.com
-
-Srinivas Kandagatla (4):
-  dt-bindings: clock: qcom: Add LPASS AUDIOCC reset controller for
-    Glymur
-  dt-bindings: clock: qcom: Add LPASSCC reset controller for Glymur
-  clk: qcom: Add lpass audio clock controller driver for Glymur
-  clk: qcom: Add lpass clock controller driver for Glymur
-
- .../bindings/clock/qcom,sc8280xp-lpasscc.yaml |  7 +-
- drivers/clk/qcom/Kconfig                      | 11 +++
- drivers/clk/qcom/Makefile                     |  1 +
- drivers/clk/qcom/lpasscc-glymur.c             | 89 +++++++++++++++++++
- .../dt-bindings/clock/qcom,glymur-lpasscc.h   | 19 ++++
- 5 files changed, 125 insertions(+), 2 deletions(-)
- create mode 100644 drivers/clk/qcom/lpasscc-glymur.c
- create mode 100644 include/dt-bindings/clock/qcom,glymur-lpasscc.h
-
-
-base-commit: 9f24d789f03b22941b905ded43cb5ff8eea9ce62
 -- 
-2.53.0
-
+Best wishes,
+Vladimir
