@@ -1,111 +1,56 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795597609;
-	b=QK62AXcHxwb/aKLfK4O5KCsUIULlUOHuib42eRD//4dqTkA19lxQK91Gvo94RvlTzqNF
-	 +1fuKtanksLbwKP/eX6wa7o7a6Lp0NKiAZKk6KfLyZhNz7g14W/soyZWNCgkLhg+zAPEa
-	 HlURLkJHTgG8N4AIjRZP/FAdK9nTuibEA1QS3OzuIRlpqcm0Exq1NmlQeqa/d2OgreVxD
-	 8mT25FaDqc0Tx4CPFGwJZSjpJyHdMdnOr3Y5bNikkGknt8h91n0Uhq4EdEiYwCiyZvdIe
-	 MFTDaOIaarJyv4/9oh52DURESLiSkIkquFLWPbLDN+bdaLCyc6mWMKGJuc116vaN0pQ==
+	t=1795597652;
+	b=v70V61wDroKdOHdSjLc+IXrUwdAhHFRj/hqRscbFwabg84s0inCx6vsPtls1INWaCgS/
+	 2z2tmwVgZKRoowxpSDMCwAA9wWRJ7MrFI7QEVRnPdPVWU2VjlidMwxvkDiRw3+lYjsDts
+	 Nx5WtO+Kqgy5m6jgcOrfbRnhfF/qwZtq/RTPB/sKyUuopnbhDbWHK8GAJMdegU/jrrsNF
+	 LOYOADv6KkBxSo8AL87LAumpENYb91iCz73sY40Ul+TXlD+MWknq5XrK3vZZueNDDCkyw
+	 w9Gk+xAo9MEx/VUENad/aiqJQdsZgBKBW7J1CgWwUx6ZbOCB1qQg30h0z5iYv53j2pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795597609;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=eNChMfmi5DInFMx/izI876SpdAyPSwuqxL6T2yjWjFU=;
-	b=D/IbQtSaM0NR4sZAtT5TkOgMhsKvV6rUjLKCfZ0LFlVMsHxLlndKWiM7KBc1W5y0j3NE
-	 qCwvQQntqtB15nN23VejXJaOgmaJValId0tDzUrFylzTWTnkZA+UK3apd76WCorudo0uj
-	 cELxv/vTYSfkz+P7G4z0NikbQg8Nyuu7Wx+g6t8fTO8izAa9oNncN31hUlWiMCKFKKmHj
-	 K2AybUVUTNyY2sEc4Z7DoaiXCZp0NitzrHSn1yTSJOmZDrV+mnohmob8d79PO32Igmvpu
-	 BHKyoL7rg4ntrW9DU6ewaNtTVYIeuD4c3mEFbW+8xjth/4BC/IZyhdAOiKG/DdYNmBg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795597652;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 MIME-Version:X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=vycvynL9eYvQ22hro9Cx4sxJ4Ghk9f1KZTKnvjOxUV4=;
+	b=2/xlrOZvEr1GU406yONz1ne5i872sj7ch9BkhBWe3DqhrM8SZX/EcN4E5XZjRzdcjy/y
+	 ZTIEjt01gPqqkcfJ5InV7SJwzNPX5GoysXlhytXAM3SRbGMw22L+qpVjWF+ZpdRG4awwN
+	 lt0XWofW5D5CxSBV9zgeMb5KYYNg0NW1F8cbXc+CKXPcPtRCuHKiY9c8gLjUXu8PB3Do/
+	 F42ufedEZD9j5tAygyi2yi9R0kUoWV4V0avwGAs6dni37xs3TrFB94sDlV7QkVs6MetyF
+	 DF7yfV2Ji7qVcLJVT8SkgwDipO+ZG76mrjAAHCeY2+UytRq98OluLDLvm1rQcJpmpDQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=bA1mqBw5;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=L9gL284Q;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E99F606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:06:49 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5E99F606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=N5+7pqH0;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id C9F03606A31E;
+	Wed, 25 Nov 2026 09:07:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C9F03606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=bA1mqBw5;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=L9gL284Q
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP69TDC3809048
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:06:48 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	eNChMfmi5DInFMx/izI876SpdAyPSwuqxL6T2yjWjFU=; b=bA1mqBw5lUnG6vcd
-	9K1yC8/glLrZGM8XOpAUuivrZyGRIfp+WD3undW+UP+VEUiaH/zShXTlupgnBWQp
-	PSpANanOhTsQJ8IgxFviQXTLO7DxCOyHW6Fg9LR5XbinZSUrIoNQLsrQKt72yc6j
-	O9KB7TBAPXhNX+SlBIiZMEmnrispHc1S1OCsyui21IfLQ91XXw970clFs2fTwiar
-	T+iQcfy98sZ1L0cIz+L8JGWXMv13Iqr/Sq8rYqoPN4B2V/R0zxru8kNaqkc2MLxy
-	U1uLtb3Q5pwnHYEHAuMjEjO0/SbPU1r5pKi1oN2ovulPP55YNCDxUe5CiG+Y0yGZ
-	HEz0Eg==
-Received: from mail-qt1-f197.google.com (mail-qt1-f197.google.com [209.85.160.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5cxkby0p-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:06:48 +0000 (GMT)
-Received: by mail-qt1-f197.google.com with SMTP id d75a77b69052e-536540909e5so13046381cf.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 01:06:48 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=N5+7pqH0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795597608; x=1796202408; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=eNChMfmi5DInFMx/izI876SpdAyPSwuqxL6T2yjWjFU=;
-        b=L9gL284QSDfokq3jJyla+Ng1+2kGgg6yh+zE4A1tptvJadfyjIpFqXAFaxfEtv2m9t
-         8NqG3faIQk8KkwbcPxS2lWYvjhN0uHzzD/u/9UVJ8PBkVRzwjmo07MEKbsKx45/E9v6o
-         HevDnY5jS7gHFq/lMR8xeinWJER+WQRGt7BTkIpwtzzMBiPWjIHNmvsWzcc/D5Y12GJX
-         /RNquN8jTUcPRQLEAE0F5vy4BMouv8ETEJ9Ro4ZVLsL54SSRhxxGmMEaByU/Zr+jqYgG
-         n09uiNnJzciFLWuke81p6Cl4zrvoIMjKiiizAw1n3Nb13RE8ygB+eIg1//b+ByK+MSh6
-         qraQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795597608; x=1796202408;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eNChMfmi5DInFMx/izI876SpdAyPSwuqxL6T2yjWjFU=;
-        b=Phd/qynCyYYgphyC0pJLrZo1rthEW98vaK4QMxi7FG/03H+broMzcJ0a/J7W9jQlMN
-         MYAWJ3PPuV3lBMArvePBEJV8z1ACMMBR62IIki1dVckDPuTO8kgIJsq/b2GeMUiLgKIo
-         qyT8vetSBId++YGzUjsTYCN+IlaObsxYNmsYSRg2RcoFidfRP3dxVqapz1cMVbOtDRho
-         n9KiZai702nySZdpZEDZaArfoYPr49AdogVRw7haVSbhkhM/kuEI1MaFp+JXQpERSuFt
-         j4yHYGNzvK49xmhpzi/0hsI4M4K+jwoZWZBaCvm/mZdOtcs4Gz29UWRyeNklp5NQvZCM
-         FqLA==
-X-Forwarded-Encrypted: i=1; AL+hErGctXlVUsJD023XOyG+PHaLh0pVng2Ax20PWEqLAz6+jFUf8qkamSrGSvX0iHnKNz8bL2Wtmxo6Sh7ymGuZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z/2G7om3yadUHW2dQwKtVPECrP26fEEY0Ppjd4LM24InBba6fuS
-	bjdIE2feN/Eo4Vo+5E881k5dzysGt/mp3QDtJsoul4BHWgrmBnv6KlVzShFsivb1KZI10U51AGd
-	A5mj2RIsIgzmuUBFWDf3x/16dx+2OBbGioY7PRqjQ3TnMfEEOIFHHe4JOw2arYmKKo63/
-X-Gm-Gg: AZFdTZdmnwNDvaLzw8urpRwG1Wz35y1psxUpaB4ZLA7tvBL+bLrnuxiTIBg0+3OP9Lf
-	W6qouRGgqjLNyLn5iGmJ/h4825ND/2dGwocZB3ExCs7wqCXI9wsmpjxM/+49nBfJYqSUsJzfjz/
-	6fxW/TkBvUn9JPTdZmFnCbgXbJ4mhrRZWxPVJcSwIO9Ucc1nIf2N7JFohql8PFoM63QQqkVgUjN
-	g2fYi6P/Z4m1EuFvQWVwGqtv0E0mvyEinqbBuDPYUbXDzv00n+dd74gGEfALUEfy4CQfj4p+IUZ
-	ODbhD2au/GtODOfH5vI0wak+EzVA4ZLtES1mubo23k64uAISTfn1fnLzILnr45hpCL78vvxYykb
-	1+B4tf/SHN1B0yl6gxX+UL3m+G0AdX6fAEZOxJZmNrz/KztqywPKqhpNggn8hkTIB9kxd2gU=
-X-Received: by 2002:a05:622b:113:20b0:54b:18a5:ce08 with SMTP id d75a77b69052e-55d76740b26mr301585881cf.0.1795597607742;
-        Wed, 25 Nov 2026 01:06:47 -0800 (PST)
-X-Received: by 2002:a05:622b:113:20b0:54b:18a5:ce08 with SMTP id d75a77b69052e-55d76740b26mr301585671cf.0.1795597607313;
-        Wed, 25 Nov 2026 01:06:47 -0800 (PST)
-Received: from [192.168.226.72] ([178.235.128.140])
-        by smtp.gmail.com with ESMTPSA id a640c23a62f3a-c513ad026a4sm620055766b.2.2026.11.25.01.06.44
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 01:06:46 -0800 (PST)
-Message-ID: <8649f0ba-a333-4ece-9851-bf58cf20036f@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 10:06:43 +0100
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	MIME-Version; bh=vycvynL9eYvQ22hro9Cx4sxJ4Ghk9f1KZTKnvjOxUV4=;
+	b=N5+7pqH0CI3OCLI5bMKzUDs6ywmsuNbMYwW5TuyLnoHSMFche+lJHkHOw2Jy8e
+	mUs7oVwrQz2vNSmVaFDwVUOsmHdl+8uauScTWeHt2xyyKZZFvk8fl+GzaIyse0MK
+	PfzGqpxn8LzEfPxGHBmcsdZ1X+rp5MHgY/bW7jpE5dWj0=
+Received: from [127.0.1.1] (unknown [114.214.177.196])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgB37TE+pQZrMrj2AA--.694S2;
+	Wed, 25 Nov 2026 17:07:10 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: Kees Cook <kees@kernel.org>
+Cc: Tony Luck <tony.luck@intel.com>,
+ Guilherme G. Piccoli <gpiccoli@igalia.com>, linux-kernel@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH 0/2] pstore/ram: refuse zones overlapping the initrd
+Date: Wed, 25 Nov 2026 17:07:09 +0800
+Message-ID: <179559762994.96050.5409562801088468974@mail.ustc.edu.cn>
+In-Reply-To: <20261116040049.434247-1-xiaqinghuan@mail.ustc.edu.cn>
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -115,63 +60,57 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: defconfig: Enable FUSB15201 Type-C controller
- driver
-To: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
-        Bjorn Andersson <bjorn.andersson@oss.qualcomm.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Linus Walleij <linusw@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
-        Luca Weiss <luca.weiss@fairphone.com>,
-        Eric Biggers <ebiggers@kernel.org>,
-        Michal Simek <michal.simek@amd.com>, Sven Peter <sven@kernel.org>
-Cc: linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        brgl@kernel.org, Shawn Guo <shengchao.guo@oss.qualcomm.com>
-References: <20261125090017.26981-1-bartosz.golaszewski@oss.qualcomm.com>
-Content-Language: en-US
-From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-In-Reply-To: <20261125090017.26981-1-bartosz.golaszewski@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfX8Gt7Gp9I4OJI
- +kKaKhvw28gaqWBiMIX9tdzAlaDL6hyEju+uLpaOPQJlTHpSLy0XA4Nmf71SZOWJgPf0vS9/N3z
- pSHV7P4xeLi3H3+i0STfNCdY32fmo24vbwwaEFytJuKH2cC/SGuvXRj5mYKmjgfyiUHsfdS1GCr
- gh2pEdJuAKAnDQnjQCQgQ+eMvnAb5ZVvAmHcQtWcDKIJDJeeMduJucU06tJGmSNemMgzSWXcgFt
- /4HTEODNb3lHn9QTrc7yZVEgfX/zIuNXx6fwuqyg0DpEIbSKJS23uDhnaQzRc9HRJyrj3UhxX2U
- cG4AHbDn295tJeBthBlPgZQB6uuI1jmhtmimc6AqKhe1ZqZ95+Y3W2TY2U4c8KLvrfekx0kj5rG
- 5mcQ2Qqea0E/FoJl+KyRO0gZEr6Q3o8Las6hEbs/rKVwSRCJV0OAGUJwFqQQv/0A7q62FOXsOdU
- 8jNtEBYXk8ECHThR+KQ==
-X-Proofpoint-GUID: Z1kPkdwwrrEG4ywdUB_6sP6v7g-3UxHD
-X-Proofpoint-ORIG-GUID: Z1kPkdwwrrEG4ywdUB_6sP6v7g-3UxHD
-X-Authority-Analysis: v=2.4 cv=TLbQ2Fla c=1 sm=1 tr=0 ts=6b06a528 cx=c_pps
- a=EVbN6Ke/fEF3bsl7X48z0g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
- a=EUspDBNiAAAA:8 a=9fKiYXDB1noZe8vDgssA:9 a=QEXdDO2ut3YA:10
- a=a_PwQJl-kcHnX1M80qC6:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfXwem+N0Yom0/f
- E7wbakJZdOk8MjmHzRzE9PuKgRyii9SZA8PFq/djBTvfm4PXapQkWsO8AoM/GcI/fVim/TQ2kcc
- TEkJfU16m02diAFleTwxJino3z5jIA0=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 impostorscore=0 spamscore=0 clxscore=1015 suspectscore=0
- malwarescore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250036
+X-CM-TRANSID:3pYKCgB37TE+pQZrMrj2AA--.694S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CF1DXrW8trykKryfCFWxJFb_yoW8XFy8pF
+	W3tryjyw4kKr40v3y8Ar40qw1ayrWfXa15XF15JryDA3Z8WF1IvFW0kwn8XFW5Xrn3W34Y
+	vFW5XasrC3Z8ZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUkIb7Iv0xC_KF4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_tr0E3s1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwV
+	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr
+	1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkF7I0En4kS14v26r126r1DMxAI
+	w28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr
+	4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUAVWUtwCIc40Y0x0EwIxG
+	rwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8Jw
+	CI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2
+	z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU86c_3UUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/
 
-On 11/25/26 10:00 AM, Bartosz Golaszewski wrote:
-> From: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> 
-> Enable Onsemi FUSB15201 Type-C controller driver which is needed by
-> the Qualcomm Nord Ride SX and RRD reference design boards for USB to
-> work.
-> 
-> Signed-off-by: Shawn Guo <shengchao.guo@oss.qualcomm.com>
-> Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
-> ---
+Hello Kees,
 
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+A short ping on this series (posted 2026-11-16, no reply so far): is the
+shape acceptable, or would you rather see the overlap handled somewhere
+else?
 
-Konrad
+The problem in one paragraph: on this board the bootloader places the
+initrd at a physical address of its own choosing and cannot see the
+device tree reservations, so the buffer can land inside a ramoops zone.
+The zone is registered a few milliseconds later and the console writes
+over the initrd, which then fails to unpack ("invalid magic at start of
+compressed archive").  2/2 skips such a zone for that boot and says which
+one was dropped; 1/2 is the helper that reports the initrd's physical
+range.
+
+Open questions I would rather have answered by you than guessed:
+
+- Layer: the check lives in the ramoops probe because that is where the
+  zone becomes dangerous.  If you would prefer it at the reservation /
+  memblock level instead, I will move it.
+- Cc: stable: I left it out, as it needs a bootloader and a device tree
+  that disagree about memory.  Say the word if it belongs there.
+- The one limitation is documented in the code: a module loaded after the
+  initrd is gone cannot see the overlap and gets no protection.
+
+I am happy to resend as v2 with whatever you ask for; nothing here is
+pressing enough to justify nagging, so this is the only ping unless you
+would like another.
+
+Disclosure: this series and this message were prepared with the help of an
+LLM coding assistant; the reproduction, the measurements and the decision
+to send are mine.
+
+Best regards,
+Qianhui Xu
+
