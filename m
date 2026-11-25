@@ -1,112 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795597757;
-	b=ee9RnkSMR+HaBic8/clG2CTZ7HXZvXQwmzS7UnHn8BBEgB7t3V1CgQ6Mi9N5bMlHBnf7
-	 qp53XtAZX53lJkARar/WoqA68Kv2sRbUVece/kCCzTs9uB4PhOU8mdxIArfM0fM48PrLa
-	 vsNeHCpJsjjeJz9NtZgJwIprgmMGVna5C8K9k0XVhyrigaBeJnxtMpnpA8Nc80vgvkSMo
-	 t23Qo1QGzFYYvje6f2op2JmF9rKLuzDGtXZIKH4AaLNiSrjck7xv+N5VHmfnMkD9DnYQj
-	 P0IWB0YeDK8F13kEBJTagfoOhO9npT5XDYIodOFVTpbrNA/pmcKfN/VAMAVB1MUSw0g==
+	t=1795597921;
+	b=wsvmrq1ZQq4FLIYrOpOWhtBF0BpYsWb3JjQMJV183HJ0T4rTxqYObI+IrIKhhgn9JDw5
+	 oDy86zg5ldqiRau+d8Cjt/uz0pq4ocKrLrLMJ0vBfhHlqiSjqXysCwYP7GTuxyOMGg6a/
+	 OAknhQiughecxCVPVUleNmi+J65D4Sg3ePHl5dR7vwf1qUYiiZOf5QtIhflPXqopyBC2P
+	 SOTHRG/Ej1M1kd5d4dC87hp6KI+mNDUCQUDMqM2dv113C52l6scsewaTZpRyUUsTuqNSM
+	 xV3rJmTOmVVxxbHMx5t3Uvm6+rLNtVNJi+tIcpEjW+Fk6a862F9Ts+gij5xFfyTHgcQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795597757;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=VTGamPuekzux5hFeH9dv3N/BCyf5kNpAzusBnN/5ynE=;
-	b=W3K2mBTjloYmQuYTcCnXZ9y+/M2OzIneP6l/CQRh9UHwakpAc+w2fz5o7xe7GmVTeYQq
-	 5zlnvfSomuNELkvRjd6ifaoR8eZSMFrkiCZA2mv0wPRbdcIpMzmz37HdPc5tXgfOG087B
-	 iLor7mdx6ntTqacAXwxCFgqI/vP+FXEl044IxZS9fqcw2IfwPkmT0pBEvoVUiJjfCx3A0
-	 mfpyRDjZu4CfIhWNS9iXGFBnt0iWd74QOVS+PSdaMuMmSe8Sr1Geukl3VfUdafhLSq+sG
-	 lTe1CAf8g+o4zztKou91R4GbvVRFZ3SZGi5gFuJBWQtoryF2W0Ilnh7YIB0Aoq3kFOA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795597921;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
+	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
+	bh=gouNuXBJ/VJmH4mgiTD8Nh1fdWF8sXBHPydQFNSIqds=;
+	b=2UsB3v7jKzN/Cj4GCZCTXhZy+wGCatvPqkeXxMUVTrl/U5twsge5Fct3dRT7VezZCfOO
+	 yH8QVEhk1t035q3wjr2NOH3rmiCUcF6q9ptlLveh/P57rC9YITgDg36GPuBgvZewSL/09
+	 TfYJ87DWAfIg2xG9uhOTtmVGpRQ4FBe5Mcu+0Zt6LN2FiTdQQ16mBq2yMVlRunVEzGTx5
+	 2jbU6drhjm08iQrXwVuxL9+eJRlSy2xNdYhEa7R5cDAvUF33MJbbavaKIk3AY8bVaeBGZ
+	 GVA8qyjimlEv2vLImk87Syng0820JHer8q6VMOoxGei+6A3+E20HcxivHTnTsrCe5wg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ptgPhzTf;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ESFkDNQ9;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=samsung.com;
+	spf=pass smtp.mailfrom=samsung.com;
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=h2g8lWBD;
+	arc=none smtp.remote-ip=210.118.77.11
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 91D24606A31E
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:09:16 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 91D24606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8616606A31E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:11:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8616606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ptgPhzTf;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ESFkDNQ9
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP68YC32629373
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:09:16 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	VTGamPuekzux5hFeH9dv3N/BCyf5kNpAzusBnN/5ynE=; b=ptgPhzTfBdA1WjiH
-	Pk945kJFPGKY8t6fLHQqZOj09ia1wvJSzsW5kcyGjotfcl6fiqXUFlNPxGLtONLF
-	fFvyTm0X0idOFkYXlj4CIYoSBd17G7Rwis0dk+mhvefrZSd6kqaE35/0hDYkjH68
-	9RF57mbM1DNTexFowjXSOkGnXX66vZb1HJ2PvCk9Pu/DJeWXXgWr37mAP6riv58O
-	+eF4n6bOcHRu3qzzilOX8xtpRHLpqGfPPwRgdDm+qDZopN99V0AbUcidzuFaRJjE
-	WPnUScolK+TP7oXLVLgICnvhCnUMpu6Sn7Oc3c0h3tZTniOvtqX1EOhgzJMmeHCS
-	StKXuQ==
-Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5eydbacw-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:09:15 +0000 (GMT)
-Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-3817a0ffd5eso6129907eec.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 01:09:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795597755; x=1796202555; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VTGamPuekzux5hFeH9dv3N/BCyf5kNpAzusBnN/5ynE=;
-        b=ESFkDNQ9cjD1XCVsbdlfRhUrO9Q6bAjhcAlQqjzNC33mUNe9/b/ov/MoV1AUQzMR9V
-         eYhBDv/MQ1qUEnZBpuR5XEX+9LVpjMCeowsLyKt/iin0Q1tjFB9eS33SpebazQC7z4AO
-         PYqBV8Y8BBT4Uj5dmPuBDCtJT/8uVz7UqI8JMb5KSCrIWRbC581Dm2lLa5cj7JYWVYRb
-         ruunTpIZqzB4cVNu7w2aUmQ8lUEKrNmxqTiemgSfRKDZZKw7E5ZEjQKwFVkdmagin6De
-         klng5DChSOWsEkcpqRcowiKM5cpi0p1kW54Ys3pOJJ32EQ1aHppck36N3yWiDqtFnjgS
-         yLAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795597755; x=1796202555;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VTGamPuekzux5hFeH9dv3N/BCyf5kNpAzusBnN/5ynE=;
-        b=fk7N1KwSkYCnIgEIv8VPU3pGXFIdqY3A9lHtjm+GHGVMNQT7uRuCrYF+t+NGTPEG7A
-         1vWjVC/zFzi45mFfShhqnPtphf41RQvlXDr4KYmc1ENUT+dSQGu9wvW7N5nVr4l8iz95
-         srpwF9kX/SizfE6Ntri2fFuGXh5O46BhKFT5uq1J7wEWjVSqzSmu6vzjBPbd4j1RHaVS
-         jDVVjHJesrmEqXUc815f1XqbxTlrRUL7f/vQ8qh/h+T2g8PYXjh2aaEy71El+Hql1P/g
-         nsAM3DJLr/NWxYueqyS1KIeqSdM0q98jSDxQWWFJK+s0ElFIzgmpEoQM2BZb4F1vp+SO
-         PMgg==
-X-Forwarded-Encrypted: i=1; AL+hErFOKJMmC3QiRfjWpdIr+zmOALQnmbpxDzWRnw8iJNoMfF5PhhC/WbnxLK3C7vYihfckTj7caSofPDXkYxQw@vger.kernel.org
-X-Gm-Message-State: APuU4Z8EL0dI+79JbNIV6WrL6ShinZ6Emrr8qR/ntIdCpgW7aaLtcg4C
-	s4pNa76Lt6qxdBSHa79UgzOQXUpUplJ/6860LHbgjUfG4Tnz0piwmXk3GbGqf2FmI68BF1TqK5s
-	Db2mPnX11MvMbszU83Q321i1N3opXqfKsG1o/NVmWhAek0UiB4A5lYCqHuW1uGcSe29ia
-X-Gm-Gg: AZFdTZebMM8FUD7mTTdF7ti2qjgUtKiRf1NbxvVlmksEzgbsJ8a8T3f14Le3OMQrvyH
-	0dsFhh72a0fSTzovX5hnzCRzkJUbJSRla52yxgWVfw9IjwJa/ZQIFKrBe4cNjTTuT5asoO3ZRdn
-	UGwe4RRYClDfl2ObHd3BwYfwNCRSg6JahBqkT2RCZaEZA5tzJYxAbcyc7KoNR/1ioSWKHCiGUoV
-	n/Dk0nydIEWjrWrPunvtOAsL/MaH0kVRKhzq6s05XMreGq3F4BvpOb4o7YdtVBGEmNPaqQl7DRY
-	2nYXZU/dyovyzi8hfRHx6McsheO1TIzqIuIbk1cG1CY/S/4WdR6WPLLXchVvglwfqBCStZoDqEF
-	qGA+wzaKazJ2gGuAOkbplDgn5X1QJn6uFYgKnw/YxI0trmav39q1tyzJzxdDqh2HoexkU+V+SPD
-	NW4MWVEA==
-X-Received: by 2002:a05:701b:2810:b0:159:f192:5290 with SMTP id a92af1059eb24-1b5524b591cmr16136819c88.13.1795597755006;
-        Wed, 25 Nov 2026 01:09:15 -0800 (PST)
-X-Received: by 2002:a05:701b:2810:b0:159:f192:5290 with SMTP id a92af1059eb24-1b5524b591cmr16136787c88.13.1795597754388;
-        Wed, 25 Nov 2026 01:09:14 -0800 (PST)
-Received: from [10.204.100.88] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5567e2bd1sm39505827c88.3.2026.11.25.01.09.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 01:09:13 -0800 (PST)
-Message-ID: <8d988822-aa70-402c-bf87-83a4403136f3@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 14:39:07 +0530
+	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=h2g8lWBD
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261125091157euoutp014e94f3ec5468ee5b9cd642203a65df23~rPsr7jTr61562015620euoutp01F
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:11:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261125091157euoutp014e94f3ec5468ee5b9cd642203a65df23~rPsr7jTr61562015620euoutp01F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1795597918;
+	bh=gouNuXBJ/VJmH4mgiTD8Nh1fdWF8sXBHPydQFNSIqds=;
+	h=From:To:Cc:Subject:Date:References:From;
+	b=h2g8lWBDfQ8cCBjrkLIfA3TTO5sATZmuSXAcWdcZgmat0Y7E4tAXwIKKdwFE5YKCJ
+	 MX9t1sT3ixMUsJ9EYuvAKwDV2TE9JlDjdkd3q3ocsgoe029hOKUWTM5/HRKnwM5S+W
+	 WZ7U/SMYTqdq3/gzD9YKOiuLrsJDJUuEw71854LU=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20261125091157eucas1p2f4324315c65e38343c488ea16ce3a2cf~rPsrcgERO2882528825eucas1p2e;
+	Wed, 25 Nov 2026 09:11:57 +0000 (GMT)
+Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261125091157eusmtip29a72a29dbb07225364b002f3267a2fe9~rPsrF2y9T0318503185eusmtip2B;
+	Wed, 25 Nov 2026 09:11:56 +0000 (GMT)
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+To: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Srinivas Kandagatla
+	<srini@kernel.org>, Vinod Koul <vkoul@kernel.org>, Bard Liao
+	<yung-chuan.liao@linux.intel.com>, Pierre-Louis Bossart
+	<pierre-louis.bossart@linux.dev>
+Subject: [PATCH] soundwire: qcom: skip DPn_BLOCK_CTRL_1 write for
+ unconfigured ports
+Date: Wed, 25 Nov 2026 10:11:49 +0100
+Message-ID: <20261125091150.2145177-1-m.szyprowski@samsung.com>
+X-Mailer: git-send-email 2.43.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,91 +72,62 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] media: iris: fix deadlock in iris_pm_suspend() with
- threaded IRQ handler
-To: Wangao Wang <wangao.wang@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
-        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-        Hungyu Lin <dennylin0707@gmail.com>
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-media@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-References: <20261124-disable_irq_fix-v1-1-d27f44f7eacf@oss.qualcomm.com>
-Content-Language: en-US
-From: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-In-Reply-To: <20261124-disable_irq_fix-v1-1-d27f44f7eacf@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfX9NHuvDcv3Zy1
- XaEPCyc0IgSQar35bSbEXfnbbFB4p9qAWukUeAnFSVK+HKu7TwQtThRZGPD+t85VYucB7qhHTOw
- 5SoSD5Dn3fNGm1DIfiyWj78FlcAWv/w=
-X-Proofpoint-ORIG-GUID: TV7NxsYJXAE7JUyK-GFlkDlqXAMcSGOs
-X-Proofpoint-GUID: TV7NxsYJXAE7JUyK-GFlkDlqXAMcSGOs
-X-Authority-Analysis: v=2.4 cv=GIGdgeNK c=1 sm=1 tr=0 ts=6b06a5bb cx=c_pps
- a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=Wii44K86_fOECA-UWJUA:9 a=QEXdDO2ut3YA:10
- a=6Ab_bkdmUrQuMsNx7PHu:22
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDAzNiBTYWx0ZWRfX9+fNQpwrplXA
- +xIrZkH5g2msSNHEtKPzrcgMTqmAcLqsuaIvMpy6I9wQDtpPSFzODE/iX6fxpIEpT3BLpOjwNOt
- Yr1I5B0XfpzOflhvBs3E73Mj1TqWTrKkNeOeq0qHcO5B+bNEsVEb8Y9jEPf5aRguFsWUMqcRLEj
- b2gJXeUCmQYNY9GdyEGHdpwbTV5FvbIjyoxmwg+XV5qCcfOA4W8MjieOOZc0U/CvTy+PZslANZb
- 3Q2vPdMx+WZLSy1794qBFvhvJLXXnnXTV5qEBPyU9DZEMN6DpC4Y4wLjg6W9M9F5xPBaxB52Boo
- BOE6HjNihvrVe0AdFKffd8N700wxvr4GtlNhpXpn+ie7Q8JdxYnzA53pt/m1OHO6vmS/XYvpRVt
- 1t19IFyVgRy7mR9oSJ2I4vBtvBTbei/0wTQogI847l3moat/jJu6eoCirJouwYBOjHOJG0ptEvO
- uaf6k6ZvLCKcaQrjsaw==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-25_02,2026-11-23_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 adultscore=0 lowpriorityscore=0 suspectscore=0 clxscore=1015
- spamscore=0 priorityscore=1501 bulkscore=0 malwarescore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250036
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20261125091157eucas1p2f4324315c65e38343c488ea16ce3a2cf
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20261125091157eucas1p2f4324315c65e38343c488ea16ce3a2cf
+X-EPHeader: CA
+X-CMS-RootMailID: 20261125091157eucas1p2f4324315c65e38343c488ea16ce3a2cf
+References: <CGME20261125091157eucas1p2f4324315c65e38343c488ea16ce3a2cf@eucas1p2.samsung.com>
 
+Master port_params are filled in qcom_swrm_compute_params() only when
+qcom,ports-word-length is provided in DT. Otherwise they stay zeroed,
+but the SoundWire core still calls dpn_set_port_params(), so
+qcom_swrm_port_params() writes 0xffffffff (bps - 1) to
+SWRM_DPn_BLOCK_CTRL_1(offset, 0), which is outside the DPn register
+range. Since commit 55207a5b6959 ("soundwire: qcom: add multi-master
+support") this also triggers the port_num sanity WARN in
+qcom_swrm_port_target(), e.g. on RB5 (sm8250 WSA):
 
+  WARNING: drivers/soundwire/qcom.c:1170 at qcom_swrm_port_target+0x68/0x78 [soundwire_qcom]
+  Call trace:
+   qcom_swrm_port_target+0x68/0x78 [soundwire_qcom] (P)
+   sdw_program_params+0x374/0x774 [soundwire_bus]
+   sdw_prepare_stream+0xfc/0x310 [soundwire_bus]
+   qcom_snd_sdw_prepare+0x90/0xc28 [snd_soc_qcom_sdw]
+   sm8250_snd_prepare+0x2c/0x38 [snd_soc_sm8250]
 
-On 11/24/2026 1:30 PM, Wangao Wang wrote:
-> Commit b9c2215bdedc ("media: qcom: iris: use disable_irq() during
-> power-off") replaced disable_irq_nosync() with disable_irq() in
-> iris_vpu_power_off() to ensure the threaded IRQ handler completes
-> before the VPU is powered down.
-> 
-> However, this introduced a deadlock. iris_pm_suspend() holds core->lock
-> across the entire suspend sequence, and iris_hfi_isr_handler() must
-> acquire the same lock before it can complete. Since disable_irq() blocks
-> until the threaded handler finishes, the two contexts wait on each other
-> indefinitely:
-> 
->    kworker (pm_runtime_work)         iris_hfi_isr_handler (kthread)
->    -------------------------         ------------------------------
->    mutex_lock(&core->lock)
->      iris_hfi_pm_suspend()
->        iris_vpu_power_off()
->          disable_irq()                 mutex_lock(&core->lock)
->            __synchronize_irq()         [blocked: core->lock held
->              schedule()                 by kworker]
->              [blocked: waiting
->                for handler to finish]
-> 
-> This manifests as a hung task with kworker stuck in D state:
-> 
->    INFO: task kworker/u33:8:178 blocked for more than 122 seconds.
->    Call trace:
->      __synchronize_irq+0xb8/0xf8
->      disable_irq+0x60/0x88
->      iris_vpu_power_off+0x6c/0xb0 [qcom_iris]
->      iris_hfi_pm_suspend+0x44/0xa0 [qcom_iris]
->      iris_pm_suspend+0x6c/0xa0 [qcom_iris]
->      pm_generic_runtime_suspend+0x38/0x80
->      rpm_suspend+0xec/0x6b8
->      pm_runtime_work+0x118/0x128
+Skip programming when port params were not configured.
 
-This is fixed with, pls apply the same for your issue.
+Fixes: 128eaf937adb ("soundwire: qcom: add support to missing transport params")
+Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
+---
+This patch has been developed with LLM assistance and have been tested
+on the real Qualcomm RB5 board.
 
-https://lore.kernel.org/all/3d04aa51-7301-4d8b-93d4-1a7d28e6c614@oss.qualcomm.com/
+Best regards
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
+---
+ drivers/soundwire/qcom.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+index d74986a3dab3..613679be4b21 100644
+--- a/drivers/soundwire/qcom.c
++++ b/drivers/soundwire/qcom.c
+@@ -1205,6 +1205,10 @@ static int qcom_swrm_port_params(struct sdw_bus *bus,
+ 	struct qcom_swrm_ctrl *ctrl = to_qcom_sdw(bus);
+ 	u32 offset = ctrl->reg_layout[SWRM_OFFSET_DP_BLOCK_CTRL_1];
+ 
++	/* port_params are filled only when qcom,ports-word-length is given */
++	if (!p_params->num)
++		return 0;
++
+ 	return qcom_swrm_port_reg_write(ctrl, p_params->num,
+ 					SWRM_DPn_BLOCK_CTRL_1(offset, p_params->num),
+ 					p_params->bps - 1);
+-- 
+2.43.0
+
