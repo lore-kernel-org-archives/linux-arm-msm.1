@@ -1,56 +1,104 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.176
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795628308;
-	b=Z7RJ/vSWB5S6UgA6J5IYS8cjWoxVSybv7+HoSQ8toO14xpq2JzhrYXHgOgsFuQR/j4Kr
-	 M1Zo49pB977MH+hrobj6JYGESoLDLGv4xOfldy2A806wTaWvXaZFU8EhmbUfvDtdTSgDQ
-	 x6VakQCP0DN9JGRfQlO2wAPnRpCCTKpzcVuN/eWPPPwXCBBFPajsxxqCjkUv+mugYam10
-	 Kww21hJahtfuyWmhz7MDfwNVwRbfe3qm9LaXGnH3QWBLtxyXT5zJPx92hTcBqbO/4CrsL
-	 IvF0hpzJJFMYY0fVdTb/SIm0NCfe49tqgS78hsWWkr5PKnOccOfbHzV6okIZs8dHnRg==
+	t=1795629350;
+	b=tcwjAyr0kwY4fr1FROgmxW5qsCkw9WwPN+/74wV984bd015RR7RqkaSIDb1CTk4xMtCb
+	 JqvRQYuwfCavm+UbX5FtfIZEDFlXxqC9EwtulUoSTXhJVKE7nlYLUX1F9Q2RkN4dLvcqj
+	 pnjK1J3vDLQU1RXN5vafdDdoKhc5zUsiUllavrm2mggud3/92NC5YaYAJrCdCdYuITbMN
+	 4HXc1udJ+PnMnIR0ygEgzeX2n3+tfsFqdStsUev9YcCwg5ud0B5VbWwa2iNEXlnHsJmM5
+	 Iwzptw4gSKDqwDiOnNTaKZ4dnfJ9eLWO7XTQO2Oj4LbcD7IiTHzJT4FqL80VUxXAOEw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795628308;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Jc2fT23SPWqHr6nIykatx49BNkv061JXFi2XlfZIV5I=;
-	b=FX6GjCTNhtSKsm5opLn8WdEz9/Vnx6JAKgJPm+6sLey8yYAx+b9mykcdEoEHW+6j3L6w
-	 mfD6u8gOV506CWtxg6gIUwz4Vb4IevPT/CDjp9tK9kgcnsQ06mSP1m1KjmzOgTtv7mezk
-	 5I/HvkGBV5S3DAndzEOK8vkatlQNopZXdr7g+hXhNZ2VFpH40T1MueypVA+fRx8aU3R6o
-	 JYwRefi0jsjVag/ILptEXhXv0TM4lXF/2bJyLGFIVXPhciZRYiXdoxXiMTmHROsgdP3xv
-	 SXfxiZJhukjau2713ihVm9L5Svk3QolSeaU1Ghe9BMOe57uyjk/3IGWa5mlju4n9lvw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795629350;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Received:Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
+	 Content-Type:Content-Disposition:In-Reply-To;
+	bh=ZhgvvGhr19GJBCcJ3nyYAHYL8qsS8Qu8flUoaHfsv+4=;
+	b=j1wmvmiI68dnpy7T/H4Hg/edO/it3Iec7zmrJnOI2JTqCiGZJlCsZ2IB6BNdtsHdXQ6+
+	 8RN+qOE8fbfLUR6vMt681Nl//b91ng3/qQ300SQ57W0ZhUNMVd3A5Z47Id/eDeYnO+k/N
+	 9mpscJJ0ojTPucEyirLbsU0cc3qQX/4FyDjf1ohVLb392+s1EMVgZ9EsVoixhyAJaZUXk
+	 sfPFeQSduhy1ukoRxRoD5B/P2t+WEzu/NeBuOBPHwfntEZsW1jnb6IZt+RHwlWUL/7ASE
+	 cJrnl4eOM0NKq2qz+6vPJpclHV/ZphFRz5D2FjMlpBl7tL4s27He8D5LAnUd/z5obgA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=vz6eljYw;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=none header.from=ziepe.ca;
+	spf=pass smtp.mailfrom=ziepe.ca;
+	dkim=pass header.d=ziepe.ca header.i=@ziepe.ca header.a=rsa-sha256 header.s=google header.b=nM473gLh;
+	arc=none smtp.remote-ip=209.85.160.176
+Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94355606A326;
-	Wed, 25 Nov 2026 17:38:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 94355606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D946D606A323
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 17:55:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D946D606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ziepe.ca
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ziepe.ca
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=vz6eljYw
-Received: from [IPV6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9] (unknown [IPv6:2a02:830a:f787:8f00:f33c:cbcd:417b:d2b9])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id E82FF53402F6;
-	Wed, 25 Nov 2026 18:38:24 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1795628305;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Jc2fT23SPWqHr6nIykatx49BNkv061JXFi2XlfZIV5I=;
-	b=vz6eljYwfoF4hl31mO8OMR8yWufis/ML2BxifwgqeIAYVH97dvFmsuVdJWgA0gZT5Y58V3
-	inXPK4a7sjHC9/YYssW/e+uzH2qny9d4EmVU6g2TIVKNtN+DJFFfTLnqzZZPZjgtV3IwEC
-	kfW6lEuobSwehOtIO53WT7TIjU1d//E=
-Message-ID: <72548a95-f009-465f-ac04-b1b09ea4d1ae@ixit.cz>
-Date: Wed, 25 Nov 2026 18:38:24 +0100
+	dkim=pass (2048-bit key) header.d=ziepe.ca header.i=@ziepe.ca header.a=rsa-sha256 header.s=google header.b=nM473gLh
+Received: by mail-qt1-f176.google.com with SMTP id d75a77b69052e-5363316fa0cso63330101cf.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 09:55:49 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google; t=1795629349; x=1796234149; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ZhgvvGhr19GJBCcJ3nyYAHYL8qsS8Qu8flUoaHfsv+4=;
+        b=nM473gLhDt8L/AJd71rb7S0acFRmXcxuz14+e2lo8uQc+NdtG5xkQav60aRPMBb/MN
+         gpXZdrYOiuIgSZDDd7rHOb4JNczuwWoUuTAycUVrhtyac1v4YoF6ULTz7x0hodXNenpT
+         1iEgT+UaS2OxnKWIjAOcUo9wguQQi0DtexdJUIvU2cYDKsbfXNJiPJ2UJHHjg0AFUdl/
+         lwtDRt9A6dtMUgTXS3ktbG1CYUYJ5ip+LCct/huS0rreCifzPVHnU/ZPNPA8hYkYzsOc
+         5snmpulZ1L88WXu/rnUo3WoM6eTvor835r8zO+jxN5Nzh88vlPSiDzZVpYfH8veC4k2V
+         R2Hw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795629349; x=1796234149;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ZhgvvGhr19GJBCcJ3nyYAHYL8qsS8Qu8flUoaHfsv+4=;
+        b=Kh0Bq61nyFDnbwH9+XRLOxrbE95jRB3sKcYNrgd+BXVQhasKakWwdqH5vTGUv144CJ
+         rADlSDi3QEoPMjR/fUn9SICxq/gf0yXHN3aG/hk+HCd+4ykaJ2EZyZNPJenoxmvQyZpF
+         Hc5499JHYMJxEffaMR5ryWTDB7orcaQ25RBAkMM8GithJ06PcQT3u7fM7F+6zbGQdX5e
+         1h74docTLiHj3HmpsUu7C0LCk0/UkSqTqwZ8pCdgoMPvnipSTL/ltgnGLhJb3QobylOw
+         N+W9r4lAVotoNN3gCwJzQtm/FEEY9XV/90Ahfrcn/x73qKJEsS1u+tVDxmVEv4/bD4Xg
+         zn6w==
+X-Forwarded-Encrypted: i=1; AL+hErGtEpLFQJRlHh7Uoq50YXeoBKeMFog6u9d91BbKlXHRcJNfEphdNOfFaPEJLcPDPOZV66eMgDO0JXG0xCNO@vger.kernel.org
+X-Gm-Message-State: APuU4Z9su757hs2ykyrNwFEl6PwwDuWa3W2uw4Ym2JSuBMf6VY0Ex+4h
+	quQ8Zchjr1HSvZpVfyXEXg7jSmNbnzhZPsQU9DhR5uMOdphOSNneQW84I04h+NSMtg/KThIFNux
+	g1AX2
+X-Gm-Gg: AZFdTZf2iT3He0MTeU2R3h+UfHIof2afam3sA1DqvpsXZKzdkmWZXgMBNkq8RYOgfvL
+	vbW6orB1KqIv2EL4Pum7p4+yzgqm6imhv6tGBuXxPVmKG+FcbuVLPQW1rgcyYRYQegCtawTJj+5
+	gh7v20sEHeFQKmp63U2OLR+yYGslUZ8Dr0VAa5NdqVC5KaEJVF+RVemvWwJD9LyHplZWuj8iunX
+	JfnITHyASeZc4o4hH2DH6eAMsCxU7ReFZYYAT/+6ktJO/NbKAKtvzc1IOev+5mG4nBEaDmd38zB
+	NIRJRKYcFUZSO5a1OmUXVjiShlX32ur4qvrfHbhfXMDCVJR5VRj4bI3jDPw98dXsMWC1pOtWlCO
+	Pdn7m8OCWalgxBgWfiTzcdnZSVcXXEF99gNRo6bfEIuZOCrjEB1iu1KiRvlhfpWdHdtN28aVItm
+	PHCiJ3wSt+ziM/OtJ6NOT2bXWAlXZwygpC/3WrdcZyXA7GnvdQq7xb7BSfJFRUVSqDN7KGRBM7M
+	cnivlfvZUSax0Sy9Glf4KgIOBTohbyJqG7IumsF8ERjy5iun4ogB9Dv+s/rnAx9UYgyF952lEni
+	8xh5TQ==
+X-Received: by 2002:ac8:5706:0:b0:536:3760:e6cb with SMTP id d75a77b69052e-55d769e9387mr335085841cf.14.1795629348805;
+        Wed, 25 Nov 2026 09:55:48 -0800 (PST)
+Received: from ziepe.ca ([142.177.118.84])
+        by smtp.gmail.com with ESMTPSA id d75a77b69052e-55dbb8546ecsm18274511cf.4.2026.11.25.09.55.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 09:55:47 -0800 (PST)
+Received: from jgg by wakko with local (Exim 4.97)
+	(envelope-from <jgg@ziepe.ca>)
+	id 1xWHDf-0000000298s-0hJB;
+	Wed, 25 Nov 2026 13:55:47 -0400
+Date: Wed, 25 Nov 2026 13:55:47 -0400
+From: Jason Gunthorpe <jgg@ziepe.ca>
+To: Marek Szyprowski <m.szyprowski@samsung.com>
+Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, will@kernel.org,
+	robin.murphy@arm.com, honghuan@amd.com,
+	Leon Romanovsky <leonro@nvidia.com>, joro@8bytes.org,
+	prakash.gupta@oss.qualcomm.com, iommu@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH] Revert "iommu/dma: simplify dma_iova_destroy() and drop
+ the free_iova helper"
+Message-ID: <20261125175547.GM246011@ziepe.ca>
+References: <CGME20261125135138eucas1p141ba6b5e09623562e2033e290fba811c@eucas1p1.samsung.com>
+ <20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
+ <a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,118 +108,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/10] dt-bindings: display: panel: samsung,s6e3ha8:
- Add AMB630QY01 panel
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Dzmitry Sankouski <dsankouski@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20261108-crosshatch-panel-v3-0-87dd4ec4f7cc@ixit.cz>
- <20261108-crosshatch-panel-v3-2-87dd4ec4f7cc@ixit.cz>
- <20261109-tacky-busy-kelpie-cbd5be@quoll>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <20261109-tacky-busy-kelpie-cbd5be@quoll>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
 
-On 09/11/2026 13:30, Krzysztof Kozlowski wrote:
-> On Sun, Nov 08, 2026 at 12:32:23PM +0000, David Heidelberg wrote:
->> The Google Pixel 3 XL (crosshatch) uses a Samsung AMB630QY01 6.3"
->> 1440x2960 flexible AMOLED panel.
->>
->> Signed-off-by: David Heidelberg <david@ixit.cz>
->> ---
->>   .../bindings/display/panel/samsung,s6e3ha8.yaml    | 41 ++++++++++++++++++----
->>   1 file changed, 34 insertions(+), 7 deletions(-)
->>
->> diff --git a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
->> index ca250b1b91712..dcf347fe5ca83 100644
->> --- a/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
->> +++ b/Documentation/devicetree/bindings/display/panel/samsung,s6e3ha8.yaml
->> @@ -7,48 +7,75 @@ $schema: http://devicetree.org/meta-schemas/core.yaml#
->>   title: Samsung s6e3ha8 AMOLED DSI panel
->>   
->>   description: |
->>     The s6e3ha8 is a display driver IC used in 1440x2960 AMOLED panels from
->>     Samsung Mobile Displays (SMD).
->>   
->>     Known panels:
->>       - AMB577PX01, 5.77", Samsung Galaxy S9 (samsung,s6e3ha8-amb577px01)
->> +    - AMB630QY01, 6.3", Google Pixel 3 XL (samsung,s6e3ha8-amb630qy01)
->>   
->>   maintainers:
->>     - Dzmitry Sankouski <dsankouski@gmail.com>
->>   
->> +required:
->> +  - compatible
->> +  - reset-gpios
->> +  - vdd3-supply
->> +  - vci-supply
+On Wed, Nov 25, 2026 at 06:21:06PM +0100, Marek Szyprowski wrote:
+> On 25.11.2026 14:51, Sibi Sankar wrote:
+> > This reverts commit 1acce29926d93f3eba427696fe3da6451504dae2.
+> >
+> > Before this commit, dma_iova_destroy() unmapped through
+> > __iommu_dma_iova_unlink(..., free_iova=true), which set
+> > iotlb_gather.queued from cookie->fq_domain, skipped iommu_iotlb_sync()
+> > and freed the IOVA with the queued gather, exactly like
+> > __iommu_dma_unmap(). After it, dma_iova_destroy() calls
+> > dma_iova_unlink() and then dma_iova_free():
+> >
+> >   - dma_iova_unlink() never marks its gather as queued and always calls
+> >     iommu_iotlb_sync() after iommu_unmap_fast().
+> >   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
+> >     the IOVA goes straight back to the allocator through
+> >     free_iova_fast() and never through queue_iova().
+> >
+> > DMA-FQ domains therefore get strict invalidation on this path. That
+> > includes the block layer's blk_rq_dma_map() path, which NVMe uses for
+> > all data transfers, so iommu.strict=0 has no effect on NVMe I/O.
+> >
+> > hw/sw details: Qualcomm Glymur CRD: SMMUv3 with no RANGE_INV,
+> > 	       4K pages; NVMe SSD on PCIe Gen5 x4
+> >
+> > Fio sequential read/write numbers:
+> >   Domain                          seq write    seq read
+> >   DMA (strict)                    2694 MiB/s   2693 MiB/s
+> >   DMA-FQ (lazy), flush queue      2707 MiB/s   2803 MiB/s
+> >     bypassed (this regression)
+> >   DMA-FQ (lazy), flush queue      10.6 GiB/s   11.9 GiB/s
+> >     used by dma_iova_destroy()
+> >
+> > Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
+> > Cc: stable@vger.kernel.org # v7.3+
+> > Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
 > 
-> I see no reason why order of this schema should be re-invented. See
-> every other binding or example-schema.
-
-Sorry about it, I guess I messed up fixuping moving the pieces.
-
-Fixed in next rev.
-David
-
 > 
-> Best regards,
-> Krzysztof
+> The performance data clearly shows that the flush queue was there for
+> the reason. Together with this revert it would probably make sense to
+> apply the v1 of the reverted patch:
+> 
+> https://lore.kernel.org/all/20260701092033.422867-1-honghuan@amd.com/
+> 
+> Leon, do You see any other option?
 
+Oh, there are a couple of issues here too, and reverting isn't fixing
+the main problem with this..
+
+The issue is the assumption we can separate the sync from the free:
+
+       if (!iotlb_gather.queued)
+               iommu_iotlb_sync(domain, &iotlb_gather);
+       if (free_iova)
+                iommu_dma_free_iova(domain, addr, size, &iotlb_gather);
+
+We cannot. The gather must always be retired, either be calling
+iommu_iotlb_sync() or by calling iommu_dma_free_iova(). It can never
+just be left dangling.
+
+Further you can't call iommu_dma_free_iova() with a NULL gather once
+unlink has been called. That risks things out of order where the
+rbtree can show the freed iova before the associated queued flush has
+happened. That is a correctness issue.
+
+I suppose the resolution here is to feed the gather up the call chain
+and allow it to be retired correctly instead of trying to short
+circuit it inside the API.
+
+Jason
