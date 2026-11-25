@@ -1,79 +1,55 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795630401;
-	b=PwWAvtGphr5axr4Y4e3SrDSsNgOrn5srsXN+oXfh/OV8QL3Dg51xk06NUy0vpKuTkUBh
-	 Kerc7eNKr/e9k2DqmrkOQVVoZAOsIFgbrvYA7915QsuaTsderqVWM9Czmq88f3NoX7Eyg
-	 ejgGgwXwwUJRV1k0cwoqvHtsehmv7efjQDdXNH1QaUUH9BWVeE6nF3S45btTVvRwfwWrS
-	 KGjIBS/EASyyDo4iPJnPm50enes5ajwGsDaeUdOuaIdxlFjwsaDtNDbcRxrxUFSy9+2FT
-	 oc+JIVFteoBGYce9wPdsAXmGrtwHU09kfzzCyR5pPJHIneejdazM7Nghp5oFp24SGww==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795630401;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=zf9Zr5En+UCqIPqNRpzp1CqfGD38nha38omPOjmNrFY=;
-	b=O0HKHFzII5vdu9Zj+7MmnqmA7B24HcQ5HFpZd4me+d6ZA0yFe1VOVHcPivwdpcPUqmU7
-	 RhFxD+jGGXXOwGtXEkk0z+4F657H0Mw0vvoSuAYAhp6lgGC/zC8nbgOmQTVa42XNQQKYD
-	 eU494IZIGxV5OL17M7MGKtkBa6jXAa7wG5KuLHfZXdAWH9aATaT9NI6J5lRaOxnT7PrZy
-	 +n/bf9lnMqp0efcOENxb+xny8iGop/YNY+GtW2/cC8vVflrRbEbj8Hfk3SIFfpZBc+GCl
-	 MGLlIhdqiw7YSnzToRKxgjVq9afSCx+x/Z4tJ4oHihLCb8WzL2HLT13khsA3eI6QbuQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P1XeMII5;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795630437;
+	b=uljihn0dpSyFFoq6wF2JkrdSS/Hzkvqx8zREU4/lYS8EafHrAsMSu7zO4/z//gafUmyW
+	 2i8WNKPi1nx4kDlyO3XD7qMJzugALpqxZubuIfmNm2k2BD216HlE6/GETG1ydM8P9zDAQ
+	 A4zOJZBj6wmQUW2J+Q0T4oJFtxN9XkO9ak+BCdJsB/V2iMevlT84GHmE6qfue+MxTNTw+
+	 rm+c+UwSLRzrf42SLaZpTte6uzN1KzM1Sarl2oQVwsjV4HJddE8+B/Xj3+v/pWHzhKHlA
+	 XWbEvjcAIOBbwae7wvcCNg4YLqsbRCNAQo+h78/ahJ79BlUBi/lkCe5R6Xu5SnAWGew==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795630437;
+	h=Received:DKIM-Signature:Received:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Received:MIME-Version:References:In-Reply-To:
+	 From:Date:X-Gmail-Original-Message-ID:X-Gm-Features:Message-ID:
+	 Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=UQyjdIZXnyN7pbRcpgqMvYP2FTIzZjKLrH9OPluFP54=;
+	b=eUADypn0tRGXmNxwJK4VEZ+3C0binbOiM3XpADX5d5W+iQW9VryC+SB+nDt4xsX3BAzH
+	 Ovb4yz/AV39ipHL6U4CoyX8mP/2k72pGZ9N01HuXjqP69YOXHSO+hdjRicohISCMyRXn7
+	 KAEeXeA7HKC0PkNPrCY+fILUZHV63qEPtfz+QI6NpxELDs687NUBXQDnzG3G/Ig6YLvSR
+	 y14Pu4E0lfYD4VSVCaXP2SIfCt8BqmWUwRTDwv94oF2C1aS/2vXsy6KUVRfKCWEkO/vUp
+	 y8FwT6vGYF4K04/OsCBhJNuYhu64U56MKRqPwvTcTeWFiqH3vQsssg4BMvvQ3xXN8NA==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Iz93ajdg;
+	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95CF4606A339;
-	Wed, 25 Nov 2026 18:13:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34C7E606A334
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:13:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=P1XeMII5
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795630401;
-	b=km/Qzj8E9GmT5p07pXYkc7Luk8PISLx+yfpg2lLwEFEJgr/rB6t1geZZ9DjDS3ZY0C17
-	 2bWHzgY/EN4qQr/s0D8OYSf61w+PFRRCNIeHqWBjFMTMDNA4UU0GShmlOhHpgvhSO0jGW
-	 8wvrYrIjWxgo8AiEVoYdH/BmxEu3nQVJmGw+xcR5KXCU8UPHK/yvZSlzbWKuxmNft3AZ6
-	 mRaGY9UiaPLz+NbJZi7cMLVwby1CJf6z3MX7I9prXhdsA/CTbhBqzzLdcesBJEgbJVpT2
-	 IPnXhE1vqKamIawW41mVME9zI+8Sl6cyopj+X7y7jx1v0Hh5qcoPl7QwNYURhGeTgAg==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795630401;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=zf9Zr5En+UCqIPqNRpzp1CqfGD38nha38omPOjmNrFY=;
-	b=ocqcYwLJzQpO1oKA1gX2SZnlVQmMwIu9GbhE0HIdtAf0uHLwe4OZ+MPOS0bVIjo3DCKY
-	 /gh15PWupejxn0PQ3kt5tPZd9o3a0aovYSHjVYu8SiwoUdrkrSS3xRoZizbENMc4F3O2w
-	 h+BmjYRzIYMnMwbrXkoe8WffnbQpxVBHkvwgmBGv0r6aNPAqza8+zqw1zU2EqPFvYTaKM
-	 drB6mPcQtJ3B+j2a86DsolYRqdtWUlygULFeTvh9iJebKYQ1Ix7rsh86L2sp9x1rUTopO
-	 9G8VC6YvBT5g+/rPsKuGQlNEXbkpuHoGA2CaJZERrH7CVLqo6DnLsKaQYY0BWKER8MA==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 7E8A71F0156A;
-	Wed, 25 Nov 2026 18:13:01 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Iz93ajdg
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 585EF1F000F2
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 18:13:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795630401;
-	bh=zf9Zr5En+UCqIPqNRpzp1CqfGD38nha38omPOjmNrFY=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=P1XeMII5tm63Ft5UzX2QusbSN+EmGIXr0NG4YLs8DeKUl/CrxIpAh32UYJFWLtdw0
-	 286LW64cwGIsmdUdO9vtNvlMeKFKKYDBKwJpHb2ma3k+0+6zhyQ0yEHDgT2cTvoa0B
-	 i+VN3KFD8Oxm8X5zKqsVxWLGvGEl3sYgkS1fiOU2OkCBPaqYtNxpe2kb7GfMYgZ9ZE
-	 zNyHPGCo3aZwiFA4HHMhLsdxvVKYq8Yom8Uy4bbZLWeQvMnL+viuIFhKFWC5N82c0h
-	 wD6veZsTLzDue7GrXh5l/Wj61gzUET8CNNygF1e7ccHnNYIPdyGthwi/mKxzgRMrwt
-	 LzCSBgHaQHM7Q==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 7A29C4CFC0;
-	Wed, 25 Nov 2026 18:12:49 +0000 (UTC)
-From: David Heidelberg via B4 Relay <devnull+david.ixit.cz@kernel.org>
-Date: Wed, 25 Nov 2026 19:12:53 +0100
-Subject: [PATCH v4 9/9] arm64: dts: qcom: sdm845-google-crosshatch: Add
- display panel
+	s=k20260515; t=1795630436;
+	bh=UQyjdIZXnyN7pbRcpgqMvYP2FTIzZjKLrH9OPluFP54=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=Iz93ajdg1Nd8CJzVL1szboFhLn8kqrwe/ZCcJh0uQLv97qGaDfCqudOjhaTObJBfO
+	 BXliTF/2V/TQYgVUCimigeZEPsiVStwzRW9nTEorwDTwgV+1TdSU3Sj3OJotAvi4f3
+	 pboPW9r1qTUv2Kmgl/FZmcBd+gHS2PVVDPbSGlTWWJHmygCPpZDJlJj7NFMQnsgMJF
+	 uTzw/hoQUm28x9z/+JEJKdADDjK/nyr/I20r5dNvMXoagOwwilIjGY207fwZ1PpqQN
+	 43F5dyWPzJx37IRk/janFiAMuKhnZYrpEgdmaGC5zeyma92Y8ooRZcnw47XBw3qZGa
+	 4/qGZJmZB82tA==
+Received: by mail-lf1-f44.google.com with SMTP id 2adb3069b0e04-5c14f3dab66so5832419e87.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 10:13:56 -0800 (PST)
+X-Forwarded-Encrypted: i=1; AL+hErH5q8j8wlHir/1poKQeVlIGNTBKS+s5692Gr8Q7UffAEuuv20BHnK9XN1weDPmGhz6AAwwUAfCtWI5nYdEZ@vger.kernel.org
+X-Gm-Message-State: APuU4Z/wV3P7J5qU3WTPCHmOmJfZa/lmStMcnWWeb6zmBfMw5hvNAPLw
+	bmNSoCdUQ5d0sQpORKv50SauUAAh+2tUsK5dtZgyESuDbMNPS0HAaZyYFoiF8X+kvJvZZ969NeF
+	uhZY7zYxqbAsguLayPa89p2H8PCq0rL4=
+X-Received: by 2002:a05:6512:2313:b0:5c1:5457:a147 with SMTP id
+ 2adb3069b0e04-5c1b7c5f28fmr4759565e87.32.1795630435118; Wed, 25 Nov 2026
+ 10:13:55 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,146 +59,48 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261125-crosshatch-panel-v4-9-120adc58e737@ixit.cz>
-References: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
-In-Reply-To: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
-To: Dzmitry Sankouski <dsankouski@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>, 
- Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Marco Mattiolo <marco.mattiolo@hotmail.it>, 
- Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
- Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org, 
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org, 
- David Heidelberg <david@ixit.cz>, Abel Vesa <abel.vesa@oss.qualcomm.com>
-X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2357; i=david@ixit.cz;
- h=from:subject:message-id;
- bh=A+2cpgTKZsuyPaY65ARPRtY967sq4BpFSqvnoaIMPGw=;
- b=owEBbQKS/ZANAwAIAWACP8TTSSByAcsmYgBrByUe51AB0/xnlO5MuDoBhNQVQ6rTFJH08qj84
- xflJayGh7yJAjMEAAEIAB0WIQTXegnP7twrvVOnBHRgAj/E00kgcgUCawclHgAKCRBgAj/E00kg
- crNHD/sFUXcq1AMMwnsUYItZGc7eUg+E1Qu47rIXPgA4HXXxY4PgxEvZvvq+jywnV8WTCxsGVt1
- JUkeo1HRf5nOiU0A2aAr0vtsvm4lvrS0a0xfWOw3TSJeGkoicz1z5+ZGRrba+u0wamzr6alQ2lO
- 1nz3AYZbzrJuqC8obgXo8r8Bb3w3ylg9xJs//RhqHBkqiMnTH72z79S6bObZY4N4UBmWlpEuMbc
- lQoFWjd0vGs06jdqAM3LHbGTd2eA7bge+5rRwRQXc1XygeSTkfCdx7+LH+J58c0nM8HkJVaTxSc
- yVfB3N8JPwkao/+jrW+Q+VexMZlcQrqy87k0dgo+zFWx735IqC0tY1JuE8RQSmntdd99Tuv3KyK
- w1cypzsmdm0bzxkSc+gs58+9fqKEdYt/RtvqXfSw4TSfKVuJl/WPm2QEKl+dOM4MzRLH+h+sScE
- QgXs6Kx+E76KfrAhd+nILkEFD0jqODC5IQ0M2E+juKDjLPzaBLfVVvxtamyA5qHpeboC/pIrM/7
- pKj//CGYokosPlAdswNIJThs8M3cumXuF1+KtJQxfQlhwdQz9l25yenmjPA3AItAMtw52KiNagQ
- jn9zTy+QNe/w3s4gB8R0C9iZ0ZBrfzLbuT9+sByXvsMA29MBpRxaX+KzGGD0epaczvNZiOSN2ve
- FPSSa48rbITYYAg==
-X-Developer-Key: i=david@ixit.cz; a=openpgp;
- fpr=D77A09CFEEDC2BBD53A7047460023FC4D3492072
-X-Endpoint-Received: by B4 Relay for david@ixit.cz/default with auth_id=355
-X-Original-From: David Heidelberg <david@ixit.cz>
-Reply-To: david@ixit.cz
-Content-Transfer-Encoding: 7bit
+References: <20261111-kuno-dts-memory-unit-addr-v1-1-89e965f2c3ac@oss.qualcomm.com>
+In-Reply-To: <20261111-kuno-dts-memory-unit-addr-v1-1-89e965f2c3ac@oss.qualcomm.com>
+From: Linus Walleij <linusw@kernel.org>
+Date: Wed, 25 Nov 2026 19:13:40 +0100
+X-Gmail-Original-Message-ID: <CAD++jLmnHp-TVDj4-CKqH-020GkmRZmgVx5-u=Uem8c0_NhTBQ@mail.gmail.com>
+X-Gm-Features: Aa3M54qKCffdcCQPk9s4DaSpiTPHhKFZVElFuVJfZUz3prnPo1qEkIVkhJwQfoU
+Message-ID: <CAD++jLmnHp-TVDj4-CKqH-020GkmRZmgVx5-u=Uem8c0_NhTBQ@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: qcom: kuno: Add unit address to memory node
+To: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, Rob Herring <robh@kernel.org>, 
+	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+	linux-arm-kernel@lists.infradead.org, kernel test robot <lkp@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: David Heidelberg <david@ixit.cz>
+On Wed, Nov 11, 2026 at 5:16=E2=80=AFPM Hardeep Sharma
+<hardeep.sharma@oss.qualcomm.com> wrote:
 
-Wire up the Samsung AMB630QY01 AMOLED panel on the Pixel 3 XL and drop
-the MDSS/DISPCC disables that kept simple-framebuffer alive.
+> The /memory node has no unit address. The dtschema root node schema
+> does not allow a bare "memory" node, and dtc warns about the missing
+> unit name with W=3D1:
+>
+>   qcom-kuno.dtsi:89.9-93.4: Warning (unit_address_vs_reg): /memory:
+>     node has a reg or ranges property, but no unit name
+>   qcom-kuno-idp.dtb: / (qcom,kuno-idp): False schema does not allow
+>     {'device_type': ['memory'], 'reg': [[0, 0]]}
+>
+> The bootloader fills in both the base and the size of the memory node,
+> so keep the reg =3D <0x0 0x0> placeholder and name the node memory@0 to
+> match it, as done on other 32-bit Qualcomm SoCs such as apq8064,
+> msm8226 and msm8974.
+>
+> Fixes: 7f6a63bc5fc9 ("ARM: dts: qcom: Add initial device tree for Kuno So=
+C")
+> Reported-by: kernel test robot <lkp@intel.com>
+> Closes: https://lore.kernel.org/r/202611101833.G7LTXoJv-lkp@intel.com/
+> Signed-off-by: Hardeep Sharma <hardeep.sharma@oss.qualcomm.com>
 
-Reviewed-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Signed-off-by: David Heidelberg <david@ixit.cz>
----
- .../boot/dts/qcom/sdm845-google-crosshatch.dts     | 60 +++++++++++++++++++---
- 1 file changed, 52 insertions(+), 8 deletions(-)
+Reviewed-by: Linus Walleij <linusw@kernel.org>
 
-diff --git a/arch/arm64/boot/dts/qcom/sdm845-google-crosshatch.dts b/arch/arm64/boot/dts/qcom/sdm845-google-crosshatch.dts
-index 2a81ca1d00b1b..3b788757b7303 100644
---- a/arch/arm64/boot/dts/qcom/sdm845-google-crosshatch.dts
-+++ b/arch/arm64/boot/dts/qcom/sdm845-google-crosshatch.dts
-@@ -10,27 +10,71 @@ / {
- };
- 
- &battery {
- 	charge-full-design-microamp-hours = <3480000>;
- 	voltage-min-design-microvolt = <3600000>;
- 	voltage-max-design-microvolt = <4400000>;
- };
- 
--&dispcc {
--	/* Disable for now so simple-framebuffer continues working */
--	status = "disabled";
--};
--
- &framebuffer0 {
- 	width = <1440>;
- 	height = <2960>;
- 	stride = <(1440 * 4)>;
- };
- 
--&mdss {
--	/* Disable for now so simple-framebuffer continues working */
--	status = "disabled";
-+&ibb {
-+	regulator-min-microvolt = <4600000>;
-+	regulator-max-microvolt = <6000000>;
-+	regulator-over-current-protection;
-+	regulator-pull-down;
-+	regulator-soft-start;
-+};
-+
-+&lab {
-+	regulator-min-microvolt = <4600000>;
-+	regulator-max-microvolt = <6000000>;
-+	regulator-soft-start;
-+	regulator-pull-down;
-+};
-+
-+&mdss_dsi0 {
-+	vdda-supply = <&vdda_mipi_dsi0_1p2>;
-+
-+	status = "okay";
-+
-+	panel@0 {
-+		compatible = "samsung,s6e3ha8-amb630qy01";
-+		reg = <0>;
-+
-+		vdd3-supply = <&vreg_l14a_1p8>;
-+		vci-supply = <&vreg_l28a_3p0>;
-+		vddpos-supply = <&lab>;
-+		vddneg-supply = <&ibb>;
-+
-+		reset-gpios = <&tlmm 6 GPIO_ACTIVE_LOW>;
-+
-+		pinctrl-0 = <&panel_default>;
-+		pinctrl-names = "default";
-+
-+		port {
-+			panel_in: endpoint {
-+				remote-endpoint = <&mdss_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss_dsi0_out {
-+	data-lanes = <0 1 2 3>;
-+	remote-endpoint = <&panel_in>;
-+	qcom,te-source = "mdp_vsync_e";
-+};
-+
-+&mdss_dsi0_phy {
-+	vdds-supply = <&vdda_mipi_dsi0_pll>;
-+
-+	status = "okay";
- };
- 
- &wifi {
- 	qcom,calibration-variant = "Google_crosshatch";
- };
-
--- 
-2.55.0
-
-
+Yours,
+Linus Walleij
