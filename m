@@ -1,112 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795605839;
-	b=ReANWWvO/gTjFOO/nad8KnyITraHf2NsE7i3Bsts8DIX/xYOD7Zo7OPI6SumXq0lg7rL
-	 qlVPn/2ERgese6T9qsa22a6GEdY/eTJPpQkVfE50od1+O7mPzOsNcCBICiUqgTIPuyoR9
-	 /V6JkxnMPX4B3itFzFHIAZKXcBFZFrSG2oGP8jQRKHem4zLtgK05kf2FmdSlaxmXfaOcm
-	 bhwvtsb0gQMPjbW4LyYQYiv1ryC9R6lwurL06tDZ871S5lSwzyJ9+zrkgRsfSfss37vEH
-	 ekk5Kn4dnbreogxc5R1dIxpj+eKISUKhB0SFCABq0FJLVb2NOuDH5//T7f2CLoxxHXA==
+	t=1795606172;
+	b=2c+2w1pcYTuYkMkZr62ouxJAa5S3BZFNGxjVnYIOIC6mOUsomTNlxRG2oMmq/D9KIlA3
+	 QLBdd0lQOUanIkvCRPViwRL59/J4YBKQA/MKDS3IaOi3/SuBlaCzcfkIRVg5J4A+QYbVx
+	 t361bsrRWRBNIBfkTM1e2S68B8YlGb4Q6ATCTUZ8Hl+GN5/yardImnqr6brOAHmlM61b/
+	 ge0HLVtlTNPjLqk1E6vtLk5j5HfLUmi75fLceMgtsu5qnwmAD/RIRr2x+N+7qziaszOrs
+	 0DYmeSo0RFI/M3ImaqFQUxnHkWBHvXe1MYbnhIIgvQCs+rRfURg33qELbilCtFIw5hw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795605839;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795606172;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
 	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Authority-Analysis:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=ZqyE+XGTWOgC2A3mi7+hrJBzXMkQ44TzEigxTeE2xT8=;
-	b=bxCSgU8zqo/iFm09vD36N73p9KP9HfxqCbnZF3/vBcCM5JHcTXjHdtlyu26a1ZCVkGlt
-	 ovF1TwiH/AI1489pF8Qn1BRKVJmMwTy9Q5ib8HA+rOxEMxRW59B84OOFYN6o3o5NXGnbd
-	 CquvCPUikozccWu9TPVbpblMJrFuUrAH72Qqu50Z/vlmVF2OyUZ1+snJCeUWDpmQ9B4kl
-	 ybSM1L6Ac5LRDD5aZHALZFj6aFTn4iEOTXGT/H/FtrJrEUWlwh01ezyhcKupGS13uq3x8
-	 8EgWipd+/fBzQXgPzEC9xdfN2/sGkoyGniZtdfhx8oL3Wbu0SQXsMHpqYvWbwjG0xOQ==
+	bh=2Uy0XGyjRWeZduI+QemS8fnn6dEoZHmbYbaW4IWMums=;
+	b=GmrSkFDEEscGkKbC3sfE1jsy5LJkFLzPosm0FaVo4ZJLye5OZ+wYZRJZt2Nf4QAlNK6z
+	 TWGOxst69lUuhISDkhdBzsaCK8qQQq6hW5kxSaWammQb/xoLTD9LA1v8DfIiJk72rSwaR
+	 Skt3ghz6lzv5FEyLH6MZFbFE1nQ7SyIdSDQpaaBOjS95eiGgjxjSF6Cij8LqyFLCciq+Q
+	 VO/e5VOGQzQmNPkhFBFhXOAAlEoHx/VilnxTLYWJ7N3T8mtEiZ4vHFAJGybDBgaRII6PT
+	 PGUl1SMygS447LUZRp6fMQBPUyxKEHds2XKo2+EHFq/bPLn7p9N4V+Z4yAFKMHLRN7g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nL4ewuhA;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ia+BShyl;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e6OegtaG;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BubfuO0H;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E807606A32D
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:23:59 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5E807606A32D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 954D0606A326
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:29:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 954D0606A326
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nL4ewuhA;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=ia+BShyl
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mSKt3764057
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:23:58 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=e6OegtaG;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=BubfuO0H
+Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AP9mBc52121024
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:29:30 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	ZqyE+XGTWOgC2A3mi7+hrJBzXMkQ44TzEigxTeE2xT8=; b=nL4ewuhAv9oyScHu
-	e+ClnbT2414Iwn52QoUbnT9u3D32UAd3+XVCe7sMMh3E9BzW+1yWdSu8tiDiLWmv
-	uWG1EbsKKI8BR8XwdHpEXv7Jw5v//8kau8jr070/U8W2A7Y51dGPcg4ZuMVvfpxf
-	j4r0mfzBhizlcq3EVt7ZgupJQxCwmORBLrvEDVBnI0PppaiFLcQgGQ4d6eX3VQN8
-	1hTKMShfesk98FYX0kkpmQt8YEhW/Cx2ormbw6NjFHpGfWRVAy4rgDZRPp/bMiMV
-	/I2HNIkL+EYjujndRxemOMqUajJZrdkWp/CUsYBlctWD6/1IamvhDsurGokb80JQ
-	cFzugg==
-Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com [209.85.215.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vv2rhkw-1
+	2Uy0XGyjRWeZduI+QemS8fnn6dEoZHmbYbaW4IWMums=; b=e6OegtaGInFUPutr
+	xoB686l7E14sFW4/MDMG49y1YmlA1pE/4QYDw7c29MqYp/WNyb15lmmQXBly+F0+
+	jeyr/2c5RHVHe3GQL80Lp4u4PN9y8OFRz9uK3USNRWkxN+emW7FjZulurShPOsMC
+	9T049D1nh3FBmhMdEfOtksuWcDVl7vcb6+vze8l0wWJZ7AX+03UmWDEiIGoM3f0a
+	5kh30NGczVgeffrLsu+REb1t4lzOuXAcaVBw1gTS06mM6yZWAsQMXAYaz+3gnQUA
+	q1SwXHkK9LRyUqj8C+o7t2ONvooxUc3Q1Uaq+nSrJmzKzwj09gr+OBXda9uwMJxs
+	lWjwKw==
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com [209.85.216.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j5vukrk9s-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:23:58 +0000 (GMT)
-Received: by mail-pg1-f200.google.com with SMTP id 41be03b00d2f7-cdea3a64d1bso1364597a12.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:23:58 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 11:29:30 +0000 (GMT)
+Received: by mail-pj1-f69.google.com with SMTP id 98e67ed59e1d1-3b4139b7abcso5258428a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 03:29:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795605837; x=1796210637; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795606168; x=1796210968; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ZqyE+XGTWOgC2A3mi7+hrJBzXMkQ44TzEigxTeE2xT8=;
-        b=ia+BShylIKbIPCrYOM1gtCiA7ht57v6tLSiguVvK21cFPrItLN6NulzPhovkB8RLu0
-         D6PXlgze7CgGYsCyjjxuzAvMgBZAXnjcxtmU57q/Jlo7cO5ElY9QzIxXqn+zbuyTSqUz
-         XLlLGjfmPTrOPTlm7sT4mNUWLCNAPNAbqyaBuFjNjKCKe5UqOa6EFiM9UBod6/CVUXeU
-         ToYMcaa0QDZuC/uJIMkCGH+YAd89XP57mm3ZoaaKh6oGU9tcLUl3a7ZszKkO77Z0KU75
-         1y17DuKnlWfiwwZvZjJv4j6t81VxEwhLJx1HXrasxrjZaaAjtrmymlF0EhypttiZsmdc
-         VA4Q==
+        bh=2Uy0XGyjRWeZduI+QemS8fnn6dEoZHmbYbaW4IWMums=;
+        b=BubfuO0HNLJUom8gNGI0oen/HUXAkl854BZv9U5SHzMb/UrJvL34LOItyFb7u8qGN3
+         xgqMZHkiMbO/n3dwJ2/E0HKipSGclBpMX4Oex6I0ya5rLe6GFlKVgSQkYYZD3y/87j5X
+         YguMvgFI9wuCM0/QuCoPThnf6JfG5ohWgHgoSqB3LDnpt0/RwcVJKQ5PtRIHkj5ETvHf
+         4U+SSmZXP+Mz3QkIhmjChlHwbvIXgDaj7abD9ZHIFezj34/PauE2uxWwop7R4g2C6f9U
+         WMPRxjNqEuG3MBA+H5WrKp4N6hk7MIqsPrdHoDn0jO3/Nl9C6Kbi+2RRdQz2XdYDqoi6
+         VFqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795605837; x=1796210637;
+        d=1e100.net; s=20260707; t=1795606168; x=1796210968;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZqyE+XGTWOgC2A3mi7+hrJBzXMkQ44TzEigxTeE2xT8=;
-        b=aSXEzVv33XcPX2ts7tvAzRytoWujZRdRe8DFwJcD/1vymcpmBieJf6cO6XdrX96/Co
-         HaqJ09cgNusuXPgCcUqfKBbPNfeNs0aBaVKhmZKS5yj7tbmQRJxaAyZLJwHTzOybGaHs
-         Tdnjqtt/ViQhM9KwwxQaLXuG9qRp8hhOYu46tdy4COFeTPIQ6ydtlORKZYq7HHEGadnJ
-         mhYcX9xOHvUPYAfaUanXnAlV6ss582W1+0KJlvqd+rqJvg8KK0v2TR+encRkt60w8u6W
-         ATqT+9BAwuSyj0OrusXTpapcwdqYqYt6CguAuIxwQEdbq7VWruKfZh6wmlJrYp2CWgL8
-         LhTQ==
-X-Forwarded-Encrypted: i=1; AL+hErFFOzvEqBOEpHDMjPBTjgE77H085128/NgRq8D8dHyLMPrHb0AJT1zcJlCUHs2FiGg3sSbHyrPrditA2HVE@vger.kernel.org
-X-Gm-Message-State: APuU4Z/2amK1Kb+PazwGVQl5ZYZcXy8zhEFJuDVPG+DrxwhQg8X6udpR
-	XKlaGN0zJuAsEcIYEoG7nwwKXKHBdCQJuniNidDTT+b+ui9fGsWQ2a8ytsSYkF7Erljylr+DHDh
-	vTfFReyWOazAbHDMEMhBpw+r2HQi28kCI5EbQqm4hff5ETRAsIlCJ50rABF8VT3ILf7Jr
-X-Gm-Gg: AZFdTZejzeDi7VZUGJsv7iRoDj3mBziIz4ZyqWCsAo4qBWYqSsCiFg3Azf3FzmpzA/i
-	9l786blr6yDEoBF8uqARpoJJ73KlI94PYYe6OnkxjdLL1e5r7o1OfCh4sH3NDisasa6mXOuz8HX
-	P6D9SZO2sjP+5Q3q4be3zYsnwHlb41xhJOgZYvy7vKmf3tOA0QYKqgmRgMi9DfuxO/D05Xaq0uw
-	+jPz3NpwpYUNcTk0M81FOGAyboPu9YH1ko10vwSRdHSZuRAyhLwRamrm78igmTE3qEo814Mp16k
-	A1wGi2boJqwcqfpUNa0OugadqLnqgqKWXfds9EMHnF2v+WM6VnXYb8NR2ca8sg3hdWbRlWSJ6t1
-	md+75b3cVsr0GGqXpYp6feOE9BWUsCQBz23FkLC0+CKJe+1FZWkqN9se2uq8vurTRWQa7loqVk4
-	DNwRX6yo/5w7ElYTZOpPvxDxe71jFav5neBTUw40EnfnMSemLNAWJc8ajiT5SsH6e5xg==
-X-Received: by 2002:a17:90b:388c:b0:3ac:e6a:1b2b with SMTP id 98e67ed59e1d1-3b41c5585femr17326635a91.0.1795605837186;
-        Wed, 25 Nov 2026 03:23:57 -0800 (PST)
-X-Received: by 2002:a17:90b:388c:b0:3ac:e6a:1b2b with SMTP id 98e67ed59e1d1-3b41c5585femr17326617a91.0.1795605836738;
-        Wed, 25 Nov 2026 03:23:56 -0800 (PST)
+        bh=2Uy0XGyjRWeZduI+QemS8fnn6dEoZHmbYbaW4IWMums=;
+        b=qQeXUpGpIcGC/CBgwV+YWRauuwGplq2PvKKIr/aT7hxTZHXci31/0s3Gq9dVyeuuzW
+         +RlnpeaA3JZZ88O/ENVShd0/iEn8mtsP4++HNySZX0nH76t/Zqo3a0W7G7aXg6kR8uwB
+         ycpvzYCWo1tzx2zKDvho0YzENkyiTZNcuXKfDwe0McCEtsPuX90je/SFjzN/RczWdBrd
+         KVTe4Fj/sfRWNNuOPk1LBjK+7iOhRGG29uzNYtQAHxNMxTLO3Rg09n7XkChX66vM6A3h
+         nDPBykVxldIVPPirmgOjw7Y/p1AwMBluFOhe1EwGI1Ef0baHFeDRennwGWo4ORssQcRC
+         BcYQ==
+X-Forwarded-Encrypted: i=1; AL+hErFeZgrtJXF+BLt3uJcIiNclKkMI8/JyCzRQYb3EuOU1bIX1a69+vyIVGnv4wKH5DDWqM7uKebWqCTP/DT5K@vger.kernel.org
+X-Gm-Message-State: APuU4Z9mGsH8SIh9dzTbXxDYw9p2LcPkQRUHYXg/qKLAX2kF1BZUobgm
+	bx2Pp1hBE2UjUOUQT8Z7mbcCHu12pip0xOgLq6/KQFrCqBrxtDIqshfkJXyBjW3b9aXwDzoKocg
+	56JLb7dbtBl0ivXdpsBOCh2G86IThPimLCfXxCE4WB00snYMq3Fr/FsGlwLl5DU2faSUF
+X-Gm-Gg: AZFdTZem2UQ+zxVZT9rvRIlshisF3siT9yiT/DnzaxVb2SiuSX8tlJS42ruX5gG6ENx
+	nDLLLDa4MKQxlIfgkkEn5x00EFmvhuDQD2oYwzhh4nVK+y3Az1wgD4GJLFdi9le13yCQ7sX66RQ
+	nBc5l6O4mR3gWw6j82VzgHW//R+8cCrIBFQmZMFBLifIc1WbCdlFEpOA55wCYO2REMMyVgE1cTS
+	WS+yRAr9zW1cB+5C0ay6vPBRaPiXLdFcjXIzkDHEP7D46hXUECAtrhwAtjjpmSMPm8DeggthKEh
+	Dnbg0v7XapvtcrwMTwNvQLRfmimRGupG7vtlvTs5qosD3igfQ6MorA209Q2K715TUEkDf3FBell
+	bId0KsCfDI/SVrbiU9WDOVUrwrRJuWBVfz7Bx5jM/oQ8PYZsin1kgT1zQvlsTAHCJ4WuQ9XlXgb
+	PqX0L70hYcTGUMFQCYk73k7etifX6tO7gBTj+zF3Vke70W2LXLybXBPHkE2JNxVqh4Wg==
+X-Received: by 2002:a17:90a:e70c:b0:3b4:22d:e078 with SMTP id 98e67ed59e1d1-3b41c7c238fmr16206690a91.1.1795606168278;
+        Wed, 25 Nov 2026 03:29:28 -0800 (PST)
+X-Received: by 2002:a17:90a:e70c:b0:3b4:22d:e078 with SMTP id 98e67ed59e1d1-3b41c7c238fmr16206670a91.1.1795606167641;
+        Wed, 25 Nov 2026 03:29:27 -0800 (PST)
 Received: from [10.79.116.36] (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com. [103.229.18.19])
-        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b41ad0a34asm26985027a91.3.2026.11.25.03.23.52
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b41adcafe0sm29497670a91.16.2026.11.25.03.29.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 03:23:56 -0800 (PST)
-Message-ID: <6493f02a-5880-4245-86f4-1e1bf00da017@oss.qualcomm.com>
-Date: Wed, 25 Nov 2026 16:53:50 +0530
+        Wed, 25 Nov 2026 03:29:27 -0800 (PST)
+Message-ID: <578f89a4-e905-453d-9ba8-f885b17f70cb@oss.qualcomm.com>
+Date: Wed, 25 Nov 2026 16:59:21 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,11 +117,12 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] dt-bindings: pinctrl: qcom: Add qcom,remote-owned for
- ownership update
-To: Linus Walleij <linusw@kernel.org>, Krzysztof Kozlowski <krzk@kernel.org>
-Cc: Bartosz Golaszewski <brgl@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>, Rob Herring <robh@kernel.org>,
+Subject: Re: [PATCH 2/2] pinctrl: qcom: Add qcom,remote-owned pin
+ configuration support
+To: Bartosz Golaszewski <brgl@kernel.org>
+Cc: Bjorn Andersson <andersson@kernel.org>, Linus Walleij
+ <linusw@kernel.org>,
+        Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley
  <conor+dt@kernel.org>,
@@ -130,81 +131,187 @@ Cc: Bartosz Golaszewski <brgl@kernel.org>,
         linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <20261106-egpio_fix-v1-0-569d220a4748@oss.qualcomm.com>
- <20261106-egpio_fix-v1-1-569d220a4748@oss.qualcomm.com>
- <20261110-modest-significant-ostrich-8dd408@quoll>
- <CAD++jLkpFWWSV55LkhAa4YfckDvzB6PrHWugX0Mth=cQRYkMDg@mail.gmail.com>
+ <20261106-egpio_fix-v1-2-569d220a4748@oss.qualcomm.com>
+ <m3znhsvgj33ipd655d3nzjnx5q74kx4cn3jwoeuarov7j6mdhx@cj6qrl65ps2n>
 Content-Language: en-US
 From: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
-In-Reply-To: <CAD++jLkpFWWSV55LkhAa4YfckDvzB6PrHWugX0Mth=cQRYkMDg@mail.gmail.com>
+In-Reply-To: <m3znhsvgj33ipd655d3nzjnx5q74kx4cn3jwoeuarov7j6mdhx@cj6qrl65ps2n>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0NSBTYWx0ZWRfX0ZreVOpl4b6X
- pxMz+RfYugtj2RG/uET+HkE8pKDElJlgI6dW2aJFFr6L53/prTXc4YVSgcjfSoNiNePGCL9Rq17
- eMdKjxySLZoDuEhYVKqd4Qdr71PhQak=
-X-Proofpoint-GUID: jtMf6PHWVNP2N-9El3zZOtv75IXjrROU
-X-Proofpoint-ORIG-GUID: jtMf6PHWVNP2N-9El3zZOtv75IXjrROU
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0NSBTYWx0ZWRfX7kZy/h1lo6/M
- 7ZtiRagyr0tVRt3RXGeIyHSwV/9U8p5XmRobYCaSwJxf/NC7m2N0SaIPWbJjJAUsAlO2SJruLXA
- mAEqF6HnU5yPnki4i3GWfnXEfMHd+Eum/xm/H5HFZxSXwJiHJAK2MM6WNNjTJZ/x1L73lwgMlRu
- XZN3CfVq2TPs9GaIxAVz1HdJcyecMY8F3Jo//O3G3OLP4wZL+WZkiAd09772DSe3W55zjvRXjTa
- AoiYvSmnkgPnypI+VLeszD2Wdl9Nmkd+c98brOdyzjTl0ivin7JEt7DoiY6MKHYJB7iZCK6Ehgt
- jZfcIZ+ESdNCp6i/dZOQbb18OxIRYwJE0ayCcMoQl8B6F5ueVtYOq5W9gvArtxUcVMbaNSTkjvZ
- Yc5OSm760+V63HweWmzoLXUiKtMwPzHVCrCND/1Uj52w+9zjyIASiNXE7ChDYipWeXZhbV++nop
- E5zvbIT0/cdR6dJmVpQ==
-X-Authority-Analysis: v=2.4 cv=A/z5rKWG c=1 sm=1 tr=0 ts=6b06c54e cx=c_pps
- a=oF/VQ+ItUULfLr/lQ2/icg==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
+Content-Transfer-Encoding: 7bit
+X-Authority-Analysis: v=2.4 cv=KfVHIgYD c=1 sm=1 tr=0 ts=6b06c69a cx=c_pps
+ a=vVfyC5vLCtgYJKYeQD43oA==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=oGwIKRxBBWau_mrDdCwA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
- a=3WC7DwWrALyhR5TkjVHa:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
+ a=EUspDBNiAAAA:8 a=PjqW6EFSHK4lKDxzUDkA:9 a=QEXdDO2ut3YA:10 a=O8hF6Hzn-FEA:10
+ a=rl5im9kqc5Lf4LNbBjHf:22
+X-Proofpoint-ORIG-GUID: NSO6DmNw3CuKT8Ign_zO8HgR6Z3siq9x
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI1MDA0NSBTYWx0ZWRfXxDWCRBZNkXLo
+ WANa9J2i6CYEPoYND/w0obopiyr8OtEuRVDvPl+P4kI317YXxMdLOK73oSNV65Unq8TiYvHJJrp
+ hxnpY7IP9SQ4bPYQ/gRfWWMxr4a2ecU=
+X-Proofpoint-GUID: NSO6DmNw3CuKT8Ign_zO8HgR6Z3siq9x
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI1MDA0NSBTYWx0ZWRfX3YWVAKlfS5Xf
+ ASUdWdU+yyOJj+2iXUEVxQ5jKWOkSy+0zcJGFyVEUKSLNz4VRTaHQeAxJH7CaLaovzDXR7SKriZ
+ 7aqBg6muN3QxoUFWh2CV2CkExqPVrofp0pX8C9m46ItQxUofsiAIiikPDh/SY9olIwA5uha+bya
+ oT4atThy6ZhMFqov+al8m52IMj0XHOU6yUqn/3K5D5mU2XuSOdgPZHD4krn5N3CP/Z0NyJZ9GMy
+ ZvHRjnN2kK2lI7M80mqsTsXvv99NL4m3L41TjwrlsJ++8pZ9InkrAcx98B+/BDMvShsrkRkQNWL
+ dtmPkQg/Yi6cu8j1RLXAClvjYmdP8Nq/CswKqu/MXLIlLH+5Hz8eLihlH6xtIrR7wGovnxgHngt
+ Ec0+VM18xXfbmuSHvYsbnonauZbhrmc4WGvJuxoIwBORTy0fvgm+394xdYU1SM8gnRxaqy2f1IE
+ vqBoVb9CBZonFaw2m5Q==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-25_03,2026-11-23_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 lowpriorityscore=0 priorityscore=1501 impostorscore=0
- suspectscore=0 bulkscore=0 adultscore=0 malwarescore=0 phishscore=0
- spamscore=0 classifier=typeunknown authscore=0 authtc= authcc= route=outbound
- adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611250045
+ adultscore=0 suspectscore=0 priorityscore=1501 clxscore=1015 bulkscore=0
+ impostorscore=0 lowpriorityscore=0 malwarescore=0 phishscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611250045
 
-On 11/22/2026 2:16 AM, Linus Walleij wrote:
-> On Tue, Nov 10, 2026 at 2:28 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
->> On Fri, Nov 06, 2026 at 01:29:41PM +0530, Pankaj Patil wrote:
-> 
->>> Add "qcom,remote-owned" boolean flag for egpio capable pins since they can
->>> be owned by remote island io independently of the selected mux function
->>> even if function is non-egpio.
->>>
->>> Presently egpio is treated as a mux function level decision where as
->>> hardware programming guide(hpg) specifies it as pin conf level decision
->>> i.e setting egpio bit is independent of selected mux function, the
->>> driver/apps claims the ownership of the pin if it's egpio capable in
->>> case of mux function being specified as anything other than egpio.
+On 11/10/2026 4:57 PM, Bartosz Golaszewski wrote:
+> On Fri, Nov 06, 2026 at 01:29:42PM +0530, Pankaj Patil wrote:
+>> The eGPIO support added was incomplete since pin ownership is independent
+>> of the selected mux function: the eGPIO present bit only describes
+>> whether a pin is capable of being owned remotely, and the enable bit
+>> selects the owner - 1 sets the owner as APPS and 0 sets the owner as
+>> remote io. At present it's a mux level decision by setting the function
+>> as "egpio", APPS releases the ownership to remote io and in process
+>> cannot use it for any other function.
 >>
->> I don't understand this. If the pin is not owned by Linux, then simply
->> do not list it. What is the point of listing a pin configuration which
->> should be skipped?
+>> Add a driver specific pinconf parameter enabling the "qcom,remote-owned"
+>> dt property support. pinconf-generic falls back to the default value of
+>> 1 whenever the property carries no value, and an absent property is
+>> skipped entirely. Since pinconf-generic emits the mux mapping ahead of
+>> the config mapping, this is applied after msm_pinmux_set_mux() has
+>> set the pin ownership, giving the intended result for a state that
+>> specifies both a function and remote-owned.
+>>
+>> The hardware programming guide(hpg) explicitly mentions that the egpio
+>> enable bit can be set independently of whatever the function select bits
+>> are set to on targets which require shared ownership while the APPS
+>> continues to use it as normal mux function.
+>>
+>> msm_gpio_dbg_show_one() printed "egpio" and returned early whenever the
+>> enable bit was clear, which was sufficient while that state could only be
+>> reached by muxing to the egpio function. Ownership is no longer tied to
+>> the mux, so report it as a suffix on the regular line and keep the
+>> direction, value, mux, drive strength and bias visible. Pins muxed to the
+>> egpio function reach the same register state and so print the full line
+>> too; their mux field reflects the previously selected function.
+>>
+>> Fixes: bebc49c1e5f6 ("pinctrl: qcom: Add egpio feature support")
+>> Signed-off-by: Pankaj Patil <pankaj.patil@oss.qualcomm.com>
+>> ---
+>>  drivers/pinctrl/qcom/pinctrl-msm.c | 81 ++++++++++++++++++++++++++++++++++----
+>>  1 file changed, 73 insertions(+), 8 deletions(-)
+>>
+>> diff --git a/drivers/pinctrl/qcom/pinctrl-msm.c b/drivers/pinctrl/qcom/pinctrl-msm.c
+>> index 32aa7b919e24..4d96260f9909 100644
+>> --- a/drivers/pinctrl/qcom/pinctrl-msm.c
+>> +++ b/drivers/pinctrl/qcom/pinctrl-msm.c
+>> @@ -48,6 +48,31 @@ struct msm_pin_state {
+>>  	bool saved;
+>>  };
+>>  
+>> +/*
+>> + * Driver specific pinconf parameter to hand a pin over to its eGPIO owner
+>> + * without muxing the TLMM away to the virtual eGPIO function. The eGPIO
+>> + * present bit only describes whether a pin is capable of being owned
+>> + * remotely; ownership itself is independent of the selected mux function,
+>> + * so a pin can keep its normal function selected while being owned by the
+>> + * remote subsystem.
+>> + *
+>> + * The "remote-owned" property is a boolean flag: its mere presence releases
+>> + * the pin to the remote owner. The default value below is what makes a
+>> + * valueless property come out as "release", as pinconf-generic falls back to
+>> + * it whenever the property carries no value.
+>> + */
+>> +#define PIN_CONFIG_REMOTE_OWNED	(PIN_CONFIG_END + 1)
+>> +
+>> +static const struct pinconf_generic_params msm_gpio_bindings[] = {
+>> +	{ "qcom,remote-owned", PIN_CONFIG_REMOTE_OWNED, 1 },
+>> +};
+>> +
+>> +#ifdef CONFIG_DEBUG_FS
+>> +static const struct pin_config_item msm_conf_items[] = {
+>> +	PCONFDUMP(PIN_CONFIG_REMOTE_OWNED, "qcom,remote-owned", NULL, false),
+>> +};
+>> +#endif
+>> +
+>>  /**
+>>   * struct msm_pinctrl - state for a pinctrl-msm device
+>>   * @dev:            device handle.
+>> @@ -328,6 +353,10 @@ static int msm_config_reg(struct msm_pinctrl *pctrl,
+>>  		*bit = g->oe_bit;
+>>  		*mask = 1;
+>>  		break;
+>> +	case PIN_CONFIG_REMOTE_OWNED:
+>> +		*bit = g->egpio_enable;
+>> +		*mask = 1;
+>> +		break;
+>>  	default:
+>>  		return -ENOTSUPP;
+>>  	}
+>> @@ -424,6 +453,17 @@ static int msm_config_group_get(struct pinctrl_dev *pctldev,
+>>  		if (!arg)
+>>  			return -EINVAL;
+>>  		break;
+>> +	case PIN_CONFIG_REMOTE_OWNED:
+>> +		/* Pin is not eGPIO capable */
+>> +		if (!pctrl->soc->egpio_func || !(val & BIT(g->egpio_present)))
+>> +			return -ENOTSUPP;
+>> +
+>> +		/* The enable bit is cleared when the remote owns the pin */
+>> +		if (arg)
+>> +			return -EINVAL;
+>> +
+>> +		arg = 1;
+>> +		break;
+>>  	default:
+>>  		return -ENOTSUPP;
+>>  	}
+>> @@ -536,6 +576,29 @@ static int msm_config_group_set(struct pinctrl_dev *pctldev,
+>>  		case PIN_CONFIG_OUTPUT_ENABLE:
+>>  			arg = !!arg;
+>>  			break;
+>> +		case PIN_CONFIG_REMOTE_OWNED:
+>> +			if (!pctrl->soc->egpio_func)
+>> +				return -ENOTSUPP;
+>> +
+>> +			/*
+>> +			 * Ownership may only be handed over on eGPIO capable
+>> +			 * pins and is released by clearing the enable bit, so
+>> +			 * this is applied here rather than through the generic
+>> +			 * read-modify-write below.
+>> +			 */
+>> +			raw_spin_lock_irqsave(&pctrl->lock, flags);
+>> +			val = msm_readl_ctl(pctrl, g);
+>> +			if (!(val & BIT(g->egpio_present))) {
+>> +				raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+>> +				dev_err(pctrl->dev, "%s is not eGPIO capable\n",
+>> +					g->grp.name);
+>> +				return -ENOTSUPP;
+>> +			}
+>> +
+>> +			val &= ~BIT(g->egpio_enable);
+>> +			msm_writel_ctl(val, pctrl, g);
+>> +			raw_spin_unlock_irqrestore(&pctrl->lock, flags);
+>> +			continue;
+>>  		default:
+>>  			dev_err(pctrl->dev, "Unsupported config parameter: %x\n",
+>>  				param);
 > 
-> We have instances of device trees which are maintained in Linux
-> being used by e.g. secure world, U-Boot...
-> So something else is using it perhaps?
+> Sashiko didn't spot it but eGPIO functions are now defined as
+> MSM_GPIO_PIN_FUNCTION() so pins configured as eGPIO can be used via GPIOLIB.
 > 
-> But I don't think the device tree should decide system partitioning
-> like that. I think the boot loader should set gpio-reserved-ranges = ...
-> before passing the devicetree to Linux instead, then pass
-> other reserved ranges to other operating systems in the
-> same physical system etc.
+> When you call:
+>   gpiod_get()
+>     msm_pinmux_request_gpio()
+>       msm_pinmux_set_mux()
 > 
-> Yours,
-> Linus Walleij
+> You'll end up clamining the pin again by setting the egpio_enable bit
+> unconditionally.
+> 
+> Bart
 
-It's being used by a downstream driver which cannot update the pin
-muxing in any way and starts accessing the gpio's assuming the
-configuration to be as expected and the property is set in the dt node
-in overlay. More dt nodes will start using this property as the
-upstreaming of those drivers begins.
-
-TLMM is a reconfigurable block and the bootloader is common across
-multiple soc's hence it can't be responsible for platform dependent
-peripherals enabled in kernel device tree.
+Understood,
+I'll post a v2 to handle this in msm_pinmux_set_mux()
 
