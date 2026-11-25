@@ -1,115 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=195.135.223.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795615056;
-	b=dB+gCtdVj5cluyvRAKJMcpufSpk3lWAZ3hSpBgVQ2ccsREeP5jjhWV28YxT9dP1Uh/J3
-	 baA6uRfyX0Z6U4KL8oO3/iqupbOHj99xXVji1TZIDNGVxpE9wsho7/fBArWIHnanU4rBa
-	 bgMXVYPjpLP7k0GbcBQ+p9ZuB9oPVaVRXtEUzQ6ZXWjzHfedQwjRUIbuvvbEJV/CYS6hX
-	 XurAVmgq9xdjCGqBE+k3PxZU30LgRC2GXQxlPRTpq/5DvGyodFP82Fze4W4ns/ZWzaSMt
-	 4w+RHCUTTYLagrdPh+YP0IvnrlvqCPKCD75ZXJbAJ2eFNj2NZ8c8jOIm4IpuvlM5Xkw==
+	t=1795616251;
+	b=44HL81YOINzoYh0bW3TVOd49w1VgIqMy3zuzAn5JhNO9nANn7rmdtxu+Z71idNbc3VZq
+	 p/sxqIAnQh8rSNbnSZz6a63xyUmrcu0r55sSJJAvmDsKNlZ5DiVaJbuxg8cH58H0vz1mA
+	 TUzm3QaVLjtZdOVFwxF0CI/JKSrJl1BKOt/5x/1b/jq6Sp3ysPBPfYPMvx2qFDwNF9yd7
+	 fZUFI/w3ioFUEUDPwJQfFD/DgIv8wdDiHfF+/V3xt9vn8Zh/P6HkCEuCv4HBW4nCPfY+G
+	 QYmTAlJzl7bMm+1aBi4CjvAW39gXOBDYyYVvniMdHbQwMYqGN9J4bWzyQcp0QLWT6Aw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795615056;
-	h=DMARC-Filter:Received:DKIM-Signature:DKIM-Signature:DKIM-Signature:
-	 DKIM-Signature:Received:Received:Date:Message-ID:From:To:Cc:Subject:
-	 In-Reply-To:References:User-Agent:MIME-Version:Content-Type:
-	 X-Rspamd-Queue-Id:X-Spam-Level:X-Rspamd-Server:X-Rspamd-Action:
-	 X-Spam-Flag:X-Spamd-Result:X-Spam-Score;
-	bh=zuzDYFKf9GTIu+Jq28BlG9gDZ12amg0wuYiaR7H6aHw=;
-	b=VO4OBH3+icerXf7Vp9UPOEPEFSuK2tUANDtYdiCA08jw8TM/j9+Xv+G5McS8uI1YVDAS
-	 fZSArgw52ZF3sPPDrf/w7neqMr66rf2Z7lyB+A/8JjKJycmcXbiv3m6fT+UB1K97rQVqw
-	 sPuzsLyZaLA3aq8KN+If7xyQwfjbiL5bOLq+jK/3adTCuucCBRoBlrpNhgkja3fjrb2sS
-	 zlMR1KMHs4VMxClafISQLwhL4VcpHjLWv5onBlwTM0QKE4rQHenpG4Fr7njPn2qaTaBkM
-	 qe3nYRQoYkyuMixmZig0yJbr+9hWCyST94Da2dTnWBw3sUwG7J/58xUF76nuMBm13gw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795616251;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
+	 MIME-Version:User-Agent:Subject:From:To:Cc:References:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=aAjT/juoIc9zz5suBwAKIoZ37zYZ6TKZoBm98/nn904=;
+	b=AhTu190TEn5YyJMP2e0hI+L/yHPsKzTMjfVi5WktSfWEk53/6eCjshsdSFg4EUJJhGlw
+	 bV2TYTSnzB7SMTv9n1ZVjsMocnwJBsyfq+vd46aBVhCmzZ7qArz4c5da5LAdiFrijk8MY
+	 D5KrDz5iMQrYSvSYWrX3ZJgwQL0KcpNi7NltugRDfKQSbV3rfZY8CsXlEQpPogkvx0A2I
+	 qF6ThTVPSZ8gMNxmz/l0lBhp6slYitjW3sDXf8p3wi8QL9myMJ4G1Slg0a7Kv1uUdsbOq
+	 00WQ1E58jEAWh/l3nFdjo/NOw/gXd++HxcceZ/dsm/scrqmhjTS6zxbV1PuTdTAle5w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=suse.de;
-	spf=pass smtp.mailfrom=suse.de;
-	dkim=pass header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ap5iIVEd;
-	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=SurMUcu+;
-	dkim=pass header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ap5iIVEd;
-	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=SurMUcu+;
-	arc=none smtp.remote-ip=195.135.223.131
-Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=A1uGbcBK;
+	arc=none smtp.remote-ip=209.85.167.50
+Received: from mail-lf1-f50.google.com (mail-lf1-f50.google.com [209.85.167.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2EFD4606A32A;
-	Wed, 25 Nov 2026 13:57:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2EFD4606A32A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=suse.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 30FD3606A31E
+	for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 14:17:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 30FD3606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ap5iIVEd;
-	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=SurMUcu+;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=ap5iIVEd;
-	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=SurMUcu+
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org [IPv6:2a07:de40:b281:104:10:150:64:97])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by smtp-out2.suse.de (Postfix) with ESMTPS id 23B231F7E1;
-	Wed, 25 Nov 2026 13:57:34 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1795615054; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zuzDYFKf9GTIu+Jq28BlG9gDZ12amg0wuYiaR7H6aHw=;
-	b=ap5iIVEdiDAMNhzMTQu9HBE2DmnJVIPXMbXn1PAN3RLjMZk9+O2Q7Mc3GG4WRJKZcXzmyN
-	aNuweWdIryBfOgZdk0HSOOCzRsYC5QLxUSkf9KsiD8Hxi7GttH/JmN18Rm+Jk9Df7rZteD
-	GobK7cZZvKyt5Mbfj8edzRLx2VtDZBc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1795615054;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zuzDYFKf9GTIu+Jq28BlG9gDZ12amg0wuYiaR7H6aHw=;
-	b=SurMUcu+ekfKaes9hMRi5JThOesStDzwzqeK8gI63539SAUTWAdn5+wLMhncP1Bz3kjcS8
-	i+D1zwBRuJUcwzCg==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=ap5iIVEd;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=SurMUcu+
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1795615054; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zuzDYFKf9GTIu+Jq28BlG9gDZ12amg0wuYiaR7H6aHw=;
-	b=ap5iIVEdiDAMNhzMTQu9HBE2DmnJVIPXMbXn1PAN3RLjMZk9+O2Q7Mc3GG4WRJKZcXzmyN
-	aNuweWdIryBfOgZdk0HSOOCzRsYC5QLxUSkf9KsiD8Hxi7GttH/JmN18Rm+Jk9Df7rZteD
-	GobK7cZZvKyt5Mbfj8edzRLx2VtDZBc=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1795615054;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references;
-	bh=zuzDYFKf9GTIu+Jq28BlG9gDZ12amg0wuYiaR7H6aHw=;
-	b=SurMUcu+ekfKaes9hMRi5JThOesStDzwzqeK8gI63539SAUTWAdn5+wLMhncP1Bz3kjcS8
-	i+D1zwBRuJUcwzCg==
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
-	(No client certificate requested)
-	by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id B41AE1339F;
-	Wed, 25 Nov 2026 13:57:33 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
-	by imap1.dmz-prg2.suse.org with ESMTPSA
-	id 0HseJE3pBmstRAAAD6G6ig
-	(envelope-from <tiwai@suse.de>); Wed, 25 Nov 2026 13:57:33 +0000
-Date: Wed, 25 Nov 2026 14:57:33 +0100
-Message-ID: <87qzg96mk2.wl-tiwai@suse.de>
-From: Takashi Iwai <tiwai@suse.de>
-To: Abel Vesa <abel.vesa@oss.qualcomm.com>
-Cc: Srinivas Kandagatla <srini@kernel.org>,
-	Liam Girdwood <lgirdwood@gmail.com>,
-	Mark Brown <broonie@kernel.org>,
-	Jaroslav Kysela <perex@perex.cz>,
-	Takashi Iwai <tiwai@suse.com>,
-	Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
-	linux-sound@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 2/4] ALSA: pcm: Report writable chmap controls as variable
-In-Reply-To: <20261124-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v4-2-1197ac8eacd2@oss.qualcomm.com>
-References: <20261124-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v4-0-1197ac8eacd2@oss.qualcomm.com>
-	<20261124-b4-sound-qcom-x1e80100-allow-ucm-channel-map-v4-2-1197ac8eacd2@oss.qualcomm.com>
-User-Agent: Wanderlust/2.15.9 (Almost Unreal) Emacs/30.2 Mule/6.0
+	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=A1uGbcBK
+Received: by mail-lf1-f50.google.com with SMTP id 2adb3069b0e04-5c14c0503dfso521897e87.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 06:17:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1795616249; x=1796221049; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:references:cc:to
+         :from:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=aAjT/juoIc9zz5suBwAKIoZ37zYZ6TKZoBm98/nn904=;
+        b=A1uGbcBKfncw0Tc0tLr4lyu6d9hbYldzQ35IkDT/oie+1W9Oj7OT/fRppeExQukyJX
+         i6DBLiUHi782agsruQuGjA0zcuVTluaD4d95YNsXDOIY62phyVNZIZzGpg82u5r9TBTL
+         KP5Evba48Ci3NeR5K4gC5Uo3yVTh53n/yPMCAOudo/k3OR2XuCO5snmihk21L2FljI41
+         0267N09LyKKKG7mcN2RHMuSjHGZu2U6xwNZnP9qKjd0uVbBnDo/sDu5pII8SHH9DCC2j
+         WMIS/qGAl0H+vQPvMGsMHjv4INCcwDqN1xDPefrteQIKQutbbRcoOa3ky4Wz8GjXsAph
+         mzBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795616249; x=1796221049;
+        h=content-transfer-encoding:content-type:in-reply-to:references:cc:to
+         :from:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=aAjT/juoIc9zz5suBwAKIoZ37zYZ6TKZoBm98/nn904=;
+        b=k8ZDNOw5YlYayrj/UDx6UZOc1nBJwFhWv7sIlxOU49wyGApXk7HtSryJujxXOvP564
+         rPGffHuSSeNKbKP9MR3kVa9E/qrpbac4rTxhzPosHts/bxGOPFmjTC82fT6SOjdZHkpt
+         PhjCgCg1EAYfB9qnJ3MlsjbHn/mzIO499aKWhXouFWnlMT/EbftuCU6H4L/NhztvRY1n
+         99ZOIJmT5HgEsjk6DE26dS5MOz4f9/U4tOXUL8MNp7N6Qnmz3Zbu99HQ8M1vqGgIE8zx
+         YxmpipXQu45lRCEX8DxE3pwSYOalSGD2PoNmWqhV7t6QRtLFKegF5cuioewVoD8VTWDy
+         Qw1w==
+X-Gm-Message-State: APuU4Z+QojZkpJFBN4Clv+/4KJVngpMEuQnsRWgEcTa7QHhpzKDUJQMm
+	WZSAal0eIdTDe2briFluFxvhNRiVaM/EXjhgHXjNEltjN3AyhoIXQE7PBfM0w+KREb8=
+X-Gm-Gg: AZFdTZeLNNMS4pUAANFYN5ux+X2TGSr2HW7zTcAOYZbYjG0EiXSe7S4sPR+w3g9rTBP
+	kW1M9br+t3utwgfk7O8V4vrZps4/BxnFLK41FD/mmDPZmxBiPR/hmGOjKYs7xPGr9SDyhF3/bcP
+	A+j7Ub8iT5hcHt7Zp4F+wih1v27Ywo/wtkoGHAXs3KeEJD7WoAnk+k7J3SbBBnE33MeoVw9Zrkj
+	UpM1eVz8vgVLDkHeafZy8QeIL6ch9v83yahVF4khYCDIHx+V8kgNLsCPABGa785ELwGlm5kcUGD
+	sr/DE0F7n3PSMzvyeAsku2+jf6VEksy/NXTdg2yjyuGEaXAv4nXjlhTtBKCy6i7fGBNNjXk3DPG
+	maDD+doWssOGAnJ4gT78jC4RDJ/FtmJflMGQuK7MLljbNof5X+gD0hcRkrvnevAPAE/gtZiAQQF
+	Do3FDCBUpdGvzpxntDBDquwIzv21uIto9TZkmuKDZ9JVc/e4JTkCzqMjQO6MotNW8n7j4jCrEpw
+	KRC3sRd/a+wPZ06dCMoe6IKJUpovU3Kw5lkv5jN0EuUG5WmaijgDY5ZGgZp7WUeRJWvxNjI5SmY
+	2ikFIgV3idGAxnsYOY5zu/IhXWOifSYoZ6x+Y8qpKlCZXdcFMyN7Df/8cbO1OGkZdZVIN6eE+zP
+	4YaS0sTw=
+X-Received: by 2002:a05:6512:6c3:b0:5c1:4a47:b86b with SMTP id 2adb3069b0e04-5c1bc785b7amr6120129e87.3.1795616249240;
+        Wed, 25 Nov 2026 06:17:29 -0800 (PST)
+Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bcff993csm4633339e87.23.2026.11.25.06.17.27
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Wed, 25 Nov 2026 06:17:28 -0800 (PST)
+Message-ID: <a1b367f1-a65b-437c-a9b7-92b29750597b@linaro.org>
+Date: Wed, 25 Nov 2026 16:17:27 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,58 +89,73 @@ List-Subscribe: <mailto:linux-arm-msm+subscribe@vger.kernel.org>
 List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
-MIME-Version: 1.0 (generated by SEMI-EPG 1.14.7 - "Harue")
-Content-Type: text/plain; charset=US-ASCII
-X-Rspamd-Queue-Id: 23B231F7E1
-X-Spam-Level: 
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spam-Flag: NO
-X-Spamd-Result: default: False [-12.51 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	TO_DN_SOME(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[kernel.org,gmail.com,perex.cz,suse.com,oss.qualcomm.com,vger.kernel.org];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	DKIM_TRACE(0.00)[suse.de:+];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,qualcomm.com:email,suse.de:dkim,suse.de:email]
-X-Spam-Score: -12.51
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/3] media: qcom: camss: Add Glymur compatible
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
+ Bryan O'Donoghue <bod@kernel.org>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, Vinod Koul <vkoul@kernel.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Manivannan Sadhasivam <mani@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+ linux-phy@lists.infradead.org, Suresh Vankadara <svankada@qti.qualcomm.com>,
+ Vikram Sharma <vikram.sharma@oss.qualcomm.com>
+References: <20260925-glymur_camss-v4-0-d7c2983d6d7b@oss.qualcomm.com>
+ <20260925-glymur_camss-v4-3-d7c2983d6d7b@oss.qualcomm.com>
+ <a2010032-8750-4289-b443-3afb57d656e6@linaro.org>
+In-Reply-To: <a2010032-8750-4289-b443-3afb57d656e6@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 24 Nov 2026 11:57:23 +0100,
-Abel Vesa wrote:
+Hi Nihal.
+
+On 11/25/26 15:28, Vladimir Zapolskiy wrote:
+> Hi Nihal.
 > 
-> The chmap control TLV always describes the maps as
-> SNDRV_CTL_TLVT_CHMAP_FIXED, which tells userspace the channel order
-> cannot be changed.
+> On 9/25/26 08:48, Nihal Kumar Gupta wrote:
+>> Glymur's camera subsystem hardware is a functional subset of X1E80100.
+>> TPG, CSID, VFE, CSID wrapper and ICC resources are shared; Glymur has
+>> three CSIPHY instances versus X1E80100's four.
+>>
+>> qcom,x1e80100-camss is not used as a fallback compatible since it is
+>> already claimed by its own binding schema, causing a duplicate
+>> compatible warning in the DT schema checker.
 > 
-> A chmap control that accepts writes exists precisely so userspace can
-> reorder the channels. Report such maps as SNDRV_CTL_TLVT_CHMAP_VAR,
-> so tools like alsa-lib expose the map as freely swappable.
+> This sounds like the DT binding documentation shall be fixed instead.
 > 
-> Signed-off-by: Abel Vesa <abel.vesa@oss.qualcomm.com>
+> It makes no sense to add a large number of new compatibles to the driver
+> code.
+> 
 
-Acked-by: Takashi Iwai <tiwai@suse.de>
+Please ignore this my comment, I believe it will be simpler to move
+forward with the current code. Sorry for the noise.
 
+>>
+>> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
+>> ---
+>>    drivers/media/platform/qcom/camss/camss.c | 1 +
+>>    1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+>> index 23f3cc30a15a5e098162bea98ba69fa636abdefb..9954a99981004590d34c722337bb6510fe759699 100644
+>> --- a/drivers/media/platform/qcom/camss/camss.c
+>> +++ b/drivers/media/platform/qcom/camss/camss.c
+>> @@ -5751,6 +5751,7 @@ static const struct of_device_id camss_dt_match[] = {
+>>    	{ .compatible = "qcom,sm8550-camss", .data = &sm8550_resources },
+>>    	{ .compatible = "qcom,sm8650-camss", .data = &sm8650_resources },
+>>    	{ .compatible = "qcom,x1e80100-camss", .data = &x1e80100_resources },
+>> +	{ .compatible = "qcom,glymur-camss", .data = &x1e80100_resources },
+>>    	{ }
+>>    };
+>>    
+>>
+> 
 
-thanks,
-
-Takashi
+-- 
+Best wishes,
+Vladimir
