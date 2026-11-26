@@ -1,113 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795670254;
-	b=BP1BNv+QTRBrxuOSxkAqpRxHlDqjCfn3GHlVBdpgU2E5sQF6d/yRz4MARZ+qP2+yMTx+
-	 JbG0hajI1K0ixhnJyVQFj6o27sww41gQ1g81r3fAN5G1A2BDJQJZJ22BqXPhezqJmFCMd
-	 SYS7mFwqDaAd234c8XD4/LmNwTwDl6ZHs0TN4ZBsvgIlO1iqEfXSrxq2WzUrNObiqeiGl
-	 EZG5po4u0OQTC2vdg2g5tlVDtNAa9obspOUVFi6DyCN7Ciy60oGTdACunM04OlOge78r7
-	 CJ7fni0F++jKeg0mGnxRie/kbkcnr2AAvwHz/BSCdUqqBAOWLHwTDkMm70VXkKUK7Sw==
+	t=1795670465;
+	b=vHiByQi21HYW+2TDlXD2/dQ8o4nhHZoPxY1rrWNEzJbWL0dDuM49WHGEu78GmNMSkyqG
+	 QnfFAZpl7MdTYmZefxOiX96bqa03j+6umyJFjhP2Pv0AosfPz5MoRt/zp0Vhs/sYL1ycv
+	 7SrlTepU6itryhW0iU8i2C0wh+pp8xz1KdVdlF/2mqSRTa3UHkt0bwU0QR4+m2eJ/uWxg
+	 3wbrg71OuA7PcVEoQpZz18UmY6Dm+mFN4jIe+srYDP7SkPqMdNLGVhAGI0uqOJxFEY3SQ
+	 Vy2e8AOC0wHQXHXi2Q2bDdzY1iHawg6/lxPfxgbMgtovdJ9LIlv6oN1MT7iuSK2Ndww==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795670254;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-	b=TUNRs9xrbQT8VyXSTQXYMbZd1CSktrhLQ793bIZJvdN1J6UVDpJ8vRrrdzkJnWuyrmc6
-	 5FoWQogNUzbiB5cNMfk1/YYMTXROlCBpVDFRZvS5RSbGArhD7J71xU+OHo7ZeeLNtLwzH
-	 EmBtYirRz9gZy3HCa5cx2xpjJEYSs0ozGMsf+NeDZUXakQZGEbTbN0WEO0afvpNey4qou
-	 QbffTC+GQpj2CA7gVH7jgZUKm+hp3DIf5lO+38C81ta7QkN/6SNprQ5BxW0j09QGCStSE
-	 rlDfbk9ocLch8YhFfjqNiEgfWmyzrJUx9D5owVaLSVXp0yVB5MEenBNMkbzroBwM9Ig==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795670465;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=i4762jOeHlCSAIcmorXRFyKGYrNpR7A6pImQM55ZY54=;
+	b=b4Q5Dn33rIncSPBESMDnjqKQJuCzGBTTKYvkDiClTuGlajxbTVZ0rOfnXBym2ewfKsYe
+	 AOvmt1+x+BJ2ExlSU0Nix8Neank40Qxg10/WfOFYqGQsxMxgm8q1iqzz2Ixv7e6XstoiU
+	 VQKF+vDori2RzJtHMrhzN/76X+dxZ+eaRwQSxbpXsFgcG1oaSr1dypd3Hf4jClFh3CpoU
+	 eFZcXr4HuTN3HUERSYhC5JC8w7tPdPFQj7+65AXD7aWdhvl4stsbbinRi4dvKaQCbiYiT
+	 NtJErOYejFLIkJ27ejb3gySCWaaM91npGxoW07bSaqXnQx0mPqibZ/2CwWw5o9pW93g==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ojnssEii;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GMtLevg9;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6BFE4606A337
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 05:17:34 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6BFE4606A337
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=wCtoBnsd;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 0445A606A321;
+	Thu, 26 Nov 2026 05:21:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0445A606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ojnssEii;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=GMtLevg9
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ36Wrj1812945
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 05:17:33 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=; b=ojnssEiiqWWT5Vxy
-	jK67y9be/JOUY5ksWIGSduhq+kE9Vwfn8oqHEJX34pNhA9Tvmz3IiJ0c2sZfTdf5
-	bLcqD9NgpICfwgmIcbR6pdoHvzivpvpEP6EiaQDe54MCUEb6Cb848PZgc+KDSKgu
-	eQoj35HoW7RfryqbisDD0rWPJ21aSXO2hTXi0I1dwUJNY06c2YInMx9VrGWroXxC
-	6OeNN+kpeg3OOMmV2JKb1nvX4I86JY9m9D6celMw2am6DN/QhLQWCSFGxm5pb/f5
-	OuTps9wSSjknbOKRyLEoKj81/B4RbDjaaBkZohNUSbt35sgrLQgjIKzOJ4g45DMT
-	J0irYg==
-Received: from mail-dl1-f71.google.com (mail-dl1-f71.google.com [74.125.82.71])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ak00pvg-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 05:17:33 +0000 (GMT)
-Received: by mail-dl1-f71.google.com with SMTP id a92af1059eb24-1b25d977b91so7037146c88.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 21:17:33 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=wCtoBnsd
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795670252; x=1796275052; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-        b=GMtLevg91q+djFMcmXiS0msqWhcVEDf0xROyBpsLoDjmXFq2Zk7DGkMaNuVub+ZWiI
-         8gUr9fcAxWohe3FosHtGsgJfpqOcx1QtTx/4+e33kxxyIH0S+mD2A+N55XtsK60vk6xj
-         Ah+YOdi7Sk/wzd1KMYE1IdqhhfHfDnfgQsUGEelrdl8OwqdHCgiFSKgoesGQ4ubnUE+I
-         26rGBX38EFub2zn7uP98VPv+QqzrLYYB6BWZBRbXbwaTaO0heIVSLcrt5jWfuvxhdLEh
-         PWJdWC3aljg7w1w5E21Su9XieXZjBGrdHrkIFHl5uyaJvBi0Mit8SuEJLQViUEMl/win
-         R3UA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795670252; x=1796275052;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=IvuVNeVnAijWURIP2f6FyFqznxRc4/b2a0oI9wlKPJA=;
-        b=RcuiJzYzfbLlQVAAJmqGiDv76HENj3FS7b90yMR5EbvJZxfdFW6KeoBhlhFXIq6ZpO
-         BwM9scmld04S99ZfCZ2Y1JZjpxR2WprEchNVeeKAQ3R2J3o0bnFksH12+cLbKgbuC0mA
-         NdRhlr7yQMIbG8diGlLn7MaP47RdvlcKGrMDXaU6STlSaamiIax1vLu7bKSCkCIZweUW
-         MWbI84Rz2WKO59Fjp3o/loJTp7wiE00N3zk/E3KGHKEQMpZmIhtQcbwHgCKFtnicHCMK
-         Tv/wBBPN+2c/XJo3cj9vrvg6Bv7QP2bZWrJKZ3flIBeCUg0niLlryELAX1GuKg2E9BnR
-         plog==
-X-Forwarded-Encrypted: i=1; AL+hErE5gTMQyMcDXaCz4gJN62YFxoGUnWrxU/TSShVdoF8oI+56ubHOxX1giglGsgdtuC8mmN1HstwHdxV+V9y0@vger.kernel.org
-X-Gm-Message-State: APuU4Z+8GgcMet1/d0C9JQbcGuCbTOyXu5rCfR2myGAYCmcH2prEqIVZ
-	nHd/cOoebaU6NNW1XLhsdig2AGgc5aCWCgwYSYUpOAt359nTWIqLcjEBYsR8mwQCJGZlR+fZlAp
-	3RCPSyM57YAuvw31WaIAM5GMsOSLVr+dR8x5FVZM4utPGmUnFjErtZBakOQ0OKha0uBkcEHGiSO
-	/q
-X-Gm-Gg: AZFdTZdVPXdZx5zpd5+DQY6tiLGa5tHG4Mwb6F3f09obGXAwDeJrTeMZg9nMuPPFOHH
-	OMt5G7oo5INYQt5wrezF/ZU+qIKcNVVfeSJDGUw/A1Q6HU2MzhDWeHKB/XveO1sdsCPm32a9b2T
-	rGjHq1+erVE+v02HhYTiJMURDtvwOk5PXLbXIHOqfb/nr1cZXbX0Qn/HxXTpMRzmbDDVBUtmCRO
-	lap2rZVa3vwdA7b7xojUfYJ4PtSvf4SxmBjaHrzOTJt4uGgvoZammZy5w/Q1WqjkedpCIkVFpWJ
-	O4sj0iN0p5t49IEDhGsK0ZuueigJAr/0Nax1xVJ45ThVwmTgkuecvZ+WOeD7Asl4eLvOC0Bla3U
-	3yMmBzEQKtfpc+gKdm77zcUgmcAosuywn1ImGdeKGn39ClaD4Kgdp4x7h5Qf9mchb+qS1T2TDBe
-	k6khuxZHn2
-X-Received: by 2002:a05:7022:2209:b0:1b2:43ac:d3a3 with SMTP id a92af1059eb24-1b5568b9e59mr25408807c88.24.1795670252313;
-        Wed, 25 Nov 2026 21:17:32 -0800 (PST)
-X-Received: by 2002:a05:7022:2209:b0:1b2:43ac:d3a3 with SMTP id a92af1059eb24-1b5568b9e59mr25408791c88.24.1795670251781;
-        Wed, 25 Nov 2026 21:17:31 -0800 (PST)
-Received: from hu-krichai-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b556847fdasm52132934c88.13.2026.11.25.21.17.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 21:17:31 -0800 (PST)
-From: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 10:47:02 +0530
-Subject: [PATCH v10 4/4] PCI: qcom: Implement shutdown() callback
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=i4762jOeHl
+	CSAIcmorXRFyKGYrNpR7A6pImQM55ZY54=; b=wCtoBnsdoM6shlmKX45S09h0B3
+	1vy87tv5nlFTIOpVUgjVOJc8iYV2OGrKlinmTNJpZU5M8KeNnH21OncDz4e6IbKG
+	bjUCoQBauNCxO5jA7K7gzNq5zQ+8Lnmm9ZSG7UtKgKCpYjkXVeQ/M3VyZhqGamGT
+	z7D4hC3GlohUHD6FY=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.224.120])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgDHNSq5wQdreQ77AA--.266S2;
+	Thu, 26 Nov 2026 13:20:57 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: andersson@kernel.org,
+	konradybcio@kernel.org
+Cc: abelvesa@kernel.org,
+	mitltlatltl@gmail.com,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	devicetree@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v10 0/2] arm64: dts: qcom: sm8750-lenovo-elden: add the Lenovo Legion Y700 Gen4
+Date: Thu, 26 Nov 2026 13:20:55 +0800
+Message-ID: <20261126052057.1544590-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,157 +64,172 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-shutdown-v10-4-fed60d9687f2@oss.qualcomm.com>
-References: <20261126-shutdown-v10-0-fed60d9687f2@oss.qualcomm.com>
-In-Reply-To: <20261126-shutdown-v10-0-fed60d9687f2@oss.qualcomm.com>
-To: Jingoo Han <jingoohan1@gmail.com>, Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
-Cc: konrad.dybcio@oss.qualcomm.com, linux-pci@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Manivannan Sadhasivam <mani@kernel.org>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795670232; l=3652;
- i=krishna.chundru@oss.qualcomm.com; s=20230907; h=from:subject:message-id;
- bh=THWTFBYwq2lZQWgLvpr0AlF/FWIRcJOgtOn7/GBUACc=;
- b=DBnr0zgrgH9rEzWHP54pMz9eSXu76S56s4LQXs82zfqP2HOMXmT0pI+6XqVnP7xY1kjkSCoBk
- cv/6pBkRIvbB+C8sc8VtJ8EwnbBfBI+Ju/4LDWNCS6i/4bhx/q0xevo
-X-Developer-Key: i=krishna.chundru@oss.qualcomm.com; a=ed25519;
- pk=10CL2pdAKFyzyOHbfSWHCD0X0my7CXxj8gJScmn1FAg=
-X-Authority-Analysis: v=2.4 cv=T4oZ3PKQ c=1 sm=1 tr=0 ts=6b07c0ed cx=c_pps
- a=JYo30EpNSr/tUYqK9jHPoA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=VwQbUJbxAAAA:8 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8 a=gM652YqJFP5vwQx0TG8A:9
- a=QEXdDO2ut3YA:10 a=Fk4IpSoW4aLDllm1B1p-:22 a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-ORIG-GUID: Hg1v_1tTIEd7wDaKWotlieg30qZzOWnQ
-X-Proofpoint-GUID: Hg1v_1tTIEd7wDaKWotlieg30qZzOWnQ
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAxOSBTYWx0ZWRfX2Iejj+UtzQyG
- glgAt2K7rW6DcFFPND7jE2ruzkJawM6I3uJllBWViIynwB89ui7htrlQfnv0SnTv0aCsmVIYuZK
- asrwZLwWpX9vzxb3LveIn3pSQFON/trdNakxKeL86w/ZuUDs45gVJATTo1bkUf/mXiqm0zRIOTd
- uf/nqqdbm0vndYG+tMssFTg4/IgO0ozSR51Sm30ozLMLqwkrkn2CEbmjxBOgHxYKdSQGTBW4eRR
- 2T8e/0qBGuyqnDygcT8UFMaKoZsOKES0ISphvg10jKyK/jlkPzyYaUOLLkiNfc49KE/qH2wvg5A
- 6v2GI77YDQ0NgPLhg/MG1sOoCCuiKigOKSN8K0Z4ysOjMNzDPgjocmYVBk3XE2IdiEJIndBBvMo
- 2QS0Ts/AfDHCaPlzdoUmq/O99Jjt+nbOT7AfhziVQwmUub2P50Hys8tvEMSwH4urjXnT+wmY4Bp
- 9ta+CeLMltohPbO/DEQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAxOSBTYWx0ZWRfXx8RiF7PK1VQ+
- IRMoX/6GlIFO+nzBKOtOYccN9c250Lu78bC1SSAZ6VgcAXymUfOR+510KWNfX0mbol0JuzBkSRs
- tcDslevK340p3RFfBI21eGfdkJvf1lo=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-26_01,2026-11-25_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
- lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260019
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgDHNSq5wQdreQ77AA--.266S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxuw4kZFyDCry3uFW8CFW8Xrb_yoWxtry8pF
+	Z8GrZ7Gr1kKryxtw4Igr1xX34fuF4kJF45JF1vyryUAan8JFZ7trsayw15uFyUC3s3Crn0
+	yF15Cr1rCFn5X3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9vb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8Jw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
+	wI1lc7CjxVAaw2AFwI0_Jw0_GFylc2xSY4AK67AK6r4rMxAIw28IcxkI7VAKI48JMxC20s
+	026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_
+	JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14
+	v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xva
+	j40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JV
+	W8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU5-VyDUUUUU==
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARECB2sGHiAuFQA7sG
 
-From: Manivannan Sadhasivam <mani@kernel.org>
+Adds the device tree for the Lenovo Legion Y700 Gen4 (TB322FC), an SM8750
+tablet, and the board compatible it needs.
 
-PCIe host controllers should bring the link down cleanly before system
-shutdown/reboot proceeds to remove power/clocks from the controller.
-Without this, the link may still be up and endpoints still have
-transactions in flight when power/clocks are cut, which can trip SMMU
-translation faults or NoC protocol errors.
+v10 changes one thing: the camera PMIC on i2c10 now describes its inputs.
+1/2 is unchanged since v8 and needs no re-review.
 
-Reuse dw_pcie_suspend_noirq() in the shutdown path to force the link
-into L2, putting it into D3cold.
+Waiting on bindings
+===================
+2/2 waits on willsemi,wl2868c
+  Documentation/devicetree/bindings/regulator/willsemi,wl2868c.yaml
+  Landed as 84e67d2ee13f (binding) and 602f57223457 (driver) in
+  regulator.git for-7.5; not in v7.4-rc3, the base of this series.
+  Merge order: 1/2 has no dependency and can be applied right away, 2/2
+  only after the binding is in the tree.  Taking 1/2 now and 2/2 after
+  7.5-rc1 is fine with me and needs no repost.
 
-device_shutdown() runs with interrupts enabled, unlike suspend_noirq().
-Mask the chained MSI IRQ(s) and the Global IRQ before tearing down the
-link and clocks/PHY, since a late/spurious interrupt could otherwise
-reach a handler that touches now-unclocked PARF/DBI registers. Use
-dw_pcie_mask_msi() rather than dw_pcie_free_msi() so the MSI IRQ domain
-and the MSI mappings held by downstream devices (which device_shutdown()
-does not remove) are left intact.
+  Cost of taking 2/2 early, measured on v7.4-rc3: with the binding applied
+  on top, dtbs_check reports 0 diagnostics for this board; without it,
+  exactly one, "failed to match any schema with compatible:
+  ['willsemi,wl2868c']" on pmic@2f.
 
-Stash a struct qcom_pcie in the platform drvdata in both the normal and
-the firmware-managed (ECAM) probe paths, so shutdown() has a single
-path and recovers everything it needs (Global IRQ, config, dw_pcie)
-uniformly via platform_get_drvdata().
+The two patches
+===============
+1/2 documents "lenovo,elden" in the Qualcomm board binding.  Without that
+line dtbs_check rejects the board's root node, so a tree that builds still
+fails validation; it is the line v7 forgot.  Unchanged since v8.
 
-Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+2/2 is the board itself, in one commit as asked in the v6 review:
+compatible, chassis type, the GPIO ranges the boot firmware reserves, the
+board clocks the SM8750 dtsi consumes, and the WL2868C camera PMIC on
+i2c10 with the voltages the stock firmware programs.
+
+What v10 changes in 2/2
+=======================
+The WL2868C node declared no input supply although this board drives six
+of its seven outputs, which the binding only allows for inputs whose
+outputs are unused.  It now declares them:
+
+	vin12-supply = <&wl2868c_vsys>;
+	vin34-supply = <&wl2868c_vsys>;
+	vin5-supply  = <&wl2868c_vsys>;
+	vin7-supply  = <&wl2868c_vsys>;
+
+All four point at the same fixed regulator that vsys-supply already used.
+That is not a shortcut: the four LDO inputs and the VSYS pin of this chip
+are fed from the tablet's always-on system rail, and that rail is modelled
+once, as a regulator-fixed without voltage constraints, because the SPMI
+PMICs that generate it are not described yet.  When they are, the rail and
+these properties move to the real regulator in one step, exactly as
+vsys-supply will.  Declaring the same supply phandle for several inputs of
+one chip is the shape the isl9305 binding has used for years
+(Documentation/devicetree/bindings/regulator/isl9305.txt: VINDCD1-supply,
+VINDCD2-supply, VINLDO1-supply and VINLDO2-supply all point at
+&system_power).
+
+VIN6 is not declared, in line with LDO6 being not wired out on this board;
+the LDO6 node is absent too, as in v9.
+
+Note what this does and does not change at runtime.  The driver only
+enables the control supply (vsys, falling back to vin7), so the board
+already worked with the inputs undeclared: the regulator core substitutes
+a dummy supply for an undeclared input and nothing fails.  What the
+properties change is the description: the DT now records where the LDO
+inputs come from instead of leaving that unstated.
+
+Review response: v9 2/2
+=======================
+sashiko posted three [Medium] notes against v9 2/2, all three answered
+here; only the third one needed a change.
+
+1. "missing willsemi,wl2868c binding schema in target tree"
+   True of the base, and deliberate: the binding is 84e67d2ee13f in
+   regulator.git for-7.5 and arrives with the 7.5 merge window.  The
+   dependency and the merge order are at the top of this letter; nothing
+   in this series can change it.
+
+2. "missing core boot and power nodes in sm8750-lenovo-elden.dts"
+   Correct, and out of scope: the SPMI PMICs, the RPMh regulators and the
+   console are the "not described, not claimed" part of this board, as
+   stated since v6.  This series adds the board skeleton and the camera
+   PMIC; a tree with this applied builds and validates but boots nothing
+   by itself.
+
+3. "missing vin*-supply properties on pmic@2f for active LDOs"
+   Accepted, fixed in v10: see "What v10 changes in 2/2".  LDO1, LDO2
+   (VIN12), LDO3, LDO4 (VIN34), LDO5 (VIN5) and LDO7 (VIN7) are all used
+   by this board, so all four inputs are now declared.  The binding keeps
+   them optional because they need not be described when the outputs they
+   feed are unused, which is not this board's case.
+
+Not described, not claimed
+==========================
+Wi-Fi/Bluetooth, camera sensors, ADSP sensors, audio, USB Type-C.  Neither
+the SPMI PMICs, the RPMh regulators nor the console are described, so this
+board description boots nothing by itself; that is the v6 comment, still
+true and not addressed here.
+
+Checks: v7.4-rc3 (aebb727447) worktree, 2026-11-26
+==================================================
+- git apply 1/2, 2/2: clean, no offset, no fuzz; git am on the same base:
+  both commits applied, resulting blobs equal the patch "index" lines
+  (qcom.yaml a32cfb30a1, Makefile e0b65a36c5, board file d8e9ab1272).
+- checkpatch.pl --strict --no-signoff: 1/2 and 2/2 both 0 errors 0
+  warnings 0 checks.
+- dtbs_check with CHECK_DTBS=1 on sm8750-lenovo-elden, sm8750-mtp and
+  sm8750-qrd, with the willsemi,wl2868c binding applied: three builds,
+  0 diagnostics for all three, the board included.
+- DTB of the board differs from v9's only in the five supply properties
+  and the regulator comment: both DTBs decompiled and diffed.
+- No boot claim: the tablet runs a vendor 7.3 kernel and this tree was not
+  booted on it.
+
+Disclosure: prepared with an LLM coding assistant; the trees, the checks
+and every number in this letter were run and read by the author, who is
+responsible for the content.
+
+Qianhui Xu
 ---
- drivers/pci/controller/dwc/pcie-qcom.c | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
 
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index 532779295734..0f548c6ce6a8 100644
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -2020,9 +2020,14 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- {
- 	struct device *dev = cfg->parent;
- 	struct dw_pcie_rp *pp;
-+	struct qcom_pcie *pcie;
- 	struct dw_pcie *pci;
- 	int ret;
- 
-+	pcie = devm_kzalloc(dev, sizeof(*pcie), GFP_KERNEL);
-+	if (!pcie)
-+		return -ENOMEM;
-+
- 	pci = devm_kzalloc(dev, sizeof(*pci), GFP_KERNEL);
- 	if (!pci)
- 		return -ENOMEM;
-@@ -2032,6 +2037,9 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- 	pci->dbi_base = cfg->win;
- 	pp->num_vectors = MSI_DEF_NUM_VECTORS;
- 
-+	pcie->pci = pci;
-+	pcie->cfg = of_device_get_match_data(dev);
-+
- 	/*
- 	 * dw_pcie_msi_host_init() is called directly here, bypassing
- 	 * dw_pcie_host_init() where pp->lock is normally initialized.
-@@ -2047,6 +2055,9 @@ static int qcom_pcie_ecam_host_init(struct pci_config_window *cfg)
- 
- 	dw_pcie_msi_init(pp);
- 
-+	/* Stash pcie so qcom_pcie_shutdown() can mask the MSI IRQ(s) later */
-+	platform_set_drvdata(to_platform_device(dev), pcie);
-+
- 	return devm_add_action_or_reset(dev, qcom_pci_free_msi, pp);
- }
- 
-@@ -2467,6 +2478,24 @@ static int qcom_pcie_probe(struct platform_device *pdev)
- 	return ret;
- }
- 
-+static void qcom_pcie_shutdown(struct platform_device *pdev)
-+{
-+	struct qcom_pcie *pcie = platform_get_drvdata(pdev);
-+	struct dw_pcie *pci = pcie->pci;
-+
-+	if (pcie->global_irq)
-+		disable_irq(pcie->global_irq);
-+
-+	if (pci->pp.use_imsi_rx)
-+		dw_pcie_mask_msi(&pci->pp);
-+
-+	if (!pcie->cfg->firmware_managed && !pci->suspended)
-+		dw_pcie_suspend_noirq(pci, true);
-+
-+	pm_runtime_put_sync(&pdev->dev);
-+	pm_runtime_disable(&pdev->dev);
-+}
-+
- static int qcom_pcie_suspend_noirq(struct device *dev)
- {
- 	struct qcom_pcie *pcie;
-@@ -2658,5 +2687,6 @@ static struct platform_driver qcom_pcie_driver = {
- 		.pm = &qcom_pcie_pm_ops,
- 		.probe_type = PROBE_PREFER_ASYNCHRONOUS,
- 	},
-+	.shutdown = qcom_pcie_shutdown,
- };
- builtin_platform_driver(qcom_pcie_driver);
+Changes since v9
+ (v9: https://lore.kernel.org/all/20261126002157.1954799-1-xiaqinghuan@mail.ustc.edu.cn/)
+- 2/2 declares the camera PMIC inputs now: vin12-supply, vin34-supply,
+  vin5-supply and vin7-supply, all pointing at the always-on system rail
+  that vsys-supply already used, plus a comment saying which pins that
+  rail feeds.  Reported against v9 2/2: "missing vin*-supply properties on
+  pmic@2f for active LDOs".  Why the four share one phandle, and what it
+  does and does not change at runtime, is in "What v10 changes in 2/2".
+- The letter answers the other two [Medium] notes of that review (binding
+  absent from the base tree, boot/power nodes absent) in "Review
+  response", and keeps the "Waiting on bindings" section Krzysztof asked
+  for in v8.
+- Nothing else changed: 1/2 is unchanged since v8 and needs no re-review;
+  2/2's compatible, clocks, LDO voltages and reserved GPIO ranges are
+  unchanged since v9.
+
+Qianhui Xu (2):
+  dt-bindings: arm: qcom: document the Lenovo Legion Y700 Gen4
+  arm64: dts: qcom: sm8750-lenovo-elden: add Lenovo Legion Y700 Gen4, a
+    Qualcomm SM8750-based tablet
+
+ .../devicetree/bindings/arm/qcom.yaml         |   1 +
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../boot/dts/qcom/sm8750-lenovo-elden.dts     | 135 ++++++++++++++++++
+ 3 files changed, 137 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/sm8750-lenovo-elden.dts
 
 -- 
-2.34.1
+2.53.0
 
