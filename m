@@ -1,79 +1,103 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795661428;
-	b=D39OzXatuIVnsSd+aP0brOn7DDalh/ouBSaSdQ0JdYXn0LCSo33CLi6tLB1E3datx8ks
-	 tuK9iNRGgTgpp0w3cG7q1px92mKN2S9/W2i4zbP9mTeJmUyxOjrbCR7Ru54YDpESSZlBI
-	 BBxpJ8+UjczBKBewUTPtCLbgzliw5agTwMhVHscPTCA+e94hqhTwHW3bnuMejRgflLfxy
-	 PI06ZxWdeieW0IxuDLKcJzdVbXTYXHVbnerSdmULh2kGXcqsHEiTG5zhtvGrjTgar76M6
-	 9TixLd3p2Yo2F1Ru7o8wto4pl+L5iZQLX0OduSjW8KJrLerBlRsgA811uS6UIrDet3w==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795661428;
-	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=drpZa+uEdwJxfzKGf24OsKowM5rsFqQ++EwQIBk9YJo=;
-	b=h89IpUkYz8uuZTPfaly2qvGlPiqI1YznGlgaNW6IYdyR7n9FiszIhptsb5OCxnTt3750
-	 +9ASJZpIrWSyVXiJ0TrFFC5r9DcxkfijQdx3Bnmvms/KTmC6e189bHQXTD3Nv/lHZpFpJ
-	 bHK0xBHZxanVUQrsYkm3nv8eCUHuM+XhiDK2cIgPzTSFTXM8JtceAzHTHPeDESDSLonwk
-	 mtv6ByhHE6Ea+32Rp0+uMqgEkm/uFxAf6EQSinRh+2llFTN62OmAHDctfOMROjk68aX1i
-	 R3b4Hb1L82UOu8BeuTD8tN/5Sy389KFdZvNWKvfXIHih6copvEo6RMZ42+D3TZHXobQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="d0Sj/8Bp";
-	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5907E606A31E;
-	Thu, 26 Nov 2026 02:50:28 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=d0Sj/8Bp
-Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
-ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795661427;
-	b=1FSqXk5MIry72RenxhbWpColfQg5PWJeJvotyXgiMXGfPYNbrpi4+2Fqwgc9laPmU2gy
-	 rWGR6ul4nE++9CsORhR9rCc8ExTB8OD2JZcrtHrWFfu9OYIf5Q3Kwf2cVgdDo3Bdk6Bng
-	 ahTpRBctSlDFcXDPwgVgUD+FNIkmWPItjUOGfsS/Z9aKWQXgd7skytWZjm461EguqC9T+
-	 Ss8BblGkhSujHqFif9irP3O30FvAHAHk2KxrBNWIxYiqqIrWfDSsC/uws0YS4/1dW2gJX
-	 M6KgvFCV042Pbd0Afl88pXXwVCpo9OUW2hZX1iH6etzjs8efiG/Y0p1YED+3cvqF4Ug==
-ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795661427;
-	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
-	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=drpZa+uEdwJxfzKGf24OsKowM5rsFqQ++EwQIBk9YJo=;
-	b=Wt7ewBsCtpobIv38PeSnl5NIKNTXAQcU9aL+jbbQNkNuX2MeBbAmqUvyEpMRb/cDy8al
-	 m5wvbISvqYn2oPJxQMZ6w+wGw0d1duVE0n/hOWe7JgVgDjWF/JgXcYrw8OvW4CxX4ArlR
-	 t9A+OmvNsIRpVNQeGPPqF0xanTPKsf09g3cs3ln28vyJv1wS7lk7CIGqdw0//nBeeP14F
-	 4fVeNKFz0MOIipH6PL2NhjVJDmyUNKv5pmAuxUzszrNq7E/7WEKp70XoltUFvS3UIZBS7
-	 gAiq1SlMGwRf5Sh4qIBwhXb57ISxWmfusoRoWVYqkGmgF4pBOiSimZhIRAwi8Bwga2w==
-ARC-Authentication-Results: i=1; smtp.kernel.org; 
-	arc=none smtp.remote-ip=100.80.115.77
-Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.54
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795663405;
+	b=3wQG/FtepOzGmu77Wq9hBylFwzAGdcIcAX1vPVqvkn1cqC22RQUwZSoul2PkO4pg1Jle
+	 +qiX04qwWUoK0NIfnAYSMnEmboY5hs8oAwBCWhrFOLXtQHbaK6Svglot+LPRKD6OlklVC
+	 hZsyF63b7L/xiSn0xoNKgh9END4Zv5QYBQyvH7vTigkK+dt5W+2SiCGjn1vwZAW7yrSJv
+	 lQwbQ5IgYkp2vbx+VXqYNr4e6Az2gyn5MxrJGwLc4Fjzep38nwo1UxkkSz+oVD60zpjtD
+	 JRJ30bZH33gJ5L5ieVFt8UFF/clLWWMsPARg7JZzA2LCqmv97zyJf1oxiRQ8oXuiAYQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795663405;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=HtWcfzq6QYRKud0neDB6yUmZQgDuRRFbJcQVKQlnPhY=;
+	b=Qryr1eRwNR0dyh7523FKa9B6/9ICyS9jLAoGp6uMyq3PS3IU9c3XfojrdvBl07JBV35V
+	 x4XrQDd3O9RfVKdZf77T9Q7lW3+SZxS7Ke+UJtcz4EBmSe2V+JBeDZu+V4ImFTl3oUpkW
+	 uYtcPLuBSfzshQVLRhd10A2uqeX2z2+A09NVnmYovgGewjmpcvRld5LAyUyJ01krv532a
+	 tU9z6OERwxUhY/4i4kHZdLOUJATo8Im/o+xEO8HaB2Gn4XC1L0ROW8ErVhZNUDsx1KSfG
+	 kjN5wrPA1Ln0vtMBUvCJAScMQ0JLiCYzZUSgpp0+bScLQ8asX+7yRsrFqgu6oqy+J7g==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MZ8omOQH;
+	arc=none smtp.remote-ip=209.85.216.54
+Received: from mail-pj1-f54.google.com (mail-pj1-f54.google.com [209.85.216.54])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id C6B801F000C4;
-	Thu, 26 Nov 2026 02:50:24 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795661427;
-	bh=drpZa+uEdwJxfzKGf24OsKowM5rsFqQ++EwQIBk9YJo=;
-	h=From:Date:Subject:To:Cc:Reply-To;
-	b=d0Sj/8BpB2MxQUbZGW0q3VEuozb+SraNWcSQ+Jy+Jz3dzB2794xVahnnrT0kHj31u
-	 2kSnTgakWwfY5a61xYUUoL7ZeKy1c12brHDv6SRi++SVdncK9VkdF7cs1jI8O0QJE/
-	 1u40aDN7wxg43q61Kyu4Mc2kUNZWJZ/TvBMei2ZaaftGWjdE9ln8Ud8W8NfyiFHzAa
-	 TknkQqZQB4cHNum5yFYArN37qpbcMUSTXHJxfU3K6hDzXtLnxv0rummt1OtMbWkwvx
-	 DHt21vqww2sMBK/sypvPHcxfYiI8Lk9DRHz5gJdgXziEc1EUKEVDoHtlqdqQhcPJYx
-	 9bF/pNTiFjBcw==
-Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 2D8394D1B0;
-	Thu, 26 Nov 2026 02:50:24 +0000 (UTC)
-From: Fabricio Akio via B4 Relay <devnull+fabricioakio.gmail.com@kernel.org>
-Date: Wed, 25 Nov 2026 23:50:23 -0300
-Subject: [PATCH] soc: qcom: smp2p: Reset the last values only when the
- remote restarted
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C82FE606A31E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 03:23:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C82FE606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=MZ8omOQH
+Received: by mail-pj1-f54.google.com with SMTP id 98e67ed59e1d1-3b51284667cso46660a91.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 19:23:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795663404; x=1796268204; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HtWcfzq6QYRKud0neDB6yUmZQgDuRRFbJcQVKQlnPhY=;
+        b=MZ8omOQHP+4FtzemVgluZ07wogDoVxnEWU7QChkmcm/I6PKG3R2Sx40QVCkasgkmvR
+         k13Gpx4dEKzkvwZA64ZgN0DfaVuP8PAk1Fkeg1wtrtUewQ66j4Ju1z49G+gfiboOKgjK
+         OplyMiqF3oaKbYCHT+RaW21OFvkfl5925+QnTJYXcBcwaAbbRDdWIJhtfEDZ8285sWb4
+         8Ad/EDVAYOuMk5T8PiRP4twyX6+JM2uEe6TntYruNC5tJTnNH1fUlTUADZa+yxTb+Ehj
+         +h4255cvw2515MIno6yVFy1RXGzuf2ZmaCkv7vWkeb5jRbGjEZ7eYCsOBll1A1eD5yNg
+         pSIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795663404; x=1796268204;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=HtWcfzq6QYRKud0neDB6yUmZQgDuRRFbJcQVKQlnPhY=;
+        b=wsyEJB9d4/YYIE+pPMU2L0R6JNihY6XGj7wVvwBuV2MzR5ijKMkxGBoT+lqmmMXISQ
+         ch+Wnhvj/bmre08HqWB7ZqdpMMLppCvXWx+JkJdLwFZ214IUMd62IHOnM+BQ99NM2kuV
+         ww1/WlruaoBM8q1jYKSGYRIintj17fTq6216YXq6niV/1RHx4TVEXHXgSlCIA2zrm0HN
+         gU+MKXL+n7Pnkx5jze4y6IZ5oppa+BjGUC0HC1NRw8oHmYxxh+JiughWkPC3XH9Nd06l
+         K55heQ5CispRKrOHmr45GYy7Ewt7tij7edsh9fgEfpGXiEjCTSX4bykGRxrUMFPKXsyf
+         YbNQ==
+X-Forwarded-Encrypted: i=1; AL+hErHjI/4ZN/ah+UBXN3TwYZgULIwRGrIWQ4QvKZHginQExU0qj4W0iLSmUB6+/c4CnLlaIkx5f+TzhGpGYDqK@vger.kernel.org
+X-Gm-Message-State: APuU4Z95/Z8BoK2XRCo4PqC4Oou7euTzs7QPjwgUKQoLI2A/Ft7kyhXw
+	Pu17tN1xvUB86hGVRxGd9C9W29LOUOQ2lTpnMYMEtUPLcVD5enUPpHUb
+X-Gm-Gg: AZFdTZdv0gSym+SK6fCSGzRt3lzxhejmn3SCvBAj40FZW7ftrDh36Q0NzyOUC6IzMjA
+	f5iXd78PVomRc7VO8Ull31coPHM+7b3EC1qGNF7SVw9XlgPcZyTOgckeEUegWNwUBYdYt4vNmTe
+	VNNti2Z6NfDYpdYemzfgwpVRiDEQOcuCbeylDBwrrZjU79CFLf62tRxAML1aGS3MOtibNyaZe/k
+	rTg+68ciuVgiI2iQ9AMmfPNqvn+ldq+BZMdPWHJS14bbsI2NcQQa8VSJ24rb8RCzc/JbmA8KVn+
+	QzNyLUJv0ko03rDSbtL++0Ik3EeilcMZhrh1kyZ61Csrep8S4eT3+fu6p70AKjxirezgVboEPSr
+	qmEYUCKuraI9w2r/Y/kREwNIzwKllxqsMnyYhxijlC/jHfBXL4dQu5/R/AmJEYJbEgTNwYk88HR
+	JM0IXDv9Wy2U+GSJQrXasvpxwj8FpPUnBn92cH7gOXsT5TYepyB5FDx8cVjHs5yi0jDySXuoTDG
+	ls9B4OezGVNMKxfZ88OQcJcxDgJlUppPuR4Pk110l8pQ4kB5jlyd+UAeN52b1APcXjm+oxwULx+
+	E4yaSWluh1yDZBlPW9NwvHHEOOyNJjH9
+X-Received: by 2002:a17:90a:e705:b0:3b0:9e2c:9b55 with SMTP id 98e67ed59e1d1-3b41c803ae0mr28913249a91.2.1795663404159;
+        Wed, 25 Nov 2026 19:23:24 -0800 (PST)
+Received: from localhost.localdomain ([240e:36d:b08:5b40::a60])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cdea2aed207sm3916423a12.11.2026.11.25.19.23.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 19:23:23 -0800 (PST)
+From: Jianfeng Liu <liujianfeng1994@gmail.com>
+To: xiaqinghuan@mail.ustc.edu.cn
+Cc: abhinav.kumar@linux.dev,
+	dmitry.baryshkov@oss.qualcomm.com,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	jesszhan0024@gmail.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	lumag@kernel.org,
+	marijn.suijten@somainline.org,
+	robin.clark@oss.qualcomm.com,
+	sean@poorly.run,
+	Jianfeng Liu <liujianfeng1994@gmail.com>
+Subject: Re: [PATCH v2] drm/msm/dsi/phy: program PLL_SYSTEM_MUXES on the first PHY enable
+Date: Thu, 26 Nov 2026 11:23:15 +0800
+Message-ID: <20261126032315.2226704-1-liujianfeng1994@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20261117052047.32129-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261117052047.32129-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -83,101 +107,28 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261125-smp2p-ssr-reset-v1-1-ed442ed77950@gmail.com>
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXM0QqCQBBG4VeRuW7AHXKRXiW6cPW3RsiWGYtAf
- HfXuvwuzlnJYQqnS7WS4aOur7kgnCrqH918B+tQTFJLDEEa9meWzO7GBsfCsYnn1NUtUhAqVTa
- M+v0dr7e//Z0m9MuxoW3bAZY5wDRzAAAA
-X-Change-ID: 20261125-smp2p-ssr-reset-6564ba08eb12
-To: Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
- Deepak Kumar Singh <deepak.singh@oss.qualcomm.com>, 
- Chris Lew <chris.lew@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org, 
- Fabricio Akio <fabricioakio@gmail.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795661423; l=2678;
- i=fabricioakio@gmail.com; s=20260928; h=from:subject:message-id;
- bh=Q1U2Pn/P1zafs/QofbW7Fr6+lX5ctVwV3JDZo//cqlw=;
- b=fvQpswV/HFL8fUj6KP2gcsjHea7zGyKS1Mz8UbNpHenHk50qWSa9BJc/b7Q/mIkTGo/QR93Yz
- sfdHHbhs5EgA9MGXbnRBqUwdathOTYkjwdQVBGLvoqvwdH6nJ2uD2tI
-X-Developer-Key: i=fabricioakio@gmail.com; a=ed25519;
- pk=TlMUT8bPI/ZQzp2q24BIQTb2qSx/jdUTBlGEXIRCm54=
-X-Endpoint-Received: by B4 Relay for fabricioakio@gmail.com/20260928 with
- auth_id=1076
-X-Original-From: Fabricio Akio <fabricioakio@gmail.com>
-Reply-To: fabricioakio@gmail.com
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-From: Fabricio Akio <fabricioakio@gmail.com>
+Hi Qianhui,
 
-Once the SSR ack feature is negotiated, qcom_smp2p_check_ssr() clears
-last_value of every inbound entry on each interrupt. Every bit that is
-set is then reported as a new rising edge whenever the remote signals
-anything: on the SDM630 ADSP, stopping the DSP raises its ready and
-handover interrupts again.
+On Tue, 17 Nov 2026 13:20:47 +0800, Qianhui Xu wrote:
+>Fixes: cb55f39bf7b1 ("drm/msm/dsi/phy: Fix reading zero as PLL rates when unprepared")
+>Signed-off-by: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
 
-Clear the values only when a restart of the remote is detected.
+Tested-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 
-Fixes: 42c4cf5d4828 ("soc: qcom: smp2p: Add support for smp2p v2")
-Signed-off-by: Fabricio Akio <fabricioakio@gmail.com>
----
-In v1 and v2 of the series that added the reset it ran only when a
-restart was detected and the remote's version was above 1; v3 dropped
-both conditions:
-https://lore.kernel.org/r/20250923-smp2p-v1-2-2c045af73dac@oss.qualcomm.com
-https://lore.kernel.org/r/20251103152929.2434911-3-deepak.singh@oss.qualcomm.com
-https://lore.kernel.org/r/20260127-smp2pv2-v3-2-4060b859b1e2@oss.qualcomm.com
+I can confirm this patch fixes DSI panel on my Xiaomi Pad 5 Pro. Thanks
+for your work and I'm looking forward to it getting merged.
 
-Tested on a Motorola Moto X4 (SDM630), whose board file is not in
-mainline yet, on sdm660-mainline's 7.2 kernel, the same build with and
-without this patch. Stopping the ADSP:
+BTW I wonder if this mail is ignored by the mailing list because from this
+link[1], I can see:
 
-  without: smp2p_notify_in: smp2p-adsp: slave-kernel: status:0x86 val:0x86
-  with:    smp2p_notify_in: smp2p-adsp: slave-kernel: status:0x80 val:0x86
+-- strict thread matches above, loose matches on Subject: below --
+2026-11-17  5:20 [PATCH v2] " Qianhui Xu
 
-Without it the ready and handover interrupts are counted again, and that
-kernel, which predates bb7c5d6f5b41 ("remoteproc: qcom: q6v5: Make
-handover IRQ one-shot"), logs "Handover signaled, but it already
-happened". With it, every start of the ADSP after a stop or a crash
-still traces "SSR detected" and raises ready.
+And the mail from 11-17 doesn't have a subject.
 
-The ADSP's smp2p item reports version 1. No version 2 remote was tested:
-that such a remote's restart is still detected, so that the reset still
-runs for it, is taken from the description of 42c4cf5d4828.
----
- drivers/soc/qcom/smp2p.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/drivers/soc/qcom/smp2p.c b/drivers/soc/qcom/smp2p.c
-index cf06a49149be..d7f7345104e0 100644
---- a/drivers/soc/qcom/smp2p.c
-+++ b/drivers/soc/qcom/smp2p.c
-@@ -194,13 +194,16 @@ static bool qcom_smp2p_check_ssr(struct qcom_smp2p *smp2p)
- 
- 	restart_done = in->flags & BIT(SMP2P_FLAGS_RESTART_DONE_BIT);
- 	restart = restart_done != smp2p->ssr_ack;
-+	if (!restart)
-+		return false;
-+
- 	list_for_each_entry(entry, &smp2p->inbound, node) {
- 		if (!entry->value)
- 			continue;
- 		entry->last_value = 0;
- 	}
- 
--	return restart;
-+	return true;
- }
- 
- static void qcom_smp2p_do_ssr_ack(struct qcom_smp2p *smp2p)
-
----
-base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
-change-id: 20261125-smp2p-ssr-reset-6564ba08eb12
+[1] https://lore.kernel.org/linux-arm-msm/20261116150334.78710-1-xiaqinghuan@mail.ustc.edu.cn/
 
 Best regards,
---  
-Fabricio Akio <fabricioakio@gmail.com>
-
-
+Jianfeng
