@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795690656;
-	b=da/ZgF8BCuHN1Sc+Oizr04URY3OgodGKYYaQabxdwDKmFrIJbUV9iQGDn+z690C0tQ/W
-	 cXnxc+npii7Y8aCEF8L1cZHCLrP3uFZTLFUk5qO0hO73NjYWxly068xysxBFjtsYNXP+M
-	 WRZ8se/jFxkbzPRWLaawqf4VyxCUFrNDhrOK/V1t8SfvwPuUr7fwJMD24+fBRz917F/aa
-	 TvJmmI9CorJZNIMRMCTbKYH3201foS8XAAtnK/lgYZwitJ6ma1Brb41X8Pq2Nu3pbwNEl
-	 o33djPRF7Ue2aGUXhBO5Q5TGssXblB8s5Q0YtJiFFWMWaZR7h+DasTiHMyzLk2oZnoQ==
+	t=1795690658;
+	b=ISo6iBysUnuXpLHGwDe3DUVna4gSur01EH5lroQ/hu2RxC0CHRONTNxIDP3kgumhMmEY
+	 5PthDskpb9IkpwKrCUlP0SyYB2G+EInXjZ5LKzvN/tASQ1bYHdZezyAXAxxlJcuGDs10W
+	 XSw83BpGd42IWjqkZWSWWyTnCiqhAFmZEk4B1RD4+dkxcwt0fneac0N0Q1JfOITHIQoRJ
+	 THSsOoRX52hhHPbyuESnnZwwxICqKz6gLPChv9gJdCMf9Q/0KE7HAwilZnYOgFnPw6JS8
+	 LYxQD3OCVVplkFf/v4ZzcBAp5uZeyWIAOpI2MLSErXp9Z31e3/AsrPnfT2RYryEZB6Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795690656;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795690658;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=HwfYvEOuN+jTv/rUMPMNkv6iGYyKWL7qSbUN29b5cO0=;
-	b=LDNJekizKP+IV/cLtSfXKHYFezkRjHA2ZghVZX15OFtRUbC/LuZKF8yWmH8OQKcFCyS8
-	 1yAkhP/ajFHxXvigzgKSgimiLCwT1l5GF6iGPAkZVenaTsMzarh4ftIYSLaqE6XPd/LAD
-	 5B+qV5zqYdH2CoKxg5cUrn5cOdhe9RZt5urQej+TgPvJMvHppLYw1yfn+7IHSR97A3rnC
-	 HS3Q5nHiMX8cw9+qZ1pQGEcGyqQhztGPUibfBvlqqk8afetkMEq9lM6tQUqhaM1BzQ7WD
-	 YAAElZx+2is68Y1BJlOXpBN+wlZ4jOux6rReavmQTJU+26V2bXafkFJCQZw/6xolJdg==
+	bh=v9V4lIhr1Yp8113iHXoe8ch5+6plW9DXOYXomuK6kQs=;
+	b=eW6mZzOM73a5foiCKXrX/z34aIFSJTbuRjol8/BW9wZGSe4NPLr1oEv+MOl6JW8ZHlOw
+	 ay8bV+u0ubT1zxACt0SekQBMUaBXcvSFVTWVBqdAMJY1UqD2VX+4KnP8y/ugXIRz0VAyJ
+	 FiJsjG1/TtshR9VwBulsx1Y1r9YJcvjAsGQ3zZLVj7gkuZ4jj34Y20XPogWUHlXgRkof3
+	 XaD45X+HNIBb/dK0xWpMJ2pUEWerCW9lSKoIEYBee3ELazimoQnNSDNneViboqJdiK0x0
+	 nKSQL4psH4I+gJBemY+OrMlX5au23iOE4MJenwRTfvksNDBU/atHRo8DObCjsfqw1ig==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AkMjPs35;
-	arc=none smtp.remote-ip=209.85.221.46
-Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tCfZGlcJ;
+	arc=none smtp.remote-ip=209.85.221.53
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 40AB2606A32A
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 10:57:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 40AB2606A32A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B90B606A332
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 10:57:37 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2B90B606A332
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AkMjPs35
-Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-497614c95f0so3899976f8f.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 02:57:35 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=tCfZGlcJ
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-4aa5833c263so6594475f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 02:57:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795690654; x=1796295454; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795690655; x=1796295455; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HwfYvEOuN+jTv/rUMPMNkv6iGYyKWL7qSbUN29b5cO0=;
-        b=AkMjPs35dEIf9ZgxdEYE8ikTLbpsCu6+nLp9CQv538B4ElAWC4PA8/a1gA1ZPw/tkW
-         SOLTdfM4AiGxeAFLvEP5TJqfweEOcEbvB3/qJXiCmrAaz8sigjH95HrgPV5r8mnMkafV
-         U9m0P4Jv2V0v+CElxzIzmq4tMx5edAhM8LMWTVVj6tBCq6xTRbsCTydCSYtDW1Ea8OSG
-         uFYBEeA020lBk7st0zfVycqNOqMshHF+LabTdJ0+Moq/+bXLCVa1ad5WdwoykB69f2Ek
-         wCQuuX0RRx6H9avPCbC1ykXO1cnwmQ5JPHJ34FrLBR+Rq4b3TKoX43P7chpgJVuHAcTF
-         hmBA==
+        bh=v9V4lIhr1Yp8113iHXoe8ch5+6plW9DXOYXomuK6kQs=;
+        b=tCfZGlcJHZ/7qqklBwkZg5bpuriB36lcSzl2nc4fE+GOXVRxjiutOiLH2P2+T/uVLf
+         hhNv3eLjOt5JUZzskhAj9vLsQVrMAE2zxKdLTeX4h5pVPe+W/fogIgDTqDRoLZps63/D
+         kzdOQ3tqfqfcR2Aq3LqdRuqYDnMnsGAvRODEQ0g77T9whGIuqoOlUZ6h1JDlP5L+W2HZ
+         7y8zOg2wNlPUO8RPHlw0tOf5RzJ8PtARDotmjtwMH0egsAE3nURr/G9xY+DOYlaPmsR6
+         r86uPNXmEmPHNR0dKL2E421IfeaeFBO2+HRt3TNvYKJixjJXtJGRbY+QTEWcNQo+2cDL
+         tx+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795690654; x=1796295454;
+        d=1e100.net; s=20260707; t=1795690655; x=1796295455;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=HwfYvEOuN+jTv/rUMPMNkv6iGYyKWL7qSbUN29b5cO0=;
-        b=p/Oa4DXURXzYCs50XIW6LcseUGBS6DLPBZXhJEbbw3oGSEOQXQsiUF0VPuDh0DktFt
-         6TmBhW2VWeRvnr0NmPO5YMuE3EAJapwWhWIPeveOyBHxnev0y7QJv3FOWwP0FW52QruO
-         +QuS/rCQ3Y/5knKn+a/qNvHXCP226XGURIPgruREJqOond3HM8rGKB+xtr82AXOWd1dH
-         1oKnPBahQlU1gzgQC1gFzupQJFVf61bX1sCjMR7zkneJrQ2paED0hd3Vtvi3VqpL/HpJ
-         0kx1aq9MSOChmFOpcP9T50jrIIXGyQ7KmnbUBIsujk6sFLDqxCXnTesChZhipZ+TonF5
-         19lQ==
-X-Forwarded-Encrypted: i=1; AL+hErH4STGvlVsOsuNbathXW28/ou8IzwHB2ksa6iKLWKzFklmX8n/gIK9SAzKlr+N7t5WEzsgrD8deCpLH5AOg@vger.kernel.org
-X-Gm-Message-State: APuU4Z8dYN65OTIa819su3n5l3t2dPzLUkY6Q4vXYebtKMr2HXRYydSK
-	0QoOm7TbsdyLF405DuAlT81cUEl03lG0Te6H3fY1Z2DU06F5VNGArY0B
-X-Gm-Gg: AZFdTZfWLmjhabbnV+WXqqVFKdUfQpfdnDqHf84FPkfzY7mgB2IpiTOt1c0ZQg8AW5F
-	qH4b/9JgcMOWyjGYNbUCmBEhHqhY2lgxOZx66nEq9u9GE8J8imtjg8ckgvBX0wptVstXfOu5uxf
-	b99dahOm6xVB7qlp8KUaOAor5DK4NXZwr4XNzH8Di16XjgegQFM/0KhkNhrXo+A7tPN6LgSqqVe
-	Q0KQ5HNmCsRN5dnEhnF+fboP2g7Y604jeRj2Re9VThROVdz6KXlTHJHt2o/78e0jXITEvCqkhLN
-	1BqeAUlYecB5tnSiYalzH7cjDGb6RF1Raz3LJDN4HaAtX79QY4bOt6VIx2MbPJirbn8wGj2O+8K
-	B/IcPYzLXHt6jkzx2HDnuAFWqqkMFjKz+M/RVrc5PMWqRd9fZKdjDVj3xZIv+TwED9lTe2cuQ5f
-	6a7Kg/7pOXuPxra2ZBe2lKHSSdNYlieYw9iVQDVgSWvLtNoTgiT7FLBFqq3P725FnERzpBHYkzK
-	frDI9Neskh+b1OKpd44mOK8MIvmDBq7jsvbzbUGnH3ohDxayEmiad0yj4HmcdTUjRXb5l3nq0SI
-	matb8k9TX2yo5YCZ4PKmgDPPM3h/PDO3pAE6YAaQgTJApyBhPiZq789NJ2odNslW7RKQWWExVuZ
-	MIKaAl7DB57Wp9De715u52A5hskQ6oCeyfs8I6s1vXchJz+aErDn4ObL98/7hrugUI1JY41p2V8
-	+Mx4xb80NaDzHnzxa8gA==
-X-Received: by 2002:a05:6000:4382:b0:4ac:a772:6485 with SMTP id ffacd0b85a97d-4aca77265d4mr39737456f8f.31.1795690654538;
-        Thu, 26 Nov 2026 02:57:34 -0800 (PST)
+        bh=v9V4lIhr1Yp8113iHXoe8ch5+6plW9DXOYXomuK6kQs=;
+        b=2fEP9YN6l94edzUOCC+lm6ZTCIFBYn3gtuQ1sh3piPARAopTcVD06vSUSJHxRUuKmH
+         pEyWS+7eZzupVc7bCblsTzGuHmnEOZbAnK25zHYQkKar0S/DdOOwfwCd3tWJCmt1tMeZ
+         dXNGFMn3IAPWfrspmuaeDfYPulPf/3g0mnxYQoxiJl+LaK78uHGYmXSricm7XcXT/Utc
+         M1ZObMBbbzN63oA1D9klypGpSsCXOOcVXygge9fWqCu2aU67YvN5rSublwBNP0i9Z0Up
+         t2DNmo5jwWQtYsKVObPVNzhr56fIrZOpl6YCCKWqLxSsSqmwqb/zeXXedbU6Bh35VQYw
+         a8yA==
+X-Forwarded-Encrypted: i=1; AL+hErGLnZUBb+4PSs8Kaijd1hzCYVLXx0qHGGM3OKVEd4qBI5pvXOiFrAtV2po2R7VSmq6wBJYIhZgJFDBo72j/@vger.kernel.org
+X-Gm-Message-State: APuU4Z9fuGzpRglmE1HwCaT74O3WW4bIaLzmKsDrbisukePo3gN+q8uV
+	/EDo8e4l7ibpb3wNSpaIwtOo+S151SkB8XmOxh4nQ65Tcg3HZg4OXNDL
+X-Gm-Gg: AZFdTZfSVA++III0t0CbGuUKmXuhmk79+kPgbkefX/NzwmkoQLWUdR8rbbz85730cBX
+	DjYBu/IPl5zEAhKf/y0NMVu+f1Ta9nYQyuZVRrJwqpIenu+2uZtNViPEF/gc/Qm2HXc1RTQjWZN
+	BZ1V+rXP97SIjVCUcb+icJDhyOVoKbnCwzJ/nAUPZ3QTLwiHmPmQpCz4J+T1YngTMvFH0g+MAjt
+	j6pY/ZRXhQwjUUu6VH9YwAhYjBJigLEAp4j+xJ84EqaB4XXscRxiDqpxuIerw3YtWragZuSTVqw
+	6Wxxm65xQ9rxKNYQaTCb3Y8xTzfAwBdfgoukCXpscQTjICNkxKKuR+2NrLhD2tzSfPPyk0bF4VZ
+	RHvXswe1vhq1Yd+jbw4SH+4P3niBFt3J5J2xBioxIoxQof6o5kFsl37EEz80KYkRyEBT32UO8gE
+	LJc01Ye4VZFFGam28D+L3QNry5Vj/eThMScYOAkKqz0H03LI7V0VHU57NWX6HZqY+WzVyPORTFn
+	FO3gpVobxGhEJBoyxhNQl3Qrj3DG75UcExibGxtSw1e3Rj6qiFH/dbvTX8HmyLqpBtOApr/yBya
+	Gb9+bRxSxKTKQ89TSyezSclyQtlqPk/EjSffoFzCTw4QhjoWdp/JZwEo1HMWbVoLzi2lkVpOTfp
+	0L9KTZhMPHq/y34sUL2q4u81eJtAmDy/C/woeXOn2GAtztVFCznh/s0g0jYOrVmWQrNTRiiuaW9
+	eufh0V4bpsTX7DkjfXGw==
+X-Received: by 2002:a05:6000:29d5:b0:4a9:1649:9eb9 with SMTP id ffacd0b85a97d-4abb2168fcemr28263168f8f.16.1795690655498;
+        Thu, 26 Nov 2026 02:57:35 -0800 (PST)
 Received: from threadripper-fedora-workstation (d-zg1-148.globalnet.hr. [213.149.36.162])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm40336850f8f.44.2026.11.26.02.57.33
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6b9add26sm40336850f8f.44.2026.11.26.02.57.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 02:57:34 -0800 (PST)
+        Thu, 26 Nov 2026 02:57:35 -0800 (PST)
 From: Robert Marko <robimarko@gmail.com>
 To: andersson@kernel.org,
 	konradybcio@kernel.org,
@@ -90,11 +90,10 @@ To: andersson@kernel.org,
 	agross@kernel.org,
 	linux-arm-msm@vger.kernel.org,
 	devicetree@vger.kernel.org
-Cc: Ziyang Huang <hzyitc@outlook.com>,
-	Robert Marko <robimarko@gmail.com>
-Subject: [PATCH 2/3] soc: qcom: smp2p: kick WCSS after restart when requested
-Date: Thu, 26 Nov 2026 11:56:51 +0100
-Message-ID: <20261126105722.188103-2-robimarko@gmail.com>
+Cc: Robert Marko <robimarko@gmail.com>
+Subject: [PATCH 3/3] arm64: dts: qcom: ipq8074: add WCSS SMP2P node
+Date: Thu, 26 Nov 2026 11:56:52 +0100
+Message-ID: <20261126105722.188103-3-robimarko@gmail.com>
 X-Mailer: git-send-email 2.56.1
 In-Reply-To: <20261126105722.188103-1-robimarko@gmail.com>
 References: <20261126105722.188103-1-robimarko@gmail.com>
@@ -109,74 +108,50 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-From: Ziyang Huang <hzyitc@outlook.com>
+Describe the SMP2P link between the application processor and WCSS.
+Provide the inbound interrupt channel and outbound state channel
+needed by the secure WCSS remote processor.
 
-IPQ8074 and IPQ6018 WCSS need another outbound kick after a remoteproc
-restart. On IPQ8074, ath11k starts WCSS, stops it for coldboot
-calibration, and then starts it again. The first start succeeds, but
-the second times out waiting for the SMP2P ready indication.
+WCSS also needs an outbound kick after its inbound entry returns to
+zero during a restart. Enable the restart-kick property for this link.
 
-The first start gets an outbound kick from qcom_smp2p_probe(). The
-SMP2P driver remains bound across the restart, so this kick is not
-repeated. WCSS waits for another kick before raising its inbound
-slave-kernel ready bit.
-
-When the SSR ACK feature is negotiated, qcom_smp2p_check_ssr()
-resets last_value to zero before inbound entries are processed. If
-slave-kernel is also zero, qcom_smp2p_notify_in() sees no change and
-skips it. Kick the peer before the unchanged-value check when an
-inbound entry is zero.
-
-Limit this behavior to WCSS links with qcom,wcss-restart-kick. Other
-SMP2P links do not need a kick for a zero inbound value.
-
-Signed-off-by: Ziyang Huang <hzyitc@outlook.com>
-Co-developed-by: Robert Marko <robimarko@gmail.com>
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 ---
- drivers/soc/qcom/smp2p.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/arm64/boot/dts/qcom/ipq8074.dtsi | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/drivers/soc/qcom/smp2p.c b/drivers/soc/qcom/smp2p.c
-index cf06a49149be..bf11b7d450a4 100644
---- a/drivers/soc/qcom/smp2p.c
-+++ b/drivers/soc/qcom/smp2p.c
-@@ -128,6 +128,7 @@ struct smp2p_entry {
-  * @ssr_ack_enabled: SMP2P_FEATURE_SSR_ACK feature is supported and was enabled
-  * @ssr_ack: current cached state of the local ack bit
-  * @negotiation_done: whether negotiating finished
-+ * @wcss_restart_kick: kick WCSS when an inbound entry returns to zero
-  * @local_pid:	processor id of the inbound edge
-  * @remote_pid:	processor id of the outbound edge
-  * @ipc_regmap:	regmap for the outbound ipc
-@@ -151,6 +152,7 @@ struct qcom_smp2p {
- 	bool ssr_ack_enabled;
- 	bool ssr_ack;
- 	bool negotiation_done;
-+	bool wcss_restart_kick;
+diff --git a/arch/arm64/boot/dts/qcom/ipq8074.dtsi b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
+index 1d1c9aab5fdb..7842a2bc4175 100644
+--- a/arch/arm64/boot/dts/qcom/ipq8074.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq8074.dtsi
+@@ -142,6 +142,27 @@ scm {
+ 		};
+ 	};
  
- 	unsigned local_pid;
- 	unsigned remote_pid;
-@@ -341,6 +343,10 @@ static void qcom_smp2p_notify_in(struct qcom_smp2p *smp2p)
- 
- 		trace_smp2p_notify_in(entry, status, val);
- 
-+		/* Some WCSS firmware needs a kick after restarting. */
-+		if (smp2p->wcss_restart_kick && val == 0)
-+			qcom_smp2p_kick(smp2p);
++	shared-memory {
++		compatible = "qcom,smp2p";
++		interrupts = <GIC_SPI 322 IRQ_TYPE_EDGE_RISING>;
++		mboxes = <&apcs_glb 9>;
++		qcom,local-pid = <0>;
++		qcom,remote-pid = <1>;
++		qcom,smem = <435>, <428>;
++		qcom,wcss-restart-kick;
 +
- 		/* No changes of this entry? */
- 		if (!status)
- 			continue;
-@@ -681,6 +687,8 @@ static int qcom_smp2p_probe(struct platform_device *pdev)
- 		return -ENOMEM;
- 
- 	smp2p->dev = &pdev->dev;
-+	smp2p->wcss_restart_kick =
-+		of_property_read_bool(pdev->dev.of_node, "qcom,wcss-restart-kick");
- 	INIT_LIST_HEAD(&smp2p->inbound);
- 	INIT_LIST_HEAD(&smp2p->outbound);
- 
++		wcss_smp2p_out: master-kernel {
++			qcom,entry-name = "master-kernel";
++			#qcom,smem-state-cells = <1>;
++		};
++
++		wcss_smp2p_in: slave-kernel {
++			interrupt-controller;
++			#interrupt-cells = <2>;
++			qcom,entry-name = "slave-kernel";
++		};
++	};
++
+ 	soc: soc@0 {
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
 -- 
 2.56.1
 
