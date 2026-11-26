@@ -1,47 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795680733;
-	b=hZDNUh277+uth1t/zyWcjyh9gW9NmBxF8/2QrGGErVI50DSEWx78+ucASwFvcWEq2D9z
-	 38qhCNXgc11LjKq0i6cSiRHS1x+4vYn4cBRz8y0ilwVF+kSezRVhNo0IEkoQ+4Ni1bzse
-	 74p9+s5yQIsmQt5aTPglWWxNn/htQ4gCj+3gSQhgvhE3HOvdtI6kXvtL/J8KUpYWYJYni
-	 9lSNv389mooARjdZjThMSUqeFP0+P+clJVBIneYU7dbVyhVR9YDFkOk1czyfl/Uwhltuk
-	 /u1vIJFtuHs+yvYRc8SHlozoPDP8q1aEK8xuafzEzGhOmz6EbtWav1iDj7KjX5saC6g==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795680733;
-	h=DMARC-Filter:Received:Date:From:To:CC:Subject:User-Agent:In-Reply-To:
-	 References:Message-ID:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=tebrHz3IvqJVQW9ErRGoXMPDohyN/Z67oVCXnCoU/hg=;
-	b=z+dSdAOoItYg10rrgPmKKPa8XPuMbJBMhho6Tv+fEUMWEg29hmJ5Vep7Hr2kp15dsXuN
-	 Glj0CgcFy+iELU42nBxS4eWKk2XGolbs9tgBXtbuXu8DCbmvOFjvpPPC2xfHMBDqhH4CZ
-	 +AzC5wBxl+hYgtoJX0EDQ9PiFmgNoe92kW5B3wOAfP7KSuDFlM5jT8IyouAcE+XsvmSZM
-	 QST0vk32qb73IBoGD1oKSEpXQ/kDygGi2N84Omk9mNrXBcfmZJ2RbINai/WUlsTO5Is0O
-	 ydUuxNTJGoDKaRvP/6M+qwjT/wftaitSxbWf4rW6W5qnjsR51yftnY7VET2teW4JBGQ==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=krgm.moe;
-	spf=pass smtp.mailfrom=krgm.moe;
-	arc=none smtp.remote-ip=103.47.186.116
-Received: from krgm.moe (krgm.moe [103.47.186.116])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 58C66606A31C;
-	Thu, 26 Nov 2026 08:12:11 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 58C66606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
-Received: from ehlo.thunderbird.net (unknown [IPv6:240e:404:1a32:1906:6486:8bff:fe17:3abb])
-	by krgm.moe (Postfix) with ESMTPSA id A7B2B82E;
-	Thu, 26 Nov 2026 13:42:09 +0530 (IST)
-Date: Thu, 26 Nov 2026 16:12:01 +0800
-From: SignKirigami <prcups@krgm.moe>
-To: Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>
-CC: Krzysztof Kozlowski <krzk@kernel.org>, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
-Subject: Re: [PATCH v3 1/2] dt-bindings: regulator: qcom,rpmh: Add PM6450
-User-Agent: Thunderbird for Android
-In-Reply-To: <20261126-netrani-pm6450-v1-v3-1-2343209bbf4c@krgm.moe>
-References: <20261126-netrani-pm6450-v1-v3-0-2343209bbf4c@krgm.moe> <20261126-netrani-pm6450-v1-v3-1-2343209bbf4c@krgm.moe>
-Message-ID: <2D9293CF-5F1C-4CE5-AD68-4214DACD1C99@krgm.moe>
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795680851;
+	b=brrxPLxgLbgCw3Xpl639kcUaTsNwgwb6ANSKPIemQwg3ddP2ESPJPXy0Rx6wT0d83UdX
+	 tWhh8LHHTmuuYnG7z2TmQJpnCz/ecHXvpj6DKIIHY3wOssOWCwKQXxKbRZHHMFqgiFO7z
+	 y+jNmhDtyixah7JPfn4LmqAtl5lglC1qMyETrp6qcnyJZGp8NIYXUiL8LuNhSFXCDRoTa
+	 lhqX5+dwfojyMZfb9nbSRr/uTVIQoCIaTuA8B+iDQ8wqRE+jD8M1uDjvZNSVk1JiD6Bb/
+	 +tMLasIL11hZRgwwbEpwgsLZHUHquPY9o0cd2A8spjcy1ItMVqdbGBcXAFOGBTBhicw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795680851;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=huqWM0eo0fyX26dQJHUvYM8kb6xLmmHqJZknA1XlnBI=;
+	b=qGamMa/dAmg+ZVPaqZXcIa56PQfp1KEr/kf6DrcDfW0cgd03ncFJapADkZPBpuNviWpL
+	 eRtgxuSHmzeD/386ihxbSptVwA7q+5JiT7wctmgjCXHa0Uqir5adPFWwj6dNTa2lnx0PJ
+	 Z9i/gG35XOuaClpAVPhm9Xr8mD/jRMIwc+785oPy8x+2BhTROTTxihpAChdnuI0k5biut
+	 4g/O24/xYpCQbqLNF/Xwj0ViQELqYZYKiR0cgTM9WFlK9QjYb/TW4KHEXbXtDwRwuMsEH
+	 oGAqUdcxLSui3z3C6MLzqmReDmFQfLNDPNv+7QtbjF3IxO+Pc40hQoa9rNMpI5OioyQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eax1i2c1;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 14730606A321;
+	Thu, 26 Nov 2026 08:14:10 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=eax1i2c1
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795680850;
+	b=W3PQtRonekxWOVZOoFHxfqcYxYccSf8VHwclQhuUD7F2bTfMsD3vM/DBrgmUxra2qy20
+	 mfyath2AxNcOd1rEoKIoHX9iYk12n5uD+W/ECBJQzpfQN5KQL0xWyCz40Tdo+SEW2oWpD
+	 v/Pegn1V0OrhrpJ4p25E0Dmr8pQ4B+2GhsZpDvy59ChSDJsX/3Xl6mNgu+fxA7omOL1/N
+	 rb14JZ7ZFM4baV/v/GHxWUBvsDm1PIiwgSuJfoR/GjiQu82zy/df9ViEvku8AhVdA8QVl
+	 3FePh/mj2bIWR6Z+mqBXAN6kdJr4NAgAehtrjwoqfkVm+0o13BOv44SM5CKJHXgqB+Q==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795680850;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=huqWM0eo0fyX26dQJHUvYM8kb6xLmmHqJZknA1XlnBI=;
+	b=UgesoyPYSga95dN5nSas6ZPy8kEC8lksk/5FHy8MXU0AedEg7cWenjHyEwXXRKyOo7kl
+	 LSMfPDKTB3PLrTKS2e5ubvpnvPbs8nH/whJK5EKaBIAaWXpskRdQ2xGK3qbJEd33xSnSP
+	 BNPv826ZVO88rHFhwg7aPJHFQ7pCKy2ew7xaga42T63frFne4Xe+MmmRGDwSFTf56685y
+	 rNEFVODIoDIB1XP6r5cEPsXErBO83ivkJMsxDpkE3fS3hQdNLolEl7aoQGTg1uercuWHm
+	 TulMwBhQB9JMIhprWWbCt2CpldQK5+DJxH+fIaF3XnZLER1KbJgEp4Pz4emWabWTDZQ==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.kernel.org (Postfix) with ESMTPS id A99881F000E1;
+	Thu, 26 Nov 2026 08:14:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795680850;
+	bh=huqWM0eo0fyX26dQJHUvYM8kb6xLmmHqJZknA1XlnBI=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=eax1i2c196w9D4jYYrnIzZBTu8/Rn5Ii3lFWCS+uuIKAudBa7G60vPgLmgh34PB0c
+	 gGSln4w31I29gET9uG0kOsOQgrktc8toIn3NDeUKRDUTS1nx+ohRuaFzqJujZaJmUk
+	 z1Ql0Ek1KXPODyVPqdGUcIDnn5siJuhk5pGR1plFh7Ueg05AjhnBOY86R2Pnus2qL6
+	 jiDTEUnbCEMRFKnWTCDvCWJh7Nu+POxiT+Iodi9kn+Iv0WJpkcqJWPWYDGFKJWCwBs
+	 foL0PWRtxsMLXkuwwyh9jDB9Y2HI/tFOhqYp7raC2sx1fuLFSw1CEjm2y9NfsOMZw6
+	 TMCVwPb7nOZcQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 36C154D2EE;
+	Thu, 26 Nov 2026 08:14:05 +0000 (UTC)
+From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
+Date: Thu, 26 Nov 2026 09:14:05 +0100
+Subject: [PATCH net-next v2 1/3] dt-bindings: net: qcom,ipa: add
+ qcom,sc8180x-ipa compatible
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,72 +83,58 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261126-qcom-ipa-sc8180x-v2-1-89eba621da95@gmail.com>
+References: <20261126-qcom-ipa-sc8180x-v2-0-89eba621da95@gmail.com>
+In-Reply-To: <20261126-qcom-ipa-sc8180x-v2-0-89eba621da95@gmail.com>
+To: Andrew Lunn <andrew+netdev@lunn.ch>, 
+ "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Alex Elder <elder@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, netdev@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ Robert Ijtsma <robertijtsma@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795680844; l=911;
+ i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
+ bh=Zda+9Ammsc4s6lMXOWoTtjkZ/oA5KShVVsCnmBZdGAo=;
+ b=I40e9SfuC+UdZBZLKwNCpF9MbOPhueCs93NphBRuYb6USVNiQaO/L3nOJhJ4Sj/u4o873DA3L
+ BZHwwh72z74CLVsV7IH/QcJk/F3TwPAYyHqnSAhiKUZ34CUtCP3g1GG
+X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
+ pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
+X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
+ auth_id=1604
+X-Original-From: Robert Ijtsma <robertijtsma@gmail.com>
+Reply-To: robertijtsma@gmail.com
+Content-Transfer-Encoding: 7bit
+
+From: Robert Ijtsma <robertijtsma@gmail.com>
+
+Document the Qualcomm SC8180X (IPA v4.1) compatible string in the
+Qualcomm IPA binding.
+
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
+---
+ Documentation/devicetree/bindings/net/qcom,ipa.yaml | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/devicetree/bindings/net/qcom,ipa.yaml b/Documentation/devicetree/bindings/net/qcom,ipa.yaml
+index 38e3830512feb375572c8801e06fbb97c33d9d89..99e5464dc47e53514dc8012ecd06654789ef6019 100644
+--- a/Documentation/devicetree/bindings/net/qcom,ipa.yaml
++++ b/Documentation/devicetree/bindings/net/qcom,ipa.yaml
+@@ -48,6 +48,7 @@ properties:
+           - qcom,msm8998-ipa
+           - qcom,sc7180-ipa
+           - qcom,sc7280-ipa
++          - qcom,sc8180x-ipa
+           - qcom,sdm845-ipa
+           - qcom,sdx55-ipa
+           - qcom,sdx65-ipa
+
+-- 
+2.47.3
 
 
-
-=E4=BA=8E 2026=E5=B9=B411=E6=9C=8826=E6=97=A5 GMT+08:00 15:39:11=EF=BC=8CS=
-ignKirigami <prcups@krgm=2Emoe> =E5=86=99=E9=81=93=EF=BC=9A
->Document the PM6450 compatible and the eight RPMh LDO resources used by
->Motorola Portov (SM7435)=2E Add the parent supply properties for the
->PM6450 package input groups used by those LDOs=2E
-The remaining PM6450 resources are omitted from this initial change
-because their RPMh types and voltage capabilities have not been fully
-established=2E
-
-Regards,
-SignKirigami
->
->Signed-off-by: SignKirigami <prcups@krgm=2Emoe>
->---
-> =2E=2E=2E/bindings/regulator/qcom,rpmh-regulator=2Eyaml           | 15 +=
-++++++++++++++
-> 1 file changed, 15 insertions(+)
->
->diff --git a/Documentation/devicetree/bindings/regulator/qcom,rpmh-regula=
-tor=2Eyaml b/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulato=
-r=2Eyaml
->index 9115885e7985b=2E=2Ec91f01d785174 100644
->--- a/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator=2Ey=
-aml
->+++ b/Documentation/devicetree/bindings/regulator/qcom,rpmh-regulator=2Ey=
-aml
->@@ -37,6 +37,7 @@ description: |
->       For PM6150, smps1 - smps5, ldo1 - ldo19
->       For PM6150L, smps1 - smps8, ldo1 - ldo11, bob
->       For PM6350, smps1 - smps5, ldo1 - ldo22
->+      For PM6450, ldo5, ldo7, ldo13, ldo16, ldo19, ldo23 - ldo25
->       For PM660, smps1 - smps6, ldo1 - ldo3, ldo5 - ldo19
->       For PM660L, smps1 - smps3, smps5, ldo1 - ldo8, bob
->       For PM7325, smps1 - smps8, ldo1 - ldo19
->@@ -72,6 +73,7 @@ properties:
->       - qcom,pm6150-rpmh-regulators
->       - qcom,pm6150l-rpmh-regulators
->       - qcom,pm6350-rpmh-regulators
->+      - qcom,pm6450-rpmh-regulators
->       - qcom,pm660-rpmh-regulators
->       - qcom,pm660l-rpmh-regulators
->       - qcom,pm7325-rpmh-regulators
->@@ -203,6 +205,19 @@ allOf:
->         "^vdd-l([14]|1[1367])-supply$": true
->         "^vdd-s[1-6]-supply$": true
->=20
->+  - if:
->+      properties:
->+        compatible:
->+          enum:
->+            - qcom,pm6450-rpmh-regulators
->+    then:
->+      properties:
->+        vdd-l5-l7-l9-l11-supply: true
->+        vdd-l13-supply: true
->+        vdd-l16-supply: true
->+        vdd-l19-l23-supply: true
->+        vdd-l24-l25-l26-l27-l28-supply: true
->+
->   - if:
->       properties:
->         compatible:
->
