@@ -1,121 +1,97 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.43
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795678827;
-	b=jRAhOGBS6J4B13RKjpkztF7mY3N+L7QwiChc/LoxKs2Ll0suEt6jlNN7nndubq6IqzHA
-	 VnK8awwLWiLRRI/m4cgGbmCrQfUI5YUvGimfIU1mlpMgD+/FuIf4jNOWlzB+/Piyw0LQw
-	 aYi81HJD7FcDM/zzSGuD/50/wrv18SFltvY3XEUgPltMZKCfT4uaMaVmJiM6iH/vVqO6I
-	 EcV93OFUaKnFoEJ6lbGn4vMqY619pC4YvnEzz/weRvBZb6FjvFJHRPVQ9ZIOeRk2qjWeU
-	 y7H0wWaJcQM9LO1CadeNf/veGjUi/xUlkS7gWm1lAEgy/0kSjPTpumZS4PQxcxXc0bQ==
+	t=1795678840;
+	b=YaY0VM7NkImdT5PzhsW75/117u8iN7sX8pMQtHgvc9njHMx3Hyy958oeMmtp3ze1PNJ5
+	 O21qW2B/iBWqMXpjIjFo/cL4CHMojJBggM4QN4caBzcJ/Gv6/hz7c82jbrc1SICC/2mHR
+	 bP8S5mHo769to+GGuPtvguVTk0ltNr4fPN8oFk7Yc+nQ9vQS4Cg+eScCCXarhlPll1zPV
+	 ZFSRitVL7eNrX73W/G1ONTZgaBceEnM4SqLvbNA7BWegYP5Z2ZKDHeTC5QOObrLGwf8WH
+	 a6ij/cYfxQInbV/L370gFdtSk/Lkr6bgEb+f1Fpt4DyCfGXNz80l6yrkE4tBROu6lVg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795678827;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
-	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
-	 Content-Disposition:In-Reply-To:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=sXWlGCRC9JQkumWInitkE8i9IQlzJPF9vbX50igGRpE=;
-	b=oVgSxcu3uIny346AjCPminTKrqHPXDs/Xjw1Oqg1+WoFuqOT1Q67GsAcH6854RW3Cb0h
-	 f8pS3Qed0Zs4yYbNBAxlg9HYRRVoorrYpX8bvghEhLQDMO3wnbqGs8nitWrzZOfOLfU8r
-	 ZDW0BteJ7LScnxUy/Cgw6QNC67e6UuGYzbtvSQheROly7YpVTMX8gupSNleIbpjBONFcf
-	 qMo3ee3rP9aLr4J0J72vG7hTnsEs2WBb7iVJTX+PqAUnktqWzEjZV7l5psZedlZk63Xvc
-	 fEIwOfiGVDcYAkbIolVn2XtesqYfLfveX3I36NY7hBwAGUY4V2XUlh9XSxuZUTeFz8A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795678840;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=41zv5RzYIPm5yVXR4qWN7+yvtS7MaY4Uz8JUaUkw5xk=;
+	b=YAiSVkI/z2PUapgOwQg1kUF+oT6jGtUbpMB5NSNtK3P3gXdXzITmHj0AeH7s/DAEjFL2
+	 05Fhe39K82CprwPAUMcV1coIYY7oeFf8Yahv8QTkNz2V4lsmeQQrDSSg6hNajbfdDS8qc
+	 6OBxKZqZFIvm89nDYQ2EmBAnCl+eXrVCGwL4CVMiz2AW9vXsKNlgKuoHrolCnOYw/PXFn
+	 JR+K1qmfriUe0z80EDeeCHET+V4rPObxZ/uQM1eQFikau/1jb3qi1z1/J4CCdFfZvF5+W
+	 +rMf+VHiCuErENW1SA/lDKZR1UdO4e5QlWdS5PpyIslVk+IDnj4Ndb/DJmlcQUgpDGQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=O3r9h3Eo;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=HbhqQaTt;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=m+i9gdUR;
+	arc=none smtp.remote-ip=209.85.167.43
+Received: from mail-lf1-f43.google.com (mail-lf1-f43.google.com [209.85.167.43])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DA1F606A326
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:40:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7DA1F606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6C335606A32A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:40:39 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6C335606A32A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=O3r9h3Eo;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=HbhqQaTt
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7BLs5920141
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:40:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=sXWlGCRC9JQkumWInitkE8i9
-	IQlzJPF9vbX50igGRpE=; b=O3r9h3EosuF9La/6Gk7uOPkO4ocLiXnApEIAq0JS
-	iwKgxZwIGDvt9pNdEIF4kg6QTVy+0uGoQUvInBreDTq5wxmPe4raq10qjgEDx7gw
-	XRsbdE3bKZGT/zOH3xJpEzKRQZQBjwQnwI5VSPfaH3B+TNCEtOKrl0u63w8vDNGU
-	SfG3Aq76yZ0r1PbEdj+aG8j5TTkpP9GuDPuHfZ23RdwzcTuSs0sY/twBfH8v2fwO
-	xoaK+fDgSNB2OxS5b+AtTecoTxS88YFn2klbbOfsaBQmEc5swCkiiMztSbSLeYDR
-	eeI6dTBfmkxJ2C+Dna+XftGJ3zlNETyh1RVjYs+/K0RVSA==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y1yu5-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:40:26 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-386a65fca25so5784633eec.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 23:40:26 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=m+i9gdUR
+Received: by mail-lf1-f43.google.com with SMTP id 2adb3069b0e04-5c00b0866b0so393057e87.0
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 23:40:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795678826; x=1796283626; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=sXWlGCRC9JQkumWInitkE8i9IQlzJPF9vbX50igGRpE=;
-        b=HbhqQaTtUpIVHEYSZ/lBnCTkaiQmQU9BVp4ByHYxoHK7iB5Se6gMVgigWKa2RsKXqp
-         ajWpl3lojcKhFfRrNdMSIaE0yEUrjhOf/WPSaumhIs4RtgsFoYRD8y2GdrwZc5Yd7jFF
-         4R4V684rPRqQzBf6sGySOFgQMKWEVK3FBMC90QVU4ITpgNzxcaNrn5eU9lxcouzo9iYW
-         ok/Pc5mKmuY/sx+3IjOcON6exSgQkxe9W07ldnmYwx0qmR1UwrZ+o2yurcZOTRxeiACf
-         v/9M4YPVAQTwOKp0jFeuPYPxoK+oHHi0XNFRDtaBF+3f42hXUFmUuNPKQtZdYj/YH6xb
-         pQ9Q==
+        d=linaro.org; s=google; t=1795678837; x=1796283637; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=41zv5RzYIPm5yVXR4qWN7+yvtS7MaY4Uz8JUaUkw5xk=;
+        b=m+i9gdURt12WvcYA3+Ma7ZMye6NVvbXEljn0s4sToSjmsJX6iqFzLVeKmPoc2VWo1q
+         DVWxhYrliolRwFL/bkGHdsolf7+nkv0N2r+uGR1Z/00MAMQws+qfeDb3BC9dnXZgvhjP
+         xYXsFNLcXoT8z1FxAhjDKPKNoQt2XvWuvFKoG8gyXQEp/TI+w/G3egBlFpvsiUIyQtrk
+         5iHynqxZvVRLS0XHx+HZfR+odjwskybTAgAIEzrNpHdWd/k2VOUkzrv/6mug85t5mvlZ
+         Q5kqP83zNMBdtc28BayGQA/zqqnIBAIG3psVVaUG0SiZ/eHusCeBUhvgHnF2MfB++j2M
+         XsOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795678826; x=1796283626;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=sXWlGCRC9JQkumWInitkE8i9IQlzJPF9vbX50igGRpE=;
-        b=H+r0SX7ygAXGeFGxiSdVXWvdB+p/cxMj7VBcTmkeHPd1+zPYVbhBtb+PdylJfNA2Bb
-         ajtu7BOEU5IcKKI6daMHED+lDqLQhbXjZd/QhUrSD18JakssTOPmLeL5wYDwahBUqK0F
-         aoDYbI6iohCgJIlJYbyYwzqdipCjkydGgFAN3Oo9Vd9G1VeGCAdjOQNs7i4Nc6KA2UKB
-         Zocuqfb4t77W/OTMBAqgV4Z9a0/806g20/mkvxgFVewp+TasykKudMN4zn0KslJE3+nc
-         jfCReMeoYqwdtYVphms98o826UoOqxGhilOu02nKs+kRgLGR47iTt1pxNAP1uyQPdvJM
-         u4jg==
-X-Forwarded-Encrypted: i=1; AL+hErFMjm72taxmDK05wW2YliyUdx4FsB0qD1+9ddqVjFGRI8eS8rmP3MzIFPXj7VsfnyrkEX0HSG6D1ozYMCor@vger.kernel.org
-X-Gm-Message-State: APuU4Z/VcwIUZO/EszYhs8k9tvSqVpLk1W+nl6gewA/Iqqv1VzO2T4WB
-	Xc3cpb/mVQr7TiXM47WwtGe61WgtEdgoh8hFtf53WBdU1lXQ+yTdjhHW1sIwSW1ELKYkv89m6B9
-	dObvZf8F0TIalWOp6LWlAnfCSNkbzf90K+U5zNp94zOri5gqi5MiavsDkStvt4f9jhnbV
-X-Gm-Gg: AZFdTZe8uuY4rMqKssfs8uYFqLckM5d5lNWh1+1cJ7fzxkxugUPltf2QnhXPq913jVQ
-	E8e/vZhEFb/Yy5H/iIujDN0FZVXGhoTiteU+38d+Kx6AkcGMTkqzUMGvsE4Mr3nFslD4LQzrLt3
-	DroU7bcrQUhmLzg+SlJxC+7KdgHVHwm/WP+ifu5tAV9hKWoFs7EMSLR01zWP3aiLU+tS9rPJatR
-	MURRMgzfCn+GvxxoKOI9gQByFP+ryu65eJNJ+r0QrLQoyyTYOHbVsbc/QLKl1XfIDE2MUUy8ufb
-	ltKj7ZjH0JlVW8fXuZ2iwM9oCxTIbB0UzkyFiJbDjdCGAOxT/mXaHuHHFI1Ix6uwQcWEL/Tm73Y
-	PwErB5E3TIqda63NKHYuuFRlqk1J/dwdmaULPaz969g5L8OT4504ygZTTyCo+03b9lk9j4lCvgb
-	MZbwqsMBs2CNLA1/uSI8Awids=
-X-Received: by 2002:a05:7301:2108:b0:386:b99:8ff9 with SMTP id 5a478bee46e88-3860b999354mr18107020eec.40.1795678825946;
-        Wed, 25 Nov 2026 23:40:25 -0800 (PST)
-X-Received: by 2002:a05:7301:2108:b0:386:b99:8ff9 with SMTP id 5a478bee46e88-3860b999354mr18106995eec.40.1795678825418;
-        Wed, 25 Nov 2026 23:40:25 -0800 (PST)
-Received: from hu-petche-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386992b404bsm47180909eec.1.2026.11.25.23.40.24
+        d=1e100.net; s=20260707; t=1795678837; x=1796283637;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=41zv5RzYIPm5yVXR4qWN7+yvtS7MaY4Uz8JUaUkw5xk=;
+        b=xfxJ7Sq3+0aDqc9PfrIuiRFmS/K8tn18B3k+npWTDq+5YAd6WDFWvble+vWng29t3N
+         lhKCgpgqj1XuEFirR+cxJkmI5boHA7DJ/OY5JHihSlX0AsPgKcaniIFJVHpvRqvpePYs
+         6AGY6Mcz8P1DWlscvVkUg+auQ1lsLAmcZV04x44pM61jtwpURtSBWWkB3f0VmwQ6F8he
+         D47uD0PU/WHmzfB9I3oOp5rLHnvyMbzxvK/erYMqeThA55vWWzYtoB5nOKxjdnDDSF98
+         jr77T0h+F6fzzIe35N1KRfi0bPf+s/2tfFUi/s0AKgVF1xUFFzvjQ2FCR0z9V55aFYC3
+         udgQ==
+X-Forwarded-Encrypted: i=1; AL+hErGO9xw61e+dp8CmtybFv8L55OXd1fJQlV27mUqTm5Kj5rBdF7/av9jWaX0oqR0v2vfimGBdHSt7Y4AegyQV@vger.kernel.org
+X-Gm-Message-State: APuU4Z+jo6sMqwoxp+k/hxWcZxWkfxGc2guyCJ1LRVqdK+HJR4fR3mA0
+	XPys9bb4iyJJuUkiTP6AhkEYwEfJGbxWjqrD5d+3tMuBCbzwYX6nqrkTNlkTxrfihfg=
+X-Gm-Gg: AZFdTZf2L7WrdDeiay/zEsq6KoRm70CcbvvaKXa02AE8cnG+ysvUTOU6jAlLOfGCbj/
+	PmVNw3/ltBwws9yT0hVJfLbwW7CXGBXFDfXVEDNFzUCbx8ejeJT5sAYp32qeIXkVBVWOcJU16F7
+	Oh1D00tT3K5VPzZguTLv4Gso+QfLoU8B+vqp6erN1LCR+++UHY2L1ITy9SWDtxKAhSTQY8cC5ut
+	d53qLmovzxTs6f+4L/nCw1xp8KQz+zXk33zAX2ex4g4HsOr5M3zcJDUpEpe46cdY8phTN+59SDB
+	IVVzckiF3B5TH+6Ica2wES9S5rAwzZkHVQ7W9z+pQ2FcL4qkbO3FfmnS06xXSSSRr5hDlwx/Mra
+	K9jeFyDIAv3KTtFE7YLfJYwGqCHRgRoC3cDXQ49LKFomah+KpBT7k/VEt2qgIbSFUPcA+PFRSqx
+	PHvuwBYaWa/YheX1N1frLhLUCB/hS+Jpio354YFTdk1a+kELJ9YLbwpLwSQNIfsCrYQln2f3g4j
+	BJcqN1A3VOsE3Vc7f4JHg2NUi+DyFBM3MHzZGggHkSLE9hiHLQarPOgLN70mO9nFmWkfRYe8dPW
+	R3d56C+5BCtYOL0y5ETKzy0uZS5R73PpxGpNZKqSdR2kuTlQQUsCcaqjZ8tw99qRhWHXOAFQ40S
+	VDszgPPMuJEHyNl4=
+X-Received: by 2002:a05:6512:318d:b0:5bf:d00a:b6c0 with SMTP id 2adb3069b0e04-5c1bc78eb99mr7625087e87.3.1795678837561;
+        Wed, 25 Nov 2026 23:40:37 -0800 (PST)
+Received: from thyme (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bd05e235sm4984521e87.64.2026.11.25.23.40.37
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 23:40:25 -0800 (PST)
-Date: Wed, 25 Nov 2026 23:40:23 -0800
-From: Peter Chen <peter.chen@oss.qualcomm.com>
-To: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
-Cc: Thinh.Nguyen@synopsys.com, gregkh@linuxfoundation.org,
-        linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        krishna.kurapati@oss.qualcomm.com,
-        krzysztof.kozlowski@oss.qualcomm.com,
-        Sriram Dash <sriram.dash@oss.qualcomm.com>
-Subject: Re: [PATCH v5 01/11] usb: dwc3: qcom: Distinguish PM and runtime
- suspend/resume paths
-Message-ID: <awfiZ8IE4UMuiO7P@hu-petche-lv.qualcomm.com>
-References: <20261123104727.1539149-1-faisal.hassan@oss.qualcomm.com>
- <20261123104727.1539149-2-faisal.hassan@oss.qualcomm.com>
+        Wed, 25 Nov 2026 23:40:37 -0800 (PST)
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+To: Bjorn Andersson <andersson@kernel.org>,
+	Abel Vesa <abelvesa@kernel.org>
+Cc: Taniya Das <taniya.das@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Stephen Boyd <sboyd@kernel.org>,
+	Brian Masney <bmasney+clk@redhat.com>,
+	Jerome Brunet <jbrunet+clk@baylibre.com>,
+	linux-arm-msm@vger.kernel.org,
+	linux-clk@vger.kernel.org
+Subject: [PATCH 1/2] clk: qcom: gcc-qcs615: Fix GPLL0 AUX2 parent of CPUSS AHB RCG
+Date: Thu, 26 Nov 2026 09:40:23 +0200
+Message-ID: <20261126074024.1440367-1-vladimir.zapolskiy@linaro.org>
+X-Mailer: git-send-email 2.53.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,154 +101,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261123104727.1539149-2-faisal.hassan@oss.qualcomm.com>
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAyOSBTYWx0ZWRfXwe5cGpJvJS2F
- LiNxhzb2MmB6ruElfXXT6yMoKP4WdpfjdnnEa1t2SZfKX77Vznf02vq2j+EL7tuwdidRXv2twPv
- oc8NbHvdJFzt4r0AUeXvztAPQNHp2glzMENk8UXphQ+SnNfxpf3drh881jBKEayHaMnI5MkCHWf
- Mb5aORwA0TKvcyxDB8uVj1w7Skt0Iu0UHzclGU7a1i/INVheTAn04Ks4qmnJ/vA5Ke4ozySNIiN
- iBRy638vGmY8e98PN7y+enPbZ0/mdBMaIf1pqR/radzM8TBTzb5ANh3k/sWKzAbdU1QakhsoL7j
- QzjEcrpGB6fiPXyZYW4OO3WI1qPoaHvfxFX91Ih6ufr/D/EScNnXe4X3FmfmkBg0NPtplWMJLtD
- HmeHEVh6z2db7eLVXiX0KxLt77Slq5x6++ciRBE6Nc1SXUFUdNnDf7A7Yi0uTSTrFXoPDEefnci
- bJEs5eKZsG7qTMoIICw==
-X-Proofpoint-GUID: 62Qgbc3a3mUVk5aRvsbIMKoP0BqTIV-_
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAyOSBTYWx0ZWRfX7dXzvG56lJ7j
- qgqff+Eo3mRytFyThCAfO0TE3z7viK+s24gTMuKcIdV81A0/7PcFaZ373BnsHf3Hef8yhu/c+x8
- rdzB/xYMe/4iugI5nkPyJrSTzx+Zq4I=
-X-Proofpoint-ORIG-GUID: 62Qgbc3a3mUVk5aRvsbIMKoP0BqTIV-_
-X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b07e26a cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
- a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=jIQo8A4GAAAA:8 a=Y18rF2VYFuf4IdEaWfYA:9 a=CjuIK1q_8ugA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-26_02,2026-11-25_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
- suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260029
+Content-Transfer-Encoding: 8bit
 
-On 26-11-23 16:17:16, Faisal Hassan wrote:
-> The dwc3_qcom_suspend() and dwc3_qcom_resume() functions
-> handle both system PM and runtime PM paths but cannot
-> differentiate between them, preventing distinct power
-> management strategies.
-> 
-> Refactor suspend/resume functions to accept pm_message_t
-> instead of boolean wakeup flags. Use PMSG_IS_AUTO()
-> to identify runtime PM (PMSG_AUTO_SUSPEND/RESUME) versus
-> system PM (PMSG_SUSPEND/RESUME) paths.
-> 
-> Preserve existing wakeup behavior: always enable wakeup
-> for runtime suspend, check device_may_wakeup() for system
-> suspend.
-> 
-> Follow dwc3/core.c pattern to enable future per-path
-> strategies like differentiated power states.
-> 
-> Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
-> Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
-> Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
-> Acked-by: Thinh Nguyen <Thinh.Nguyen@synopsys.com>
-> Reviewed-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+The always-on parent data of the CPUSS AHB RCG lists GPLL0 twice, while
+gcc_parent_map_0 describes mux input 6 as the GPLL0 AUX2 output, which is
+modelled by the gpll0_out_aux2_div fixed divider clock, and the non
+always-on gcc_parent_data_0 refers to it accordingly.
 
-Reviewed-by: Peter Chen <peter.chen@oss.qualcomm.com>
+The RCG frequency table has only the XO entry, so the kernel never selects
+the GPLL0 AUX2 input itself, however if a bootloader leaves the RCG on it,
+then the clock framework takes GPLL0 as the parent, and the RCG rate is
+reported twice higher than the actual one.
 
-Peter
-> ---
->  drivers/usb/dwc3/dwc3-qcom.c | 25 +++++++++++++++++--------
->  1 file changed, 17 insertions(+), 8 deletions(-)
-> 
-> diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
-> index d44f093ac243..7a7225b900b3 100644
-> --- a/drivers/usb/dwc3/dwc3-qcom.c
-> +++ b/drivers/usb/dwc3/dwc3-qcom.c
-> @@ -335,8 +335,18 @@ static void dwc3_qcom_enable_interrupts(struct dwc3_qcom *qcom)
->  		dwc3_qcom_enable_port_interrupts(&qcom->ports[i]);
->  }
->  
-> -static int dwc3_qcom_suspend(struct dwc3_qcom *qcom, bool wakeup)
-> +/*
-> + * For runtime PM, always enable wakeup.
-> + * For system PM, check device wakeup capability.
-> + */
-> +static bool dwc3_qcom_wakeup_enabled(struct dwc3_qcom *qcom, pm_message_t msg)
-> +{
-> +	return PMSG_IS_AUTO(msg) || device_may_wakeup(qcom->dev);
-> +}
-> +
-> +static int dwc3_qcom_suspend(struct dwc3_qcom *qcom, pm_message_t msg)
->  {
-> +	bool wakeup = dwc3_qcom_wakeup_enabled(qcom, msg);
->  	u32 val;
->  	int i, ret;
->  
-> @@ -369,8 +379,9 @@ static int dwc3_qcom_suspend(struct dwc3_qcom *qcom, bool wakeup)
->  	return 0;
->  }
->  
-> -static int dwc3_qcom_resume(struct dwc3_qcom *qcom, bool wakeup)
-> +static int dwc3_qcom_resume(struct dwc3_qcom *qcom, pm_message_t msg)
->  {
-> +	bool wakeup = dwc3_qcom_wakeup_enabled(qcom, msg);
->  	int ret;
->  	int i;
->  
-> @@ -750,14 +761,13 @@ static int dwc3_qcom_pm_suspend(struct device *dev)
->  {
->  	struct dwc3 *dwc = dev_get_drvdata(dev);
->  	struct dwc3_qcom *qcom = to_dwc3_qcom(dwc);
-> -	bool wakeup = device_may_wakeup(dev);
->  	int ret;
->  
->  	ret = dwc3_pm_suspend(&qcom->dwc);
->  	if (ret)
->  		return ret;
->  
-> -	ret = dwc3_qcom_suspend(qcom, wakeup);
-> +	ret = dwc3_qcom_suspend(qcom, PMSG_SUSPEND);
->  	if (ret)
->  		return ret;
->  
-> @@ -770,10 +780,9 @@ static int dwc3_qcom_pm_resume(struct device *dev)
->  {
->  	struct dwc3 *dwc = dev_get_drvdata(dev);
->  	struct dwc3_qcom *qcom = to_dwc3_qcom(dwc);
-> -	bool wakeup = device_may_wakeup(dev);
->  	int ret;
->  
-> -	ret = dwc3_qcom_resume(qcom, wakeup);
-> +	ret = dwc3_qcom_resume(qcom, PMSG_RESUME);
->  	if (ret)
->  		return ret;
->  
-> @@ -810,7 +819,7 @@ static int dwc3_qcom_runtime_suspend(struct device *dev)
->  	if (ret)
->  		return ret;
->  
-> -	return dwc3_qcom_suspend(qcom, true);
-> +	return dwc3_qcom_suspend(qcom, PMSG_AUTO_SUSPEND);
->  }
->  
->  static int dwc3_qcom_runtime_resume(struct device *dev)
-> @@ -819,7 +828,7 @@ static int dwc3_qcom_runtime_resume(struct device *dev)
->  	struct dwc3_qcom *qcom = to_dwc3_qcom(dwc);
->  	int ret;
->  
-> -	ret = dwc3_qcom_resume(qcom, true);
-> +	ret = dwc3_qcom_resume(qcom, PMSG_AUTO_RESUME);
->  	if (ret)
->  		return ret;
->  
-> -- 
-> 2.34.1
-> 
+Replace the duplicate GPLL0 entry by gpll0_out_aux2_div clock, as it is
+done in the downstream driver and in the other GCC drivers with the same
+parent map.
 
+Fixes: 39d6dcf67fe9 ("clk: qcom: gcc: Add support for QCS615 GCC clocks")
+Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+---
+ drivers/clk/qcom/gcc-qcs615.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/clk/qcom/gcc-qcs615.c b/drivers/clk/qcom/gcc-qcs615.c
+index f205de3a9361..4c7d44187dae 100644
+--- a/drivers/clk/qcom/gcc-qcs615.c
++++ b/drivers/clk/qcom/gcc-qcs615.c
+@@ -229,7 +229,7 @@ static const struct clk_parent_data gcc_parent_data_0[] = {
+ static const struct clk_parent_data gcc_parent_data_0_ao[] = {
+ 	{ .index = DT_BI_TCXO_AO },
+ 	{ .hw = &gpll0.clkr.hw },
+-	{ .hw = &gpll0.clkr.hw },
++	{ .hw = &gpll0_out_aux2_div.hw },
+ };
+ 
+ static const struct parent_map gcc_parent_map_1[] = {
 -- 
+2.53.0
 
-Thanks,
-Peter Chen
