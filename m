@@ -1,101 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=198.175.65.14
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.179
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795667374;
-	b=XkwYojquj7aQINzEA+el3qa7FEx/2zBkl17cNEKOWH0tGfsmP5wukW5fBsuNZWuQiIBP
-	 KvrUuYybEReQuECK534VVGGMhB7UTpSux96mRumxdXdkmjnx58BzYApB5cZQ7N6Dv6j+R
-	 uImPmHQ3hIYlxxsUWoycc8PmuT3BZG3GKBY51YWmG1Z7V123Z+Dh/kre2vW0Ne3gDN+N/
-	 /W6PsFS/MYEG3k+nerb6s1d/RK4h1GCceqDMCzkowQgO3gXi/Ji2l9IMrL+ZhPisjR6Jv
-	 y6gnPI/ueEjayEOsBXzrydALas+tKpkLCcuhpSw+LRgrhOO2EF1otPSRwJPs6AAzliw==
+	t=1795669100;
+	b=328k8Md/LG98OEf7nEgiTE3YHU1CwZa5bZhUMLMNrl0M3q3YulSC9BwGdsvCiQ3JC5f1
+	 smh2iCyr7tmmziuPX3cjmWVvOOtEJbm0beBTpuLfyC9HVZhXr3uk+qsaFYX8FXLoOWmFj
+	 KHGlqty2hmDi9lkagwy0WKK6NptskQchAlwvijwoHO3bq9U2UId5cyIsJHOSdv+Go49xn
+	 KfmBiqen5v1xcfRJNTMFoRMoJU6VdMRX/0Ysm9guEsjaBcc48vfPuItXWgl2t4csk0Qpz
+	 7cw/gr17r4/LT3siVVuX7L/7TqgfI82zmpTokWC6ypeM0IDNZkit+HTyb6XY1RSKqKw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795667374;
-	h=DMARC-Filter:DKIM-Signature:X-CSE-ConnectionGUID:X-CSE-MsgGUID:
-	 X-IronPort-AV:X-IronPort-AV:Received:X-CSE-ConnectionGUID:
-	 X-CSE-MsgGUID:X-ExtLoop1:X-IronPort-AV:Received:From:To:Cc:Subject:
-	 Date:Message-Id:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=AK43gpYSq7w0CU4ikLDj1utD0vYiVFGZ7nkSEgL3mF4=;
-	b=LB+kU5lGKO4O9oBvQkJ1i3W+LKV7XfLzTdjLuT7ta3O3p6Dh73/bUvz9YBVOQRYxDHnK
-	 5vUmKZTOa0pllIkqhcheNTH3IJ9pIDx5yVvkPGyZoP9EVuaBMlZOLj2cnudpk1iDWue0Q
-	 S87AgMPOD9rLl2WPGAejYm4PJXlWEo0VIhRZAcHh0vLrn40j90J/1n5ZAZoeYYZb99/vW
-	 +k49zvSM30NuZMOsVQhHWg0cGCxSBq4tF4/C1dnL1fJK/YCex2MCudIRaoqhw2c0uVkXy
-	 wTmMJ2UAB+kEVm4BDtLBa+hz4vB86bPvQ5584LFM3CPfdaBF46Vlm/JYh+VYVSuF+tg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795669100;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:Subject:Date:
+	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-B4-Tracking:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=JI8HfPX41bL6Z32pAsbgbrb/7QYtt9ijsc5D9+fTPhY=;
+	b=mf7i591RxwUv+5IpdR/jGWLCoaDImWnxrtWB3kU/e2yMjMM+6SdaIurTEkd5KcQC+PIu
+	 5jBlWz7IZXttq8CWNMv4R3kIN4GFz0cu0TYSAgUVhEsRq6Q1/ccfn45cZ9vDCRhd829gp
+	 fQ2FVitLhTz3yfO6Bx+PS+F18MElp+yg7R07NLW6SC6MCpMz88dEXwMot9AOXJSZ1zlGt
+	 5wHjFSOZkZ9GFjynhSS+V+C6hW7M/x3B/JboOIUJkz7LGitRWFby4FsoQwkrMa4aaaRPl
+	 WPVewCF0mWdg3TO7Iwoch9FhcNGjUCMLsVrxy0VsXEmxadGkVb70E5w0+y9u40uGLtQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=intel.com;
-	spf=pass smtp.mailfrom=intel.com;
-	dkim=pass header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UdHgE2YJ;
-	arc=none smtp.remote-ip=198.175.65.14
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kA0qL9Uj;
+	arc=none smtp.remote-ip=74.125.82.179
+Received: from mail-dy1-f179.google.com (mail-dy1-f179.google.com [74.125.82.179])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8246A606A32C;
-	Thu, 26 Nov 2026 04:29:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8246A606A32C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=intel.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9DCA6606A31C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 04:58:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9DCA6606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=intel.com header.i=@intel.com header.a=rsa-sha256 header.s=Intel header.b=UdHgE2YJ
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
-  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
-  t=1795667374; x=1827203374;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version:content-transfer-encoding;
-  bh=Q46Ny86YECgKXN8kmIWRz+GSU1zXe1ndvwWqiPQFP5c=;
-  b=UdHgE2YJkNsjwB3sK3ZEdJ+EobQjvnKHCBVad8OTMwxFmyaVGyfyqPPA
-   KzrsZcUVtf0qs9Dcw01Nl/i3Xmn1E9ve1Wv/zXB7nL41SPKoXMxpVgsMY
-   Ky9Q/gCzpQWS09jbOgjjJvPRTAUiqrhbT7DIV5a0KmrXV/VOEcnlQs526
-   +f1jd3zJdtWuqtjvgh7DVIlfMGuDI4zvGo6lTsrzkoY7J5AS79O+6jM02
-   mDlrcYm57/+Jplpj+uENkkVinVHCbLSXPeRmxS1BYYhKSeMzMDY7/5np1
-   ReCTmJprMDwJbvChoCOSEJrFXiQUgWsxoDK2HO+lYWmbct2vpE4nYNJNB
-   Q==;
-X-CSE-ConnectionGUID: argBnWZNTZCb+xx5ysbjTw==
-X-CSE-MsgGUID: EO6HMcMRRFGC3VHC+pQS9A==
-X-IronPort-AV: E=McAfee;i="6800,10657,11977"; a="4472835"
-X-IronPort-AV: E=Sophos;i="6.27,234,1787036400"; 
-   d="scan'208";a="4472835"
-Received: from fmviesa003.fm.intel.com ([10.60.135.143])
-  by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Nov 2026 20:29:34 -0800
-X-CSE-ConnectionGUID: GBmajvHTT4+NW1bJIYiSfg==
-X-CSE-MsgGUID: yVto/OjVTrSgf9wH6h5W6Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.27,234,1787036400"; 
-   d="scan'208";a="12287780"
-Received: from kandpal-x299-ud4-pro.iind.intel.com ([10.190.239.10])
-  by fmviesa003.fm.intel.com with ESMTP; 25 Nov 2026 20:29:26 -0800
-From: Suraj Kandpal <suraj.kandpal@intel.com>
-To: dri-devel@lists.freedesktop.org,
-	amd-gfx@lists.freedesktop.org,
-	freedreno@lists.freedesktop.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-renesas-soc@vger.kernel.org,
-	intel-gfx@lists.freedesktop.org,
-	intel-xe@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Cc: dmitry.baryshkov@oss.qualcomm.com,
-	John.Harrison@Igalia.com,
-	kernel-dev@igalia.com,
-	alex.hung@amd.com,
-	liviu.dudau@arm.com,
-	louis.chauvet@bootlin.com,
-	maarten.lankhorst@linux.intel.com,
-	mripard@kernel.org,
-	tzimmermann@suse.de,
-	airlied@gmail.com,
-	simona@ffwll.ch,
-	laurent.pinchart+renesas@ideasonboard.com,
-	tomi.valkeinen+renesas@ideasonboard.com,
-	kieran.bingham+renesas@ideasonboard.com,
-	dave.stevenson@raspberrypi.com,
-	mcanal@igalia.com,
-	kernel-list@raspberrypi.com,
-	uma.shankar@intel.com,
-	arun.r.murthy@intel.com,
-	Suraj Kandpal <suraj.kandpal@intel.com>
-Subject: [PATCH v8 7/7] drm: writeback: Modify cleanup_writeback_job helper
-Date: Thu, 26 Nov 2026 09:58:35 +0530
-Message-Id: <20261126042835.436307-8-suraj.kandpal@intel.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261126042835.436307-1-suraj.kandpal@intel.com>
-References: <20261126042835.436307-1-suraj.kandpal@intel.com>
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=kA0qL9Uj
+Received: by mail-dy1-f179.google.com with SMTP id 5a478bee46e88-38431138772so8576185eec.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 20:58:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795669099; x=1796273899; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=JI8HfPX41bL6Z32pAsbgbrb/7QYtt9ijsc5D9+fTPhY=;
+        b=kA0qL9UjEBH6xoroa4PMEU9xJz2r1G9pleT0UHMh2Fc5IXhMDOJF9jKOZvxypOIdNT
+         ozkeS3xcz0FqntWz3f1HxDdF7mr9HpZbIPym27zSIIIOlBOUqlaSMbs+u0N52CI5+28P
+         JQWX3uW32UhtR63gxbZhJ+8W0RSafYoY9eCvI7c04S9GR1Cgw/uO0QBu4hxXq6kEQ18K
+         OniVmjsvrfrFRtYm4+ccJMTwIPJOF9YUUQ9doGiBw3ln77X3rQeRJI2se35jWLKd5Vc2
+         ljMBNk4seCvuvsRIxI+df4W9b2qTDiCw7jwNUEBb/PX0ZWHyjIGkE3To+Q+OBCv1fWZn
+         ucvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795669099; x=1796273899;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=JI8HfPX41bL6Z32pAsbgbrb/7QYtt9ijsc5D9+fTPhY=;
+        b=lkvMRiJz7KSaniGXZzuRxQAc3VgGZGZkEMBOns7hmNb2HkEFFUTOGM2PiRooFymf9b
+         1XQYuwnUjuEcwvqcN6/KsP/zRoAYriwsOdcQ0WZlJZyOCSoj9lXW7BTYc8Dk/qlwvn/o
+         4+4DCxnV99EKtxrNUuzqBSfg3VBWVqJm06m0Bj7+Pam+LEjlQ9cDcENND3pqTnTM9oyL
+         MbJ19N4X+5EUcyUrKaH+om7EXbRM7AO7y/0PhE7AgbrRDK4Xv/SqlEg6tkDvkx2i75Rv
+         HoRIXK/t+wNVWmcwxWGKuUz5DRHp2JgR2ucm1UvWhVZVAt2H2hUFW1EZIIXzpvGs56Q1
+         05tQ==
+X-Gm-Message-State: APuU4Z/dGp53pa2/V6d0/W0aPrnDPcnJ83dey/+zijhcS2JD+VW7UrK4
+	InHz8FtyxLJRZM/Ukv7R6tUJ68NtP6tSfZPxs5G/gOjEnH5ZrWV25b+U
+X-Gm-Gg: AZFdTZchY04kL6s/IIzObJArgPdG5SCbyCUzD5O7hzJqNJ5e2mklPRTYepvogjVknie
+	ITdIn9sD8nSfQKAleCCMSvbnrFI2p5M0EbVIAmmQrIdJwnw3SayGtaEI4FmJPCf0c3DqYf4RcsF
+	FsG+C+yDfUz6Xzo6W0pspKFaWdM5xix5cLJmg9x5lSnH43P0pbr69G05rAJixvSMpWiRrFw13qC
+	S4Z3zXY6RXCt1xLmZeYT5WtMoRJm0Z7dnMLzhk4e5M5cBdT91grwop8WDcL/S8mlH98i+DPDqOe
+	19F9jhzPzbcYh8Pvv/D1i3GN4/8TPkwev++74QbnvjPY5fjc7TFZqNrA1LKO6uhohlZ79fXNM60
+	1wQRvgQkbovnJnEwUhqPbOmGdjPGiAYW+mRXAbwAYhXcUY5auQZqyfBFEOSj2Pp2Dg25h28kUUL
+	qea6mHcmil5ppYl1MfhUbjt55PneOg37xkDU0YLt6otkhwkboXkSJy5O0UtwSFaaun2CbRVaBUd
+	1y+j6/PUs/EL5AMsBFYyJMQP6L51Avj+KvvQs3HW31TpcZPeo/ugAAUgaG08o6K3Ww7SjZ9TzP6
+	BrksqKjDlNtmeQwOF/5IO1arjWz0/NNTFbMpvC2nliNiJqmblshKWPSRqfwvu3TC46ZeqDhYa3k
+	3wNzwgIk=
+X-Received: by 2002:a05:7301:650c:b0:386:cca5:3626 with SMTP id 5a478bee46e88-386cca53bd1mr7062875eec.31.1795669098625;
+        Wed, 25 Nov 2026 20:58:18 -0800 (PST)
+Received: from Sobhana.localdomain ([152.59.222.211])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385666e96bdsm54800362eec.7.2026.11.25.20.58.08
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 20:58:18 -0800 (PST)
+From: Sreeshankar K <sreeshankar0910@gmail.com>
+Subject: [PATCH RESEND v15 0/8] Add initial support for Qualcomm SM7250 SoC
+Date: Thu, 26 Nov 2026 04:58:05 +0000
+Message-Id: <20261126-sm7250-v15-0-492014ec0a52@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -105,145 +91,200 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAF28B2sC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDE11FJSSM
+ xLz0lN1M1OAAkpGBkZmhoZGZrrFueZGpga6RsYWySlmySbmSYnmSkDFBUWpaZkVYJOilYJcg13
+ 9XJRia2sBvy3ZPWEAAAA=
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>, 
+ Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, 
+ Jerome Brunet <jbrunet+clk@baylibre.com>, Rob Herring <robh@kernel.org>, 
+ Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, 
+ Taniya Das <taniya.das@oss.qualcomm.com>, Amit Kucheria <amitk@kernel.org>, 
+ Thara Gopinath <thara.gopinath@gmail.com>, 
+ "Rafael J. Wysocki" <rafael@kernel.org>, 
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>, 
+ Lukasz Luba <lukasz.luba@arm.com>, Konrad Dybcio <konradybcio@kernel.org>, 
+ Robert Marko <robimarko@gmail.com>, Guru Das Srinagesh <linux@gurudas.dev>, 
+ Viresh Kumar <viresh.kumar@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ linux-pm@vger.kernel.org, Sreeshankar K <sreeshankar0910@gmail.com>, 
+ Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795669088; l=8347;
+ i=sreeshankar0910@gmail.com; s=20261029; h=from:subject:message-id;
+ bh=sNABgjva2hPKnWVGrROAvMEHWqF0OpGbtuBDXR47Gm0=;
+ b=2Zf1TqTwzSOis3UUKFHBV/xWYVXWZYEXIgHSzkou+9E4BAyoCd7gT126wJ6e1J+UVTOeWTcU4
+ t0UwEdfgmLXD7ZrAGpwm7skiIGPCt934cyqv6qQX3OWYtWQqHSLRh9H
+X-Developer-Key: i=sreeshankar0910@gmail.com; a=ed25519;
+ pk=CGSHduvtn2hwLCNRXRc9s/fh6X8PH/zNdp08zC8hOuQ=
 
-The cleanup_writeback_job() connector helper hook needs access to
-the parent drm_connector object as well as the drm_writeback_connector
-object itself. So, pass in the top level drm_connector and traverse
-down to drm_writeback_connector rather than passing in the lower
-level object and traversing back up. This also makes it uniform
-with the params passed to other drm_connector_helper_funcs hooks.
+This patchset introduces foundational upstream support for the Qualcomm SM7250
+SoC (internally codenamed Lito).
 
-Signed-off-by: Suraj Kandpal <suraj.kandpal@intel.com>
-Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Reviewed-by: John Harrison <John.Harrison@Igalia.com>
-Reviewed-by: Alex Hung <alex.hung@amd.com>
+SM7250 is an ARMv8.2-A platform manufactured on a 7nm process, featuring an
+octa-core Kryo 475 CPU configuration (1x Prime Cortex-A76, 1x Gold Cortex-A76,
+and 6x Silver Cortex-A55) and Adreno 620 GPU.
+
+This patchset is organized as follows:
+> Document relevant device tree bindings (SoC ID, Kryo 475 CPUs, SCM, PDC,
+RPMh clocks/power domains, GCC and cpufreq hardware).
+> Add driver support for SM7250 in socinfo, rpmh-clk, rpmhpd, and GCC.
+> Add the base SoC DTSI (sm7250.dtsi) defining the cpus, PSCI,
+interrupt controllers, clock providers, power domains, and reserved memory.
+
+>-----------------------------------------------------------------------------<
+Merged patches:
+dt-bindings: arm: qcom,ids: Add SoC ID for SM7250
+soc: qcom: socinfo: Add SM7250 SoC ID
+dt-bindings: clock: qcom,rpmhcc: Document RPMHCC compatible
+clk: qcom: rpmh: Add SM7250 rpmh clocks
+dt-bindings: power: qcom,rpmhpd: Document RPMh power domain for SM7250
+pmdomain: qcom: rpmhpd: Add RPMh power domains
+dt-bindings: arm: cpus: Document Kryo 475 CPUs
+dt-bindings: interrupt-controller: qcom,pdc: Document SM7250 PDC
+
+Pending patches:
+dt-bindings: clock: Add SM7250 global clock controller
+clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+thermal/qcom/lmh: Switch to match data for SoC CPU-to-node mappings
+dt-bindings: thermal: lmh: Document SM7250 LMh
+thermal/qcom/lmh: Add support for Qualcomm SM7250
+dt-bindings: firmware: qcom,scm: Document SM7250 SCM
+dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq hardware
+arm64: dts: qcom: Add SM7250 devicetree file
+>------------------------------------------------------------------------------<
+
+Changelog [v15]:
+[PATCH v15 3/8] thermal/qcom/lmh: Switch to match data for SoC CPU-to-node mappings
+> Update the patch to fix apply conflicts with Linux 7.4-rc3
+
+Link [v14]: https://lore.kernel.org/linux-arm-msm/20261106-sm7250-v14-0-7d167e993f9c@gmail.com/t/#t
+Changelog [v14]:
+Fixed various issue found from Sashiko's review, Link: https://sashiko.dev/#/patchset/20261104-master-v13-0-355b65c6f764%40gmail.com
+
+Link [v13]: https://lore.kernel.org/linux-arm-msm/20261104-master-v13-0-355b65c6f764@gmail.com/t/#t
+Changelog [v13]:
+Fixed various issue found from Sashiko's review, Link: https://sashiko.dev/#/patchset/20261104-master-v12-0-57fbe9eef978%40gmail.com
+[PATCH v13 3/8] thermal/qcom/lmh: Switch to match data for SoC CPU-to-node mappings
+> Switch to match data mapping instead of hardcoded 4-4 cpu configuration.
+[PATCH v13 5/8] thermal/qcom/lmh: Add support for Qualcomm SM7250
+> Add 6-2 cpu configuration LMh support for SM7250 SoC.
+[PATCH v13 8/8] arm64: dts: qcom: Add SM7250 devicetree file
+> Place the nodes in acesending order.
+
+Link [v12]: https://lore.kernel.org/linux-arm-msm/20261104-master-v12-0-57fbe9eef978@gmail.com/T/#t
+Changelog [v12]:
+[PATCH v12 1/6] dt-bindings: clock: Add SM7250 global clock controller
+> Move dt-binding definition to qcom,gcc-sm8250.yaml. The device tree
+schema of SM7250 matches with SM8250 for clock-controller node.
+[PATCH v12 5/6] dt-bindings: thermal: lmh: Document SM7250 LMh
+> Add LMh compatible.
+[PATCH v12 6/6] arm64: dts: qcom: Add SM7250 devicetree file
+> Remove cluster wise sorting of cpus.
+> Add LMh node.
+
+Link [RESEND v11]: https://lore.kernel.org/linux-arm-msm/20261029-master-v11-0-2c29e382162c@gmail.com/T/#t
+Link [v11]: https://lore.kernel.org/linux-arm-msm/20261016042432.824-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v11]:
+[PATCH v11 2/5] clk: qcom: Add Global Clock Controller (GCC) driver
+> Drop hw_ctl clock branches
+> Populate default values for GDSCs
+
+Link [v10]: https://lore.kernel.org/linux-arm-msm/20261015051926.13752-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v10]:
+[PATCH v10 2/6] clk: qcom: Add Global Clock Controller (GCC) driver
+> Update .halt_check and .ops are per the review.
+
+Link [v9]: https://lore.kernel.org/linux-arm-msm/20260901092447.3028-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v9]:
+[PATCH v9 04/13]: clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Make all clk_init_data instances const across the driver.
+
+Link [v8]: https://lore.kernel.org/linux-arm-msm/20260901070717.20513-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v8]:
+Same as v7. Resending the full patchset as v8 due to a transmission interruption during v7.
+
+Link [v7]: https://lore.kernel.org/linux-arm-msm/20260901064357.20055-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v7]:
+[PATCH v7 04/13]: clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Fixed missing (struct device *dev) in gcc_sm7250_clk_regs_configure
+
+Link [v6]: https://lore.kernel.org/linux-arm-msm/20260824150156.1310-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v6]:
+[PATCH v6 04/13]: clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Make all clk_init_data instances const across the driver.
+
+Link [v5]: https://lore.kernel.org/linux-arm-msm/20260824130437.2771-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v5]:
+[PATCH v5 13/13]: arm64: dts: qcom: Add SM7250 devicetree file
+> Reformat multi-entry phandle lists (domain-idle-states) to '<&a>, <&b>'.
+> Reformat multi-entry tuples and string lists (qcom,pdc-ranges, qcom,tcs-config, reg-names)
+  to one item per line.
+> Enable QUPv3 wrapper globally by dropping 'status = "disabled"'.
+> Move compatible property to first.
+> Remove clock-frequency property for timer.
+
+Link [v4]: https://lore.kernel.org/linux-arm-msm/20260821154030.2514-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v4]:
+[PATCH v4 04/13] clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Update .fw_name with .index
+[PATCH v4 13/13] arm64: dts: qcom: Add SM7250 devicetree file
+> Added missing capacity-dmips-mhz and dynamic-power-coefficient for cpu@300
+> Added power-domains for cpus and apps_rsc
+
+Link [v3]: https://lore.kernel.org/linux-arm-msm/20260821081125.4522-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v3]:
+[PATCH v3 04/13] clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+> Updated the way of registering critical clocks.
+> Made some more clock critical.
+        GCC_VIDEO_XO_CLK
+        GCC_CAMERA_XO_CLK
+        GCC_DISP_XO_CLK
+        GCC_NPU_CFG_AHB_CLK
+        GCC_CPUSS_AHB_CLK
+        GCC_NPU_BWMON_CFG_AHB_CLK
+  These clocks are flagged as critical in gcc-lito.c
+
+Link [v2]: https://lore.kernel.org/linux-arm-msm/20260819152545.3934-1-sreeshankar0910@gmail.com/T/#t
+Changelog [v2]:
+[PATCH v2 12/13] dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq hardware
+[PATCH v2 13/13] arm64: dts: qcom: Add SM7250 devicetree file
+> Added SM7250 cpufreq hardware
+
+Link [v1]: https://lore.kernel.org/linux-arm-msm/20260818080754.4362-1-sreeshankar0910@gmail.com/T/#t
+
+Signed-off-by: Sreeshankar K <sreeshankar0910@gmail.com>
 ---
-v6 -> v7:
-- Rebase over latest kernel
-- Rebase over latest writeback series by Dmitry
+Sreeshankar K (8):
+      dt-bindings: clock: Add SM7250 global clock controller
+      clk: qcom: Add Global Clock Controller (GCC) driver for SM7250
+      thermal/qcom/lmh: Switch to match data for SoC CPU-to-node mappings
+      dt-bindings: thermal: lmh: Document SM7250 LMh
+      thermal/qcom/lmh: Add support for Qualcomm SM7250
+      dt-bindings: firmware: qcom,scm: Document SM7250 SCM
+      dt-bindings: cpufreq: qcom-hw: Document SM7250 cpufreq hardware
+      arm64: dts: qcom: Add SM7250 devicetree file
 
-v5 -> v6:
-- Rebase over latest kernel
+ .../devicetree/bindings/clock/qcom,gcc-sm8250.yaml |   13 +-
+ .../bindings/cpufreq/cpufreq-qcom-hw.yaml          |    2 +
+ .../devicetree/bindings/firmware/qcom,scm.yaml     |    1 +
+ .../devicetree/bindings/thermal/qcom-lmh.yaml      |    1 +
+ arch/arm64/boot/dts/qcom/sm7250.dtsi               |  803 +++++++
+ drivers/clk/qcom/Kconfig                           |   10 +
+ drivers/clk/qcom/Makefile                          |    1 +
+ drivers/clk/qcom/gcc-sm7250.c                      | 2278 ++++++++++++++++++++
+ drivers/thermal/qcom/lmh.c                         |   74 +-
+ include/dt-bindings/clock/qcom,gcc-sm7250.h        |  163 ++
+ 10 files changed, 3327 insertions(+), 19 deletions(-)
+---
+base-commit: 40212b29a6f718d4e7fb3275cede181cb8e137cf
+change-id: 20261126-sm7250-238cd6c47ba7
 
-v3 -> v4:
-- Update subject line for consitency (John)
-- Update commit message across commits for consitency (John)
-
- drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c | 2 +-
- drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.h | 2 +-
- drivers/gpu/drm/drm_writeback.c                      | 2 +-
- drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c        | 3 +--
- drivers/gpu/drm/renesas/rcar-du/rcar_du_writeback.c  | 5 ++---
- drivers/gpu/drm/vkms/vkms_writeback.c                | 5 +----
- include/drm/drm_modeset_helper_vtables.h             | 2 +-
- 7 files changed, 8 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c
-index afed660762fd..90ffa9e83957 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.c
-@@ -196,7 +196,7 @@ STATIC_IFN_KUNIT int amdgpu_dm_wb_prepare_job(struct drm_connector *wb_connector
- }
- EXPORT_IF_KUNIT(amdgpu_dm_wb_prepare_job);
- 
--STATIC_IFN_KUNIT void amdgpu_dm_wb_cleanup_job(struct drm_writeback_connector *connector,
-+STATIC_IFN_KUNIT void amdgpu_dm_wb_cleanup_job(struct drm_connector *connector,
- 				struct drm_writeback_job *job)
- {
- 	struct amdgpu_bo *rbo;
-diff --git a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.h b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.h
-index ede7ff007ad7..4050d83a2a95 100644
---- a/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.h
-+++ b/drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm_wb.h
-@@ -61,7 +61,7 @@ int amdgpu_dm_wb_encoder_atomic_check(struct drm_encoder *encoder,
- int amdgpu_dm_wb_connector_get_modes(struct drm_connector *connector);
- int amdgpu_dm_wb_prepare_job(struct drm_connector *wb_connector,
- 			     struct drm_writeback_job *job);
--void amdgpu_dm_wb_cleanup_job(struct drm_writeback_connector *connector,
-+void amdgpu_dm_wb_cleanup_job(struct drm_connector *connector,
- 			      struct drm_writeback_job *job);
- void amdgpu_dm_wb_kunit_set_ops(const struct amdgpu_dm_wb_kunit_ops *ops);
- #endif
-diff --git a/drivers/gpu/drm/drm_writeback.c b/drivers/gpu/drm/drm_writeback.c
-index e63a2a0c2e2c..14b979e3c72b 100644
---- a/drivers/gpu/drm/drm_writeback.c
-+++ b/drivers/gpu/drm/drm_writeback.c
-@@ -428,7 +428,7 @@ void drm_writeback_cleanup_job(struct drm_writeback_job *job)
- 		connector->helper_private;
- 
- 	if (job->prepared && funcs->cleanup_writeback_job)
--		funcs->cleanup_writeback_job(wb_connector, job);
-+		funcs->cleanup_writeback_job(connector, job);
- 
- 	if (job->fb)
- 		drm_framebuffer_put(job->fb);
-diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
-index 88227aa7ee69..44797c9443ac 100644
---- a/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
-+++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_writeback.c
-@@ -100,10 +100,9 @@ static int dpu_wb_conn_prepare_job(struct drm_connector *connector,
- 	return 0;
- }
- 
--static void dpu_wb_conn_cleanup_job(struct drm_writeback_connector *wb_connector,
-+static void dpu_wb_conn_cleanup_job(struct drm_connector *connector,
- 		struct drm_writeback_job *job)
- {
--	struct drm_connector *connector = drm_writeback_to_connector(wb_connector);
- 	struct dpu_wb_connector *dpu_wb_conn = to_dpu_wb_conn(connector);
- 
- 	if (!job->fb)
-diff --git a/drivers/gpu/drm/renesas/rcar-du/rcar_du_writeback.c b/drivers/gpu/drm/renesas/rcar-du/rcar_du_writeback.c
-index 6c4685147e49..d6171fb5eb9a 100644
---- a/drivers/gpu/drm/renesas/rcar-du/rcar_du_writeback.c
-+++ b/drivers/gpu/drm/renesas/rcar-du/rcar_du_writeback.c
-@@ -72,11 +72,10 @@ static int rcar_du_wb_prepare_job(struct drm_connector *connector,
- 	return 0;
- }
- 
--static void rcar_du_wb_cleanup_job(struct drm_writeback_connector *connector,
-+static void rcar_du_wb_cleanup_job(struct drm_connector *connector,
- 				   struct drm_writeback_job *job)
- {
--	struct drm_connector *conn = drm_writeback_to_connector(connector);
--	struct rcar_du_crtc *rcrtc = wb_to_rcar_crtc(conn);
-+	struct rcar_du_crtc *rcrtc = wb_to_rcar_crtc(connector);
- 	struct rcar_du_wb_job *rjob = job->priv;
- 
- 	if (!job->fb)
-diff --git a/drivers/gpu/drm/vkms/vkms_writeback.c b/drivers/gpu/drm/vkms/vkms_writeback.c
-index be67b13e7347..c805fcf78163 100644
---- a/drivers/gpu/drm/vkms/vkms_writeback.c
-+++ b/drivers/gpu/drm/vkms/vkms_writeback.c
-@@ -103,13 +103,10 @@ static int vkms_wb_prepare_job(struct drm_connector *connector,
- 	return ret;
- }
- 
--static void vkms_wb_cleanup_job(struct drm_writeback_connector *wb_conn,
-+static void vkms_wb_cleanup_job(struct drm_connector *connector,
- 				struct drm_writeback_job *job)
- {
- 	struct vkms_writeback_job *vkmsjob = job->priv;
--	struct drm_connector *connector = container_of(wb_conn,
--						       struct drm_connector,
--						       writeback);
- 	struct vkms_output *vkms_output = container_of(connector,
- 						       struct vkms_output,
- 						       wb_connector);
-diff --git a/include/drm/drm_modeset_helper_vtables.h b/include/drm/drm_modeset_helper_vtables.h
-index bff41a1d49a6..0fdba3eded28 100644
---- a/include/drm/drm_modeset_helper_vtables.h
-+++ b/include/drm/drm_modeset_helper_vtables.h
-@@ -1176,7 +1176,7 @@ struct drm_connector_helper_funcs {
- 	 *
- 	 * This callback is used by the atomic modeset helpers.
- 	 */
--	void (*cleanup_writeback_job)(struct drm_writeback_connector *connector,
-+	void (*cleanup_writeback_job)(struct drm_connector *connector,
- 				      struct drm_writeback_job *job);
- 
- 	/**
+Best regards,
 -- 
-2.34.1
+Sreeshankar K <sreeshankar0910@gmail.com>
 
