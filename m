@@ -1,66 +1,67 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795702714;
-	b=aI6RY/woUlPCXoFnlCwn0Fyxl0feB3Y3eLo9bjZXvE2ZTfySMGTZg9k1WRePO0tzHuct
-	 DdLllQvs2snZ2asvO5VExhCu+rbirsKUVrGj9ymjQ33gcAN0E3hw8Ki3LQLjvuHIROFFJ
-	 7dCo0Cz6YAiMg62UEQbm6vd7Tgmk4x6Tmsq4Kpa4w/b4jG1e/fvD8c+5KVUlJ8iMtsBLI
-	 aul1+U/Bd1RuLKuB1B0H5U/eBdKp5oeO/UVwZh1VKXsvF1C/w2YijkNtl+Azj5F79ttBU
-	 ZLF5h90icICSNSlCvZLHKHIn5qKS6fW1mXmtcLhV05TDYNDHcXC6kucLtqoxxvySOPA==
+	t=1795702792;
+	b=M75yjyy0gadrfe/XplWVebfygsYtotPHUJTI5QcGCRYMdqsXHYFaboxGNC8QXAeZAFdx
+	 PzjXuu0kgh1WYmASgpT0T2fg1dB6HqXfOy8V9QxQAicKdB5NMrKj7cNHLmSqtHiYObBJF
+	 vQ5MCm9Zm48ZKAh3aBJYlG5ceoJYLzCZjSDVeJwm7b8sjjdrvFRHbWUlATXHjN2evglcm
+	 w4bx2l7vFIXwg/l852ArWQA3EPBU8Q7Kz5UazW4sAtotsd8UX/OA/OM9ER4a4DmtTdyxs
+	 7HvcR0QvW725rdclyWBGTrGa35PrTzkFehoT0FL0lDBFJjHrPDbNobt8MEetpIl8T4Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795702714;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
-	bh=NyKzTXadaH80KPU41rwaODjR1cCn4hE+RiYMnZpd86g=;
-	b=hnPWp49HbeFGWBNcRo9l0LOoTO84syeYQWFcpKNmOEVx2xPBNP/fYy5/dBkfrWby5CJb
-	 LgaDu0gKk7a9X27sGnF5ekP54KeolAVEVu9N3QVTDh42NgWdcnQwEWH1axWdXT2QsnWdD
-	 m5BT03zvEoWouwJE99G0LaUifClHFYaaLpebvrTgz7L64hEENxBDWFcz7XVcHWhFpmhoM
-	 b3qgjuywwkZonTfI95Ugl9Nw4sc1PXD1dZaiWSP3bFF00KVLXzF9F3Vm4LRu0nFTh46vu
-	 teT14Ack2A/y+H02vQ5hPeU0kAlm2cu8CatUbQzUhiCvxTUWMTB/IuF4WgA4mWsT38Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795702792;
+	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=qTtoQav1e0mPKUJi3xGwyEJuXSQqz7+AIi65Xpjvqks=;
+	b=BUJm1T8VaHxMprsYQANtgwPAyaU/dl9CVKtLWpIOamKJrFQTpZdE9Tgvy3GeI0dCAWou
+	 ME6+aKBJuDQwDIgxVhjFsGnTl327nrAxWog7Ij/i/aTLFjw1VIxFPC9QPud+GKalb7R3f
+	 5WRnMrEgt0OO1hIDmzHirj4R7n/nJo5ZHcI3Wfz7S3Boc9h8q/6XBAEjy2sWjntcq6YHP
+	 19W7+UTgi3kDUisT8idXGV5gAA8uWE46rCyQztjV3XZsSZtdKFpZ9XaqlAtqBwsPOq1hr
+	 pS79iprmFk8/d87R1e6WFRZBRZFET6Y5rnCV4R9ac4YhRp9ie/7atyrzSJWgxdLJwLA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TKkG0YX2;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mYNg7xja;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with UTF8SMTPS id E62DB606A31E;
-	Thu, 26 Nov 2026 14:18:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02A8A606A326
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 14:19:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=TKkG0YX2
-Received: by smtp.kernel.org (Postfix) with UTF8SMTPSA id 0721D1F000D1;
-	Thu, 26 Nov 2026 14:18:32 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mYNg7xja
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 460CC1F000CF;
+	Thu, 26 Nov 2026 14:19:47 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795702713;
-	bh=NyKzTXadaH80KPU41rwaODjR1cCn4hE+RiYMnZpd86g=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=TKkG0YX2wb7BkJBT5asY8jsFXrQuwOipsZzhH1M+s97eq57mxGxAVspA9aqxFr0Hr
-	 9neyTwJY+BHUAYaaHfuU10yUrLzQGp7ycUQWDNTFUyhxVjmfdz3iggeF3XU8ZB4c3f
-	 pZUQ3eICTufypMiM0p/bNzAbXp36P8eamOlf4ImvMPz6awcJ1DjPqsnGsiSyGwKpbh
-	 P2RFvo3LeHh+dMgbhDrftSeP5hZpl2NeCw45q1OU/44oI2PPlxw631sma+ciNlTA6F
-	 6umxiR38hL4E1QuAlqx3q+5NAVSIYOyyoog8HlNZF+mpB9wA/UbqqOcqdVBDmSbKND
-	 2M0+hbriCKn6Q==
-Date: Thu, 26 Nov 2026 15:18:29 +0100
-From: Bartosz Golaszewski <brgl@kernel.org>
-To: Xilin Wu <sophon@radxa.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>, 
-	Andrzej Hajda <andrzej.hajda@intel.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
-	Robert Foss <rfoss@kernel.org>, Laurent Pinchart <Laurent.pinchart@ideasonboard.com>, 
-	Jonas Karlman <jonas@kwiboo.se>, Jernej Skrabec <jernej.skrabec@gmail.com>, 
-	Luca Ceresoli <luca.ceresoli@bootlin.com>, David Airlie <airlied@gmail.com>, 
-	Simona Vetter <simona@ffwll.ch>, Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
-	Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
-	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
-	Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
-	Konrad Dybcio <konradybcio@kernel.org>, Linus Walleij <linusw@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org, 
-	dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-gpio@vger.kernel.org, Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>, 
-	dragon@radxa.com
-Subject: Re: [PATCH v4 4/4] firmware: qcom: scm: Allow QSEECOM for Radxa
- Dragon Q8B
-Message-ID: <p3kffrgkkxa2gzszqa73rro6vcxtc3aho4srjvinq4cxfbierh@xm3esomojnns>
-References: <20261029-q8b-dts-v4-0-e8e7438f5545@radxa.com>
- <20261029-q8b-dts-v4-4-e8e7438f5545@radxa.com>
+	s=k20260515; t=1795702791;
+	bh=qTtoQav1e0mPKUJi3xGwyEJuXSQqz7+AIi65Xpjvqks=;
+	h=From:To:Cc:Subject:Date;
+	b=mYNg7xjauKUq3DGtXABXWAVcEK4uEr4zclFPym8iC8JbMgBbHSuAZWQl9Yu91HwSs
+	 epPTm3viGzuQcuhGwWcIjzKwo9SbJdab9dIxwQK3q+lYAwvw5ZoqZG+uIxGRITxGed
+	 unq99GPU+17FAJc4xubKvCO2ORQdt58S3VChW6fQO0dyinJTkpfJGmYk6O6yIZnabG
+	 Y+UUsuIDH0WcXcH55EpNmtlQgyKuC5rkGwukNNyrEid9+YGw/nBuhPN/GiXWDa41Ma
+	 9ebARrA1rIDqdxnqSo7fh4FQf5K51PxloamzkgzTFUweOJAqZGzp6Y5JRLlxqp9i0r
+	 kx10pG7elvshQ==
+From: Vladimir Zapolskiy <vz@kernel.org>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>
+Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jesszhan0024@gmail.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
+	Pengyu Luo <mitltlatltl@gmail.com>,
+	Alexander Koskovich <akoskovich@pm.me>,
+	Abel Vesa <abel.vesa@oss.qualcomm.com>,
+	Kavan Smith <kavansmith82@gmail.com>,
+	Jonathan Marek <jonathan@marek.ca>,
+	Jordan Crouse <jordan@cosmicpenguin.net>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org
+Subject: [PATCH] drm/msm/dsi: Fix TX buffer pin leak on command transfers
+Date: Thu, 26 Nov 2026 16:19:42 +0200
+Message-ID: <20261126141942.335280-1-vz@kernel.org>
+X-Mailer: git-send-email 2.51.0
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,15 +71,78 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261029-q8b-dts-v4-4-e8e7438f5545@radxa.com>
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 29, 2026 at 06:13:38PM +0800, Xilin Wu wrote:
-> Add Radxa Dragon Q8B to the QSEECOM allowlist for enabling access to
-> efivars and uefi bootloader.
-> 
-> Signed-off-by: Xilin Wu <sophon@radxa.com>
-> ---
+The DSI 6G TX buffer is allocated by msm_gem_kernel_new(), which pins
+the buffer object in the KMS address space and returns its IOVA, but the
+returned IOVA is ignored. Instead dsi_dma_base_get_6g() calls
+msm_gem_get_and_pin_iova() on every DSI command transfer to get the TX
+buffer address, and the buffer is never unpinned after the transfer.
 
-Reviewed-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+As a result the pin count of the TX buffer object grows with every
+transmitted DSI command, and when the buffer is freed by
+msm_gem_kernel_put(), which drops only the pin taken on allocation,
+the object is freed while still pinned:
+
+  msm_obj->pin_count
+  WARNING: drivers/gpu/drm/msm/msm_gem.c:173 at update_lru_locked+0x90/0x98
+  Call trace:
+   update_lru_locked+0x90/0x98 (P)
+   put_pages+0x8c/0x104
+   msm_gem_free_object+0x1bc/0x244
+   drm_gem_object_free+0x1c/0x30
+   msm_gem_kernel_put+0xa4/0xb8
+   msm_dsi_tx_buf_free+0x2c/0x64
+   dsi_unbind+0x20/0x40
+
+Save the IOVA returned on the TX buffer allocation and use it as the DMA
+base of command transfers without pinning the buffer again.
+
+Fixes: 9fe041f6fdfe ("drm/msm: Add msm_gem_get_and_pin_iova()")
+Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
+---
+ drivers/gpu/drm/msm/dsi/dsi_host.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi_host.c
+index 78f0fd259421..5a6fb1a5a890 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -153,6 +153,7 @@ struct msm_dsi_host {
+ 	/* DSI 6G TX buffer*/
+ 	struct drm_gem_object *tx_gem_obj;
+ 	struct drm_gpuvm *vm;
++	u64 tx_iova;
+ 
+ 	/* DSI v2 TX buffer */
+ 	void *tx_buf;
+@@ -1261,6 +1262,7 @@ int dsi_tx_buf_alloc_6g(struct msm_dsi_host *msm_host, int size)
+ 
+ 	msm_gem_object_set_name(msm_host->tx_gem_obj, "tx_gem");
+ 
++	msm_host->tx_iova = iova;
+ 	msm_host->tx_size = msm_host->tx_gem_obj->size;
+ 
+ 	return 0;
+@@ -1422,14 +1424,13 @@ static int dsi_long_read_resp(u8 *buf, const struct mipi_dsi_msg *msg)
+ 
+ int dsi_dma_base_get_6g(struct msm_dsi_host *msm_host, uint64_t *dma_base)
+ {
+-	struct drm_device *dev = msm_host->dev;
+-	struct msm_drm_private *priv = dev->dev_private;
+-
+ 	if (!dma_base)
+ 		return -EINVAL;
+ 
+-	return msm_gem_get_and_pin_iova(msm_host->tx_gem_obj,
+-				priv->kms->vm, dma_base);
++	/* The TX buffer is pinned on allocation by msm_gem_kernel_new() */
++	*dma_base = msm_host->tx_iova;
++
++	return 0;
+ }
+ 
+ int dsi_dma_base_get_v2(struct msm_dsi_host *msm_host, uint64_t *dma_base)
+-- 
+2.51.0
+
