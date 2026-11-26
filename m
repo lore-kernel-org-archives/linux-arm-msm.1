@@ -1,47 +1,77 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=212.227.17.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795684616;
-	b=PSyZ+IlOkT27sxidIOn2fVu9WWZeZnKNqsvDqqK5WKQAlKZb+cpDkYYLX0o4YCc85ElD
-	 Wg3VPkjYmUtnbL4gtz58GNQcYD+v11V74e/2JJ3iDLdqQscqz5GPx9i6NNzCf531wd4ds
-	 Hi1dfXJR3xgikg+A7TrLC6AA/JiUL6PF67QMPQf57fyGSQsdKZvG8IE1axuMuUZUlo68W
-	 xaJZ5+NLe4DHaUDZE3MLeSnOcFS84Jb4dyTeEp1KGw4PW7Uy15FOQZorRPIy6IGeyS+pt
-	 TFGxFZQHWQdSIZev/NRyOxPcH9oNDAAS40KHnX7BooR1dNaz5j2hv0pqTuI211tR8AA==
+	t=1795685103;
+	b=5kBklAfxIfD6Zllp8vsKGKcSMBtAxREJvsUN92wLTXoBQK1f9Ek1ESpao+T74QCoS6Vd
+	 W5gDbFgTKlITK/t3cspFtrsQZuzd0EpmSoGaxgpYgkI4ys9LtukH89Dcu3pGUyJnmBqwe
+	 J9c5gG9OP8cWmmd6qNgAODZn/YZ2vzgxlFwytsbfoYe3lsnt4DEEd+spdXxOqP3287Ygd
+	 /ziEPlzUypbRRhS5CRlhhFhkQvxNG7be7wFtO0HoqMDp5VNxFPK45KnLLuEC9xbNVaTom
+	 2fdhiIyA1FyiotpoGXmXs3wt0agzXETrkDf9mwzDHW6UJtc5CyNQdai7veguEdxi/aw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795684616;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=ZfdcZ48c//AzqVH7rKfuc7GAHFokrDENxga69K9MVf0=;
-	b=gRM91y3QG+9FIFiwZaujwvirlaPHAXUEuICgqPwaO0pFSJLi/5aG5twdYYxnKMxDzWMK
-	 2acTiwzKQG9wJXgNus33ad42GHVfRxuXxfFHiGkvhKbpzYwvXrC2gsRBxC5N3scQ07QGV
-	 XwAs8N8q43foJUfYO5oND2drMqxF6DNG/1zh6md+irlhbJkqNJCOKlw3r/9XMpmhY7zds
-	 wC2JbgmZdAuHSUtr8W2fntViu50v/btPKj0C4hoqpbTC2slgHgHLK+HISp7UGIGmsXdgf
-	 v9bA4+APKPwK65623Yy8HlyCbCwUCOYLXJaCTmVH2EyQVDiJnUJEvhkUSNOVVyFXH+w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795685103;
+	h=DMARC-Filter:DKIM2-Signature:Message-Instance:DKIM-Signature:
+	 X-UI-Sender-Class:Received:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:
+	 UI-OutboundReport;
+	bh=9JSNdwZV67Uwnrr8l1kdCs7HPzDkZQfnoroyJMBz3l0=;
+	b=TYvzhP50l2avSBtBEdkjso7OrGI03SCDRAuQhGoOl+y0yi8ei/Cc4DAF9dGW9CLyqV80
+	 Os9wXq/FEhyaUH2fKG6MWxYoiiZw/72SLw8/409Ma0Mx3Elf50+zj8v2pNp/4eYHZmgV6
+	 95R56jPtifP6A7a3egqiP2HWg/GoLqtVcOg3nZ/uG/00sc+lILq1PZfZFwwAAc29wyMyH
+	 UlEqcB4JKyMBrdJx6mtMu6pkyYdS944qUsBK7qvIxCtPccsiCJOgIvzBph3VUq61VGmjb
+	 Xx2bzWn0k1lUKxUbQRTUVDSnuZqM1BIVUIELnzZF4IbjsLLArPkCpa/Np2o8xNk5/Sg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXi4jtdy;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=web.de;
+	spf=pass smtp.mailfrom=web.de;
+	dkim=pass header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=qvcFVzs9;
+	arc=none smtp.remote-ip=212.227.17.11
+Received: from mout.web.de (mout.web.de [212.227.17.11])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA12F606A31C;
-	Thu, 26 Nov 2026 09:16:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D62F9606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:25:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D62F9606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXi4jtdy
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7A801F000C4;
-	Thu, 26 Nov 2026 09:16:54 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795684616;
-	bh=ZfdcZ48c//AzqVH7rKfuc7GAHFokrDENxga69K9MVf0=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=MXi4jtdyxHYxeNd9GvD8/qTFBek+uKD/UwQvdkBGMpRoBOKugRg1mH/Sgv8frDoTk
-	 W0hwp50y+gziYVZkt41i99BFLSJEup8+HwVZwkJ1tsunz+k4Hug8CfwibkTj4EgYov
-	 eHcq8Hi0MJdTD47i1JQs3SnmqQot035w4Rl0yQ6OpcKs0MpS8qCPBRvCSiQr0LJ15J
-	 vQvkWgMepbe6g9vBPRrN9ZbMDxbMh85D7+o7r9bErMGnarnZWdbHZpEM3e1zPeWw12
-	 7ctXM5s0ZmPEQCTuwt3euxOfFxj7lfoy2SH9D0UQaQUyJHWcQ/tP3CXyL7YWeuXhyj
-	 EMlp5ct0ly5Hw==
-Message-ID: <534f7330-d4de-47a8-ba6b-68c29c138186@kernel.org>
-Date: Thu, 26 Nov 2026 09:16:53 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=qvcFVzs9
+DKIM2-Signature:  i=1; m=1; t=1795685100;
+ mf=PE1hcmt1cy5FbGZyaW5nQHdlYi5kZT4=;
+ rt=PGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnPg==;
+ d=web.de;
+ s=s29768273:rsa-sha256:EQzaACp7x2kKc+JUEXbSMML1O95M
+   Z4NG0xW8qDQyWDQdZKCX/j1z8mhF0j3l9y9QYg+Cvjs5VmpZrBVQ3BDPz3EW001E3dl75tdtBCC
+   hhDsUBB+omOAyBbfM9qWFB5Bn7cm5aHdmPtP/6pnkpMgZOsRKyLIrmxMfOWHZoxFTki9yZ5t3Vk
+   BWR/KJYOUaOjXWDnOj+7bNN1XgIGHzhGmEX+GZV+7vJlrEN4VbETy1QSm4KDHvuywxm04y6wx2A
+   0KmYoczzoW9z4QGpjuoZ2oCoVSJFIgPoJzaWufmZNjDJDqsGXPEWs8jcPyAjqwxUNWNKgwOLh/D
+   mdZ9dH8UFbF9Rw==;
+Message-Instance:  m=1;
+ h=sha256:
+   8tyKrKjTXvavKxXLtUUO/GrJ91WYuWeK4i+uVERLt3g=:
+   fivIcAd4rKt7AUTEW40BewMt8mNW8MG6LIlwpdkYJbI=,
+  sha512:
+   kcVNTBiYOp91P41GzFaI6Qsecf6mC6mDlv+sVA549DQrNMNHQbQA0R4m6NI9Vxs6nudIGvyxVi8cqZ0+pGJleQ==:
+   6ok9KLgnMdcQTezwC9UVZnzzlB0pHgZ8U4Osfnui5Cs2zt8w2CSBuOgVN0cjYzmu3wue9Ot3MWQCM4BbSkL2KA==;
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
+	s=s29768273; t=1795685014; x=1796289814; i=markus.elfring@web.de;
+	bh=9JSNdwZV67Uwnrr8l1kdCs7HPzDkZQfnoroyJMBz3l0=;
+	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+	 References:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:cc:content-transfer-encoding:
+	 content-type:date:from:message-id:mime-version:reply-to:subject:
+	 to;
+	b=qvcFVzs93vTh4OmkjFWvfY5JXMEL2MnHSCaQtRZbVa21opWnmlAG0LVOpJPf6DW4
+	 agQp0zfx7ID41obnzHdC5V6/Wz6JNWLvVhHZoO6fwnMe/5X9s9/Er/b1gBrut+ZwW
+	 +uCsOA9zLG03KhY8QOt1P+Thad/4v+baiffbj4KTTlvb4pdV6gCsvYKvMWsPM7O8e
+	 rUn+KwhFm4e4OwCKhuzzLknDhsYQhFxcW9zK23PzzD3Lq23pgZceNLO+3vE/lIjRz
+	 n4oecbZQciTZglzzjr0UBE0oGfiDulGMKc+p6Ee3NeW+bX/t3AReDHrhVRCw6fmvv
+	 0JZdgvjVIP7YDSuDyw==
+X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
+Received: from client.hidden.invalid by smtp.web.de (mrweb106
+ [213.165.67.124]) with ESMTPSA (Nemesis) id 1MWi9q-1y3NbJ2suW-00SpYE; Thu, 26
+ Nov 2026 10:23:34 +0100
+Message-ID: <9e76edf9-433e-43ab-a748-8a71804e2b26@web.de>
+Date: Thu, 26 Nov 2026 10:23:23 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,119 +82,162 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] soundwire: qcom: Fix off-by-one error in port
- exhaustion check
-To: Christopher Obbard <chris.obbard@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>,
- Bard Liao <yung-chuan.liao@linux.intel.com>,
- Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, stable@vger.kernel.org
-References: <20261126-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v2-1-c424edf85968@oss.qualcomm.com>
-From: Srinivas Kandagatla <srini@kernel.org>
-Content-Language: en-US
-In-Reply-To: <20261126-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v2-1-c424edf85968@oss.qualcomm.com>
+Subject: Re: [00/13] mmc: Assorted bug fixes across MMC host drivers
+To: Lee Jones <lee@kernel.org>, linux-mmc@vger.kernel.org
+Cc: aaro.koskinen@iki.fi, adrian.hunter@intel.com,
+ aidanmacdonald.0x0@gmail.com, alcooperx@gmail.com, allen.lkml@gmail.com,
+ apelete@seketeli.net, aubin.constans@microchip.com,
+ bcm-kernel-feedback-list@broadcom.com, chenhuacai@kernel.org,
+ christian.loehle@arm.com, djakov@kernel.org, florian.fainelli@broadcom.com,
+ geert+renesas@glider.be, hkallweit1@gmail.com, jan.glauber@gmail.com,
+ jbrunet@baylibre.com, jh80.chung@samsung.com, josua@solid-run.com,
+ kamal.dasu@broadcom.com, khilman@baylibre.com,
+ krzysztof.kozlowski@oss.qualcomm.com, lars@metafoo.de,
+ lgs201920130244@gmail.com, linux-amlogic@lists.infradead.org,
+ linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
+ linux-omap@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
+ martin.blumenstingl@googlemail.com, mirq-linux@rere.qmqm.pl,
+ neil.armstrong@linaro.org, niklas.soderlund+renesas@ragnatech.se,
+ oakad@yahoo.com, paul@crapouillou.net, pb@handhelds.org,
+ prabhakar.mahadev-lad.rj@bp.renesas.com, pramod.gurav@linaro.org,
+ rric@kernel.org, sameo@openedhand.com, shawn.lin@rock-chips.com,
+ support@cavium.com, tony@atomide.com, u.kleine-koenig@baylibre.com,
+ ulfh@kernel.org, wsa+renesas@sang-engineering.com,
+ yoshihiro.shimoda.uh@renesas.com, zhoubinbin@loongson.cn
+References: <20261123191703.179283-1-lee@kernel.org>
+ <bc602723-07fb-4af9-9201-272dd0fe759e@web.de>
+ <20261126085340.GC38590@joneslee-macbookpro.roam.internal>
+Content-Language: en-GB, de-DE
+From: Markus Elfring <Markus.Elfring@web.de>
+In-Reply-To: <20261126085340.GC38590@joneslee-macbookpro.roam.internal>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:hpuFpSStygnRjyGu4OdwI8scl5Tqdmf8IzYI4hnLjaMfqgtX7UM
+ ibOS+HndZBacMC/YuZ61lDrnndFscX38s5dE89HRhg/oRr/1uYX0yiV5jqKjW2rh0aLEIIG
+ CGKZmtpk+LJl8q+QZXKhYFZyjvldtY4SizqsqY2WEzDwV2w7W0LK1RjadRiOz2Gt/WAFilt
+ Ncx5IupM7mNy4nEUvlyHw==
+X-Spam-Flag: NO
+UI-OutboundReport: notjunk:1;M01:P0:27iBBxTNLss=;pM/2RWrGZu8RBZprcieS2TZSkdh
+ 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
 
+>> How do you think about to sort (and group) desired adjustments
+>> by affected software components?
+>=20
+> This is new to me.  What guidance says to do that?
+>=20
+> Making your own rules up and spraying them at contributors wastes people=
+'s time.
+Can the following list variant be more helpful eventually?
 
+  mmc: cavium: Prevent slot_pdev[] out-of-bounds write during probe
+  mmc: cavium: Remove MMC slots before destroying slot platform devices
+  mmc: dw_mmc: Disarm central watchdog when ending a request
+  mmc: jz4740: Apply DMA max_seg_size limit to unified tx-rx channel
+  mmc: jz4740: Skip DMA cleanup in PIO mode during post_req
+  mmc: meson-gx: Fail request when descriptor chain DMA mapping fails
+  mmc: omap: Shut down cover timer before disabling cover BH work
+  mmc: renesas_sdhi: Disable internal DMAC BH work items on release
+  mmc: renesas_sdhi: Fix SDIO manual tap correction in SDR104 mode
+  mmc: renesas_sdhi: Guard host->cmd access in internal DMAC issue work
+  mmc: sdhci-brcmstb: Handle absent optional sdio_freq clock in probe
+  mmc: sdhci-msm: Resume runtime PM before accessing registers on remove
+  mmc: tifm_sd: Synchronise timeout handler with request completion
 
-On 11/26/26 8:56 AM, Christopher Obbard wrote:
-> Qualcomm SoundWire master ports are indexed from 1, with bit 0 of
-> port_mask reserved. Valid port numbers therefore range from 1 to
-> maxport.
-> 
-> Commit 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in
-> stream_alloc_ports") changed the port exhaustion check from
-> pn > maxport to pn >= maxport which rejects the last valid port.
-> 
-> On RB3gen2 (QCS6490), two WSA883x speaker amplifiers are connected
-> to swr2, which has qcom,dout-ports = <6> and qcom,din-ports = <2>
-> (8 ports). Each amplifier uses one port for playback and another for
-> voltage and current sensing (VISENSE). The right amplifier's
-> qcom,port-mapping is <4 5 6 8>, so its VISENSE port is master port 8,
-> which is rejected by the new check.
-> 
-> Since all ports in a SoundWire stream are allocated together during
-> hw_params, this causes the stream to fail with:
-> 
->     qcom-soundwire 3250000.soundwire: All ports busy
-> 
-> The -EBUSY propagates through hw_params, preventing speaker playback.
-> Disabling VISENSE works around the issue. Speaker protection is not
-> enabled on this device in upstream, but with AudioReach userspace the
-> userspace PAL mixer paths enable VISENSE on every speaker stream, so a
-> mixer change alone does not avoid the failure.
-> 
-> The original fix addressed an exhaustion check that could never
-> trigger because find_first_zero_bit() returns maxport when all
-> searched bits are set. Include the reserved bit 0 in the search so
-> exhaustion returns maxport + 1 and restore the pn > maxport check.
-> 
-> Tested on RB3gen2 with a v7.4-rc3 based kernel and AudioReach
-> userspace: with the stock PAL mixer paths, which enable VISENSE on
-> both amplifiers, speaker playback through the PAL speaker sink is
-> audible and no longer fails with "All ports busy".
-> 
-> Fixes: 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in stream_alloc_ports")
-> Cc: stable@vger.kernel.org
-> Signed-off-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
-lgtm,
-
-Reviewed-by: Srinivas Kandagatla<srinivas.kandagatla@oss.qualcomm.com>
-
---Srini
-> ---
-> Changes in v2:
-> - Rebase onto soundwire/next.
-> - soundwire/next now has commit d9ea256ee889 ("soundwire: qcom: Prevent
->   pconfig buffer overflow in qcom_swrm_stream_alloc_ports()"), which
->   adds an nports >= maxport bound on the pconfig array. That bound is
->   separate from the off-by-one fixed here: it keeps pn >= maxport, so
->   the last valid master port (maxport) is still rejected and RB3gen2
->   speaker playback with VISENSE still fails with "All ports busy". This
->   patch is still needed; keep both checks as
->   pn > maxport || nports >= maxport.
-> - Add Cc: stable@vger.kernel.org, as 6ccec91c3535 landed in v7.3 and
->   was backported to stable (Srini).
-> - Drop the claim that disabling VISENSE disables speaker protection;
->   speaker protection is not enabled on any upstream device (Srini).
-> - Give the concrete swr2 port counts and the right WSA883x
->   qcom,port-mapping from the RB3gen2 DT.
-> - Note that the PAL mixer paths enable VISENSE on every speaker
->   stream, so a mixer change alone does not work around the issue.
-> - Add a note about testing on RB3gen2.
-> - Say the -EBUSY propagates through hw_params rather than naming the
->   codec DMA backend.
-> - Link to v1: https://patch.msgid.link/20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v1-1-81f1a4c9c73a@oss.qualcomm.com
-> ---
->  drivers/soundwire/qcom.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-> index 65add9a74ffd9..05311cf639e4c 100644
-> --- a/drivers/soundwire/qcom.c
-> +++ b/drivers/soundwire/qcom.c
-> @@ -1461,9 +1461,9 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
->  				if (m_port)
->  					pn = m_port;
->  				else
-> -					pn = find_first_zero_bit(port_mask, maxport);
-> +					pn = find_first_zero_bit(port_mask, maxport + 1);
->  
-> -				if (pn >= maxport || nports >= maxport) {
-> +				if (pn > maxport || nports >= maxport) {
->  					dev_err(ctrl->dev, "All ports busy\n");
->  					*port_mask &= ~allocated;
->  					return -EBUSY;
-> 
-> ---
-> base-commit: d9ea256ee889f3db9f0bd07ce5d114ce92e31b4f
-> change-id: 20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-47c0a8af1c5e
-> 
-> Best regards,
-> --  
-> Christopher Obbard
-> 
-
+Regards,
+Markus
