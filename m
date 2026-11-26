@@ -1,121 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795678423;
-	b=2mI/5evOJFNZsn6XkyP87ywOUSfGo64lAi7dXtw+hDOySv7/SuoXr9IakJqM1ZqHMBqg
-	 wiMfSNK5r08wQZK7tMBq85YlH4kk9CHi15K3nf0HmZBxiXDtUU//bU/qBbx71dUMdvb0o
-	 gi4SDWL2BRVYAo1XDkscouNUsrhTgR0ELQuquvsoMYJ5tFNkGnQGtTCWP577PRaR944v7
-	 LRF38OMBOE1dsZge02fa7SzIAOJPjYsYTrtRm3ntCI6LJcf0LRqxbpIFu3RtXych+b/J5
-	 nice8ADeOtjGw7Bl96dRnGz7EJ6NzUHyewLwupu1YpHpZf4NZe4RoOe8egYQvw16ptg==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795678423;
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795678705;
+	b=Dn6CxDIzYAx4Lc5+oLvgbB/wyHuQjb7zm/qocBV91GyPDnK5hrYPGpIDnMgl1Cwwc8Dg
+	 B1xPhF0QNVny4PKSE+tIi1IiroT6d35ivJq1X/O6hK7g5Biigm+offh9D5IVnQKiWGaLU
+	 LTnrNarzL4Xij4WMcabaHmBQFkSgMxmHce21YeCnzUZADQxZ4DLR4wu+MZQBcOECUWvX0
+	 NhvbsFnc/VoXQhbcgUFELERi0lpx8haLgA3VkT4f3KFSgmv8r+oGFIGEeN/hSM0jOS6MT
+	 KmmysAKnSWypB+nxjoyL3LPAKDjyR5uYJ9/iHYMd/r8w6fSqvRbnSmXBS/De9Cxlegg==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795678705;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
-	 Cc:Content-Type:X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
+	 Subject:Date:Message-Id:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:To:Cc:X-Mailer:X-Developer-Signature:
+	 X-Developer-Key:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
 	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=YBSRWO6MC1F0PIG5BHgyDYraH89PBdVkETYH3/gn8Uk=;
-	b=VjeRkeZLZdixZ+yHa3oLTfFS0fhW2NhDFiAeHPVCF7/P2kyE63H2IqbrrMaxqe8TJYY7
-	 Vj/BanM4zXGJRpMyhQeWHCjT3c+dDNIMPMHWzx7w7KLjKox1roP0RvkErGIinLdxrw6CA
-	 PK2BzkoykuFvKRKEYZM6UAEKuN8vgpN+ow/XT6rGz4fd9K6a1p0XIKJtA3sW4MCJYV5T2
-	 XD6aj8/WNAyEyKJS224R8l5v/KlxfmGlkspi9u9OW3dDq6GWUhkgDn7+mTpsTPt31jReK
-	 6M4TRUhtiiLpBVkp+1PE9013muLlYUrKLgmkMdoPTPxpYrb2eeGhtEy0ZtXmBDlUEQQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	bh=YA1Blq4ppgGh0yHluPfL3JZZmE/oyALbTlX72JCcysw=;
+	b=gh1aAsQWvBQspcAQeO4KFCpsLZtbA91S3J6rBVvfn0MEgD5esAahyu2xp7e0I1jf6Pmb
+	 XbjlVDkMbbCK2G9jE8LG1RuvhodzEQ80XAXNK3Ir42BHrsQv3wEXrZiVDDvhZrwlRzMA9
+	 1AZEVZYVhUIOSLY6Z9EbFgZQss+d9Lk2c+LPEho5Pr3tR6PxscCku+MxETaR7Aov27JUP
+	 ZIJW+og1IsIS0XZQUAVughI7pAj1KdsMUvtNXffHv1cPPLH/DSjOlOSfSbBFcJW9mN4Zh
+	 qT5zwXZwsEtKfcXtDEQOO0tQjuvR5H9rfeKO7ed73JAaV3/amH3YrcyfYWGv3agyzew==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aTAMvPwP;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PIuifmyc;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cpH1xXzK;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NVGHONBO;
+	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EDEC5606A321
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:33:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EDEC5606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64CD3606A31C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:38:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 64CD3606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=aTAMvPwP;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=PIuifmyc
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7B8YZ919534
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:33:42 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cpH1xXzK;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=NVGHONBO
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7B67a3548371
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:38:24 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=qcppdkim1; bh=YBSRWO6MC1F0PIG5BHgyDYra
-	H89PBdVkETYH3/gn8Uk=; b=aTAMvPwPqHQpfSSIjX5E4px1lnzG2cUdofHhTWjs
-	rEdm9YMKeU/HXSLrwMyyx05U0fRnumVrEGaAeqc8Xy4YhCxqx8eizuZssJ45o1xK
-	34HW0aL29/rUwWASLeQIpRDvHcf7SV2OAvrNlOzHAIClC5QsT4mN7Dgav9EMkfAT
-	tY89Z01pQXJhZWUFfi+urUkbU69jnIX6xsh0W1b3AQelmFlVyGV2wbpFY+jOuhIo
-	h/X9hHsgf4tUNmovAMMKwYMdCw1HIdke+dAuB1FPDL8H5thIEcVgpkrrEPxDi6T6
-	Mbjp+41D45mZc609bQdliJAMBJUNhXB4QT2S80C0mVjwMQ==
-Received: from mail-yx1-f69.google.com (mail-yx1-f69.google.com [74.125.224.69])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y1y0s-1
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=YA1Blq4ppgGh0yHluPfL3J
+	ZZmE/oyALbTlX72JCcysw=; b=cpH1xXzKBhWVYrY9gl5H953oMoIK4Ud4LDBeCC
+	rf3fBdmxLvLcScos3P0Qj4yELCD85kPHW7qFTM+W3ShgEjz95491wyS4jYX9XNmW
+	nPe/O3X2+uQopm2Q3ne7T7U9VZ2HveD0gQ8CBuHvlcag1BOgjAVSlZ2/kxVpIqaa
+	9LfeWnTHR2JtXiBOIUsJAj4/FFtKFjNRHV1kBZYZLGYa1tKOXk35++eLTJArCWOt
+	aslOUGCx+IamiIYTRx9xCzMQhMCC0f6tXtjF+cVjmBtGCFWqSYXxG20t80S2qjlb
+	8ur3GIa37xxoQvjeAOEkb5wgyMQSzWkRIR68L2XSHhIIEYig==
+Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j62vatu3m-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:33:41 +0000 (GMT)
-Received: by mail-yx1-f69.google.com with SMTP id 956f58d0204a3-67bec5d62ebso9743017d50.1
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 23:33:41 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795678421; cv=none;
-        d=google.com; s=arc-20260327;
-        b=Zizpg7kens52mEOYGhPremlYsH9NkZFXZDQXFZzq1n72Pjse93Xc9FqDau9hUVViez
-         5QhdNcPfpMILzHrNstuY1/aOjed/Ojl9lCYFisuKJ3pB3ySsUm+n0EesLdCmwwUgCHe0
-         TlBPFAyGKBxhmRTGjFm6tq2oAHNgBNCXM+MeVcZ+qwEiNshCsmVSTXdgUw+ArnTCRpsX
-         /+55DTsT/iFTEQ/o+3UCPFUxTGaaqRz2Xj4ZEhHr9gMhpPL1ohH1MUE0F3mCH8tt9qrl
-         G5GWMz20Sh+tI3hzAlyN53Mqu3IZqQhFH9/dp5TK5hteaR4xEQN+Eu5hxIeVBMKjL8Fh
-         HiOg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=YBSRWO6MC1F0PIG5BHgyDYraH89PBdVkETYH3/gn8Uk=;
-        fh=xj4C4w3Ov6Dv7Rbi9R4O4Mk2rNGCOvh8SliYHmvCTEs=;
-        b=pUqG9YdLmBBEG4SnUbUInZC6GrcpC1f86jM/60RdnP+9a2czWODpLTNbc7EfaDFsRz
-         YvsfpWfY+ayENo0XbXmzGmb9lZME9ZAPd4F9482J8njRyU5RRR6O5udXNtACMU6XYxwN
-         CQmYpnw2c57GRdyc5SVajPOxAuH4AD2TgfBkKWioB1Vv0CpIx2fowtjfc2O2yDp1TwPU
-         9YYf3cNyb31jq8PPzzqiBRxHtAwGmxoEfOfMknvQIY6+YtR1oUXnDkgfl9L7Wln3ymoc
-         DoAUClTm2n98vXKeN1n1pB+9nE23JpNh88hkKG+QwG2tAzJSImrmM85QF0bj8zbWqtVP
-         d2OQ==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:38:24 +0000 (GMT)
+Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cd652c0385bso4575154a12.2
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 23:38:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795678421; x=1796283221; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YBSRWO6MC1F0PIG5BHgyDYraH89PBdVkETYH3/gn8Uk=;
-        b=PIuifmycehLssaSxSavGLG7rtV7+blg32V89Np+BhnGsR7RCwbYtpM6tZKQhdMkErO
-         GaWSUZC1aJ90aqL8v87DyEfAxupUvhQM2rFQNHtVsaJibyMvsPhdiNziein8BPNq3EV7
-         88Kxc5qx8JpkPD0JSiKtVRkpUqa8DAh9Q9jE64qHYZ/A12Aj+EyL2SZdI4JIqHoZC6yS
-         S9XuMeNOX04vZxUfG5Q1WVxIgO2XuqQr6Off7ONZ68iJOTw7y8uMf2h5TdacYHKTdYFC
-         psnT61Ozibn4nAOXzMXuWe3vAFPXcLrBFJVif9QjkPFwsw1dSuyyXTZ9Pt6IC/CoGbOO
-         zXhQ==
+        d=oss.qualcomm.com; s=google; t=1795678704; x=1796283504; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=YA1Blq4ppgGh0yHluPfL3JZZmE/oyALbTlX72JCcysw=;
+        b=NVGHONBOdlumplamWq2K89MX7EPtwVhVqilCn7b9oY4xAn0oHVZ3Dr6Es2E6bttYFe
+         XOzbcLrHCCBitjWj+PAh2okfoCNk5zDeejhINWIWt+POKfsniYX3bBW4yCJXRLLXaHeL
+         0iTQxsQB+aAEc7SX+YQhyP7JuMlU7GrpkfQ36FLxc9Ig9fW8ka4DkDKBCALNPfuplZaT
+         9yZmnLFMD4NwciOZdhays6MEb+obwROxE/fNQnxSNq9XAaHUmSkm8aCk5v5i/LaQWyOF
+         RZiv+nSWriYf7unOISOAkssPXaGidvQBghIoOWmfxRTF3jbIqNfQVAGSsMwWokTewTYU
+         aH6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795678421; x=1796283221;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+        d=1e100.net; s=20260707; t=1795678704; x=1796283504;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=YBSRWO6MC1F0PIG5BHgyDYraH89PBdVkETYH3/gn8Uk=;
-        b=vg9dN+bLMbSg9MQshrQOKlYe+uzMN41yjEyRQScm6CnKbVnQbSp+4ZSKCN8acGPi1E
-         nbxtVBLTvramRPP5WWUwyxds75C6ZXSn6ED/okdKnZYBxYQHtGn02roQ96z5BZNX/xXF
-         MiAz5OLxcJ4iY319FlWe4k/eSOnSog8MEX6HK3VxqVdXWCrlBFkguR/KQFQ1/hVxEfiq
-         2i40kJlLpvm6wWEFOPus98FiuLNbk8OGHNc5Sa6tnTA9pZ/88Rd8GNJQZU5YaBd5JWqZ
-         Byhhb4ZSQDZfRElaXQ8eOk3gfI57rsJHmd8NaA+sSIKJTjPuGyJu+aJrAb/W+eUIOyXk
-         Va5g==
-X-Forwarded-Encrypted: i=1; AL+hErHlwAyFZf4PKzScG25DN4rHaq+WeggpW33+zkDSTk5LjSHINTPoTiSdYHTXiWVAQcSAyJX+hBg5+bro0b1w@vger.kernel.org
-X-Gm-Message-State: APuU4Z9IOcsTwTo6ptCuwEYF0b1S7UJfjpkx9PSPr4qo1VTQItOkblWI
-	ayfMjbp7vr3xX5jKvObUHmTUWP7Fzha4MK/jjVtcMGm8GTXTeJAPSF7Kb8BC8yX1zEQ2ia/w7p/
-	azZ97ZoadApcbX0FBpAEey6s5wFt9AP6mlBbwzlJjJbdnIM7P9mwG2MNosXyu1AsidJtMY0PsG0
-	usJLDlKuhruTYDwyD0fnZNIhlpxQumLVqbWYf+ghpjLn8=
-X-Gm-Gg: AZFdTZdxmUc0odX243qMdWgVWd8KQxg2lQ694Kdjd4jlSdKCg6+ya3tbOFZdtoV/yAt
-	FzSdrpaphYWasRmqRpncAI/FKLcjXEDvvbmVs5MfQZBE6hsAH4dIySJWKJONT+RzX6NSeN1Ocgx
-	G9d9OGbvT+hps5nCiOTXJuojzzQ+1aEru210HsqDP5el7/xGbCrsFwZsVEYjD/+9Z1/g5m5iYHS
-	KSZcPEj6e6CdOWtCA==
-X-Received: by 2002:a05:690e:1407:b0:67c:8a0:db52 with SMTP id 956f58d0204a3-67df4429198mr9258170d50.67.1795678420911;
-        Wed, 25 Nov 2026 23:33:40 -0800 (PST)
-X-Received: by 2002:a05:690e:1407:b0:67c:8a0:db52 with SMTP id
- 956f58d0204a3-67df4429198mr9258131d50.67.1795678420457; Wed, 25 Nov 2026
- 23:33:40 -0800 (PST)
+        bh=YA1Blq4ppgGh0yHluPfL3JZZmE/oyALbTlX72JCcysw=;
+        b=ayCRSSOZ1dMjkca1bWM2UL15UiFbX3cUhDSKgKWvkwbrW5Vu8SWySUwuGdplUAZ4CG
+         LJsKYHHiQXENTWpPPXM/zoxFHNb/Y95h6mhBQXJEf17gpSvy1p9SHAsw+M2gNqmkJub0
+         nB3U/YMlkXBEuNmtgbS9p0scOzVZjy0VTV5zAV43Qdb7O+HdPkhYrr5fnlEAK9Ygm1OJ
+         kk3SAu/B7QKstFRSTGLrAJKOWZwDFDpC4F401PlgrLjxKwY+7dMg5eLONVPGsqNJJmul
+         Tg0pX3QJ3tL03ko0jbeCRaO2jyaNSsKVdB+YW0BKFw84IcJcvcRrYtQw+zxPT9Xne2mH
+         I06w==
+X-Forwarded-Encrypted: i=1; AL+hErEwZadk0O24jCp6R85mAwG1cC1FSPyRHR21ZxqBcqr+AHhaR7Zh8V+clYDvQ4NATmilQOS8jjhqdp4TRJhl@vger.kernel.org
+X-Gm-Message-State: APuU4Z/RtzoSOuMKrTvFlDPyxrGX44/KqzsDMpZSPOWWhaqbN7dQCHtW
+	d5atErVdXmPzRZY4b30zNq8wwWXkbn4o5QCJ30HcYk51YnJGIYHyuxlP5619Np4p9J7bcKtQpRp
+	nN+LEqa/Zp8vP2flKU2AUmB5fVtgJWHqykoRne9gZ6MclWbvaFIBswUTT/PTDgZlgbo/7
+X-Gm-Gg: AZFdTZcC0grWn2klytAHEEKh/fGBQQrZfhbkuYKXaitMas+5mromTZupce0JvEl5XfD
+	u86iho3Hc0PpFJaNI63aRcTASW77O0CmFYlIuvAfOTFNhU2rnA98vtF40wwZN+lxbNkVhSXe5Ud
+	fuW6J+VOj4fdk5ZKTJaHrcDvcfC6V3pAPq/jrHN464N+F5ovNRh9pb6CUmFRBF9XUl2jksl6Wib
+	p2QEL5JZh8xdRW9hCi9plGue/c/1DZCRTE6l2qHRxLPSyK+HW8F6DH1cOgOATdB6+G6/aMTvjC8
+	ap6+7uwTNavAQLrOq9nTO9SOMUhSHsFg/PYo6Df4Zuezonts0/5dfcFtPgm/GfI7hA3jKKPn2Mf
+	uTMzA7CksflEeioCbJDxkDMXpgDKwotHICa2yYC8gyA4VJpWpjkC1+edfFJ2jTwnQbhOVHtoSsm
+	M5Cd3qUr8B
+X-Received: by 2002:a05:6a20:6a0a:b0:401:d3:b917 with SMTP id adf61e73a8af0-4014cf54aa7mr21944011637.63.1795678703678;
+        Wed, 25 Nov 2026 23:38:23 -0800 (PST)
+X-Received: by 2002:a05:6a20:6a0a:b0:401:d3:b917 with SMTP id adf61e73a8af0-4014cf54aa7mr21943980637.63.1795678703172;
+        Wed, 25 Nov 2026 23:38:23 -0800 (PST)
+Received: from hu-jshekhar-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cde9bb05981sm5042987a12.26.2026.11.25.23.38.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2026 23:38:22 -0800 (PST)
+From: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+Subject: [PATCH RESEND 0/2] arm64: dts: qcom: Enable DCP on Maili MTP
+Date: Thu, 26 Nov 2026 13:08:16 +0530
+Message-Id: <20261126-b4-jshekhar-maili-dcp-enable-v1-0-3d65c89bfe7c@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -125,232 +114,115 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-References: <20261029-q8b-dts-v4-0-e8e7438f5545@radxa.com>
-In-Reply-To: <20261029-q8b-dts-v4-0-e8e7438f5545@radxa.com>
-From: Chris Obbard <chris.obbard@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 07:33:29 +0000
-X-Gm-Features: Aa3M54p9KPshpOehHxoS4BJg-DAEPGiNryfudrEn_XbVOFzPOSXBBvyMZarG90A
-Message-ID: <CAPnEM6aAK8hwJ3EfhzS=gdMPTf+bhVgS-=JAoM+axcHzBQ1CGg@mail.gmail.com>
-Subject: Re: [PATCH v4 0/4] arm64: dts: qcom: Add support for Radxa Dragon Q8B
-To: Xilin Wu <sophon@radxa.com>
-Cc: Bjorn Helgaas <bhelgaas@google.com>,
-        Andrzej Hajda <andrzej.hajda@intel.com>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Robert Foss <rfoss@kernel.org>,
-        Laurent Pinchart <Laurent.pinchart@ideasonboard.com>,
-        Jonas Karlman <jonas@kwiboo.se>,
-        Jernej Skrabec <jernej.skrabec@gmail.com>,
-        Luca Ceresoli <luca.ceresoli@bootlin.com>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Bartosz Golaszewski <brgl@kernel.org>,
-        Linus Walleij <linusw@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, devicetree@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org,
-        Stephen Chen <stephen@radxa.com>, Junhao Xie <bigfoot@radxa.com>,
-        dragon@radxa.com,
-        Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>,
-        Daniele Briguglio <hello@superkali.me>
-Content-Type: text/plain; charset="UTF-8"
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAyOCBTYWx0ZWRfX3BNFl1olf8Wg
- Klas5GmaTnsGhFUmeJTCa14hI8bT0SOIKSxiEzfunwNHxQpSGBSZbIq+Kv+dtyv79vaw0RxovBh
- KSJTvnzIWoFDWiOc1demEPXWeNQNqSNKq5DrEng1AqqH4mRqZIwpNYpYHJ9RPOnZm8w2oz6lf4+
- KOteLFJI+2iNp9HwlYBZwGz3g3Wuht3r1wMM5+pP7qJJFxGRmAk9Cdhgt3ZQOIJK7+QT8SmnecR
- Leqs7z9zUU+ouO2i5MqyFBonl3y5tCo6Fy0FroL+COQmNCAiY+M/1EFmAQ6qGMG9OLkI3xFUH0r
- jIJAsWSJJUN605rYbtRwjqWM09j3yrY/3g4iWJoFa8i8yb5EO1xu8XXVRTgf4sXNi0V8m+XB0uw
- QvlIMlYOr0/nG7JIcYvwqDKhkF97oyKIMu/ucnSYc2VGrJCfMuCrY/mmdQ0V7+Vh+vOWJv5WhTv
- mpPGZvH4yjOF+9DMidg==
-X-Proofpoint-GUID: 0CwqR5FfLFPIL57DV1sP0r-bnyQy4VrT
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAyOCBTYWx0ZWRfX496aEwjUxJ1a
- r/uhG5thO7PfDDp4NwsEtCkYgET4NAOMEtFV/ZPi/Gu8DP0nSSHVvQ9Y60PEp4dfT6ZyUmArdz7
- 37KUoUHs+buc0twurkzSFRJLaWgCETE=
-X-Proofpoint-ORIG-GUID: 0CwqR5FfLFPIL57DV1sP0r-bnyQy4VrT
-X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b07e0d6 cx=c_pps
- a=J+5FMm3BkXb42VdG8aMU9w==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=DJpcGTmdVt4CTyJn9g5Z:22 a=VwQbUJbxAAAA:8 a=bC-a23v3AAAA:8 a=ksxQWNrZAAAA:8
- a=QyXUC8HyAAAA:8 a=KKAkSRfTAAAA:8 a=P1BnusSwAAAA:8 a=pGLkceISAAAA:8
- a=P-IC7800AAAA:8 a=e5mUnYsNAAAA:8 a=slKOw8fCkYvWlRKagp4A:9 a=QEXdDO2ut3YA:10
- a=Epx66wHExT0cjJnnR-oj:22 a=FO4_E8m0qiDe52t0p3_H:22 a=l7WU34MJF0Z5EO9KEJC3:22
- a=cvBusfyB2V15izCimMoJ:22 a=D0XLA9XvdZm18NrgonBM:22 a=d3PnA9EDa4IxuAV0gXij:22
- a=Vxmtnl_E_bksehYqCbjh:22
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+To: conor+dt@kernel.org, robh@kernel.org, andersson@kernel.org,
+        krzk+dt@kernel.org, konradybcio@kernel.org, abelvesa@kernel.org
+Cc: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
+        devicetree@vger.kernel.org
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795678699; l=3687;
+ i=jayant.shekhar@oss.qualcomm.com; s=20260925; h=from:subject:message-id;
+ bh=CxeNKvR8duZnvJRyTCCs+tbLsc277Ha+QtpXq82oRHY=;
+ b=Rv8Y4rzBHCVAOATAlQacBALWyXAnoiy+E4N1nsRgKi9YjLoidv4SByr81puMmF2TYN81kEpWA
+ de33ukKD3hOAMUf5NjYlJ/xKg4S40siTT62HRpPptaAe73Bn3RDSHqE
+X-Developer-Key: i=jayant.shekhar@oss.qualcomm.com; a=ed25519;
+ pk=saYTwtCCpug4b0Hz0jHFoATgDtdhFVicwMzDJo2z5ZE=
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAyOSBTYWx0ZWRfX0y2+J2hgzMtd
+ uwtH/VlAIjloMVkGa5is2/TsnmLQGe8ruiHQpa1Q+On7gcDVOBlrD8iN5ASDnRPX1PED03KvpuX
+ 5WgxD1aybC1HniOeVXG53zWqm1p7y7Y=
+X-Proofpoint-ORIG-GUID: 7h-M67yFtguPLASyHyQeu-39M2_1FFsN
+X-Proofpoint-GUID: 7h-M67yFtguPLASyHyQeu-39M2_1FFsN
+X-Authority-Analysis: v=2.4 cv=QZPzLcbv c=1 sm=1 tr=0 ts=6b07e1f0 cx=c_pps
+ a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=Lx_9dNaADeAjOkdmO44A:9 a=QEXdDO2ut3YA:10
+ a=x9snwWr2DeNwDh03kgHS:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAyOSBTYWx0ZWRfX8KrWafv4o3rg
+ vBLSVV/K3oNIREYCDfQkbia1dXTLjmHtZJJqIi8M0oIhGzWFgdPmRuAnZoYQ+EWoIcUbrXKFp9A
+ gzlHoyz7RW6+exAkEjDs5zKWR0idmOThIBMGRxO9eHGbsus3e9N5XZ5OJ1HTNsiMjtkphiRCnwC
+ f+4T9LmW2wjotb79G9Ds0+Fdx9T8iEMRnCya46DmyCxSmSvW+e+5ATDeW1jzUgpqTiDc7TmQsK4
+ lSkMnpGv/h7O9HUMXfMKkYMn5eBhMgJDvdnvzN8YTJJLTNS2XYumw2Maq0g2DstkB3JBqTylwDb
+ OQY8S8fWQ4F5ZfKDUJcl/3zRPKm+6r9xjtmZZslz2RHT3Qn/3v14jgnIPdJRekt+gW5j5QIRds+
+ dYP0beIbnGccH1z3npWXJzcuo9CU61Gws1wRcm5V6ZsF5InD+YBtWhKifiLC8gAPHRBPylXVg6B
+ LW1xv8SDRUM6r3FhAQA==
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_02,2026-11-25_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
- suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 bulkscore=0 phishscore=0
+ adultscore=0 malwarescore=0 impostorscore=0 spamscore=0 suspectscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260028
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260029
 
-Hey,
+This series enables Qualcomm DCP display support on the Maili MTP.
+DCP firmware owns the display hardware; Linux accesses it through the
+Qualcomm VirtIO host transport and the MSM DCP display driver.
 
-On Thu, 29 Oct 2026 at 10:19, Xilin Wu <sophon@radxa.com> wrote:
->
-> Hi,
->
-> The Radxa Dragon Q8B is a single-board computer based on the Qualcomm
-> Snapdragon 8cx Gen 3 (SC8280XP) platform.
->
-> The board provides UFS and microSD storage, two M.2 M-key slots, an M.2
-> E-key slot, a QPS615/TC9563 PCIe switch, USB Type-C ports with DisplayPort
-> alternate mode, USB Type-A ports, HDMI 2.1 output, headset audio and
-> a 40-pin expansion header.
->
-> This series adds the initial device tree support for the board. It
-> describes the regulators, storage, PCIe topology, USB and display outputs,
-> audio, remote processors, thermal sensors, RTC, EEPROM and expansion
-> header. Build targets for both the regular and EL2 device trees are
-> included.
->
-> The TC9563 power-control driver powers off external downstream ports whose
-> device tree nodes have status = "disabled". On the Dragon Q8B,
-> config-space reads to these powered-off port functions raise an Arm SError
-> instead of returning an all-ones PCI error response, preventing the board
-> from completing boot.
->
-> The PCI OF change to skip config-space reads for unavailable DT-described
-> bridge functions has been split out into a separate two-patch series for
-> the PCI tree. Disabled endpoint functions remain discoverable so PCI
-> fixups can still be applied, while driver binding continues to be
-> suppressed later.
->
-> The onboard HDMI output is provided by a Chrontel CH7218A DisplayPort 1.4
-> to HDMI 2.1 protocol converter. The device boots its firmware from on-chip
-> flash and requires no host-side configuration.
->
-> The PCIe ECAM and 64-bit memory windows are defined in the shared
-> SC8280XP DTSI for all five controllers. The board DTS inherits these
-> SoC resources.
-> The SA8540P PCIe2a and PCIe3a address maps are kept unchanged.
->
-> The series also documents the board compatible. The SC8280XP TLMM binding
-> change allowing gpio-line-names has already been applied and is no longer
-> included in this series.
->
-> The PCI change is required before applying the board DTS patch; otherwise
-> the disabled TC9563 downstream ports cause a boot-time SError.
+Patch 1 enables the Novatek NT37802 panel driver as a module in arm64
+defconfig. Patch 2 describes the DCP transport and firmware display
+subsystem in maili.dtsi, then wires the Maili MTP panel to DCP
+interface 1. It adds the panel supplies, reset GPIO, and pinctrl states.
 
-I've been testing this series rebased on top of Bjorn's/qcom's
-for-next [1], with a vanilla Debian forky userspace
-+ gnome, booting from a USB stick (in one of the USB-A ports). I've
-had a couple of issues:
+Dependencies (in application order):
+- VPU IOMMU iommu-ranges support (patch 4/13):
+  <20260926-vpu_iommu_iova_handling-v5-4-0322ca5dc10c@oss.qualcomm.com>
+- Qualcomm DCP VirtIO host transport (v1):
+  <20261126-jshekhar-qcom-virtio-dcp-v1-0-7b49bda74916@oss.qualcomm.com>
+- Qualcomm DCP DRM function driver (v3):
+  <20261126-jshekhar-v3-dcp-v3-0-f1e9d7505039@oss.qualcomm.com>
+- Novatek NT37802 panel binding and driver (v2):
+  <20261109-jshekhar-nt37802-v2-0-a8e9efdcabd7@oss.qualcomm.com>
 
-1) Reboot shortly after booting; with:
+Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+---
+Jayant Shekhar (2):
+      arm64: defconfig: Enable Novatek NT37802 panel
+      arm64: dts: qcom: maili: Add DCP support
 
-    qcom-iris aa00000.video-codec: core init failed
-    arm-smmu 15000000.iommu: Unhandled context fault: fsr=0x402,
-iova=0x00000000, fsynr=0x120001, cbfrsynra=0x2a00, cb=7
-    Unbalanced enable for IRQ 252
-    WARNING: kernel/irq/manage.c:776 at __enable_irq+0x4c/0x80, CPU#6:
-v4l_id/918
+ arch/arm64/boot/dts/qcom/maili-mtp.dts | 130 +++++++++++++++++++++++++++++++++
+ arch/arm64/boot/dts/qcom/maili.dtsi    |  45 ++++++++++++
+ arch/arm64/configs/defconfig           |   1 +
+ 3 files changed, 176 insertions(+)
+---
+base-commit: 9437046953b2fb3bf55b36582450ea0267df82a7
+change-id: 20261126-b4-jshekhar-maili-dcp-enable-eb2ce69fcf55
+prerequisite-patch-id: eecfd66a55b8f2b7b2fc7d76d815facca0489d00
+prerequisite-message-id: <20261126-jshekhar-qcom-virtio-dcp-v1-0-7b49bda74916@oss.qualcomm.com>
+prerequisite-patch-id: 43f30570f31419a014962e6012f98f5b341d46bc
+prerequisite-patch-id: 08ffd8da137637eda4fa6d64a4a7fc5a24ea80a6
+prerequisite-patch-id: eca5d1310fd57c909cedf1668e075acb966db4ba
+prerequisite-message-id: <20261126-jshekhar-v3-dcp-v3-0-f1e9d7505039@oss.qualcomm.com>
+prerequisite-patch-id: 72baddd88461d6eb9ae02be5987fa1d6483cba22
+prerequisite-patch-id: 0c075c6b5ab526394f31e172b73d074382736e0e
+prerequisite-patch-id: 3263d4ca08492441a2f3c4b7d7724ae97535de29
+prerequisite-patch-id: 54c7c8d04f11036d716ec23976e94f962d261750
+prerequisite-patch-id: f6e5093f779820655cdcc0f8d5693c040873a823
+prerequisite-patch-id: c0330919436ea36a5322a93008d932aed1eca743
+prerequisite-patch-id: 0ad54e3e5eab2825b24bacee114ad25cd7133204
+prerequisite-patch-id: eb1547c27ab35800e8a38f4cfd760285cb57c0db
+prerequisite-patch-id: 1c47b825b6c7a78d6d89bff5655404cbb9ca4ae2
+prerequisite-patch-id: 38fe1330d79a5e6f4797f25588dcdc17f4a1450e
+prerequisite-patch-id: 15025d3b58e7f3b7a23533111eb26df3554e8c08
+prerequisite-patch-id: 655e9f37d822450523ebf1e485adc10d196e3a4b
+prerequisite-patch-id: 824412ddb416d43256347baa0dbd47ca8485f6e0
+prerequisite-patch-id: 6094e7eb2d3cce49e07be6f6428004321ec2d762
+prerequisite-patch-id: 58da7873bb288df93ab9d6e8e9cb6e8e3d5c8ebd
+prerequisite-patch-id: 53c063e0dd50f1462894bc5ba58d231e92fe3f1c
+prerequisite-patch-id: 182886b1aa1fc1e3200503ece0380e56446fb32f
+prerequisite-patch-id: 7f8ba80e3ad16ef84beb24781bcbbb774c8c6887
+prerequisite-patch-id: a036601e6280e82b4d8f1ba0afdbf04285e76f73
+prerequisite-patch-id: 529aec287f758d98fdc7760353a50297b737e87f
+prerequisite-patch-id: b5e513cd73a3b7132a5a0e049bac9d486051a874
+prerequisite-message-id: <20261109-jshekhar-nt37802-v2-0-a8e9efdcabd7@oss.qualcomm.com>
+prerequisite-patch-id: 3e049a8a6ef8ba6dd748d88d60c5c76dda51e308
+prerequisite-patch-id: 4b91b15bbaf8654013056643d40fdf40bfa043d4
 
-Adding module_blacklist=qcom_iris to the cmdline works around this; I
-didn't look any further yet.
+Best regards,
+--
+Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+-- 
+Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 
-
-2) With the above workaround I get to the gnome login screen (GDM),
-but the device appears to lock up when changing the password on the
-first login. No logs or reboots this time, just appears to hang.
-
-I'll try to debug 2 some more over the next week.
-
-
-Have you seen either of these issues? It could be related to my rebase
-or userspace.
-
-
-
-[1] https://web.git.kernel.org/pub/scm/linux/kernel/git/qcom/linux.git/log/?h=for-next
-
-
-Cheers!
-
-Chris
-
->
-> Signed-off-by: Xilin Wu <sophon@radxa.com>
-> ---
-> Changes in v4:
-> - Add the missing pinctrl configuration for Bluetooth UART2. (Sashiko)
-> - Link to v3: https://patch.msgid.link/20261029-q8b-dts-v3-0-655696dfec45@radxa.com
->
-> Changes in v3:
-> - Rebase onto next-20261027.
-> - Drop tested-by tag in the dt binding patch
-> - Drop CH7218A patches which have been applied
-> - Mark vcc_5v_s regulator as boot on
-> - Add the device to the QSEECOM allowlist
-> - Move PCIe ECAM and 64-bit memory windows to a separate SoC DTSI patch
->   covering all five SC8280XP controllers; preserve the original SA8540P
->   PCIe2a and PCIe3a register and memory windows.
-> - Format the board DTS with dtfmt and fix subnode and audio-routing layout.
-> - Drop forced output states from the SBU pinctrl configurations.
-> - Explain why full-pwr-cycle is needed to recover the SD card state left
->   by boot firmware.
-> - Link to v2: https://patch.msgid.link/20261009-q8b-dts-v2-0-eda11e5dea8b@radxa.com
->
-> Changes in v2:
-> - Describe the TC9563 embedded GPIO controller and use its GPIOs 2 and 3
->   for the external downstream port PERST# reset lines.
-> - Drop "PCI: of: Avoid config reads for disabled bridge nodes"; split it
->   into a separate two-patch PCI series, including the kernel-doc fix.
-> - Drop "dt-bindings: pinctrl: qcom,sc8280xp-tlmm: allow gpio-line-names"
->   because it has already been applied.
-> - Link to v1: https://patch.msgid.link/20260901-q8b-dts-v1-0-7de0b6a73d08@radxa.com
->
-> To: Andrzej Hajda <andrzej.hajda@intel.com>
-> To: Neil Armstrong <neil.armstrong@linaro.org>
-> To: Robert Foss <rfoss@kernel.org>
-> To: Laurent Pinchart <Laurent.pinchart@ideasonboard.com>
-> To: Jonas Karlman <jonas@kwiboo.se>
-> To: Jernej Skrabec <jernej.skrabec@gmail.com>
-> To: Luca Ceresoli <luca.ceresoli@bootlin.com>
-> To: David Airlie <airlied@gmail.com>
-> To: Simona Vetter <simona@ffwll.ch>
-> To: Maarten Lankhorst <maarten.lankhorst@linux.intel.com>
-> To: Maxime Ripard <mripard@kernel.org>
-> To: Thomas Zimmermann <tzimmermann@suse.de>
-> To: Rob Herring <robh@kernel.org>
-> To: Krzysztof Kozlowski <krzk+dt@kernel.org>
-> To: Conor Dooley <conor+dt@kernel.org>
-> To: Bjorn Andersson <andersson@kernel.org>
-> To: Konrad Dybcio <konradybcio@kernel.org>
-> To: Abel Vesa <abelvesa@kernel.org>
-> Cc: dri-devel@lists.freedesktop.org
-> Cc: devicetree@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Cc: linux-arm-msm@vger.kernel.org
->
-> ---
-> Xilin Wu (4):
->       arm64: dts: qcom: sc8280xp: enable PCIe ECAM and 64-bit memory
->       dt-bindings: arm: qcom: document Radxa Dragon Q8B
->       arm64: dts: qcom: sc8280xp: add Radxa Dragon Q8B
->       firmware: qcom: scm: Allow QSEECOM for Radxa Dragon Q8B
->
->  Documentation/devicetree/bindings/arm/qcom.yaml    |    1 +
->  arch/arm64/boot/dts/qcom/Makefile                  |    2 +
->  arch/arm64/boot/dts/qcom/sa8540p.dtsi              |    9 +
->  .../boot/dts/qcom/sc8280xp-radxa-dragon-q8b.dts    | 2053 ++++++++++++++++++++
->  arch/arm64/boot/dts/qcom/sc8280xp.dtsi             |   25 +-
->  drivers/firmware/qcom/qcom_scm.c                   |    1 +
->  6 files changed, 2081 insertions(+), 10 deletions(-)
-> ---
-> base-commit: 151a134a4e6ec66f69db8750c66006f5207f7a9d
-> change-id: 20260901-q8b-dts-a3afc5f9b8b2
-> prerequisite-change-id: 20260507-sc8280xp-qup-pinctrl-5ab8af9be35f:v3
-> prerequisite-patch-id: d799218553d1a8d44d83ab7d5c36a9ba7dd05e92
->
-> Best regards,
-> --
-> Xilin Wu <sophon@radxa.com>
->
->
