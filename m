@@ -1,88 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.210.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795697998;
-	b=3W/F3gFKr5Rp2BdaTUKZqnJyTHbobMw1XsI4ZGJDSR3lyNvVgnfFJMoSziH79tohhgS7
-	 oIM8lOhXqsBxZFVQCDR65GKBKJWbzHlntIKyOxB1o+0zU6JRu7WMyStbqffHTMmi/zhJT
-	 z/V68Eg1Dg/PB75WSDFujqFoHdU1yVFiq8rKNcpCfbU9+SlVxwUT3fGI3d6AylcS1DIc7
-	 jzqkOcsaPXMzBwzKXcHQyZLvHv0LRvKwMIoNk//kup+i9lwYopUgjbUhWy9dcUuaqZ0qR
-	 ydt0LeyE1yIURjTonVWJzGL2NOupH+cP/J7ubVGS7/nMkRwD2w5d04uNulheHxG290Q==
+	t=1795698448;
+	b=C+4m6onDZvaq+V0btsH5ggGywGzT4mAKgmJsDhzEV8mmMxY/a3TNXakPkOPA/A04No3Z
+	 ADD/PJpT+V0ifk/g8YL9slz8m7r+G6naku/fQK9oowPS3C3aB5jcwR1OOKq8OB+lBW1oi
+	 ayLy0io0KIieWA3hRZEFY3OEeYDqo4q9lf5D25QCOSamNo3I67MSah3jwX5eoMt3gdpil
+	 rDd7UJ52MqX/0OBGieS52LkUKdS8tcpxuugb+qPyjQBTJhAXCpW+24cHJZ/ByjSD9Mgrd
+	 VdZjHOGPR78A7bqsKlrt4LwDvBbYMNiEtEdpPq8QJv5N1HMboxbva5Eqdc7yLuKVTDw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795697998;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=qBf/pzK+uJDQxotO7zZtnUx0PFHSi9S3B+LhgAk65HA=;
-	b=xuSZlwbrC6Z0IkP/bJ9AGoyBSaEz/kY4RZf9VpuJuAbfCsxxlpYMCQ+BwVru0zGxvdz9
-	 nBq3roMj7YZs31WSiPsSQoJb+uvtFBA7UXjcr1SykEeZYEdcdSgLJDK3E3NPbHQn1bxOc
-	 Ohui91i7B9Viy3RPhUmYPFUNci/EZz5B6JxCpBXjqmjsVNgsDPvCdKI7UR2Yz7eRdZnqK
-	 St36PvlEIZFRI/c4xQLw+yRFSzESWW4UOFLCOimDt7XbaeMdMHnm7qOWtfLf+c2nwZ+1j
-	 wbTpw9+7SOR6vxFSmPFMc2xUFxedjrrClW0ra+4Ycwtub6NCCFV6wc2KD+zp92sV+Vg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795698448;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=m/r7tY+1cY+d5JvPnaKis6TXcnMWfsaA3A63jNKdj0k=;
+	b=kWlkVxoZxKTF1KrjBhpNNlpCotvmsh6YUmfbkUqHZ8p67Uf44tbOqMh/JkJaLoxuKskw
+	 elf4VFkERihzarlbeJ4eM0VIHojdqxV3ONNuKs9fa5SNqRyYlzhtfG44hT7vRCBEt//KF
+	 MZ3hYNTO22fFuePv5vEMQXFHeOMDaJRGjvB8PwG1RFpr3yePUefHdOSUO+4J+qMICT+K7
+	 6H40IJfZ1wBX8D1nVkc1Gf/1cZaHOtybs2K63T+G2MFC5DFTl5Dlh5qDHAqocqiFnwTF2
+	 706Wo5vGl4+YaDVevzm2RHk45GnccUqo0ub5vwBB4XFdToFtV/Gd1o/BegNAiZDj3Eg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=riscstar.com;
-	spf=pass smtp.mailfrom=riscstar.com;
-	dkim=pass header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=Ni5icM2E;
-	arc=none smtp.remote-ip=209.85.210.46
-Received: from mail-ot1-f46.google.com (mail-ot1-f46.google.com [209.85.210.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nPx75k5X;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cX5Le6vD;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F0D0606A327
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 12:59:57 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F0D0606A327
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4FB43606A31C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:07:28 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4FB43606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=Ni5icM2E
-Received: by mail-ot1-f46.google.com with SMTP id 46e09a7af769-8470d7d430fso3463445a34.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 04:59:57 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=nPx75k5X;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cX5Le6vD
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQBVU4d4128748
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:07:27 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	m/r7tY+1cY+d5JvPnaKis6TXcnMWfsaA3A63jNKdj0k=; b=nPx75k5XdhHwI+L0
+	l/r2eqJbKaVVDnx2nTTCCltg1LKiPpNOzgpta07hJ/bm+KUR+Y+4SPGfTz3BxCW5
+	gCAJwzmwL1kZ+HqTQEZQVeSD050byW6vCtTtluuh9tu6uCy3hsRUQmTh7dSOJTsZ
+	0Qs+unUZ1f/2DuthFfMKhOpUQaoqqOIbTL9WoiYOuYK0RMuWg0wATmQ+mZ1yWsPz
+	dJGbDZppPbDsFD1Vla99Fpy3C/+FJQt2srhptHUKuFBS77Lu91NzwJUTcuhsEum2
+	585k04oDxQD7Z7Re5ttPWlsBi577Vb3c+TH4RoVP8U6R1J/zKHsRgruoZSVR+0Kp
+	VPQfFw==
+Received: from mail-qk1-f199.google.com (mail-qk1-f199.google.com [209.85.222.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j62vav1jk-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:07:27 +0000 (GMT)
+Received: by mail-qk1-f199.google.com with SMTP id af79cd13be357-9460411fce4so39111385a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 05:07:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=riscstar.com; s=google; t=1795697997; x=1796302797; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795698446; x=1796303246; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qBf/pzK+uJDQxotO7zZtnUx0PFHSi9S3B+LhgAk65HA=;
-        b=Ni5icM2E74nNCK1kkhfleyOOlHVlks2ELVDV8SF+XLnFb2IkGSG86FphXdWme0o72F
-         Ee5/PKGCxCll00Nx4gF6NK3jsUFm8/g2R6kV0CBuFOR9+qyfXgzICNnocGA1YS2vOBoe
-         vWTxmTShzmkVYayLKrpWJ/z+XJW7tJ85GBfdGNgYWt+pd/IwgecaLttZfz8qHQtNN62s
-         fmWP5SvnQIC65/yZKKAeKbBDKCINV1ANPBHCIAZheOe1ulVuoDIanWFoIxaie5fJpTTd
-         PI7NMFULQDRzaOzLQawMaDir7XHQL0E1oFHvzTtUBcQ6WZzRcDNRP/GV3rtV5oHBPwBM
-         CnTQ==
+        bh=m/r7tY+1cY+d5JvPnaKis6TXcnMWfsaA3A63jNKdj0k=;
+        b=cX5Le6vDhMfWVUNl2bNqqPkAXCbqN+DiLLUZwWEZp/+WzMJkVF7HhFlpZyvNOcGsTj
+         hCCdhwse+WnkswWFnNe3nOAHI9rioVL8TWmi71E+n7USc+1g67uOoaYqxAYFHQrEzpsd
+         K8jgqSFEdAo0bBObvKZrdkYkjFub/gILbQWyQgtqGpLBTRLWLqsAYhiwCua4RICGdIjq
+         KzrcWTjCFJRidYJx4Y79V5tmrJ0i5ewv48cj4hqK9wz9v31CvV52ob1KM3NOjbD4h6H8
+         32FaNk/CkAav3keVSeMifJLjXdizCdLdUBX+IAFcZTN4uurpuZv3lgqAmhMxBHyWMGBJ
+         jnRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795697997; x=1796302797;
+        d=1e100.net; s=20260707; t=1795698446; x=1796303246;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qBf/pzK+uJDQxotO7zZtnUx0PFHSi9S3B+LhgAk65HA=;
-        b=N7IwgBu5LpnoOStLHivE6bD2n84U4o9El4voOSfmzG3CQdTfebdX2MnyoADf4oMnJA
-         ewC9K8zh8dKKEiIPjEYUadf1/Z2ke1lFlJ3XsVGzDOmf8vfQ8yaB0qqb9/K5Da9pt8Ir
-         o1MzUxDi7+aXFvyEpaon6YwUmcXPdhKdoEte8EptkXvj5kEdRCQab8m0GlzyBCjI4R3H
-         aK0JWCp6UtHuG7I9vRzH6QDlsswajleDuOOCaz071nqF0bY1EZfWCl5sYFZY/Ks0oJna
-         OipNK37mBtDzjcKN8/h8Z57AvwDGemNnnolE/7TdYn4HhPK3tTNnvZpOBR44IST0gOhx
-         KYuA==
-X-Forwarded-Encrypted: i=1; AL+hErGLTqxAr9GtKzh7T7kFhlS9Dxiv5TGmgmW22y2KedPCCOxxHiVCZ8EElqAgjbKQjF/a1M1+W8/yYzS1L3Tt@vger.kernel.org
-X-Gm-Message-State: APuU4Z8fgTe+QVeUx6LJaiK9vsQJAEFmSZy+X9BymXMhk7dwZeN6/tAS
-	59T1Rzo7KVldrGuHfcpZqS1GzrqBVM0u76tF7mPPDGati9Xoajc5GqE6HUQ50PJTHr8=
-X-Gm-Gg: AZFdTZdjT4NlGfZeLvOp+NH5+x0LH7GjTzpg6bdeSaCosQe8zyPRCle4cqqlT31MTLM
-	yaoeMgKQd7qNG2XXjCNQti3zKjbdU1A/6j0YKvFPEfF8MTH5ND1ijz6gSUg9ySuhcFjrlTUmxZ+
-	sWsPmH1etAJqy+dGqFvmD3YePiXpDDn+4QS4IjvyH7Hhoe0naWMtUEs1KkLfremcVzCYu5eWYs2
-	pJCiMfOgaWvroMx7wzSPDEBVdL7LMVsOOKYCob6ntKpBE+eaoCCIvFiM0gRRlQWR+JNcrEdMJaF
-	Xmffg/L7MAiEDHpG0nGZnioMQKrU5VorY07zY5Vi/bHlhQhCaJYiw92w935fEs/uFBe4zM2j24b
-	9vzATE6Qf904Ar7+sm2dfNm0I212sNuPFnIiD8esvMKcuw4WNERtONxQQcFb3BrYyTVMeNr3itP
-	6O+94+1jiFEvYWsZEEGIz7kPPS11z0UnTFW4GFIEYL2s/J8y7FR8ibXWtXCO5lKrmylzWv/HE86
-	KQZRLY6q2rghNx2LcG+QU/Z2NtqO221DsY1kXv8CW6c2D46Uo6t2iaY10mI29YQHYY4ID4zO8H/
-	qVPCrRKdBa0+lCeK91KWLGpdDZ4OUN5A
-X-Received: by 2002:a05:6820:809:b0:71b:40c:9d86 with SMTP id 006d021491bc7-71b394b3c12mr14780581eaf.44.1795697996937;
-        Thu, 26 Nov 2026 04:59:56 -0800 (PST)
-Received: from [172.22.22.28] ([76.156.233.211])
-        by smtp.gmail.com with ESMTPSA id 006d021491bc7-71b380c6815sm13831517eaf.12.2026.11.26.04.59.55
+        bh=m/r7tY+1cY+d5JvPnaKis6TXcnMWfsaA3A63jNKdj0k=;
+        b=Ui0mjC8trF7KFonMtDiS6r2mESvmxUtptINpBryZjPY5Lg72oOm+N8Evj25tmWbP1X
+         JdODS22AT8pxmxzW/vBjRyMM2zEOrQhcWgo9q90CAslf103ZXgCqiwFNGVfKx86H+E1t
+         s396IJiwfVI6OaIaF2MiVzXdMudxakQJ9Agq0dWZXGD0oc2cXK5AOCNs0MjnGwiLz1z0
+         kLpud8zxS8A6iUEfFBcrJF/2X7HHv5fGP/d91y/d4fR2Uv3995v4wkX0zSaeZlgFDVYG
+         yvNxAKLc41qZEsLpzBF9s1Uvx+ghbEym4pE532RzypKtXw04I7FXIMiXYWpRGuPSWv74
+         5cDw==
+X-Gm-Message-State: APuU4Z8NUlUf+PpHq9mK2HrIuZ+lTF0EuFFsRb3RML0NYMqWrQF+SL3d
+	aOqn4PQRCXVuGp2LQGKA6IgL9YRSNsdzawbIMfss/F/as8sG0Pn8HH8NeNP22vSNZRsCo6g/41a
+	XH0ks930uXX8VpW9TyjzsSK40xCL7SeNwvBcxizc3grF2twKtuZZoVVKQi0TUt4whHlmjYGJyzB
+	8B
+X-Gm-Gg: AZFdTZc+GJhen2Z1YyIk1Tm8XHdRcGZMioKyMZoezaVoTMyIh8s1/yY6ApRz9A9rKlt
+	ssBQIvNhWwgOI3mvwZlRKPMIj8ysz/H3jaJykHa+sC2nWJshYxT88qABtSbMPHjbUpVN4GIc9ZS
+	3UEO6Jk1WDFtZB6WoWDa9pDnQooCw7tdPG3T7DSo7SQS8+7ypOnblWTWobn1OWtyw8V4QaJQRS0
+	OUuo7fXAJKhKewCb48ESHAHOC7NtXmXilsr/V7R3MMnS7ex4w8EDES7f3bBSZfczFKQ47kPqZkA
+	hk1PkuASilIvMsLn9HawoYesHPbKOaGskUiuZbelMXOkAft3Tmo0IHk2uFvwGvTVj+Kk1dGIfXq
+	ur8N6YDKltSMe3MnEPXBfTdtL/pG0iKY2p8aRs3n0hudgu3PUca8snPRDz6++iTO2LHC9Xuk=
+X-Received: by 2002:a05:620a:72b5:b0:949:ee76:cfe3 with SMTP id af79cd13be357-949ee76d22fmr1906390785a.0.1795698446384;
+        Thu, 26 Nov 2026 05:07:26 -0800 (PST)
+X-Received: by 2002:a05:620a:72b5:b0:949:ee76:cfe3 with SMTP id af79cd13be357-949ee76d22fmr1906385785a.0.1795698445931;
+        Thu, 26 Nov 2026 05:07:25 -0800 (PST)
+Received: from [192.168.226.72] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ba370cbb80sm9687245a12.9.2026.11.26.05.07.23
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Nov 2026 04:59:56 -0800 (PST)
-Message-ID: <e20fde6a-3389-4084-a2de-fee5426a74e6@riscstar.com>
-Date: Thu, 26 Nov 2026 06:59:54 -0600
+        Thu, 26 Nov 2026 05:07:25 -0800 (PST)
+Message-ID: <b4aa73a1-ccdb-4ea7-a800-3c4ef20024dd@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 14:07:22 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -93,116 +115,91 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] clk: toshiba: introduce a TC9564 clock/reset
- driver
-To: Philipp Zabel <p.zabel@pengutronix.de>, sboyd@kernel.org,
- bmasney+clk@redhat.com, jbrunet+clk@baylibre.com, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, andersson@kernel.org,
- konradybcio@kernel.org, abelvesa@kernel.org
-Cc: daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
- lorenzo.bianconi@oss.qualcomm.com, fabrice.gasnier@foss.st.com,
- alexandre.torgue@foss.st.com, marex@nabladev.com,
- changhuang.liang@starfivetech.com, devicetree@vger.kernel.org,
- linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org
-References: <20261125202141.1288493-1-elder@riscstar.com>
- <20261125202141.1288493-3-elder@riscstar.com>
- <579859f0e1b53aa6506492a2e5d073f3f991014c.camel@pengutronix.de>
+Subject: Re: [PATCH] PCI: qcom: Skip ASPM enablement walk on resume
+To: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?UTF-8?Q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20261126-qcom-aspm-resume-v1-1-a34625656e92@oss.qualcomm.com>
 Content-Language: en-US
-From: Alex Elder <elder@riscstar.com>
-In-Reply-To: <579859f0e1b53aa6506492a2e5d073f3f991014c.camel@pengutronix.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261126-qcom-aspm-resume-v1-1-a34625656e92@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA1MSBTYWx0ZWRfX7KLZfPvp5sd9
+ dNDWmkwf+d1ipFPQbJXcTYgHwnjbLEozjMyOYwUvoXdh8vxkyEjfFH4KeYMj/ED5gm3xu7DM0Ct
+ Ns05+hrqhufVwBJk6WfaL04Ia0vVRms=
+X-Proofpoint-ORIG-GUID: riSluJu5DfdlrOpKT94mw2qSSi3EeBBR
+X-Proofpoint-GUID: riSluJu5DfdlrOpKT94mw2qSSi3EeBBR
+X-Authority-Analysis: v=2.4 cv=QZPzLcbv c=1 sm=1 tr=0 ts=6b082f0f cx=c_pps
+ a=HLyN3IcIa5EE8TELMZ618Q==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=M-jGJTmE-ygQmRKCDXMA:9 a=QEXdDO2ut3YA:10
+ a=bTQJ7kPSJx9SKPbeHEYW:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA1MSBTYWx0ZWRfX6j4wxdb3fjs2
+ w839C/U0vXO4983yICXtTaTtPloqff7xeOiqC0MuinGuk4zlii2z8VVqZou1m+OlX6B52O1OWiZ
+ gA8yMT482KFJUT1Y2+bHJcpaZsm9v1qJdnks6JRgILzVN4O430isax386tUj0xx8dMIqc/JHRPJ
+ YpKhIGXHeHq9lndy051R/wqrZ6kHdh0u0qOWvWzXaU3tOzVwUBNBHrjJeg8rTlp6qIpdho3zLgs
+ 01mVsml2VVYSB4XZmGf5VwzQX5rfs8zb8JT5rimdlOSOsxoU2WyQ/zquRQFYzHUZs7d0V9hvBab
+ 6X3SZCfXQtOUQPlY+vGUlaWN68brXpaPbHWqerJ7Yrm5+p7iZw6sksDtsKUOQ9t8jLTb5Wb94WS
+ zqukKcwCT4vnRMUBcN1VbwLlWI2SWKvidhM99CY1Vb1fusABIe0HXTyveGXo6e9WGeZ4g21PFgx
+ syb67QvOZ9v/XjqEyaA==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_03,2026-11-26_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 lowpriorityscore=0 bulkscore=0 phishscore=0
+ adultscore=0 malwarescore=0 impostorscore=0 spamscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260051
 
-On 11/26/26 3:42 AM, Philipp Zabel wrote:
-> On Mi, 2026-11-25 at 14:21 -0600, Alex Elder wrote:
->> Define a new platform driver that manages clocks and resets implemented
->> by the Toshiba TC9564 SoC.  There are 21 gate clocks that can be enabled
->> and disabled, but currently only the clocks that are (or will soon be)
->> used are defined to be controllable.  There are also 13 resets that can
->> be asserted or deasserted, but support for some of these is omitted as
->> well.
->>
->> Two registers manage the state of the clocks, and two others manage
->> the state of the resets.  All four registers are found in a region
->> mapped for MMIO.  The region is provided via a BAR on one of the PCI
->> functions embedded in the TC9564 SoC.
->>
->> The I2C and PCIE clocks and resets are treated as CRITICAL, meaning their
->> state should never be changed (and a warning is issued if changing their
->> state is attempted).
->>
->> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
->> Signed-off-by: Alex Elder <elder@riscstar.com>
->> ---
->> v3: - Fixed problems/garbage in the patch header
->>      - The Kconfig option now depends on RESET_CONTROLLER, and can now
->>        be enabled if COMPILE_TEST is enabled
->>      - The generic gate clock controller code is now used rather than
->>        implementing a custom one
->>      - The PLL and internal fixed clocks IDs are no longer available
->>        outside "clk-tc9564.c"
->>      - The PLL is initialialized, followed by all fixed rate clocks,
->>        followed by the gate clocks, to ensure each clock's parent is
->>        initialized before the clock is
->>      - Updating the reset registers (read/modify/write) is now protected
->>        by a spinlock
->>      - "Unnecessary newlines" have been removed
->>
->>   MAINTAINERS              |   1 +
->>   drivers/clk/Kconfig      |   9 +
->>   drivers/clk/Makefile     |   1 +
->>   drivers/clk/clk-tc9564.c | 456 +++++++++++++++++++++++++++++++++++++++
->>   4 files changed, 467 insertions(+)
->>   create mode 100644 drivers/clk/clk-tc9564.c
->>
-> [...]
->> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
->> new file mode 100644
->> index 0000000000000..306781e2f7b4f
->> --- /dev/null
->> +++ b/drivers/clk/clk-tc9564.c
->> @@ -0,0 +1,456 @@
-> [...]
->> +
->> +static int reset_update(struct reset_controller_dev *rcdev,
->> +			unsigned long id, bool assert)
->> +{
->> +	const struct reset_init *reset;
->> +	struct tc9564_clock *clock;
->> +	unsigned long flags;
->> +	void __iomem *reg;
->> +	u32 mask;
->> +	u32 val;
->> +
->> +	/* Warn on any attempt to change state of a critical reset */
->> +	if (WARN_ON(id == RESET_I2C) || WARN_ON(id == RESET_PCIE))
->> +		return 0;
+On 11/26/26 6:44 AM, Krishna Chaitanya Chundru wrote:
+> qcom_pcie_host_post_init_2_7_0() walks the bus and calls
+> pci_set_power_state(D0) and pci_enable_link_state() on every downstream
+> device. It runs from pp->ops->post_init(), which dw_pcie_resume_noirq()
+> invokes on the resume path in addition to the initial host init.
 > 
-> Can't this be checked at reset_control_get() time (in fwnode_xlate) so
-> that critical reset controls aren't given out to consumers in the first
-> place?
-
-So I'd pass in a slightly modified fwnode_reset_simple_xlate()
-as the fwnode_xlate pointer?  I hadn't thought about that, but
-it's a good suggestion.
-
->> +	clock = dev_get_drvdata(rcdev->dev);
->> +	reset = &reset_init[id];
->> +	reg = clock->ioaddr + reset->offset;
->> +	mask = BIT(reset->bit);
->> +
->> +	spin_lock_irqsave(&clock->lock, flags);
+> On resume, the PCI core has not yet restored the downstream devices
+> saved config space, so the config accesses performed by the walk fail.
+> With a PCIe switch in the topology this is easily hit, producing errors
+> such as:
 > 
-> Consider using guard(spinlock).
+> pcieport 0000:02:01.0: Unable to change power state from D3hot to D0, device inaccessible
+> ath12k_wifi7_pci 0000:03:00.0: Unable to change power state from D3hot to D0, device inaccessible
+> pcieport 0000:02:02.0: Unable to change power state from D3hot to D0, device inaccessible
+> pci 0000:05:00.0: Unable to change power state from unknown to D0, device inaccessible
+> 
+> The walk is also redundant on resume: the ASPM link state is restored by
+> the PCI core as part of the config space save/restore. Skip the walk when
+> the controller is resuming, which is the case while pci->suspended is
+> still set at post_init() time.
+> 
+> Signed-off-by: Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>
+> ---
+>  drivers/pci/controller/dwc/pcie-qcom.c | 3 +++
+>  1 file changed, 3 insertions(+)
+> 
+> diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
+> index a6a0e3ecd921..bd1ffbf5c21a 100644
+> --- a/drivers/pci/controller/dwc/pcie-qcom.c
+> +++ b/drivers/pci/controller/dwc/pcie-qcom.c
+> @@ -1174,6 +1174,9 @@ static void qcom_pcie_host_post_init_2_7_0(struct qcom_pcie *pcie)
+>  {
+>  	struct dw_pcie_rp *pp = &pcie->pci->pp;
+>  
+> +	if (pcie->pci->suspended)
+> +		return;
 
-OK I'll do that.  This will be the first time I've used this...
+Is this going to regress hotplugged devices?
 
-Thanks.
+Or do we need this bus walk anyway now that we have 
 
-					-Alex
+eacf92a29af9 ("PCI/ASPM: Mask ASPM states based on Devicetree properties")
 
-> regards
-> Philipp
+?
 
+Konrad
