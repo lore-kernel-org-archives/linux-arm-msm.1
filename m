@@ -1,65 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795721182;
-	b=RsWtpXnXNPqe+mhPXzVpwAm4LBo6AV4SpVBaf/EG0R1Z4xZ100pIey+edz8SQ9t5lS6g
-	 U1S6oz+A4JMTRxvgfHESFNzT/ceCrGvyB5XrUhPXL5QyXqp2kucjfAulir27/xEFLmMpj
-	 ySHZFriW0P+EqE5dosy+K/4/rFPMc7xt+EUp7AjrDHvyAeMSLOHMWkaBuu3912Q+043GM
-	 eFEuIWmcDUZPe7RjR8PGribXoxyRZz5Xp6HB9wXMyySTcmYov0zov5oEp9nC+HN7PnOkr
-	 mFm1p8xRExHzKfvnYjLN86sqO6sTLtb2oJACQiWqCHWAjdICSRABEK8noqRskYCcTKw==
+	t=1795721199;
+	b=WipFNOgEFe1O6UGEsI06NNtX6SrleK5LKPza/Ga/B9w2mcrfuSqc9vuvqIXSy3WzwIgO
+	 2eGjb3Lrb+XJFCeTqzHU7L3hIu9Ckq37SCzr0KlPA4CB/vH8MIHFPqu93Yi4pVAj9NxE+
+	 31Uh43H02/lao65Qg3CdEs5qshcjwta8hJrLEyz40gzIg5JCKEFmn380R0nOaINqCyTsO
+	 MejPcd7npWHtTcC2W8Qt+D+XJiz167+MN/Wg38vXpgIIH6U2Qdq2wbe2xlplOU1DhYafS
+	 38sTQiwxRYazbkwew2Qb9uSTS+qjdxi6PBODxFEAW95RXfdpWYWKzzbFHwyOPD2ImFA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795721182;
-	h=Received:DKIM-Signature:Subject:From:To:Cc:Date:Message-ID:
-	 In-Reply-To:References:X-sashiko-severity:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=DlmXxKCRfwySP2H9xbg+rD0tHnrJuVjklCcVNScXQk4=;
-	b=l7FdNPWmwTrSycE+YBdQtxzU/Y/5lIElkd6ls81/9ldkYpKOFW5gPoZA7ImsiDZGf04D
-	 ecQ34Fq67vQQNtRhU1Ca5Gkt9pSnN0ZJvhZioZ2TApqGRuikz7+y+uSvCVCqCiTFXVCYG
-	 jXEBUxPkHxsAcIL+BhWbfljGJ9X1ZGhZ+PxY/6+eJa7sPpGgZpHXd1Wv9nIay15DmqS3x
-	 ii6zOxYkRjXNl+R+YCZNMTNbrgshZ/7BSrmaYt60oDarmGSGHEps82WMhuXpLxKeKIHUY
-	 RK6teftKjLtZgWK0v7svKLZqyeR5xOU+fY96Sn0ZrbZDkm20AB6Go/M6yHvrrjQWWCQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795721199;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
+	 User-Agent:Subject:To:Cc:References:Content-Language:From:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=RSbO/8C3j8RIVBHNdX+Dlhj+7Zj2tOE/srOubQ38wfA=;
+	b=vthy78aI3qghzEmFDflzcrxHGTDaeEujHX2yWZuOH12MSqaqPdezDUFl+0qczDvCBnZd
+	 oOP8as+kJILl4VwnVctGCSlzWh2Vhmn1HWaMZ46bDtpacSvfPI+pzpCHQON32H39xmkhS
+	 hdS4cEn6KNJJNxeRlInYAbayWqqKBrYRTe1DsoL6nrm8oOJ/EBmZ9jwF46m1g8Vk6mM7T
+	 lOP31jAzZlBaa1Fb/HR8n5zYxVP1YxLinHvS3MRebPfvTjV6FLjZHpXGtAfBt/AsTBJSB
+	 07fNkdMiPmJbK3xPeJGvt68mIfUn6mrSuMAQFOyZC5GsDn4qmBPaAM8ged7cGBovWJQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VLdeKFk2;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Y6vxztZ7;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="eO0Qr+/R";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C358A606A31E;
-	Thu, 26 Nov 2026 19:26:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 26A51606A31E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:26:38 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 26A51606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=VLdeKFk2
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 613671F000C4;
-	Thu, 26 Nov 2026 19:26:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795721182;
-	bh=DlmXxKCRfwySP2H9xbg+rD0tHnrJuVjklCcVNScXQk4=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=VLdeKFk2jnnsDeHa5w+9cs9AVtXeXk0NK2+QqgkGNQRKJ359/0ZJwP7rEZA8O2lD6
-	 Evf9JBWGctuH57a3m0r9cUCAAeLOUQ7QQa1h7S0/wahAe9inMvlxjIgGPFMg30yiXs
-	 E7HiT18iIHujTJj3huD5+SwUY2rb2p2ej/XXtznCh5jXELZNGlMJeu0G+d1c294vAD
-	 0TQd7Ig3nQ9yVjaA4ZTQTC9IcCK51JSpRml5Nt4Us9kTSgRIKeYmQjc3biLWAP90MP
-	 mULoCWCRdczSndKPm5lJLdCQy5+AfwpUT1MuTj6IMeWIYpq9jQsQNtk7WyxYDC47AT
-	 d9FnYKR8q5rcg==
-Subject: Re: [PATCH net] net: stmmac: xgmac: fix RX split header length on
- multi-descriptor frames
-From: netdev-bot+sashiko@kernel.org
-To: sagar.cheluvegowda@oss.qualcomm.com
-Cc: maxime.chevallier@bootlin.com, andrew+netdev@lunn.ch, davem@davemloft.net,
- edumazet@kernel.org, kuba@kernel.org, pabeni@redhat.com,
- mcoquelin.stm32@gmail.com, alexandre.torgue@foss.st.com,
- Jose.Abreu@synopsys.com, netdev@vger.kernel.org,
- linux-stm32@st-md-mailman.stormreply.com,
- linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, lorenzo.bianconi@oss.qualcomm.com,
- hongmei.xu@oss.qualcomm.com, abhishek.chauhan@oss.qualcomm.com,
- sarosh.hasan@oss.qualcomm.com
-Date: Thu, 26 Nov 2026 19:26:20 +0000
-Message-ID: <179572118090.3135.17761933543011019663@kernel.org>
-In-Reply-To: <20261125192531.1940982-1-sagar.cheluvegowda@oss.qualcomm.com>
-References: <20261125192531.1940982-1-sagar.cheluvegowda@oss.qualcomm.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Y6vxztZ7;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=eO0Qr+/R
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQGc3pn596445
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:26:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	RSbO/8C3j8RIVBHNdX+Dlhj+7Zj2tOE/srOubQ38wfA=; b=Y6vxztZ7S8v5heaq
+	gLEDsIR0PNNktgZKZ+zUllJa3BnwCokbTyCKp35pawsJD7jUZLLCMflHewAhKqJS
+	7BqPortcbmF9YLDvciYxtaqgpAHWcnSRq5DRVOfTQtmaNRR4fRR0Q5UKGz/Q7SmM
+	5/wRD3IXwhdzsCJruxhIWegfLpDS/r/AAPsww0i6WTLTnYm6mRbHbE0LiQRtcCFr
+	GDHMfZ0DfQkMD01mm2hmRHQObVww2sm4DEBmwNuH3d61LU2qBOIO1KE50Xdy6/aV
+	SlT1DPOfnUdcv3VV6llZXD93nxzDYvizSLpaG6aMy2Nrkqi2//sHlhMrI3tf6/GC
+	Vyt1Ew==
+Received: from mail-dl1-f69.google.com (mail-dl1-f69.google.com [74.125.82.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6rf90faa-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:26:37 +0000 (GMT)
+Received: by mail-dl1-f69.google.com with SMTP id a92af1059eb24-1b55f4f3bb8so4276747c88.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:26:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795721197; x=1796325997; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RSbO/8C3j8RIVBHNdX+Dlhj+7Zj2tOE/srOubQ38wfA=;
+        b=eO0Qr+/RaacgI2YzlWPMmhQaN42IU58jek8est1j/O23SR4QkplORHOJ+9gqqk1d0k
+         uaon1OHT3aglu4Rp6Xrd7qlmzUpq7qqh/AoQdXJ+VduFpONkpDqin49t89K3pKGxdw23
+         5HhWTw+mx3a85idfZ2WoSjO0OhtxkYVCGyi/QXDCHU9LgkM5BxAVoU7fDqY/5x1sSTgH
+         dst0SzMXVjxIarBW8IMYkk7XlofEFsBwG8x3ecxk6JmJ2ezXYalmRuPH9gfm95iPGjfZ
+         FU2abOoNsRKPwR/4Hqlm6NVQJvD0W5e1EZjXblCOzEsvV8dHwi4lyP8+FxIaxJF//lpU
+         YTlg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795721197; x=1796325997;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=RSbO/8C3j8RIVBHNdX+Dlhj+7Zj2tOE/srOubQ38wfA=;
+        b=Y05CG6WMPmBQlxGnQnAWbpjtncZbhHQtxpnIYRjWG154PHLPGEOhobNGq5p6kafFpf
+         QApu73aOtMFavlKMky3D1xQDO8JXn7Cz/X65kXsS5EQ3kL8PzhvgARm6Afg3eEzjrI/r
+         SpsJdc9uwb7p9wLpMKrz9l6cNQWW6/wqr4FAQG9tiI5Wvk9MpJDnSi3o2Vkwqpk+e+Fx
+         A8vAgbxOaqb1QINnSILvLdsLd9xiyupgsyS2GxL0HteoIJy1NJCaSSJhZrANL8Yj5Jyd
+         4Fw/gM/yVpRw3iMx3JsKGvmDP+wObEycGXqMan1lzxp9QOs4jZ9TUMmC37aHx3nBodjZ
+         L3VQ==
+X-Gm-Message-State: APuU4Z/eYsrt7EMYJg9HnQGe0cYabnQJoe7m9tG4XHFjq+nj9DgCWihf
+	KhH1iA7n7labkNcWJG7T3IKnQthmbF8OpLNPN5G7Un/14QQq7vwsK3WOY0oRoIZ2D0AJeiu3RsY
+	U9Cl9KRM9EcXmDb+mirAWW2LSSz7yAxdMon3O4hJwFVgq8r1uxwOsnvpAkXDm7U7h07GQ
+X-Gm-Gg: AZFdTZePBnbueGn8uf6U34fV8PakOay5QiM0O6IiCLMLJYQGHARi2jPU7tXfvQx2gd9
+	sKby8YIKRRHHdlfIqPRZ0opka4gc0wJ/y7xoWTMySMhOXiSIi5fdgwUN5Owrrg7Eg0LYU0dm2hD
+	rEH9aSD2rDzKHZyPoKgOhlmJ4I03rj1ZFNC/PyoWRyNYgW0VNp58ubC1tQhqZ1qe/6D99PIpy9P
+	FKzoCwMFRVzWifRdDAuZIPtQEA5k6A/8LwbQ2KGapFutrD834d4oWRVNDjlWRItCOWrob1hTAh5
+	SAq/1fcy+jnQ2h0PMp6zYImSTg4QHsTrUOSnC364gxph+3qjvMO9yAzW2iAfBgRwT8oYXCUM+Vq
+	0xchzdg8egS3ykUf6nH2guO29k5n0MT++CJdPwWNdbmKinN1QNw1a0tVZdFtEO8qOZx6M4N4D2Q
+	==
+X-Received: by 2002:a05:701b:2051:20b0:1b2:4998:a0df with SMTP id a92af1059eb24-1b5568fa273mr22224567c88.35.1795721197149;
+        Thu, 26 Nov 2026 11:26:37 -0800 (PST)
+X-Received: by 2002:a05:701b:2051:20b0:1b2:4998:a0df with SMTP id a92af1059eb24-1b5568fa273mr22224548c88.35.1795721196695;
+        Thu, 26 Nov 2026 11:26:36 -0800 (PST)
+Received: from [10.204.104.211] ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38566fdce48sm69877832eec.14.2026.11.26.11.26.32
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 26 Nov 2026 11:26:36 -0800 (PST)
+Message-ID: <83e49e4a-0e31-4802-bbcd-7e0c178b6ac0@oss.qualcomm.com>
+Date: Fri, 27 Nov 2026 00:56:31 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -69,139 +114,156 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 6/8] drm/msm/a6xx: Add IFPC tables for Adreno 640/680
+To: Konrad Dybcio <konradybcio@kernel.org>,
+        Rob Clark <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar
+ <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
+Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+        Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+References: <20261030-topic-a6xx_ifpc-v1-0-6992841a9a32@oss.qualcomm.com>
+ <20261030-topic-a6xx_ifpc-v1-6-6992841a9a32@oss.qualcomm.com>
+Content-Language: en-US
+From: Akhil P Oommen <akhilpo@oss.qualcomm.com>
+In-Reply-To: <20261030-topic-a6xx_ifpc-v1-6-6992841a9a32@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-ORIG-GUID: iALIUw8KIHJajzI6OBmfJ8gATO8zpSSY
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA3NiBTYWx0ZWRfXzuLMyt8kLtSV
+ +AxEDFQABmy9c9tuoLI9bo99dicHtWe10rqBOQfYvtM/7TM3rlAMDxox8IfShA7wak/aJbfFAhc
+ wTAAIOVBhL9RYdsMjwxMFri+Aa+QerohqNnzkHly4th8f7bqpAdpVaap+Lcd91jNzeQlubxIew8
+ wVzdG/bLA1WVyk1eQ36yQXDkvc5m1+xN4lgBTdw3m9qOzQXnyLUeswyNoyvanxoc5vmIYR24ATZ
+ kExOVX51qtvMNrcmerSwI2kHcc0AwYOrA6aw5k6yUSP0KZXT6paiH+jV5TkUVcGBPDHdroRItMZ
+ 8HDHlQUd16ULqOJph5NkM49kOEl4FrTlSyShvxxwFpBVV7oAfnRddWD+bEvHjIOMivEBYq1LWF3
+ NOGQdjNbDjOTmXmsnKwbyeMNw089R1Tb66zv4gFq+1sOLjav9X4eJZMBnEeYpdJ3dsZH0Wp5VkY
+ aQk6Md+NJa9usLRnaAw==
+X-Authority-Analysis: v=2.4 cv=cpkOAF4i c=1 sm=1 tr=0 ts=6b0887ee cx=c_pps
+ a=kVLUcbK0zfr7ocalXnG1qA==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22
+ a=EUspDBNiAAAA:8 a=PhAf4g791m7IZrnnNEMA:9 a=QEXdDO2ut3YA:10
+ a=vr4QvYf-bLy2KjpDp97w:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA3NiBTYWx0ZWRfX0WMg6MJQnLEc
+ 9EGS44wzMFSz9eD03Q1b62RRWFnQBH82myMBSVDmvYGrnpkHKR+qWeeuL1xEkrEoWrCAT9Z1Wq+
+ WlCYEfJXS6j9jBEIw+gqNJwV1d/TH6M=
+X-Proofpoint-GUID: iALIUw8KIHJajzI6OBmfJ8gATO8zpSSY
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 priorityscore=1501 spamscore=0 phishscore=0
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260076
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue(s) to consider.
 
-Critical: 0 · High: 0 (1) · Medium: 1 · Low: 0
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+On 10/30/2026 3:34 PM, Konrad Dybcio wrote:
+> From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+> 
+> Fill out the register tables to enable IFPC on these SKUs.
+> 
+> Signed-off-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 
-- [Medium] dwxgmac2_get_rx_header_len()
-  (drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c:293-304) now…
+Reviewed-by: Akhil P Oommen <akhilpo@oss.qualcomm.com>
 
-Pre-existing issues:
-- [High] This problem wasn't introduced by this patch, but it can produce
-  the same corruption the patch fixes.
+-Akhil
 
---
-
-net: stmmac: xgmac: fix RX split header length on multi-descriptor frames
-
-This patch changes dwxgmac2_get_rx_header_len() so it reads the split
-header length from RDES2.HL whenever the first descriptor is not also the
-last one. The RDES3.L34T check is kept only for single-descriptor frames.
-For descriptors without FD set, the function now returns early.
-
-> diff --git a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> index 6719ac6e395bc..ed38aa358642b 100644
-> --- a/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> +++ b/drivers/net/ethernet/stmicro/stmmac/dwxgmac2_descs.c
-> @@ -292,7 +292,14 @@ static int dwxgmac2_get_rx_hash(struct dma_desc *p, u32 *hash,
+> ---
+>  drivers/gpu/drm/msm/adreno/a6xx_catalog.c | 47 +++++++++++++++++++++++++++++--
+>  1 file changed, 45 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> index 5e1d91a73a4e..89829fa8f4f4 100644
+> --- a/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> +++ b/drivers/gpu/drm/msm/adreno/a6xx_catalog.c
+> @@ -814,6 +814,43 @@ static const u32 a630_pwrup_reglist_regs[] = {
 >  
->  static void dwxgmac2_get_rx_header_len(struct dma_desc *p, unsigned int *len)
->  {
-> -	if (le32_to_cpu(p->des3) & XGMAC_RDES3_L34T)
-> +	u32 rdes3 = le32_to_cpu(p->des3);
+>  DECLARE_ADRENO_REGLIST_LIST(a630_pwrup_reglist);
+>  
+> +static const u32 a640_pwrup_reglist_regs[] = {
+> +	REG_A6XX_VSC_ADDR_MODE_CNTL,
+> +	REG_A6XX_GRAS_ADDR_MODE_CNTL,
+> +	REG_A6XX_RB_ADDR_MODE_CNTL,
+> +	REG_A6XX_PC_ADDR_MODE_CNTL,
+> +	REG_A6XX_HLSQ_ADDR_MODE_CNTL,
+> +	REG_A6XX_VFD_ADDR_MODE_CNTL,
+> +	REG_A6XX_VPC_ADDR_MODE_CNTL,
+> +	REG_A6XX_UCHE_ADDR_MODE_CNTL,
+> +	REG_A6XX_SP_ADDR_MODE_CNTL,
+> +	REG_A6XX_TPL1_ADDR_MODE_CNTL,
+> +	REG_A6XX_UCHE_WRITE_RANGE_MAX,
+> +	REG_A6XX_UCHE_WRITE_RANGE_MAX + 1,
+> +	REG_A6XX_UCHE_TRAP_BASE,
+> +	REG_A6XX_UCHE_TRAP_BASE + 1,
+> +	REG_A6XX_UCHE_WRITE_THRU_BASE,
+> +	REG_A6XX_UCHE_WRITE_THRU_BASE + 1,
+> +	REG_A6XX_UCHE_GMEM_RANGE_MIN,
+> +	REG_A6XX_UCHE_GMEM_RANGE_MIN + 1,
+> +	REG_A6XX_UCHE_GMEM_RANGE_MAX,
+> +	REG_A6XX_UCHE_GMEM_RANGE_MAX + 1,
+> +	REG_A6XX_UCHE_FILTER_CNTL,
+> +	REG_A6XX_UCHE_CACHE_WAYS,
+> +	REG_A6XX_UCHE_MODE_CNTL,
+> +	REG_A6XX_RB_NC_MODE_CNTL,
+> +	REG_A6XX_TPL1_NC_MODE_CNTL,
+> +	REG_A6XX_SP_NC_MODE_CNTL,
+> +	REG_A6XX_PC_DBG_ECO_CNTL,
+> +	REG_A6XX_RB_CONTEXT_SWITCH_GMEM_SAVE_RESTORE_ENABLE,
+> +	REG_A6XX_UCHE_GBIF_GX_CONFIG,
+> +	REG_A6XX_UCHE_CLIENT_PF,
+> +	REG_A6XX_RBBM_GBIF_CLIENT_QOS_CNTL,
+> +	REG_A6XX_RBBM_PERFCTR_CNTL,
+> +};
 > +
-> +	/* HL is only defined on the first descriptor */
-> +	if (!(rdes3 & XGMAC_RDES3_FD))
-> +		return;
+> +DECLARE_ADRENO_REGLIST_LIST(a640_pwrup_reglist);
 > +
-> +	/* L34T is only valid on the last descriptor */
-> +	if (!(rdes3 & XGMAC_RDES3_LD) || (rdes3 & XGMAC_RDES3_L34T))
+>  static const struct adreno_info a6xx_gpus[] = {
+>  	{
+>  		.chip_ids = ADRENO_CHIP_IDS(0x06010000),
+> @@ -1115,7 +1152,8 @@ static const struct adreno_info a6xx_gpus[] = {
+>  		},
+>  		.gmem = SZ_1M,
+>  		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
+> -			  ADRENO_QUIRK_4GB_VA,
+> +			  ADRENO_QUIRK_4GB_VA |
+> +			  ADRENO_QUIRK_IFPC,
+>  		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
+>  		.funcs = &a6xx_gpu_funcs,
+>  		.zapfw = "a640_zap.mdt",
+> @@ -1124,6 +1162,8 @@ static const struct adreno_info a6xx_gpus[] = {
+>  			.protect = &a630_protect,
+>  			.gmu_cgc_mode = 0x00020202,
+>  			.prim_fifo_threshold = 0x00180000,
+> +			.ifpc_reglist = &a630_ifpc_reglist,
+> +			.pwrup_reglist = &a640_pwrup_reglist,
+>  		},
+>  		.speedbins = ADRENO_SPEEDBINS(
+>  			{ 0, 0 },
+> @@ -1238,7 +1278,8 @@ static const struct adreno_info a6xx_gpus[] = {
+>  		},
+>  		.gmem = SZ_2M,
+>  		.quirks = ADRENO_QUIRK_HAS_CACHED_COHERENT |
+> -			  ADRENO_QUIRK_4GB_VA,
+> +			  ADRENO_QUIRK_4GB_VA |
+> +			  ADRENO_QUIRK_IFPC,
+>  		.inactive_period = DRM_MSM_INACTIVE_PERIOD,
+>  		.funcs = &a6xx_gpu_funcs,
+>  		.zapfw = "a640_zap.mdt",
+> @@ -1247,6 +1288,8 @@ static const struct adreno_info a6xx_gpus[] = {
+>  			.protect = &a630_protect,
+>  			.gmu_cgc_mode = 0x00020202,
+>  			.prim_fifo_threshold = 0x00200200,
+> +			.ifpc_reglist = &a630_ifpc_reglist,
+> +			.pwrup_reglist = &a640_pwrup_reglist,
+>  		},
+>  	}, {
+>  		.chip_ids = ADRENO_CHIP_IDS(0x06090000),
+> 
 
-[Severity: Medium]
-
-Can this trust HL for frames the MAC did not actually split?
-
-Commit 96147375d49f added the L34T gate on purpose. Its message says
-"Split Header length is only available when L34T ...". After this change,
-every FD=1/LD=0 descriptor uses RDES2.HL no matter what L34T says.
-
-Suppose the XGMAC writes a non-zero HL on the first descriptor of a
-multi-descriptor frame it did not split, and that HL is smaller than what
-buffer 1 really holds. Examples are a large non-IP frame, or a frame whose
-headers exceed HDSMS. GPSL=16368 accepts both. stmmac_rx_buf1_len() then
-returns hlen without any check:
-
-    if (priv->sph_active && hlen) {
-        priv->xstats.rx_split_hdr_pkt_n++;
-        return hlen;
-    }
-
-Later descriptors count buf1 as 0 and buf2 as dma_buf_sz, so the running
-len ends up too low. On the last descriptor, stmmac_rx_buf2_len() has a
-floor but no dma_buf_sz cap:
-
-    return plen > len ? plen - len : 0;
-
-stmmac_rx() then uses that value directly:
-
-    dma_sync_single_for_cpu(priv->device, buf->sec_addr,
-                            buf2_len, dma_dir);
-    skb_add_rx_frag(skb, skb_shinfo(skb)->nr_frags,
-                    buf->sec_page, 0, buf2_len,
-                    priv->dma_conf.dma_buf_sz);
-
-Could buf2_len then be larger than what the DMA wrote into sec_page? That
-would put stale page_pool bytes into the skb. When dma_buf_sz is close to
-the page size, it would read past the end of the page.
-
-Before this patch, the FD && !LD case was mostly gated off by L34T. It
-fell back to counting buffer 1 as a full dma_buf_sz, which under-counts
-but never over-reads.
-
-A stale read-format des2 is a page-aligned DMA address, so it gives HL=0.
-That leaves the question of what the hardware writes to HL for frames it
-does not split. Does the databook guarantee that HL is either zero or
-accurate in that case?
-
->  		*len = le32_to_cpu(p->des2) & XGMAC_RDES2_HL;
->  }
-
-[Severity: High]
-
-This is a pre-existing issue, but is this des2 read ordered against the
-OWN check in stmmac_rx()?
-
-In stmmac_rx(), the only dma_rmb() after the OWN check is behind
-extend_desc:
-
-    status = stmmac_rx_status(priv, &priv->xstats, p);
-    /* check if managed by the DMA otherwise go ahead */
-    if (unlikely(status & dma_own))
-        break;
-    ...
-    if (priv->extend_desc) {
-        /* Read the extended status after the own bit */
-        dma_rmb();
-
-extend_desc is only set in stmmac_dwmac1_quirks(), for dwmac1 enhanced
-descriptors, so XGMAC and GMAC4 never get this barrier. stmmac_rx_zc()
-has the same gap.
-
-On weakly ordered CPUs such as arm64, the des2 load in
-stmmac_rx()->stmmac_rx_buf1_len()->dwxgmac2_get_rx_header_len() can be
-satisfied before the des3 load that saw OWN clear. In that case des2
-still holds the read-format value written by stmmac_rx_refill() through
-dwxgmac2_set_sec_addr(). That value is a page-aligned address, so HL
-reads as 0.
-
-On an FD && !LD descriptor, this gives the same buf1_len = dma_buf_sz
-misaccounting that this patch fixes. On a single-descriptor split frame,
-buf2_len becomes 0. The skb then carries the header plus stale buffer 1
-bytes instead of the payload in buffer 2, and the frame is still marked
-CHECKSUM_UNNECESSARY. The RSS hash (des1) and VLAN (des0) reads have the
-same exposure.
-
-Documentation/memory-barriers.txt calls for dma_rmb() after checking the
-descriptor ownership bit and before reading the other fields. Should
-there be an unconditional dma_rmb() after the OWN check for these cores?
-
--- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261125192531.1940982-1-sagar.cheluvegowda%40oss.qualcomm.com
