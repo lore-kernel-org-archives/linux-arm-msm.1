@@ -1,62 +1,45 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=220.197.31.3
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795699089;
-	b=yZxx6RPKDMTkx4ZBCjlWriFyvgaS5Nl/X9O2mIrX599/8IUlYr6xCrwC2Hzfyky5smxS
-	 22oZR6gJ2O/GixoZHsTMOqX1bwVmlOT09iMUOnEESQ9hVW2+G3Gt71J1aPs8X/zdUka9+
-	 2utAdzGYP9n+NjbL+Ukww/b4Pv6HPLQ6yo/qY6XumXJyAOLQCIY5h2t7PMrjvzFz9W3di
-	 u3IamBgfz8Z39jGmxkcNjLfNJrZDQYmr+65hO9AcsXpwMeh7aEa1VfdTn7OItmuZTiCK2
-	 LBZtWXj0KTNMN0QL2T6B7DyhUuA/WSlXcpuH0P7N6/ikX2G8Reb+TbOycHdPPpvBmvQ==
+	t=1795699100;
+	b=mTHvedloT9BkYcqpgJEJSiet+3BpL0H3qiBrAOGQ77sBo/SvaFzeXV58zv471Zb5H4HY
+	 D5ANJ0gfVAidMuZIzyMEVd//tlq5BMs5ulDUeuLRdgQ02Qi4b9KoyPpSgQO1OrB7Lfnw2
+	 6h1fR+V0yf6sS0TWgWYEkAMJVhNBNhwt7/je634AGf+yvnFiJeGFsdLD1OEjYKiHPVjaa
+	 sQp9RiZGpgclaGQxh7ED1XP8U9fLP9MHEBSFNpcxD7tAxLjHre1GQ7WnU47QFS271tJiJ
+	 1yc/MLfwzRahwit2mhwVbdyaVCUyHI0fQhaJ7OY+X4MYSgCQ5fxPMpr5DlHNGCZYrcg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795699089;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version:X-CM-TRANSID:
-	 X-Coremail-Antispam:X-CM-SenderInfo;
-	bh=a5eiw90JNCaLC4Ef+I5J1t6v50x42Rr5WSiSG3Fy+qU=;
-	b=YYbd+qpOVescubT7iS2vpwVearLfY2QP5eL4MtHlIsL3lG4iFLSc+gfuBHAeaZ2yb+/P
-	 BZn9V41bkAbIazG+zrzbIn5uLt9cmI5RFxCJlOk2ZpEstk0enbj/Boc/4mJpH5lJeRzhJ
-	 1l/y30es5UYgqRgPn/X41zwsEfWjiGuOSfD4xGgrzqF1S1SAOYDU6YgcOzp93eMq2bIrK
-	 PJi3UYWzZKFwExnomVjgICagP2m9V5/CexdwkZLr4EUBdI7rH0yI8/0DrC+UtmJ0zrFSQ
-	 kUJ0+nHNUbMVLr15Xx86E6SjePWQjXAsJF2q91bJcT7Um+MzijzAI3YoseD7gBrwfvg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795699100;
+	h=Received:DKIM-Signature:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
+	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=50w5TnwtHKoNNcWJzKsCh3SA1N3koocOu3iOlBC+3P4=;
+	b=kbRerJmOux95LyRL0MT+vC4CxlpyPdoi8VjvuIMzCWYoUlQzsyyVqF3YQ9Qz2l01qq5F
+	 B+wCzHvqh1+NMPQP0d5ROnyyJTV8j15zxFLMsX5PynuhOApnNdbdUBrwzCaO3pjZMZr6K
+	 vNbWQBeB02LwwglLPeEOAOYWU4b944ybAHFOqOKA/Qg/1MOfiArHEUOz2MKgo5qhiRHKa
+	 kvBfCjXrsumvD5KA7kybKidDWbp/7GFcwuLzw6/BkTD2pT3NtABzr5ShLuoRfoIbMyZXL
+	 e3N2BcXsrDiBJpOYvAWc8apb+AXsan/uPhUoaLN1Pth7o+T6i6BrBesmIe++jRWGMhA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=163.com;
-	spf=pass smtp.mailfrom=163.com;
-	dkim=pass header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=pINPwOll;
-	arc=none smtp.remote-ip=220.197.31.3
-Received: from m16.mail.163.com (m16.mail.163.com [220.197.31.3])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mH5YYYbc;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2EFE606A31E;
-	Thu, 26 Nov 2026 13:18:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A2EFE606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=163.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=163.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4C697606A32E;
+	Thu, 26 Nov 2026 13:18:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=163.com header.i=@163.com header.a=rsa-sha256 header.s=s110527 header.b=pINPwOll
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
-	s=s110527; h=From:To:Subject:Date:Message-ID:Content-Type:
-	MIME-Version; bh=a5eiw90JNCaLC4Ef+I5J1t6v50x42Rr5WSiSG3Fy+qU=;
-	b=pINPwOllsw/8qbuBJ3J2sxno63aCAB1bew+I1NiG0bfU3XmQZt0DwGlZJnOAnu
-	qkm9OVW0HAuylUZQmA8hD7zliGq3+xl7VNB8o7l96bdRn4XE/1KG0SD3b90WUvsN
-	S+cKMRSmi1NNxbl39XwpArnRSbM49YkJa0MC6Ys7YjUG4=
-Received: from piano.lan (unknown [])
-	by gzsmtp5 (Coremail) with SMTP id QCgvCgAHuqFuMQhrRGYOIQ--.37185S2;
-	Thu, 26 Nov 2026 21:17:39 +0800 (CST)
-From: sakimidare <ssmzhn@163.com>
-To: linux-media@vger.kernel.org
-Cc: Xilin Wu <sophon@radxa.com>,
- Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, linux-arm-msm@vger.kernel.org
-Subject: Re: [PATCH 1/5] media: iris: support decode-order output on HFI gen2
-Date: Thu, 26 Nov 2026 21:17:27 +0800
-Message-ID: <179569904757.642669.1138193352390349179@163.com>
-In-Reply-To: <20261029-iris-va-fixes-v1-1-44a2783f782b@radxa.com>
-References: <20261029-iris-va-fixes-v1-1-44a2783f782b@radxa.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mH5YYYbc
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B1EB61F000E1;
+	Thu, 26 Nov 2026 13:18:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795699099;
+	bh=50w5TnwtHKoNNcWJzKsCh3SA1N3koocOu3iOlBC+3P4=;
+	h=Subject:From:To:Cc:In-Reply-To:References:Date;
+	b=mH5YYYbcXqfYUARrt0nWe38NLdOkQyISiewoRcPIsRBaTfYo+DHYayIQoKj795TMF
+	 ZtT4wXIu1zECUBBouI9IiswjAJi3E5U44vvh/Np5MXBmkzLeMX1Dvgw0n1GZhBb5OK
+	 C6FM2Le18pzBpwL5tHXq9BkS+Gb82NvG3wo0mvCtaE2wqF2W4TegM9To8tgdU2/Uv8
+	 dO7IOkffAAXsMv9ePGJEhGtkbQEDkKprenff/uxE8I6lRkWN+n8YtTWVAI5AkvMSyc
+	 Kt5inPHwwjJ/N7zPcFzX9ErbYF+ZzLjQDT5pbp/ITdxWeBRXRotMs88mtLEJSjFAPI
+	 iLMHLd3w9EmQA==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,61 +49,54 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-X-CM-TRANSID:QCgvCgAHuqFuMQhrRGYOIQ--.37185S2
-X-Coremail-Antispam: 1Uf129KBjvJXoW7uF4rJr18KFW8CF1UuryrXrb_yoW8WFy3pr
-	43Grn0qF4xGFyfC395Ww48XayfJan5Xw12qr4F934jva9xuFyDXr1xKF48XF48WasxGa4a
-	gFZFyaykGa1vga7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07UVnQUUUUUU=
-X-CM-SenderInfo: hvvp6xrq6rljoofrz/xtbC0RNFcmsIMXP6iAAA3m
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v6 2/3] media: qcom: camss: csid-680: Use HW CSID index
+ for wrapper IO path config
+From: bod@kernel.org
+To: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bod@kernel.org>, 
+ Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
+ Loic Poulain <loic.poulain@oss.qualcomm.com>, 
+ Mauro Carvalho Chehab <mchehab@kernel.org>, 
+ Bryan O'Donoghue <bryan.odonoghue@linaro.org>, linux-media@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261126-purwa_camss-v6-2-5ab97aea3832@oss.qualcomm.com>
+References: <20261126-purwa_camss-v6-0-5ab97aea3832@oss.qualcomm.com>
+ <20261126-purwa_camss-v6-2-5ab97aea3832@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 13:18:15 +0000
+Message-Id: <179569909545.596873.2198374046768172754.b4-reply@b4>
+X-Mailer: b4 0.17-dev-cdd92
+X-Developer-Signature: v=1; a=openpgp-sha256; l=624; i=bod@kernel.org;
+ h=from:subject:message-id; bh=jTllOHp2jZdK8T9c6RR3b2JmWFa4Zs3KWqgMSIVB1pE=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrCDGXjPCLl/7I8AjYRO4mg9gj4wGDs8pvxD+tY
+ 8d37YkP7PyJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawgxlwAKCRAicTuzoY3I
+ OkhzEACgUlnXk1oY/8i/Tg9tj6j32LbV8tlDlCN4qTBb/3dStUQC3RMbatjY8i+KfWVdy7tO8oZ
+ ZuFGq/KCi8zRB6VNTQN/skW/NbSLhJDb8KRxYGX70sqCKS9yZMVwVxuJ+aZ9+7iGxb5Ot3wHyQS
+ r9rpOqdUlJFGHx5AysjT+l3wX+bYtIGcqOkgRGhGM/+7eQdi7UzdH9uXDbj8/wiR919pCM4S0O/
+ zTMQKriomS5I8clZxK4AAlPuEDELPlOlyMqzYDc4K8kjf0pNZ9lH5MRqHchYNeewM5A49GGgul6
+ M18eZInuoce1b1Fm7ZeCCww9sF8MwTzNx1HTvVHiA79VW8aXjLo5XfNiNHvRJ5Ois1OvaulaNqg
+ 6chmFh8k5zd11B/99vw3g/WWjfXBlSviP32FH/73HMJcKBHiDoKrne4gR4+xp1Eyja3JQo5eAIv
+ X7w1Rr9ac/F/OQVchd+tsnxIKzxmohysuI40Q/sQDpsSYetSlvqhCx1TzsfWlBJj/vCAE1+9j+T
+ PHssGQC77PLNByNMoWM3vZgEBGFjxT3xaU0UkmRECNIU6OVknaMh1xRs7BGO+dI1j+tLe66Ze+l
+ VgcYYqvzIDPU+JO8BKdQwi093OErhGdDBlRrBC+ezz0YHI+PNo+Gk12hfPUQvszHiIYHNbslZhf
+ yekgm+Bb0ACJocg==
+X-Developer-Key: i=bod@kernel.org; a=openpgp;
+ fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-Tested-by: sakimidare <ssmzhn@163.com>
+On 2026-11-26 19:15 +0800, Wenmeng Liu wrote:
+> The CSID_TOP_IO_PATH_CFG0 registers are per hardware CSID, but they are
+> indexed with csid->id, which is the index into csid_res[]. On X1E80100
+> the two no longer match since CSID2 was removed from the resources, so
+> the lite CSIDs program the wrong register and never output to the IFE.
+> 
+> Add a hw_id to the CSID resources and use it to index the wrapper
+> registers.
+> 
+> Signed-off-by: Wenmeng Liu <wenmeng.liu@oss.qualcomm.com>
 
-Hi Xilin,
-
-I tested the series on a Xiaomi Pad 8 Pro (SM8750, Adreno 830)
-running Debian forky/sid with Linux 7.3.3 arm64, qcom-va-driver
-1.1.0-1, libva 2.24.1 and FFmpeg 9.0.2.
-
-The tree is a downstream 7.3.3 tree with 295 patches; it already
-maps HFI_BUF_FW_FLAG_PSC_LAST to V4L2_BUF_FLAG_LAST, so patch 5
-needed a one-line conflict resolution: the recycle condition also
-checks !(buf->flags & V4L2_BUF_FLAG_LAST). The rest of the series
-is as posted.
-
-Test results (all decodes completed with rc=0 and no errors):
-
-VA-API:
-  H.264 1080p: 150/150 frames, 23.4x
-  H.264 4K:     60/60 frames, 10.8x
-  HEVC  1080p:  90/90 frames, 23.4x
-  HEVC  4K:     60/60 frames, 11.5x
-  VP9   1080p:  90/90 frames, 20.8x
-  AV1   1080p:  90/90 frames, 15.1x
-  AV1   4K:     30/30 frames,  6.9x
-
-V4L2 M2M:
-  H.264 1080p: 150/150 frames; output bit-identical to software
-               decode (framemd5 cmp)
-  HEVC  1080p:  90/90 frames
-  VP9   1080p:  90/90 frames
-
-Seek (-ss 2) decoded 90/90 frames. The H.264 encoder round-trip
-(1080p, 60 frames) also decoded correctly; the new deblocking
-controls (h264_loop_filter_mode/alpha/beta) are visible on
-/dev/video16.
-
-New decoder controls visible on /dev/video14:
-  display_delay (0..0), display_delay_enable, av1_profile
-
-v4l2-compliance -d /dev/video14: 41/48 passed. The seven failures
-are:
-  - missing bus_info prefix
-  - missing V4L2_CID_MIN_BUFFERS_FOR_CAPTURE
-  - colorspace missing in G_FMT/TRY_FMT/S_FMT
-  - REQBUFS on the second queue does not return EBUSY
-I did not check whether these predate the series.
-
-dmesg shows no Iris errors, faults or resets.
-
-The Tested-by applies to all five patches.
+I will squash this into the patch in camss-next and add your Co-Developed-by:
+on the relevant patch for upstream.
+---
+bod
 
