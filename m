@@ -1,85 +1,110 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795674261;
-	b=2RlTJEg95yuefdqHJQthx+tbxfiixJkYmL8yQ6jwnrNQ/PyoTmeNq+XoZyNJPZ/S9wtv
-	 S6BJ+xhV1LUI7OXTABAebLf9b+O7OjcRj/43AaMtQck7YpmPh/Bx6mp/V8/UrBsNK7L8h
-	 ul7PNBCmA647+Mv/XS6dPFgYHW9XudN2ooKIjkOUnukq9cxQ4TvGtDOBm+WrQy65lR/P6
-	 HFBgSUugEZtgkdIvb4wE8gF2UEC2HYQHgzWAb5RHWRxKZw5Iu5n7Ir9h46wz/Y347OfE8
-	 6tfBzW9qemUlC13fr61OsRHTr7sLwYhSCbztZ7X5MX647i44dCGdOVTO0mIYWY8i+QQ==
+	t=1795674264;
+	b=yqKkd1QMbcj8lqt3AZis2lhW/u7cNIiAuKdLU5eAJv3pdDQkcjvIKo4+ddVg9o71wnjq
+	 uotxg7lNX9NuyV2uWjyMVhOKjVCFwQgnYRxCGYmrwCtgJsBbdvHe7uNh0n2Kl76HdKIVM
+	 ejeDv3eyOeaJmRSoQszBdYpj2GAWXQy1hC52JfAzG8S3B8vsUR1nVb/prWsV02eV8IoJG
+	 anjlcOkWCrGZxVMkYfZbCba8MkYalqxxkjIqla2VQQhFrC4dxbZ8RKuGEMGoj0ajLLnhX
+	 HkK/IqmsFZtcG7hi0M14SVi1WjnZtjzMJcLPhK9o1YsMOBR6jx4v/sM3mW+s/n+PE7w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795674261;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer;
-	bh=1smrtCoKPSjZha/dsx0ELlDf7J6mje+6G+R+oE23Xnk=;
-	b=Nx+mbv+MMHc5/++dLRahTBHa6KGc9tz91W9FRgtGU8Ko7uXJzc6DDooj/VwLw3VLhf75
-	 TzuVLMUihqV1t1twY26rSfs5av/n20g9KAKaySCC7ZwKuNjedx85bibhEYNVrRkbgR53Y
-	 hogMZDRJr1mqiPQaeOnoQM1RWxIy1CjV5OMceaXcuhziTuNa0QcoWYt9Php6i8wDrXVvI
-	 /+SEYEkdmvP1mm9+MKp6nuF/2vRyAvqueO4hndA9UsuTLkcaQ2yvlg3DdM9GJ9zloHDo2
-	 5o2cd7HS9wbRTlSoYZIsQg3dEu+HOX/YwV2XXzqlXgIDqflhlOW335ffuQsLC9qNzQg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795674264;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
+	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=VRWFQMmfOhAdXsj6YFM6m5s/YKM/cmFaiuqWjca59kY=;
+	b=zkD5Dh549Au/iKxvd82ttOJn4BL3CIisOxoKk+LcqlPVjy/3d4SV6BWl9SMJ4BXwmcdl
+	 wP1bWi6hNRKxAQ1s2gQn8gRxgg2sWOSVtHDCWANZUj0L2/OVxUO+KD7xpLUzCpgFBpJ1P
+	 DzHw53Z1Z7Mu3maXcjGl+UUxk549mWRVwAE/4gOFFZ0jUxvCS3ESc67QkQrLJqgN57ACT
+	 c7xnHv442v9unYtZh76fSB+1Te+ItDcKd7iokhyEMDi+wvBuJdJvCMKqxybYlUf9Y76cC
+	 VAKf1lSSm4o4ybcI4gQ8HOyd1fDH1VBnvrFuenjiHo78eIj2VwxHclqAJ97sqSdUckw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=chromium.org;
-	spf=pass smtp.mailfrom=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=ab62A+iM;
-	arc=none smtp.remote-ip=74.125.82.47
-Received: from mail-dl1-f47.google.com (mail-dl1-f47.google.com [74.125.82.47])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OdolxAgf;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fD+zAS98;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A0EC8606A333
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:24:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A0EC8606A333
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8DE66606A32E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:24:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 8DE66606A32E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=ab62A+iM
-Received: by mail-dl1-f47.google.com with SMTP id a92af1059eb24-1a2af4c8d00so5976193c88.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:24:20 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=OdolxAgf;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=fD+zAS98
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ36Fgk1157378
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:24:24 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	VRWFQMmfOhAdXsj6YFM6m5s/YKM/cmFaiuqWjca59kY=; b=OdolxAgfqI2pDZuw
+	7lIVRaBaousaXsnNZ+J5PaZizpOz55gw6EmPH8qKWw1Mogj6LTpRSmawjc+FDa4w
+	xGb/KApM92k6X1bisxZbLUUwblWajRykzQl9QDwovTGnBYek/nC+5tlDE0uB8QFr
+	VltDBQILEM7X0BwghxaLbux1APLBF9b51+7ZPymBtPF3JD66KbXOOfZ2af92J+Ky
+	/0Q4xOCGg4WJNrVJYGNj0X5NA9YjU/N4UFPB3092UastC8eGRXFMREH6fxZWHAM2
+	p4NQhzQwja3/nr25OdOZnnlL26PD0JJFtzOPSfH95ese/O5gMQdfaWsq0QdtGDED
+	OBtP6A==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j62aejqvd-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:24:23 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b4ca90ed93so2992624a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:24:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1795674260; x=1796279060; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=1smrtCoKPSjZha/dsx0ELlDf7J6mje+6G+R+oE23Xnk=;
-        b=ab62A+iMuBt1iX36hzkBlxC/Tpf7SHUQHiMc0Gan4VjHPehobNGK9R8hFOWT14bjeh
-         EZ3jLspLwm5Qk0Gu5T/QM7RSRX0gGH70gUs+nQ0ZbNA6gJ/FF5SEL0qbNujIva7JPCGl
-         b4TYCWZTCD2FAg3WJ9PS6OVlJ4KjvjvSSXQa4=
+        d=oss.qualcomm.com; s=google; t=1795674263; x=1796279063; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=VRWFQMmfOhAdXsj6YFM6m5s/YKM/cmFaiuqWjca59kY=;
+        b=fD+zAS98uZu1mfv1sTxb7hkM9pyfPQHdhSDuKvzli2xMBoO8ZK/TgwppXBB32mNhTz
+         qwX0dMGOj6fnRj65WPZTEF9E/6z8v7K0ispSKcuxsfWJqAPK9TzdBixXIJOIArUJFiz0
+         lxuCWCM7ety0U8Pmz6dOjqPaTaKxz4q+D5T2yWaQ9vkkASHm+fr4gZ0fQ8Oov+BPZvNk
+         RSO5mrHQ2CpXSJppNLMAqL+/dBG5F5NuUKjfn9LXblbfxmW8wZ6rthDXIbFNKnniiSkL
+         CrYQZ1ImhCLRAmnbpGJUnTiZBe9ucnDp/cnmu+PzpTVyl3X/MoabfCLyItJh4FlP9SKc
+         P6hA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795674260; x=1796279060;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=1smrtCoKPSjZha/dsx0ELlDf7J6mje+6G+R+oE23Xnk=;
-        b=zIg3+SOyVZVjxiwhkPPEvr0jp0oQrSra4sO4tDT4Vma3O6OBnU6EjA4G48/y3ERbUk
-         rMvxTH9fcYHq9IJSSj9NV2yYEnTE9aW5oI7ZAn53pXd5oMNml9WQ2q5tKyehJXzpz57u
-         dZCvfQufE0f3AOzF/RNhxRHtAR1xoW6DYJV2/N8R1VYlBdhUb7vuFkVvHhriTwau9Q03
-         C0xdXGDVwFdqD45vC2HklsDmHl+yqTXsAiMrplP48dzXVHjhQ70LAHRzVUmuzDAohykt
-         oK9DaOTYHovpSKVi0E4gPwC//DqtleN3hZx4jaQsb8GQRG3Lq9szwr4b7+m5RcvjbApz
-         JuSA==
-X-Forwarded-Encrypted: i=1; AL+hErGVqn02xYTnv43SfsPgQ6pJhRBBQet/hzk2MqyUXWNgZU1bay4GXSpZ8GOvhPQ75G3/rkQFsPWBHwc4heNP@vger.kernel.org
-X-Gm-Message-State: APuU4Z+rY/7hzBpCjEz19bAsCH2HPVFMROAm2pcoovWW2Dz+Ae+Sf3hd
-	Y67UxxU9vX4NJEbNZ1VBR8eaCZD5IxBgoFzWGcB54BAH12ANsJhlJmQZ5VVSfzzbAw==
-X-Gm-Gg: AZFdTZcWbXOlXuNcaVS+h/yvCGTT1LRB+D+4QWhED24tsPLoovGbLHBEi7QoOmdSWia
-	q8miJdkYKbt+CK9SNmq5wMbu9Ps2xG1B9uAep3sTy9amPcOkLKXE5+pqo8lApEXlCuxPigf3c6C
-	9ifJSX26pkPMxi8N+LT6KGV0u8Glnk2V37a5jIXdRJh9z/mVFo2maI9wsB8dWwDXBJcSq6Gc2N1
-	PTrGA3L5TEeolDcCavSJMUkjHhSt1n9WesB6jD5qU/Ol1VHZ8fVpXYqfw6EYIa1jH4MBreppTfB
-	D+VJgYKdGpB6E/dVOS/VtBA7HTRXMbMWMtXqH/WAMxQ5s+ZDRQzH38IjvcWoRCVsSmxwOd/dSyP
-	rLQGsU8Zh1dUpjaU/ICChbzXZjN0rx8wWXZQnMaXvjGHRRn4B6Y/cCm942Oza0zQH3J6+8FvsTd
-	eu+iFQ5SSVjEqabf3MUKXjUTWyDvxfWw0kkL4SWRIfa3+ymDvQcjy7NlvzFOCVUipfA89/ymlIJ
-	Rsr63mDNdCysOULmek37UduH3D9eemP9WZ+StVM+4IKlymIRG65NjUQR080wrAbfhFj28tHUMmH
-	rtSX2meU7+bZ+nj+dz1S+5ovREGHPlOz51kfP0/wKDYeSS8rsIaEf5WWVV+sicnSU/0V+aX9lZ7
-	GAWX6ITSBP6vWLErvXMCZlg==
-X-Received: by 2002:a05:7022:b902:b0:1a5:9abb:fdd7 with SMTP id a92af1059eb24-1b556877a2bmr18501590c88.9.1795674259793;
-        Wed, 25 Nov 2026 22:24:19 -0800 (PST)
-Received: from fshao-cloudtop.c.googlers.com (123.142.199.104.bc.googleusercontent.com. [104.199.142.123])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b56ef9fd16sm36793186c88.4.2026.11.25.22.24.11
+        d=1e100.net; s=20260707; t=1795674263; x=1796279063;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=VRWFQMmfOhAdXsj6YFM6m5s/YKM/cmFaiuqWjca59kY=;
+        b=dVD7YxSONAr6aFniMsGT7StZCbDxCeki0yxoNP2feU6ln9dCDTmSvIx/BzYp0C+ctZ
+         7IXDU0lBMYZnN2IEAs+AQ2Axt25fnOl5VpVe500tQsOU9A+ln/taLbMYWU99W11LHZhC
+         FYXfBDN3eKk3Yg9jw+QR+r2k5edOyQ8slgWLPoL19v+qCO3i7YJtcparvdFrMjyXHmUD
+         iwbzP+rKelX1szIkvZ0TXlxAAkvKhOlLttWxKdn7gkIoNMxZDCR52Co0trAjVbc9WEeV
+         Vu7R3YNrpVtUFOfxhgVmXdcF4XIybezU89Mtrz6uZ1aie6eE+wZdg4fMscML9KwQCuzK
+         EIVA==
+X-Gm-Message-State: APuU4Z+R6esKB4TGDzXArKzD45/2IoZkeWNZUTanCdkbgyO5FcXSpGeo
+	nLeZegz6AewbKsYUiwm4JybYnG/GNeQ+xFmRRY2opj0taflGyUVG0OhYVKBD5PK5TdyAjUp8lPA
+	T5lj0znxKJoOGkQt2DRndn59VBxHzn3u1++8SzmKn1FyxPr04XZOrqv6l+pOBl9Rvb9Av
+X-Gm-Gg: AZFdTZdYq1mhKsW7haJuUyM5RjoHWjHL9PhdOGyYVc81oa5V55ZAfZ8HXRhFKfYSsmk
+	4LZFG88c+zIZ4goq+DYMDLl0NgY+OMjFD4QVnFr1Kt1mpBLXLXl7pLn4KIk1I3/kD58G5CM+28q
+	aS6jrdF7pkt8R1dJh52abg5Eca0gjzQe0a2BqsRflfIFVArq4zpTGzmcXfVN4a/HyLhms/o9A1w
+	dW95nJuTwLlA1ZM1109p7FFotEQsRh/gSvCUMcM99DLgFamp+iGEJyhKhadounHUtKBvZJvJy2q
+	+MoD/qNVTjTzV/KJ2obnhRuyOi+hpJ6e9FDMXwzqoBCPzbyemXLufPZLIIJfmC9H6KuuW+8iXBt
+	N7hbyqJgJ4nnzZgnGAXA2vm1u+nyREiBNGi/DdSB4HGHFIRmKUo8ZCx1thZiG9fBqwm0apzZpjo
+	a6mDv/3xRr
+X-Received: by 2002:a17:90b:554d:b0:3ad:d29c:5e64 with SMTP id 98e67ed59e1d1-3b41c9b361fmr19232481a91.65.1795674262883;
+        Wed, 25 Nov 2026 22:24:22 -0800 (PST)
+X-Received: by 2002:a17:90b:554d:b0:3ad:d29c:5e64 with SMTP id 98e67ed59e1d1-3b41c9b361fmr19232454a91.65.1795674262406;
+        Wed, 25 Nov 2026 22:24:22 -0800 (PST)
+Received: from hu-jshekhar-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b44b6fc28asm14988015a91.1.2026.11.25.22.24.18
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 22:24:19 -0800 (PST)
-From: Fei Shao <fshao@chromium.org>
-Subject: [PATCH 0/8] drm: Attach drm_show_fdinfo() in default fops helpers
-Date: Thu, 26 Nov 2026 14:23:42 +0800
-Message-Id: <20261126-drm-fops-show-fdinfo-v1-0-7cb1d1a5d6ef@chromium.org>
+        Wed, 25 Nov 2026 22:24:22 -0800 (PST)
+From: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 11:54:00 +0530
+Subject: [PATCH 2/3] virtio: Add vendor-specific device ID
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,77 +116,83 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAG/QB2sC/yXMwQqDMAyA4VeRnBdYgzjxVWSH2SYzA1tptimI7
- 27djt/h/zcwzsoGXbVB5q+apljgLhX48RGfjBqKga7UOEc1hjyhpNnQxrSgBI2SsGmlvnlyLUm
- Aks6ZRdfftr//bZ/hxf59vmDfDwYnpUF4AAAA
-X-Change-ID: 20261124-drm-fops-show-fdinfo-68f47c2182fd
-To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, 
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>, 
- Oded Gabbay <ogabbay@kernel.org>
-Cc: Lucas Stach <l.stach@pengutronix.de>, 
- Russell King <linux+etnaviv@armlinux.org.uk>, 
- Christian Gmeiner <christian.gmeiner@gmail.com>, 
- Rob Clark <robin.clark@oss.qualcomm.com>, 
- Dmitry Baryshkov <lumag@kernel.org>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, 
- Jessica Zhang <jesszhan0024@gmail.com>, 
- Marijn Suijten <marijn.suijten@somainline.org>, 
- Boris Brezillon <boris.brezillon@collabora.com>, 
- Rob Herring <robh@kernel.org>, Steven Price <steven.price@arm.com>, 
- =?utf-8?q?Adri=C3=A1n_Larumbe?= <adrian.larumbe@collabora.com>, 
- Melissa Wen <mwen@igalia.com>, 
- =?utf-8?q?Ma=C3=ADra_Canal?= <mcanal@igalia.com>, 
- Karol Wachowski <karol.wachowski@linux.intel.com>, 
- Andrzej Kacprowski <andrzej.kacprowski@linux.intel.com>, 
- Chun-Kuang Hu <chunkuang.hu@kernel.org>, 
- Philipp Zabel <p.zabel@pengutronix.de>, 
- Matthias Brugger <matthias.bgg@gmail.com>, 
- AngeloGioacchino Del Regno <angelogioacchino.delregno@collabora.com>, 
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
- etnaviv@lists.freedesktop.org, linux-arm-msm@vger.kernel.org, 
- freedreno@lists.freedesktop.org, linux-mediatek@lists.infradead.org, 
- linux-arm-kernel@lists.infradead.org, Fei Shao <fshao@chromium.org>
+Message-Id: <20261126-jshekhar-qcom-virtio-dcp-v1-2-7b49bda74916@oss.qualcomm.com>
+References: <20261126-jshekhar-qcom-virtio-dcp-v1-0-7b49bda74916@oss.qualcomm.com>
+In-Reply-To: <20261126-jshekhar-qcom-virtio-dcp-v1-0-7b49bda74916@oss.qualcomm.com>
+To: "Michael S. Tsirkin" <mst@redhat.com>, Jason Wang <jasowangio@gmail.com>,
+        =?utf-8?q?Eugenio_P=C3=A9rez?= <eperezma@redhat.com>,
+        Xuan Zhuo <xuanzhuo@linux.alibaba.com>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Flemin Jose <flemin.jose@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, virtualization@lists.linux.dev,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795674248; l=1122;
+ i=jayant.shekhar@oss.qualcomm.com; s=20260925; h=from:subject:message-id;
+ bh=GarfczuQMc+vTCQFOwF20nMoLmGibGyTdxH8fgzaj4Y=;
+ b=xLVT2dFjo27JP30KZLWo89YMNzpxh6pFxM2QaR2byRBSxWn8dA4BXKdb8GXuJjoxbEQrnxjmq
+ O96QgrXg7C/B94GfmaYJ7hOthasfXBM8g50jzhTiloiGHkGBoG18Kl4
+X-Developer-Key: i=jayant.shekhar@oss.qualcomm.com; a=ed25519;
+ pk=saYTwtCCpug4b0Hz0jHFoATgDtdhFVicwMzDJo2z5ZE=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAyNCBTYWx0ZWRfX5N39t6qFIeT7
+ LzpiHobBmxEfVB6EyO6PfljGU8YjBDFSgcP2BMvV8YDYdHJx3ADNdfbNFe2b9ISb+4WXeyju2lD
+ 4BXS2QfHj0zzqIGBS2zVeibYiqaPLnAAC0IqHZgtY0P6fhwxrWl3ea03I9dnJciE8H+u3N+5OG5
+ lm0pK6l/865/bmMyf6vRKV5U3HmDdw7NVW22MfPluhsZUeZeXT9ssFvtue3ze8oC6Vegb/OMiwo
+ 145YuanG3JJu7wo7QwwcrhiASksKowWfQNTLq76dlXqlyi2gV1DIXbepgKydTZU9cT8hklDd/pm
+ 6/oqQ+y+GNXCO0tm6AM/qQQIM8cbQL6g4UfEDWuOOdDZYMJqZANerOdgjVeHGqCzi5cZCwY4E2a
+ OUjFx7UQIoLM0bFSIkMw5J3AL2MHmOz0JUDHB5ZyKr5MXR53NbJ9pvy4YIlMG4KeEfdZACoJppw
+ 1GFORFTrkfAl0mtj0aw==
+X-Proofpoint-GUID: 3HU308L42xShq_DpoV2y-6GxTjOc9HvX
+X-Proofpoint-ORIG-GUID: 3HU308L42xShq_DpoV2y-6GxTjOc9HvX
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAyNCBTYWx0ZWRfXx5BmY5fW+LiU
+ fhYjPYtU0XDv99+teA2Q9oJX4dzaM347zWsJxCXnf3RDT31KddQnZo9O/aXe+lGniW2WAOaY1nw
+ FdAZWS76cTNpucCYyEPXKqOGRRV/eH0=
+X-Authority-Analysis: v=2.4 cv=PqoG/AM3 c=1 sm=1 tr=0 ts=6b07d097 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=Gva-buRrl8eeyeTSwpAA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_01,2026-11-25_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ phishscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 bulkscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260024
 
-DRM core's default DEFINE_DRM_*_FOPS() helpers currently don't expose
-fdinfo, so any DRM driver that wants standard GEM memory stats or client
-names must declare custom fops to attach drm_show_fdinfo().
+Define VIRTIO_ID_VENDOR with the proposed device ID value 52 for generic
+vendor-specific VirtIO devices. This allows vendor-specific functions to
+share one VirtIO device ID and be distinguished using their vendor ID and
+platform description.
 
-This series consolidates that into the default fops helpers and migrates
-existing drivers for consistency and simplicity.
+The value is proposed for VirtIO TC allocation and must not be merged
+until the ID is formally allocated. The DCP function driver should match
+the generic device ID together with Qualcomm vendor identification and
+the DT-described transport.
 
-- Patch 1: Guard drm_show_fdinfo() for !CONFIG_PROC_FS builds.
-- Patch 2: Wire drm_show_fdinfo() into the default GEM, GEM-DMA, and
-           accel fops helpers.
-- Patch 3-7: Convert existing drivers to the default helpers.
-- Patch 8: Enable GEM memory usage fdinfo in drm/mediatek.
-
-Signed-off-by: Fei Shao <fshao@chromium.org>
+Signed-off-by: Jayant Shekhar <jayant.shekhar@oss.qualcomm.com>
 ---
-Fei Shao (8):
-      drm/file: Define drm_show_fdinfo as NULL when CONFIG_PROC_FS is disabled
-      drm: Wire drm_show_fdinfo() into default fops helpers
-      drm/etnaviv: Use DEFINE_DRM_GEM_FOPS()
-      drm/msm: Use DEFINE_DRM_GEM_FOPS()
-      drm/panfrost: Use DEFINE_DRM_GEM_FOPS()
-      drm/v3d: Use DEFINE_DRM_GEM_FOPS()
-      accel/ivpu: Use DEFINE_DRM_ACCEL_FOPS()
-      drm/mediatek: Expose GEM memory usage stats via fdinfo
+ include/uapi/linux/virtio_ids.h | 1 +
+ 1 file changed, 1 insertion(+)
 
- drivers/accel/ivpu/ivpu_drv.c           | 8 +-------
- drivers/gpu/drm/drm_file.c              | 2 ++
- drivers/gpu/drm/etnaviv/etnaviv_drv.c   | 6 +-----
- drivers/gpu/drm/mediatek/mtk_drm_drv.c  | 2 ++
- drivers/gpu/drm/msm/msm_drv.c           | 6 +-----
- drivers/gpu/drm/panfrost/panfrost_drv.c | 6 +-----
- drivers/gpu/drm/v3d/v3d_drv.c           | 6 +-----
- include/drm/drm_accel.h                 | 1 +
- include/drm/drm_file.h                  | 4 ++++
- include/drm/drm_gem.h                   | 2 ++
- include/drm/drm_gem_dma_helper.h        | 1 +
- 11 files changed, 17 insertions(+), 27 deletions(-)
----
-base-commit: 793807ca13bf3072fc6d16ce6d90e9ab9beff2a5
-change-id: 20261124-drm-fops-show-fdinfo-68f47c2182fd
+diff --git a/include/uapi/linux/virtio_ids.h b/include/uapi/linux/virtio_ids.h
+index f9056af0c622..9a8b6a6a03a4 100644
+--- a/include/uapi/linux/virtio_ids.h
++++ b/include/uapi/linux/virtio_ids.h
+@@ -70,6 +70,7 @@
+ #define VIRTIO_ID_GPIO			41 /* virtio gpio */
+ #define VIRTIO_ID_SPI			45 /* virtio spi */
+ #define VIRTIO_ID_MEDIA			48 /* virtio media */
++#define VIRTIO_ID_VENDOR		52 /* virtio vendor-specific device */
+ 
+ /*
+  * Virtio Transitional IDs
+
+-- 
+2.43.0
 
