@@ -1,51 +1,79 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.254.49.198
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795699694;
-	b=sLSTP/ix9pe4EYGpxvaixOB32KAJMcrllZlsjr0M4gHp+C9w9C0R0frcNR9ihGa3NygD
-	 rCZhUolEFyzO094DCY1oVKzQ4ffanSWuwIX6hYBpujm6ZqepDZcYC0/p0EdC+MJtpR351
-	 fLbMihAqhzxhPnghXfMoh3QqYxNM2m3f6Km96ihAw+6BRth994JvPCrUqi9S1mJiXx1S8
-	 EXBndne0vaTfDGxVVjiAWx8ZW7BkaV9uyPL/tOxM2zSFrQguYRBHslRvQ49rUqbYH5BN1
-	 mpNx4B7m0xZdSNHfjfNs+e21vd18DbRVNu6K2ePckHum1gQwgBt9Wiy+5UrZqO35qLg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795699694;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-Id:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-HM-Tid:X-HM-MType:
-	 X-HM-Spam-Status:DKIM-Signature;
-	bh=HCK+qoZcybpccL8/UdjiQOeq275clZ4WAJC1smngnlo=;
-	b=nR6R56Has3sIsoJXv2qkzzCv0Q6/BSaDc0dUYW+O25TY5E+SLgSqU/vAONw1pTte4LF7
-	 grZRHbGUyLNhR38QP35qqNzwHWHqBDu1ecBYpwwDOtexGQk9YF9ysHchwFlVvy1R3iAhf
-	 +WzXPDhXZdiyV77QIWIWThl4Y4v+cd2uepp5n2pQwqKt+coHRXLEh8E4bjkf3xrKfQfVU
-	 VqcRl0bUHJzipuZifAFEu38sY+g+cZK/+xCeKxTcuVZ32gMERnQ1/IO1OTxQhCVpYymLD
-	 1/gpNsvzHuYY9PlnB9D0LT0R2RDJkoNSioo6pYZLj85u7XQkFEY3Vrj+Q+Hj4AVoXMg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.sdu.edu.cn;
-	spf=pass smtp.mailfrom=mail.sdu.edu.cn;
-	dkim=pass header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=Pcz7C2l9;
-	arc=none smtp.remote-ip=45.254.49.198
-Received: from mail-m49198.qiye.163.com (mail-m49198.qiye.163.com [45.254.49.198])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795700388;
+	b=Mnikol6E8vx9mJzHvvUe75KwOdRfNGM/Vdwade9v/p4jZTUEX+b/LgqM90/6t85FtbCg
+	 sTP0Uq56ZGJTbhOL8ahcnSksX8z1fAIb5i/EXG9qH9RY8H1s9Lurf8ta7oiDxMhlUe3mE
+	 fetoVJK8AqzQBY/Ibdkj8WqVttKoHsGy3zl0lWDfcZp/JdCW9qflngKgauvumUX1Pmhsc
+	 bCSnD42pzQy+lVnBvnPiPLCsyPY9qB2AIjbcWxQvIczi3x+gaw6lRT2JkZHZFyAW08Rou
+	 jPYeoiPJwenCAQ9vscEbd2HRp4ewi6ZGl9NumvPl10fuvvjgt2ko5PkCSdERLvhmT4g==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795700388;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=DBljaZx1Ie/yPOiJhFP1dRpPDFPXYbPsWXbK8agzgEc=;
+	b=fLakoVFV12tNCjUIVZKI1USoTBeoOowzSUyRcetYH0HXVDv57TM8WkBipP+65Zbyj6AI
+	 a5KDyH1D+NDVoHEahj5AGYeUNhkEmbcTOMZVwiM1tCZqAEP0M9vdVROWIxm+6SsQ5uYrq
+	 jQRW341JS0IBBvtzCNd8YmkA/RHT7TojzWX/RazLBphEm7rwo2DuVGHvRt4Vt3n3FCp2Y
+	 hi+vK8xyEd+uC8ZPdpHny3jPi99uLJQcnjcugot9mKdE6IZvkd4D6nYd3OJ5jWu7E2HSl
+	 kmr786t6j5O+3Pz3+41H+IvG18sEMD8aZVWGHxTJHmsdioPSKtJ1121ZFvXufjBhpfQ==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QtJNZ1WC;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E892606A31E;
+	Thu, 26 Nov 2026 13:39:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=QtJNZ1WC
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795700388;
+	b=L5Ev+zRhX5uTK/e1o1FOHe6kQWkJTetJNRnBJIZak0z6R0OfffsBY7fe25A9x1GXH8HU
+	 thJeh38RpUdcPKlq94hiH97AJTWghz9+rWWlwp0S2bk6sM5OrsA7GPtyPE4xCPmAZDbjJ
+	 It6jqGwA7wDsxJ927kNcs/bqZDPBeXmPIwZ0c/WIS9ILyFR+GRAvFcmsOmpzfCDkV1gcN
+	 TRGqEdkSP0q9PRzcL/XWwBCxVlzLi9/Zwf4jrzi9SG3Tv5UIMpuQB68u1Ow2tFhi/FkVF
+	 pRvfQtvQdehklu3MlkbwVkchdY/ZFP+GZQtS+cVq7yHM1/6xmaOG1PZlQsbUMEurlGg==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795700388;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=DBljaZx1Ie/yPOiJhFP1dRpPDFPXYbPsWXbK8agzgEc=;
+	b=j2BExsK3mtr+Rxb0jAI25ziKgHY77c8bwDP/TW14jPGXLavJ6lrCLty7IH8qHNbdar3Q
+	 0fOqFrHPvV7AF6WF39n57xLnNcR5MTxXpzKyjP45LApy/Y+rqdtxIEAN3CLJy69XOGhRO
+	 oVpwrlUF6pTzuYSItH7nYcgCrAXNog9zEHH0S5CI9a4gIMhMHQRgG5MYvT3TDnEcwfC+J
+	 xScW7BNVwKOcobhJcvYA/G4AdaTX6wskzF3tRNwRfVtRG7KtGLOxYqLNfy1OSyM7KiVel
+	 0FpNPHc3aA7rcUz7SklpfroKkbT/UU+CFh/Kc+d4fkGp+eVMwf6nhZTDChYJAWZjt9Q==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A08A0606A321;
-	Thu, 26 Nov 2026 13:28:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A08A0606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mail.sdu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.sdu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=Pcz7C2l9
-Received: from user.localdomain (unknown [223.80.110.101])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 561f6fcbc;
-	Thu, 26 Nov 2026 21:28:10 +0800 (GMT+08:00)
-From: Tian Xuechen <202300460064@mail.sdu.edu.cn>
-To: vkoul@kernel.org
-Cc: Frank.Li@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	dmaengine@vger.kernel.org,
-	liguangshuo@mail.sdu.edu.cn
-Subject: [PATCH] dmaengine: qcom: gpi: Unregister the DMA providers on unbind
-Date: Thu, 26 Nov 2026 21:28:09 +0800
-Message-Id: <20261126132809.4091225-1-202300460064@mail.sdu.edu.cn>
-X-Mailer: git-send-email 2.34.1
+	by smtp.kernel.org (Postfix) with ESMTPS id 1F5211F000C6;
+	Thu, 26 Nov 2026 13:39:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795700388;
+	bh=DBljaZx1Ie/yPOiJhFP1dRpPDFPXYbPsWXbK8agzgEc=;
+	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
+	b=QtJNZ1WCGvBIt5yhrXsBJx33X+LUthgUvQfOk1dJkYGJLpBOEWOxYKrFduISmCAmE
+	 iyr1bBWQw+scw+9AefgLZbsgcRySu3ImfVzc/BSnNwV43Jww48jrA/C709L3Bxc1/l
+	 B5xq+QpexNBdmlxqQvuvh72JLmoyFN0OdyMtmxyxbVPMICZpb/j1Gx+Vwl2nXQWqOR
+	 CNb9EonN1FyFxqZksPf5dnV70LJxVqrp5WRm5qouyzDjDuE+doWClTOwF0NJAuKj/i
+	 rNhqBJbjJBFWeZVGSEDzVI8eBIGjO2RsPqn7F6AH45tumbCia7qMVDwfVEZttuWJ9c
+	 /H6ABSO8a5xqA==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id A562A4D51A;
+	Thu, 26 Nov 2026 13:39:45 +0000 (UTC)
+From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
+Date: Thu, 26 Nov 2026 14:39:43 +0100
+Subject: [PATCH v2 1/2] dt-bindings: sram: document qcom,sc8180x-imem
+ compatible
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,57 +83,53 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa2180acbce03a2kunmac47a51f35d968
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaHhlDVkNLS0MeTE8eThpCGFYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlJSUhVQ0tVSkpLVUpLSllXWRYaDxIVHRRZQVlLVUtVS1VLWQ
-	Y+
-DKIM-Signature: a=rsa-sha256;
-	b=Pcz7C2l9x8BConIdvFRbjv+zdMYUtLHAFJTxQ/xSXoFiibEhGu4DbScqdNSFTa/PtSLi+XT0+l3Di2DDeb2Iz0uWwBCbEYr9WNgqbpFHzsvJzsNbcyIulEa+xEGaedmwdiacg+ugYdWU+UTgzR4BCFAvWY4JtQe+/ZatsiCJpFU=; s=default; c=relaxed/relaxed; d=mail.sdu.edu.cn; v=1;
-	bh=HCK+qoZcybpccL8/UdjiQOeq275clZ4WAJC1smngnlo=;
-	h=date:mime-version:subject:message-id:from;
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261126-sc8180x-dts-ipa-v2-1-ad57b1be7c70@gmail.com>
+References: <20261126-sc8180x-dts-ipa-v2-0-ad57b1be7c70@gmail.com>
+In-Reply-To: <20261126-sc8180x-dts-ipa-v2-0-ad57b1be7c70@gmail.com>
+To: Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
+ Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
+Cc: Robert Ijtsma <robertijtsma@gmail.com>, devicetree@vger.kernel.org, 
+ linux-arm-msm@vger.kernel.org
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795700384; l=808;
+ i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
+ bh=nEQ+cGLgYgPSg71wgECg22VaJoVFfq3rn8jYugnx5Uc=;
+ b=vzd6mOxpsmnXG8ZyobOX8UTLgHOJrDa++9/EF08MRlgNK/3IxUv1tw5c9oRifO/xljKc5KMVT
+ RM8TfTrD3P/D+hUwbGQBoNnk7fjp53r7xaoWkUFagvxAazo6rDczOlj
+X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
+ pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
+X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
+ auth_id=1604
+X-Original-From: Robert Ijtsma <robertijtsma@gmail.com>
+Reply-To: robertijtsma@gmail.com
+Content-Transfer-Encoding: 7bit
 
-From: Tian Xuechen <202300460064@mail.sdu.edu.cn>
+From: Robert Ijtsma <robertijtsma@gmail.com>
 
-The GPI driver leaves the DMA device registered if OF controller
-registration fails, and leaves both registrations in place on unbind.
-Use the managed registration helpers so the OF controller and DMA
-device are unregistered before their backing storage is released.
+Document the compatible string for the on-chip SRAM (IMEM) region on
+Qualcomm SC8180X SoCs under the generic mmio-sram binding.
 
-This issue was found by our static analysis tool under development.
-
-Fixes: 5d0c3533a19f ("dmaengine: qcom: Add GPI dma driver")
-Signed-off-by: Tian Xuechen <202300460064@mail.sdu.edu.cn>
+Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
 ---
- drivers/dma/qcom/gpi.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ Documentation/devicetree/bindings/sram/sram.yaml | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/dma/qcom/gpi.c b/drivers/dma/qcom/gpi.c
-index d3c3d0f35afb..d34bcd737b60 100644
---- a/drivers/dma/qcom/gpi.c
-+++ b/drivers/dma/qcom/gpi.c
-@@ -2284,14 +2284,14 @@ static int gpi_probe(struct platform_device *pdev)
- 	gpi_dev->dma_device.device_resume = gpi_resume;
- 
- 	/* register with dmaengine framework */
--	ret = dma_async_device_register(&gpi_dev->dma_device);
-+	ret = dmaenginem_async_device_register(&gpi_dev->dma_device);
- 	if (ret) {
- 		dev_err(gpi_dev->dev, "async_device_register failed ret:%d", ret);
- 		return ret;
- 	}
- 
--	ret = of_dma_controller_register(gpi_dev->dev->of_node,
--					 gpi_of_dma_xlate, gpi_dev);
-+	ret = devm_of_dma_controller_register(&pdev->dev, pdev->dev.of_node,
-+					      gpi_of_dma_xlate, gpi_dev);
- 	if (ret) {
- 		dev_err(gpi_dev->dev, "of_dma_controller_reg failed ret:%d", ret);
- 		return ret;
+diff --git a/Documentation/devicetree/bindings/sram/sram.yaml b/Documentation/devicetree/bindings/sram/sram.yaml
+index 6ee0b14..a6353ab 100644
+--- a/Documentation/devicetree/bindings/sram/sram.yaml
++++ b/Documentation/devicetree/bindings/sram/sram.yaml
+@@ -42,6 +42,7 @@ properties:
+         - qcom,maili-imem
+         - qcom,milos-imem
+         - qcom,rpm-msg-ram
++        - qcom,sc8180x-imem
+         - qcom,shikra-imem
+         - rockchip,rk3288-pmu-sram
+         - samsung,exynos850-acpm-sram
 
-base-commit: 4dce97c6c265544342e716e62fd24bbb232590c5
 -- 
-2.43.0
+2.56.0
+
 
