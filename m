@@ -1,66 +1,113 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.172
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795719602;
-	b=08A3JBu7c87hrN+ufJzrSqGhA7xPJ7S6MJV+KaALukLt8EDUaCaqL/I60BOQqcY1X/PU
-	 /dWdTXnTfb68zpwh39quKG6zgMXGGRST4h5nzNbL0O+W0apZGpA+rG0wlgYRvbN35xn9t
-	 gAONRadKq06+zr4jv8GoWL1CB7ZuVMnhglGMCzhcp0vfnM/IioRPnwyFo3hSvbSePhNae
-	 a4a6+YuBemDNCmf72xneh8mmn88weCPPAs6mxtMqZg0L/ETQVRJsGQ0UncrDsQrr/s5U1
-	 vOMOysFvUo3FaB0OAsOK5HvRWnGsaT6vD1zXMnD/3lKizkT55A9nsRrxvrry9LtFEow==
+	t=1795719603;
+	b=ngVFmVeb7Q99eg3pYRqJbT/r+RLEgHW8Wcg1yqLajOBTxSYNRpCeNed4vkN4nwYozVWR
+	 zZWI7ywYFoAwIkjuiSZ8vR8wbnUcx/iDwOx53PAGuzSDi0f1a5PvpQYmQTGstsSeLwhlQ
+	 81FfZ4pMPik8uxh9TS+kcRaG4W7sH1L1QvjeF9omrz3/Toh91Z0s9yqCwFQEDuO3WjUL3
+	 9vzQa9oD0wfiC9prM3o0TwaNTvuoJd0HlNP8nLkXTipeGn0i00sZMLV9jhLGpJGYfjao5
+	 WOouwjRaxSiFmZp3oyrXpPtF9Udy631BIh6uO7AKxIpJq5EL6+uAtWjfs1LpHGNoK8g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795719602;
-	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
-	 Subject:Message-ID:In-Reply-To:References:Content-Type:
-	 Content-Transfer-Encoding:MIME-Version;
-	bh=whyYBFaRg7vM5AgWVPAf0VahbrPtCCLkEesp43DsjqQ=;
-	b=2Z6CwoKNX+K5qxa8nLxKIdaUvDyL1y7yuVV1Gw/VD+btZZ7sF3MmJa32FCAPPthea3x4
-	 gpPtysMgjl8bblzqlEplejQCyzmuTKPARzGNHCgHu53hRR5fglIh9crgfCJ0uWuANL4yU
-	 R0nGINa/U25T6jsRjLavDSRVi8jCSHqbk2J7KHgCayiRxaVZyl0UdAoSYV5qIRaZrLfpp
-	 PlRzRxS6NzQp87ZVkESN70iJuOvZU64Ss39ksldVAfAku65heccgj2AZqg+CvZjXkQgun
-	 hJEnS/zJLD8jdVdSUnw4P+gNlrCEFDFiGV8OxjZRzbpmC8yju8pOIrx97TczdCrlk9A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795719603;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
+	b=RpZvEkcuOuV833i3oRZptRftzCaVIrKHCK4EaXBGjkmfZ0vmlWzd7+r7j5JljxyE3B/1
+	 1O8mXkloGXbyxa4tCdXr6+dRi86ups62es4VHkMurUPNBAxa1NYZ1I0MrWnZ/RjiqP4qo
+	 kHqioU1HrtRCd5UmokgfTbGLqbfjKadyxrg0qx4sKwitQDwcWiB91D/bkMkSMXwZsfqwQ
+	 yYb+zU7h3P/gNhBY7KGuaGDj2KCckMc2qOUjcWoc3z663v6y1ADvOVr2FcCa5wXhktpCj
+	 DCfcjqYuyyC3XXOjpxXogwf5ngj37g7YrOlzrEfJEG0em2iaE4DNjSq7LX4pgFbYArQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=michaelmcallister.org;
-	spf=pass smtp.mailfrom=michaelmcallister.org;
-	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b="QmgCDZj/";
-	arc=none smtp.remote-ip=185.70.43.172
-Received: from mail-43172.protonmail.ch (mail-43172.protonmail.ch [185.70.43.172])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PTCW4Tav;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Qk+4cFwB;
+	arc=none smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2308606A326;
-	Thu, 26 Nov 2026 19:00:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B2308606A326
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56095606A332
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:03 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56095606A332
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=QmgCDZj/
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PTCW4Tav;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Qk+4cFwB
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFu4r23850515
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:02 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=; b=PTCW4Tavs8sEGIGD
+	sz8/fOge8yOQMouJw4pYBniAonjpd3qi1v40dZYuOZsWJDzyNco7HZjpzaTemJGB
+	lfyX9S15RhwnPg0fUXshot5FEWJ3byCuw1fItJyIVgWbqjeC0gSevY6mTBrg+Xb7
+	shXxmBvYar5xERAy+pUrE1hjJ6zJOl9JvvjTf9leLKLRDm+TKW4iFCcbdFy9tZDz
+	4FshGmPhoCGlot+2Ps5Cq3gJ6lID+4jnHm1DFq3LwROaYunKW0hqRYfPMhznD0PF
+	Z7ASnAYCXpmzd+MxqnEWJbJduT0y7YbG9fSFeEi/XXgR3foa3FPt3ddcUr92mFOW
+	IxA9hw==
+Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6h7ga617-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:02 +0000 (GMT)
+Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-139b62317d0so3063065c88.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=michaelmcallister.org; s=protonmail2; t=1795719599; x=1795978799;
-	bh=whyYBFaRg7vM5AgWVPAf0VahbrPtCCLkEesp43DsjqQ=;
-	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
-	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=QmgCDZj/m7tbtM278xysX2kjWvUTUrdv/K+i+aRJmkQE6ofnp61zKnLi08lnZ7117
-	 +XWKetSWyCrANrkm4XImz/lYhCUvt+6zyGEtgIuYdHQ0ZI2rVT3Iq21JCsUDMq++iW
-	 ky+GL0UgPCd8w831XMQLgA7JRT6Bg9KkysXr/QIcb7Wuudv6V/Xgqw2/axK0Qve32I
-	 jR5F8h3B7pcMhBpArVThTcoYYgtnK+KkeS2gCjuRTbu67uulNvy7rbcMzw1s0H5scb
-	 8CZAaLYIiHJ5TEt73ReFdMCYDfboBghy2JM5yuHqt7Uq4qCANz9ytrTzHmdqsjDR7W
-	 YrF8ZNGXRJnzA==
-X-Pm-Submission-Id: 4jb5T91Gqfz2ScXX
-From: Michael McAllister <me@michaelmcallister.org>
-To: marcel@holtmann.org, luiz.dentz@gmail.com
-Cc: brgl@kernel.org, enderaoelyther@gmail.com, linux-arm-msm@vger.kernel.org,
- linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org,
- lumag@kernel.org, markus.probst@posteo.de, mka@chromium.org,
- phone-devel@vger.kernel.org, quic_bgodavar@quicinc.com,
- shuai.zhang@oss.qualcomm.com, zhaojinming@uniontech.com,
- me@michaelmcallister.org
-Date: Thu, 26 Nov 2026 18:59:41 +0000
-Subject: [PATCH v4 0/4] Bluetooth: qca: Power off WCN3950 safely
-Message-ID: <179571958163.81221.3368253997777320112.wcn3950-poweroff-v4-0@michaelmcallister.org>
-In-Reply-To: <hvwqozj3r7n7igxw5qogu7xxya4fkhqanb334sroj37ufzdizu@qarvtlkkulmj>
-References: <179484638195.54009.1916641645532262287.wcn3950-poweroff-v3-0@michaelmcallister.org>
- <hvwqozj3r7n7igxw5qogu7xxya4fkhqanb334sroj37ufzdizu@qarvtlkkulmj>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+        d=oss.qualcomm.com; s=google; t=1795719601; x=1796324401; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
+        b=Qk+4cFwBGGKT1PHEUp7Ej2lcsLlXezJhA/E4hd7A0b5Fpm6gHthacNuw6PC8+R0aaa
+         8LCiMylzZQAJkxDPxiEOQY7Ih/awYn1qsulkkvgW6/0QX3FJnI9AoA6bmlRDMtTiCJN0
+         UrhCl+85p4JsM7VJbRqIZWr+o454gyOsSWjb45qcp9V4WeBvt8YgGDzz1SSgl5XBEr9R
+         7dZ66kaiFVJj1fOfFezkUVJe7loI/c5SMvp26CWCqyYWBaMNfJg9nMB5be9OdPM+Pfvr
+         OV2VdFh2cTKzp8dnCBwA8EkCHcGvGV9AS66MLnAW30G95o+EBapgnlJ5fJh+0WLa/Wog
+         Hz6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795719601; x=1796324401;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
+        b=CxgVTG9DG6xO+0kvWYZU82bmiS0eZuxs53AMhNnSm9LhMYXRzBX7wrKdVT/ogX6l13
+         CHkrBjDLLYXwUeNhhVrH/TWttcIlrCZrAKhywCxBiFQ3lvjzSFCNEOZtjcPmE02FW09m
+         sxqG7sfRp83BK645NQ97tphTR6io57613t8wPE8nzUG0C4AXzBELo3dVYX2gbBX8U3zj
+         mndqp5nQx/bx0bw2/Npc1JMWS/J60lG4zc4qFG71GezPwr/+mIku+uLAAkyP4TW4WYMe
+         AdJ+ldHII6Bbz6Z1CnmOpa0igWihWMuE/scd3Q2VxZCLMG6wFZaJyMhd7MIoDNwCPiXg
+         Q/Bg==
+X-Forwarded-Encrypted: i=1; AL+hErF6BetimzNgRyO+T0c2TQYudmE3tNBPwkl/vPBhVaQuArZQh6h64D7cmKA0Whl5EWYoB4SQTeIfYOVI1fNQ@vger.kernel.org
+X-Gm-Message-State: APuU4Z+yFLHQ7wiP45NcEs29+YnWSNgdh469TM+cKiJFnGxNOUcubwbn
+	2ADLTS6aVNfMyxj6qzG//ok26KlFG3QkkkMUxaEzc1gRm263Qnwnj57+rReKC65e9iZu/Ahu06n
+	ZN+33dNHRIE9r6daDfCX9LHzsQRKUfVUhb4b3qOFIovy9IA9BNi5I+dkvyQSSMRU6shbi
+X-Gm-Gg: AZFdTZcWdEQwFkwBUCIDJX9tLjD/mH4QM5zY9zmMJX0NGHXzCREC2q6OL0D1G0klwSm
+	vGhGXugzNrT3ifbGDDzmvf2YKh9T1Uudzgh90wxfTbbw4VCAQeCjFKDSbuVjYOnrM866jl5GXy5
+	PNkzmOZxbQc9nJWeliX76xhNWo32WMnInYJOOqLMjKRpTTrUy+XBqLjwY6LD6eR8oCZv0kxjtJi
+	0pCORfPjKntJHYJLD8GaPG93CnyDYUx6jRrVRRFOYXLwzCw/3zCITngiTjT7SWMsD5MelBA++XH
+	BoOALzesDs7Jaa1WZYQd9wHJjrv8QWiQbn8odUg3ULopb+JOnLvdHRCZS/bBEq6qjAtDybgAbfD
+	amQxulNWfOnLR5t0iQ0K+aZIOb1DTZw5plZOHlgvZ5+ANY4lcdD/3n9BXtm+3aqHzQhPoNAag8D
+	TFKqA5
+X-Received: by 2002:a05:7022:1701:b0:1a4:c892:b130 with SMTP id a92af1059eb24-1b55feaa6a4mr19781270c88.15.1795719601459;
+        Thu, 26 Nov 2026 11:00:01 -0800 (PST)
+X-Received: by 2002:a05:7022:1701:b0:1a4:c892:b130 with SMTP id a92af1059eb24-1b55feaa6a4mr19781239c88.15.1795719600868;
+        Thu, 26 Nov 2026 11:00:00 -0800 (PST)
+Received: from hu-jkona-hyd.qualcomm.com ([202.46.23.25])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5567ffa8csm60868190c88.7.2026.11.26.10.59.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Nov 2026 11:00:00 -0800 (PST)
+From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Date: Fri, 27 Nov 2026 00:27:11 +0530
+Subject: [PATCH 3/8] clk: qcom: gcc-qcs615: Register set_hwmode_dev
+ callback for USB, PCIe GDSCs
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -70,48 +117,97 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20261127-usb-pcie-gdsc-suspend-v1-3-485a08ffdc6f@oss.qualcomm.com>
+References: <20261127-usb-pcie-gdsc-suspend-v1-0-485a08ffdc6f@oss.qualcomm.com>
+In-Reply-To: <20261127-usb-pcie-gdsc-suspend-v1-0-485a08ffdc6f@oss.qualcomm.com>
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Vinod Koul <vkoul@kernel.org>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Manivannan Sadhasivam <mani@kernel.org>,
+        Lorenzo Pieralisi <lpieralisi@kernel.org>,
+        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
+        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
+        Ulf Hansson <ulf.hansson@oss.qualcomm.com>
+Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
+        Imran Shaik <imran.shaik@oss.qualcomm.com>,
+        Taniya Das <taniya.das@oss.qualcomm.com>,
+        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        linux-usb@vger.kernel.org, linux-phy@lists.infradead.org,
+        linux-pci@vger.kernel.org,
+        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Proofpoint-ORIG-GUID: 97rYFGrichVNtzcBntnrrmKpuUjZYMI2
+X-Proofpoint-GUID: 97rYFGrichVNtzcBntnrrmKpuUjZYMI2
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfX52jotCzG8c4z
+ JpTAY3bKsgF7HFTc3j71I00FftDH/cnTy1OEt0snsKF1UrDGs/p4MPaqI3IaH0u3HawArqto1bK
+ nrRXJz+u7CaDegE1oN9qu738AA4Z+hvs/eJxZRM0KWYGopAB4S3vXmE9CFmrom7D7AczrGTRcoY
+ 4APy0ycRczeOWnUvSWovx6Wkt/iDHESIepAbbn7YMO9/6UdSkyf8w5g52CfzVi2kl8UgFSj1pel
+ qUFmwIPr4lQ3Y7Mj+IZEKdOuDt9gwUFFXBXD8EmoaFyCXXCFgJD8cQmdYbvMMdO6mOXxSCAyDUd
+ BIeG1bNoVmGhlP7Zo9BlFspC3xNkFUoQyhVY+udjRmEV5C8jtp7PC0z9tekSyK6WRmqG4TO2b7W
+ 43d+izrVelNCVAjUxy7OYWwzvMhUnzLyq/s6d6qvGR2snkOaY8vtjrEXVn3E+nYWyRJpptjiprm
+ y6btV+lEDWVQZcqJh7A==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfX6CXDugJ8I7vw
+ LBKeq43YAiacvxmWWLewF0tbuMvAZaoLBT1R35qiwrdx6x0sjJnuiSfUPlFLSyTvF2RGLZ76sQv
+ MsWsTRz+7tmIKiJGxgVVobyRRpGQfk4=
+X-Authority-Analysis: v=2.4 cv=L4GI0OT8 c=1 sm=1 tr=0 ts=6b0881b2 cx=c_pps
+ a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=EUspDBNiAAAA:8 a=zroWNzDgHOBiqxzc7EQA:9 a=QEXdDO2ut3YA:10
+ a=vBUdepa8ALXHeOFLBtFW:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ adultscore=0 bulkscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
+ clxscore=1015 spamscore=0 impostorscore=0 phishscore=0 priorityscore=1501
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260074
 
-Hi,
+Register gdsc_set_hw_stay_on as set_hwmode_dev callback for USB & PCIe
+GDSCs to allow the USB & PCIe consumer drivers to keep the GDSC ON based on
+the requirement in USB host mode and PCIe non-D3 cold usecases.
 
-On my Moto G10, turning Bluetooth off leaves its four regulator votes
-enabled. This series adds the missing WCN3950 power-off handling and fixes
-the UART teardown ordering needed to send the pulse safely.
+Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+---
+ drivers/clk/qcom/gcc-qcs615.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
-I've split the unregister/TX fix out as requested and rebased these four
-patches onto the current Bluetooth tree, including Zhao's flush and close
-changes. This series depends on that standalone fix.
+diff --git a/drivers/clk/qcom/gcc-qcs615.c b/drivers/clk/qcom/gcc-qcs615.c
+index f205de3a936170413b21173c7af9668c14495369..76d835346632ed672e0cfd896723b84c185de270 100644
+--- a/drivers/clk/qcom/gcc-qcs615.c
++++ b/drivers/clk/qcom/gcc-qcs615.c
+@@ -2654,6 +2654,7 @@ static struct gdsc pcie_0_gdsc = {
+ 	.clk_dis_wait_val = 0x2,
+ 	.pd = {
+ 		.name = "pcie_0_gdsc",
++		.set_hwmode_dev = gdsc_set_hw_stay_on,
+ 	},
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+@@ -2676,6 +2677,7 @@ static struct gdsc usb20_sec_gdsc = {
+ 	.clk_dis_wait_val = 0x2,
+ 	.pd = {
+ 		.name = "usb20_sec_gdsc",
++		.set_hwmode_dev = gdsc_set_hw_stay_on,
+ 	},
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
+@@ -2687,6 +2689,7 @@ static struct gdsc usb30_prim_gdsc = {
+ 	.clk_dis_wait_val = 0x2,
+ 	.pd = {
+ 		.name = "usb30_prim_gdsc",
++		.set_hwmode_dev = gdsc_set_hw_stay_on,
+ 	},
+ 	.pwrsts = PWRSTS_OFF_ON,
+ };
 
-Tested as a module backport on my Moto G10 running 7.2.9: six Bluetooth
-off/on cycles and driver unbind/rebind with Bluetooth both off and on.
-The four regulator votes dropped to zero on every power-off, and Bluetooth
-came back on each time. One firmware download needed a retry and recovered;
-the original driver also needed retries in the same six-cycle test.
-
-Thanks,
-Michael
-
-Changes in v4:
-- Submit the unregister/TX fix separately from this series.
-- Rebase onto f57f78086ab5, retaining the merged flush and close fixes.
-- Move controller TX flushing into the standalone unregister fix.
-- The separate Marvell prerequisite from v3 is now upstream.
-
-v3: https://lore.kernel.org/179484638195.54009.1916641645532262287.wcn3950-poweroff-v3-0@michaelmcallister.org/
-
-Michael McAllister (4):
-  Bluetooth: hci_serdev: Track whether the serial port is open
-  Bluetooth: qca: Power off after unregistering the HCI device
-  Bluetooth: qca: Handle failed power-pulse writes
-  Bluetooth: qca: Power off WCN3950
-
- drivers/bluetooth/hci_qca.c    | 34 +++++++++-----------------------
- drivers/bluetooth/hci_serdev.c | 36 +++++++++++++++++++++++++++-------
- drivers/bluetooth/hci_uart.h   |  3 +++
- 3 files changed, 41 insertions(+), 32 deletions(-)
-
-
-base-commit: f57f78086ab54f3b3122fbaeba2c842ba7bb6d00
-prerequisite-patch-id: 4f7b2f10b0911886f60ec40656c453138c3570f0
 -- 
-2.39.5
+2.56.0
 
