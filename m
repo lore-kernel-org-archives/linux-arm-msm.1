@@ -1,112 +1,113 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795690830;
-	b=TCZqc2S1JatITL1YXHYP62eS5VPSsitgtEUKsUQg+HdlszoHU57AhX2ccykxd8iGLB2+
-	 d2Tdff3H9NJ0kUJ2TTw77XoEF6XF3/3gGfTU+MFL/Joza0vbJerlbYww2JapAM8S4e/zw
-	 6Bpm35TibeUnBFnHco/80ozT7dWKklWHTUsAYZ6IzKLb3/goyaWI1U6InJx9jSNlyCJlg
-	 aZnOSEmfXlfUtp5Ohc2+oP8p81A6jlBu7/773g4+LMwCGmNynN7wphWplcmtSsePQuyg0
-	 nQ7/4BrThqysIuWOJP5div8sqpZLj5uy3F/coaRa3zLqIo/nsZEtOG5aQCdhQKsJekQ==
+	t=1795690844;
+	b=5bXs8J7fv0fgxLVtgcj/DZQm22gOlzrnphoFGQivCncNzbbicLitzizLMWZTNLv+t0F2
+	 qSNrLy62sfpFKJ0VsnlIl9kHEk0hH8dkoc1VNEPHh3survYquntEg2eivaEFFQ1ILUgYB
+	 IdOHqyzB6TtAiMaJMufhIcBS4ZBbQ/KhPsmAd+Uqwf04A0eO599OkEA8DE59lw3w8V0c7
+	 yxxQZxZxtBoqjrMPBEh7IRJE7cCfjUORtBwSPBSzOs19KNNHEQKQIetJvdiOiB6+NwfsA
+	 oGlYBIEw1+2+I5CgMYcqZalhZ3fejWM82TlcvGC8XR3KsFhpGFrkcWIeuuSppceXvRw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795690830;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795690844;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:
-	 Subject:Date:Message-Id:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
 	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=l5SIfcklw084WTI/zcukrT5r8aWMbpdgCAh8jjCi+mA=;
-	b=DWs0oz7d3ZU0ugIHRkY86R7JcpVgwD6dAFgCXW/2qDV7R5aKRaGukJLl9ylE76WmaVrT
-	 HcjyUbn6DQl4Ui6+zl3RKrfanZq5lTztm9ur0tSm0wAZa9pnaGpWNMMelbnhg+cgLKVhd
-	 KIN1CD3VffNvMugeMFbDxIDPnMUpRadje6tzScMOALRtBKQrohy3Pz+mV1MI8GsyUJfBU
-	 XTkUFB+EPhWj3QyLm/jlVWaKM6IZMNyyEPvnTpsJONn8kNR557LVJGPzr09Tft6r2O6oh
-	 n8pKSj+vAAwdJe9kqYB+0zS7LKBH5gDcM/mU6jJ6EB2WHYmRPPPOsY7BWytpJ3Uk4nQ==
+	bh=hC5j3yYvZkzOJ/ykWx13Jh1oYG73M5th0dRp0/OdTG4=;
+	b=5jrE15/vXPkVl0lBI/N3ept3NAXJKsl/7A90p3lOfeQkw7PLOkJMjUHAtO357DZ5fnbD
+	 U+m3Tp0G5vkZtMlgamgQjVPPw1Z9Q780n77HiEkVh0P47yxY2RbP+uJCrWNwDnEaQIu6T
+	 IkIuXk42t1469KO86Jwuq6R8RbvCCcBV2yIBI+KNoGg3V3CstwodLeHsPFwZbe/B2BjY0
+	 PzRHHsSq8exy5WNaJ+2sq5KXPfv1f/0ZMIKG5DA7vNd4iASAFz8KGZTug90DbRuUZUpxT
+	 6bHDobYcaP5hwNuD9yAnHOMRejazWCiTlXfATHo/BUGEZWhy9p8p3wMWu6i2F+6qshQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="b3/RGVBq";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TxfKRKL0;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LPbrRJfZ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="clM/IN1P";
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 239D2606A329
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:30 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 239D2606A329
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4508F606A329
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4508F606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=b3/RGVBq;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TxfKRKL0
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQAXLMj1369994
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:29 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=LPbrRJfZ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=clM/IN1P
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQAXAZ02135809
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:42 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=l5SIfcklw084WTI/zcukrT
-	5r8aWMbpdgCAh8jjCi+mA=; b=b3/RGVBqmwgkxG15ypLBBHxy1hidEDyQoxKEUo
-	62hFlQbhy8mk9SXv5I6vuOOCIEuX20A5Bob4HUvh6xBOF18t3NzKGADXASfRwBxy
-	wabRNUMOEyBXZunrm9TpDy4HzueBVx2Qx5SE7O2rWupQAVJhp2V0rqSL5c2Nx/yP
-	F8rv4n6gfnekZEQqy9yXML5nwbQTJFr+uxMm4Qh6U/f4c8XBGXVAaP5iSptdHZHd
-	0CTiyompt23prSSR3wMamgtIKGFcCJJtXkWhqa2vYlC46CzRsEk91AOk5Cqj1kZq
-	B1C8T9PnAiZAM3LJlKX1rsDuLyOHz8OVFvjvJcY41QTF7BOQ==
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com [209.85.214.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y2rkv-1
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	hC5j3yYvZkzOJ/ykWx13Jh1oYG73M5th0dRp0/OdTG4=; b=LPbrRJfZmxMqjRMn
+	iT8voFheCmgXsimEqV19td+gL71gziOjwUYwt7a0mpvbo7sjdzZYCPNBtoUYjvzG
+	pmFcqcrF+MG/74Xc6VAI1O8c7EfyYif0c0xSjjssz98Rpvlgriu9FNjKB/5Lj5LR
+	ukf50trjAs7pDAOw9EFNiSe46VTRJ6f4PD+4RpnubYStPV5f/4mZ+sx748VydBxy
+	OqFomyW9uvsnZsq1fJJtk/oH5ioZ4L9E2RR9PHGirqjN5dTQg6BDRn0cHzqpsJkr
+	EcSNP3IVArAd4+rYERGdq/osA6NptzXh2Ho1xZoCuYs90h93Hdty6lIp7RhSNyTA
+	5wixJA==
+Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j62aekt48-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:29 +0000 (GMT)
-Received: by mail-pl1-f198.google.com with SMTP id d9443c01a7336-2f0381f07a0so70142015ad.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 03:00:29 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:42 +0000 (GMT)
+Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2f0717e54b0so47229655ad.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 03:00:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795690828; x=1796295628; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=l5SIfcklw084WTI/zcukrT5r8aWMbpdgCAh8jjCi+mA=;
-        b=TxfKRKL06cCK4DuUQR2uhR/tSrcLCqkHLsPmgXeh9ihsB5EmI6ryeFZkVDJCUId2id
-         pPkdv03ncAz3qvVvFIqPjUOKh6XbKf+oYWe481gxGLdE47MnhXmahicz9J64BKQs46Kb
-         2zXBm4VJakC18u3ldaReW0EeclrZYozeJOXhA5wJnj7nrYMW1bvSX13N61+ABXtNC4HA
-         X6RA44Yhowtd6f+SADTo5OJ9QWusMu8/P7B2gODv0QQPwtxN+GwfM1pS5WIE79FaJqxq
-         hX28vwQbzBsaLUJMo5+ym0akuI9Cxe2KivEFzoT9kKYqXyhRteVxOXFwMXAg0YfJvbqd
-         pgGQ==
+        d=oss.qualcomm.com; s=google; t=1795690842; x=1796295642; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=hC5j3yYvZkzOJ/ykWx13Jh1oYG73M5th0dRp0/OdTG4=;
+        b=clM/IN1PR3OQqcLJowc3C6DqdNKJ0/L5k3aIEDzkj33LDepXt6Gps4DjpnID/irD5Y
+         aKhAlD/KfJ7mq8U51oQfHojAZ4WD6jUpIPfq+Eufz90U5UkB+BIUU4ZFe2Sh9yKpSxBn
+         SwR/7VH/8wLptxWzfvViNR8tBBTyiag86deKyU6vOn4/RvQKumQl6nzh7RPSaL9Fj1gH
+         cesBeHXhKBsre7fclbVvmMPCKudMVXWA9QG4ix7F+6kc3vAKStfjD6sWrpfk4FUVyQPv
+         u0O1hzDWF+mrAxQcpVVKTYrMPmA52Iuc801mUFJFJgyZds1oNFxUDeEUk6kHcymCYuG1
+         ONGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795690828; x=1796295628;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=l5SIfcklw084WTI/zcukrT5r8aWMbpdgCAh8jjCi+mA=;
-        b=sCtKC1ZS9Gl0L24pgKcqtYMWMcbPlyRuFfIPCQoI+f+FyPoADb4kmbz9BfjqRP2bon
-         SFs5bgJMwR8RnEJ+HivmEBG+F54cIhcg/R14yYvddF9KkSKHdLWVluVABeDQwwNACqtl
-         ehCLR6PdRtl92Z8sjZo7zR//NpUBY4VZPfwGiZTq9ovjJWq2Y2fyMxaYEa8BvDV4DBT7
-         ci3p7sDBAnn+CR3K6w977sNw91ZrrodvvS2ch0jgeL/lq3MOPAeiL1Wrq9GmrlSGN/XA
-         89m+IzCJPjow6uq12/ZW8QpKK4xlMNcvcPyAUHZM5PED6cHyxQgvF4WJJuCmV0xJaAS3
-         y2Rw==
-X-Forwarded-Encrypted: i=1; AL+hErEdM59E2rfDeUy7u66mOzDA+pZA1BwKsC+HEJeQcR8xWJt1DMU92VjohPa4hFy404j3caAU1rkA9MWsff6P@vger.kernel.org
-X-Gm-Message-State: APuU4Z8dHIkamLIORM/BzKnvS84Qa9nVcbKLghfAGS7ZJiaoXg0xUJBX
-	fM0a38LW3/AL2jZ3FYTxXzu1rr/G2fhHFt58wMMOVlH9i8fYUwVkCTe7AG9C2B7DiB3f7jMl/3a
-	Pm4QyKPOF8NWhIaRkUzv0D+zbrqfGVPtfBXyZNyvClAUUtMBdyHYSwYxgcEM8hC5WZbUJ
-X-Gm-Gg: AZFdTZcfByHxGB09wOFMxd12C2kTtbGYj7FYUN6toscAblFKJcwRlhOW5uRx+oHENMO
-	cRr7yt6jLY2ZQkcJhnVelqMKAAFATlvfFilveIVakjR0YDbqHeM0JOLFiKaGym9vhF3IyCYXGtp
-	va7NKuGqAaNlb3GU5ZQ8urkyRWXw35yQLlsnt5WI9PZCLuidt5YLY/lqPx3cAMnJk8RaGnsH0HP
-	fxe4Ja1W8ORoZbs0iVCmf/cOa6rfgvkqeHZL0PQtNp9iaWvlVwKrrJ7v/fQ++h5OtXWTYmD4cnF
-	b6ViOqIZjMViDyaGXC/xho7H6svWvW8SYbEGuff3wfzGT+tXvbRsQA9KGB2dcFmTekcGu5S+zvd
-	jdLhFbW+bpTeLIZRfN7VfJV7TjIu+ND2IfSUtDc7dyY1iTKf7CJD06rkMe4Cp7WVncKU8p9EtJW
-	0=
-X-Received: by 2002:a17:902:db01:b0:2e9:57bb:72df with SMTP id d9443c01a7336-2f031fc3478mr174815045ad.28.1795690828029;
-        Thu, 26 Nov 2026 03:00:28 -0800 (PST)
-X-Received: by 2002:a17:902:db01:b0:2e9:57bb:72df with SMTP id d9443c01a7336-2f031fc3478mr174814435ad.28.1795690827206;
-        Thu, 26 Nov 2026 03:00:27 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795690842; x=1796295642;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=hC5j3yYvZkzOJ/ykWx13Jh1oYG73M5th0dRp0/OdTG4=;
+        b=aTxg04EsSTSzSda6vhFyx0bSdlClFq3QTfdPXbt5frcBX8dInyd8CeSBZ6cr38J6Ai
+         ICsk5dPMIR8J/5Jg4X1wp7p3NyU8oUEvUxVJ8yFi4JD/BdogRP5TC5u2UoaFa/FqQPvX
+         ATnYkIe87cqupQgdQBAbdEhwrxHPYUYSrzCMTKLZBoaQrxI+du9tvpiQsqhNJLWAR661
+         zw6FEAPjXdSbpjEUbK4lwNzQiCF/SRKTmoG9lwkqXfZuozS/2osUJeGj0vot5vsq6rYY
+         6ih5un+sV1YScvHmDi3UlhPpI+9eu0J23PyzjV4OQ4wLNh5VYjFHQECbHwoh9bt4UmQM
+         DUhw==
+X-Forwarded-Encrypted: i=1; AL+hErGIS0vgmUjlxMcy/1jkAqgV9oV/yFqwSSDRnwPhqfXaHpNCEnSgI4mcZauH2MIZq9rO3BaMHCuDpWwPnVlA@vger.kernel.org
+X-Gm-Message-State: APuU4Z/qocw2AQfs5hkFFiX2fE5qzxUf7foUhl8cx09bgXvdtdatbmPW
+	QjYJmKs+4bA7z0Ave1TIzdimE11hNTC3C2ioMSDIbUNYAiHSIs86XgZ4ivC2+nWoz+fSOhniwCL
+	xOBkiTEq8HhMajcNgZsprHcJr++LN8iz5PngNV9bjIEKLSzfIOUnzWxD/9nTa9On/TyQd
+X-Gm-Gg: AZFdTZcPNHz4dlny6G2DIvhtApL7uqLJ21Fv+bc9y4fuV+5gTV3fJD3Lb8Xoa83BO4n
+	JSbGg6y6QlEiyKP/7QaNhV+W4bY9eIBypwC8LDL5/Mvg8usHJpeM1krL1HMnyipYlt6D3web9nH
+	pjOZrGLrwMbdoJrYU+RY4g8lBuo0GFlzOIauuG+NQnzevp9GMWD4O56o/3JfinZMQl5pvfj1kot
+	1cwpFrbkE2e8K+uEYS/mBoLiCcZ8PixgWM8c3DCKDgIjw2gnobe7r+m92sia52Zu0vKsv4AbzCp
+	OBfO2qbhxMwttMVI9hB/8SZ6XTCpwgzkgBkZB25sT83L4TwrzOdsRYUyUYqyroObOURRxl6J3L3
+	mxcmUMg9ZJJ1n7dRNRXyOs7uqks3eMaP5BBs6jaegY8/0R4R7+odt53OiBvdS/MRrL4DDVk6oej
+	w=
+X-Received: by 2002:a17:903:1ce:b0:2ef:d157:e128 with SMTP id d9443c01a7336-2f03f1e8493mr208584705ad.52.1795690840403;
+        Thu, 26 Nov 2026 03:00:40 -0800 (PST)
+X-Received: by 2002:a17:903:1ce:b0:2ef:d157:e128 with SMTP id d9443c01a7336-2f03f1e8493mr208583965ad.52.1795690839505;
+        Thu, 26 Nov 2026 03:00:39 -0800 (PST)
 Received: from hu-raryan-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f0c42b1sm101400615ad.17.2026.11.26.03.00.21
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f0c42b1sm101400615ad.17.2026.11.26.03.00.34
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 03:00:26 -0800 (PST)
+        Thu, 26 Nov 2026 03:00:39 -0800 (PST)
 From: Raj Aryan <raj.aryan@oss.qualcomm.com>
-Subject: [PATCH v2 0/2] power: supply: Add SMBLite charger support for
- PM4125
-Date: Thu, 26 Nov 2026 16:30:16 +0530
-Message-Id: <20261126-smblite-charger-for-pm4125-v2-0-20656509518b@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 16:30:18 +0530
+Subject: [PATCH v2 2/2] power: supply: qcom_smbx: Add PM4125 SMBLite
+ charger support
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,12 +119,9 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAEARCGsC/32OywrCMBBFf6XM2shk8mpd+R/iIrGJBqzRpBZF+
- u+mde9m4M6Fc88His/RF9g1H8h+iiWmWw20aeB0sbezZ7GvGQhJY0uGlcFd4+hZbfPZZxZSZvd
- BclKsF1y31qBShFAB9+xDfK3ww/GXs38868b4e4KzpZLSMMRx13RSGJS6U8JRcMIFpZzQqiWp0
- Nu6b/rQkjWwsC6xjCm/V++Jr7BFkXOS/xQnzpARF3TqAmrkYZ9K2T6e9rpYbOuB4zzPXwUgle0
- XAQAA
-X-Change-ID: 20260827-smblite-charger-for-pm4125-d3168a705520
+Message-Id: <20261126-smblite-charger-for-pm4125-v2-2-20656509518b@oss.qualcomm.com>
+References: <20261126-smblite-charger-for-pm4125-v2-0-20656509518b@oss.qualcomm.com>
+In-Reply-To: <20261126-smblite-charger-for-pm4125-v2-0-20656509518b@oss.qualcomm.com>
 To: Sebastian Reichel <sre@kernel.org>, Rob Herring <robh@kernel.org>,
         Krzysztof Kozlowski <krzk+dt@kernel.org>,
         Conor Dooley <conor+dt@kernel.org>,
@@ -135,104 +133,1518 @@ Cc: linux-pm@vger.kernel.org, devicetree@vger.kernel.org,
         mfd@lists.linux.dev, Rakesh Kota <rakesh.kota@oss.qualcomm.com>,
         Raj Aryan <raj.aryan@oss.qualcomm.com>
 X-Mailer: b4 0.14.3
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795690821; l=3185;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795690821; l=48274;
  i=raj.aryan@oss.qualcomm.com; s=20260507; h=from:subject:message-id;
- bh=Egbbn6MpPK4SfNFKa+uRss7dEExa4CDRxOxDLWL7XEk=;
- b=MJlKqNEhwCiPRU2v7OBEyMqj7RJreMUdouoo6UPR8Eh/K5j7FyEhbHlS4tEBFLc5v3RN1+1+V
- 0bPxMxOHkzcCeIGRFX/tuNQw4LarCCAdvCOVXP3m9mWhmPogIeNFpIE
+ bh=04VGS5Sx+/PT8SunGep3AxVtq6D+DJ1DnMjUq62QFyU=;
+ b=tfKZVREQbRraN2F8lquJ34q+JzeyDAd4/OrSEgg/3Ff3l5VxL53LRd8uanEKR5yk5YAYQFujm
+ qYp4a2AmJ2YCvThzhjIDTy/7VMv+UztdtKgHnAMP1A0yzjTgV3I0eE9
 X-Developer-Key: i=raj.aryan@oss.qualcomm.com; a=ed25519;
  pk=NMkZ/eGFLSObYX6FfysQiuEElPoUYghk7+2Jtc4VEBQ=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA0MiBTYWx0ZWRfX4CJj1NapMAm2
- Po7qoKnAxEbEZeXdOOtF4hOJk7vIHiUi0sGOYlmpJ3qSdCeVoT9Ot5fTJjTxua3zzuYO68/oyXy
- uyqN+aYUWKk+mg5HAANv0ORmDzFu9BHGQVUF4cqw4M9PAvW4rOeGrPo3iiD6AfQ8f/9iaTnWsV5
- +xY1uxiB/LeyneMTPEfjY3ak5fbKoS5bMJJaDKmrz2XeaLQp59BizyNeqgUo/PA/nx+oRRdng7j
- 22lBoNTQ9JHywxZVi/aBDH07ZUzaadMSxvjAmIzZYMLzOCUvA13OREfu0AyevLQWlcR8mmxhxVY
- /c7U75yAPs8Y4ABoHFKTdDxCD3MQ7AhHFUj6CfiT74qFot4N/93r54+h/J7yXRshGOFtTFKVfdS
- UY86LnOqPlJG+S45G06wMaWE5bBFMPRVtuzT+d+6d8cDxAdlaYv96+5wjd1+DLj4WNFcglLCzin
- DEOwv9zUNWa30j9/abg==
-X-Proofpoint-GUID: hxKEJeydGhc2nSjZSHOAxMjWd_2HNQYP
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA0MiBTYWx0ZWRfXxlCBsCpf7XCf
- cZatJMjeuBTqMXbzJivjbthhqzCAUEaSUGqQ+nk4uLNSLU5ZRuPpAZte9zKOZcfXV6HVnjy/vJ4
- 8cFjcjO9THtObHTTpTluLwzfxm/I+CM=
-X-Proofpoint-ORIG-GUID: hxKEJeydGhc2nSjZSHOAxMjWd_2HNQYP
-X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b08114d cx=c_pps
- a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA0MiBTYWx0ZWRfX7ehoxAlluEQ6
+ R4W6/jwAX+DOYssELsUP+ptf8PPxzdmHzTJGXw1+ANGgb1o8uSDtp3q4g/YRCwBy7/WvOphODVk
+ JCX4e2J6YnuXv+J503M9Ft9i+r6yk7ddFukR+syj/kCQtRr5jMap1VHz49K6yteJVK3VoerWy6V
+ vV25HYGEEa7i0dJLZMxStprzBWnQR9kuq18AMNGAPKpOoIH34pt++2pWW/8K9zqU7g5pk5Seg0b
+ 0xox2akcVJ3VDCNLywQL/na4ESV3G34Ph2YYO7kHccH4JUiUNIxJSuMZ8G0pPVJ5DbWRCOR62Pc
+ /ksaY3alz+q5whc6rwM2yWkX9InpEcSDffgVBe6G/iUtx7jQkearHiNSVqO0+8ULxMiOzi3xf4f
+ pzb3s96qbbfxgYgtXQa6dNhy5PXZuSlODJMpGSHwhUh8/YcjrUp1kAoSfBfmMFnsvzx+oOhx9++
+ ynXYg9HwSMDvH+ijOsQ==
+X-Proofpoint-GUID: 6RzS9sy-1fH-fFdvjF3khUNF_ZCNvKOl
+X-Proofpoint-ORIG-GUID: 6RzS9sy-1fH-fFdvjF3khUNF_ZCNvKOl
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA0MiBTYWx0ZWRfX8uISRSXOWqV+
+ BqCViocJzw7MRjHAl58OzzxF2KCEnV4q0bXoK7B/ytDZnjxnc9iMvOq/rwUFVOEclYkL2mYR7W0
+ CYQm/UaRpqW8Xygiz5TL4KfKK3bTnx0=
+X-Authority-Analysis: v=2.4 cv=PqoG/AM3 c=1 sm=1 tr=0 ts=6b08115a cx=c_pps
+ a=cmESyDAEBpBGqyK7t0alAg==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=DxrESgKfosCQc-jqPugA:9 a=QEXdDO2ut3YA:10
- a=GvdueXVYPmCkWapjIL-Q:22
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
+ a=EUspDBNiAAAA:8 a=KKAkSRfTAAAA:8 a=ZtA6beOwL2YdRPoJx1oA:9
+ a=XOvi_61WkF7neQbg:21 a=QEXdDO2ut3YA:10 a=1OuFwYUASf3TG4hYMiVC:22
+ a=cvBusfyB2V15izCimMoJ:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_02,2026-11-26_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
- suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ phishscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0 suspectscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 bulkscore=0 spamscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260042
 
-The PM4125 PMIC, used on the Qualcomm CQ2390 platform (cocos),
-integrates the SMBLite switch-mode battery charger IP. The existing
-qcom_smbx charger driver only supports the SMB2 charger IP found on
-PMI8998 and PM660, so PM4125 currently has no charger support at
-all.
+PM4125 uses the SMBLite charger IP, a reduced-feature variant of SMB2.
+While both use the same SPMI bus and driver model, they differ in register
+layout, status reporting, recharge mode and JEITA configuration. Extend
+qcom_smbx to handle these differences so PM4125 can use the existing
+charger driver. Select register bases and handling based on chip->type,
+allowing SMB2 and SMBLite to share one driver and power-supply class
+device.
 
-SMBLite is a reduced-feature variant of SMB2: it shares the same
-SPMI bus and overall driver model, but uses a different register base
-layout (five separate SPMI peripheral bases instead of a single base
-with fixed offsets), a different battery-overvoltage status
-register, SOC-based recharge instead of VBAT-based recharge, and a
-different JEITA configuration sequence.
-
-This series extends the existing qcom_smbx driver to support both chip
-types side by side, selecting the correct register bases and handling
-logic based on chip->type. This keeps a single driver and power-supply
-class device covering both SMB2 and SMBLite hardware.
-
-This series:
-
-- Adds the qcom,pm4125-charger devicetree binding, covering PM4125.
-- Extends qcom_smbx to add SMBLite register support, JEITA
-  threshold configuration, and SOC-based recharge, while preserving
-  all existing SMB2 (PMI8998/PM660) behavior
-
-Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
 Signed-off-by: Raj Aryan <raj.aryan@oss.qualcomm.com>
+Signed-off-by: Rakesh Kota <rakesh.kota@oss.qualcomm.com>
 ---
-Changes in v2:
-- dt-bindings: add per-entry maximum bounds to the JEITA threshold
-  arrays, and a dependency requiring both or neither to be present.
-- driver: defer enabling SMBLite charging until after float voltage
-  is configured, and explicitly disable charging at probe start, so
-  the charger always comes up in a known disabled -> configured ->
-  enabled sequence; leave charging disabled on probe failure instead of
-  restoring the prior state.
-- driver: propagate JEITA threshold write failures, require both
-  soft and hard thresholds to be present together, and check the
-  other previously-ignored SMBLite init register writes.
-- driver: add watchdog-bark IRQ wake support for SMBLite.
-- driver: treat missing battery info as a probe failure for SMB2,
-  matching the existing monitored-battery binding requirement.
-- usbin_v is required, and channel lookup errors fail probe.
-- The USB-plugin handler checks the charger-status read and both
-  charging-enable writes.
-- Link to v1: https://lore.kernel.org/r/20261124-smblite-charger-for-pm4125-v1-0-2132c9f0601f@oss.qualcomm.com
-- It depends on charger type detection mentioned below.
-- Depends-on: https://lore.kernel.org/all/20261111-shikra-qusb2-charger-det-v1-0-5a9d919c66b5@oss.qualcomm.com/
+ drivers/power/supply/qcom_smbx.c | 1081 ++++++++++++++++++++++++++++++++++----
+ 1 file changed, 969 insertions(+), 112 deletions(-)
 
----
-Raj Aryan (2):
-      dt-bindings: power: supply: Add qcom,pm4125-charger
-      power: supply: qcom_smbx: Add PM4125 SMBLite charger support
+diff --git a/drivers/power/supply/qcom_smbx.c b/drivers/power/supply/qcom_smbx.c
+index c6188c915703..d23e5ec85858 100644
+--- a/drivers/power/supply/qcom_smbx.c
++++ b/drivers/power/supply/qcom_smbx.c
+@@ -4,8 +4,9 @@
+  * Copyright (c) 2023, Linaro Ltd.
+  * Author: Casey Connolly <casey.connolly@linaro.org>
+  *
+- * This driver is for the switch-mode battery charger and boost
+- * hardware found in pmi8998 and related PMICs.
++ * This driver supports the switch-mode battery charger found in:
++ *   - PMI8998 / PM660  (SMB2 IP)
++ *   - PM4125           (SMBLite IP)
+  */
+ 
+ #include <linux/bits.h>
+@@ -20,8 +21,16 @@
+ #include <linux/of.h>
+ #include <linux/power_supply.h>
+ #include <linux/regmap.h>
++#include <linux/regulator/consumer.h>
+ #include <linux/types.h>
+ #include <linux/workqueue.h>
++#include <linux/pm_wakeup.h>
++
++/* PMIC IP types */
++enum smb_type {
++	SMB2,		/* PMI8998, PM660 - SMB2 IP */
++	SMBLITE,	/* PM4125 - SMBLite IP */
++};
+ 
+ /* clang-format off */
+ #define BATTERY_CHARGER_STATUS_1			0x06
+@@ -355,6 +364,118 @@
+ #define SMB2_FLOAT_VOLTAGE_MIN_UV			3487500
+ #define SMB2_FLOAT_VOLTAGE_MAX_UV			4920000
+ #define SMB2_FLOAT_VOLTAGE_STEP_UV			7500
++
++/* ================================================================
++ * SMBLite specific registers and base addresses
++ * Source: downstream smblite-reg.h (qpnp-smblite driver)
++ * ================================================================
++ */
++/* SMBLite peripheral base addresses (PM4125) */
++#define SMBLITE_CHGR_BASE			0x1000
++#define SMBLITE_DCDC_BASE			0x1100
++#define SMBLITE_BATIF_BASE			0x1200
++#define SMBLITE_USBIN_BASE			0x1300
++/* 0x1500 (typec) belongs to the qcom,pm4125-typec peripheral, not this driver */
++#define SMBLITE_MISC_BASE			0x1600
++
++/* ---- SMBLITE CHGR registers (chg_base offsets) ---- */
++
++#define SMBLITE_BATTERY_CHARGER_STATUS_1	0x06
++#define SMBLITE_CHARGER_VBAT_STATUS		0x08
++#define SMBLITE_BAT_OV_BIT			BIT(7)
++
++#define SMBLITE_CHARGING_ENABLE_CMD		0x46
++#define SMBLITE_CHARGING_ENABLE_CMD_BIT		BIT(0)
++
++#define SMBLITE_CHGR_FAST_CHARGE_CURRENT_CFG	0x54
++#define SMBLITE_CHGR_FLOAT_VOLTAGE_CFG		0x58
++/*
++ * chg_base + 0x60 = CHGR_TERM_CFG_REG (termination current config).
++ * SMBLite has NO pre-charge current register at this offset.
++ * Do NOT write pre-charge current to 0x60.
++ */
++#define SMBLITE_CHGR_CHG_TERM_CFG		0x60
++
++#define SMBLITE_CHGR_RECHG_CFG			0x70
++#define SMBLITE_RECHG_MASK			GENMASK(7, 6)
++#define SMBLITE_CHGR_RECHG_SOC_THD_CFG		0x74
++#define SMBLITE_CHGR_CHG_INHIBIT_CFG		0x78
++
++/*
++ * ---- SMBLite DCDC registers (dcdc_base offsets) ----
++ * This peripheral also holds the OTG/VBUS enable registers (0x50/0x52/0x56),
++ * which belong to the qcom,pm4125-vbus-reg peripheral and are intentionally
++ * not touched here. The three below are status/config registers with no
++ * other home, so they are read directly by this driver.
++ */
++#define SMBLITE_ICL_STATUS			0x09
++
++#define SMBLITE_POWER_PATH_STATUS		0x0B
++#define SMBLITE_VALID_INPUT_POWER_SOURCE_BIT	BIT(7)
++#define SMBLITE_USE_USBIN_BIT			BIT(5)
++
++#define SMBLITE_DCDC_LDO_CFG			0x70
++#define SMBLITE_LDO_MODE_BIT			BIT(0)
++
++#define SMBLITE_BATIF_BPD_CFG			0x60
++
++#define SMBLITE_BATIF_JEITA_COMP_STATUS		0x0C
++#define SMBLITE_JEITA_ADC_THOT_AFP_BIT		BIT(5)
++#define SMBLITE_JEITA_ADC_THOT_BIT		BIT(4)
++#define SMBLITE_JEITA_ADC_WARM_BIT		BIT(3)
++#define SMBLITE_JEITA_ADC_COOL_BIT		BIT(2)
++#define SMBLITE_JEITA_ADC_TCOLD_BIT		BIT(1)
++#define SMBLITE_JEITA_ADC_TCOLD_AFP_BIT		BIT(0)
++
++#define SMBLITE_JEITA_HOT_THRESHOLD_CFG		0x84
++#define SMBLITE_JEITA_WARM_THRESHOLD_CFG	0x86
++#define SMBLITE_JEITA_COOL_THRESHOLD_CFG	0x88
++#define SMBLITE_JEITA_COLD_THRESHOLD_CFG	0x8A
++
++#define SMBLITE_APSD_STATUS			0x0A
++#define SMBLITE_APSD_RESULT_STATUS		0x0B
++#define SMBLITE_CMD_APSD			0x45
++#define SMBLITE_USB_APSD_EN			0x44
++#define SMBLITE_USB_APSD_CFG			0x46
++#define SMBLITE_USBIN_QC23_EN			0x48
++#define SMBLITE_HVDCP_EN_BIT			BIT(2)
++
++#define SMBLITE_USBIN_ICL_OPTIONS		0x50
++#define SMBLITE_USBIN_MODE_CHG_BIT		BIT(2)
++#define SMBLITE_USB51_MODE_BIT			BIT(1)
++
++#define SMBLITE_USBIN_CURRENT_LIMIT_CFG		0x52
++#define SMBLITE_USBIN_INPUT_SUSPEND		0x54
++#define SMBLITE_SUSPEND_ON_COLLAPSE_USBIN_BIT	BIT(7)
++
++#define SMBLITE_USBIN_AICL_OPTIONS_CFG		0x60
++#define SMBLITE_USBIN_AICL_EN_BIT		BIT(7)
++#define SMBLITE_USBIN_AICL_START_AT_MAX		BIT(4)
++
++#define SMBLITE_MISC_AICL_RERUN_CFG		0x54
++#define SMBLITE_USBIN_AICL_PERIODIC_RERUN_EN_BIT BIT(5)
++#define SMBLITE_USBIN_AICL_RERUN_TIME_MASK	GENMASK(1, 0)
++#define SMBLITE_AICL_RERUN_TIME_12S_VAL		0x01
++
++#define SMBLITE_WD_CFG				0x58
++#define SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT BIT(7)
++#define SMBLITE_BARK_WDOG_INT_EN_BIT		BIT(4)
++#define SMBLITE_WDOG_TIMER_EN_ON_PLUGIN_BIT	BIT(1)
++#define SMBLITE_WDOG_TIMER_EN_BIT		BIT(0)
++#define SMBLITE_SNARL_BARK_BITE_WD_CFG		0x59
++#define SMBLITE_BARK_BITE_WDOG_PET		0x5A
++#define SMBLITE_BARK_WDOG_TIMEOUT_MASK		GENMASK(5, 4)	/* 0x30 */
++#define SMBLITE_BITE_WDOG_TIMEOUT_MASK		GENMASK(7, 6)	/* 0xC0 */
++#define SMBLITE_BITE_WDOG_TIMEOUT_8S		0x3
++#define SMBLITE_BITE_WDOG_TIMEOUT_SHIFT		6
++
++#define SMBLITE_ICL_STEP_UA			100000
++#define SMBLITE_FCC_STEP_UA			100000
++#define SMBLITE_ICL_MAX_UA			2000000
++#define SMBLITE_FV_STEP_UV			20000
++#define SMBLITE_FV_MIN_UV			3600000
++#define SMBLITE_FV_MAX_UV			4600000
++
+ /* clang-format on */
+ 
+ enum charger_status {
+@@ -368,6 +489,17 @@ enum charger_status {
+ 	DISABLE_CHARGE,
+ };
+ 
++enum smblite_charger_status {
++	SMBLITE_INHIBIT_CHARGE = 0,
++	SMBLITE_TRICKLE_CHARGE,
++	SMBLITE_PRE_CHARGE,
++	SMBLITE_FULLON_CHARGE,
++	SMBLITE_TAPER_CHARGE,
++	SMBLITE_TERMINATE_CHARGE,
++	SMBLITE_CHARGING_PAUSED,
++	SMBLITE_CHARGING_DISABLED,
++};
++
+ struct smb_init_register {
+ 	u16 addr;
+ 	u8 mask;
+@@ -377,6 +509,7 @@ struct smb_init_register {
+ /**
+  * struct smb_chip - smb chip structure
+  * @dev:		Device reference for power_supply
++ * @type: PMIC IP type (SMB2 or SMBLITE)
+  * @name:		The platform device name
+  * @base:		Base address for smb registers
+  * @regmap:		Register map
+@@ -384,13 +517,19 @@ struct smb_init_register {
+  * @initial_charge_enable: Charging enable state before hardware setup
+  * @status_change_work: Worker to handle plug/unplug events
+  * @cable_irq:		USB plugin IRQ
++ * @wdog_irq:		Watchdog bark IRQ
+  * @wakeup_enabled:	If the cable IRQ will cause a wakeup
+  * @usb_in_i_chan:	USB_IN current measurement channel
+  * @usb_in_v_chan:	USB_IN voltage measurement channel
+  * @chg_psy:		Charger power supply instance
++ * @ldo_mode: True if operating in LDO mode (SMBLITE only)
++ * @icl_step_ua: ICL step size in uA
++ * @icl_max_ua: Maximum ICL in uA
++ * @charge_status: Cached POWER_SUPPLY_STATUS_* value
+  */
+ struct smb_chip {
+ 	struct device *dev;
++	enum smb_type type;
+ 	const char *name;
+ 	unsigned int base;
+ 	struct regmap *regmap;
+@@ -399,12 +538,17 @@ struct smb_chip {
+ 
+ 	struct delayed_work status_change_work;
+ 	int cable_irq;
++	int wdog_irq;
+ 	bool wakeup_enabled;
+ 
+ 	struct iio_channel *usb_in_i_chan;
+ 	struct iio_channel *usb_in_v_chan;
+ 
+ 	struct power_supply *chg_psy;
++	bool ldo_mode;
++	unsigned int icl_step_ua;
++	unsigned int icl_max_ua;
++	int charge_status;
+ };
+ 
+ static enum power_supply_property smb_properties[] = {
+@@ -419,19 +563,49 @@ static enum power_supply_property smb_properties[] = {
+ 	POWER_SUPPLY_PROP_USB_TYPE,
+ };
+ 
++static enum power_supply_property smblite_properties[] = {
++	POWER_SUPPLY_PROP_MANUFACTURER,
++	POWER_SUPPLY_PROP_MODEL_NAME,
++	POWER_SUPPLY_PROP_CURRENT_MAX,
++	POWER_SUPPLY_PROP_VOLTAGE_NOW,
++	POWER_SUPPLY_PROP_STATUS,
++	POWER_SUPPLY_PROP_HEALTH,
++	POWER_SUPPLY_PROP_ONLINE,
++	POWER_SUPPLY_PROP_CHARGE_TYPE,
++	POWER_SUPPLY_PROP_USB_TYPE,
++};
++
++/*
++ * smb_get_prop_usb_online - check whether a valid USB input is present.
++ *
++ * SMB2  (0x60B): P_PATH_USE_USBIN BIT(4) && VALID_INPUT BIT(0)
++ * SMBLite (dcdc_base + 0x0B = 0x110B):
++ *   VALID_INPUT_POWER_SOURCE_STS BIT(7) && USE_USBIN BIT(5)
++ */
+ static int smb_get_prop_usb_online(struct smb_chip *chip, int *val)
+ {
+ 	unsigned int stat;
++	u16 reg;
+ 	int rc;
+ 
+-	rc = regmap_read(chip->regmap, chip->base + POWER_PATH_STATUS, &stat);
++	if (chip->type == SMBLITE)
++		reg = SMBLITE_DCDC_BASE + SMBLITE_POWER_PATH_STATUS;
++	else
++		reg = chip->base + POWER_PATH_STATUS;
++
++	rc = regmap_read(chip->regmap, reg, &stat);
+ 	if (rc < 0) {
+ 		dev_err(chip->dev, "Couldn't read power path status: %d\n", rc);
+ 		return rc;
+ 	}
+ 
+-	*val = (stat & P_PATH_USE_USBIN_BIT) &&
+-	       (stat & P_PATH_VALID_INPUT_POWER_SOURCE_STS_BIT);
++	if (chip->type == SMBLITE)
++		*val = (stat & SMBLITE_VALID_INPUT_POWER_SOURCE_BIT) &&
++		       (stat & SMBLITE_USE_USBIN_BIT);
++	else
++		*val = (stat & P_PATH_USE_USBIN_BIT) &&
++		       (stat & P_PATH_VALID_INPUT_POWER_SOURCE_STS_BIT);
++
+ 	return 0;
+ }
+ 
+@@ -442,6 +616,7 @@ static int smb_get_prop_usb_online(struct smb_chip *chip, int *val)
+ static int smb_apsd_get_charger_type(struct smb_chip *chip, int *val)
+ {
+ 	unsigned int apsd_stat, stat;
++	u16 apsd_reg, result_reg;
+ 	int usb_online = 0;
+ 	int rc;
+ 
+@@ -451,7 +626,15 @@ static int smb_apsd_get_charger_type(struct smb_chip *chip, int *val)
+ 		return rc;
+ 	}
+ 
+-	rc = regmap_read(chip->regmap, chip->base + APSD_STATUS, &apsd_stat);
++	if (chip->type == SMBLITE) {
++		apsd_reg   = SMBLITE_USBIN_BASE + SMBLITE_APSD_STATUS;
++		result_reg = SMBLITE_USBIN_BASE + SMBLITE_APSD_RESULT_STATUS;
++	} else {
++		apsd_reg   = chip->base + APSD_STATUS;
++		result_reg = chip->base + APSD_RESULT_STATUS;
++	}
++
++	rc = regmap_read(chip->regmap, apsd_reg, &apsd_stat);
+ 	if (rc < 0) {
+ 		dev_err(chip->dev, "Failed to read apsd status, rc = %d", rc);
+ 		return rc;
+@@ -461,7 +644,7 @@ static int smb_apsd_get_charger_type(struct smb_chip *chip, int *val)
+ 		return -EAGAIN;
+ 	}
+ 
+-	rc = regmap_read(chip->regmap, chip->base + APSD_RESULT_STATUS, &stat);
++	rc = regmap_read(chip->regmap, result_reg, &stat);
+ 	if (rc < 0) {
+ 		dev_err(chip->dev, "Failed to read apsd result, rc = %d", rc);
+ 		return rc;
+@@ -479,11 +662,33 @@ static int smb_apsd_get_charger_type(struct smb_chip *chip, int *val)
+ 	return 0;
+ }
+ 
++static unsigned int smb_usb_type_current_ua(enum power_supply_usb_type usb_type)
++{
++	switch (usb_type) {
++	case POWER_SUPPLY_USB_TYPE_CDP:
++		return CDP_CURRENT_UA;
++	case POWER_SUPPLY_USB_TYPE_DCP:
++		return DCP_CURRENT_UA;
++	case POWER_SUPPLY_USB_TYPE_SDP:
++	default:
++		return SDP_CURRENT_UA;
++	}
++}
++
++/*
++ * smb_get_prop_status - report POWER_SUPPLY_STATUS_* for the battery.
++ *
++ * BAT_OV detection:
++ *   SMB2:    BATTERY_CHARGER_STATUS_2 (chip->base + 0x07), BIT(5)
++ *   SMBLite: CHARGER_VBAT_STATUS_REG (chg_base + 0x08 = 0x1008), BIT(7)
++ *
++ * Charger status enum differs between IPs -- handled by dedicated branches.
++ */
+ static int smb_get_prop_status(struct smb_chip *chip, int *val)
+ {
+-	unsigned char stat[2];
+-	int usb_online = 0;
+-	int rc;
++	unsigned int chg_status, stat_batov;
++	u16 chg_status_reg, reg_batov;
++	int usb_online = 0, rc;
+ 
+ 	rc = smb_get_prop_usb_online(chip, &usb_online);
+ 	if (!usb_online) {
+@@ -491,65 +696,132 @@ static int smb_get_prop_status(struct smb_chip *chip, int *val)
+ 		return rc;
+ 	}
+ 
+-	rc = regmap_bulk_read(chip->regmap,
+-			      chip->base + BATTERY_CHARGER_STATUS_1, &stat, 2);
++	if (chip->type == SMBLITE) {
++		chg_status_reg = SMBLITE_CHGR_BASE + SMBLITE_BATTERY_CHARGER_STATUS_1;
++		reg_batov = SMBLITE_CHGR_BASE + SMBLITE_CHARGER_VBAT_STATUS;
++	} else {
++		chg_status_reg = chip->base + BATTERY_CHARGER_STATUS_1;
++		reg_batov = chip->base + BATTERY_CHARGER_STATUS_2;
++	}
++
++	rc = regmap_read(chip->regmap, reg_batov, &stat_batov);
+ 	if (rc < 0) {
+-		dev_err(chip->dev, "Failed to read charging status ret=%d\n",
+-			rc);
++		dev_err(chip->dev, "Failed to read bat-ov status ret=%d\n", rc);
+ 		return rc;
+ 	}
+ 
+-	if (stat[1] & CHARGER_ERROR_STATUS_BAT_OV_BIT) {
+-		*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
+-		return 0;
++	/* Check BAT_OV -- different register/bit per IP */
++	if (chip->type == SMBLITE) {
++		if (stat_batov & SMBLITE_BAT_OV_BIT) {
++			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			return 0;
++		}
++	} else {
++		if (stat_batov & CHARGER_ERROR_STATUS_BAT_OV_BIT) {
++			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			return 0;
++		}
+ 	}
+ 
+-	stat[0] = stat[0] & BATTERY_CHARGER_STATUS_MASK;
+-
+-	switch (stat[0]) {
+-	case TRICKLE_CHARGE:
+-	case PRE_CHARGE:
+-	case FAST_CHARGE:
+-	case FULLON_CHARGE:
+-	case TAPER_CHARGE:
+-		*val = POWER_SUPPLY_STATUS_CHARGING;
+-		return rc;
+-	case DISABLE_CHARGE:
+-		*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
+-		return rc;
+-	case TERMINATE_CHARGE:
+-	case INHIBIT_CHARGE:
+-		*val = POWER_SUPPLY_STATUS_FULL;
+-		return rc;
+-	default:
+-		*val = POWER_SUPPLY_STATUS_UNKNOWN;
++	rc = regmap_read(chip->regmap, chg_status_reg, &chg_status);
++	if (rc < 0) {
++		dev_err(chip->dev, "Failed to read charging status ret=%d\n", rc);
+ 		return rc;
+ 	}
++
++	chg_status &= BATTERY_CHARGER_STATUS_MASK;
++
++	if (chip->type == SMBLITE) {
++		switch (chg_status) {
++		case SMBLITE_TRICKLE_CHARGE:
++		case SMBLITE_PRE_CHARGE:
++		case SMBLITE_FULLON_CHARGE:
++		case SMBLITE_TAPER_CHARGE:
++			*val = POWER_SUPPLY_STATUS_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_CHARGING;
++			break;
++		case SMBLITE_TERMINATE_CHARGE:
++			*val = POWER_SUPPLY_STATUS_FULL;
++			chip->charge_status = POWER_SUPPLY_STATUS_FULL;
++			break;
++		case SMBLITE_INHIBIT_CHARGE:
++		case SMBLITE_CHARGING_PAUSED:
++		case SMBLITE_CHARGING_DISABLED:
++			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			break;
++		default:
++			*val = POWER_SUPPLY_STATUS_UNKNOWN;
++			chip->charge_status = POWER_SUPPLY_STATUS_UNKNOWN;
++			break;
++		}
++	} else {
++		switch (chg_status) {
++		case TRICKLE_CHARGE:
++		case PRE_CHARGE:
++		case FAST_CHARGE:
++		case FULLON_CHARGE:
++		case TAPER_CHARGE:
++			*val = POWER_SUPPLY_STATUS_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_CHARGING;
++			break;
++		case DISABLE_CHARGE:
++			*val = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			chip->charge_status = POWER_SUPPLY_STATUS_NOT_CHARGING;
++			break;
++		case TERMINATE_CHARGE:
++		case INHIBIT_CHARGE:
++			*val = POWER_SUPPLY_STATUS_FULL;
++			chip->charge_status = POWER_SUPPLY_STATUS_FULL;
++			break;
++		default:
++			*val = POWER_SUPPLY_STATUS_UNKNOWN;
++			chip->charge_status = POWER_SUPPLY_STATUS_UNKNOWN;
++			break;
++		}
++	}
++
++	return 0;
+ }
+ 
+ static inline int smb_get_current_limit(struct smb_chip *chip,
+ 					 unsigned int *val)
+ {
+-	int rc = regmap_read(chip->regmap, chip->base + ICL_STATUS, val);
++	u16 reg;
++	int rc;
++
++	if (chip->type == SMBLITE)
++		reg = SMBLITE_DCDC_BASE + SMBLITE_ICL_STATUS;
++	else
++		reg = chip->base + ICL_STATUS;
+ 
++	rc = regmap_read(chip->regmap, reg, val);
+ 	if (rc >= 0)
+-		*val *= CURRENT_SCALE_FACTOR;
++		*val *= chip->icl_step_ua;
+ 	return rc;
+ }
+ 
+ static int smb_set_current_limit(struct smb_chip *chip, unsigned int val)
+ {
+ 	unsigned char val_raw;
++	u16 reg;
+ 
+-	if (val > 4800000) {
+-		dev_err(chip->dev,
+-			"Can't set current limit higher than 4800000uA");
++	if (val > chip->icl_max_ua) {
++		dev_err(chip->dev, "Can't set current limit higher than %duA",
++			chip->icl_max_ua);
+ 		return -EINVAL;
+ 	}
+-	val_raw = val / CURRENT_SCALE_FACTOR;
+ 
+-	return regmap_write(chip->regmap, chip->base + USBIN_CURRENT_LIMIT_CFG,
+-			    val_raw);
++	val_raw = val / chip->icl_step_ua;
++
++	if (chip->type == SMBLITE)
++		reg = SMBLITE_USBIN_BASE + SMBLITE_USBIN_CURRENT_LIMIT_CFG;
++	else
++		reg = chip->base + USBIN_CURRENT_LIMIT_CFG;
++
++	return regmap_write(chip->regmap, reg, val_raw);
+ }
+ 
+ static void smb_status_change_work(struct work_struct *work)
+@@ -579,27 +851,20 @@ static void smb_status_change_work(struct work_struct *work)
+ 	}
+ 
+ 	if (rc < 0) {
+-		rc = regmap_update_bits(chip->regmap, chip->base + CMD_APSD,
+-					APSD_RERUN_BIT, APSD_RERUN_BIT);
++		if (chip->type == SMBLITE)
++			rc = regmap_update_bits(chip->regmap,
++						SMBLITE_USBIN_BASE + SMBLITE_CMD_APSD,
++						APSD_RERUN_BIT, APSD_RERUN_BIT);
++		else
++			rc = regmap_update_bits(chip->regmap, chip->base + CMD_APSD,
++						APSD_RERUN_BIT, APSD_RERUN_BIT);
+ 		schedule_delayed_work(&chip->status_change_work,
+ 				      msecs_to_jiffies(1000));
+ 		dev_dbg(chip->dev, "get charger type failed, rerun apsd\n");
+ 		return;
+ 	}
+ 
+-	switch (charger_type) {
+-	case POWER_SUPPLY_USB_TYPE_CDP:
+-		current_ua = CDP_CURRENT_UA;
+-		break;
+-	case POWER_SUPPLY_USB_TYPE_DCP:
+-		current_ua = DCP_CURRENT_UA;
+-		break;
+-	case POWER_SUPPLY_USB_TYPE_SDP:
+-	default:
+-		current_ua = SDP_CURRENT_UA;
+-		break;
+-	}
+-
++	current_ua = smb_usb_type_current_ua(charger_type);
+ 	smb_set_current_limit(chip, current_ua);
+ 	power_supply_changed(chip->chg_psy);
+ }
+@@ -623,11 +888,61 @@ static int smb_get_iio_chan(struct smb_chip *chip, struct iio_channel *chan,
+ 	return iio_read_channel_processed(chan, val);
+ }
+ 
++/*
++ * smb_get_prop_health - battery health based on temperature status.
++ *
++ * SMBLite: BATTERY_TEMP_STATUS_REG = batif_base + 0x0C (smblite-reg.h)
++ * SMB2:    BATTERY_CHARGER_STATUS_2 = chip->base + 0x07
++ */
+ static int smb_get_prop_health(struct smb_chip *chip, int *val)
+ {
+ 	int rc;
+ 	unsigned int stat;
+ 
++	if (chip->type == SMBLITE) {
++		rc = regmap_read(chip->regmap,
++				 SMBLITE_CHGR_BASE + SMBLITE_CHARGER_VBAT_STATUS,
++				 &stat);
++		if (rc < 0) {
++			dev_err(chip->dev,
++				"Couldn't read SMBLITE vbat status rc=%d\n", rc);
++			return rc;
++		}
++		if (stat & SMBLITE_BAT_OV_BIT) {
++			*val = POWER_SUPPLY_HEALTH_OVERVOLTAGE;
++			return 0;
++		}
++
++		rc = regmap_read(chip->regmap,
++				 SMBLITE_BATIF_BASE + SMBLITE_BATIF_JEITA_COMP_STATUS,
++				 &stat);
++		if (rc < 0) {
++			dev_err(chip->dev,
++				"Couldn't read SMBLITE JEITA status rc=%d\n", rc);
++			return rc;
++		}
++		if (stat & (SMBLITE_JEITA_ADC_THOT_AFP_BIT |
++			    SMBLITE_JEITA_ADC_THOT_BIT)) {
++			*val = POWER_SUPPLY_HEALTH_OVERHEAT;
++			return 0;
++		}
++		if (stat & (SMBLITE_JEITA_ADC_TCOLD_AFP_BIT |
++			    SMBLITE_JEITA_ADC_TCOLD_BIT)) {
++			*val = POWER_SUPPLY_HEALTH_COLD;
++			return 0;
++		}
++		if (stat & SMBLITE_JEITA_ADC_WARM_BIT) {
++			*val = POWER_SUPPLY_HEALTH_WARM;
++			return 0;
++		}
++		if (stat & SMBLITE_JEITA_ADC_COOL_BIT) {
++			*val = POWER_SUPPLY_HEALTH_COOL;
++			return 0;
++		}
++		*val = POWER_SUPPLY_HEALTH_GOOD;
++		return 0;
++	}
++
+ 	rc = regmap_read(chip->regmap, chip->base + BATTERY_CHARGER_STATUS_2,
+ 			 &stat);
+ 	if (rc < 0) {
+@@ -667,6 +982,8 @@ static int smb_get_property(struct power_supply *psy,
+ 	case POWER_SUPPLY_PROP_CURRENT_MAX:
+ 		return smb_get_current_limit(chip, &val->intval);
+ 	case POWER_SUPPLY_PROP_CURRENT_NOW:
++		if (chip->type == SMBLITE)
++			return -EOPNOTSUPP;
+ 		return smb_get_iio_chan(chip, chip->usb_in_i_chan,
+ 					 &val->intval);
+ 	case POWER_SUPPLY_PROP_VOLTAGE_NOW:
+@@ -680,6 +997,30 @@ static int smb_get_property(struct power_supply *psy,
+ 		return smb_get_prop_health(chip, &val->intval);
+ 	case POWER_SUPPLY_PROP_USB_TYPE:
+ 		return smb_apsd_get_charger_type(chip, &val->intval);
++	case POWER_SUPPLY_PROP_CHARGE_TYPE: {
++		int status, rc;
++
++		if (chip->type != SMBLITE)
++			return -EOPNOTSUPP;
++
++		rc = smb_get_prop_status(chip, &status);
++		if (rc < 0)
++			return rc;
++
++		switch (status) {
++		case POWER_SUPPLY_STATUS_FULL:
++			val->intval = POWER_SUPPLY_CHARGE_TYPE_NONE;
++			break;
++		case POWER_SUPPLY_STATUS_CHARGING:
++			val->intval = POWER_SUPPLY_CHARGE_TYPE_STANDARD;
++			break;
++		default:
++			val->intval = POWER_SUPPLY_CHARGE_TYPE_UNKNOWN;
++			break;
++		}
++
++		return 0;
++	}
+ 	default:
+ 		dev_err(chip->dev, "invalid property: %d\n", psp);
+ 		return -EINVAL;
+@@ -694,6 +1035,8 @@ static int smb_set_property(struct power_supply *psy,
+ 
+ 	switch (psp) {
+ 	case POWER_SUPPLY_PROP_STATUS:
++		if (chip->type == SMBLITE)
++			return -EINVAL;
+ 		return regmap_update_bits(chip->regmap, chip->base + USBIN_CMD_IL,
+ 					  USBIN_SUSPEND_BIT, !val->intval);
+ 	case POWER_SUPPLY_PROP_CURRENT_MAX:
+@@ -707,8 +1050,11 @@ static int smb_set_property(struct power_supply *psy,
+ static int smb_property_is_writable(struct power_supply *psy,
+ 				     enum power_supply_property psp)
+ {
++	struct smb_chip *chip = power_supply_get_drvdata(psy);
++
+ 	switch (psp) {
+ 	case POWER_SUPPLY_PROP_STATUS:
++		return chip->type != SMBLITE;
+ 	case POWER_SUPPLY_PROP_CURRENT_MAX:
+ 		return 1;
+ 	default:
+@@ -716,35 +1062,94 @@ static int smb_property_is_writable(struct power_supply *psy,
+ 	}
+ }
+ 
++/*
++ * smb_handle_batt_overvoltage - IRQ handler for battery overvoltage.
++ *
++ * SMB2:    chip->base + BATTERY_CHARGER_STATUS_2 (offset 0x07), BIT(5)
++ * SMBLite: SMBLITE_CHGR_BASE + SMBLITE_CHARGER_VBAT_STATUS (0x1008), BIT(7)
++ */
+ static irqreturn_t smb_handle_batt_overvoltage(int irq, void *data)
+ {
+ 	struct smb_chip *chip = data;
+ 	unsigned int status;
++	u16 reg;
++	u8 bit;
+ 	int rc;
+ 
+-	rc = regmap_read(chip->regmap,
+-			 chip->base + BATTERY_CHARGER_STATUS_2, &status);
++	if (chip->type == SMBLITE) {
++		reg = SMBLITE_CHGR_BASE + SMBLITE_CHARGER_VBAT_STATUS;
++		bit = SMBLITE_BAT_OV_BIT;
++	} else {
++		reg = chip->base + BATTERY_CHARGER_STATUS_2;
++		bit = CHARGER_ERROR_STATUS_BAT_OV_BIT;
++	}
++
++	rc = regmap_read(chip->regmap, reg, &status);
+ 	if (rc < 0) {
+ 		dev_err(chip->dev, "Couldn't read charger status: %d\n", rc);
+ 		return IRQ_HANDLED;
+ 	}
+ 
+-	if (status & CHARGER_ERROR_STATUS_BAT_OV_BIT) {
+-		/* The hardware stops charging automatically */
++	if (status & bit)
+ 		dev_err(chip->dev, "battery overvoltage detected\n");
+-	}
+ 
+ 	power_supply_changed(chip->chg_psy);
+ 
+ 	return IRQ_HANDLED;
+ }
+ 
++/*
++ * smb_handle_usb_plugin - IRQ handler for USB plug/unplug events.
++ *
++ * SMBLite: if the charger shows INHIBIT_CHARGE (0x00) right after plug,
++ * toggle the charging enable bit (chg_base + 0x46) to kick-start charging.
++ * SMB2: simply schedules the status work.
++ */
+ static irqreturn_t smb_handle_usb_plugin(int irq, void *data)
+ {
+ 	struct smb_chip *chip = data;
++	int usb_online = 0;
++	int rc;
+ 
+ 	power_supply_changed(chip->chg_psy);
++	smb_get_prop_usb_online(chip, &usb_online);
+ 
++	if (!usb_online)
++		goto schedule_work;
++
++	if (chip->type == SMBLITE) {
++		unsigned int chgr_status;
++		u16 chgr_reg  = SMBLITE_CHGR_BASE + SMBLITE_BATTERY_CHARGER_STATUS_1;
++		u16 chgen_reg = SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD;
++
++		rc = regmap_read(chip->regmap, chgr_reg, &chgr_status);
++		if (rc < 0) {
++			dev_err(chip->dev,
++				"Couldn't read charger status: %d\n", rc);
++			goto schedule_work;
++		}
++
++		if ((chgr_status & BATTERY_CHARGER_STATUS_MASK) ==
++		    SMBLITE_INHIBIT_CHARGE) {
++			rc = regmap_update_bits(chip->regmap, chgen_reg,
++						SMBLITE_CHARGING_ENABLE_CMD_BIT, 0);
++			if (rc < 0) {
++				dev_err(chip->dev,
++					"Couldn't disable charging: %d\n", rc);
++				goto schedule_work;
++			}
++
++			usleep_range(10000, 10100);
++			rc = regmap_update_bits(chip->regmap, chgen_reg,
++						SMBLITE_CHARGING_ENABLE_CMD_BIT,
++						SMBLITE_CHARGING_ENABLE_CMD_BIT);
++			if (rc < 0)
++				dev_err(chip->dev,
++					"Couldn't re-enable charging: %d\n", rc);
++		}
++	}
++
++schedule_work:
+ 	schedule_delayed_work(&chip->status_change_work,
+ 			      msecs_to_jiffies(1500));
+ 
+@@ -769,21 +1174,176 @@ static irqreturn_t smb_handle_chg_state_change(int irq, void *data)
+ 	return IRQ_HANDLED;
+ }
+ 
++/*
++ * smb_handle_wdog_bark - pet the watchdog after a bark interrupt.
++ *
++ * SMB2:    MISC base 0x600 + 0x43 = 0x643
++ * SMBLite: MISC base 0x1600 + 0x5A = 0x165A  (per smblite-reg.h)
++ *
++ * NOTE: downstream qpnp-smblite enables the watchdog (WD_CFG bits
++ * WDOG_TIMER_EN_ON_PLUGIN + BARK_WDOG_INT_EN + BITE_WDOG_DISABLE_CHARGING).
++ * The wdog-bark IRQ is registered here to pet it; the watchdog config itself
++ * is written in smblite_init_seq[].
++ */
+ static irqreturn_t smb_handle_wdog_bark(int irq, void *data)
+ {
+ 	struct smb_chip *chip = data;
++	u16 reg;
+ 	int rc;
+ 
+ 	power_supply_changed(chip->chg_psy);
+ 
+-	rc = regmap_write(chip->regmap, chip->base + BARK_BITE_WDOG_PET,
+-			  BARK_BITE_WDOG_PET_BIT);
++	if (chip->type == SMBLITE)
++		reg = SMBLITE_MISC_BASE + SMBLITE_BARK_BITE_WDOG_PET;
++	else
++		reg = chip->base + BARK_BITE_WDOG_PET;
++
++	rc = regmap_write(chip->regmap, reg, BARK_BITE_WDOG_PET_BIT);
+ 	if (rc < 0)
+ 		dev_err(chip->dev, "Couldn't pet the dog rc=%d\n", rc);
+ 
+ 	return IRQ_HANDLED;
+ }
+ 
++/* ================================================================
++ * SMBLite-specific initialisation helpers
++ * ================================================================
++ */
++static int smblite_write_jeita_16(struct smb_chip *chip, u16 addr, u16 val)
++{
++	u8 buf[2];
++
++	buf[0] = (val >> 8) & 0xff;
++	buf[1] = val & 0xff;
++	return regmap_bulk_write(chip->regmap, addr, buf, 2);
++}
++
++static int smblite_program_jeita_thresholds(struct smb_chip *chip)
++{
++	u32 soft[2], hard[2];
++	struct device_node *np = chip->dev->of_node;
++	bool soft_present, hard_present;
++	int rc;
++
++	if (chip->type != SMBLITE || !np)
++		return 0;
++
++	soft_present = of_find_property(np, "qcom,jeita-soft-thresholds", NULL);
++	hard_present = of_find_property(np, "qcom,jeita-hard-thresholds", NULL);
++	if (!soft_present && !hard_present)
++		return 0;
++	if (!soft_present || !hard_present)
++		return -EINVAL;
++
++	rc = of_property_read_u32_array(np,
++					"qcom,jeita-soft-thresholds",
++					soft, ARRAY_SIZE(soft));
++	if (rc)
++		return rc;
++
++	rc = of_property_read_u32_array(np,
++					"qcom,jeita-hard-thresholds",
++					hard, ARRAY_SIZE(hard));
++	if (rc)
++		return rc;
++
++	if (soft[0] > 0xffff || soft[1] > 0xffff ||
++	    hard[0] > 0xffff || hard[1] > 0xffff)
++		return -EINVAL;
++
++	rc = smblite_write_jeita_16(chip,
++			SMBLITE_BATIF_BASE + SMBLITE_JEITA_COOL_THRESHOLD_CFG, soft[0]);
++	if (rc < 0)
++		return rc;
++
++	rc = smblite_write_jeita_16(chip,
++			SMBLITE_BATIF_BASE + SMBLITE_JEITA_WARM_THRESHOLD_CFG, soft[1]);
++	if (rc < 0)
++		return rc;
++
++	rc = smblite_write_jeita_16(chip,
++			SMBLITE_BATIF_BASE + SMBLITE_JEITA_COLD_THRESHOLD_CFG, hard[0]);
++	if (rc < 0)
++		return rc;
++
++	rc = smblite_write_jeita_16(chip,
++			SMBLITE_BATIF_BASE + SMBLITE_JEITA_HOT_THRESHOLD_CFG, hard[1]);
++	if (rc < 0)
++		return rc;
++
++	dev_dbg(chip->dev,
++		"JEITA: COOL=0x%04x WARM=0x%04x COLD=0x%04x HOT=0x%04x\n",
++		soft[0] & 0xffff, soft[1] & 0xffff,
++		hard[0] & 0xffff, hard[1] & 0xffff);
++
++	return 0;
++}
++
++/*
++ * smblite_config_fast_charge_safety_timer - configure the fast-charge
++ * safety timer.
++ *
++ * Matches downstream smblite_init_hw()'s masked write on
++ * CHGR_FAST_CHARGE_SAFETY_TIMER_CFG_REG (chg_base + 0x90):
++ *   mask = FAST_CHARGE_SAFETY_TIMER_EN_BIT | FAST_CHARGE_SAFETY_TIMER_MASK (0x0B)
++ *   val  = FAST_CHARGE_SAFETY_TIMER_EN_BIT | FAST_CHARGE_SAFETY_TIMER_768_MIN (0x0A)
++ *
++ * This register has no relation to JEITA. The downstream qpnp-smblite
++ * driver never programs JEITA thresholds for SMBLite at all, so there
++ * is no downstream reference for an "enable JEITA" bit or register --
++ * smblite_program_jeita_thresholds() only writes the threshold
++ * comparator registers themselves.
++ */
++static int smblite_config_fast_charge_safety_timer(struct smb_chip *chip)
++{
++	if (chip->type != SMBLITE)
++		return 0;
++
++	return regmap_update_bits(chip->regmap,
++				  SMBLITE_CHGR_BASE + 0x90,
++				  0x0B, 0x0A);
++}
++
++static int smblite_write_init_reg(struct smb_chip *chip, u16 addr, u8 val,
++				  const char *name)
++{
++	int rc;
++
++	rc = regmap_write(chip->regmap, addr, val);
++	if (rc < 0)
++		return dev_err_probe(chip->dev, rc,
++				     "Couldn't configure %s\n", name);
++
++	return 0;
++}
++
++static int smblite_detect_ldo_mode(struct smb_chip *chip)
++{
++	unsigned int val;
++	int rc;
++
++	if (chip->type != SMBLITE)
++		return 0;
++
++	rc = regmap_read(chip->regmap,
++			 SMBLITE_DCDC_BASE + SMBLITE_DCDC_LDO_CFG, &val);
++	if (rc < 0)
++		return rc;
++
++	chip->ldo_mode = !!(val & SMBLITE_LDO_MODE_BIT);
++	dev_info(chip->dev, "Operating in %s mode\n",
++		 chip->ldo_mode ? "LDO" : "switching");
++	return 0;
++}
++
++static int smblite_init_hw_specific(struct smb_chip *chip)
++{
++	if (chip->type != SMBLITE)
++		return 0;
++
++	return smblite_detect_ldo_mode(chip);
++}
++
+ static const struct power_supply_desc smb_psy_desc = {
+ 	.name = "pmi8998_charger",
+ 	.type = POWER_SUPPLY_TYPE_USB,
+@@ -904,37 +1464,216 @@ static const struct smb_init_register smb_init_seq[] = {
+ 	  .val = 1000000 / CURRENT_SCALE_FACTOR },
+ };
+ 
++/* ================================================================
++ * SMBLite init sequence (PM4125)
++ * All addresses are absolute (peripheral_base + offset).
++ *
++ * Modelled strictly after downstream smblite_init_hw() in qpnp-smblite.c.
++ * Key differences from SMB2:
++ *   - CHARGING_ENABLE_CMD is at chg_base + 0x46 (not 0x42)
++ *   - Watchdog IS enabled (downstream enables it with specific timeout bits)
++ *   - No pre-charge current register at 0x60 (that is CHGR_TERM_CFG_REG)
++ *   - AICL enable bit is BIT(7) in usbin_base + 0x60
++ *   - Suspend-on-collapse is in usbin_base + 0x54 BIT(7)
++ * ================================================================
++ */
++static const struct smb_init_register smblite_init_seq[] = {
++	/* AICL: periodic rerun every 12 s (misc_base + 0x54) */
++	{ .addr = SMBLITE_MISC_BASE + SMBLITE_MISC_AICL_RERUN_CFG,
++	  .mask = SMBLITE_USBIN_AICL_PERIODIC_RERUN_EN_BIT |
++		  SMBLITE_USBIN_AICL_RERUN_TIME_MASK,
++	  .val = SMBLITE_USBIN_AICL_PERIODIC_RERUN_EN_BIT |
++		  SMBLITE_AICL_RERUN_TIME_12S_VAL },
++	/* Enable AICL (usbin_base + 0x60) */
++	{ .addr = SMBLITE_USBIN_BASE + SMBLITE_USBIN_AICL_OPTIONS_CFG,
++	  .mask = SMBLITE_USBIN_AICL_EN_BIT | SMBLITE_USBIN_AICL_START_AT_MAX,
++	  .val = SMBLITE_USBIN_AICL_EN_BIT },
++	/* Suspend on collapse (usbin_base + 0x54 BIT(7)) */
++	{ .addr = SMBLITE_USBIN_BASE + SMBLITE_USBIN_INPUT_SUSPEND,
++	  .mask = SMBLITE_SUSPEND_ON_COLLAPSE_USBIN_BIT,
++	  .val = SMBLITE_SUSPEND_ON_COLLAPSE_USBIN_BIT },
++	/*
++	 * Watchdog config (misc_base + 0x59):
++	 * Bark timeout = 16 s (ilog2(16/16)=0 << shift), bite timeout = 8 s.
++	 * Matches downstream DEFAULT_WD_BARK_TIME=16.
++	 */
++	{ .addr = SMBLITE_MISC_BASE + SMBLITE_SNARL_BARK_BITE_WD_CFG,
++	  .mask = SMBLITE_BARK_WDOG_TIMEOUT_MASK | SMBLITE_BITE_WDOG_TIMEOUT_MASK, /* 0xF0 */
++	  .val = (SMBLITE_BITE_WDOG_TIMEOUT_8S << SMBLITE_BITE_WDOG_TIMEOUT_SHIFT) }, /* 0xC0 */
++	/*
++	 * Enable watchdog: WDOG_TIMER_EN_ON_PLUGIN + BARK_WDOG_INT_EN
++	 * + BITE_WDOG_DISABLE_CHARGING (misc_base + 0x58)
++	 * Matches downstream WD_CFG_REG enable sequence.
++	 */
++	{ .addr = SMBLITE_MISC_BASE + SMBLITE_WD_CFG,
++	  .mask = SMBLITE_WDOG_TIMER_EN_BIT | SMBLITE_WDOG_TIMER_EN_ON_PLUGIN_BIT |
++		  SMBLITE_BARK_WDOG_INT_EN_BIT |
++		  SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT,
++	  .val = SMBLITE_WDOG_TIMER_EN_ON_PLUGIN_BIT |
++		  SMBLITE_BARK_WDOG_INT_EN_BIT |
++		  SMBLITE_BITE_WDOG_DISABLE_CHARGING_CFG_BIT },
++	/* SDP: 500 mA USB 2.0 (usbin_base + 0x50) */
++	{ .addr = SMBLITE_USBIN_BASE + SMBLITE_USBIN_ICL_OPTIONS,
++	  .mask = SMBLITE_USB51_MODE_BIT | SMBLITE_USBIN_MODE_CHG_BIT,
++	  .val = SMBLITE_USB51_MODE_BIT },
++	/* Disable HVDCP (usbin_base + 0x48) */
++	{ .addr = SMBLITE_USBIN_BASE + SMBLITE_USBIN_QC23_EN,
++	  .mask = SMBLITE_HVDCP_EN_BIT,
++	  .val = 0 },
++	/* Fast-charge current 1.5 A (chg_base + 0x54) */
++	{ .addr = SMBLITE_CHGR_BASE + SMBLITE_CHGR_FAST_CHARGE_CURRENT_CFG,
++	  .mask = FAST_CHARGE_CURRENT_SETTING_MASK,
++	  .val = 1500000 / SMBLITE_FCC_STEP_UA },
++};
++
+ static int smb_init_hw(struct smb_chip *chip)
+ {
+-	int rc, i;
++	const struct smb_init_register *init_seq;
++	int seq_len, rc, i;
+ 
+-	for (i = 0; i < ARRAY_SIZE(smb_init_seq); i++) {
+-		dev_dbg(chip->dev, "%d: Writing 0x%02x to 0x%02x\n", i,
+-			smb_init_seq[i].val, smb_init_seq[i].addr);
+-		rc = regmap_update_bits(chip->regmap,
+-					chip->base + smb_init_seq[i].addr,
+-					smb_init_seq[i].mask,
+-					smb_init_seq[i].val);
++	rc = smblite_init_hw_specific(chip);
++	if (rc < 0)
++		return rc;
++
++	if (chip->type == SMBLITE) {
++		init_seq = smblite_init_seq;
++		seq_len  = ARRAY_SIZE(smblite_init_seq);
++	} else {
++		init_seq = smb_init_seq;
++		seq_len  = ARRAY_SIZE(smb_init_seq);
++	}
++
++	for (i = 0; i < seq_len; i++) {
++		/*
++		 * SMB2: addresses in smb_init_seq are relative offsets;
++		 *       prepend chip->base (read from DT "reg").
++		 * SMBLite: addresses in smblite_init_seq are already absolute.
++		 */
++		u32 addr = (chip->type == SMB2) ?
++				(chip->base + init_seq[i].addr) :
++				init_seq[i].addr;
++
++		dev_dbg(chip->dev, "%d: Writing 0x%02x to 0x%04x\n", i,
++			init_seq[i].val, addr);
++
++		rc = regmap_update_bits(chip->regmap, addr,
++					init_seq[i].mask,
++					init_seq[i].val);
+ 		if (rc < 0)
+ 			return dev_err_probe(chip->dev, rc,
+ 					     "%s: init command %d failed\n",
+ 					     __func__, i);
+ 	}
+ 
++	/*
++	 * SMBLite vendor bring-up register writes.
++	 * These are undocumented initialisation values derived from the
++	 * downstream qpnp-smblite driver.  They are SMBLITE-only.
++	 *
++	 * Float voltage is NOT written here: smb_probe() programs it from
++	 * the battery-info (or leaves the hardware default untouched if no
++	 * battery info is available), so an unconditional write here would
++	 * clobber that "preserve hardware setting" fallback.
++	 *
++	 * Charging is NOT enabled here either: smb_probe() enables it only
++	 * after the float voltage step above has run, matching the
++	 * downstream qpnp-smblite ordering (fv_votable before clearing
++	 * chg_disable_votable).
++	 *
++	 * IBAT_STATUS/VFLT_STATUS (chg_base + 0x0A/0x0B) are read-only
++	 * hardware status registers downstream -- there is nothing to
++	 * configure there, so they are not written.
++	 */
++	if (chip->type == SMBLITE) {
++		rc = smblite_config_fast_charge_safety_timer(chip);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++				"Couldn't config fast charge safety timer\n");
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_BATIF_BASE +
++					    SMBLITE_BATIF_BPD_CFG, 0x00,
++					    "battery-present detection");
++		if (rc < 0)
++			return rc;
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_CHGR_BASE +
++					    SMBLITE_CHGR_CHG_INHIBIT_CFG,
++					    0x00, "charge inhibit");
++		if (rc < 0)
++			return rc;
++
++		/* SOC-based recharge, matching SMBLITE_CHGR_RECHG_SOC_THD_CFG below */
++		rc = regmap_update_bits(chip->regmap,
++					 SMBLITE_CHGR_BASE + SMBLITE_CHGR_RECHG_CFG,
++					 SMBLITE_RECHG_MASK, SMBLITE_RECHG_MASK);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++				"Couldn't configure recharge strategy\n");
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_CHGR_BASE +
++					    SMBLITE_CHGR_RECHG_SOC_THD_CFG,
++					    0xFA, "SOC recharge threshold");
++		if (rc < 0)
++			return rc;
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_CHGR_BASE +
++					    SMBLITE_CHGR_CHG_TERM_CFG,
++					    0x80, "charge termination");
++		if (rc < 0)
++			return rc;
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_USBIN_BASE +
++					    SMBLITE_USB_APSD_EN, 0x10,
++					    "APSD enable");
++		if (rc < 0)
++			return rc;
++
++		rc = smblite_write_init_reg(chip,
++					    SMBLITE_USBIN_BASE +
++					    SMBLITE_USB_APSD_CFG, 0x00,
++					    "APSD configuration");
++		if (rc < 0)
++			return rc;
++	}
++
+ 	return 0;
+ }
+ 
+-static void smb_restore_charge_enable(void *data)
++static void smb_restore_charge_state(void *data)
+ {
+ 	struct smb_chip *chip = data;
++	u16 reg;
++	u8 charge_enable;
+ 	int rc;
+ 
+-	rc = regmap_update_bits(chip->regmap,
+-				chip->base + CHARGING_ENABLE_CMD,
++	if (chip->type == SMBLITE)
++		reg = SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD;
++	else
++		reg = chip->base + CHARGING_ENABLE_CMD;
++
++	/* Keep SMBLite charging disabled if probe fails partway through setup. */
++	charge_enable = chip->type == SMBLITE ? 0 : chip->initial_charge_enable;
++	rc = regmap_update_bits(chip->regmap, reg,
+ 				CHARGING_ENABLE_CMD_BIT,
+-				chip->initial_charge_enable);
++				charge_enable);
++	if (rc < 0)
++		dev_err(chip->dev, "Couldn't set probe-failure charging state: %d\n",
++			rc);
++}
++
++static void smb_disable_wdog_irq_wake(void *data)
++{
++	struct smb_chip *chip = data;
++	int rc;
++
++	rc = disable_irq_wake(chip->wdog_irq);
+ 	if (rc < 0)
+-		dev_err(chip->dev, "Couldn't restore charging state: %d\n", rc);
++		dev_err(chip->dev, "Couldn't disable watchdog IRQ wake: %d\n", rc);
+ }
+ 
+ static int smb_init_irq(struct smb_chip *chip, int *irq, const char *name,
+@@ -966,6 +1705,7 @@ static int smb_probe(struct platform_device *pdev)
+ 	unsigned int charge_enable;
+ 	unsigned int float_voltage_sel;
+ 	int float_voltage_uv;
++	const char *pmic_name;
+ 	int rc, irq;
+ 
+ 	chip = devm_kzalloc_obj(&pdev->dev, *chip);
+@@ -973,45 +1713,89 @@ static int smb_probe(struct platform_device *pdev)
+ 		return -ENOMEM;
+ 
+ 	chip->dev = &pdev->dev;
+-	chip->name = pdev->name;
++
++	pmic_name = device_get_match_data(&pdev->dev);
++	if (!pmic_name)
++		return -EINVAL;
++	chip->name = pmic_name;
++
++	if (strcmp(pmic_name, "pm4125") == 0) {
++		chip->type        = SMBLITE;
++		chip->icl_step_ua = SMBLITE_ICL_STEP_UA;
++		chip->icl_max_ua  = SMBLITE_ICL_MAX_UA;
++		/* Use the charger peripheral as the base for SMBLite accesses. */
++		chip->base = SMBLITE_CHGR_BASE;
++	} else {
++		/* SMB2: PMI8998, PM660 */
++		chip->type        = SMB2;
++		chip->icl_step_ua = CURRENT_SCALE_FACTOR;
++		chip->icl_max_ua  = 4800000;
++		rc = device_property_read_u32(chip->dev, "reg", &chip->base);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't read base address\n");
++	}
+ 
+ 	chip->regmap = dev_get_regmap(pdev->dev.parent, NULL);
+ 	if (!chip->regmap)
+ 		return dev_err_probe(chip->dev, -ENODEV,
+ 				     "failed to locate the regmap\n");
+ 
+-	rc = device_property_read_u32(chip->dev, "reg", &chip->base);
+-	if (rc < 0)
+-		return dev_err_probe(chip->dev, rc,
+-				     "Couldn't read base address\n");
+-
++	/*
++	 * IIO channels:
++	 *   usbin_v  -- voltage, supported by both SMB2 and SMBLite
++	 *   usbin_i  -- current, SMB2 only (not in downstream smblite)
++	 */
+ 	chip->usb_in_v_chan = devm_iio_channel_get(chip->dev, "usbin_v");
+ 	if (IS_ERR(chip->usb_in_v_chan))
+ 		return dev_err_probe(chip->dev, PTR_ERR(chip->usb_in_v_chan),
+ 				     "Couldn't get usbin_v IIO channel\n");
+ 
+-	chip->usb_in_i_chan = devm_iio_channel_get(chip->dev, "usbin_i");
+-	if (IS_ERR(chip->usb_in_i_chan)) {
+-		return dev_err_probe(chip->dev, PTR_ERR(chip->usb_in_i_chan),
+-				     "Couldn't get usbin_i IIO channel\n");
++	if (chip->type != SMBLITE) {
++		chip->usb_in_i_chan = devm_iio_channel_get(chip->dev, "usbin_i");
++		if (IS_ERR(chip->usb_in_i_chan))
++			return dev_err_probe(chip->dev,
++					     PTR_ERR(chip->usb_in_i_chan),
++					     "Couldn't get usbin_i IIO channel\n");
+ 	}
+ 
+-	rc = regmap_read(chip->regmap, chip->base + CHARGING_ENABLE_CMD,
+-			 &charge_enable);
++	if (chip->type == SMBLITE)
++		rc = regmap_read(chip->regmap,
++				 SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD,
++				 &charge_enable);
++	else
++		rc = regmap_read(chip->regmap, chip->base + CHARGING_ENABLE_CMD,
++				 &charge_enable);
+ 	if (rc < 0)
+ 		return dev_err_probe(chip->dev, rc,
+ 				     "Couldn't read charging state\n");
+ 
+ 	chip->initial_charge_enable = charge_enable & CHARGING_ENABLE_CMD_BIT;
+-	rc = devm_add_action_or_reset(chip->dev, smb_restore_charge_enable, chip);
++	rc = devm_add_action_or_reset(chip->dev, smb_restore_charge_state, chip);
+ 	if (rc)
+ 		return dev_err_probe(chip->dev, rc,
+ 				     "Couldn't register charging state rollback\n");
+ 
++	if (chip->type == SMBLITE) {
++		rc = regmap_update_bits(chip->regmap,
++					 SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD,
++					 SMBLITE_CHARGING_ENABLE_CMD_BIT, 0);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't disable charging for setup\n");
++	}
++
+ 	rc = smb_init_hw(chip);
+ 	if (rc < 0)
+ 		return rc;
+ 
++	if (chip->type == SMBLITE) {
++		rc = smblite_program_jeita_thresholds(chip);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't program JEITA thresholds\n");
++	}
++
+ 	supply_config.drv_data = chip;
+ 	supply_config.fwnode = dev_fwnode(&pdev->dev);
+ 
+@@ -1019,6 +1803,12 @@ static int smb_probe(struct platform_device *pdev)
+ 	if (!desc)
+ 		return -ENOMEM;
+ 	memcpy(desc, &smb_psy_desc, sizeof(smb_psy_desc));
++
++	if (chip->type == SMBLITE) {
++		desc->properties     = smblite_properties;
++		desc->num_properties = ARRAY_SIZE(smblite_properties);
++	}
++
+ 	desc->name =
+ 		devm_kasprintf(chip->dev, GFP_KERNEL, "%s-charger",
+ 			       (const char *)device_get_match_data(chip->dev));
+@@ -1032,9 +1822,18 @@ static int smb_probe(struct platform_device *pdev)
+ 				     "failed to register power supply\n");
+ 
+ 	rc = power_supply_get_battery_info(chip->chg_psy, &chip->batt_info);
+-	if (rc)
++	if (rc && (chip->type == SMB2 || rc != -ENOENT))
+ 		return dev_err_probe(chip->dev, rc,
+ 				     "Failed to get battery info\n");
++	if (!chip->batt_info) {
++		if (chip->type == SMB2)
++			return dev_err_probe(chip->dev, -ENODATA,
++					     "Failed to get battery info\n");
++
++		dev_warn(chip->dev,
++			 "No battery info, skipping float voltage configuration\n");
++		chip->batt_info = NULL;
++	}
+ 
+ 	rc = devm_delayed_work_autocancel(chip->dev, &chip->status_change_work,
+ 					  smb_status_change_work);
+@@ -1042,6 +1841,9 @@ static int smb_probe(struct platform_device *pdev)
+ 		return dev_err_probe(chip->dev, rc,
+ 				     "Failed to init status change work\n");
+ 
++	if (!chip->batt_info)
++		goto init_irqs;
++
+ 	if (power_supply_battery_info_has_prop(chip->batt_info,
+ 					       POWER_SUPPLY_PROP_CONSTANT_CHARGE_VOLTAGE_MAX)) {
+ 		float_voltage_uv =
+@@ -1050,27 +1852,67 @@ static int smb_probe(struct platform_device *pdev)
+ 					      POWER_SUPPLY_PROP_VOLTAGE_MAX_DESIGN)) {
+ 		float_voltage_uv = chip->batt_info->voltage_max_design_uv;
+ 	} else {
+-		dev_warn(chip->dev, "No battery float voltage; preserving hardware setting\n");
+-		goto skip_float_voltage;
++		dev_warn(chip->dev,
++			 "No battery float voltage; preserving hardware setting\n");
++		goto init_irqs;
++	}
++
++	if (chip->type == SMBLITE) {
++		if (float_voltage_uv < SMBLITE_FV_MIN_UV ||
++		    float_voltage_uv > SMBLITE_FV_MAX_UV)
++			return dev_err_probe(chip->dev, -EINVAL,
++					     "float voltage %d uV outside %d-%d uV\n",
++					     float_voltage_uv, SMBLITE_FV_MIN_UV,
++					     SMBLITE_FV_MAX_UV);
++
++		float_voltage_sel = (float_voltage_uv - SMBLITE_FV_MIN_UV) /
++				     SMBLITE_FV_STEP_UV;
++
++		rc = regmap_write(chip->regmap,
++				  SMBLITE_CHGR_BASE +
++				  SMBLITE_CHGR_FLOAT_VOLTAGE_CFG,
++				  float_voltage_sel);
++	} else {
++		if (float_voltage_uv < SMB2_FLOAT_VOLTAGE_MIN_UV ||
++		    float_voltage_uv > SMB2_FLOAT_VOLTAGE_MAX_UV)
++			return dev_err_probe(chip->dev, -EINVAL,
++					     "float voltage %d uV outside %d-%d uV\n",
++					     float_voltage_uv,
++					     SMB2_FLOAT_VOLTAGE_MIN_UV,
++					     SMB2_FLOAT_VOLTAGE_MAX_UV);
++
++		float_voltage_sel =
++			(float_voltage_uv - SMB2_FLOAT_VOLTAGE_MIN_UV) /
++			SMB2_FLOAT_VOLTAGE_STEP_UV;
++
++		rc = regmap_update_bits(chip->regmap,
++					chip->base + FLOAT_VOLTAGE_CFG,
++					FLOAT_VOLTAGE_SETTING_MASK,
++					float_voltage_sel);
+ 	}
+ 
+-	if (float_voltage_uv < SMB2_FLOAT_VOLTAGE_MIN_UV ||
+-	    float_voltage_uv > SMB2_FLOAT_VOLTAGE_MAX_UV)
+-		return dev_err_probe(chip->dev, -EINVAL,
+-				     "float voltage %d uV outside %d-%d uV\n",
+-				     float_voltage_uv,
+-				     SMB2_FLOAT_VOLTAGE_MIN_UV,
+-				     SMB2_FLOAT_VOLTAGE_MAX_UV);
+-
+-	float_voltage_sel =
+-		(float_voltage_uv - SMB2_FLOAT_VOLTAGE_MIN_UV) /
+-		SMB2_FLOAT_VOLTAGE_STEP_UV;
+-	rc = regmap_update_bits(chip->regmap, chip->base + FLOAT_VOLTAGE_CFG,
+-				FLOAT_VOLTAGE_SETTING_MASK, float_voltage_sel);
+ 	if (rc < 0)
+ 		return dev_err_probe(chip->dev, rc, "Couldn't set vbat max\n");
+ 
+-skip_float_voltage:
++init_irqs:
++
++	/*
++	 * SMBLite: enable charging only after the float voltage has been
++	 * configured (or deliberately left at its hardware default, above),
++	 * matching the downstream qpnp-smblite ordering of applying fv
++	 * before clearing chg_disable_votable. SMB2 keeps its pre-existing
++	 * behaviour of enabling charging as part of smb_init_seq.
++	 */
++	if (chip->type == SMBLITE) {
++		rc = regmap_update_bits(chip->regmap,
++					 SMBLITE_CHGR_BASE + SMBLITE_CHARGING_ENABLE_CMD,
++					 SMBLITE_CHARGING_ENABLE_CMD_BIT,
++					 SMBLITE_CHARGING_ENABLE_CMD_BIT);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't enable charging\n");
++	}
++
+ 	rc = smb_init_irq(chip, &irq, "bat-ov", smb_handle_batt_overvoltage);
+ 	if (rc < 0)
+ 		return rc;
+@@ -1084,7 +1926,8 @@ static int smb_probe(struct platform_device *pdev)
+ 			   smb_handle_usb_icl_change);
+ 	if (rc < 0)
+ 		return rc;
+-	rc = smb_init_irq(chip, &irq, "wdog-bark", smb_handle_wdog_bark);
++	rc = smb_init_irq(chip, &chip->wdog_irq, "wdog-bark",
++			  smb_handle_wdog_bark);
+ 	if (rc < 0)
+ 		return rc;
+ 
+@@ -1109,7 +1952,20 @@ static int smb_probe(struct platform_device *pdev)
+ 	if (rc < 0)
+ 		return dev_err_probe(chip->dev, rc, "Couldn't set wake irq\n");
+ 
+-	devm_remove_action(chip->dev, smb_restore_charge_enable, chip);
++	if (chip->type == SMBLITE) {
++		rc = enable_irq_wake(chip->wdog_irq);
++		if (rc < 0)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't enable watchdog IRQ wake\n");
++
++		rc = devm_add_action_or_reset(chip->dev,
++					      smb_disable_wdog_irq_wake, chip);
++		if (rc)
++			return dev_err_probe(chip->dev, rc,
++					     "Couldn't register watchdog IRQ wake cleanup\n");
++	}
++
++	devm_remove_action(chip->dev, smb_restore_charge_state, chip);
+ 
+ 	platform_set_drvdata(pdev, chip);
+ 
+@@ -1122,6 +1978,7 @@ static int smb_probe(struct platform_device *pdev)
+ static const struct of_device_id smb_match_id_table[] = {
+ 	{ .compatible = "qcom,pmi8998-charger", .data = "pmi8998" },
+ 	{ .compatible = "qcom,pm660-charger", .data = "pm660" },
++	{ .compatible = "qcom,pm4125-charger", .data = "pm4125" },
+ 	{ /* sentinal */ }
+ };
+ MODULE_DEVICE_TABLE(of, smb_match_id_table);
+@@ -1137,6 +1994,6 @@ static struct platform_driver qcom_spmi_smb = {
+ module_platform_driver(qcom_spmi_smb);
+ 
+ MODULE_AUTHOR("Casey Connolly <casey.connolly@linaro.org>");
+-MODULE_DESCRIPTION("Qualcomm SMB2 Charger Driver");
++MODULE_DESCRIPTION("Qualcomm SMB2/SMBLite charger driver");
+ MODULE_LICENSE("GPL");
+ MODULE_IMPORT_NS("IIO_CONSUMER");
 
- .../devicetree/bindings/mfd/qcom,spmi-pmic.yaml    |    1 +
- .../bindings/power/supply/qcom,pm4125-charger.yaml |  119 +++
- drivers/power/supply/qcom_smbx.c                   | 1081 ++++++++++++++++++--
- 3 files changed, 1089 insertions(+), 112 deletions(-)
----
-base-commit: 9437046953b2fb3bf55b36582450ea0267df82a7
-change-id: 20260827-smblite-charger-for-pm4125-d3168a705520
-
-Best regards,
 -- 
-Raj Aryan <raj.aryan@oss.qualcomm.com>
+2.34.1
 
