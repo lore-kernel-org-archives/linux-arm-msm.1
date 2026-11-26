@@ -1,57 +1,47 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795734851;
-	b=cuq/X8nDdGicmh6B1KaLkr26KGH++TKITrCid80RNjMANvDwrSQdlb8gfFs2wbl4vh8D
-	 9iuUKe0RJK0Kd6JfHGrd2wDG1SWk58ZARhQCopULXgyV2OGRLv71AQPwI1LcjZdZeKGU7
-	 DWgIt+ORLeNpDauWFwv3YKcdOUK+0E5u/6qD5ZbWmS7GZQGnoFU95Shb5zaCuACqrtUtB
-	 8BZF7d2mZn7OcwTX+dvIvKSHVFs/9yhPQbd4xQwKtFX/w4ad7HKipGqRc5LyKTG55somX
-	 fb67C70qQgLH7UmI05q3I8zw2BVNLRx8OpTCI3KQTV0+a9LN4czCjCtPlbKt050khZw==
+	t=1795735717;
+	b=YzLE4MI3afTut41+sY/8cqbhFLCeDELSyjtSvQqLzpcvC5GUGRKVxzepom7yMiRZX1GA
+	 bZbwbYQVMTEbvq/1X6LVtHV3RphAU+pTeR16s6mLDueu/ncxZLV3GyTYjXC5XIZl4Y2Wx
+	 ANj6AS4ZW48JGsi7Sfg9EWrbBFXAtcxYTPHGbeodbfs1hbih8mrqW2ytMFaZsmPthZKBT
+	 cY7sHM9BPF6Y+0FhZUdJileQG7w1CroTgYIod2iT5nYmBpvxNd3NRhA8ZDY8sBNJUD/Bc
+	 PdoJRC/yBP3S27GL0DUGf33/qzCYOB3R+8nfyO76MtDH2bm5jr2lI98Hyn3wZELIAWA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795734851;
-	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
-	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=2V0mx8KvDSloADKsFMwUZp/ao86S1YvoNPEoPKACjso=;
-	b=jqj1GCDP7USkw/iQUXLDvucQNmDCLQ9JZZwz+07eGIaHzUHFKGsvtiyOh3wQ3jQVeGAI
-	 j+iabNMyo9ej7iTJwynXejtvHJSkk1UJVNsBfkhzIiyItuMwHk+gVKh5PllyhhCk/I2og
-	 IJMPfmeYJghewGNibndAIbLgzEgZZJnX+6O5jo5fK98GK7gZHLPKmHkZgIX4G3rX7e+6T
-	 +6bqsKc/KmkWNpzjjdlnZBzaHW6vCJnR5gDfwHQQK7gCKBvbgsutRGaV4mSXGWja2hOdg
-	 aot3eFTvNpOwNXcXED3JM3ba46hXlyLl6z/FvLt6EIAU45asDbdzFvxHMNaRX9F8sjw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795735717;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=twJo0s/v3DoMCfRKsRe0tacmP7SwLMnarbIHRsOnhSk=;
+	b=NRYueYPWc3wtaGVe9/p7do/rDZqt6QsSm4877RRe/uRfGUFn0xJvizCtqU6rHzmiZseE
+	 krb9xRuf6jOLm/fpMsgCarCZMHbG8Riq7DWYfI5m73yJsyio4FYxXASr3rKPYAStYNtqx
+	 GPGrdP8u1aeor/H7ZLI8j+eS4A+AxtYQoGxGrY+itMWmRW3MNth/No2t81ayyidUrxERi
+	 sjXaa7z7TrOhB265mrA19FopO/vwIYMKjJKpsqhpAktN2xeH486/9k7RHPooJ8PrQXOU8
+	 E9QEbeyqkhsBMTQ6Kh3980kfz+epsvKuBxkQTKoWMpOnIsJ21vjiBEPk3STe3cSfo3A==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oCTLrGw1;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U7ZbglIA;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFEB8606A31C;
-	Thu, 26 Nov 2026 23:14:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F386606A31C;
+	Thu, 26 Nov 2026 23:28:36 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oCTLrGw1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19B3A1F00893;
-	Thu, 26 Nov 2026 23:14:09 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U7ZbglIA
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42ADD1F00896;
+	Thu, 26 Nov 2026 23:28:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795734851;
-	bh=2V0mx8KvDSloADKsFMwUZp/ao86S1YvoNPEoPKACjso=;
-	h=From:To:Cc:In-Reply-To:References:Subject:Date;
-	b=oCTLrGw1uj64SziI7K6oLwymGAPjp5MEqzlPsRxeedivzAL1Zk9amSoQ/mWGEu15A
-	 7P3sh2ri4/gxGCfPEum/uiOE7G7jT20bzxegU/SUSkwm1XcE7t9sGmyhAjPUkcGuqP
-	 30Lg7qlg1aWhCg2Xm6exSSvEaJ73enTX9KTlYXfnZTD+pkP8pFCofGyZSTUxVZlphU
-	 KZor9Wev08ly6FpYjXCiFZpzsv4jbydhnxFyhqZFS8bpJ9qqJJmuCzkV+Kplq5BbXj
-	 CAWQ7VUv7QhSePPitF0FglqicNTzxnwMPYTVw39yC3HrCIDFRXLx+fl6pBSVKPpdEi
-	 YuY4u5B1rh15g==
-From: Mark Brown <broonie@kernel.org>
-To: Srinivas Kandagatla <srini@kernel.org>, 
- Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
- Takashi Iwai <tiwai@suse.com>, Perry Dale <techluddite@outlook.com>
-Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
-References: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
-Subject: Re: [PATCH 0/2] ASoC: qcom: q6apm-dai: stop the playback queue
- from wedging the DSP
-Message-Id: <179572375936.838304.12750230700944585596.b4-ty@b4>
-Date: Thu, 26 Nov 2026 20:09:19 +0000
+	s=k20260515; t=1795735716;
+	bh=twJo0s/v3DoMCfRKsRe0tacmP7SwLMnarbIHRsOnhSk=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=U7ZbglIAgnBUb1FyCSiXFC/ZLo+9zT0z6Rt0oYfS0FYCrrx0KP156t2tkIKtHpWEK
+	 NIjkkPBlILs1Nl9hWUJhwXS9XzOswgun92FX6zjFxTqRFWBjTz1wBwkpuj+9Yd4/NL
+	 FEwBDtI/ozU6QXG/vlVTgWe5QS4KqFtNjat6LydP7Ju+Zby4sNb4c1uSTBR4yw7mFn
+	 +43A3SIRkTFFygfMy9H3nxOJaQ+Myf1ny6Ghm8lwp6tH66KnTXvBRwnLDLKp/s0Hxw
+	 OGCTZY3mbEpcjqoBer0xN88h7eBbyJ0Kt9StiYi/3OnCNnd697vLhQKdy3DhnWduPs
+	 yKWvN4Qt1gihg==
+Message-ID: <cf06a649-a5ef-45d3-a103-a71ba5e1d3d3@kernel.org>
+Date: Thu, 26 Nov 2026 23:28:33 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,55 +51,86 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.17-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1588; i=broonie@kernel.org;
- h=from:subject:message-id; bh=9xx5kMezR5vVzYWuK+csQ5UgfhjXK4Y0X0r9cyL6JHs=;
- b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI59jroXK6P3357/ux5xy/KXNeo4lHb6PKEuzVSxejss
- 3VRU4xPdZSyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAimtMYGVplb125u8lzl7qD
- 5OnX7wP9Kleorz/rHlNy5+2FyQ7c8k8Y/teKKSuURYrzuzPM7l15Vytt6QG9F+7nH95vb736VYj
- 9HwsA
-X-Developer-Key: i=broonie@kernel.org; a=openpgp;
- fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/7] media: qcom: camss: icp: Add HFI/ICP v4l m2m driver
+ for x1e80100 BPS/IPE
+To: =?UTF-8?Q?Ram=C3=B3n_Jes=C3=BAs_Miranda_Hern=C3=A1ndez?=
+ <ramonjesusmiranda@gmail.com>
+Cc: vladimir.zapolskiy@linaro.org, rfoss@kernel.org, todor.too@gmail.com,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
+References: <3_3nc2zwTAg_ilwaJQ7XHrQP0IbIlCBzBpK9k8iKBgiG8UyinhJKSas3kGkpfyPoaD7YrdqwgL1w06xY1yoa5g==@protonmail.internalid>
+ <CAP08=V0F+A9AP7ShGDXqgWgpX3EMi5sFeqPBEWK0WM1PQ4GN5w@mail.gmail.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <CAP08=V0F+A9AP7ShGDXqgWgpX3EMi5sFeqPBEWK0WM1PQ4GN5w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, 20 Nov 2026 11:47:23 -0800, Perry Dale wrote:
-> ASoC: qcom: q6apm-dai: stop the playback queue from wedging the DSP
+On 26/11/2026 22:58, Ramón Jesús Miranda Hernández wrote:
+> Not working yet: frames wider than one stripe (1920 gives a bus
+> write violation) and enabling demosaic (luma stalls).
 > 
-> On the AYN Odin 2 Portal (SM8550) the audio DSP stops answering GPR
-> commands when a game pauses its stream, and every later prepare times
-> out until a reboot. q6apm_dai_ack() queues one write per period of the
-> whole appl_ptr after a trigger stop has reset queue_ptr.
+> Not related to camera, but found on the way: qcom_scm_assign_mem()
+> accumulates the destination VMIDs in an int with BIT(), so *srcvm comes
+> back as 0 for any VMID >= 32.
 > 
-> [...]
+> I am happy to share the code or test patches on this machine if that
+> helps.
+> 
+> For transparency: the reverse engineering and the test code were done
+> with the help of an AI coding assistant (Claude). Everything above was
+> checked on the hardware.
+> 
+> Thanks for the RFC,
+> Ramón Jesús Miranda
 
-Applied to
+Great thanks for trying.
 
-   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
+We have an update pretty much ready to roll in the next few weeks please 
+hold tight.
 
-Thanks!
-
-[1/2] ASoC: qcom: q6apm-dai: queue playback buffers only while the graph runs
-      https://git.kernel.org/broonie/sound/c/a81d29df131f
-[2/2] ASoC: qcom: q6apm-dai: keep a playback stream running across a PCM reset
-      https://git.kernel.org/broonie/sound/c/164041af6ce0
-
-All being well this means that it will be integrated into the linux-next
-tree (usually sometime in the next 24 hours) and sent to Linus during
-the next merge window (or sooner if it is a bug fix), however if
-problems are discovered then the patch may be dropped or reverted.
-
-You may get further e-mails resulting from automated or manual testing
-and review of the tree, please engage with people reporting problems and
-send followup patches addressing any issues that are reported if needed.
-
-If any updates are required or you are submitting further changes they
-should be sent as incremental updates against current git, existing
-patches will not be replaced.
-
-Please add any relevant lists and maintainers to the CCs when replying
-to this mail.
-
-Thanks,
-Mark
-
+---
+bod
