@@ -1,56 +1,87 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795692049;
-	b=LUO/EE+AZZawFnFm5d9hXi/fSkoTGbVOdoufxDmUc6AWwpcueKtC79AeivDv3GczH6LH
-	 abbg1pp/Knyd8/l9vzOJqLLM84AvGPvlQu978Glk6qX3rFj/edspiG8S02egVDkDA6r8R
-	 MbwmjlfKW4iLFvp3SkR/aCHYo7HbAWLNAWxQ0p+syp88PIz6Ai8j3tQtymVjS+8ombvls
-	 y8TlY5ntJf6iO/AZbzmYam4pPDlPaP1mL9bAPsQHWhFe2VGfBqAp6NkzDlicWQLcXilYp
-	 74Bs2tEdVI4NYERToLQOk25aER9DMBBqh5SafLdL/niA0D8VtbdPdsMZLR1Z1qoJ2hA==
+	t=1795692204;
+	b=0vOuDtC4ECiLHkQVDNDCVoP01HTty2rWSXqTfudEkQ5LrVtEI1lYAG5t+jBtzvNzTL8V
+	 cejdL5m309ftdvS6LOz2HAxvFDzuruSl4ZBgrGScw6CO1S/jLxIAxn3Jr8wu4PKZMi58X
+	 hGDpIk1AzIAutKCIHfMTuCXPsDKfyT2LHygNqH1x0n612ocISUUlewku7nK0A5y5wHlMV
+	 Ku6CGsYzjmzLI1SGehc/2dn7kRSW7vh3dFXpcZUY8FEneZNsKMsU/wC/jhL/UDESol4JZ
+	 XpZXzCf4T2W4BnTEnGdsLpn1/4/VtDuGOwkqLd7cotSpq/deFX1tUkCpyHxwSjdUMPw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795692049;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
+	a=rsa-sha256; c=relaxed/relaxed; t=1795692204;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
 	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=Y66QBO6DbAP5uXeJh0gRndKoLqNI4TvaNfyMDZHOY+I=;
-	b=DRrvRDr253pOsBrPqxTAmBvgr6CBa8z3xxk9iGqxv72hnI6wHaleh559KX29HH2ra5AA
-	 SSB4TUG6MuZy4YLd3bb/RPC36PauGbT6zANyeBu3N0YCkyIUCSLxzVPk/MR43iT6GcZLF
-	 dXgoG7nlLwcnYp9eSiwGGirsw9MT9q+yO1tLg9BlS6JvKwpr2+JlNAJjCn+rjdf0Sq4+z
-	 /iXnBRdfxAaHCthFpsTMw1+hnsKVEKzdfubTHz6XxU5wPKtWeKRqb++u5lcOLh5Taiyx1
-	 /wNwFl7YAGmdnzLkVmL8sp+gFyJnlyFPfwiImrArQQijsG0KXDdOic0VLxWZwY1cT2g==
+	bh=nkVHTBWGRkEmPj0y0p+bGJ739Ifet0BlvM+VCtljhP0=;
+	b=sCMXbyMWkpv3oM8QTw1wxXI3ZhvmQjvA4Sys65AEdIC5wRvYU3U3hMxBQZWhUrOjxMmH
+	 KYtRTx+gXrEBIRfVPP6lI0F5YD9nTLyVJF9WtDKSgRXh38LL8sK8VXtzTqCYaSHkc6Ol/
+	 dXNb/V60tQoyTYtClv8TtpFavaofVT6d5LRmxuFpvKaVtfKsOTpbcbMSWZdj6hKr/dtbn
+	 mUTofmdC4l5Xhb6xM1tGozhk6CLhyNJ/o59+c8+3BCYEIYlxVcDtfQY02pLWX5sRyzxmo
+	 tSnTOhyeT3jF+G3Ex3n+Mn64N/NL0mt50/oyZX1HMBojKYNHGce9PSanmeEE0rAK+xg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=VzluMsJ7;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=linaro.org;
+	spf=pass smtp.mailfrom=linaro.org;
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lrYSgtMC;
+	arc=none smtp.remote-ip=209.85.167.47
+Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9BB14606A33C;
-	Thu, 26 Nov 2026 11:20:48 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9BB14606A33C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EDB7606A6B7
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:23:23 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9EDB7606A6B7
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=VzluMsJ7
-Received: from [IPV6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e] (unknown [IPv6:2a02:830a:f787:8f00:d622:eaa3:3dd6:8f5e])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id E35B653401ED;
-	Thu, 26 Nov 2026 12:20:45 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1795692046;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=Y66QBO6DbAP5uXeJh0gRndKoLqNI4TvaNfyMDZHOY+I=;
-	b=VzluMsJ7QXuJIey/L4mBnFkAIQ7Xs9LyGKdFZhmq7wa4HzvV6iHqcXpmOimgciyTY02+Up
-	vAYjiVaZ4KUQ64e2nFQor9FeR4aaoSd1GSwJTbQuyqgDuME5ElypNOVbIf+wSh3fapAMzd
-	nETHfzweZ/kxei6AKHDuaF7XGEfZoEw=
-Message-ID: <e7bd7f8d-e59b-41c2-a560-bbb06f93acd9@ixit.cz>
-Date: Thu, 26 Nov 2026 12:20:45 +0100
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=lrYSgtMC
+Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5c0ace36e8eso651194e87.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 03:23:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1795692202; x=1796297002; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=nkVHTBWGRkEmPj0y0p+bGJ739Ifet0BlvM+VCtljhP0=;
+        b=lrYSgtMCrESJBFokuoEjstgT0mV42/g7ywFU2W8mYFTCtK2+ri2Nw5YeyTEfXxzUFz
+         uxh78hcP/h6G4FxUzs1L+xG13Y9Eh+8HlWzvc3xanKDMUDfHCsDomSD2R6kBBvormnkv
+         pqeUyY0AL39Cw22AksXMAPwAes7vNWB7hxEE+AhrCG+XGTCeMIelkoBRi5bQAQvVoHrZ
+         m3T9I3UtIN3KbkNwKlU6p5cMNZ4lqAACgJMl1jeAxQX9yJrYZdktam9OXCguCvZzyQaH
+         NBjRs06aWGpKVKlSlGRTAhqk3AvKukeUxZ9JvsJzNrYJEKL9LlS/FW8I2HiiUP4KO2bh
+         tCoA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795692202; x=1796297002;
+        h=content-transfer-encoding:content-type:in-reply-to:from:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=nkVHTBWGRkEmPj0y0p+bGJ739Ifet0BlvM+VCtljhP0=;
+        b=UsMfbABn+bqfdcFDW15PJeNfqMV6gf7iKPnQKyB0BOAkzUvGEqMOacesGITltAiLci
+         BxNir3wjbUBurCedoYKeJmh9HPOwEWe9j0GwrRWTZ3uxFtvJZVKbHvW5j7ifq4EfQrFi
+         hC9PwlbTUGRwpYErHXP7PDKQU+D3PlTlpcRma422nznBjp6icQi7gPejTlaWELA7DxLZ
+         Q9BIuQYuqAN8s9e/g1MslJJa0xPvg9Cr4faeq3LlO5wen50QZw2kQFPtouUzhE+jyMTR
+         HlhysvZ31EjUb0JQpTks8JR98pUquZmHZiPIBhjx2dB1dUwEYfEykoHLIl/HOKiGWGIG
+         uV1w==
+X-Forwarded-Encrypted: i=1; AL+hErHzDv9kJI7CFuJge7IbN3DWq6Q2vrMcU2waviFv7sNd2jQji8CUVaqT/5Pr+2NLp0OR6aLsB2vIsNmGpe2k@vger.kernel.org
+X-Gm-Message-State: APuU4Z9S7cuLI0OZgqCKOXc0ASOkjVTAoWoNovEay0lQF/VKH1GgKcUp
+	VerKaJvU0/9HMqD9q81vh8tGBf5NQlVPwfeNTYAi0zlyMjcNQTbX0TRvXDW1s2vI9+o=
+X-Gm-Gg: AZFdTZdPPNvlEpnniXRXyMWFOJ6u8UN4SLEpvgMsPMfodLxkYQ5zcz6kutMkwGOFJEV
+	J5Ze+Xy3pLr7Y8bLubjMeCAzEhNIsEr7C6Rhucb+DNMRTgf/xXMzysuHXLI/5sLbMrx07PyXnWk
+	M/9e6aOHqFy14T/Il1NeJuX4EAkigs8TJUX+ammu4Fs8fuAmLunY5fXDBkMLznLVxz4awCmZxK6
+	EX2KRhBTiNyB00QSZek9j7z9wgFsc+m38wAl1E9ghy3G8FBf7aAVOaS/phKvMaS/k3A05TARwZP
+	4i2WZfHjNl11Yb+jq5gRcjJJALbRfNTFqJFfAbjbYYxFCjEJoSc1BU7RELM1W13opuh3p7+FWmg
+	1NxS37KZmSI3kv89Gsm3o7so4s5YNnE9kwcmyZOY4Uc4MUXd7gK0nqwDp1Fw71PtI5lra4EnJz7
+	eMS0Nwoc7wJqZgaAuIxCVVO2cmAPM/FwhPyrapl67jZ0R38usCeJkb+1oNAjsXpTF0SwXF43K4C
+	qDgCfFIHZF3WfYiGpRokkK+I0seUrWsv9FkbZDKX41o9PIgVUISl6CnOVTbh5JtZzIIH7cYLAp7
+	y4rrDdxfxoqPodkLcPvjTEQeQMzeSX9KE+QR3sOCabRs+cCTA3fl/eYmSA4+LYG/IG3ggy6I++q
+	9dnjkRcM=
+X-Received: by 2002:a05:6512:6313:b0:5c1:ac32:9904 with SMTP id 2adb3069b0e04-5c1bc80e619mr6458406e87.3.1795692201670;
+        Thu, 26 Nov 2026 03:23:21 -0800 (PST)
+Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bd077b37sm5089736e87.74.2026.11.26.03.23.21
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 26 Nov 2026 03:23:21 -0800 (PST)
+Message-ID: <8a34e083-f364-4eee-9a46-9533647f323a@linaro.org>
+Date: Thu, 26 Nov 2026 13:23:20 +0200
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -61,98 +92,133 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/9] drm/panel: s6e3ha8: Correct the polarity logic
- within
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Dzmitry Sankouski <dsankouski@gmail.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Jessica Zhang <jesszhan0024@gmail.com>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, Thomas Zimmermann <tzimmermann@suse.de>,
- Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>,
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Marco Mattiolo <marco.mattiolo@hotmail.it>,
- Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
- <20261125-crosshatch-panel-v4-5-120adc58e737@ixit.cz>
- <c1ec2f35-955f-4131-85f4-bae78d016c98@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <c1ec2f35-955f-4131-85f4-bae78d016c98@oss.qualcomm.com>
+Subject: Re: [PATCH 1/6] dt-bindings: media: qcom,sm8650-camss: Add test
+ pattern generators
+To: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>, Rob Herring <robh@kernel.org>,
+ Krzysztof Kozlowski <krzk+dt@kernel.org>,
+ Bjorn Andersson <andersson@kernel.org>,
+ Konrad Dybcio <konradybcio@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+ linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+ devicetree@vger.kernel.org
+References: <20261031112203.545319-1-vladimir.zapolskiy@linaro.org>
+ <20261031112203.545319-2-vladimir.zapolskiy@linaro.org>
+ <CAFEp6-0Ykn4VNMMAa-WzCDcJ9=Z0x9Vd5e7z8FSNf72gGL7c2Q@mail.gmail.com>
+From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+In-Reply-To: <CAFEp6-0Ykn4VNMMAa-WzCDcJ9=Z0x9Vd5e7z8FSNf72gGL7c2Q@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 26/11/2026 09:31, Konrad Dybcio wrote:
-> On 11/25/26 7:12 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
+Hi Loic.
+
+On 11/26/26 12:52, Loic Poulain wrote:
+> On Sat, Oct 31, 2026 at 12:22 PM Vladimir Zapolskiy
+> <vladimir.zapolskiy@linaro.org> wrote:
 >>
->> The reset was introduced with wrong polarity. Correct for the future
->> compatibles and keep current with reverted logic.
+>> Qualcomm SM8650 CAMSS contains three test pattern generator (TPG) blocks.
+>> Describe their register spaces and the non-real time CAMNOC AXI clock,
+>> which is required to get TPG output frames passed to VFE.
+> 
+> Do you know why TPG support requires the non-RT CAMNOC AXI clock? Does
+> the TPG perform any memory accesses?
+
+No, I don't know the details, here it is a simple experimental evidence,
+basically TPG works with this clock enabled and does not work without it.
+
+I believe the NRT clock is "cheaper" and good enough for TPG usecase, and
+to some extent it is a buffer data copying from some (static?) memory page
+sitting inside a TPG IP block, while dealing with PHYs requires more
+expensive RT clock.
+
 >>
->> Old DTs keep GPIO_ACTIVE_HIGH and are fixed up via
->> gpiod_toggle_active_low() on the deprecated compatible.
-> 
-> 738455858a2d ("ASoC: codecs: wsa881x: Use proper shutdown GPIO polarity")
-> 
-> made it work with one compatible
+>> Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+>> ---
+>>   .../bindings/media/qcom,sm8650-camss.yaml     | 24 ++++++++++++++-----
+>>   1 file changed, 18 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml b/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+>> index 9c8de722601e..50ae30cdcb82 100644
+>> --- a/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+>> +++ b/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+>> @@ -17,7 +17,7 @@ properties:
+>>       const: qcom,sm8650-camss
+>>
+>>     reg:
+>> -    maxItems: 17
+>> +    maxItems: 20
+>>
+>>     reg-names:
+>>       items:
+>> @@ -38,9 +38,12 @@ properties:
+>>         - const: vfe2
+>>         - const: vfe_lite0
+>>         - const: vfe_lite1
+>> +      - const: tpg0
+>> +      - const: tpg1
+>> +      - const: tpg2
+>>
+>>     clocks:
+>> -    maxItems: 33
+>> +    maxItems: 34
+>>
+>>     clock-names:
+>>       items:
+>> @@ -77,6 +80,7 @@ properties:
+>>         - const: vfe_lite_ahb
+>>         - const: vfe_lite_cphy_rx
+>>         - const: vfe_lite_csid
+>> +      - const: camnoc_nrt_axi
+>>
+>>     interrupts:
+>>       maxItems: 16
+>> @@ -226,7 +230,10 @@ examples:
+>>                     <0 0x0ac71000 0 0xf000>,
+>>                     <0 0x0ac80000 0 0xf000>,
+>>                     <0 0x0accc000 0 0x2000>,
+>> -                  <0 0x0acd1000 0 0x2000>;
+>> +                  <0 0x0acd1000 0 0x2000>,
+>> +                  <0 0x0acf6000 0 0x400>,
+>> +                  <0 0x0acf7000 0 0x400>,
+>> +                  <0 0x0acf8000 0 0x400>;
+>>               reg-names = "csid_wrapper",
+>>                           "csid0",
+>>                           "csid1",
+>> @@ -243,7 +250,10 @@ examples:
+>>                           "vfe1",
+>>                           "vfe2",
+>>                           "vfe_lite0",
+>> -                        "vfe_lite1";
+>> +                        "vfe_lite1",
+>> +                        "tpg0",
+>> +                        "tpg1",
+>> +                        "tpg2";
+>>               clocks = <&camcc CAM_CC_CAMNOC_AXI_RT_CLK>,
+>>                        <&camcc CAM_CC_CPAS_AHB_CLK>,
+>>                        <&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
+>> @@ -276,7 +286,8 @@ examples:
+>>                        <&camcc CAM_CC_IFE_LITE_CLK>,
+>>                        <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
+>>                        <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
+>> -                     <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
+>> +                     <&camcc CAM_CC_IFE_LITE_CSID_CLK>,
+>> +                     <&camcc CAM_CC_CAMNOC_AXI_NRT_CLK>;
+>>               clock-names = "camnoc_axi",
+>>                             "cpas_ahb",
+>>                             "cpas_fast_ahb",
+>> @@ -309,7 +320,8 @@ examples:
+>>                             "vfe_lite",
+>>                             "vfe_lite_ahb",
+>>                             "vfe_lite_cphy_rx",
+>> -                          "vfe_lite_csid";
+>> +                          "vfe_lite_csid",
+>> +                          "camnoc_nrt_axi";
+>>               interrupts = <GIC_SPI 601 IRQ_TYPE_EDGE_RISING>,
+>>                            <GIC_SPI 603 IRQ_TYPE_EDGE_RISING>,
+>>                            <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
 
-In my opinion, that looks relatively complex and here we have a bit different 
-situation than with speaker amplifier likely used in huge number of 
-device-trees, where here we have panel, currently used within one device (market 
-limited, personally I'm not aware of more than one user).
-
-This will also allow us easily, in few years,  drop the legacy compatible in 
-contrary to introducing variable into reset sequence.
-
-David
-
-> 
-> Konrad
-
+-- 
+Best wishes,
+Vladimir
