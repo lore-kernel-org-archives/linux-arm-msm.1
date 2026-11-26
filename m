@@ -1,44 +1,44 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795712748;
-	b=royi53xdYdxYw5vsJwnAAgIXFlhn9bYxCinT6ad6ouuZMccbSrxI26e1uYvIaOKU+quQ
-	 UJ8Oj0JuIa9HpX1N0ebB6Uu+xkF+s2oQtDG24Fh2o37x9ITkla4v3pO9JSaLR6FuAFlIB
-	 Y98PIigPtHWBwle24MU/Xia7f22EJ0d3hNjQGfc7eznSmtWxHLThgmVQlVqDCIRG4FtbK
-	 /XkGiYRYy9awsII7yXF5/lQi94RqSHTfYxoM1UyICTzv/RkcLfuCpvTOeCLFWJv6T69Ma
-	 fjMYRgmn9k+73T2mvHTd5PYLRWLVlnT1a3DPEsnpTF9NHFX4XNvjISIkS3jm9yXfZKg==
+	t=1795712751;
+	b=0TDq9rEYN7ZWY6EQbc8QMpKhi4vaPg04QiGDP9oCYMZIdH5rNmLxWXTovGFdjEwG8Vg4
+	 CtDfTJd3qZZazZUO8nVQBR7JbTLl4G4BPb5WhjAGypbfDHx1gemFjC1srtTkEEs6uIWU9
+	 LtvPoAHNoRhpEFwunydPl5Tfh6iQLoFfwajmKM2jeH055cPrlc4H1PHcM0o6JtvrLAiU2
+	 hvBEoZCAVOQTQWZfg/V7oqJT+eJtUoGQU2Thg1f5WRl90sNpg0SPF9VbxgwRvGmhp7g/S
+	 ywPKdewidzyHReayhlSSYT42tUAogCt5VTUkhT5lc3ML+iJ+oDPLysGqxMp28q1lNtg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795712748;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795712751;
 	h=Received:DKIM-Signature:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
 	 In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
-	bh=Y31QOYSjkwVXeBu0iykFUqlYudJkbfULT7s0fbEPojA=;
-	b=0WSx55zxVM5Ca+HChrKFSLdVVFgSE6m0NemRW+D/rBGz4zOlHy/+uULBEcik0/0zxOHu
-	 JxF++bAs/ci04u7MbdeZWEkN8H+Hz4tVOdS/ANtEAn5ZRelgcFwSZry73VTpIkkomuNW7
-	 huet+DRj+tUH9dNCDURihIsvg6yRUT9OgH8Vu50jon+4ApA07mGLr2Whl5+KjXL/i7AG6
-	 b4FJ8lgNanCy7Qa2cTLcy+kPhO38x0bO93SlyYhdG7MEKTR6/VHGP1e5xE4ZKzoECmDYI
-	 UYUQ5yS+h+/oG5WxULrnjgfP3IhltNgcMTXedJ2p13L3/pkuO46FCjq7W4u1XmwJi+w==
+	bh=yg65JGwcrMTp4Xs9zqZhDkeQCmvP3MpmYYEyFpYrG2k=;
+	b=qeDM/9R2nqreJLCTazVmuPRudbeKXjVTas+/J5ulwayWTjXmhbW1zZKd6/YMUijUsjjU
+	 WpoSGjgWyi0sovidTd+GVsNmaQH/ETRfF7RaCbF0rmkVgqbC0og0bts4qRvxHQ9tD3vFs
+	 57fAqXqqvlk32NNNElKehie9AU70V4NCzKxxfXKIyAm0ANMxH2RtBgJGeA3oZvBLKh47Z
+	 yrlvG6XAKpMV3S6RQ88O4ZaDtGlDXND3r58V4zOl5FcbxHbvxUtrwWZq+DfebzOWnnIUL
+	 1rA2rJHHbQSxEbY5S9uf2rubFDqZaGFU2I1yqAPX/usFP2Ew8qqPloR9lRypuyweDHQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hjeLRLMx;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JHuJDZsp;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8F9EB606A31C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:05:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2BC4606A31C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:05:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hjeLRLMx
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4BAD11F000C0;
-	Thu, 26 Nov 2026 17:05:45 +0000 (UTC)
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=JHuJDZsp
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A9BAD1F000CF;
+	Thu, 26 Nov 2026 17:05:48 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795712748;
-	bh=Y31QOYSjkwVXeBu0iykFUqlYudJkbfULT7s0fbEPojA=;
+	s=k20260515; t=1795712751;
+	bh=yg65JGwcrMTp4Xs9zqZhDkeQCmvP3MpmYYEyFpYrG2k=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References;
-	b=hjeLRLMxMEktFiDP0dwsbcP+t1Y3tGxZqF+LpOUuWFfEjXLNDPQ5ZJfILcMXxhRZ1
-	 BPvNkmWPkShynD+gUf1zq48DVn0UbUzgOCP0kKWTkdbTQkq4mt8DBy1dif+WQyt3+E
-	 o2Or+0/M7X4eAhGhtZz7DPtIeNthHz2aVaydwa9lRWjtmtEeWQalFucaD+aCdOZNi7
-	 8HgWVKXxEozd8azH9MFpm7O4vhzP5jj/B0UyAG/9Xkqyfq4D3sxJMd4JT4XJw9UKW/
-	 62Gr4IRlqlANunAzEyxxjkEGPXYckHgiZnzd9P2DaaQ2B7Of3NlBQP+xk8qemUOxmV
-	 ER3rcnEXyG01A==
+	b=JHuJDZsp/nrZlLIhLJ1ChA20B2YYW968lb/mW+tT69g5fQTAfE287+Qa8qHJcr/gQ
+	 jwKwbHIZ7TvWfaCgPL6PjmGiOd41mUL29ofABH0BvUb2HtyRzPjsAd3bt5Hyo4dsM9
+	 5Bt+ukKOkoIbjVfSt6rGMq6/IsJW8ice9t1GYrKtMa122yKvGogFq61KF6EFtxdRMu
+	 U3BFZrTSnH25rRjWekcKrhT4/E8Iau8SyaJ4W1dqcBKPHzsb0OqUuGYSOuspRcoeTh
+	 eBTDU0feJliNAUuK41mT05Sivpfz0nxDcyVLCCWNumUBit1p3gWaeXwCAdOLKgjzO8
+	 GKqohEcJLruDw==
 From: Vladimir Zapolskiy <vz@kernel.org>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
@@ -52,9 +52,9 @@ Cc: Abhinav Kumar <abhinav.kumar@linux.dev>,
 	linux-arm-msm@vger.kernel.org,
 	dri-devel@lists.freedesktop.org,
 	freedreno@lists.freedesktop.org
-Subject: [PATCH 1/2] drm/msm: fbdev: Unpin the framebuffer buffer object on destroy
-Date: Thu, 26 Nov 2026 19:05:34 +0200
-Message-ID: <20261126170535.361985-2-vz@kernel.org>
+Subject: [PATCH 2/2] drm/msm: fbdev: Add the missing VMA reference of the framebuffer
+Date: Thu, 26 Nov 2026 19:05:35 +0200
+Message-ID: <20261126170535.361985-3-vz@kernel.org>
 X-Mailer: git-send-email 2.51.0
 In-Reply-To: <20261126170535.361985-1-vz@kernel.org>
 References: <20261126170535.361985-1-vz@kernel.org>
@@ -69,58 +69,63 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The fbdev emulation pins the framebuffer buffer object in the KMS
-address space and maps it on probe, however on fbdev destruction only
-the mapping is released, and the buffer object is freed while still
-pinned. For instance on removal of a DSI panel driver module, which
-unbinds the MSM DRM driver, the next warning message is displayed:
+A VMA reference of the framebuffer buffer object is dropped on the probe
+error path, like msm_framebuffer_cleanup() does, but the reference is
+never taken, and the VMA reference count underflows on the following
+deletion of the temporary GEM handle.
 
-  msm_obj->pin_count
-  WARNING: drivers/gpu/drm/msm/msm_gem.c:173 at update_lru_locked+0x90/0x98
-  Call trace:
-   update_lru_locked+0x90/0x98 (P)
-   put_pages+0x8c/0x104
-   msm_gem_free_object+0x1bc/0x244
-   drm_gem_object_free+0x1c/0x30
-   drm_client_buffer_delete+0xd4/0xf8
-   msm_fbdev_fb_destroy+0x54/0x6c
-   put_fb_info+0x48/0x84
-   unregister_framebuffer+0x88/0xf8
-   drm_fb_helper_unregister_info+0x14/0x20
-   drm_fbdev_client_unregister+0x18/0x34
-   drm_client_dev_unregister+0x80/0xfc
-   drm_dev_unregister+0x24/0x98
-   msm_drm_uninit.isra.0+0x8c/0xcc
+The missing reference also affects a successful probe: the KMS VMA is
+torn down, when the VMA reference count drops to zero, which happens on
+deletion of the temporary GEM handle at the end of the probe. Then
+fbi->fix.smem_start points to an unmapped address, and on fbdev
+destruction msm_gem_unpin_iova() finds no VMA and does not drop the pin,
+unless the framebuffer is prepared for scanout at that time.
 
-Unpin the buffer object on fbdev destruction in the same way as it is
-done on the error path of the fbdev probe.
+Take a VMA reference before pinning the framebuffer on probe, like
+msm_framebuffer_prepare() does, and drop it after unpinning on fbdev
+destruction.
 
-Fixes: 940b869c2f2f ("drm/msm: Implement fbdev emulation as in-kernel client")
+Fixes: eb714953c441 ("drm/msm: fbdev: Use a DRM client buffer")
 Signed-off-by: Vladimir Zapolskiy <vz@kernel.org>
 ---
- drivers/gpu/drm/msm/msm_fbdev.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/gpu/drm/msm/msm_fbdev.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/msm_fbdev.c b/drivers/gpu/drm/msm/msm_fbdev.c
-index f37cc3f97a21..25e55b5c5ecc 100644
+index 25e55b5c5ecc..b5ced6ede19f 100644
 --- a/drivers/gpu/drm/msm/msm_fbdev.c
 +++ b/drivers/gpu/drm/msm/msm_fbdev.c
-@@ -41,6 +41,7 @@ static int msm_fbdev_mmap(struct fb_info *info, struct vm_area_struct *vma)
- static void msm_fbdev_fb_destroy(struct fb_info *info)
- {
- 	struct drm_fb_helper *helper = (struct drm_fb_helper *)info->par;
-+	struct msm_drm_private *priv = helper->dev->dev_private;
- 	struct drm_gem_object *bo = msm_framebuffer_bo(helper->fb, 0);
- 
- 	DBG();
-@@ -48,6 +49,7 @@ static void msm_fbdev_fb_destroy(struct fb_info *info)
- 	drm_fb_helper_fini(helper);
+@@ -50,6 +50,7 @@ static void msm_fbdev_fb_destroy(struct fb_info *info)
  
  	msm_gem_put_vaddr(bo);
-+	msm_gem_unpin_iova(bo, priv->kms->vm);
+ 	msm_gem_unpin_iova(bo, priv->kms->vm);
++	msm_gem_vma_put(bo);
  
  	drm_client_buffer_delete(helper->buffer);
  	drm_client_release(&helper->client);
+@@ -144,10 +145,11 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
+ 	 * in panic (ie. lock-safe, etc) we could avoid pinning the
+ 	 * buffer now:
+ 	 */
++	msm_gem_vma_get(bo);
+ 	ret = msm_gem_get_and_pin_iova(bo, priv->kms->vm, &paddr);
+ 	if (ret) {
+ 		drm_err(dev, "failed to get buffer obj iova: %d\n", ret);
+-		goto err_drm_client_buffer_delete;
++		goto err_msm_gem_vma_put;
+ 	}
+ 
+ 	DBG("fbi=%p, dev=%p", fbi, dev);
+@@ -183,8 +185,8 @@ int msm_fbdev_driver_fbdev_probe(struct drm_fb_helper *helper,
+ 
+ err_msm_gem_unpin:
+ 	msm_gem_unpin_iova(bo, priv->kms->vm);
++err_msm_gem_vma_put:
+ 	msm_gem_vma_put(bo);
+-err_drm_client_buffer_delete:
+ 	drm_client_buffer_delete(buffer);
+ err_drm_gem_handle_delete:
+ 	drm_gem_handle_delete(file, handle);
 -- 
 2.51.0
 
