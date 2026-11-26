@@ -1,73 +1,120 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795681963;
-	b=voVrcnvkDccgFfZ8v+o9/e7D0/GdEF2GbcG8aHeI9KL+d5zI/zmaLs9StzuvuyMw3JgU
-	 XrG2rFENVWKhzhf7UtU8X/e0dnqMLGud6/9vFavj9Mxdt+HsEWIv5Yt7eZY+cQpOGHwXJ
-	 RsyNmoZQ9g9pRn7qV+1SsltTudTQzaUgayrdBOUiDfEIbZuljlldpacVtcBe7Xzl+8GB7
-	 OOBkldJkJR84k62HTtq/RXeN1dZl30UznqMIIO1tgej2lKjSZVRkgvInqsaAbkxzopDhw
-	 UEEO57Z+c05wpcqYbCaxn7/XcsAYPBzESlSVc00JfweciMFKJfK7F8IUiI0Nu3fXxpg==
+	t=1795682282;
+	b=2ik4mqM4l8Mu63IouK1GUTE46NM4tc4sFeLnITf5kofTXJmy5F4hDFPJljUWAlgHXYH1
+	 iYhSoBh+dDmsd4Egjr7ZmnsGosx6TYdlyVOln9Rv6y9uTu9voOmp+d+aemoIoeDD7paGt
+	 qCdP1ghU+V/eeJqaZzN1lq9sU90SNTEu3jS+UVyVGb0t9J0+BvBFNSqAWToENHA5TUw9N
+	 MMP7EWpicoM8dfys9QsWYzDAFIaII2sCInEmA71mu9giUhKukDQW35J2Dqq6FXyjDHflR
+	 SPkvXarJsHQbJm+tElrOT0iE2Q/gxGH7PtHy/DToRflbb4aSWqnkNKtV5EW+eniqG/w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795681963;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:Received:
-	 Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
-	 X-Mailer:X-Developer-Signature:X-Developer-Key:X-Proofpoint-Reinject:
-	 X-QCInternal:X-QCInternal:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=gT1L25J6GLalX/fFkvbStga+dcZTwKzwJIB43V6oOxU=;
-	b=vXdTjcMVhpG8GuYNIj6f7/y0d889idEu3NuFen7+2voLDo2C7b8NfJP7JzHCP4pPBnmx
-	 gCQGZmBWR8V7gsocuIIR+qFdMh2g4+WjVQoAiFV4L4gtDFJTpriE/cy0v/ZqIvmV3xWFN
-	 YsOLhuunfTS3LsxdK4UWSqlgJZO6YUDD7u/gxHk1bJicoEYzsTEe5RTYHWzVuviimbbHo
-	 1/xSra/BwOvV50yw86l7LlEeR9RuDGWo1yFsDJW2KvPXoTZIjGfzcvs35lBwqeKsMwIqO
-	 /qAad3N6rtxWo3NVQ1gFraAd+haGuak72ECARJPmMK15PlvPVB672hJJVeBhGLbpZzA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795682282;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Authority-Analysis:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=WQPx9qKiYiOC+Qu5wRqDaiDPoYwCF37v4r4ojrWgYNg=;
+	b=knEJ7khcwQkKc+mm57Gq17cx1QRP3IZIQeR8SfM08tbGtCU1csyu+5NB0fnFngCR14uq
+	 WIyH2TvziCu8d5XteQ6LQtCipdHSaowtv0o5cp4Obfd8vsV2O9ub1O299IxVH7dY1Gj9x
+	 EzEsI8l4Uy9C+tJEPUTKvEILNeWkaHzu3qDs/9TBbHc4yJ9+UULngzBmQTcNqV3enm1eG
+	 fREF7geG761pSHQ2IFFNLuaCnzPog50fVIeakFrtxGgvS81/6uIwlkb0YNH0HVyALmzSE
+	 UpPbYSvnBoNTaFkYvr8EszeCWrcOcswV32ZoUFw0eMoTKKKMEcSPt1BgN27r9GXkbew==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=G40vzwGg;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="fK/KNW3J";
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TOq5g7uc;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A7BCC606A323;
-	Thu, 26 Nov 2026 08:32:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A7BCC606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E20FF606A330
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:38:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E20FF606A330
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=G40vzwGg
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7B7CD919515;
-	Thu, 26 Nov 2026 08:32:29 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=fK/KNW3J;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=TOq5g7uc
+Received: from pps.filterd (m0279863.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7AvLN2594855
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:38:01 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gT1L25J6GLalX/fFkvbStga+dcZTwKzwJIB43V6oOxU=; b=G40vzwGgVf2iC+83
-	TZ3N8NrpCdKbTHqpdj5l96hz5jjAY3z5pnpSY2/etTdupzQY7pZvotH+Y+EhalZ+
-	0/EW7d6FD1J5nEG/3xhNetraST1Y7wCGJ58758lb5LX/S7dTkf4THavzePFhrdxV
-	RrZXA8KoT1/TEyNbhhX+LdrgVkPlK8IsW8gJ/TiCrCCXaT2Du1tVXPHxKV0HIqe7
-	4JOJPJ82poS1yZDOSRC2PuTalZLDgM/fCmcJnac3rl8aDPqD3UAIBOxYPAAYEmNT
-	/LxytMsSvmJYnqUkuPn2q7rDVoinQ9o3dI+UjVvyetZqEOuPpthWmTvS7Gmvabpf
-	nch9Ig==
-Received: from apblrppmta02.qualcomm.com (blr-bdr-fw-01_GlobalNAT_AllZones-Outside.qualcomm.com [103.229.18.19])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y265n-1
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 26 Nov 2026 08:32:28 +0000 (GMT)
-Received: from pps.filterd (apblrppmta02.qualcomm.com [127.0.0.1])
-	by APBLRPPMTA02.qualcomm.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ8WOFU3850903;
-	Thu, 26 Nov 2026 08:32:25 GMT
-Received: from hu-devc-hyd-u22-c.qualcomm.com (hu-mdsor-hyd.qualcomm.com [10.147.243.209])
-	by APBLRPPMTA02.qualcomm.com (PPS) with ESMTPS id 6AQ8WP483850918
-	(version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
-	Thu, 26 Nov 2026 08:32:25 +0000 (GMT)
-Received: by hu-devc-hyd-u22-c.qualcomm.com (Postfix, from userid 4770534)
-	id 2781FA7A; Thu, 26 Nov 2026 14:02:23 +0530 (+0530)
-From: mohit.dsor@oss.qualcomm.com
-Date: Thu, 26 Nov 2026 14:02:22 +0530
-Subject: [PATCH v3 7/7] arm64: dts: qcom: lemans-draco-evk: Add Waveshare
- 8-inch DSI panel overlay
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=WQPx9qKiYiOC+Qu5wRqDaiDP
+	oYwCF37v4r4ojrWgYNg=; b=fK/KNW3JrLr3ekiZDOsKo3oXpjL6zpTkYQlblXef
+	xJ/JmLp4vUmHcpOqd8zl52ccM/FCqDidbdI5/oPNjfSE+6k9idpYFby+sMvGm5j+
+	1aDqoksZvM0QxOeC78NTMVnGoLkML6qrqiOfJxVmmQMl4Xi8TlLT6p5waAQFBei5
+	2wK/2cnDYrjZwJKb+38gy2vWI6uL28hROIDoSx4SK761qa/e1bq1IVypUo1zq/CZ
+	3NFH0VswAQfCvOq5nyXdn3/r29GPKGdyf2jnnaM2aIg4fpmLJmyMslL+2HeHIPrB
+	qIMoI3mMLrHya1BvJhdwf0NX3C6wXzIyEAzsxgKZnyci7Q==
+Received: from mail-dy1-f199.google.com (mail-dy1-f199.google.com [74.125.82.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662sa81r-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:38:01 +0000 (GMT)
+Received: by mail-dy1-f199.google.com with SMTP id 5a478bee46e88-386177b0516so17029021eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 00:38:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795682280; x=1796287080; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=WQPx9qKiYiOC+Qu5wRqDaiDPoYwCF37v4r4ojrWgYNg=;
+        b=TOq5g7ucgxhjxObt30jm2lqKyLr0CppaxoGxkuOwP7djCcnh6vTbrP/kk5hQNGjbC3
+         xQmQERjAt3eBptW7yBbsNXk3bfjP2G2MAwTINYTcSSC6ceoCAHbX5rayf/nu2g0pmvyU
+         mD8aAA6eUmnjEbjfZ16NVDp6mhmUfrFUM+Dgewh0ml2IXLB/6MQw98zSBDuKGB+UBfEe
+         ODDO8ASfC5/2J1uurHjfGQENyvPrk0KJ+mQKYpbX6QmbsmgC+cIUWZicOadBov14rTFM
+         ibX69BGZJU+Jt6EDopHjNjEKkDtdDMIOwl5cT0VCxftGLwP7NpwBkeZVz1w+fnrgRV+P
+         hDRw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795682280; x=1796287080;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=WQPx9qKiYiOC+Qu5wRqDaiDPoYwCF37v4r4ojrWgYNg=;
+        b=igvslTePx6dSXwmvXX7zoJbZX96y54csitpXp8nW+IZ8wZINWfDSt02cb+MiRgwSkf
+         MGIlLOebQFLuq9RoQLe1UzUCCcmYOyGGbsa/5ARTX4iw+0K1IfkRPeaP/Pf7IkKfaXgD
+         AJsy8+rW72f2jVLxqHN5UC0vGk1sellsAFMeuVZL+CyvGnIKLcEKTrQZmX9WtFXrXOAJ
+         dtW47vaFPrALUUtpg8RtQdhWHWqyPVnOoNTOkup6GbJmUJWX9cnc8LSKdA1c6dz9vnwb
+         Qnl27SfDp7fo+kqqKukrIdqedkyZexT7Cy+vwmVTP4HJYntFdpUqWtBQfo0t/oU2Hnnr
+         ZczQ==
+X-Forwarded-Encrypted: i=1; AL+hErFRmuSM5UOVSoKpJ77VrGHhFmS8N/YkpIB8YspuWg+VRRCu+afETRp1evmiLVjvIqbJfi2vkUuJkwkapSpa@vger.kernel.org
+X-Gm-Message-State: APuU4Z+6EsVmZW8qsqQEL2sHNyXzSTxtbQSqgk21igNKfZgan5UiqQTG
+	y0R7lbIMTZW2Kwv5/8bWgJHIxduJlaqHL1pPBaqH8CnUNzQ0tryNzs4ABP84VwlN9/ebt/61476
+	THd2otBYWycsw+GIEUu8YGiKnA7IhAaGUBOb8ngq7pMh6CLbPjiez1BU3jw6dHSqo/KSR
+X-Gm-Gg: AZFdTZdkrxQkq8SqI/ljHvDNOaaf9Sp1NoMcIBj5+TuR6hWpUL3VnWoar6WnsJHcYa8
+	RU55arv3v3dT3NEBySMC6BpF0nmbMhq5vdEf+VzgfghkWIj3kzar2AEVY/UehQPo793Y9rPBzcL
+	bPP7MTENsXQ0/2c7VLf0hIlx5ATBj6Fd0Dy0zrTJ19BfnCpy3ePo1QWGETXi1757+OGuc7QeUDy
+	fnRGXhvNWKztMwZ64JReDAJFoUMsbHr5F9bAewG4I65YUDvtFYXM8J/xGW4ZHUeVEM870BJeOhF
+	B0kOG/4JmV8tISmDP9F2+1U0TyjL3JHKOI9p/SPlKKHarHUFMB9KgtU1yKNk1w21KfTaegreje0
+	r/di+OjJoo8S2OpGV0kwIKByB/bdhnloaNchncu+7dPd7cVR4hqei02sC9W7iKS+4oDvZ5XiI+g
+	W5Spg357F7ffq1V5dy3r7fZg==
+X-Received: by 2002:a05:693c:61cc:b0:386:98bf:c6c1 with SMTP id 5a478bee46e88-38698bfddfemr18800996eec.26.1795682280036;
+        Thu, 26 Nov 2026 00:38:00 -0800 (PST)
+X-Received: by 2002:a05:693c:61cc:b0:386:98bf:c6c1 with SMTP id 5a478bee46e88-38698bfddfemr18800971eec.26.1795682279493;
+        Thu, 26 Nov 2026 00:37:59 -0800 (PST)
+Received: from hu-petche-lv.qualcomm.com (Global_NAT1.qualcomm.com. [129.46.96.20])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386b9bdafb5sm27849473eec.9.2026.11.26.00.37.58
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Nov 2026 00:37:59 -0800 (PST)
+Date: Thu, 26 Nov 2026 00:37:57 -0800
+From: Peter Chen <peter.chen@oss.qualcomm.com>
+To: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
+Cc: Thinh.Nguyen@synopsys.com, gregkh@linuxfoundation.org,
+        linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
+        krishna.kurapati@oss.qualcomm.com,
+        krzysztof.kozlowski@oss.qualcomm.com
+Subject: Re: [PATCH v5 03/11] usb: dwc3: qcom: Keep wakeup IRQ enable/disable
+ balanced on failed resume
+Message-ID: <awfv5SLoUnYlJUWi@hu-petche-lv.qualcomm.com>
+References: <20261123104727.1539149-1-faisal.hassan@oss.qualcomm.com>
+ <20261123104727.1539149-4-faisal.hassan@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -77,195 +124,126 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-draco-evk-display-v3-7-6864d09e916f@oss.qualcomm.com>
-References: <20261126-draco-evk-display-v3-0-6864d09e916f@oss.qualcomm.com>
-In-Reply-To: <20261126-draco-evk-display-v3-0-6864d09e916f@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
-        Krzysztof Kozlowski <krzk+dt@kernel.org>,
-        Conor Dooley <conor+dt@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Mohit Dsor <mohit.dsor@oss.qualcomm.com>,
-        venkata.valluru@oss.qualcomm.com,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Vishnu Saini <vishnu.saini@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795681943; l=3981;
- i=mohit.dsor@oss.qualcomm.com; s=20260808; h=from:subject:message-id;
- bh=Q9aDfO8BcQHw8fDnM/kbAoNjMI0uoGbsvDb7HgcH0+w=;
- b=QRTkD+BXp6qjhvJy+VOgZT+sbWwvngqwvM97+eFuNLL7ubWBuOWOwHoVp8XvmdpD+BFbnS1ch
- ikryyfKn4kqDAoXM//2ohgettN9EdfQXgiuU2hj/13AgIoFVdo8aaxA
-X-Developer-Key: i=mohit.dsor@oss.qualcomm.com; a=ed25519;
- pk=outHVBN53JhozDw1xkj3G1qrqqE5scMBP7M4WL3aHQQ=
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-QCInternal: smtphost
-X-QCInternal: smtphost
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAzMiBTYWx0ZWRfX6A7SPbjMkcGl
- xOoXTJf5GY52R6PM/DzTJL+gQtZQ7GVpDcZtpNGzyATt+IQiT8lQZkmVljYmqrhbzOmaJ3VPq/5
- QU7spyFDFL5tsDg5Q1JzHYAm+NCScDI3CYF+5INOetYLZBtcK2beCygbIHEFvJnsxvoGo4zWOTg
- Q+kHPXdNqU54ShoEyUhkKAVhDO2PyiTiFQrVcFOxUdOxe2Nu29l3Z9cLSiZjjfCRgF8Imo34xEh
- QZUgQtIPAHe4F7xJfWi7OnI8/aLutDwtJ9byw4SS4kfWv97LdO3Wsku3mfD01umJA3OM+fnOxyZ
- B7wds7gF5Pe9XSIy4FlzGdoyxX/qmfC5qpC9aZhKyLy2sfOEYKhyiRSZn93OTx4/8ozVL3ocQqb
- Selp2j6D1I+uiffwIgQBgkZ1FEwg/wc3i/jdnZuyRfERdHNiDyXWpczqQ4ZZhiT1rQ7faPAOuvU
- b+TaoxcN2+CfxhCds3w==
-X-Proofpoint-GUID: vJ6u2nYHaisC2xU8Y9JbhGsa-OrE5nyX
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAzMiBTYWx0ZWRfX8xHfrjexjHWP
- akDOjdS0OtaXDpiJmeSJx1niX7G3hLmS1LIoF6/cQ62+HxsETIBmxLqIkrRQFhPFfhIOmlXlW4o
- roB9LBXUTwJuKqmCBNhMWbBvoHUpCSc=
-X-Proofpoint-ORIG-GUID: vJ6u2nYHaisC2xU8Y9JbhGsa-OrE5nyX
-X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b07ee9d cx=c_pps
- a=Ou0eQOY4+eZoSc0qltEV5Q==:117 a=Ou0eQOY4+eZoSc0qltEV5Q==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22 a=EUspDBNiAAAA:8
- a=LHCJLpAu2B1udcNI4aUA:9 a=QEXdDO2ut3YA:10
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261123104727.1539149-4-faisal.hassan@oss.qualcomm.com>
+X-Authority-Analysis: v=2.4 cv=B54sQ+tM c=1 sm=1 tr=0 ts=6b07efe9 cx=c_pps
+ a=cFYjgdjTJScbgFmBucgdfQ==:117 a=ouPCqIW2jiPt+lZRy3xVPw==:17
+ a=kj9zAlcOel0A:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=yOCtJkima9RkubShWh1s:22
+ a=EUspDBNiAAAA:8 a=kPxKJPT4JOKwAKEPVQYA:9 a=CjuIK1q_8ugA:10
+ a=scEy_gLbYbu1JhEsrz4S:22
+X-Proofpoint-GUID: fLfjCcdBRS6JiZS5drFG11ROlU35cgk7
+X-Proofpoint-ORIG-GUID: fLfjCcdBRS6JiZS5drFG11ROlU35cgk7
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAzMyBTYWx0ZWRfX3CwLmbCaNbht
+ lqPq4LEAGkLvfhOu4uyfves+e6ZQU2dXpWnFXJ+iO0YvRCtweiZUeDYUwLWE4s9EjEr9h1mwO97
+ hnK+zl6+tPn8gI6rB9YrBujzjqjl0wKYbnRFgqj7/0n6kxWd/3o4l1SLzETjmef0QOk9RV/vJIr
+ /Jny7CQqpziwnmocvcEl4IBC8FZ173xONIugHotpq5d1rseubYsBhF1bzvAi4Qene/gbMXMif6u
+ 3wARLmtwpgL5NdfLvkDyok8Bd7zB7431+Zbp3XYmHqxm2tumd4n9LCWyK8vQfXbkxCk2+j4CCqk
+ tEUJApDxOu54JvDncqHB5TS1U8aGAGhRRqP3b4n1VycwbV2I2WwfPA28Wn+/+LwYmJIsl1feSy7
+ KKZRao221IjyOW8exxv7rMpNMnrdiGUnVmWe8LahrZov3Woynox2+5mFolmoSbjSKV6qfnGuQ/h
+ lHXvs5cYUSW3cFEvzJg==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAzMyBTYWx0ZWRfX5uAvDc4FA+xY
+ /toWkBgf9icxbzHc4aqGO/dWqdnYcYO+Mzzqum+2gBiv+oiLeEIdzyJ8nuTkatIjYq8OnlyOkge
+ 9gEGd25Mf/VdiHGiAcCeN11mFNTkIIw=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_02,2026-11-25_01,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
  suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ phishscore=0 clxscore=1015 malwarescore=0 adultscore=0 impostorscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260032
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260033
 
-From: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
+On 26-11-23 16:17:18, Faisal Hassan wrote:
+> dwc3_qcom_resume() disables the wakeup interrupts before enabling the
+> clocks. If clk_bulk_prepare_enable() fails, it returns with them
+> disabled. The next suspend returns early
 
-Add a DT overlay to enable Waveshare 8-inch DSI panel connected to
-JDISP1 22pin connector on the carrier card.
+Have you run out this sequence at hardware? I find the dwc3 core suspend
+(dwc3_pm_suspend) has not guarded for is_suspended, it should run into
+some problems, eg visiting register with clocks off, etc. It is predate
+issue, not related to your patch.
 
-DSI0 from SoC is routed through MUX which can be selected by DIP
-switch for enabling this 22pin connector. Add the JD9365DA-H3 panel,
-GPIO expander at I2C1 mux channel 0 address 0x45 for panel power,
-reset and backlight, and the Goodix GT9271 touch controller. DIP Switch
-SW2.4 need to be OFF for this to work.
+> on is_suspended without
+> re-enabling them, and the next resume disables them again, so every
+> failed resume leaves the disable depth one level deeper and host-mode
+> wakeup is lost for good.
+> 
+> Re-enabling them on the error path is not safe either: the
+> level-triggered ss_phy interrupt can stay asserted, and the handler
+> can't make progress while the controller is not resumed, so it would
+> fire continuously.
+> 
+> Track whether the wakeup interrupts are armed and make enabling and
+> disabling them idempotent. A failed resume now leaves them disarmed and
+> balanced, and the next suspend arms them again.
+> 
+> Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 
-Disable the default HDMI bridge and connector in favour of the
-Waveshare DSI panel.
+Reviewed-by: Peter Chen <peter.chen@oss.qualcomm.com>
 
-Signed-off-by: Vishnu Saini <vishnu.saini@oss.qualcomm.com>
-Signed-off-by: Mohit Dsor <mohit.dsor@oss.qualcomm.com>
----
- arch/arm64/boot/dts/qcom/Makefile                  |  4 +
- .../qcom/lemans-draco-evk-waveshare-dsi-8inch.dtso | 94 ++++++++++++++++++++++
- 2 files changed, 98 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 3faa50f9e63d..d6ffca89363d 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -75,6 +75,10 @@ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-draco-evk-lvds-auo,g133han01.dtbo
- lemans-draco-evk-raspberrypi-dsi-7inch-dtbs := lemans-draco-evk.dtb lemans-draco-evk-raspberrypi-dsi-7inch.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-draco-evk-raspberrypi-dsi-7inch.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-draco-evk-raspberrypi-dsi-7inch.dtbo
-+
-+lemans-draco-evk-waveshare-dsi-8inch-dtbs := lemans-draco-evk.dtb lemans-draco-evk-waveshare-dsi-8inch.dtbo
-+dtb-$(CONFIG_ARCH_QCOM)	+= lemans-draco-evk-waveshare-dsi-8inch.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= lemans-draco-evk-waveshare-dsi-8inch.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= milos-fairphone-fp6.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= milos-nothing-asteroids.dtb
-diff --git a/arch/arm64/boot/dts/qcom/lemans-draco-evk-waveshare-dsi-8inch.dtso b/arch/arm64/boot/dts/qcom/lemans-draco-evk-waveshare-dsi-8inch.dtso
-new file mode 100644
-index 000000000000..31cd1a46c32b
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/lemans-draco-evk-waveshare-dsi-8inch.dtso
-@@ -0,0 +1,94 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
-+ */
-+
-+/dts-v1/;
-+/plugin/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&{/} {
-+	panel_avdd: regulator-panel-avdd {
-+		compatible = "regulator-fixed";
-+		gpios = <&wsgpio 0 GPIO_ACTIVE_HIGH>;
-+		regulator-name = "panel-avdd";
-+		enable-active-high;
-+	};
-+
-+	panel_iovcc: regulator-panel-iovcc {
-+		compatible = "regulator-fixed";
-+		gpios = <&wsgpio 4 GPIO_ACTIVE_HIGH>;
-+		regulator-name = "panel-iovcc";
-+		enable-active-high;
-+	};
-+
-+	panel_vcc: regulator-panel-vcc {
-+		compatible = "regulator-fixed";
-+		gpios = <&wsgpio 8 GPIO_ACTIVE_HIGH>;
-+		regulator-name = "panel-vcc";
-+		enable-active-high;
-+		regulator-always-on;
-+	};
-+};
-+
-+&hdmi_bridge {
-+	status = "disabled";
-+};
-+
-+&hdmi_connector {
-+	status = "disabled";
-+};
-+
-+&i2c1 {
-+	i2c-mux@70 {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		i2c@0 {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			wsgpio: gpio@45 {
-+				compatible = "waveshare,dsi-touch-gpio";
-+				reg = <0x45>;
-+				gpio-controller;
-+				#gpio-cells = <2>;
-+			};
-+
-+			touch: goodix@5d {
-+				compatible = "goodix,gt9271";
-+				reg = <0x5d>;
-+				reset-gpios = <&wsgpio 9 GPIO_ACTIVE_HIGH>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss0_dsi0 {
-+	status = "okay";
-+
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+
-+	panel@0 {
-+		compatible = "waveshare,8.0-dsi-touch-a", "jadard,jd9365da-h3";
-+		reg = <0>;
-+
-+		backlight = <&wsgpio>;
-+		reset-gpios = <&wsgpio 1 GPIO_ACTIVE_LOW>;
-+		vccio-supply = <&panel_iovcc>;
-+		vdd-supply = <&panel_avdd>;
-+
-+		port {
-+			panel0_in: endpoint {
-+				remote-endpoint = <&mdss0_dsi0_out>;
-+			};
-+		};
-+	};
-+};
-+
-+&mdss0_dsi0_out {
-+	remote-endpoint = <&panel0_in>;
-+	data-lanes = <0 1 2 3>;
-+};
+Peter
+> ---
+>  drivers/usb/dwc3/dwc3-qcom.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+> 
+> diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
+> index 18db19cf2065..e7fadad9a4e1 100644
+> --- a/drivers/usb/dwc3/dwc3-qcom.c
+> +++ b/drivers/usb/dwc3/dwc3-qcom.c
+> @@ -81,6 +81,7 @@ struct dwc3_qcom {
+>  	enum usb_dr_mode	mode;
+>  	bool			is_suspended;
+>  	bool			pm_suspended;
+> +	bool			wakeup_irqs_armed;
+>  	struct icc_path		*icc_path_ddr;
+>  	struct icc_path		*icc_path_apps;
+>  
+> @@ -323,16 +324,26 @@ static void dwc3_qcom_disable_interrupts(struct dwc3_qcom *qcom)
+>  {
+>  	int i;
+>  
+> +	if (!qcom->wakeup_irqs_armed)
+> +		return;
+> +
+>  	for (i = 0; i < qcom->num_ports; i++)
+>  		dwc3_qcom_disable_port_interrupts(&qcom->ports[i]);
+> +
+> +	qcom->wakeup_irqs_armed = false;
+>  }
+>  
+>  static void dwc3_qcom_enable_interrupts(struct dwc3_qcom *qcom)
+>  {
+>  	int i;
+>  
+> +	if (qcom->wakeup_irqs_armed)
+> +		return;
+> +
+>  	for (i = 0; i < qcom->num_ports; i++)
+>  		dwc3_qcom_enable_port_interrupts(&qcom->ports[i]);
+> +
+> +	qcom->wakeup_irqs_armed = true;
+>  }
+>  
+>  /*
+> @@ -396,6 +407,11 @@ static int dwc3_qcom_resume(struct dwc3_qcom *qcom, pm_message_t msg)
+>  	if (!qcom->is_suspended)
+>  		return 0;
+>  
+> +	/*
+> +	 * If a later step fails, the wakeup interrupts stay disarmed, as a
+> +	 * level-triggered wakeup line could otherwise keep firing while the
+> +	 * controller can't be resumed.
+> +	 */
+>  	if (dwc3_qcom_is_host(qcom) && wakeup)
+>  		dwc3_qcom_disable_interrupts(qcom);
+>  
+> -- 
+> 2.34.1
+> 
 
 -- 
-2.34.1
 
+Thanks,
+Peter Chen
