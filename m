@@ -1,77 +1,124 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=212.227.17.11
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795685103;
-	b=5kBklAfxIfD6Zllp8vsKGKcSMBtAxREJvsUN92wLTXoBQK1f9Ek1ESpao+T74QCoS6Vd
-	 W5gDbFgTKlITK/t3cspFtrsQZuzd0EpmSoGaxgpYgkI4ys9LtukH89Dcu3pGUyJnmBqwe
-	 J9c5gG9OP8cWmmd6qNgAODZn/YZ2vzgxlFwytsbfoYe3lsnt4DEEd+spdXxOqP3287Ygd
-	 /ziEPlzUypbRRhS5CRlhhFhkQvxNG7be7wFtO0HoqMDp5VNxFPK45KnLLuEC9xbNVaTom
-	 2fdhiIyA1FyiotpoGXmXs3wt0agzXETrkDf9mwzDHW6UJtc5CyNQdai7veguEdxi/aw==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795685103;
-	h=DMARC-Filter:DKIM2-Signature:Message-Instance:DKIM-Signature:
-	 X-UI-Sender-Class:Received:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:Content-Language:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Provags-ID:X-Spam-Flag:
-	 UI-OutboundReport;
-	bh=9JSNdwZV67Uwnrr8l1kdCs7HPzDkZQfnoroyJMBz3l0=;
-	b=TYvzhP50l2avSBtBEdkjso7OrGI03SCDRAuQhGoOl+y0yi8ei/Cc4DAF9dGW9CLyqV80
-	 Os9wXq/FEhyaUH2fKG6MWxYoiiZw/72SLw8/409Ma0Mx3Elf50+zj8v2pNp/4eYHZmgV6
-	 95R56jPtifP6A7a3egqiP2HWg/GoLqtVcOg3nZ/uG/00sc+lILq1PZfZFwwAAc29wyMyH
-	 UlEqcB4JKyMBrdJx6mtMu6pkyYdS944qUsBK7qvIxCtPccsiCJOgIvzBph3VUq61VGmjb
-	 Xx2bzWn0k1lUKxUbQRTUVDSnuZqM1BIVUIELnzZF4IbjsLLArPkCpa/Np2o8xNk5/Sg==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=web.de;
-	spf=pass smtp.mailfrom=web.de;
-	dkim=pass header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=qvcFVzs9;
-	arc=none smtp.remote-ip=212.227.17.11
-Received: from mout.web.de (mout.web.de [212.227.17.11])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795685122;
+	b=xVBjChIXMyRMfoXvmXEbWwZ2Tul+up34TwiiHTBZ632kYuZr//nv5ZpcjRBiJqKEIaRE
+	 9iUBln0tTLN4BAvimew5WxvTwuB05b0itVqhXezl4dzyOFDffDeaaN/3RmpomYtIb5MPo
+	 qtL8d6Q7ea/BL69tXcvFaNfoJDo4uJw2ityCpSYskSC4vCeP3oaogg4GGcUeAbR6Ts3Hm
+	 nRb/rV96/yXAZJ17jUl1ZemOyC0Hn8gUxt0QZi5FKVqBxcmlZ365rK8ILrijHtN56MMw1
+	 plqIDiY840mspXaJCsC7MLKvegqT74yrlVqkE30CzZbl7ToRpjO108FIlxLR9xm1tVw==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795685122;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:X-Authority-Analysis:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=Z6e8lKXfZsI8EGzM9i5Jr6xl5eF9MvsYlAAPWJhqZx0=;
+	b=U/jQDTyATakTncDZ4dMaSE3CbIO3YOseS7w7/rB4IoYuutulzbMMM1qUpiGceHD/jYel
+	 xYQ4QF1dtH0Y8RyTVDidUfQGSomhW+pOKZF4SsJuBLhRH2vaSMAEhapOzDor/yTU+JpXR
+	 TuUEJ3VT8k+Q3lrsd8FoKPmcYjx7kupxkB/eefgy+gcyE0jo7mhyjwxayxXOTs7t2S1LQ
+	 XMcj9fxCl17m4WiaYfCuu42WJJAkZ+QXsinMR8KAl9iBAcvgEMLaIRT9H8SxK+EC+qWuC
+	 8UYyMmnv+YysGS5ss8HoLfZrzkjKkq0HVQhW1UQ1o9b5a7vUkuaEzwC9+dLfri8MSVg==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cCW9JMA9;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="cOWHZX2/";
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.180.131
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D62F9606A321
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:25:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D62F9606A321
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=web.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=web.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5975606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:25:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E5975606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=web.de header.i=markus.elfring@web.de header.a=rsa-sha256 header.s=s29768273 header.b=qvcFVzs9
-DKIM2-Signature:  i=1; m=1; t=1795685100;
- mf=PE1hcmt1cy5FbGZyaW5nQHdlYi5kZT4=;
- rt=PGxpbnV4LWFybS1tc21Admdlci5rZXJuZWwub3JnPg==;
- d=web.de;
- s=s29768273:rsa-sha256:EQzaACp7x2kKc+JUEXbSMML1O95M
-   Z4NG0xW8qDQyWDQdZKCX/j1z8mhF0j3l9y9QYg+Cvjs5VmpZrBVQ3BDPz3EW001E3dl75tdtBCC
-   hhDsUBB+omOAyBbfM9qWFB5Bn7cm5aHdmPtP/6pnkpMgZOsRKyLIrmxMfOWHZoxFTki9yZ5t3Vk
-   BWR/KJYOUaOjXWDnOj+7bNN1XgIGHzhGmEX+GZV+7vJlrEN4VbETy1QSm4KDHvuywxm04y6wx2A
-   0KmYoczzoW9z4QGpjuoZ2oCoVSJFIgPoJzaWufmZNjDJDqsGXPEWs8jcPyAjqwxUNWNKgwOLh/D
-   mdZ9dH8UFbF9Rw==;
-Message-Instance:  m=1;
- h=sha256:
-   8tyKrKjTXvavKxXLtUUO/GrJ91WYuWeK4i+uVERLt3g=:
-   fivIcAd4rKt7AUTEW40BewMt8mNW8MG6LIlwpdkYJbI=,
-  sha512:
-   kcVNTBiYOp91P41GzFaI6Qsecf6mC6mDlv+sVA549DQrNMNHQbQA0R4m6NI9Vxs6nudIGvyxVi8cqZ0+pGJleQ==:
-   6ok9KLgnMdcQTezwC9UVZnzzlB0pHgZ8U4Osfnui5Cs2zt8w2CSBuOgVN0cjYzmu3wue9Ot3MWQCM4BbSkL2KA==;
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=web.de;
-	s=s29768273; t=1795685014; x=1796289814; i=markus.elfring@web.de;
-	bh=9JSNdwZV67Uwnrr8l1kdCs7HPzDkZQfnoroyJMBz3l0=;
-	h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
-	 References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:cc:content-transfer-encoding:
-	 content-type:date:from:message-id:mime-version:reply-to:subject:
-	 to;
-	b=qvcFVzs93vTh4OmkjFWvfY5JXMEL2MnHSCaQtRZbVa21opWnmlAG0LVOpJPf6DW4
-	 agQp0zfx7ID41obnzHdC5V6/Wz6JNWLvVhHZoO6fwnMe/5X9s9/Er/b1gBrut+ZwW
-	 +uCsOA9zLG03KhY8QOt1P+Thad/4v+baiffbj4KTTlvb4pdV6gCsvYKvMWsPM7O8e
-	 rUn+KwhFm4e4OwCKhuzzLknDhsYQhFxcW9zK23PzzD3Lq23pgZceNLO+3vE/lIjRz
-	 n4oecbZQciTZglzzjr0UBE0oGfiDulGMKc+p6Ee3NeW+bX/t3AReDHrhVRCw6fmvv
-	 0JZdgvjVIP7YDSuDyw==
-X-UI-Sender-Class: 814a7b36-bfc1-4dae-8640-3722d8ec6cd6
-Received: from client.hidden.invalid by smtp.web.de (mrweb106
- [213.165.67.124]) with ESMTPSA (Nemesis) id 1MWi9q-1y3NbJ2suW-00SpYE; Thu, 26
- Nov 2026 10:23:34 +0100
-Message-ID: <9e76edf9-433e-43ab-a748-8a71804e2b26@web.de>
-Date: Thu, 26 Nov 2026 10:23:23 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=cCW9JMA9;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cOWHZX2/
+Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7B4Qq2335360
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:25:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	Z6e8lKXfZsI8EGzM9i5Jr6xl5eF9MvsYlAAPWJhqZx0=; b=cCW9JMA9N9jqEPyZ
+	f58UgkPZhogmuFx7EaHWvlh9b3//hVk54l3g6BVuLiVNpHs/mR30YIQxn7fdzfGs
+	qWRvONdbISBaMUo6zdcgPfCDjVtYs0UBRwA+J0CVWWtGbtuXgIJCG5bWkcmcPlQi
+	hVr9IxGV6F3J3QnnlUBCWw5hwxELdNZob4L7bhjWtnX1RMT35jIkBwSYZrsFxS3c
+	JBmVhvj4VhheustQgonuOhZSvKpVaYLUm2jb14hBhpZMyf5GemfcJAGFiL7Fb5Jo
+	79HH57KSXRv3OPoA0pJMNqUKdmvjMCv/TPdQNGjLzASYVr5Vs7wrV/iU2876WxGX
+	lqFPmA==
+Received: from mail-qv1-f69.google.com (mail-qv1-f69.google.com [209.85.219.69])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ak01kg4-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:25:19 +0000 (GMT)
+Received: by mail-qv1-f69.google.com with SMTP id 6a1803df08f44-92106c98714so132780936d6.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 01:25:19 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795685119; cv=none;
+        d=google.com; s=arc-20260327;
+        b=TzsvP26TUkG16GBa/2Ckc6t35lQl0rQixNJ+hlOuLTAewDSMH6SfNVhmZOw1miv1gI
+         GWAfKsRKhcA7QgyMIvDpPTzz3NcZn1a2haiOzg8jJJSv4tQl/Mu8i5ZQff+lSrudw1hg
+         XVSjYtWVvcXCeEF7C1XEkWg8/wc1FOJ+ZhXJQw89sWNYoKEkrnBHfo1/C5TI1UMsUiXJ
+         TMtPBhmC7UALSwB25radnuZUuV/cYUC/ISPOH6/EQbUAQ6vfog0VgmTuzEnNhPGjAB6a
+         Mt08jAfk9RpBmpBC2Rq9doMNAa+vhoIWOOmpLmOOs7t358551EMeSgbvJJgRgTHRQ1NZ
+         EcRQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Z6e8lKXfZsI8EGzM9i5Jr6xl5eF9MvsYlAAPWJhqZx0=;
+        fh=a5JrGTshTu8eHh84J2PvZVFj8tcnCgJW3MBfdkhmSBo=;
+        b=l+Rh2p/hRbN+KfEHR3fQn0zk5/PO9S5B+OSlABXKQPDUKnKEX0eZHzf9s5bF0gD5rI
+         eZFOUYzln6A0DGpJxy9znu86E4FRJSPkOx24yEPDzVFF9Xg2pQO4Ptugq43MNtO+wMdl
+         USpi1xPj4Acl+qrYf9FULrIxPQkRfhkHvbC9yLDHxo2JBM43DWJmb6OSy4+83pC8Zid5
+         jA5w14NixbFIBSFPO2QNSyT9Wb48LkJ5D498ZLkGzu1CnjmvotO2VdHTNkODd+Iz4erD
+         dOvOtgzUMqS/ZQ0QzATGAMyEikXAJsuaqZhrzfWFbYMSb6wTpxmJT6K8CVKijfD2cdQX
+         IHBQ==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795685119; x=1796289919; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Z6e8lKXfZsI8EGzM9i5Jr6xl5eF9MvsYlAAPWJhqZx0=;
+        b=cOWHZX2/9ZAR9+PqJLAgCMFdVpbCjTOSnSWlVgA2QE+2vmFePO5LuQtJ5q4C1pjEI/
+         C6mbJLGjmlwRmlpoK1MRcLxrfomPUQaFfcLzpXUK7saN0hiXDSuBqdb0En4wGp40JWTe
+         ZQHZeCRFPamS0yhTGqGFjtWrvppZpYEdiTiVHafvFt1zRJ9ZqJxJoasTUG/LJykBbZD/
+         2GlBLroHP2saMjAo08+qMhjIrFdJMwGqyq+eEbMrUdYricyQjPWrocUmG3WJLBscQnx7
+         lAo00pPGeZR7JhayHWsbdD7DwgrwW8hPhEwAFG5kRDhRIpwjZ5xx6o44mF/cgOA4/zJi
+         qtug==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795685119; x=1796289919;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Z6e8lKXfZsI8EGzM9i5Jr6xl5eF9MvsYlAAPWJhqZx0=;
+        b=aHOA+qooYD8CyFPncFetCF1611oySqEbg5wRubI+PTu1R2jSeAiYFczJ0vDhGw7OMs
+         yJMs7MrrWDXBuefURzB6MjUOyg+yJOnwXxXLfqlmgAO/VI/F6Ev0AL4rGx4B59YzNkNd
+         cULibZHC0JPV7sbmsU1kWx72vSX2FgkuxkyCqvuCxs2SFWj5z9m/bY2gjjhxRwokghAC
+         35OHCZhzT5LuCXwO85VO7Nm8te54F275ks8zPIRndotu/JYtJx5m8o9ck7J50zXrgnIf
+         xdxQa8wqfNDnWnpNX9jTdP58jmEt8VLGd8wa4vmgRv5WOQetZX2Ny1OT3q+hQCpC5tYy
+         uiBw==
+X-Forwarded-Encrypted: i=1; AL+hErE58V1u4XazXzTJe83oY/v54mkOlMPSuyEEgRI+uZYi77W1k2vRdxgVMLwtuDVH95n9SITEKW4+HPmSZ8VC@vger.kernel.org
+X-Gm-Message-State: APuU4Z9diyc7n/z82GhGCn0FRIW2VF+mffnjOqtQtPs0bu4U5DO2IwBM
+	awRCJneh5Yuv7rBHVzqeXyg7uCg9jOHgQ0IW1kWGH90UlVfyhdhiy1ML49sEvFgEQ89P2n2Qigi
+	A6ojvBu1gh+8M5BO7mz1WUCysS3mH2TOTcp43Q1qkqrMIdQyiHzcqBb37GoPLQbTe7KIdtvHiCO
+	1Q5a+FikdgAgdqV2uzFdEIKJlweVA0Zfe6NmSF8zb6k0U=
+X-Gm-Gg: AZFdTZc5uyvr/1+/UWQbsdqEjCcrD/W9dWrbLyt0CTSsMzW9exIaYWhohIT7hHt1DJt
+	YAbgm0b/OHWOAVRXdbH7WJykFxHltPx9dE2Nxx1DkbDsdPoVZ5GMlSjLXIKEzyDiYgGaq+f3woa
+	8WMVIBVxrSmCZsvPHISIbNqTz3bE2W2jOuKQmA/CX4TWi9kcdSfSL3cCxU8balN1W/neVSKLfCc
+	SqZcjoGQ3yaS7VqBTYvdSwmgXait/creiosAVOh/pfIzLiiJ0iZJo/5HKmOGO65n0OdKZLT5pzf
+X-Received: by 2002:a05:620a:2856:b0:949:873d:3dbf with SMTP id af79cd13be357-949bab58cebmr3663076085a.59.1795685118961;
+        Thu, 26 Nov 2026 01:25:18 -0800 (PST)
+X-Received: by 2002:a05:620a:2856:b0:949:873d:3dbf with SMTP id
+ af79cd13be357-949bab58cebmr3663071685a.59.1795685118401; Thu, 26 Nov 2026
+ 01:25:18 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -81,163 +128,362 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [00/13] mmc: Assorted bug fixes across MMC host drivers
-To: Lee Jones <lee@kernel.org>, linux-mmc@vger.kernel.org
-Cc: aaro.koskinen@iki.fi, adrian.hunter@intel.com,
- aidanmacdonald.0x0@gmail.com, alcooperx@gmail.com, allen.lkml@gmail.com,
- apelete@seketeli.net, aubin.constans@microchip.com,
- bcm-kernel-feedback-list@broadcom.com, chenhuacai@kernel.org,
- christian.loehle@arm.com, djakov@kernel.org, florian.fainelli@broadcom.com,
- geert+renesas@glider.be, hkallweit1@gmail.com, jan.glauber@gmail.com,
- jbrunet@baylibre.com, jh80.chung@samsung.com, josua@solid-run.com,
- kamal.dasu@broadcom.com, khilman@baylibre.com,
- krzysztof.kozlowski@oss.qualcomm.com, lars@metafoo.de,
- lgs201920130244@gmail.com, linux-amlogic@lists.infradead.org,
- linux-arm-kernel@lists.infradead.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
- linux-omap@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
- martin.blumenstingl@googlemail.com, mirq-linux@rere.qmqm.pl,
- neil.armstrong@linaro.org, niklas.soderlund+renesas@ragnatech.se,
- oakad@yahoo.com, paul@crapouillou.net, pb@handhelds.org,
- prabhakar.mahadev-lad.rj@bp.renesas.com, pramod.gurav@linaro.org,
- rric@kernel.org, sameo@openedhand.com, shawn.lin@rock-chips.com,
- support@cavium.com, tony@atomide.com, u.kleine-koenig@baylibre.com,
- ulfh@kernel.org, wsa+renesas@sang-engineering.com,
- yoshihiro.shimoda.uh@renesas.com, zhoubinbin@loongson.cn
-References: <20261123191703.179283-1-lee@kernel.org>
- <bc602723-07fb-4af9-9201-272dd0fe759e@web.de>
- <20261126085340.GC38590@joneslee-macbookpro.roam.internal>
-Content-Language: en-GB, de-DE
-From: Markus Elfring <Markus.Elfring@web.de>
-In-Reply-To: <20261126085340.GC38590@joneslee-macbookpro.roam.internal>
-Content-Type: text/plain; charset=UTF-8
+References: <20261125-camss-hw-ts-v2-0-24c955e43d75@oss.qualcomm.com>
+ <20261125-camss-hw-ts-v2-2-24c955e43d75@oss.qualcomm.com> <8808df3f-e090-4dba-af7d-a51146290d48@oss.qualcomm.com>
+ <c5ec6619-7001-4ab4-9035-405dcaa3b739@oss.qualcomm.com> <CAFEp6-2kW9-Cq9kz-T9Rdz5EKL92TW=QzcSPGBPqLNfcLeDYMg@mail.gmail.com>
+ <b962afd1-9e66-4780-a7ac-43426bca1a67@oss.qualcomm.com> <CAFEp6-1Sk1rjhqsdm+-GHBESdExWr4vVX5wMcFzEpMt8zQJhsA@mail.gmail.com>
+ <d56b1e2b-ff7a-4587-b45e-2607ab85861d@oss.qualcomm.com>
+In-Reply-To: <d56b1e2b-ff7a-4587-b45e-2607ab85861d@oss.qualcomm.com>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 10:25:07 +0100
+X-Gm-Features: Aa3M54oHMmZdn8Qfp7yIftc4MbEujsv0MVJxSIvHKCzi6TGrZi-RYBixrz8yxzk
+Message-ID: <CAFEp6-3LJbCKj+tUpaYL1TE1XXYHc7kW4p-97JOm8VvB-Fm5Hg@mail.gmail.com>
+Subject: Re: [PATCH v2 2/7] media: qcom: camss: csid: Add an operation to read
+ the SOF timestamp
+To: "Gjorgji Rosikopulos (Consultant)" <gjorgji.rosikopulos@oss.qualcomm.com>
+Cc: Mauro Carvalho Chehab <mchehab@kernel.org>,
+        "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+        Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+        linux-media@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:hpuFpSStygnRjyGu4OdwI8scl5Tqdmf8IzYI4hnLjaMfqgtX7UM
- ibOS+HndZBacMC/YuZ61lDrnndFscX38s5dE89HRhg/oRr/1uYX0yiV5jqKjW2rh0aLEIIG
- CGKZmtpk+LJl8q+QZXKhYFZyjvldtY4SizqsqY2WEzDwV2w7W0LK1RjadRiOz2Gt/WAFilt
- Ncx5IupM7mNy4nEUvlyHw==
-X-Spam-Flag: NO
-UI-OutboundReport: notjunk:1;M01:P0:27iBBxTNLss=;pM/2RWrGZu8RBZprcieS2TZSkdh
- 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
+X-Authority-Analysis: v=2.4 cv=T4oZ3PKQ c=1 sm=1 tr=0 ts=6b07faff cx=c_pps
+ a=wEM5vcRIz55oU/E2lInRtA==:117 a=n8IlR8rfZ27013JM:21 a=IkcTkHD0fZMA:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22 a=EUspDBNiAAAA:8
+ a=KKAkSRfTAAAA:8 a=-zCU6LR9qziFT2Ef_f0A:9 a=QEXdDO2ut3YA:10
+ a=OIgjcC2v60KrkQgK7BGD:22 a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-ORIG-GUID: vzC8Sj73F5uHr4xMHWO_D2bPmqWCXeke
+X-Proofpoint-GUID: vzC8Sj73F5uHr4xMHWO_D2bPmqWCXeke
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAzNiBTYWx0ZWRfX/xtx1ctBXZzJ
+ ewFEhc1rk6Ar9bYvr1oCptBGYLKR+c3rCqBgllxC7uMESpEdbMFN+k8ZPC1j8qViCfOhBqDKdaL
+ UBO5550a6RRzOkcWuvGp7BRjuuMA8GwH+VBsGz/7K2WIGU4tYpyDoFABbY+hNhGy4x9bKxm7Y28
+ T9tpVEzMigZKPkivO8PYp32q87dBvLYRDNgZLXaXG77OIYQO1utLk1sENLtupCVYJJUTvPyOFTy
+ vo0TgU/BCO4My2l78asmwobiMpXWflonmcdEEeFOLB9djWTQEloeBY8SZhaBQnOgaPQ7eApAOA3
+ 6E1KuWMogZY+qT428J4E9UDmNCTY+mKt1KgqC7/D3mTIAFcTBzgMNAESTr1KoWxflLfiYBREpvP
+ o5XCRcQ0Bt6KbyIRWBzIEUxiFrW9aYqGnbwioll846hZSRWqaaWApRde5mJJ6Jh7e8q7lXWiG1X
+ 8snUmmh/U+iJAaa/p4Q==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAzNiBTYWx0ZWRfXysdbLsUfv0Bo
+ 7wgjeGafkODi9xb0rMRO7IViiTF5RU6BhCNMrAifrJamnpzKdmXhYy2+l4bmYkWFN3hFz7fMYF9
+ aPlrddtCV8h78rXoxm1eV2RE99B8KNY=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_02,2026-11-25_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 priorityscore=1501 spamscore=0 suspectscore=0 phishscore=0
+ lowpriorityscore=0 bulkscore=0 malwarescore=0 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260036
 
->> How do you think about to sort (and group) desired adjustments
->> by affected software components?
->=20
-> This is new to me.  What guidance says to do that?
->=20
-> Making your own rules up and spraying them at contributors wastes people=
-'s time.
-Can the following list variant be more helpful eventually?
+On Wed, Nov 25, 2026 at 6:23=E2=80=AFPM Gjorgji Rosikopulos (Consultant)
+<gjorgji.rosikopulos@oss.qualcomm.com> wrote:
+>
+>
+>
+> On 11/25/2026 6:21 PM, Loic Poulain wrote:
+> > On Wed, Nov 25, 2026 at 4:01=E2=80=AFPM Gjorgji Rosikopulos (Consultant=
+)
+> > <gjorgji.rosikopulos@oss.qualcomm.com> wrote:
+> >>
+> >>
+> >>
+> >> On 11/25/2026 3:18 PM, Loic Poulain wrote:
+> >>> On Wed, Nov 25, 2026 at 1:06=E2=80=AFPM Gjorgji Rosikopulos (Consulta=
+nt)
+> >>> <gjorgji.rosikopulos@oss.qualcomm.com> wrote:
+> >>>>
+> >>>>
+> >>>>
+> >>>> On 11/25/2026 2:04 PM, Gjorgji Rosikopulos (Consultant) wrote:
+> >>>>> Hi Loic,
+> >>>>>
+> >>>>> On 11/25/2026 12:19 PM, Loic Poulain wrote:
+> >>>>>> Modern CSID revisions latch the global timestamp counter at SOF. T=
+hat
+> >>>>>> counter is the ARM architected counter, so correlating it with
+> >>>>>> CLOCK_MONOTONIC through ktime_get_snapshot_id() turns the latched =
+value
+> >>>>>> into the time the frame actually started, rather than the time the
+> >>>>>> interrupt handler ran.
+> >>>>>>
+> >>>>>> Add a hardware operation returning that counter value and do the
+> >>>>>> correlation in one place, leaving a CSID revision with nothing to =
+do but
+> >>>>>> read its own registers. Revisions not implementing it keep being
+> >>>>>> timestamped at queue time.
+> >>>>>>
+> >>>>>> Suggested-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
+> >>>>>> Signed-off-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
+> >>>>>> ---
+> >>>>>>  drivers/media/platform/qcom/camss/camss-csid.c | 72 +++++++++++++=
++++++++++++++
+> >>>>>>  drivers/media/platform/qcom/camss/camss-csid.h |  9 ++++
+> >>>>>>  2 files changed, 81 insertions(+)
+> >>>>>>
+> >>>>>> diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/driv=
+ers/media/platform/qcom/camss/camss-csid.c
+> >>>>>> index 588122beec854ae5b78de9997b68c7a81d4207e1..0d9b4f7dd768aeaed6=
+5d01da58b4dd8a3a425cbc 100644
+> >>>>>> --- a/drivers/media/platform/qcom/camss/camss-csid.c
+> >>>>>> +++ b/drivers/media/platform/qcom/camss/camss-csid.c
+> >>>>>> @@ -8,14 +8,17 @@
+> >>>>>>   * Copyright (C) 2015-2018 Linaro Ltd.
+> >>>>>>   */
+> >>>>>>  #include <linux/clk.h>
+> >>>>>> +#include <linux/clocksource_ids.h>
+> >>>>>>  #include <linux/completion.h>
+> >>>>>>  #include <linux/interrupt.h>
+> >>>>>>  #include <linux/io.h>
+> >>>>>>  #include <linux/kernel.h>
+> >>>>>> +#include <linux/math64.h>
+> >>>>>>  #include <linux/of.h>
+> >>>>>>  #include <linux/platform_device.h>
+> >>>>>>  #include <linux/pm_runtime.h>
+> >>>>>>  #include <linux/regulator/consumer.h>
+> >>>>>> +#include <linux/timekeeping.h>
+> >>>>>>  #include <media/media-entity.h>
+> >>>>>>  #include <media/mipi-csi2.h>
+> >>>>>>  #include <media/v4l2-device.h>
+> >>>>>> @@ -37,6 +40,16 @@
+> >>>>>>
+> >>>>>>  #define LANE_CFG_BITWIDTH 4
+> >>>>>>
+> >>>>>> +/*
+> >>>>>> + * The CSID latches the global timestamp counter on SOF. That cou=
+nter is
+> >>>>>> + * the ARM architected counter, 56 bit wide and ticking at 19.2 M=
+Hz.
+> >>>>>> + */
+> >>>>>> +#define CSID_TIMESTAMP_WIDTH        56
+> >>>>>> +#define CSID_TIMESTAMP_MASK GENMASK_ULL(CSID_TIMESTAMP_WIDTH - 1,=
+ 0)
+> >>>>>> +#define CSID_TIMESTAMP_NS_MUL       10000   /* NSEC_PER_SEC / 19.=
+2 MHz, reduced */
+> >>>>>> +#define CSID_TIMESTAMP_NS_DIV       192
+> >>>>>> +#define CSID_TIMESTAMP_MAX_AGE_NS   (2 * NSEC_PER_MSEC)
+> >>>>>> +
+> >>>>>>  #define MSM_CSID_NAME "msm_csid"
+> >>>>>>
+> >>>>>>  const char * const csid_testgen_modes[] =3D {
+> >>>>>> @@ -1370,12 +1383,71 @@ atomic_t *csid_get_sof_seq(struct media_pa=
+d *pad)
+> >>>>>>      return &csid->sof_seq[pad->index - MSM_CSID_PAD_FIRST_SRC];
+> >>>>>>  }
+> >>>>>>
+> >>>>>> +static u64 csid_timestamp_to_ns(u64 ticks)
+> >>>>>> +{
+> >>>>>> +    return mul_u64_u32_div(ticks, CSID_TIMESTAMP_NS_MUL, CSID_TIM=
+ESTAMP_NS_DIV);
+> >>>>>> +}
+> >>>>>> +
+> >>>>>> +static u64 csid_timestamp_to_monotonic(struct csid_device *csid, =
+u64 ticks)
+> >>>>>> +{
+> >>>>>> +    struct system_time_snapshot snap;
+> >>>>>> +    u64 delta, delta_ns, now;
+> >>>>>> +
+> >>>>>> +    ktime_get_snapshot_id(CLOCK_MONOTONIC, &snap);
+> >>>>>> +
+> >>>>>> +    /*
+> >>>>>> +     * Translating requires reading the counter the CSID latched =
+from.
+> >>>>>> +     * If timekeeping is driven by something else there is nothin=
+g to
+> >>>>>> +     * correlate against, so let the caller fall back to IRQ time=
+.
+> >>>>>> +     */
+> >>>>>> +    if (!snap.valid || snap.cs_id !=3D CSID_ARM_ARCH_COUNTER) {
+> >>>>>> +            dev_warn_once(csid->camss->dev,
+> >>>>>> +                          "CSID%u: Can't use hardware timestamp, =
+invalid clock source (%d)\n",
+> >>>>>> +                          csid->id, snap.cs_id);
+> >>>>>> +            return 0;
+> >>>>>> +    }
+> >>>>>> +
+> >>>>>> +    /* How long ago, in counter ticks, the timestamp was latched =
+*/
+> >>>>>> +    delta =3D (snap.cycles - ticks) & CSID_TIMESTAMP_MASK;
+> >>>>>> +    delta_ns =3D csid_timestamp_to_ns(delta);
+> >>>>>> +    now =3D ktime_to_ns(snap.systime);
+> >>>>>> +
+> >>>>>> +    /* Fall back rather than reporting a nonsensical timestamp */
+> >>>>>> +    if (delta_ns > now) {
+> >>>>>> +            dev_warn_once(csid->camss->dev,
+> >>>>>> +                          "CSID%u: SOF timestamp predates CLOCK_M=
+ONOTONIC, ignoring\n",
+> >>>>>> +                          csid->id);
+> >>>>>> +            return 0;
+> >>>>>> +    }
+> >>>>>> +
+> >>>>>> +    if (delta_ns > CSID_TIMESTAMP_MAX_AGE_NS)
+> >>>>>> +            dev_warn_ratelimited(csid->camss->dev,
+> >>>>>> +                                 "CSID%u: Too slow! SOF timestamp=
+ is %llu us old\n",
+> >>>>>> +                                 csid->id, delta_ns / NSEC_PER_US=
+EC);
+> >>>>>> +
+> >>>>>> +    return now - delta_ns;
+> >>>>>> +}
+> >>>>>> +
+> >>>>>> +static u64 csid_hw_sof_ts(struct csid_device *csid, unsigned int =
+id)
+> >>>>>> +{
+> >>>>>> +    const struct csid_hw_ops *hw_ops =3D csid->res->hw_ops;
+> >>>>>> +
+> >>>>>> +    if (!hw_ops->sof_ts)
+> >>>>>> +            return 0;
+> >>>>>> +
+> >>>>>> +    return csid_timestamp_to_monotonic(csid, hw_ops->sof_ts(csid,=
+ id));
+> >>>>>
+> >>>>> I am not sure if we need to do this every SOF. Most probably the de=
+lta will
+> >>>>> remain the same during the streaming, so I think it's best to use t=
+he delta within
+> >>>>> tolerance and then apply that for the whole streaming session. Also=
+, I think it's better
+> >>>>> to have a constant delta from the monotonic clock rather than a flu=
+ctuating one.
+> >>>>
+> >>>> I think it will be the best to send both timestamps to userspace, an=
+d give the freedom
+> >>>> to userspace to decide by him self. But the API is not allowing that=
+ as discussed.
+> >>>
+> >>> No, the delta is not constant. In fact, that's precisely why we use
+> >>> it, it captures the variable CPU and software latencies between the
+> >>> hardware event and the timestamp acquisition. By combining the
+> >>> captured hardware timestamp with the current system timing
+> >>> information, we can reconstruct an accurate event timestamp that
+> >>> remains aligned with the Sensor/CSI timing, rather than being affecte=
+d
+> >>> by software scheduling and processing delays. According to my testing=
+,
+> >>> the resulting timing error is below 1 =C2=B5s, from which we can deri=
+ve an
+> >>> accurate sensor framerate.
+> >>>
+> >>> --
+> >>> watching /dev/v4l-subdev2 (msm_csid0), id 0
+> >>> id0    478 ev   60.06 fps   16.650 ms
+> >>>   events           : 478
+> >>>   timestamp (mono) : 180.160315690 .. 188.102256050
+> >>>   duration         : 7.942 s
+> >>>   frame rate       : 60.061 fps
+> >>>   frame_sequence   : 539 .. 1016 (missing: 0)
+> >>>   interval (ms)    : mean 16.650  median 16.650  min 16.650  max 16.6=
+50
+> >>>                      p95 16.650  p99 16.650
+> >>> ---
+> >>
+> >> Ok i will test the changes on my side. Just for other people we have c=
+onflicting names
+> >> CSID (stands from clock fw perspective to Clock Source ID, and from ca=
+mss for the
+> >> csi decoder). If you are sure that the for csi decoder the CSID_ARM_AR=
+CH_COUNTER
+> >> is always the clock source this will work i agree.
+> >> But if that is not the case and we end up with big delta what is the i=
+dea to do
+> >> that every frame. It is kind of confusing to me at least. Also i think=
+ we need
+> >> to check for the other platforms if the clock source is always the sam=
+e.
+> >
+> > Yes, the camera hardware always snapshots the architecture counter. If
+> > we detect that the monotonic clock is not derived from the same timer,
+> > we simply fall back to the traditional IRQ timestamping path. The same
+> > fallback is used if the computed delta is found to be inconsistent.
+>
+> If the both clocks are from same timer there are two checks:
+>
+> 1. Big delta big delta something is completely wrong,
+>    most probably the csid timestamp has some stall data.
+> 2. snap.cs_id !=3D CSID_ARM_ARCH_COUNTER. If that is true do
+>    we need to check on every SOF, most probably every time
+>    you will get the same result.
+>
+> If the error can be recovered on next SOF maybe make sense
+> to enter this function. But i think in both cases most probably
+> you will end up there for every SOF, which is for each pipeline.
+> If all all streaming 4 times per frame.
 
-  mmc: cavium: Prevent slot_pdev[] out-of-bounds write during probe
-  mmc: cavium: Remove MMC slots before destroying slot platform devices
-  mmc: dw_mmc: Disarm central watchdog when ending a request
-  mmc: jz4740: Apply DMA max_seg_size limit to unified tx-rx channel
-  mmc: jz4740: Skip DMA cleanup in PIO mode during post_req
-  mmc: meson-gx: Fail request when descriptor chain DMA mapping fails
-  mmc: omap: Shut down cover timer before disabling cover BH work
-  mmc: renesas_sdhi: Disable internal DMAC BH work items on release
-  mmc: renesas_sdhi: Fix SDIO manual tap correction in SDR104 mode
-  mmc: renesas_sdhi: Guard host->cmd access in internal DMAC issue work
-  mmc: sdhci-brcmstb: Handle absent optional sdio_freq clock in probe
-  mmc: sdhci-msm: Resume runtime PM before accessing registers on remove
-  mmc: tifm_sd: Synchronise timeout handler with request completion
+Yes, I see. We need to snapshot the system monotonic clock anyway, and
+I don't think the extra if is particularly costly. But what we could
+do instead is returning the already snapshotted system time on error,
+avoiding an additional timestamp capture in the caller through
+ktime_get_ns().
 
-Regards,
-Markus
+>
+> >
+> > When Linux receives the interrupt, we know:
+> > - The counter value now (C_NOW)
+> > - The Linux timestamp now (T_NOW)
+> > - The counter value captured by hardware when the frame started (C_SOF)
+> >
+> > Since the Linux monotonic clock and the camera counter both come from
+> > the same hardware timer, we can convert the difference between C_NOW
+> > and C_SOF into time (T()) and "rewind" from T_NOW back to the
+> > **exact** frame start time:
+> >
+> > T_SOF =3D T_NOW - T(C_NOW - C_SOF)
+> >
+> > Regards,
+> > Loic
+> >
+> >>
+> >> ~Gjorgji
+> >>
+> >>>
+> >>> Regards,
+> >>> Loic
+> >>>
+> >>>>
+> >>>>>
+> >>>>> ~Gjorgji
+> >>>>>
+> >>>>>> +}
+> >>>>>> +
+> >>>>>>  void csid_sof_event(struct csid_device *csid, unsigned int id)
+> >>>>>>  {
+> >>>>>> +    u64 ts =3D csid_hw_sof_ts(csid, id);
+> >>>>>> +    struct timespec64 sof =3D ns_to_timespec64(ts);
+> >>>>>>      struct v4l2_event event =3D {
+> >>>>>>              .type =3D V4L2_EVENT_FRAME_SYNC,
+> >>>>>>              .u.frame_sync.frame_sequence =3D
+> >>>>>>                      atomic_inc_return(&csid->sof_seq[id]),
+> >>>>>> +            .timestamp.tv_sec =3D sof.tv_sec,
+> >>>>>> +            .timestamp.tv_nsec =3D sof.tv_nsec,
+> >>>>>>      };
+> >>>>>>
+> >>>>>>      if (atomic_read(&csid->frame_sync_users))
+> >>>>>> diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/driv=
+ers/media/platform/qcom/camss/camss-csid.h
+> >>>>>> index ccafdbf3a9fe0c282da68ccdd04661b3fab81ff5..17cc3b42c8d83180d6=
+abfcc3efe22178dcc2f2e7 100644
+> >>>>>> --- a/drivers/media/platform/qcom/camss/camss-csid.h
+> >>>>>> +++ b/drivers/media/platform/qcom/camss/camss-csid.h
+> >>>>>> @@ -111,6 +111,15 @@ struct csid_hw_ops {
+> >>>>>>       */
+> >>>>>>      int (*reset)(struct csid_device *csid);
+> >>>>>>
+> >>>>>> +    /*
+> >>>>>> +     * sof_ts - Read the counter value the hardware latched at SO=
+F
+> >>>>>> +     * @csid: CSID device
+> >>>>>> +     * @id: CSID src-stream ID
+> >>>>>> +     *
+> >>>>>> +     * Return the raw counter value of the most recent SOF
+> >>>>>> +     */
+> >>>>>> +    u64 (*sof_ts)(struct csid_device *csid, unsigned int id);
+> >>>>>> +
+> >>>>>>      /*
+> >>>>>>       * src_pad_code - Pick an output/src format based on the inpu=
+t/sink format
+> >>>>>>       * @csid: CSID device
+> >>>>>>
+> >>>>>
+> >>>>
+> >>
+>
