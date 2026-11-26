@@ -1,112 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795714362;
-	b=Gqpf6uIoBVqTcfUNz2HlvedPN1UYonoJYVbTCpBzeh2cjDoSkAJNSJrZ134Yk1Q2sWKa
-	 +BhllYosJcYt8cevro/Y9OxAp2pSdfouTYdQrMf+OaXQzJHBA8c2SwQlDgfip/dWW2RJw
-	 rsMnjrWqiS693MpI0HuxOSkXGEdVVIfiCKPk6x7EMEUbAqgtARUMdlkYh+3ERmGIocTZT
-	 l8WQyjtvAAUkK3Vr8pe1scIbtPaLL3/j6p/h0H1stgIvmfyD4RWOm223QeoLIGjhcL+31
-	 +LehL9onLM92K3fSyslftPfDx18GV/Rls0Q0vUSjwOP/e/i82z663YA8MtO3sjFX8Aw==
+	t=1795714467;
+	b=fAhCkjUYw4kvjWxsQK8dnhA/jYfB5L/Vw/Xlcj7I8kV5K33dUAQsUty4uiKgcfSw+g9M
+	 daGANL5Qo1wXbqGXOcbKvCJvcNZRFKtS5EOpetNe6IXz4AT8uAQUuLvAjy+LpJ44y/lPF
+	 i+Ikja7UTtUIs06Xk/qRE+6ZP8jsGW2TONMJePaAq9ikvPUEpmQfRZXNHPybyh+BxXJQW
+	 gvxlfwuCgOPlB/G7m6IDFq9jmAs++0iD4zX1LI4YDxiJgdlcWq2d9+Gnw26ir+bBpzIvF
+	 OLV73n9AYYhRIJqq8+SwAg59ALltpI5HwH3Rio1TBH5sbptSAgazp/y0zgSbHrhFS8Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795714362;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795714467;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
 	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
 	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
 	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Authority-Analysis:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Virus-Version:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=d9QHHcFfpRjmiOA2EOzjqJMr/IIGvSYy+UhP+4kYREE=;
-	b=yZZAsO8gwKZZT/IolmAMtb9rwBajdV4miMU330uWGdiK1hwoZN4ILGktkfibM5SOl1Nk
-	 4mo0XRSbVvmECkhGBt2zvpVDqhHkiU5WKvT3ALgAbw6HoTShfZ3pq5luvDY1OEtdLNfI4
-	 TX6Mi8j5ccLMGwEMaARbIAVHWc+bSt/hC3WiGPpoe6dcMiswkGNb5HNWBndvLZvNDDJyi
-	 tHi6TzjhCR8IRC5tObumY0fkKG9zto6yg8sVgHuCiXWzI3oJ92aUkJLe3Fyfl70F2Gglc
-	 yZQ2vblzCg/A7f/KUJR8cD177sMyA4frpuZ3ubVAFZiYgrVH1i98vKHKnKXX92yV4xA==
+	bh=kAM7pQYhZdvEW1ETslRXtOjChEJigCxTZT0kkHulOzw=;
+	b=xJSjS+RUwYluqdd2UNXg5GgtfjVyE2VAYorLRY37QzE6WStpEgNNDHJ0mK9sBW/qxr1a
+	 ZEoiXOli0kyAYHCqwvk+sUAaBDzOLXXOQj2dUk1Tx7/z1cprcS1rCrF4OLmzdA20sPPFB
+	 13nODfWEuuBftdNzLrtclbLgmj4QkSyQiqZbX4T/ug+0Xg8GDjGUH6CRxB+LOWsjbM33Q
+	 KZwcAfXP+PAFJHxCyY1CAxiqDJd2UnzxvB9j2XdKpD5b8y7aSgldYeY2pkbvIBkVsHXQ/
+	 IBWj61tO0yFphVqNilxbOccfGFOoOvdMyUmbk5jv9qMRBMHszhi1DYN6Xc50XNqeqyA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ldwzgPvB;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Tz83se3p;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=c9OGn8pS;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aaUhnfPJ;
 	arc=none smtp.remote-ip=205.220.168.131
 Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85A46606A323
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:32:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 85A46606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4827E606A323
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:34:27 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4827E606A323
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=ldwzgPvB;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Tz83se3p
-Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFtrwV2834943
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:32:41 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=c9OGn8pS;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=aaUhnfPJ
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFu2Eg4049018
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:34:26 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	d9QHHcFfpRjmiOA2EOzjqJMr/IIGvSYy+UhP+4kYREE=; b=ldwzgPvBGBcqnftN
-	Xv8RY/jQgo8lMmw/5jLTZ+/bVcLP32F9M6jjF9LdRKDrJb6uzqkmNWaHvupCMJsH
-	JmhftRmaAsNWOnzfz1ZKUlqP9g/Qe+ad270462y8rRxR+zesePSW2hSroXTNfCOT
-	li4Q1ErkLIwM8i4pxc/NgMV1P/5ijGastp8S+UB32IBh5qosjSRTXoSNg3Cg09EM
-	Tfz+hsOKRVWb88LsAf+zAZ0l2fk8YlV/3ql+A2mJH5tdwnyqXgQcI3QiB9A+iHes
-	9f8xpI+R/NzLJhALop5oIr4BD37HuDJAVwLIx+8ttNGvK9falD9/gzStjnzA7ZRt
-	y0I7bw==
-Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com [209.85.214.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6pgqgmpu-1
+	kAM7pQYhZdvEW1ETslRXtOjChEJigCxTZT0kkHulOzw=; b=c9OGn8pSyXWiy3jP
+	ZlD6X/tWVRdT6GibDnT6G3OtkWv6guKJyfvdsDAEItLIyH/jAC7SQjO1MbcWGo+h
+	eUx7Az0fAnd9dpVWGjOvQO6u3mbU5RTjU1R3o+qoF7zSWmg0uMAKuvung9Klb9EX
+	LmZYv/GiFXS2trGnD6sGWHm8xRwAmpTNf/ilHfG2KXg90tUK1acTPdcTBfGNXdBD
+	/9wFahtAe97F2f2pYsbrWPEGSUJSU7/S/S2aIta28seBHp+BLu8LvMigMqU+iRmf
+	0vOHHgQ/mk2Ny8NwB6OjLT8rRHxZaXlOlCTYX5+hOaPQwAacLZjPY/mjfzveXeKk
+	Muwg/Q==
+Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com [209.85.216.70])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6f8rje9t-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:32:41 +0000 (GMT)
-Received: by mail-pl1-f197.google.com with SMTP id d9443c01a7336-2f040c6e0ceso67676305ad.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:32:41 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 17:34:26 +0000 (GMT)
+Received: by mail-pj1-f70.google.com with SMTP id 98e67ed59e1d1-3b0a7cbf164so5928303a91.3
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:34:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795714361; x=1796319161; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795714466; x=1796319266; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=d9QHHcFfpRjmiOA2EOzjqJMr/IIGvSYy+UhP+4kYREE=;
-        b=Tz83se3p38C1v0D89CwewiTgagEy0CFroaeyOzdVtjWd9kUHUCFODHhFnD6liO09Bj
-         xdSZ+1+WBFpu38kYr+5/v5BoTJvQtZbzT46kKM9qDRPvXrm/hJe5UddeQrqexcWbDgUs
-         UanBdtWuygWMxaCT8xca8v35mMw4MPHwPl9xTdWYXpg0HgVJWEnXhQDW7NE4cuYHEmdq
-         SGXzEO0/UI7kp8JtBHoJJ5tzgcLYaPZ5c6a84zmIL1anOTPomay8oHQrZiqA6MulRWYo
-         prAAVJy6SE/+BcvCYT3hTjCa1Ew5SqB331gl5+3I4vtEHeYT/o1T2VZuEMFN0001GwGJ
-         XF+g==
+        bh=kAM7pQYhZdvEW1ETslRXtOjChEJigCxTZT0kkHulOzw=;
+        b=aaUhnfPJdFdxVad2qFVzUzpYaFZwYoFyGAgS+wVk1k2Ux/wHvsgfy2Oo4I4joAYmFn
+         dGU+Be7IMAM5VA9U7NE00Uj0LBT6nKV1++82VxSqgAUjbC/+xNSfT087fAXVP7Z+Wfhu
+         eCPJm11FPibJ0P9Q1FheYIN2wHpmM9eHw64Y44dTdqvWony2ZvIyU49aZHEfCtRoaSOR
+         q2jLijvmFallrqArE6P03wQtzlAPZY+trIKUR2mmoDeRaEQrLwXRM6dMqK6YPEGrM0P1
+         /V8qpl9HmV9MuS4smjvzzTscbIhBFjTlbUOYyrlnhDdjh70A4cEkEs0DLtwLZBqjcJEK
+         b+qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795714361; x=1796319161;
+        d=1e100.net; s=20260707; t=1795714466; x=1796319266;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=d9QHHcFfpRjmiOA2EOzjqJMr/IIGvSYy+UhP+4kYREE=;
-        b=ZSxzED3YtE3tHySt6OLcMsuOauhruHzsMNrZmbCYfVyO0v2sEovynUkWtPtyRE91+g
-         NDNTmEWMFqImLMkBrfCZk5Q/o0eXQuesltg6R7IWAt0AMPTsR3baGmCkWhfB+rp1I9iE
-         UJVPyMCGZ4W05ooY/sMErN+LrwNPVuEzY3IhRzP5K1TybdbTKYWUN8kBqqGSugTWH8+0
-         jt9JF+haRgm2bWF9QPiIXOASIUVwMMY/S+9Lf0ukrXV2zFzbX1B9LnMDEcCUFAqeqqfa
-         Y1GbKqiEtGjGyn1JN8kzOI6ZYY/wVIw59811Sja+guSR0rLmNib5F6O7kVTlxus+y68R
-         eosA==
-X-Forwarded-Encrypted: i=1; AL+hErHnZMKa8J6gxEG8fvIXi0e6sx4hxyzoN2pdpX+r/xw2ZG0wFUbFbOBs79aFeAwePsGbUR+q0ozGHyxlALGj@vger.kernel.org
-X-Gm-Message-State: APuU4Z8lLrFq0NcbRKuYwfKATACShWQ1W5gjru1XLLJyy8ojyYC8fWSP
-	QzTn1LWRVualHCh0exTX4v+XjVdNs2cnYxpWNAGX/tVz0UEXa9KGqynZWzeb6n69U24ueoL31ID
-	C88Rgi3206uiE+727VwnwQ3Y7WDfPh6ByM+oxLNoB++92OqlCpOWvvH91jpiXjOPgDoT+
-X-Gm-Gg: AZFdTZeiFtK1EyyWJAfJZ8RHuSsijMU9Q5/MIAPCcqZ2G7N+hRy/W6HfxMTC0tHyAsX
-	/KrpQWRuRQvGfzUcVDikrd8cOCsrJ6VIL/owO085zDakeA6Ez8XUgxS1xyaMQ3vpkFrmoa+6Grr
-	VeZ7fLf3XV0UbLt3mXNxUyo1QtvFS7bFT0BluTazjhaxHm2gD2Vy4hX2rv+VNG94UpW6eLYNw6M
-	tvptNBuSR5NQWuZfwXf7SldIxWat8uznryiYjLhp8McfSAfQwa1sDPnZBZsJm4XjQjonK4/uFVQ
-	ufCjz2dFeC+TXkit1QxAGvhNAQHbLnLs2TSzA4CjRDRim3HwBIwXY+3SlmOeUNHIOPVMvqGuquX
-	t+hLcoUY0BKsaX8dOwu0SmHQ39axfIb9e0CTK1himuLstTrcFgJuqYHtLv8DGHMJDHxgCl4BCEW
-	OVZ/uyk/v1z4hxQoC9/Tfdc1VYp+loVM2HHnHax+gS
-X-Received: by 2002:a17:902:e551:b0:2ed:ff4a:6d21 with SMTP id d9443c01a7336-2f03f1beef6mr213757965ad.73.1795714361071;
-        Thu, 26 Nov 2026 09:32:41 -0800 (PST)
-X-Received: by 2002:a17:902:e551:b0:2ed:ff4a:6d21 with SMTP id d9443c01a7336-2f03f1beef6mr213757755ad.73.1795714360588;
-        Thu, 26 Nov 2026 09:32:40 -0800 (PST)
+        bh=kAM7pQYhZdvEW1ETslRXtOjChEJigCxTZT0kkHulOzw=;
+        b=SSewGh/dfERH69Gq2gVi2OXEbgZesCOsX/+KEmrWn1MJyc1uzIRwZSJriIzWO0Cgg9
+         tKGHYkn/vTnNQ45a3ob9WApqOjU3GCntwPrX4PtRgP2ua621l1l70v/I89AQyZ6U05wt
+         OVrjE3uoZzWHYKRKa2ww5vRyyVMyNM9fe/3uJbxfb7CRWTL6te13HgVgG08ku5wJmofa
+         odTYebtGPUZjR71CIfUpFfJRhNryNtocOe+prApWN/yt8dev6Oy9QCpNqd8+TJQMHA5C
+         xva42F7zerqJmPhztT1MzgYl2nTlnBlHIyDe6cvlWrBM1uE4ujDDISAZqxA5NwH7DyuQ
+         1NrA==
+X-Forwarded-Encrypted: i=1; AL+hErHEOk08nTkQjmNieN+TcX9YmbCXokIsRYHCMcYdk+6ZQWCPLxsQfRRpeg7UPokLpSVstLWDUYom3MdJWN12@vger.kernel.org
+X-Gm-Message-State: APuU4Z/dPMgtoGAaqYstZX9egHk9/HBTmjRPNNQT9qvBhI3zryiHOdCF
+	4LvxgBCjCg87m2dUYncSDGYX4cEIDpD5myWCm28WxtKjB80AZ1sfBGDli6hA+frH189JojJ9wzl
+	ylMySqRln9p3FnlLIeh+cRSW2hEgaKNQGmURLRvI+AEyDIioHUhIWJgHFwZKDtS86w9R1
+X-Gm-Gg: AZFdTZeP8OkCEWYoG7jrCN3CgKyL/ctDTZDrkmBna+gSW1X52xycaUuN4VEnTiRiuLx
+	Vkz0L+QNxHwH01DVCRM8C8A8lFFWFO2VT9uq+DQPLnXXhreyBmE/8N7715y3CZGNnwMAX9Uiua7
+	6AnibGjE7JCYloTMGPfi9vfkFn9RUXdyKhsHcGkUwtOmfvDTNTc5699z4e/SZuOqR0gWwit+Lzl
+	pVo/5JvtaZ2Fy10YX1TsJGRyJtds5b40jQHNzPf64PBXGsC1aCjfn37WLRCF5ZUZ4jz/FUxqb/G
+	qPOOCdcdOOTOlx80us71JLzOuQnzKpNfh+6ZTHkTv/N/ZH3yI47oNMUGpMJLc3OkXLDiK8QIIek
+	Wbtp/fa2vzsFS6/INsrtRFYRrPm/lbzMgd/Hbg06/husAHKA5gOpaoQXnu1aZgyrHRgnlgghugq
+	Vrc2sK4vTDxennYBZbRjP8ctXmFLTEVY0/ryI4qiao
+X-Received: by 2002:a17:90a:d2cf:b0:3b4:d22:8600 with SMTP id 98e67ed59e1d1-3b41c8fe1e2mr19204593a91.18.1795714465825;
+        Thu, 26 Nov 2026 09:34:25 -0800 (PST)
+X-Received: by 2002:a17:90a:d2cf:b0:3b4:d22:8600 with SMTP id 98e67ed59e1d1-3b41c8fe1e2mr19204570a91.18.1795714465312;
+        Thu, 26 Nov 2026 09:34:25 -0800 (PST)
 Received: from [192.168.1.8] ([122.177.242.156])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f0b8a43768sm49779685ad.31.2026.11.26.09.32.36
+        by smtp.gmail.com with ESMTPSA id 98e67ed59e1d1-3b41ad0a34asm33227833a91.3.2026.11.26.09.34.21
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Nov 2026 09:32:39 -0800 (PST)
-Message-ID: <e01e6db6-9581-4003-b874-bb0a49bc9b8e@oss.qualcomm.com>
-Date: Thu, 26 Nov 2026 23:02:34 +0530
+        Thu, 26 Nov 2026 09:34:24 -0800 (PST)
+Message-ID: <3c0a98e5-0696-45eb-a0c2-83f429f6c76b@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 23:04:20 +0530
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,62 +117,64 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 08/11] usb: dwc3: qcom: Restore VBUS override after
- system resume
+Subject: Re: [PATCH v5 11/11] usb: dwc3: qcom: Enable VBUS override at probe
+ for default peripheral role
 To: Faisal Hassan <faisal.hassan@oss.qualcomm.com>, Thinh.Nguyen@synopsys.com,
         gregkh@linuxfoundation.org
 Cc: linux-usb@vger.kernel.org, linux-arm-msm@vger.kernel.org,
         linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        peter.chen@oss.qualcomm.com, krzysztof.kozlowski@oss.qualcomm.com,
-        Sriram Dash <sriram.dash@oss.qualcomm.com>
+        peter.chen@oss.qualcomm.com, krzysztof.kozlowski@oss.qualcomm.com
 References: <20261123104727.1539149-1-faisal.hassan@oss.qualcomm.com>
- <20261123104727.1539149-9-faisal.hassan@oss.qualcomm.com>
+ <20261123104727.1539149-12-faisal.hassan@oss.qualcomm.com>
 Content-Language: en-US
 From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
-In-Reply-To: <20261123104727.1539149-9-faisal.hassan@oss.qualcomm.com>
+In-Reply-To: <20261123104727.1539149-12-faisal.hassan@oss.qualcomm.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: OeRCZhAio8wiWfctUy_EYjR1nkyU-NQM
-X-Proofpoint-ORIG-GUID: OeRCZhAio8wiWfctUy_EYjR1nkyU-NQM
-X-Authority-Analysis: v=2.4 cv=A7H5rKWG c=1 sm=1 tr=0 ts=6b086d39 cx=c_pps
- a=cmESyDAEBpBGqyK7t0alAg==:117 a=EbDk/eETi6Q6sYbTlnF7GQ==:17
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2OCBTYWx0ZWRfX7X+VpCF71KzL
+ u+mY+KWDTqtpGWQiC9Sqrd7WcLmq9rctHUeAn3ImZrAn1Ly6TrllGWQ89fzYCxs4+CXtxnTTtR1
+ 7pN0KRtwtvrxCdSlroEGs6yUWs90qOiOKQkbB2lOmKfMRv7ZvWEf5w7LYwgJFF4jZZ49IIH5Lhv
+ 7ZPTu/VHphfxIjDZGEPg5CQy7Za3M2bl2aj/4UzfVdxK5Lz6NjRI+2eg7AMgZwAX5GHDZ9WRYlH
+ hMUiL9gTpUeylqMTUuNymW/YZp267GNODTUuquRUrYVVS7Xyx38JatieqdVwvEpaZyOaBpfK1Ip
+ XB8I6uMFr1KjGyjQSqAAi8ZvImydPqfBM3vBkZRC6DrXkT3zvRDMKGipHgZ/QzdO9P9UdkUQ/BE
+ uaxMe6jhWJZ67NzNTGrrUeEdk6t+n7HX9r+dI/cgmLkEnmRPJWUDwRdvPPqdhTlfLVTIETsyXF7
+ RGf8TuslKvo8+Tpg2cw==
+X-Proofpoint-GUID: K6pwu4KQtUycL3pEdFS8_jJqvl5iiCMF
+X-Proofpoint-ORIG-GUID: K6pwu4KQtUycL3pEdFS8_jJqvl5iiCMF
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2OCBTYWx0ZWRfX5GAQ5tp2nSLg
+ qPpwjRCg2J0UiDqxibZVsERuSZAwHcsj1L5V+EdyaAkbuoQSKCv3Tw+CRiSWC9BZZ33fBntfOeZ
+ T8BsDVcs4C+6n+9P1k6w0YvgyduKI5s=
+X-Authority-Analysis: v=2.4 cv=FuOQbGrq c=1 sm=1 tr=0 ts=6b086da2 cx=c_pps
+ a=0uOsjrqzRL749jD1oC5vDA==:117 a=EbDk/eETi6Q6sYbTlnF7GQ==:17
  a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=YMgV9FUhrdKAYTUUvYB2:22
- a=EUspDBNiAAAA:8 a=JdB8cOfk_NMNDU_cp-YA:9 a=QEXdDO2ut3YA:10
- a=1OuFwYUASf3TG4hYMiVC:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2OCBTYWx0ZWRfX5gCSk7bBuiwK
- ggu2I7xICU9Ir0pc8GSaEuQsFDjp8AnJN1WUxCEPgvJiSR4c+75uBi72GumLf9wHN7gZbjzvm3N
- tSoq6rOys5bYfNRMcDpQkl+MMvAGfRw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2OCBTYWx0ZWRfX0xWh7LUwfSQe
- w42QPwSs+yipZX9S+AJotUPwZZHTUVATpy4aotgJvetH9ThB9WnOK9Vv+D8AB4X+NrvxDMhZVAl
- txzHv07fiEKs7IX/XxRZEt/2Kog49pyYGMINaWivB49XbCJrk/fxH1HQgF/VRRWbXGxUuJEm2xl
- CerX8MOJ1vD+Y0jzHx9WuSC9JTI+LEdAjXF5diZrr6HYoXFnn23YnUWD2Kr5AFX75qWICjogzZu
- C6z7SWBcHAknY74m2ZlANoQjSKm2xodi6Xxcw9W1R+MkkDmaR1EMiOoocceemXok+z8T3EHt/zs
- yyCRSl2nP5avy7bGhDWkEff4qwqV2ITmRIKsCabwuf63TVyKtBQmh6D51fSB2Kp5ON+reijFK2D
- Nm10HbotAw3BvcOEYznXbwpBPtl+eLXIPn5WNAeMABBJ0mAndsGx67yfmvXHtMN86hDIiS4rUly
- 4UW4bIxqdKCj+3ht4Vw==
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22
+ a=EUspDBNiAAAA:8 a=fyVOInN8tGEjVan_8WYA:9 a=QEXdDO2ut3YA:10
+ a=mQ_c8vxmzFEMiUWkPHU9:22
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 suspectscore=0 lowpriorityscore=0 clxscore=1015 bulkscore=0
- priorityscore=1501 malwarescore=0 phishscore=0 spamscore=0 adultscore=0
+ clxscore=1015 priorityscore=1501 impostorscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 phishscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0
  classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
  reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260068
 
 
 
 On 11/23/2026 4:17 PM, Faisal Hassan wrote:
-> The controller reset on system resume returns the Qscratch registers to
-> their power-on defaults, which clears the VBUS valid override that was
-> set up for device mode. Without it the PHY does not see VBUS and the
-> gadget fails to enumerate after resume.
+> When the controller is in OTG mode with usb-role-switch and
+> role-switch-default-mode set to peripheral, the role notifier never sees
+> a transition at probe, so the QSCRATCH VBUS override is not programmed
+> and the device never gets a session-valid indication.
 > 
-> Re-enable the override after resume when the controller is not in host
-> mode.
+> Enable the VBUS override once at probe, after the initial role has been
+> determined, whenever that role is USB_ROLE_DEVICE. This also covers the
+> dr_mode = "peripheral" case, which previously programmed the override on
+> its own.
 > 
-> Co-developed-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
-> Signed-off-by: Sriram Dash <sriram.dash@oss.qualcomm.com>
+> Validated on SA8255P with an HS host attached: 20 unbind/bind and 20
+> suspend/resume iterations completed with no failures.
+> 
 > Signed-off-by: Faisal Hassan <faisal.hassan@oss.qualcomm.com>
 
 Reviewed-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
@@ -181,26 +183,30 @@ Regards,
 Krishna,
 
 > ---
->   drivers/usb/dwc3/dwc3-qcom.c | 8 ++++++++
->   1 file changed, 8 insertions(+)
+>   drivers/usb/dwc3/dwc3-qcom.c | 5 ++++-
+>   1 file changed, 4 insertions(+), 1 deletion(-)
 > 
 > diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
-> index 8e8d7e59c6d5..50fca06c83d4 100644
+> index 559de5172e61..22b6c7ca0297 100644
 > --- a/drivers/usb/dwc3/dwc3-qcom.c
 > +++ b/drivers/usb/dwc3/dwc3-qcom.c
-> @@ -457,6 +457,14 @@ static int dwc3_qcom_resume(struct dwc3_qcom *qcom, pm_message_t msg)
->   				  PWR_EVNT_LPM_IN_L2_MASK | PWR_EVNT_LPM_OUT_L2_MASK);
+> @@ -964,7 +964,6 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+>   		qcom->current_role = USB_ROLE_HOST;
+>   	} else if (qcom->mode == USB_DR_MODE_PERIPHERAL) {
+>   		qcom->current_role = USB_ROLE_DEVICE;
+> -		dwc3_qcom_vbus_override_enable(qcom, true);
+>   	} else {
+>   		if ((device_property_read_bool(dev, "usb-role-switch")) &&
+>   		    (usb_get_role_switch_default_mode(dev) == USB_DR_MODE_HOST))
+> @@ -973,6 +972,10 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+>   			qcom->current_role = USB_ROLE_DEVICE;
 >   	}
 >   
-> +	/*
-> +	 * The reset above returned Qscratch to its power-on defaults, so
-> +	 * restore the VBUS valid override set up for device mode.
-> +	 */
-> +	if (qcom->power_lost_in_suspend && !PMSG_IS_AUTO(msg) &&
-> +	    !dwc3_qcom_is_host(qcom))
+> +	/* Force the VBUS valid indication to the PHYs in device mode */
+> +	if (qcom->current_role == USB_ROLE_DEVICE)
 > +		dwc3_qcom_vbus_override_enable(qcom, true);
 > +
->   	qcom->is_suspended = false;
+>   	qcom->dwc.glue_ops = &dwc3_qcom_glue_ops;
 >   
->   	return 0;
+>   	qcom->dwc.dev = dev;
 
