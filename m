@@ -1,86 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.47
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795672795;
-	b=pil5Gr38agq0v0G9MHFrzG0r1Rd8Ja0jycOJUlye1smJz5FN5GDenHHcHfSVsMNkZS5r
-	 TCh9CsJOAy92ZDRg3Zbh/yORqEv7oHWCJQt+ANFXQ0REjaI4J8yMjiL3L1zTNMTRaZull
-	 3Qp5JXWcG4Jxd1pT4MW9wuq37RdCJdafRx19FfymvKhaAWX7dwztNxizhsY83lrrhhU01
-	 qFoIqSzpljSxhw0peWPZB11zFe9hW2kafdT7zaNZXJ+GE7x5xYzJPDyGSjEyCgk/KXYRv
-	 O6qS0Gm8ehKE56/5btVj1iV2u8bvDzvEU6rnZMmW600MYFUQHZLoEIhNgB5UMZmiBKQ==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795672795;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:Message-ID:Date:
-	 MIME-Version:User-Agent:Subject:To:Cc:References:From:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=k2IRBl9gY5e2oSUNrEWY6jjQeC8ZZ1pQO6bdpjOXj2I=;
-	b=wQz1IE4WBs0k8UfwqxweIWB9XSq+xxqB4+YqCl7acN6h8iiDUoA+2BoHb9+XF2qh/eVc
-	 ZL6khIFKn/lP8B1OZufUfCtJPm37JCAxBhwhwgV5xAmcB+vEbOGLqwukzBmcToRMoWe4n
-	 EGADg5KZWGgrS6N1NwAU4rxMnn9Gz8piAQ2/k8nw+3ehevFiSq2Ih6I6c96g+VoqRV9wk
-	 sGeIQvHvhKVmEHr6RhnlTN0VbyU+fejxlmKvzwznvfmmqSh2fOp69kzfi+Bz59mOv/omd
-	 fPinB3fSg0PVwTJ8VWK3J9iftxT4EzcXXgQ9AUPE4hBUCJ3JmcUQKd/4/rcFufyQh/A==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=eXnfkOdx;
-	arc=none smtp.remote-ip=209.85.167.47
-Received: from mail-lf1-f47.google.com (mail-lf1-f47.google.com [209.85.167.47])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.227.94
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795673012;
+	b=YPG+02Qy2e5EqRbz/QFEvOfjiI7RNqf8iXY2w80uUohUPe6Y/jJiYTgdAEEAKfbRenWS
+	 s/9Q8bmY3ZfRYfNnXDFL5BUu961KGHgWOst7xNQ1fDJoMeZvSUnkppo3FW/pChpVNSBPr
+	 4AEE2P6JYVRiIu1GWLXi23KsCyplbgGnvj8UgXVVax7KITVxUcij0vhZvbxm0Y/jQvj/y
+	 GbCKwRhqSG0h92pBPyz2eWs0Xl2FOt+jhqOE8R87KcICDH0N4lUCzmExt1bHdXKMkMpSB
+	 3bgi4JHCHpgRxxV+039D9Anqij0n2i8ugVxl9vmcLCXd01NkFsQGMVQwF30KC7/WBDg==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795673012;
+	h=DMARC-Filter:Received:Received:From:To:Cc:Subject:Date:Message-ID:
+	 X-Mailer:In-Reply-To:References:Content-Transfer-Encoding:
+	 Content-Type:X-ClientProxiedBy:MIME-Version:X-MS-PublicTrafficType:
+	 X-MS-TrafficTypeDiagnostic:X-MS-Office365-Filtering-Correlation-Id:
+	 X-MS-Exchange-SenderADCheck:X-MS-Exchange-AntiSpam-Relay:
+	 X-Microsoft-Antispam:X-Microsoft-Antispam-Message-Info:
+	 X-Forefront-Antispam-Report:
+	 X-MS-Exchange-AntiSpam-MessageData-ChunkCount:
+	 X-MS-Exchange-AntiSpam-MessageData-0:
+	 X-MS-Exchange-AntiSpam-MessageData-1:X-OriginatorOrg:
+	 X-MS-Exchange-CrossTenant-Network-Message-Id:
+	 X-MS-Exchange-CrossTenant-AuthSource:X-MS-Exchange-CrossTenant-AuthAs:
+	 X-MS-Exchange-CrossTenant-OriginalArrivalTime:
+	 X-MS-Exchange-CrossTenant-FromEntityHeader:
+	 X-MS-Exchange-CrossTenant-Id:X-MS-Exchange-CrossTenant-MailboxType:
+	 X-MS-Exchange-CrossTenant-UserPrincipalName:
+	 X-MS-Exchange-Transport-CrossTenantHeadersStamped;
+	bh=2LxeavXPe6VXSUosbgjtKtxaYe0oFk+RyjaRfAlz3sY=;
+	b=2DaXClE8akfpjcWSd0Sh5KkTdK9j6b2XNBRLS05F9XlKhuUpKuxBfYpx6NqUKL9uOxjz
+	 Uu5E8qck6xJNjKDBixluzH9ZwT4Mguk5EIaSYVRHgJ6TC1Zq76ISXWBvKp8FZBRCMsXHs
+	 0QLafahaU24OD7OnXKG1bZnMUCAPvGCBfuMFQb4raAKzvTeR6NluXJg9sBmKz6yHXh1my
+	 WgGfihStddVOTN9fmuIb5b7mRsXhyGUr5b/FlsYwoksvblcscxq77aCM3/B9E1UqrLPmv
+	 Z31B1SDdl4Gi+oapsktfVgdV9MtM0HgpMTWr9Jyr438rp5hXcsIH0d8AKBr5K0fO4fA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=none header.from=ebytelogic.com;
+	spf=pass smtp.mailfrom=ebytelogic.com;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=52.101.227.94
+Received: from MA0PR01CU009.outbound.protection.outlook.com (mail-southindiaazon11020094.outbound.protection.outlook.com [52.101.227.94])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange ECDHE (secp384r1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D8BC8606A323
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 05:59:54 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D8BC8606A323
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=eXnfkOdx
-Received: by mail-lf1-f47.google.com with SMTP id 2adb3069b0e04-5c00b0866b0so382029e87.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 21:59:54 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795672793; x=1796277593; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=k2IRBl9gY5e2oSUNrEWY6jjQeC8ZZ1pQO6bdpjOXj2I=;
-        b=eXnfkOdxJc0Gj7vmJ8rNyjwrixGiB80YcEjr3kfxXXWycGgRixJo8zxbnIzNFq3yNc
-         2mMdoAgIIepQ2rgKnIcqF0K8Ll9eeCF+H+HCXTEzWIn2DGA2jL4fMrPxUFQy3HCk3Xho
-         YM+CEtXOh/+YQemc6c8XUTfwL7cc73Wxn5BAxKVko7gF0qH8FaoP1GFQFthtGnYhYhj4
-         v/6KADYgbLYCA3z2UPDOvPzdlYW2TEnWANnnfLA9bWYQTYBGWmyjVSZkSQtsixl6N+8z
-         7fuqCjnuZdhE5DFOtA9to/FYLZvKfJdwZDx64/SawBHM+x+VrPGbavm2BWt0jy8yf4eq
-         00cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795672793; x=1796277593;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=k2IRBl9gY5e2oSUNrEWY6jjQeC8ZZ1pQO6bdpjOXj2I=;
-        b=A0H2bA0mlQJPPHk9J+DoDD3sMj0DUnJCoddtiCihu3ry+IFLyTSxbLkKLlETHQR7wo
-         87QkZq734tYNc+9hsyuZ116HH7FhbysTPvUZocPWfuajvmFaRMQ0kJg3uC0wGDvQHbml
-         rjIj2+G5I1uRzrOUMg1dvaQpQU78/t1HHL5Tpeoy1qwvjD12bNnb9kKFhYp7ee8AIWFH
-         vFF/ouhAW/V9VXEtMRdI1Eve9s0kW1goIT+Zb9rG38+oBoDcRRJFSC47KP6EZgLTtOwc
-         dRDncmEY+0G6dvyxhe84IHe2lynFLanUeVY4/YFe7bb7vwq0igijz7RlZqJoOY5uFrLb
-         sTDg==
-X-Gm-Message-State: APuU4Z+2xnKyMcDmOl3N/hATYM71ZxQMukHBOVa8xm1Xr8Y/FjlGGSBm
-	iYTEal6yY45LApIEB2ncLLZxOtXmS96loFZ7FBoNAuqfWJemSEf5pTEo7EO6mTuicxg=
-X-Gm-Gg: AZFdTZfZaIiW47LdRWZSHaTBn/BZGeeP6eL2HhGjY86Z4Tz2pFodhCg72vbhnB/a8Zy
-	xHY//uRpG/oPSU9H5h8rS2gpl66+vjAK3VoscZ84qP/iqNIdpXM5FzgPrXAhctg17llzOlIPp6C
-	16l5GQqnwZ8nlz/dI2+sFClDcIXdKJoZeZZlqQeO+IVmojZzJIjWfQGk5wgRDLbz2gNXVZCvbbr
-	Hk060HuQzFS+1k7IaVHEJsvsaDZA8wcZY/uCVm5h5Gn8qEctRfzndGYIOKp4IEfnJ81bQKBkEKu
-	WOrwcd3DsoU0qBsFmYIzyZ4mPlm33v6dthaSycH4Vu1QRN6CjbSoduHuCCFMtMYcNmq9WgwlJoT
-	i1tpF/6vq0M9/aW31yWtzbJT0zk8+AFncCbL/r7cBVNuSC544IT9is6pj7kmOVeO5dGlYkthfb1
-	+uv+QJVSC8dC0LVGYXwo3aZ19chl570SdQKgpj+2UFDZUIl/7FUkgRoJgGWX7lgC+MViooi8w7K
-	MBCXfEkw2yQRKI53gx/ONLHLr1mdRADcEiLyHMY7lBhGu4yb3zy03WERZJMZ7tWQzy+O+ErufzL
-	a1JhdX+tLaGs2XXzgz+xGtCq8G2zQkRAMeQwo2eh2N6Uiy+/sEUOBCTLFcK4fAhXnhYyggiPyxp
-	LlD5BUQY=
-X-Received: by 2002:a05:6512:12c7:b0:5bf:a48b:7827 with SMTP id 2adb3069b0e04-5c1bc6bf385mr6662753e87.2.1795672792982;
-        Wed, 25 Nov 2026 21:59:52 -0800 (PST)
-Received: from [192.168.1.101] (91-159-24-186.elisa-laajakaista.fi. [91.159.24.186])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bd01b3eesm5192662e87.42.2026.11.25.21.59.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 25 Nov 2026 21:59:52 -0800 (PST)
-Message-ID: <6d7257a7-92dd-4a1a-a598-9a4cd2be6e2e@linaro.org>
-Date: Thu, 26 Nov 2026 07:59:51 +0200
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33019606A327;
+	Thu, 26 Nov 2026 06:03:31 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 33019606A327
+Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=ebytelogic.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ebytelogic.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XyADRK+j6BIaqgXtDPRXN/0jdCGHMCpJ/vGS2R/OQJvyS4ZXvTX4DpOJJhL3fYr58mIwhVEFyrAft77Yv+usLHqjd+t7QB7jCJ8wFVfm6hvbySzFTDGBIfQGPNRuvYZntk9UQAEG0YhgBaZhP4Cv7/VEzhmwb5CC4NTBo5MWrgB8aZ4Ul9ygeSbVyMY2/ulfsQfQjOFLTKXf7aM2mM/W+alavcSMqrE0jySkjqOhUoePuVwnB6FaCEc2Y0UqjpMLxcAsx/7ltejKBVOKJL2tjEbWS8sjhvKayRK1J8vLfBF5oLumyaI/VvmMmgn3e8vnknjZna0wsqzBfpD8O0PWvQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2LxeavXPe6VXSUosbgjtKtxaYe0oFk+RyjaRfAlz3sY=;
+ b=joABgVhuFRskgmRKD6h3aS9wzpS1AyjBG42EW+3cWHXwRLWNCwp2NDbMBWXzbAlgvq+yci5GGLRaIt387QpxRJ2jBo0LloFCmJANDm5kAXfYivFsD3f2FmiioMIStGhvANKVIxEF6X4Z4W34U7y+K02L6/SxlZYKvyZbULZJ7MbXaOKlAB7s41ITEkpJVqgvC1dpCTqN9NsaJzmw1CmUbXLAIMh74jjjThDnxf/+6ZffxJG14cADmnDiD37hzjMvjL6xoFzYgCOqfUpt0o9eidTkQJ6zzplNOk3fbeFSTP+rHpmXnhl5V5uvNLYAwQFkR7mANglDO77p9A1XsrXvpQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=ebytelogic.com; dmarc=pass action=none
+ header.from=ebytelogic.com; dkim=pass header.d=ebytelogic.com; arc=none
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ebytelogic.com;
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM (2603:1096:c04:1::97)
+ by PN3P287MB0070.INDP287.PROD.OUTLOOK.COM (2603:1096:c01:ad::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.662.7; Thu, 26 Nov
+ 2026 06:03:28 +0000
+Received: from PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::4cf2:bb74:999f:d6b8]) by PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ ([fe80::4cf2:bb74:999f:d6b8%8]) with mapi id 15.21.0662.004; Thu, 26 Nov 2026
+ 06:03:27 +0000
+From: Hitesh Patel <hitesh@ebytelogic.com>
+To: Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+Cc: Hitesh Patel <hitesh@ebytelogic.com>,
+	linux-media@vger.kernel.org,
+	Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+	Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
+	Loic Poulain <loic.poulain@oss.qualcomm.com>,
+	linux-arm-msm@vger.kernel.org,
+	ravi@ebytelogic.com
+Subject: Re: [PATCH v2 0/12] media: qcom: camss: add V4L2 subdev streams API support
+Date: Thu, 26 Nov 2026 11:33:14 +0530
+Message-ID: <20261126060317.3696384-1-hitesh@ebytelogic.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
+References: <20261125080001.2540101-1-gjorgji.rosikopulos@oss.qualcomm.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN4P287CA0050.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c01:270::16) To PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+ (2603:1096:c04:1::97)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,117 +94,96 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/2] media: qcom: camss: Add Glymur-specific resources
-To: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>,
- Bryan O'Donoghue <bod@kernel.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
- Suresh Vankadara <svankada@qti.qualcomm.com>,
- Vikram Sharma <vikram.sharma@oss.qualcomm.com>
-References: <20261123-glymur_camss-v4-0-d7db74f59e22@oss.qualcomm.com>
- <20261123-glymur_camss-v4-2-d7db74f59e22@oss.qualcomm.com>
-From: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-In-Reply-To: <20261123-glymur_camss-v4-2-d7db74f59e22@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PN3PPF28092842E:EE_|PN3P287MB0070:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0ca949d4-cb63-46f9-8fe3-08df4b82fcc2
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|52116014|366016|1800799024|376014|23010399003|10070799003|261009223027099003|18002099003|22082099003|3023799007|56012099006|10067099003|5023799004|261102123227099003|261028144727099003|261022105027099003|261026121527099003|261026140227099003|261021121427099003;
+X-Microsoft-Antispam-Message-Info:
+	6t2pquDm6O/SlQFSToczeKCFDoFf+9tqQ257BriSZqBoOaUnuS0jWGxTyYySsp3rjVbRsFO6+KsJwCytZhCmiK6L3HGCIxwOZfYu8MxtOvKBanVKEuDknNSxoguQmW67GmvBwYqDbqufi0DCSsIdVbh2vdZUHB2qhj+5GhacAOww8H1D8YTHgtyTQizuYxyOJzTPbJ7yItzgD5jl8/iOa6hcDmMfMoPZwjfgEwT7boozLrBuWG/awMK8yu0yAZHkWfbFSNAXwupw45acAT3Aof8HcQaSS6mnlEXjL5VOyJQEWPt0YbnJk+rgWi75oA0vEpWGTlGdeiLCck9LOXk1aoxORBUl/TBjiUeevx0DucXu/y8vLfqc2MENZBpLpWe9RhZ4EHZAoVaIA1JNaUsofjuTfmNjzh0W/AbEx91GGLRnwHSSG4wfR0jBXlncbH4q/Hb6s4S5fiOcCFHYQUtS8H6HUIAJTEY+8yZkp8iK/PjAiZT1+Nx31oIeiK2Yqa6/T7DTpB0ZGk+DNdj8VhuO37kDkfnzI+VgGUFk8XEPiqYUkjOyHkLJGGrVi1KopA8O7Z+q2G8m7fb1XdtyPZBhzZbFWYb3uwZsSKstk0JKebtK7kM1j5JDOW3AwVkVXNTROti8oS0FhS94Ds57faA/N0daPc6dQsFHtETvbBy1aCg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(52116014)(366016)(1800799024)(376014)(23010399003)(10070799003)(261009223027099003)(18002099003)(22082099003)(3023799007)(56012099006)(10067099003)(5023799004)(261102123227099003)(261028144727099003)(261022105027099003)(261026121527099003)(261026140227099003)(261021121427099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?zlqxL7U3S6Y5aUNjJovluQgg0irczDEqYHZAEJ+xlA+AK6EJSeC8gKZoSunn?=
+ =?us-ascii?Q?5l69ZmF6MYsvmzL3fAfouAiT+rSpLElS302wH49uGCd0Wzk3usoGNqPZTjoB?=
+ =?us-ascii?Q?J+DurOsFtmZzOrLMzkjl/1QhFf0aS5vofhbddVNSUSS7k0EG+wBwn1NHpsDh?=
+ =?us-ascii?Q?zJmpnjFJGaNIkZENl0r8I0zbVvA8i2f9+i1sqRKbSoYy0LJP2WJcjYQ3hU8M?=
+ =?us-ascii?Q?3mRuJFVOBdi5dLr4Kayh/WQulM5LrHkfwmrFjowIAQKD0rgjdlVgG1Do3a3V?=
+ =?us-ascii?Q?xpeMZz/O87ikh6WHcVRHgBLDdAz1qaabQq7SVOlXXoDV+YOvqyhZ0KjBtD3z?=
+ =?us-ascii?Q?WD5dbHjncV5olLPxBMmPpezYpU7yWF5jeFRKSQd+N25TMY33JPM9BWFHaXlF?=
+ =?us-ascii?Q?oMVvV4dW+QPa0e9ChwbjtYsj7FyoAA7PrS2/uNtOdu8h+kNqFCEsQcUMQ7zk?=
+ =?us-ascii?Q?17+3SsKRkyqMbVkUvWJB7Y5WndWYlPjzm0auw9mke2Fg6RPhFoPpVBcvMwXl?=
+ =?us-ascii?Q?SBRrdaXa81Cdy5++EdqmCGsh7QvMFfOLlc1Sot6tlptsgHi/KYjuiud1LWdc?=
+ =?us-ascii?Q?4SecDp2/q4JV364UgrDpJ5L+QDtVcE+AuhvIBqB+69/qlcI9LGQyvrPMnerP?=
+ =?us-ascii?Q?rUQHY9+kDoSmvPEvFWCd9b/zAUQgKdVtRNtaj1dGOjU5Mjy2dUi7VXowuWqi?=
+ =?us-ascii?Q?w12z0+KF1kjyYzGkqSF6a5F7r6XPHkKjHmhx33NDs8ngjj9M8IlJ2lqsS+FP?=
+ =?us-ascii?Q?PibDuXWCBhbFgWQcnFkIBkm+koJyM3JNJLg21lLs6PWxuUQUzQq6/xpoygyP?=
+ =?us-ascii?Q?dX043pF3qXHiVGIF9VgYg2JNzAzG1ieVUNX8+0di4ebl21G6K+0j54DR1g95?=
+ =?us-ascii?Q?ydqylqCH+zQZZBe9qdQH+zeUVrHmIoWUOvFnr4VqakG8rXdgHkO1qzvQqXZ3?=
+ =?us-ascii?Q?u//j6qwDkZk1CFlQP8LGS9FM5SzUcr6iYDpO6IYNgjXhGCezUIJivteR67QU?=
+ =?us-ascii?Q?acKfAbUV6BT6qnX+ys35hGw9YPjjNVVjtUpfgetW0dox2iMIf+ofR71Y77Zo?=
+ =?us-ascii?Q?3ajngTOp+fvSOi1O01SlE8bXhe+FlZ/ePSM8FImKu3DC4hchs2EW0uF/UW/o?=
+ =?us-ascii?Q?sNMsCFArYXFCK0HqC2UknQfgyYofXkN1TLyvApjqUULh+eYeHFVLgFhkx46J?=
+ =?us-ascii?Q?cQ1LupN5HDqzCryb7ZqolCUvIFQ9Adng6CCehMDdfKH/CD/7BT/kyJHZT3e6?=
+ =?us-ascii?Q?fGngfFSOa+N7+Dpen4mSHM6/1QnJPdRWhz+G9BbjTXxOT20znq0/NtPSEFnD?=
+ =?us-ascii?Q?LZGBufSFEYru8di34p9NfxHLo/zFzq6yXL+Bd9dxL7OI++0mKcU816qtoUtK?=
+ =?us-ascii?Q?ov9VsFfFRj+xpft6HtByiaFYzBNlCJMuXFbwcpQGeYefHxlZMZdksQ9RKF10?=
+ =?us-ascii?Q?R5MIS5ABBNEDnh+WVWCgAs7yACgfbSeqSa/PIxTKBIaySmQHB3BCbC4cOHGp?=
+ =?us-ascii?Q?zaObsCho3zsSSLoPKf5MXHgoxMgRLR2yYn2kpgwUf1gULJno/3Am7AP5eAkn?=
+ =?us-ascii?Q?GXrzFQkxRjyWmPgDg5GS/c5c1O+N2eKS+wHfp5VuYTnaVTWFv5tWNuSyLYG/?=
+ =?us-ascii?Q?oVPS6YnDk/e+wjRZi3R/sXT8X1KNjTdSDJbtRpvb5Z1cLkaIMhutR2RBUhWt?=
+ =?us-ascii?Q?beE7HAptOLwQxDcBNlHB0TIg98kghYRT7biw5V0jmeo9+CDwMZkqwtwXMS5J?=
+ =?us-ascii?Q?eIrjDvAfFYcp+I+0xJb0dqcvCOlxDq/SaGmtXkVRjpUA9mvciAebjV746cDE?=
+X-MS-Exchange-AntiSpam-MessageData-1: eXLRZpSK8QaUbg==
+X-OriginatorOrg: ebytelogic.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0ca949d4-cb63-46f9-8fe3-08df4b82fcc2
+X-MS-Exchange-CrossTenant-AuthSource: PN3PPF28092842E.INDP287.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Nov 2026 06:03:27.2731
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 13bdb17c-4ae8-490c-90c1-ec8121ef96ee
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vXYYGIkhFd+9uqwG5V/Baho3xZYFW4aDNb/kflct5Ytz5MPpdwZ66FgKUl35cJfWoQfucbYwjdMPGqQ1Ef2CYQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN3P287MB0070
 
-On 11/23/26 13:36, Nihal Kumar Gupta wrote:
-> Glymur has three CSIPHY instances while X1E80100 has four. Reusing the
-> X1E80100 CSIPHY resources also exposes CSIPHY2, which is not present on
-> Glymur.
-> 
-> Add Glymur-specific CSIPHY resources for the three available PHYs while
-> continuing to reuse the common X1E80100 CAMSS resources.
-> 
-> Fixes: 09d6c30d3fae ("media: qcom: camss: Add Glymur compatible")
-> Signed-off-by: Nihal Kumar Gupta <nihal.gupta@oss.qualcomm.com>
-> ---
->   drivers/media/platform/qcom/camss/camss.c | 42 ++++++++++++++++++++++++++++++-
->   1 file changed, 41 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index f8e5cf9f3ff09e96d3b48cd5628489715385cc5c..f3cab9ecef04273e09b81ee0cd4e31ca45d1c915 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4103,6 +4103,30 @@ static const struct resources_icc icc_res_sa8775p[] = {
->   	},
->   };
->   
-> +static const struct camss_subdev_resources csiphy_res_glymur[] = {
-> +	/* CSIPHY0 */
-> +	{
-> +		.csiphy = {
-> +			.id = 0,
-> +			.formats = &csiphy_formats_sdm845
-> +		},
-> +	},
-> +	/* CSIPHY1 */
-> +	{
-> +		.csiphy = {
-> +			.id = 1,
-> +			.formats = &csiphy_formats_sdm845
-> +		},
-> +	},
-> +	/* CSIPHY4 */
-> +	{
-> +		.csiphy = {
-> +			.id = 4,
-> +			.formats = &csiphy_formats_sdm845
-> +		},
-> +	},
-> +};
-> +
->   static const struct camss_subdev_resources csiphy_res_x1e80100[] = {
->   	/* CSIPHY0 */
->   	{
-> @@ -5572,6 +5596,22 @@ static void camss_remove(struct platform_device *pdev)
->   	camss_genpd_cleanup(camss);
->   }
->   
-> +static const struct camss_resources glymur_resources = {
-> +	.version = CAMSS_X1E80100,
-> +	.pd_name = "top",
-> +	.csiphy_res = csiphy_res_glymur,
-> +	.tpg_res = tpg_res_x1e80100,
-> +	.csid_res = csid_res_x1e80100,
-> +	.vfe_res = vfe_res_x1e80100,
-> +	.csid_wrapper_res = &csid_wrapper_res_x1e80100,
-> +	.icc_res = icc_res_x1e80100,
-> +	.icc_path_num = ARRAY_SIZE(icc_res_x1e80100),
-> +	.csiphy_num = ARRAY_SIZE(csiphy_res_glymur),
-> +	.tpg_num = ARRAY_SIZE(tpg_res_x1e80100),
-> +	.csid_num = ARRAY_SIZE(csid_res_x1e80100),
-> +	.vfe_num = ARRAY_SIZE(vfe_res_x1e80100),
-> +};
-> +
->   static const struct camss_resources msm8916_resources = {
->   	.version = CAMSS_8x16,
->   	.csiphy_res = csiphy_res_8x16,
-> @@ -5806,6 +5846,7 @@ static const struct camss_resources x1e80100_resources = {
->   };
->   
->   static const struct of_device_id camss_dt_match[] = {
-> +	{ .compatible = "qcom,glymur-camss", .data = &glymur_resources },
->   	{ .compatible = "qcom,msm8916-camss", .data = &msm8916_resources },
->   	{ .compatible = "qcom,msm8939-camss", .data = &msm8939_resources },
->   	{ .compatible = "qcom,msm8953-camss", .data = &msm8953_resources },
-> @@ -5824,7 +5865,6 @@ static const struct of_device_id camss_dt_match[] = {
->   	{ .compatible = "qcom,sm8550-camss", .data = &sm8550_resources },
->   	{ .compatible = "qcom,sm8650-camss", .data = &sm8650_resources },
->   	{ .compatible = "qcom,x1e80100-camss", .data = &x1e80100_resources },
-> -	{ .compatible = "qcom,glymur-camss", .data = &x1e80100_resources },
->   	{ }
->   };
->   
-> 
+Hi Gjorgji,
 
-Reviewed-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Thanks for folding in the SC7280 patch.
 
--- 
-Best wishes,
-Vladimir
+Ran this on SC7280 with two GMSL2 cameras, so real sensors rather than the
+TPG. All twelve applied with plain git apply, built without errors.
+
+Tested-by: Hitesh Patel <hitesh@ebytelogic.com>
+
+RB3 Gen 2 core kit, QCS6490, MAX9296A with two MAX9295A serializers.
+qcom-next at v7.4-rc3 (7.4.0-rc3-01389-g1843874b4356), your frame sync
+dependency plus patches 1 and 2 of Bryan's routing series underneath. Two
+local camss fixes on top that aren't upstream yet - link frequency from
+the CSI-2 transmitter, and the source to CSIPHY link made per endpoint -
+I'll post those on their own.
+
+One camera per deserializer output:
+
+  imx900 -> max9296a sink 0, route 0/0->2/0, src pad 2
+         -> csiphy4 -> csid1 -> vfe1_rdi0
+  ar0234 -> max9296a sink 1, route 1/0->3/0, src pad 3
+         -> csiphy3 -> csid0 -> vfe0_rdi0
+
+  imx900 SRGGB10 2048x1536, 10 frames -> 39321600 bytes
+  ar0234 SGRBG10 1280x960,  10 frames -> 15360000 bytes
+
+Also narrowed the CSID routing from the default 0/0 to all four source
+pads down to 0/0->2/0 alone; capture moved to RDI1 and streamed fine.
+dmesg clean.
+
+One stream per output, so nothing here covers two VCs sharing an output.
+1/12 is gen3 and SC7280 is gen2. No SM8250 or SA8775P board for 10/12 and
+11/12.
+
+Saw you'll resend. Send it and I'll re-run the same captures.
+
+Hitesh
