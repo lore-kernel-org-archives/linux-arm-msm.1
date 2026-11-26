@@ -1,52 +1,111 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=45.254.49.198
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795681773;
-	b=zOA2BNSOVLahpwxGvqEtt19WV6EdkNBZWOJmglcqYPBoFkedg5IsfWHv5kxUaxZmhteL
-	 TXQN73cYi1uj2svPdgYkQm023Jx2w884L/ilf1wJBYu+8LOohEeG5oWjcaOvanSxsiUSJ
-	 IFysOf8klER3EiChqyyjk3VlbXu3eL8q+bUB2/9HYUmvOwyB7joR9kP6m2+ifrSqK5C5n
-	 EugK8IKDkf6gQ+YD9UFlUIj7xBiZhRvkLgmSdqQTp3VpanApDHFusZnpoIq+0etqH81C8
-	 1SGW/GYGqi8bxVbMMEbw0lqJ3PcGNEeXoe5WuBEfvphp/f1MI0oFVcD3pyqfEipakxQ==
+	t=1795681916;
+	b=im4QxYihGOU+nuYw3HcIB4qwSA39mcSFyfUSFqfAvDOyHnkhl9nbC3LnflTSdRSG9cAI
+	 04wro+v87Z0ra9D82mpwOkig82F9anzsnRlv5h6THy+jbNrdzPehIa8R74jBKIv4Bq/+6
+	 rdCfviwy3GV9XpIN1d+WYbYoD6vFp/Bb6NHzyqpCX2nOw52iBjMGlAn1JqZ9e0XyADl/1
+	 7HsQ4/buaGVVbKKl15qdGNq++wjMD/FuSY+1Cle9w9sV6CPA441CrdkJY528pfq9b4w04
+	 dBnDE29VbeAg5D1uKCkyqu6kU3L/yH2VFMO36bHdfUGy3FjmX7oWLTlc2CR3zEaoMwA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795681773;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:X-Mailer:
-	 MIME-Version:Content-Transfer-Encoding:X-HM-Tid:X-HM-MType:
-	 X-HM-Spam-Status:DKIM-Signature;
-	bh=g8kf8/GeH/g1HWFh6tDbyo06gdYqxLTJw8CjiHPTWWo=;
-	b=tlLX3SJDMghphIY2WlEOXbqJlL8JZGPEBRB6q+TOVjKT4WenX0Oy/TL/vr/AmFNbiz5P
-	 DpOFYXjnhx8pqxJ5IOUxSptE7LsbZfHIrEBxS6G8oJdYmGhmsBqkEBd3isCq72+g2QgOJ
-	 Uypi+o7IoFTqKj1Gm1OJuUxqySbYFxPGM1x67v0Fl3U8VBpI3KalT2l4rAoC74BpFl7zn
-	 nw2v2comnjaOojEmFvLeDIvADnlL+4cTimyIogAuB3qVM6+gJqvbjVjLO0NsRw2elX28S
-	 Qw2W/90KZgOK6McNIOQ4XAesSgKzT+O3t/RwnIg3VdhuJ7Mj8Qv1VzHQHq4mLF9Udag==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795681916;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
+	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=bsFyyn4glzVRtAEYcoWdywoe9cNyQJ0bI+XLL83v7f4=;
+	b=Q4iklGZLku7tvRLQhTrEQDOQdfl979uSrmCpITxjseTrasW2VtZ0juvq64Ef8LGNGWDP
+	 +JusjoRd0/HBfndtn12g7QpRJN6QylQo2NBcAb2rCDAo0M9YysLV2SbUs9ZElrlRwd38+
+	 /nC7aEBiNhGTqshFB+sX+UwRtM/4fpYlQCSbU+utkd3aUn3R7HNTgK6FyizVMXjmnYUXJ
+	 63qo41PXwAOE4RAkSALB44E0k2O5kvuQgoIpXwlF58wS9Sq3V1HFvUORYJf2aES0nNtSd
+	 0z1byASHfWZw85wkAPVIKXF96l740de7d7k/PFHft64YuK5OPuKB/wHjY7mH/1G1HCA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.sdu.edu.cn;
-	spf=pass smtp.mailfrom=mail.sdu.edu.cn;
-	dkim=pass header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=WGqhDXyN;
-	arc=none smtp.remote-ip=45.254.49.198
-Received: from mail-m49198.qiye.163.com (mail-m49198.qiye.163.com [45.254.49.198])
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VHNHPIPJ;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b="Cb/6fMKG";
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5343E606A31C;
-	Thu, 26 Nov 2026 08:29:31 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5343E606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=mail.sdu.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.sdu.edu.cn
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFEDD606A323
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:31:55 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DFEDD606A323
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.sdu.edu.cn header.i=@mail.sdu.edu.cn header.a=rsa-sha256 header.s=default header.b=WGqhDXyN
-Received: from lgs.. (unknown [101.76.249.61])
-	by smtp.qiye.163.com (Hmail) with ESMTP id 561726a28;
-	Thu, 26 Nov 2026 16:29:28 +0800 (GMT+08:00)
-From: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
-To: will@kernel.org,
-	mark.rutland@arm.com,
-	agustinv@codeaurora.org
-Cc: linux-arm-msm@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	linux-perf-users@vger.kernel.org
-Subject: [PATCH] perf: qcom_l3_pmu: Remove CPU hotplug instances on probe failure
-Date: Thu, 26 Nov 2026 16:29:25 +0800
-Message-ID: <20261126-a35bb25eb5-u21-0@mail.sdu.edu.cn>
-X-Mailer: git-send-email 2.43.0
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=VHNHPIPJ;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Cb/6fMKG
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQ7B721919512
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:31:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	bsFyyn4glzVRtAEYcoWdywoe9cNyQJ0bI+XLL83v7f4=; b=VHNHPIPJMFTm2FRU
+	Ec47rd255jdGakFPiT7uMNt5jTPVQ1FicYqYVdwYenErQFi/LL0zxANpIH0/9R2v
+	CaxDDGSgDdEcY4K7pleWjKTGOdAK1Mgtb9oWb9GOnAt87/eEaslWMZupabxh2sff
+	xUNxi0+qDzGW8vT5hvGc5/mnnJBo0P1zdev6DavGVL6ePh1vfaa9UMWb+YbMWPLF
+	N/D03OTZ47kaP4nP+BaIawczseyDP8EAkW6AUV4edvJDPvf9WvUFnn0BEYBP0oHk
+	eOYrTAnda0Uudxk4Ns8q0cZI5VUeC7BX+R1th+ME8biWt1JXuc403hEXPY5wTB3i
+	Mv6H0A==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y262f-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:31:55 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9460411fce4so37021285a.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 00:31:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795681914; x=1796286714; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=bsFyyn4glzVRtAEYcoWdywoe9cNyQJ0bI+XLL83v7f4=;
+        b=Cb/6fMKGaXX7DeYORLnDNyi3KQ7pSbCueISIgAOKLZ0XvQwJNqf7BCJ+IyQGOVk+j3
+         Yrq92XewJDVlfY8pqCfDNNWgfwpeuugtyd282Yjt89bYHzCmTeRYq7fPgFt7pYJiVjr+
+         TBwYweLjnrwglRFQlStNM5uDZh2k8tI7ZdXqjDDQ1X7FPBVPMfDV7OpXrdD8YgDrcXW0
+         EdG5yLY7LOxMnuqmxODqhwU30glmLUDuZOF7sUZt6ZkzUJD8ksDFXR0FthrLBfLkectR
+         5mE/89HFzREN74TEcb6sYjFQAkvC7f+dVZxQ9JU9VL7WRX/zFi/2kzSl9DjNURU9qPdN
+         1EAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795681914; x=1796286714;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=bsFyyn4glzVRtAEYcoWdywoe9cNyQJ0bI+XLL83v7f4=;
+        b=CDla4q5FfW8Hq0ttvwf/l0vtUh0FLjtaNnVOpwgMMHxX4ZaNhwB0MOToQBUs/N13Gz
+         tsOlpjHZsV6SBsmre1qDJZ2PgY2kRk7ikYt74RiZMe7VurCAyI1O1Mud199VoLKME3+V
+         hMN+KNTiizU9idXjC2vrebeJQKfsOZIeP2NRckj6N5t1pMO1nsVqCU5sHSbZpSYW5fgb
+         JLgbeWvvuT1vIiwIt/O0H+RKITbe+SIUT6iNYJaFa2ppk2fv5dzzFgJiT3/iQFeejOBt
+         73/7XRGxVoRTh94sCvC9/ZjERVPGWOAvFtXi3/LdxmHdZBDnNIOL+KkUD/W4liSJ4wBr
+         wIaw==
+X-Forwarded-Encrypted: i=1; AL+hErGfYzN0uAobufeb/9AAhPWpEJ05MU9BAGKM3AqAwmccQOv3BdHj2iTY9Gz/NI6BmZ7atCvZnlTj9woiYSrg@vger.kernel.org
+X-Gm-Message-State: APuU4Z8Y/2GSGrkmhD0dLJvMWBEG7fIwYg9PTLfCOC14M6ZLtoM/j6yK
+	zb6rmFHzF09EdgylBhAhlq8tJ7S1u7iWNItT99e104msX1s4s6VmnTiEottiuPzd7A+yuEPjkWO
+	ht2fIMjzkG+k9yKWom+l3HVf1P7cN3Oju8StL+SYUekfsuowR95wxMQ7qmWEdDCI/VPJm
+X-Gm-Gg: AZFdTZdXPgCjcO4CXnobCcv9M7/l0442cqPfoqrUpBPDjCsZUmjWw1opJx6ka1OruoM
+	7Ug/L99Pzo13+LqWZcOTNGmTGVc1a8iTzErXnjMefVztd/zUfqNIHQNuiKQDkVaMbbRDsQtsTw2
+	K+AyAKkIu3G6ql8A8wVK6fDNEt5t1aSItQLk5zduebpx08KqbEHwb5FVED7IQciDF+W0S61nhTs
+	S50NQ2FIXXZl2daslERYEH6KQHSXG9q4H+lJrEUviOi8Bz523gbV3G8yUpc865bZXtQpcM3JjS7
+	UH84tld2rum+E/aQG1nT6100xUMXSYJxG72MiPgTvASKl2JtkwpdIIgCQ/unXOLe/tjHA9FnEMx
+	dWeQ/A7PvfL4W57fOyMK8QHMxDdizs20J+cKu+wHKIzBvmtf5vncQP/uKoQ7jm7qrCRYfyyo=
+X-Received: by 2002:a05:622a:e2cc:10b0:535:f9db:3b86 with SMTP id d75a77b69052e-55d769f824dmr343745951cf.3.1795681914137;
+        Thu, 26 Nov 2026 00:31:54 -0800 (PST)
+X-Received: by 2002:a05:622a:e2cc:10b0:535:f9db:3b86 with SMTP id d75a77b69052e-55d769f824dmr343745661cf.3.1795681913644;
+        Thu, 26 Nov 2026 00:31:53 -0800 (PST)
+Received: from [192.168.226.72] ([178.235.128.140])
+        by smtp.gmail.com with ESMTPSA id 4fb4d7f45d1cf-6ba370e8adbsm9286795a12.17.2026.11.26.00.31.48
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 26 Nov 2026 00:31:52 -0800 (PST)
+Message-ID: <c1ec2f35-955f-4131-85f4-bae78d016c98@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 09:31:47 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -56,73 +115,70 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Tid: 0aa216f94d3303a1kunm5cc7b3d23c2e50
-X-HM-MType: 10
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
-	tZV1koWUFITzdXWRgWCB1ZQUpXWS1ZQUlXWQ8JGhUIEh9ZQVkaTB8eVk1DGkJLQh8dTBkeSlYeHw
-	5VEwETFhoSFyQUDg9ZV1kYEgtZQVlKS0pVTE1VSU9CVU1KWVdZFhoPEhUdFFlBWU9LSFVKS0lCQ0
-	NMVUpLS1VLWQY+
-DKIM-Signature: a=rsa-sha256;
-	b=WGqhDXyNpObUhpFwumADEkdXBBrKtopgU2let9BhoQMYMAGA1+aLf4CubUzWyWeKeFDP9J714hmE8j8oNLvfVW8lh+OUDoOzZMhjQjvL3qxTgdHUFPPkuEMKypDOcwre3LIHM4APPeLUBy9C7Pc8yi2sZoJpI4lsCpGVs46aB8o=; c=relaxed/relaxed; s=default; d=mail.sdu.edu.cn; v=1;
-	bh=g8kf8/GeH/g1HWFh6tDbyo06gdYqxLTJw8CjiHPTWWo=;
-	h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 5/9] drm/panel: s6e3ha8: Correct the polarity logic
+ within
+To: david@ixit.cz, Dzmitry Sankouski <dsankouski@gmail.com>,
+        Neil Armstrong <neil.armstrong@linaro.org>,
+        Jessica Zhang <jesszhan0024@gmail.com>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>, Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Abel Vesa <abelvesa@kernel.org>
+Cc: Marco Mattiolo <marco.mattiolo@hotmail.it>,
+        Petr Vorel <petr.vorel@gmail.com>, dri-devel@lists.freedesktop.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, phone-devel@vger.kernel.org
+References: <20261125-crosshatch-panel-v4-0-120adc58e737@ixit.cz>
+ <20261125-crosshatch-panel-v4-5-120adc58e737@ixit.cz>
+Content-Language: en-US
+From: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+In-Reply-To: <20261125-crosshatch-panel-v4-5-120adc58e737@ixit.cz>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDAzMiBTYWx0ZWRfX4dEKS+6F6YZt
+ GREC/fCNZumvskFoMXvXQxOD8W0ltFfT/GfWYYslihc5Lsjl73RIWywXKV9isOoeJBnMIWfxCgN
+ qA1I1CF4tBU7B6VUHhwhMRh7QRJSHXFMDNVIoJvbFw6XbhMneetuNCMWZDYXD5CRxSIcpPk1BN+
+ 87PckGqIbsVfnEVw0iy6/pFA0LNxg6yXbeEG09Ngb8BJXeYczKfIGVYftRtsMc/zJbjsoJCcUfI
+ GZw1xe+E/NMMFdoC3x/Ur8ExhjsmPUjJ76NcyKtxlLjWBzYP91OcxI1qOw1ysl1LSEMo2ynek7J
+ KoblKdfLxfw8Y1mPiRVKqH1vy2GxUpAvoERrGpbjQ0YX6WFOwVFFK5DIPDq51FWOyQkg/jurIh8
+ MNBm1ig6lOF9Bki50HXTp+/v3iH2oa+s783cOgkYS7ZW3ix+fvGSYR0AckqSK+xh93B0nUWfyQU
+ bjVa/mm3DT/N+l7tHjQ==
+X-Proofpoint-GUID: REgd3R9XqCNtnZnvAgiv3pgt9rz5ZwdS
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDAzMiBTYWx0ZWRfX4UESd3bd5txJ
+ gSxz2hrZ/uFN+59tq6BdNZTDo0cdka+A3AlqwhKSKqMJ9JsBRo9A7WNqg5kOfygu2FItooLavhJ
+ bqtIjOqmeQAaV9zMRG3D5uoCR2qr0UU=
+X-Proofpoint-ORIG-GUID: REgd3R9XqCNtnZnvAgiv3pgt9rz5ZwdS
+X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b07ee7b cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=PRfkaYvzSr8QmIIGAkY2Sg==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=7BbI1mFHGmmar5m0u5AA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_02,2026-11-25_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260032
 
-If perf PMU registration fails after CPU hotplug setup, the hotplug
-callbacks retain a pointer to freed device data. A completed probe also
-lacks a corresponding removal path.
+On 11/25/26 7:12 PM, David Heidelberg via B4 Relay wrote:
+> From: David Heidelberg <david@ixit.cz>
+> 
+> The reset was introduced with wrong polarity. Correct for the future
+> compatibles and keep current with reverted logic.
+> 
+> Old DTs keep GPIO_ACTIVE_HIGH and are fixed up via
+> gpiod_toggle_active_low() on the deprecated compatible.
 
-Remove the hotplug instance on failure and detach it before
-unregistering the PMU on removal.
+738455858a2d ("ASoC: codecs: wsa881x: Use proper shutdown GPIO polarity")
 
-This issue was found by our static analysis tool under development.
+made it work with one compatible
 
-Fixes: 3071f13d75f6 ("perf: qcom: Add L3 cache PMU driver")
-Signed-off-by: Guangshuo Li <liguangshuo@mail.sdu.edu.cn>
----
- drivers/perf/qcom_l3_pmu.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
-
-diff --git a/drivers/perf/qcom_l3_pmu.c b/drivers/perf/qcom_l3_pmu.c
-index 3e0c00e3733f..afb13882f0da 100644
---- a/drivers/perf/qcom_l3_pmu.c
-+++ b/drivers/perf/qcom_l3_pmu.c
-@@ -780,14 +780,25 @@ static int qcom_l3_cache_pmu_probe(struct platform_device *pdev)
- 	ret = perf_pmu_register(&l3pmu->pmu, name, -1);
- 	if (ret < 0) {
- 		dev_err(&pdev->dev, "Failed to register L3 cache PMU (%d)\n", ret);
-+		cpuhp_state_remove_instance_nocalls(CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE,
-+						    &l3pmu->node);
- 		return ret;
- 	}
- 
-+	platform_set_drvdata(pdev, l3pmu);
- 	dev_info(&pdev->dev, "Registered %s, type: %d\n", name, l3pmu->pmu.type);
- 
- 	return 0;
- }
- 
-+static void qcom_l3_cache_pmu_remove(struct platform_device *pdev)
-+{
-+	struct l3cache_pmu *l3pmu = platform_get_drvdata(pdev);
-+
-+	cpuhp_state_remove_instance_nocalls(CPUHP_AP_PERF_ARM_QCOM_L3_ONLINE, &l3pmu->node);
-+	perf_pmu_unregister(&l3pmu->pmu);
-+}
-+
- static const struct acpi_device_id qcom_l3_cache_pmu_acpi_match[] = {
- 	{ "QCOM8081", },
- 	{ }
-@@ -801,6 +812,7 @@ static struct platform_driver qcom_l3_cache_pmu_driver = {
- 		.suppress_bind_attrs = true,
- 	},
- 	.probe = qcom_l3_cache_pmu_probe,
-+	.remove = qcom_l3_cache_pmu_remove,
- };
- 
- static int __init register_qcom_l3_cache_pmu_driver(void)
-
-base-commit: 4dce97c6c265544342e716e62fd24bbb232590c5
--- 
-2.43.0
-
+Konrad
