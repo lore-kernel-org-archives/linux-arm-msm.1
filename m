@@ -1,83 +1,83 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.53
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.216.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795674676;
-	b=H7AQMjkSeNTxxwHCH3qR0KAmpz6/6nEK56ovotpA+T3ArJASwxprWwOTAqDJePtFJQzO
-	 3TkvMPHY19A1SiySfOsARibhMFATCRG/4+aU0KmqDQ/Q9hjsR0T7UVSYUGbR1RH90CtIR
-	 LrFYJMNzmftbT8fOZAp1aqKKdaPTy4RvBjNCM9y+MFBc6rtL9P6lAa3DQAtnX5atxafIa
-	 mRYtDX8Qpww1sq97FmJBnZc4sroej2uoS3TI30USNkV0IVmdN33mUbB4mfxsW0YC+13/K
-	 lLoaD5Ul3iipIGzJunWYSZhFrqecxMBQboAU28+1XnFTFvRinzDm0gKW/LPYl0SA1AA==
+	t=1795674679;
+	b=nblvJ3lWPdeXRxPU/ryv3+c7u9LFWlduqClh79T0T38CmIVbqyfnJTlFY4Dmpai9nFw1
+	 RNBv8vRaqR6rsxDMx+0qTakmJAw35kvBY5bG+Fx49+1Y7tT7M/0DPTYJUE3PlXDO3hDD7
+	 LK7BB2MQnzvGpiRuFEKPx9Zi/ek5NB1k44pNtnoNxkBgAHuLpqEvpVLZXCYxC2vqFhr1f
+	 TR+CRrYmuPH4F/GqlL2xwbcx7x4Ko5CI/ByYFoHsAFWDav87jcuhAsrzryhXi+glX3+dm
+	 t5V7Q2e36pHVAoFTFerlSDIVw+KmgiqKZPrHUcZqUqsnJbQw/15yposa8P87XklgYvA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795674676;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795674679;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=0rpAfURq6UOsPiwQ4FgTkXmy2v7jkBq3d/kmCK91TF4=;
-	b=mVwkn4PjJVhcNynAuT2rhpiB9zHEjnLIc9bRw8aV4sE9tz/sIsMVvOb0Ln4uJcB24WFl
-	 RKzQ9CdfegmEClhtKQNtcZWhRnSoUhaLT9mHDWnEofV6GeUf/zQe2ruMyykhA8dlojDDR
-	 mIEhHQWZDuMBUnaxTOyRsBChEtJizQ0ubJprF+BXLIQ01/1BLBFp1bVSQt0T5KCDG2fW8
-	 1deUObaOrWKl2kBFOL2WowzrAYQoGnvb5Ljpyr2hX3/EuGg9k3GOgrjv+yo14oBBm23wP
-	 rxeYsOEI80G0oOpBUuDxD6/Wpmt9q7ndldiOKVoUsiTDucYNIiAj1nliRD/MH8BZE0g==
+	bh=+eLYgfBAkjmFmmcTVzRQujd4paseXj2/5uFjWz/lHZA=;
+	b=U6ThT57HfJpLqEPkoxGuXyJSXvnupr4YeXEmGhXj92o4BNDBGUFvsI/waNkCcsjM7yWa
+	 V6HF9RnNltqEK77dhGmve3Q+veiarHxT8EGKIJd+IjbifV1Eq/ZKtMCVZvc2duog1YZYq
+	 h8yzbGYb56guL96xO2hoL49zz7Eq4r5QHAzI2fm4wDKtbqZpXASGP5j1c2sAUlbr7ixMF
+	 FUsPF5FuKN0vEQCfmR4MlK9gpP8mXta4mKXEIYZQoM06sXcEUQgfcgWsTQnc7uUeO45g3
+	 iSOeTisSGcusj6wJaXMc+gcofBsSusTKnKO1p+xrqx3gKP2gqaKm5JQ86+wOGahwrhA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SJrfEagZ;
-	arc=none smtp.remote-ip=209.85.216.53
-Received: from mail-pj1-f53.google.com (mail-pj1-f53.google.com [209.85.216.53])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WxSq6isw;
+	arc=none smtp.remote-ip=209.85.216.46
+Received: from mail-pj1-f46.google.com (mail-pj1-f46.google.com [209.85.216.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 65372606A31C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:31:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 65372606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23B2D606A31C
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:31:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 23B2D606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=SJrfEagZ
-Received: by mail-pj1-f53.google.com with SMTP id 98e67ed59e1d1-3b4200f59e1so716698a91.2
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:31:15 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WxSq6isw
+Received: by mail-pj1-f46.google.com with SMTP id 98e67ed59e1d1-3b40a522c00so766210a91.3
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:31:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795674675; x=1796279475; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795674678; x=1796279478; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0rpAfURq6UOsPiwQ4FgTkXmy2v7jkBq3d/kmCK91TF4=;
-        b=SJrfEagZnkHwRnLOHyJaCSiMBCa59J4gj0xoer+A4ZL1BnihskxU6ZIu6ZMczmMStX
-         +MeLM1KP+eWScUwxegYatJ5MnoOtBMgEFjUQGji775loTtLPSlb9RXDegNEEED9dFKmn
-         cBSY2YL0tDDJ0msJIA6IKXIxoSZB9LP99leLHpzD6GRuGSKuD32L6H1UWm2bYpBTcI4/
-         HcQJqliFm0BtU8uXy5upFCBuFQOVoOi/Xyh57/FLIJMFiqXrDeLsaTBydXss7Qc+2iFJ
-         nKlDdHBXSyzgLLfBBGN8EQgHZuCnHGOjhzV25J1mR8+isQuzvuA7cnZ8hDL+PUeQsgKp
-         CKWQ==
+        bh=+eLYgfBAkjmFmmcTVzRQujd4paseXj2/5uFjWz/lHZA=;
+        b=WxSq6iswh4gERHnq7KF3yzR1kEsSgP25oEG2Y52ZCyDkgFbEYivNnqmaGegP9AYgGV
+         5/mEujXOjNv0LG0pskaseJsRoFtxoHRpuza1loGsgTEVyig9o3MFGPKycc86OSa1JjXp
+         wMPLBwJELutmPtFnm7tR/QzdKrBes2tetHbsBpA5ZkSXwxdOjIMccbqdXszJdrZeh+ql
+         TC5osXtML3kqt/a082hddVPQ3rLWg8S0qIA0MS9I4Q/zUluvnOLHgfsOhA3QbQYsxb9C
+         T87TwheaZbpXQo2iS5s6CemobHuNDDDdY8Ws12aD92O1TCf+fZF7ZF3tfzBRAHjvH59E
+         ieEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795674675; x=1796279475;
+        d=1e100.net; s=20260707; t=1795674678; x=1796279478;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0rpAfURq6UOsPiwQ4FgTkXmy2v7jkBq3d/kmCK91TF4=;
-        b=vp3jOnHhfKmwDU41rsTA2E4Z5w5/Bf+QiACmAt93WRDB4s+ZxWAPAZVfB+lSchi8Yf
-         C0GEORh/2OOn94krxtT0fH2h+c5Cj8tiSDAndogYpdrR/vxbtu4t8S5Rsc6nVBwI1ajc
-         FqrB889AoW7J5ADtN7IG3VgwhyBVF4LgzZyIbUBmaPYjqvphEd0DbU1H3qauku8Bx+uO
-         BLQRwAZS3Awe20eEcrYV0sjNrW/1tvXHUDnzP1H2x6ocG+q0aQh/fEX+ZFY4AeiQCimo
-         i0haPo+ZkESVImnZ6Y0ycB8lZYGHFlowSQZ46Q6V02pR9Mw+8EU3KHayG3kULjZJ8Aft
-         gViQ==
-X-Forwarded-Encrypted: i=1; AL+hErFIHjHRKLfBCzmvdjwIDxJvlaA16eK+AkHTka5i//CE3aJl2jD68nZ9qdhkifmbTkTVftgDlYbVppFNuwzP@vger.kernel.org
-X-Gm-Message-State: APuU4Z/Fq8+NcFx6d426jyf0PDGZuqTrOjq8YTzsP5SetTuNipOWtXO0
-	3YNJvjE91bbVgktar0HD8AB/nRQaeUKFZyGmaJBY+DQttCPEMy0ky7vO
-X-Gm-Gg: AZFdTZfdQhy53f9KHNTZ+G1b/JsVHeaeZtSPKsJyj1XhzTXYjlgExBvRXYctLHjKMCv
-	5SCfXYm+lYqmJsK1T6hmjgsUiTlXFuKAysRXMm6/+rk8qKa1sxni5zv4pXdUtWz5V9rbqqiZBEp
-	Rci/HKuyOUMjqH6cHI+CvnMrU00dPTIU4N/88X4/v+X2GeZnT33K8Pc16sfIQ3+GM7gK/+I9pvT
-	Cm5SkTfkZtDX7/r9u7snIWAKPHl7kPx4ymgnl2SLiBd3MNkLBVl19SIt5T/+Z53XDHdDpZjJCLZ
-	HcR0X54EWUIvq/NNPOSIRJtm9QaA4g8e7sIro/8kMbzqgTNVcRbewPrsiMo01Td+8pXq4cM6Q3p
-	s6qorD1vWo82InSk1rdey+JGAsrG1RqRf8iv7ZZBDnvyt3stCS44L15YovKTUCPdOb/a2HFkvhE
-	rt6IRclDN4M6Mtx9JZIZMiG1SPiEQv3NOvjX/HeS+mmxDQO/QX6zSh/XQw3SaPbiDA0IQ5NV9VN
-	2zXWUGu4N+xU/Cxa6lz9LHixMZM6eiyEvR8vdMVqXsOCvUDTQ+rkytqOVQisNrb4OQrL7x4reNh
-	tkx8Whlq8ltrRzfZOcSucxkvVgmaMSq3
-X-Received: by 2002:a17:90b:5346:b0:3b3:c107:8458 with SMTP id 98e67ed59e1d1-3b41c961ee4mr30654785a91.5.1795674674808;
-        Wed, 25 Nov 2026 22:31:14 -0800 (PST)
+        bh=+eLYgfBAkjmFmmcTVzRQujd4paseXj2/5uFjWz/lHZA=;
+        b=Po/KOjAFgmrZmZLXmarDR06ng+UAt3tnGfvxFqZwyS0nTH6webP63qKVdJrBTl8+CW
+         +NlAtfaTzV3TjWnwuGJ+PoamAzaHQxyt+bhtn2oP7EcVlaKoUrSSvy13Q2oiOKOc5YXr
+         kRJyWrdrcW0S+zHrorFO8xVwxzEH971sA4VqsUItHEPYzBZLSFLvhmmMVBZyPinnExYH
+         TYgkeo/fdAcCvvmicTKT/0hsRsy197eBvzTo7iRHiGbJsq2U7N3xSUdmPt5tUGKTEU6k
+         q/N657+vj4s1oRSLYBRf05h/KyaVXVneHeRnSTdKm2skGOnxYFRJjEoemWYMLp3GH8m8
+         Wfhg==
+X-Forwarded-Encrypted: i=1; AL+hErFfIouzEAT8M8LF2j2zgxBODnBdAK0q2lY/Kq6vu0iiqvP+iocX015Ahco2MYsP4pljb2DQB7azRwnY86f8@vger.kernel.org
+X-Gm-Message-State: APuU4Z+7tVealSXAJX5VoIhO0L2hJ0378+YCuDCKPtOH2EgRhCLLxiiw
+	n4QGYKn7jd6C2yHQMl8bHfS7+X74wQ0CUSJzlL0F74CG5N6+K1qtvUFP
+X-Gm-Gg: AZFdTZfVXjgUh+n1/CRaK/BEHPCTrdt9vYJX/J3uBFWIHsbDa2GZYegZYbQQZgDKVcB
+	RLykw/ogpwqnHNauO78hhTNZZNUZOETx8nQrJiRpisBukuWrCp9RNyjOylZiBBfGXinWL6ZDZ6P
+	5XoFrUbwnQOXP3t8HRKu4fPqR3tXFsc/YIhj7JzAQHsiipf+9Nug54t+ZY9yXwCUt0SyEwxQGU1
+	L6m4VwcJhucjrUcLOxCBdK3SIv7GIppick71Yg/QqPctxVifMlEc8AHjKc2KuDg4fJYt+vMmqhI
+	D+07dyv0Vgb4WKMvSLWgAQmNGS/j//P6EZl+FA8xfenjEkE4tgoxB45gqV0eVlyvZMFIuAYvfzO
+	xMcp1xeaSi+E5nv/hDXDuvWclbB3YPWgj7kNZ8g6YBKcgi8dZW94g0vRRVxpNNKN75zWGmCVUOg
+	tzqO8WeBU7RaIMDLlQ1/Q7tOhqpdN9bQEW2l0TNoUK9eT+xZv134GwGHMIEZEyY0atZ6gzqvJEl
+	du6BYD6wfXm4skjHcFHXnjH8RU2Ytq3L+x6Ms6eVrkYZmrMxNNUXxJz+Z+oT5LWR/U690t0BnfT
+	Hbrb2Q41ujCIQgsEm+Z6sE4KdbWmMnFI8E1ENSAnnOq5qke30QQHiw==
+X-Received: by 2002:a17:90b:3d8d:b0:3ab:a188:b898 with SMTP id 98e67ed59e1d1-3b41c80b970mr31782071a91.2.1795674678516;
+        Wed, 25 Nov 2026 22:31:18 -0800 (PST)
 Received: from localhost.localdomain ([240e:36d:b08:5b40::a60])
-        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cde7f91c6f5sm7906328a12.27.2026.11.25.22.31.10
+        by smtp.gmail.com with ESMTPSA id 41be03b00d2f7-cde7f91c6f5sm7906328a12.27.2026.11.25.22.31.15
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 22:31:14 -0800 (PST)
+        Wed, 25 Nov 2026 22:31:18 -0800 (PST)
 From: Jianfeng Liu <liujianfeng1994@gmail.com>
 To: devicetree@vger.kernel.org
 Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
@@ -88,9 +88,9 @@ Cc: Jianfeng Liu <liujianfeng1994@gmail.com>,
 	Krzysztof Kozlowski <krzk+dt@kernel.org>,
 	Rob Herring <robh@kernel.org>,
 	linux-arm-msm@vger.kernel.org
-Subject: [PATCH v1 1/2] dt-bindings: arm: qcom: Document Xiaomi elish panel variants
-Date: Thu, 26 Nov 2026 14:30:33 +0800
-Message-ID: <20261126063056.2276703-2-liujianfeng1994@gmail.com>
+Subject: [PATCH v1 2/2] arm64: dts: qcom: sm8250-elish: Distinguish display panel variants
+Date: Thu, 26 Nov 2026 14:30:34 +0800
+Message-ID: <20261126063056.2276703-3-liujianfeng1994@gmail.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20261126063056.2276703-1-liujianfeng1994@gmail.com>
 References: <20261126063056.2276703-1-liujianfeng1994@gmail.com>
@@ -105,37 +105,49 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-The Xiaomi Mi Pad 5 Pro (elish) is available with either a BOE or a CSOT
-display panel. Document a board compatible for each variant so firmware
-can distinguish the corresponding device trees.
+The BOE and CSOT variants of the Xiaomi Mi Pad 5 Pro have separate device
+trees, but both advertise the same root compatible list. Firmware using
+that list to select a DTB, such as Stubble, cannot distinguish them and
+may select the device tree for the wrong panel.
 
-Keep xiaomi,elish as a fallback and continue to allow the existing
-two-string compatible for older device trees.
+Prepend a panel-specific board compatible to each variant's root node.
+Retain xiaomi,elish and qcom,sm8250 as fallbacks for existing users of the
+generic board and SoC compatibles.
 
 Signed-off-by: Jianfeng Liu <liujianfeng1994@gmail.com>
+
 ---
 
- Documentation/devicetree/bindings/arm/qcom.yaml | 7 +++++++
- 1 file changed, 7 insertions(+)
+ arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-boe.dts  | 2 +-
+ arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-csot.dts | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index a7157795870cd..84ae2d991d628 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -1192,6 +1192,13 @@ properties:
-               - xiaomi,pipa
-           - const: qcom,sm8250
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-boe.dts b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-boe.dts
+index de6101ddebe7d..4838f3950124c 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-boe.dts
++++ b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-boe.dts
+@@ -9,7 +9,7 @@
  
-+      - items:
-+          - enum:
-+              - xiaomi,elish-boe
-+              - xiaomi,elish-csot
-+          - const: xiaomi,elish
-+          - const: qcom,sm8250
-+
-       - items:
-           - enum:
-               - microsoft,surface-duo2
+ / {
+ 	model = "Xiaomi Mi Pad 5 Pro (BOE)";
+-	compatible = "xiaomi,elish", "qcom,sm8250";
++	compatible = "xiaomi,elish-boe", "xiaomi,elish", "qcom,sm8250";
+ };
+ 
+ &display_panel {
+diff --git a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-csot.dts b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-csot.dts
+index 4cffe9c703df8..0ad0a76ee9d04 100644
+--- a/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-csot.dts
++++ b/arch/arm64/boot/dts/qcom/sm8250-xiaomi-elish-csot.dts
+@@ -9,7 +9,7 @@
+ 
+ / {
+ 	model = "Xiaomi Mi Pad 5 Pro (CSOT)";
+-	compatible = "xiaomi,elish", "qcom,sm8250";
++	compatible = "xiaomi,elish-csot", "xiaomi,elish", "qcom,sm8250";
+ };
+ 
+ &display_panel {
 -- 
 2.47.3
 
