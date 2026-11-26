@@ -1,100 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.182
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795684188;
-	b=TYXn6vqrvdHY5FjHSyYnn0X3btHyCP5n589WJ5ogpNyyd4JW8lFyjm4n31A/Cqa7vDzU
-	 /CLFhFUcIyQf+7F55Ql2zmUvXhVnnPuVCfxsjYr8pAhZx8xVDyeoeFisOucafn6qiTQCP
-	 3mKcvcLInVA+ur02bC/cdXd0U42pGZSrumapeSSjtPUPQ1aCQXPY2MBfO3BFFalJe9aDa
-	 MSHY1fuayS6NDr2NkSvBRCLX6rDf+57bdFv1pEO8fgQdzFtrunEaDFBVB3Okr5XADuuUw
-	 oZehjNdMk2rNR17IYsBRCL03ner/mBxudla9t1pNHudz5YlXBZgbiz+lgMgxsn4P5bQ==
+	t=1795684616;
+	b=PSyZ+IlOkT27sxidIOn2fVu9WWZeZnKNqsvDqqK5WKQAlKZb+cpDkYYLX0o4YCc85ElD
+	 Wg3VPkjYmUtnbL4gtz58GNQcYD+v11V74e/2JJ3iDLdqQscqz5GPx9i6NNzCf531wd4ds
+	 Hi1dfXJR3xgikg+A7TrLC6AA/JiUL6PF67QMPQf57fyGSQsdKZvG8IE1axuMuUZUlo68W
+	 xaJZ5+NLe4DHaUDZE3MLeSnOcFS84Jb4dyTeEp1KGw4PW7Uy15FOQZorRPIy6IGeyS+pt
+	 TFGxFZQHWQdSIZev/NRyOxPcH9oNDAAS40KHnX7BooR1dNaz5j2hv0pqTuI211tR8AA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795684188;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=Cqsb4zO6HbeJh9XUU8WL9O7XoWnnf8+mVsP8DSAgEVo=;
-	b=h2cNlKMpQroXjn/hS9XhtS/hnQRkB3OJWHIRVCBwbu0OiQAJyO6H8gbOgW92qNetr3pt
-	 2GwNGwV+LnRnudZ+2UWLq1itxdXzQQoMqDpctxJ+xJjU0sR7zlx7EHXatLyc+YwRPkiVp
-	 W9HkNaxSQHszk5OE8J2tTatPaUKe783sAaj0Xr51/ofavngo2nU6iwJVl2URa0HxKIc+U
-	 HC+wUmFZOOQ7jPiYJVOwaND9gyLY29cc6uMreU71OqK9MNOg5tuz+XoyhsIeojB2MW7ZO
-	 o+l6nCfN9/UaWjPNbKcWKg4FAUM89Oa+EmKPD3OVEXxtX7VcQjJXb7BnkEzsxB1T7IQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795684616;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=ZfdcZ48c//AzqVH7rKfuc7GAHFokrDENxga69K9MVf0=;
+	b=gRM91y3QG+9FIFiwZaujwvirlaPHAXUEuICgqPwaO0pFSJLi/5aG5twdYYxnKMxDzWMK
+	 2acTiwzKQG9wJXgNus33ad42GHVfRxuXxfFHiGkvhKbpzYwvXrC2gsRBxC5N3scQ07QGV
+	 XwAs8N8q43foJUfYO5oND2drMqxF6DNG/1zh6md+irlhbJkqNJCOKlw3r/9XMpmhY7zds
+	 wC2JbgmZdAuHSUtr8W2fntViu50v/btPKj0C4hoqpbTC2slgHgHLK+HISp7UGIGmsXdgf
+	 v9bA4+APKPwK65623Yy8HlyCbCwUCOYLXJaCTmVH2EyQVDiJnUJEvhkUSNOVVyFXH+w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZZERgYC1;
-	arc=none smtp.remote-ip=74.125.82.182
-Received: from mail-dy1-f182.google.com (mail-dy1-f182.google.com [74.125.82.182])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXi4jtdy;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 11399606A31E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:09:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 11399606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DA12F606A31C;
+	Thu, 26 Nov 2026 09:16:56 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ZZERgYC1
-Received: by mail-dy1-f182.google.com with SMTP id 5a478bee46e88-386c4d2e2ccso4416013eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 01:09:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795684187; x=1796288987; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Cqsb4zO6HbeJh9XUU8WL9O7XoWnnf8+mVsP8DSAgEVo=;
-        b=ZZERgYC1VuQfUsQOrSBcU6DSLwmsa2ifa853N7XQslulIYoustsmdwtqSlKuCfI0JL
-         JT6ZQpC8LLpI4iSn8UDnZ4uuPILyKjILUJzZdTedrCVB1gl1qFAzxj/TQCrakX9a0YtP
-         KD8O1k5F/pERT++0JxsmZw5X+lWCnVj6RufzFcbgb4CC8dsnXWuxytO+x8BXio1n3eY5
-         VP3rmCy3yTkUZrr+j0fnKIJUVzTEFaTgzXpaXJ2BJZI21OXeFCLDLkNgW7W4KVy05O8T
-         6ooklbMdACFGFGbHKJkdsLvAe1lU0LpWL3fNpKUopXIegxohbDW/AA7dObexZTkObrnB
-         44Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795684187; x=1796288987;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Cqsb4zO6HbeJh9XUU8WL9O7XoWnnf8+mVsP8DSAgEVo=;
-        b=qvu+K594EQDGZWX909+04KMZSu7A4lVQTjUr6Bg7WWtwOE4IbQzwm6wkhbrVc0r0tZ
-         uqpwxEeeG6pBcMnKykAWIvdv14+5y7vZEh8zC+m4owK6h1inhlAbYCh4CPiuTi3cNDU9
-         IbQ6hQ1RDoYiZKA2ahn0mglorcJ8xK2EU3P3OhIFw5JOM2ezCvSaGvpEcTm+zpMAIxOX
-         ElJUDOzFk1Lzy1hrVSLyyZbt7BYiJgGqqqjnqTd/0zvkYLYIH1n/EfnXLV8QpTfzQqN4
-         stBI8IuSY3JTrxXl7hhwJ/Pnp1e5rwqVf76a397VcWfNWBzAltcjgzBlNQTXY0zrydm1
-         xT/w==
-X-Forwarded-Encrypted: i=1; AL+hErE08i4qKs67qe/ZXyMxA7hsa/znHO/JFiyjRr+eup6sB4BnFuF70Tiw7aRjfAjrK2JHj0KNNEIqhc2HZiH4@vger.kernel.org
-X-Gm-Message-State: APuU4Z/iWoHZ9Rennhd2BDSBtOPybjczL8wUt0t4FMw7OHWkHo0cO9sI
-	58AoTYNKiTgvFJgBKGdVpd/o40v/H2gxIYYCWNyNw01RNd06KANMazBc
-X-Gm-Gg: AZFdTZc8RwIayx1Ji0MybYvK7l/ZtpkalSrG/XNC3yo9+bytqoAuv9YtSN9JK5A+cKU
-	BbTWIpZE4nB03EzeLd424hUx9Q880/wxyB1OUVZCtiytn5JrNRacx0xnW0a3IJmAIirwT2Ho927
-	bIujXzQgEnliB9FmAhGwcszNZc+DWxtbQGEE4BUDKXllcqltZW07hRjPqJOPkDY8rzNS5q4TznS
-	Wl72JmUH/5ud2ONUXNiAC0U9xObZDrYvNhZk0vPQFvYBc8MsU9Arr1pplbxdt4vGy6fnwEt/1jO
-	11/Kd45t02+rMpurhbzdokn/WXa5D7wpaY+T//atkJ+EZe3mooFY5Nt4Rlu1ymufhzpTvF6tpCq
-	E7R8KGcnxxUtr0M8MaCz/vp2TMVFoc0mDzGT4MnGbkcXQq+w7wK1XIMAmHA2NF3ApVxNLepICJD
-	1atjz3jTHgb0xMN9FsI8DSEnZwzN0tMKaZsFJ0CRvQzHLAZPY9WCkPnvg+I3tJ3bAXVJVwqAWRr
-	ASIHApd5xEdZH4Ebn103guVPmrdnGlQbkMmUKMbsadxt+LmrWfdwnYmR0HlLLWpELEt4D0eEhAN
-	t6NsdJaCNrJiPGFTNUdukOZpYrLE/4qBDRMIWlW0Y1WuvP1ifSTQ
-X-Received: by 2002:a05:693c:8209:b0:383:e7af:c28d with SMTP id 5a478bee46e88-3856f14d5b2mr21042098eec.9.1795684187144;
-        Thu, 26 Nov 2026 01:09:47 -0800 (PST)
-Received: from 192.168.1.36 ([2402:a00:163:2ce9:ad38:eaaf:b00d:c452])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385646633d0sm108374649eec.3.2026.11.26.01.09.41
-        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
-        Thu, 26 Nov 2026 01:09:46 -0800 (PST)
-From: Ajit Singh <blfizzyy@gmail.com>
-To: andersson@kernel.org
-Cc: konradybcio@kernel.org,
-	abelvesa@kernel.org,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	Ajit Singh <blfizzyy@gmail.com>
-Subject: [PATCH v3 1/1] arm64: dts: qcom: lemans: Add Vicharak Axon Pro
-Date: Thu, 26 Nov 2026 14:39:28 +0530
-Message-ID: <20261126090928.73637-2-blfizzyy@gmail.com>
-X-Mailer: git-send-email 2.50.1
-In-Reply-To: <20261126090928.73637-1-blfizzyy@gmail.com>
-References: <20261126090928.73637-1-blfizzyy@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MXi4jtdy
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B7A801F000C4;
+	Thu, 26 Nov 2026 09:16:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795684616;
+	bh=ZfdcZ48c//AzqVH7rKfuc7GAHFokrDENxga69K9MVf0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=MXi4jtdyxHYxeNd9GvD8/qTFBek+uKD/UwQvdkBGMpRoBOKugRg1mH/Sgv8frDoTk
+	 W0hwp50y+gziYVZkt41i99BFLSJEup8+HwVZwkJ1tsunz+k4Hug8CfwibkTj4EgYov
+	 eHcq8Hi0MJdTD47i1JQs3SnmqQot035w4Rl0yQ6OpcKs0MpS8qCPBRvCSiQr0LJ15J
+	 vQvkWgMepbe6g9vBPRrN9ZbMDxbMh85D7+o7r9bErMGnarnZWdbHZpEM3e1zPeWw12
+	 7ctXM5s0ZmPEQCTuwt3euxOfFxj7lfoy2SH9D0UQaQUyJHWcQ/tP3CXyL7YWeuXhyj
+	 EMlp5ct0ly5Hw==
+Message-ID: <534f7330-d4de-47a8-ba6b-68c29c138186@kernel.org>
+Date: Thu, 26 Nov 2026 09:16:53 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -104,553 +51,120 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] soundwire: qcom: Fix off-by-one error in port
+ exhaustion check
+To: Christopher Obbard <chris.obbard@oss.qualcomm.com>,
+ Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>,
+ Bard Liao <yung-chuan.liao@linux.intel.com>,
+ Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>
+Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
+ linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, stable@vger.kernel.org
+References: <20261126-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v2-1-c424edf85968@oss.qualcomm.com>
+From: Srinivas Kandagatla <srini@kernel.org>
+Content-Language: en-US
+In-Reply-To: <20261126-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v2-1-c424edf85968@oss.qualcomm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add initial device tree support for the Vicharak Axon Pro SBC based on
-the Qualcomm QCS9075 SoC.
 
-Enable the debug UART, UFS, USB 2.0 host, PCIe1 (NVMe), GPIO LEDs, GPU
-and DSPs.
 
-Signed-off-by: Ajit Singh <blfizzyy@gmail.com>
----
- arch/arm64/boot/dts/qcom/Makefile             |   1 +
- .../dts/qcom/lemans-vicharak-axon-pro.dts     | 514 ++++++++++++++++++
- 2 files changed, 515 insertions(+)
- create mode 100644 arch/arm64/boot/dts/qcom/lemans-vicharak-axon-pro.dts
+On 11/26/26 8:56 AM, Christopher Obbard wrote:
+> Qualcomm SoundWire master ports are indexed from 1, with bit 0 of
+> port_mask reserved. Valid port numbers therefore range from 1 to
+> maxport.
+> 
+> Commit 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in
+> stream_alloc_ports") changed the port exhaustion check from
+> pn > maxport to pn >= maxport which rejects the last valid port.
+> 
+> On RB3gen2 (QCS6490), two WSA883x speaker amplifiers are connected
+> to swr2, which has qcom,dout-ports = <6> and qcom,din-ports = <2>
+> (8 ports). Each amplifier uses one port for playback and another for
+> voltage and current sensing (VISENSE). The right amplifier's
+> qcom,port-mapping is <4 5 6 8>, so its VISENSE port is master port 8,
+> which is rejected by the new check.
+> 
+> Since all ports in a SoundWire stream are allocated together during
+> hw_params, this causes the stream to fail with:
+> 
+>     qcom-soundwire 3250000.soundwire: All ports busy
+> 
+> The -EBUSY propagates through hw_params, preventing speaker playback.
+> Disabling VISENSE works around the issue. Speaker protection is not
+> enabled on this device in upstream, but with AudioReach userspace the
+> userspace PAL mixer paths enable VISENSE on every speaker stream, so a
+> mixer change alone does not avoid the failure.
+> 
+> The original fix addressed an exhaustion check that could never
+> trigger because find_first_zero_bit() returns maxport when all
+> searched bits are set. Include the reserved bit 0 in the search so
+> exhaustion returns maxport + 1 and restore the pn > maxport check.
+> 
+> Tested on RB3gen2 with a v7.4-rc3 based kernel and AudioReach
+> userspace: with the stock PAL mixer paths, which enable VISENSE on
+> both amplifiers, speaker playback through the PAL speaker sink is
+> audible and no longer fails with "All ports busy".
+> 
+> Fixes: 6ccec91c3535 ("soundwire: qcom: Fix port exhaustion check in stream_alloc_ports")
+> Cc: stable@vger.kernel.org
+> Signed-off-by: Christopher Obbard <chris.obbard@oss.qualcomm.com>
+lgtm,
 
-diff --git a/arch/arm64/boot/dts/qcom/Makefile b/arch/arm64/boot/dts/qcom/Makefile
-index 19310879349d..6c38f753f06a 100644
---- a/arch/arm64/boot/dts/qcom/Makefile
-+++ b/arch/arm64/boot/dts/qcom/Makefile
-@@ -79,6 +79,7 @@ dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-el2.dtb
- lemans-evk-ifp-mezzanine-dtbs	:= lemans-evk.dtb lemans-evk-ifp-mezzanine.dtbo
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-evk-ifp-mezzanine.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= lemans-sa8255p-ride.dtb
-+dtb-$(CONFIG_ARCH_QCOM)	+= lemans-vicharak-axon-pro.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-crd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-lenovo-thinkpad-t14s-gen7-lcd.dtb
- dtb-$(CONFIG_ARCH_QCOM)	+= mahua-qcb.dtb
-diff --git a/arch/arm64/boot/dts/qcom/lemans-vicharak-axon-pro.dts b/arch/arm64/boot/dts/qcom/lemans-vicharak-axon-pro.dts
-new file mode 100644
-index 000000000000..f81aa2ebbdcc
---- /dev/null
-+++ b/arch/arm64/boot/dts/qcom/lemans-vicharak-axon-pro.dts
-@@ -0,0 +1,514 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Copyright (c) 2026 Vicharak Computers Pvt. Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/leds/common.h>
-+#include <dt-bindings/regulator/qcom,rpmh-regulator.h>
-+
-+#include "lemans-embedded.dtsi"
-+#include "lemans-pmics.dtsi"
-+
-+/ {
-+	model = "Vicharak Axon Pro";
-+	compatible = "vicharak,axon-pro", "qcom,qcs9100", "qcom,sa8775p";
-+
-+	aliases {
-+		serial0 = &uart10;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		pinctrl-0 = <&user_leds>;
-+		pinctrl-names = "default";
-+
-+		led-0 {
-+			color = <LED_COLOR_ID_BLUE>;
-+			function = LED_FUNCTION_STATUS;
-+			gpios = <&tlmm 16 GPIO_ACTIVE_HIGH>;
-+			linux,default-trigger = "heartbeat";
-+			default-state = "keep";
-+			retain-state-suspended;
-+		};
-+
-+		led-1 {
-+			color = <LED_COLOR_ID_BLUE>;
-+			function = LED_FUNCTION_INDICATOR;
-+			gpios = <&tlmm 18 GPIO_ACTIVE_HIGH>;
-+			default-state = "on";
-+			panic-indicator;
-+			retain-state-suspended;
-+		};
-+	};
-+
-+	vcc_5v0_sys: regulator-vcc-5v-sys {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_5v0_sys";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+	};
-+
-+	regulator-vcc-5v0-usb2-en {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_5v0_usb2_en";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+
-+		vin-supply = <&vcc_5v0_sys>;
-+
-+		gpio = <&tlmm 76 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&usb2_en>;
-+		pinctrl-names = "default";
-+
-+		regulator-always-on;
-+	};
-+
-+	vcc_pcie1_en: regulator-vcc-pcie1-en {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc_pcie1_en";
-+		regulator-min-microvolt = <3300000>;
-+		regulator-max-microvolt = <3300000>;
-+
-+		vin-supply = <&vcc_5v0_sys>;
-+
-+		gpio = <&tlmm 6 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+
-+		pinctrl-0 = <&pcie1_en>;
-+		pinctrl-names = "default";
-+	};
-+};
-+
-+&apps_rsc {
-+	regulators-0 {
-+		compatible = "qcom,pmm8654au-rpmh-regulators";
-+		qcom,pmic-id = "a";
-+
-+		vreg_l4a: ldo4 {
-+			regulator-name = "vreg_l4a";
-+			regulator-min-microvolt = <788000>;
-+			regulator-max-microvolt = <1050000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5a: ldo5 {
-+			regulator-name = "vreg_l5a";
-+			regulator-min-microvolt = <870000>;
-+			regulator-max-microvolt = <950000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6a: ldo6 {
-+			regulator-name = "vreg_l6a";
-+			regulator-min-microvolt = <870000>;
-+			regulator-max-microvolt = <970000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7a: ldo7 {
-+			regulator-name = "vreg_l7a";
-+			regulator-min-microvolt = <720000>;
-+			regulator-max-microvolt = <950000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l8a: ldo8 {
-+			regulator-name = "vreg_l8a";
-+			regulator-min-microvolt = <2504000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l9a: ldo9 {
-+			regulator-name = "vreg_l9a";
-+			regulator-min-microvolt = <2970000>;
-+			regulator-max-microvolt = <3544000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s4a: smps4 {
-+			regulator-name = "vreg_s4a";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1816000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+
-+			/* Powers boot/reset straps and always-active level shifters. */
-+			regulator-always-on;
-+		};
-+
-+		vreg_s5a: smps5 {
-+			regulator-name = "vreg_s5a";
-+			regulator-min-microvolt = <1850000>;
-+			regulator-max-microvolt = <1996000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s9a: smps9 {
-+			regulator-name = "vreg_s9a";
-+			regulator-min-microvolt = <535000>;
-+			regulator-max-microvolt = <1120000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-1 {
-+		compatible = "qcom,pmm8654au-rpmh-regulators";
-+		qcom,pmic-id = "c";
-+
-+		vreg_l1c: ldo1 {
-+			regulator-name = "vreg_l1c";
-+			regulator-min-microvolt = <1140000>;
-+			regulator-max-microvolt = <1260000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l2c: ldo2 {
-+			regulator-name = "vreg_l2c";
-+			regulator-min-microvolt = <900000>;
-+			regulator-max-microvolt = <1100000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l3c: ldo3 {
-+			regulator-name = "vreg_l3c";
-+			regulator-min-microvolt = <1100000>;
-+			regulator-max-microvolt = <1300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l4c: ldo4 {
-+			regulator-name = "vreg_l4c";
-+			regulator-min-microvolt = <1200000>;
-+			regulator-max-microvolt = <1200000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l5c: ldo5 {
-+			regulator-name = "vreg_l5c";
-+			regulator-min-microvolt = <1100000>;
-+			regulator-max-microvolt = <1300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l6c: ldo6 {
-+			regulator-name = "vreg_l6c";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <1980000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l7c: ldo7 {
-+			regulator-name = "vreg_l7c";
-+			regulator-min-microvolt = <1620000>;
-+			regulator-max-microvolt = <2000000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l8c: ldo8 {
-+			regulator-name = "vreg_l8c";
-+			regulator-min-microvolt = <2400000>;
-+			regulator-max-microvolt = <3300000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l9c: ldo9 {
-+			regulator-name = "vreg_l9c";
-+			regulator-min-microvolt = <1650000>;
-+			regulator-max-microvolt = <2700000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+
-+	regulators-2 {
-+		compatible = "qcom,pmm8654au-rpmh-regulators";
-+		qcom,pmic-id = "e";
-+
-+		vreg_l6e: ldo6 {
-+			regulator-name = "vreg_l6e";
-+			regulator-min-microvolt = <1280000>;
-+			regulator-max-microvolt = <1450000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_l8e: ldo8 {
-+			regulator-name = "vreg_l8e";
-+			regulator-min-microvolt = <1800000>;
-+			regulator-max-microvolt = <1950000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+			regulator-allow-set-load;
-+			regulator-allowed-modes = <RPMH_REGULATOR_MODE_LPM
-+						   RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s4e: smps4 {
-+			regulator-name = "vreg_s4e";
-+			regulator-min-microvolt = <970000>;
-+			regulator-max-microvolt = <1520000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s7e: smps7 {
-+			regulator-name = "vreg_s7e";
-+			regulator-min-microvolt = <1010000>;
-+			regulator-max-microvolt = <1170000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+
-+		vreg_s9e: smps9 {
-+			regulator-name = "vreg_s9e";
-+			regulator-min-microvolt = <300000>;
-+			regulator-max-microvolt = <570000>;
-+			regulator-initial-mode = <RPMH_REGULATOR_MODE_HPM>;
-+		};
-+	};
-+};
-+
-+&gpi_dma0 {
-+	status = "okay";
-+};
-+
-+&gpi_dma1 {
-+	status = "okay";
-+};
-+
-+&gpi_dma2 {
-+	status = "okay";
-+};
-+
-+&gpu {
-+	status = "okay";
-+};
-+
-+&gpu_zap_shader {
-+	firmware-name = "qcom/sa8775p/a663_zap.mbn";
-+};
-+
-+&iris {
-+	firmware-name = "qcom/vpu/vpu30_p4_s6.mbn";
-+
-+	status = "okay";
-+};
-+
-+&pcie1 {
-+	perst-gpios = <&tlmm 4 GPIO_ACTIVE_LOW>;
-+	wake-gpios = <&tlmm 5 GPIO_ACTIVE_HIGH>;
-+	vddpe-3v3-supply = <&vcc_pcie1_en>;
-+
-+	pinctrl-0 = <&pcie1_default_state>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+&pcie1_phy {
-+	vdda-phy-supply = <&vreg_l5a>;
-+	vdda-pll-supply = <&vreg_l1c>;
-+
-+	status = "okay";
-+};
-+
-+&pmm8654au_0_pon_resin {
-+	linux,code = <KEY_VOLUMEDOWN>;
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_0 {
-+	firmware-name = "qcom/sa8775p/qupv3fw.elf";
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_1 {
-+	firmware-name = "qcom/sa8775p/qupv3fw.elf";
-+
-+	status = "okay";
-+};
-+
-+&qupv3_id_2 {
-+	firmware-name = "qcom/sa8775p/qupv3fw.elf";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_adsp {
-+	firmware-name = "qcom/sa8775p/adsp.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp0 {
-+	firmware-name = "qcom/sa8775p/cdsp0.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_cdsp1 {
-+	firmware-name = "qcom/sa8775p/cdsp1.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_gpdsp0 {
-+	firmware-name = "qcom/sa8775p/gpdsp0.mbn";
-+
-+	status = "okay";
-+};
-+
-+&remoteproc_gpdsp1 {
-+	firmware-name = "qcom/sa8775p/gpdsp1.mbn";
-+
-+	status = "okay";
-+};
-+
-+&sleep_clk {
-+	clock-frequency = <32768>;
-+};
-+
-+&tlmm {
-+	pcie1_default_state: pcie1-default-state {
-+		clkreq-pins {
-+			pins = "gpio3";
-+			function = "pcie1_clkreq";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+
-+		perst-pins {
-+			pins = "gpio4";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+
-+		wake-pins {
-+			pins = "gpio5";
-+			function = "gpio";
-+			drive-strength = <2>;
-+			bias-pull-up;
-+		};
-+	};
-+
-+	pcie1_en: pcie1-en-state {
-+		pins = "gpio6";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	usb2_en: usb2-en-state {
-+		pins = "gpio76";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	user_leds: user-led-state {
-+		pins = "gpio16", "gpio18";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+};
-+
-+&uart10 {
-+	compatible = "qcom,geni-debug-uart";
-+	pinctrl-0 = <&qup_uart10_default>;
-+	pinctrl-names = "default";
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_hc {
-+	reset-gpios = <&tlmm 149 GPIO_ACTIVE_LOW>;
-+	vcc-supply = <&vreg_l8a>;
-+	vcc-max-microamp = <1100000>;
-+	vccq-supply = <&vreg_l4c>;
-+	vccq-max-microamp = <1200000>;
-+
-+	status = "okay";
-+};
-+
-+&ufs_mem_phy {
-+	vdda-phy-supply = <&vreg_l4a>;
-+	vdda-pll-supply = <&vreg_l1c>;
-+
-+	status = "okay";
-+};
-+
-+&usb_2 {
-+	/* Routed to an onboard USB hub for two USB-A host ports. */
-+	dr_mode = "host";
-+
-+	status = "okay";
-+};
-+
-+&usb_2_hsphy {
-+	vdda-pll-supply = <&vreg_l7a>;
-+	vdda18-supply = <&vreg_l6c>;
-+	vdda33-supply = <&vreg_l9a>;
-+
-+	status = "okay";
-+};
-+
-+&xo_board_clk {
-+	clock-frequency = <38400000>;
-+};
--- 
-2.50.1 (Apple Git-155)
+Reviewed-by: Srinivas Kandagatla<srinivas.kandagatla@oss.qualcomm.com>
+
+--Srini
+> ---
+> Changes in v2:
+> - Rebase onto soundwire/next.
+> - soundwire/next now has commit d9ea256ee889 ("soundwire: qcom: Prevent
+>   pconfig buffer overflow in qcom_swrm_stream_alloc_ports()"), which
+>   adds an nports >= maxport bound on the pconfig array. That bound is
+>   separate from the off-by-one fixed here: it keeps pn >= maxport, so
+>   the last valid master port (maxport) is still rejected and RB3gen2
+>   speaker playback with VISENSE still fails with "All ports busy". This
+>   patch is still needed; keep both checks as
+>   pn > maxport || nports >= maxport.
+> - Add Cc: stable@vger.kernel.org, as 6ccec91c3535 landed in v7.3 and
+>   was backported to stable (Srini).
+> - Drop the claim that disabling VISENSE disables speaker protection;
+>   speaker protection is not enabled on any upstream device (Srini).
+> - Give the concrete swr2 port counts and the right WSA883x
+>   qcom,port-mapping from the RB3gen2 DT.
+> - Note that the PAL mixer paths enable VISENSE on every speaker
+>   stream, so a mixer change alone does not work around the issue.
+> - Add a note about testing on RB3gen2.
+> - Say the -EBUSY propagates through hw_params rather than naming the
+>   codec DMA backend.
+> - Link to v1: https://patch.msgid.link/20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-v1-1-81f1a4c9c73a@oss.qualcomm.com
+> ---
+>  drivers/soundwire/qcom.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
+> index 65add9a74ffd9..05311cf639e4c 100644
+> --- a/drivers/soundwire/qcom.c
+> +++ b/drivers/soundwire/qcom.c
+> @@ -1461,9 +1461,9 @@ static int qcom_swrm_stream_alloc_ports(struct qcom_swrm_ctrl *ctrl,
+>  				if (m_port)
+>  					pn = m_port;
+>  				else
+> -					pn = find_first_zero_bit(port_mask, maxport);
+> +					pn = find_first_zero_bit(port_mask, maxport + 1);
+>  
+> -				if (pn >= maxport || nports >= maxport) {
+> +				if (pn > maxport || nports >= maxport) {
+>  					dev_err(ctrl->dev, "All ports busy\n");
+>  					*port_mask &= ~allocated;
+>  					return -EBUSY;
+> 
+> ---
+> base-commit: d9ea256ee889f3db9f0bd07ce5d114ce92e31b4f
+> change-id: 20261012-wip-obbardc-soundwire-qcom-fix-port-off-by-one-47c0a8af1c5e
+> 
+> Best regards,
+> --  
+> Christopher Obbard
+> 
 
