@@ -1,113 +1,67 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=185.70.43.171
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795719603;
-	b=ngVFmVeb7Q99eg3pYRqJbT/r+RLEgHW8Wcg1yqLajOBTxSYNRpCeNed4vkN4nwYozVWR
-	 zZWI7ywYFoAwIkjuiSZ8vR8wbnUcx/iDwOx53PAGuzSDi0f1a5PvpQYmQTGstsSeLwhlQ
-	 81FfZ4pMPik8uxh9TS+kcRaG4W7sH1L1QvjeF9omrz3/Toh91Z0s9yqCwFQEDuO3WjUL3
-	 9vzQa9oD0wfiC9prM3o0TwaNTvuoJd0HlNP8nLkXTipeGn0i00sZMLV9jhLGpJGYfjao5
-	 WOouwjRaxSiFmZp3oyrXpPtF9Udy631BIh6uO7AKxIpJq5EL6+uAtWjfs1LpHGNoK8g==
+	b=b3bG6TuNAgNsHOYQUPH22DmRkVqz3AtTs6NZWjIKQ+7C1MLB7TEEoUdVvNxIoo+xuQYj
+	 wSlgVLbrnFbsCkBItk3ChrSealXUR/XM7/CG9BVMPlCCivyG1ig9/Xfxx6PAr3VEBUKq+
+	 ST9kiLTD20aeAIwZYhFW6p9LoFlFm332DlDQvcRC5lxoPOxstfU8fDmrwAfZ6x+/GQGGq
+	 zue9xP1mWJihPPb/iWsp9E31s/YwYj8TuRiLU9ARiKUXVjRn+pPWNOPljfQ/FBNDD7xw7
+	 9lqeivVyG8e2e9nTz0fB917FXIoHoo4g1KYTntfjpOoP/x7Dd1MroXp8W8uW+v+bvFw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795719603;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
-	b=RpZvEkcuOuV833i3oRZptRftzCaVIrKHCK4EaXBGjkmfZ0vmlWzd7+r7j5JljxyE3B/1
-	 1O8mXkloGXbyxa4tCdXr6+dRi86ups62es4VHkMurUPNBAxa1NYZ1I0MrWnZ/RjiqP4qo
-	 kHqioU1HrtRCd5UmokgfTbGLqbfjKadyxrg0qx4sKwitQDwcWiB91D/bkMkSMXwZsfqwQ
-	 yYb+zU7h3P/gNhBY7KGuaGDj2KCckMc2qOUjcWoc3z663v6y1ADvOVr2FcCa5wXhktpCj
-	 DCfcjqYuyyC3XXOjpxXogwf5ngj37g7YrOlzrEfJEG0em2iaE4DNjSq7LX4pgFbYArQ==
+	h=DMARC-Filter:DKIM-Signature:X-Pm-Submission-Id:From:To:Cc:Date:
+	 Subject:Message-ID:In-Reply-To:References:Content-Type:
+	 Content-Transfer-Encoding:MIME-Version;
+	bh=2b6K6pvLLOQHdHQFNsRUOJnyQczbFVIGhymNPlQlyy8=;
+	b=O1OglqF5VmXPta5ufSr5vcyZB9cJ2HXEJ3vWOhSJIS3TutOYo7giUe6ZVJtKuvLERr3e
+	 g9GoK/gsmyLh8+Z7bQ4C5M/cLhwTvSJQVid+mpzR3wEZkl9X7jTSJsx24C7MnC+wdcR7W
+	 zgM82DoX3sRwhrNk9L3FmQteJxF1OwLOP8tTWbW1oRYstriCjwatdQYlCEj8HGivBidBw
+	 NdT9X7hmSCekxCJ9+ZMW79UWEIX0mIsrsD6hapisLCEFhMvk0ZalwSjQlK6HB0FFIQcdz
+	 7qKQyME+ojTXhn6jRCvx6wDUVq1KdKV6UwKvQSC/4tbX7qleH8HwSxD5yQ6B/IxT4Uw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PTCW4Tav;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Qk+4cFwB;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
+	dmarc=pass header.from=michaelmcallister.org;
+	spf=pass smtp.mailfrom=michaelmcallister.org;
+	dkim=pass header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=KLR9WuaB;
+	arc=none smtp.remote-ip=185.70.43.171
+Received: from mail-43171.protonmail.ch (mail-43171.protonmail.ch [185.70.43.171])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56095606A332
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:03 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 56095606A332
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EE0E8606A33A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EE0E8606A33A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=michaelmcallister.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=michaelmcallister.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=PTCW4Tav;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Qk+4cFwB
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFu4r23850515
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:02 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=; b=PTCW4Tavs8sEGIGD
-	sz8/fOge8yOQMouJw4pYBniAonjpd3qi1v40dZYuOZsWJDzyNco7HZjpzaTemJGB
-	lfyX9S15RhwnPg0fUXshot5FEWJ3byCuw1fItJyIVgWbqjeC0gSevY6mTBrg+Xb7
-	shXxmBvYar5xERAy+pUrE1hjJ6zJOl9JvvjTf9leLKLRDm+TKW4iFCcbdFy9tZDz
-	4FshGmPhoCGlot+2Ps5Cq3gJ6lID+4jnHm1DFq3LwROaYunKW0hqRYfPMhznD0PF
-	Z7ASnAYCXpmzd+MxqnEWJbJduT0y7YbG9fSFeEi/XXgR3foa3FPt3ddcUr92mFOW
-	IxA9hw==
-Received: from mail-dl1-f72.google.com (mail-dl1-f72.google.com [74.125.82.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6h7ga617-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 19:00:02 +0000 (GMT)
-Received: by mail-dl1-f72.google.com with SMTP id a92af1059eb24-139b62317d0so3063065c88.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 11:00:02 -0800 (PST)
+	dkim=pass (2048-bit key, unprotected) header.d=michaelmcallister.org header.i=@michaelmcallister.org header.a=rsa-sha256 header.s=protonmail2 header.b=KLR9WuaB
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795719601; x=1796324401; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
-        b=Qk+4cFwBGGKT1PHEUp7Ej2lcsLlXezJhA/E4hd7A0b5Fpm6gHthacNuw6PC8+R0aaa
-         8LCiMylzZQAJkxDPxiEOQY7Ih/awYn1qsulkkvgW6/0QX3FJnI9AoA6bmlRDMtTiCJN0
-         UrhCl+85p4JsM7VJbRqIZWr+o454gyOsSWjb45qcp9V4WeBvt8YgGDzz1SSgl5XBEr9R
-         7dZ66kaiFVJj1fOfFezkUVJe7loI/c5SMvp26CWCqyYWBaMNfJg9nMB5be9OdPM+Pfvr
-         OV2VdFh2cTKzp8dnCBwA8EkCHcGvGV9AS66MLnAW30G95o+EBapgnlJ5fJh+0WLa/Wog
-         Hz6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795719601; x=1796324401;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NII0+L88Wv3q4wyUgO6D17Ai3ObjNTZatzOLfgRo1vg=;
-        b=CxgVTG9DG6xO+0kvWYZU82bmiS0eZuxs53AMhNnSm9LhMYXRzBX7wrKdVT/ogX6l13
-         CHkrBjDLLYXwUeNhhVrH/TWttcIlrCZrAKhywCxBiFQ3lvjzSFCNEOZtjcPmE02FW09m
-         sxqG7sfRp83BK645NQ97tphTR6io57613t8wPE8nzUG0C4AXzBELo3dVYX2gbBX8U3zj
-         mndqp5nQx/bx0bw2/Npc1JMWS/J60lG4zc4qFG71GezPwr/+mIku+uLAAkyP4TW4WYMe
-         AdJ+ldHII6Bbz6Z1CnmOpa0igWihWMuE/scd3Q2VxZCLMG6wFZaJyMhd7MIoDNwCPiXg
-         Q/Bg==
-X-Forwarded-Encrypted: i=1; AL+hErF6BetimzNgRyO+T0c2TQYudmE3tNBPwkl/vPBhVaQuArZQh6h64D7cmKA0Whl5EWYoB4SQTeIfYOVI1fNQ@vger.kernel.org
-X-Gm-Message-State: APuU4Z+yFLHQ7wiP45NcEs29+YnWSNgdh469TM+cKiJFnGxNOUcubwbn
-	2ADLTS6aVNfMyxj6qzG//ok26KlFG3QkkkMUxaEzc1gRm263Qnwnj57+rReKC65e9iZu/Ahu06n
-	ZN+33dNHRIE9r6daDfCX9LHzsQRKUfVUhb4b3qOFIovy9IA9BNi5I+dkvyQSSMRU6shbi
-X-Gm-Gg: AZFdTZcWdEQwFkwBUCIDJX9tLjD/mH4QM5zY9zmMJX0NGHXzCREC2q6OL0D1G0klwSm
-	vGhGXugzNrT3ifbGDDzmvf2YKh9T1Uudzgh90wxfTbbw4VCAQeCjFKDSbuVjYOnrM866jl5GXy5
-	PNkzmOZxbQc9nJWeliX76xhNWo32WMnInYJOOqLMjKRpTTrUy+XBqLjwY6LD6eR8oCZv0kxjtJi
-	0pCORfPjKntJHYJLD8GaPG93CnyDYUx6jRrVRRFOYXLwzCw/3zCITngiTjT7SWMsD5MelBA++XH
-	BoOALzesDs7Jaa1WZYQd9wHJjrv8QWiQbn8odUg3ULopb+JOnLvdHRCZS/bBEq6qjAtDybgAbfD
-	amQxulNWfOnLR5t0iQ0K+aZIOb1DTZw5plZOHlgvZ5+ANY4lcdD/3n9BXtm+3aqHzQhPoNAag8D
-	TFKqA5
-X-Received: by 2002:a05:7022:1701:b0:1a4:c892:b130 with SMTP id a92af1059eb24-1b55feaa6a4mr19781270c88.15.1795719601459;
-        Thu, 26 Nov 2026 11:00:01 -0800 (PST)
-X-Received: by 2002:a05:7022:1701:b0:1a4:c892:b130 with SMTP id a92af1059eb24-1b55feaa6a4mr19781239c88.15.1795719600868;
-        Thu, 26 Nov 2026 11:00:00 -0800 (PST)
-Received: from hu-jkona-hyd.qualcomm.com ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b5567ffa8csm60868190c88.7.2026.11.26.10.59.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 11:00:00 -0800 (PST)
-From: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 00:27:11 +0530
-Subject: [PATCH 3/8] clk: qcom: gcc-qcs615: Register set_hwmode_dev
- callback for USB, PCIe GDSCs
+	d=michaelmcallister.org; s=protonmail2; t=1795719601; x=1795978801;
+	bh=2b6K6pvLLOQHdHQFNsRUOJnyQczbFVIGhymNPlQlyy8=;
+	h=From:To:Cc:Date:Subject:Message-ID:In-Reply-To:References:From:To:
+	 Cc:Date:Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
+	b=KLR9WuaBY7rtxnEXoOKqHWVBvL98XZIlP2lmfS7HIneGsUra70O8tiU5T5Mcf0w0Y
+	 Qnx7RE0HA8on5KnslIrxi4zX+17MyGethw92BbwTo44RIHm42jAlKuV4GZV7xK7p3k
+	 JiGDGOD8+7GsaA0LhaNKP4WI6KpwLoMyD/29JgzAx0sRT6vCeu1Dti4LNyGF93806X
+	 1LgFenb94PiaIuLiii3Xc3Od3ZdiD9c1pUQfQQ6Tbwc2NcxtDiPfD0IG8X3P2BAVRn
+	 +TF5F5rXvH31YEGOCFbaU1T4PW37HAsLzUevRqCrJxUv8mwt0foIc6FAbILbKTUhIG
+	 msH3NJyxviTug==
+X-Pm-Submission-Id: 4jb5TB3wPsz2ScWs
+From: Michael McAllister <me@michaelmcallister.org>
+To: marcel@holtmann.org, luiz.dentz@gmail.com
+Cc: brgl@kernel.org, enderaoelyther@gmail.com, linux-arm-msm@vger.kernel.org,
+ linux-bluetooth@vger.kernel.org, linux-kernel@vger.kernel.org,
+ lumag@kernel.org, markus.probst@posteo.de, mka@chromium.org,
+ phone-devel@vger.kernel.org, quic_bgodavar@quicinc.com,
+ shuai.zhang@oss.qualcomm.com, zhaojinming@uniontech.com,
+ me@michaelmcallister.org
+Date: Thu, 26 Nov 2026 18:59:41 +0000
+Subject:
+ [PATCH v4 1/4] Bluetooth: hci_serdev: Track whether the serial port is open
+Message-ID: <179571958165.81221.3058707179497995247.wcn3950-poweroff-v4-1@michaelmcallister.org>
+In-Reply-To: <179571958163.81221.3368253997777320112.wcn3950-poweroff-v4-0@michaelmcallister.org>
+References: <179484638195.54009.1916641645532262287.wcn3950-poweroff-v3-0@michaelmcallister.org>
+ <hvwqozj3r7n7igxw5qogu7xxya4fkhqanb334sroj37ufzdizu@qarvtlkkulmj> <179571958163.81221.3368253997777320112.wcn3950-poweroff-v4-0@michaelmcallister.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,97 +71,154 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-usb-pcie-gdsc-suspend-v1-3-485a08ffdc6f@oss.qualcomm.com>
-References: <20261127-usb-pcie-gdsc-suspend-v1-0-485a08ffdc6f@oss.qualcomm.com>
-In-Reply-To: <20261127-usb-pcie-gdsc-suspend-v1-0-485a08ffdc6f@oss.qualcomm.com>
-To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
-        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
-        Jerome Brunet <jbrunet+clk@baylibre.com>,
-        Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Vinod Koul <vkoul@kernel.org>,
-        Neil Armstrong <neil.armstrong@linaro.org>,
-        Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Rob Herring <robh@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>,
-        Ulf Hansson <ulf.hansson@oss.qualcomm.com>
-Cc: Ajit Pandey <ajit.pandey@oss.qualcomm.com>,
-        Imran Shaik <imran.shaik@oss.qualcomm.com>,
-        Taniya Das <taniya.das@oss.qualcomm.com>,
-        linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-usb@vger.kernel.org, linux-phy@lists.infradead.org,
-        linux-pci@vger.kernel.org,
-        Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
-X-Mailer: b4 0.14.2
-X-Proofpoint-ORIG-GUID: 97rYFGrichVNtzcBntnrrmKpuUjZYMI2
-X-Proofpoint-GUID: 97rYFGrichVNtzcBntnrrmKpuUjZYMI2
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfX52jotCzG8c4z
- JpTAY3bKsgF7HFTc3j71I00FftDH/cnTy1OEt0snsKF1UrDGs/p4MPaqI3IaH0u3HawArqto1bK
- nrRXJz+u7CaDegE1oN9qu738AA4Z+hvs/eJxZRM0KWYGopAB4S3vXmE9CFmrom7D7AczrGTRcoY
- 4APy0ycRczeOWnUvSWovx6Wkt/iDHESIepAbbn7YMO9/6UdSkyf8w5g52CfzVi2kl8UgFSj1pel
- qUFmwIPr4lQ3Y7Mj+IZEKdOuDt9gwUFFXBXD8EmoaFyCXXCFgJD8cQmdYbvMMdO6mOXxSCAyDUd
- BIeG1bNoVmGhlP7Zo9BlFspC3xNkFUoQyhVY+udjRmEV5C8jtp7PC0z9tekSyK6WRmqG4TO2b7W
- 43d+izrVelNCVAjUxy7OYWwzvMhUnzLyq/s6d6qvGR2snkOaY8vtjrEXVn3E+nYWyRJpptjiprm
- y6btV+lEDWVQZcqJh7A==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA3NCBTYWx0ZWRfX6CXDugJ8I7vw
- LBKeq43YAiacvxmWWLewF0tbuMvAZaoLBT1R35qiwrdx6x0sjJnuiSfUPlFLSyTvF2RGLZ76sQv
- MsWsTRz+7tmIKiJGxgVVobyRRpGQfk4=
-X-Authority-Analysis: v=2.4 cv=L4GI0OT8 c=1 sm=1 tr=0 ts=6b0881b2 cx=c_pps
- a=bS7HVuBVfinNPG3f6cIo3Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=zroWNzDgHOBiqxzc7EQA:9 a=QEXdDO2ut3YA:10
- a=vBUdepa8ALXHeOFLBtFW:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 bulkscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
- clxscore=1015 spamscore=0 impostorscore=0 phishscore=0 priorityscore=1501
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260074
 
-Register gdsc_set_hw_stay_on as set_hwmode_dev callback for USB & PCIe
-GDSCs to allow the USB & PCIe consumer drivers to keep the GDSC ON based on
-the requirement in USB host mode and PCIe non-D3 cold usecases.
+HCI_UART_PROTO_READY is cleared before protocol close during unregister,
+even though the serial port stays open. QCA needs to distinguish that
+case from a port left closed by a failed setup reopen before sending
+its power-off pulse.
 
-Signed-off-by: Jagadeesh Kona <jagadeesh.kona@oss.qualcomm.com>
+Track the port state in the transport and QCA open/close helpers. Keep
+the existing PROTO_READY handling for setup failures and use the actual
+open state when flushing or closing the port during unregister.
+
+Signed-off-by: Michael McAllister <me@michaelmcallister.org>
 ---
- drivers/clk/qcom/gcc-qcs615.c | 3 +++
- 1 file changed, 3 insertions(+)
+ drivers/bluetooth/hci_qca.c    |  4 ++--
+ drivers/bluetooth/hci_serdev.c | 36 +++++++++++++++++++++++++++-------
+ drivers/bluetooth/hci_uart.h   |  3 +++
+ 3 files changed, 34 insertions(+), 9 deletions(-)
 
-diff --git a/drivers/clk/qcom/gcc-qcs615.c b/drivers/clk/qcom/gcc-qcs615.c
-index f205de3a936170413b21173c7af9668c14495369..76d835346632ed672e0cfd896723b84c185de270 100644
---- a/drivers/clk/qcom/gcc-qcs615.c
-+++ b/drivers/clk/qcom/gcc-qcs615.c
-@@ -2654,6 +2654,7 @@ static struct gdsc pcie_0_gdsc = {
- 	.clk_dis_wait_val = 0x2,
- 	.pd = {
- 		.name = "pcie_0_gdsc",
-+		.set_hwmode_dev = gdsc_set_hw_stay_on,
- 	},
- 	.pwrsts = PWRSTS_OFF_ON,
- };
-@@ -2676,6 +2677,7 @@ static struct gdsc usb20_sec_gdsc = {
- 	.clk_dis_wait_val = 0x2,
- 	.pd = {
- 		.name = "usb20_sec_gdsc",
-+		.set_hwmode_dev = gdsc_set_hw_stay_on,
- 	},
- 	.pwrsts = PWRSTS_OFF_ON,
- };
-@@ -2687,6 +2689,7 @@ static struct gdsc usb30_prim_gdsc = {
- 	.clk_dis_wait_val = 0x2,
- 	.pd = {
- 		.name = "usb30_prim_gdsc",
-+		.set_hwmode_dev = gdsc_set_hw_stay_on,
- 	},
- 	.pwrsts = PWRSTS_OFF_ON,
- };
-
+diff --git a/drivers/bluetooth/hci_qca.c b/drivers/bluetooth/hci_qca.c
+index d51db761f..0f893f16a 100644
+--- a/drivers/bluetooth/hci_qca.c
++++ b/drivers/bluetooth/hci_qca.c
+@@ -1758,14 +1758,14 @@ static void qca_port_close(struct hci_uart *hu)
+ 	 * hci_uart_close() or hci_uart_unregister_device().
+ 	 */
+ 	if (test_and_clear_bit(HCI_UART_PROTO_READY, &hu->flags))
+-		serdev_device_close(hu->serdev);
++		hci_uart_serdev_close(hu);
+ }
+ 
+ static int qca_port_open(struct hci_uart *hu)
+ {
+ 	int ret;
+ 
+-	ret = serdev_device_open(hu->serdev);
++	ret = hci_uart_serdev_open(hu);
+ 	if (!ret)
+ 		set_bit(HCI_UART_PROTO_READY, &hu->flags);
+ 
+diff --git a/drivers/bluetooth/hci_serdev.c b/drivers/bluetooth/hci_serdev.c
+index dfa921afc..d4b8c3b61 100644
+--- a/drivers/bluetooth/hci_serdev.c
++++ b/drivers/bluetooth/hci_serdev.c
+@@ -21,6 +21,29 @@
+ 
+ #include "hci_uart.h"
+ 
++int hci_uart_serdev_open(struct hci_uart *hu)
++{
++	int err;
++
++	if (hu->serdev_open)
++		return 0;
++
++	err = serdev_device_open(hu->serdev);
++	if (!err)
++		hu->serdev_open = true;
++
++	return err;
++}
++
++void hci_uart_serdev_close(struct hci_uart *hu)
++{
++	if (!hu->serdev_open)
++		return;
++
++	hu->serdev_open = false;
++	serdev_device_close(hu->serdev);
++}
++
+ static inline void hci_uart_tx_complete(struct hci_uart *hu, int pkt_type)
+ {
+ 	struct hci_dev *hdev = hu->hdev;
+@@ -145,7 +168,7 @@ static int hci_uart_open(struct hci_dev *hdev)
+ 	 * BT OFF. Upon next BT ON UART port should be opened.
+ 	 */
+ 	if (!test_bit(HCI_UART_PROTO_READY, &hu->flags)) {
+-		err = serdev_device_open(hu->serdev);
++		err = hci_uart_serdev_open(hu);
+ 		if (err)
+ 			return err;
+ 		set_bit(HCI_UART_PROTO_READY, &hu->flags);
+@@ -187,7 +210,7 @@ static int hci_uart_close(struct hci_dev *hdev)
+ 		clear_bit(HCI_UART_PROTO_READY, &hu->flags);
+ 		percpu_up_write(&hu->proto_lock);
+ 
+-		serdev_device_close(hu->serdev);
++		hci_uart_serdev_close(hu);
+ 
+ 		clear_bit(HCI_UART_TX_WAKEUP, &hu->tx_state);
+ 		enable_work(&hu->write_work);
+@@ -351,7 +374,7 @@ int hci_uart_register_device_priv(struct hci_uart *hu,
+ 	if (percpu_init_rwsem(&hu->proto_lock))
+ 		return -ENOMEM;
+ 
+-	err = serdev_device_open(hu->serdev);
++	err = hci_uart_serdev_open(hu);
+ 	if (err)
+ 		goto err_rwsem;
+ 
+@@ -422,7 +445,7 @@ int hci_uart_register_device_priv(struct hci_uart *hu,
+ 	clear_bit(HCI_UART_PROTO_READY, &hu->flags);
+ 	p->close(hu);
+ err_open:
+-	serdev_device_close(hu->serdev);
++	hci_uart_serdev_close(hu);
+ err_rwsem:
+ 	percpu_free_rwsem(&hu->proto_lock);
+ 	return err;
+@@ -470,7 +493,7 @@ void hci_uart_unregister_device(struct hci_uart *hu)
+ 		hu->tx_skb = NULL;
+ 	}
+ 
+-	if (proto_ready)
++	if (hu->serdev_open)
+ 		serdev_device_write_flush(hu->serdev);
+ 
+ 	/* Close the protocol before freeing hdev (intrinsically purges queues).
+@@ -479,8 +502,7 @@ void hci_uart_unregister_device(struct hci_uart *hu)
+ 	 */
+ 	hu->proto->close(hu);
+ 
+-	if (proto_ready)
+-		serdev_device_close(hu->serdev);
++	hci_uart_serdev_close(hu);
+ 
+ 	hci_free_dev(hdev);
+ 
+diff --git a/drivers/bluetooth/hci_uart.h b/drivers/bluetooth/hci_uart.h
+index 7fbe8dffa..2f8e346f3 100644
+--- a/drivers/bluetooth/hci_uart.h
++++ b/drivers/bluetooth/hci_uart.h
+@@ -66,6 +66,7 @@ struct hci_uart_proto {
+ struct hci_uart {
+ 	struct tty_struct	*tty;
+ 	struct serdev_device	*serdev;
++	bool			serdev_open;
+ 	struct hci_dev		*hdev;
+ 	unsigned long		flags;
+ 	unsigned long		hdev_flags;
+@@ -112,6 +113,8 @@ static inline int hci_uart_register_device(struct hci_uart *hu,
+ }
+ 
+ void hci_uart_unregister_device(struct hci_uart *hu);
++int hci_uart_serdev_open(struct hci_uart *hu);
++void hci_uart_serdev_close(struct hci_uart *hu);
+ 
+ int hci_uart_tx_wakeup(struct hci_uart *hu);
+ int hci_uart_wait_until_sent(struct hci_uart *hu);
 -- 
-2.56.0
+2.39.5
 
