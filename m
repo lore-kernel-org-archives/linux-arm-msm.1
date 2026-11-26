@@ -1,85 +1,85 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.48
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795674310;
-	b=lEnvN1hz/Ca8jXcYUPlIH9/Bzz/FzPF3c9wZO6PornDH+TNvOQkzJktJt+dleqvW6qfr
-	 ACbsrwzw62tAOB+CHl8PSQVVu4uNJ17a6o29dYE4o3aPipB8K6f+RSkMemT/vquzUsoP2
-	 2NW0IMzzYNMMhGh/CGW+awN0ns6SKq/AYXE+Ct420QCQCkHURCetz3Dbz9Abn8m5Mn/lv
-	 J0okDUTs+ftZFK4IOUYJpSAclxj+vyWy8HRJkHwIqOg8IGYls5kKEIcfy7OG144UDlvs3
-	 i1p4dcCDzHwFEMtj1lojsDIiZsGPMLuH7oiGr12ybbqOqFdaBPhjwlD9APM28MTERLQ==
+	t=1795674318;
+	b=O6zCeUe6BgI7vqZaUavU9HnQZvdLLAXuW35uVr6sv1B7L5eI2A9wMhQlulwOp3d/GsCv
+	 uheFjm9ZRsjic+K6VztZriVxOI/db3+1qSB65OzwNjo3a+GuM/L1ycmc+HnL3op7qShrL
+	 X2fmyHcq3e5nTUn4c8IMGrayvFfEQxJvgwACQhUkY3Q1V6r5MByyOk6Wif0aJ/cDF8yHD
+	 lc5KkAQcg2nGr2glfcP/+LhdrCxwMPxHEhBlQiOPpJAX9X/v1ZAsblcDQ1Lsp2IU/ZVtx
+	 Zq/9rcZxbtQx6R6ZDP6kuEfXJSXtzqff7Y53pYtaglgDj/BQELsUeMGJnZGqr4q3Qkw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795674310;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795674318;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer;
-	bh=M/GwF7ja2EExmiOCCoGRHXQh66DBZWnwfGBy5FGHJ3U=;
-	b=jYmFtCuZItY9JFn3TC1kvwc7xBZwpxqU+T7NZ9kqAY+B7TfpiPGGALjrdb7CkLWXRtrN
-	 6usOtjdFxy8cWQM2mno7uzWeTcQ8MHhMGhBlwbMHmqcs03eJAcRRhBx2tHLxIlbPrcL0o
-	 D5rg6+CmkzwMrqLwTQr4TV1ze2EI8ha3Vg7YNIMvfNKAdr25XFegYyd09ztLdsoI9IfDX
-	 3bL61fAbm7tOgJX1D9pVCOVdu68kj6t8TUsS5PVsaBhv24OsKK1vMfNF1cXseAZ5Q4J0m
-	 QNAw+TNdUugs2cbXM4xOReKSbqVAJnKQC7mQqPCZw1sfTVLMA5F1sSP/pspQgoOVZkA==
+	bh=HNRVcWsUwEqRjHp3GCePDYV+jK31QihzT78TeRmMmIA=;
+	b=0cuq3Lb+Ro8+wNv7tAL0EbOlah78N/GeC5m5JRGHvRuh56//FkDyhgKK49vkLsKowfam
+	 3ZrcTEyVxQeE5VulwlxJwi1/fCA6AkYIFbvelnPjAMgxRUHbzjl7QY8Fx4VFoCs3QuVpa
+	 /MwQ1YmllHCfRVNFqZocUoIYO7uEzXox64C0kArvaRSLVYYrK6YOXAMN0893Q7MnCgKLp
+	 0otMKjLUTur7+bsj/cQvckhVggCVz7ueuMXdEfB/F6452pmyaec6RUj6OkcARg0MFJgd7
+	 xhZVsTcKiWV/PCZk2h3ICP1e8hX0gjI6KdMuwp17g7L8eAbSwxrA3W+y/Pq5ibhSpqw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=chromium.org;
 	spf=pass smtp.mailfrom=chromium.org;
-	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=M4YeWuw1;
-	arc=none smtp.remote-ip=74.125.82.48
-Received: from mail-dl1-f48.google.com (mail-dl1-f48.google.com [74.125.82.48])
+	dkim=pass header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=kwwZM801;
+	arc=none smtp.remote-ip=74.125.82.53
+Received: from mail-dl1-f53.google.com (mail-dl1-f53.google.com [74.125.82.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C0E2A606A323
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:25:09 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C0E2A606A323
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E2BF4606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 06:25:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E2BF4606A321
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=chromium.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=M4YeWuw1
-Received: by mail-dl1-f48.google.com with SMTP id a92af1059eb24-170135e43c7so10346706c88.0
-        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:25:09 -0800 (PST)
+	dkim=pass (1024-bit key) header.d=chromium.org header.i=@chromium.org header.a=rsa-sha256 header.s=google header.b=kwwZM801
+Received: by mail-dl1-f53.google.com with SMTP id a92af1059eb24-1b3acec6677so10090347c88.1
+        for <linux-arm-msm@vger.kernel.org>; Wed, 25 Nov 2026 22:25:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google; t=1795674309; x=1796279109; darn=vger.kernel.org;
+        d=chromium.org; s=google; t=1795674317; x=1796279117; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=M/GwF7ja2EExmiOCCoGRHXQh66DBZWnwfGBy5FGHJ3U=;
-        b=M4YeWuw1PxXm0MlRnq22rrdnvINCFUbNrfgDVZakNVVXvF3/qJB8hQZDVX6Z6HgS2T
-         RzZB/unnyym9I0arXNNUrzXui9lx4IhyWgN9olICYuD6TwsUTWOkOqqTKwcAFWEToNI7
-         FiyiT6MHHIBJ8O7tcs5Ko751fgJDWPZGkTH2w=
+        bh=HNRVcWsUwEqRjHp3GCePDYV+jK31QihzT78TeRmMmIA=;
+        b=kwwZM801xwY2OIuhFX6EGU46pbfEvMYve2UtJxsXKahMtppPFbmsogbWGtMrnYDdVc
+         MkqiRHAKH8ft1s6KUT0PXPxlPEAOV38faYLXe6n5JYu6Htke0YbaTE8HLngPKG58wJQW
+         6Csmja8VRmmYoK1gzjRlIATHGv73Z+cdim0MU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795674309; x=1796279109;
+        d=1e100.net; s=20260707; t=1795674317; x=1796279117;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=M/GwF7ja2EExmiOCCoGRHXQh66DBZWnwfGBy5FGHJ3U=;
-        b=xFsIILT/t/inKG/gpV8udqbw0bznA3RExV8Oh4q9dKvCT1rYj43amobsGvAq2wr5o4
-         Fcoz5GxOXMrd5FoymugQOAJmyWWVYWKCIvhehmOwdBsXwR8hd5pUy5ZlrFNAQI3saZQg
-         kQ/mGsi5q81630doNzzl8PvCzyWS1dclB6umY36Yj2gApkqxzgaZpYY/ZboI8C2Bxi0V
-         peg4EmKxWtt/B4V5rZrf/K22Veaojen6l1mRFXPgJxC/9HEXWAREH29U7K1n37jRVDMK
-         2ItpwtTO13qTRmb6A0Omk6K1N9x3uyzzk6Uk9Ngpg4fn25MjdQFyn/7AW2KLaO6za+6O
-         JQpA==
-X-Forwarded-Encrypted: i=1; AL+hErHjDzakuJuigIZ+xttA9ujJN4YmwF7Z92TiLw8VxEm3kJytCvMi4p2fp2oGmXhC3g4elZthDpMedxeiunyQ@vger.kernel.org
-X-Gm-Message-State: APuU4Z8aOoHUODfQLCb4VmXqEOtaHbXMcnGnRsHXFtFM0XOeNddIQoC8
-	XEq9J8JRL4ARA+MdnnM/gzm4tUZbAWsrstbq+G/qDJKSMIqxaH2KjiSRspmLdno3Cw==
-X-Gm-Gg: AZFdTZcrOIn6xsufIyZNg4V+FIOJKPwBJvMecqcU5ousGGkFOMNcl4MobgIKS7mwxRd
-	9E5zhMME+1clcDlnxaMXkhYoORDSy4ywezaNVQbmt8+ArLSy5tggPrraYbVQkgl+OdkuTs/NUgy
-	5q32P2yksJ5qvmqXxEy69+MrQgSroLScc2adNewfz50pbVIFhrIlmFTxfgpzXAz9Sj2lNcIJ0Tv
-	znLGmpkJVT1ERCFDJ0AXeabxStVug1I2AuHecEwf7p9AwA48zCxgKln8u1VX/vwwA6a68R+oMDK
-	08GVuXxMlToVPRIvuh+JiBXZorByinYIv1DEj/Xa0KR2Cn/vORQhx4qouAfqV6SCpk/PXdRtYKy
-	nqj3Qc3ptSNZzMIzwbxyin9xhLlkPV2m4eVDZSJ6Rm4mtwYrn8iD3m6PjAt+mz4lfrmLeZs05Ba
-	O7Gd9oZLbRAFVpyXgdRA6TyK/OpEj9bOcmkmmEtnoX0KlGxO2zU+T7kAfpbKN1sC3uoPzHge6dl
-	XfZqzFxQBMmLZ1+cT3iqwQFhjxwKBHV3e45ifQ6znEPVCLzd3cPaJk8xI/sp8Q/HwHUqm9Nt1O9
-	CXIolbJxivJBM+/TR9PCGdFaXSjf2EnQj8Y0Qk2MAO8KTixAKaUpPhKW5QZNBEt8zhjshzHr5Ts
-	bVMvy6zMxnX68i9WaGzjMNg==
-X-Received: by 2002:a05:701b:2918:b0:192:e5a8:6bae with SMTP id a92af1059eb24-1b570d52afcmr11431758c88.40.1795674308955;
-        Wed, 25 Nov 2026 22:25:08 -0800 (PST)
+        bh=HNRVcWsUwEqRjHp3GCePDYV+jK31QihzT78TeRmMmIA=;
+        b=ATLpoKGOttbYw1c1jApqPVZg21K7xpX3J7825AkLp9hZmklB7uOYz90/NlFa/Mq9xR
+         fT8h11yJ30a8PvCCj46SAxG9Q2m5Kf1DTrdYPpirnn5Wyv9z9x92Zyh/UE9BE7g3CeRx
+         GAOkZDdtGm83ty5bB1UooPuEwBBOp6rDyz05ioqn8Lkvo6kSQPWuqBWOQSJQ5yr+BG07
+         SEzF2mrm+T1lj+lGKmvCI/DBaVY6CVxr2fO4Y6YTrhMJy8Om7cQ7mjgveUS6aUTQGUV5
+         pez4a22MQGI607gXiTgVu3mqqUDIYpb1YC0YSs5hGy+NRUzjPHvDHvqeNdNBC3WIpFfM
+         V5uA==
+X-Forwarded-Encrypted: i=1; AL+hErF077uq0XN6ZJNQ72vc3WghvI0ekdsN6AAnLGndncqYl/QBirJ0JKDLS3dXjDfalyVkHQgrJy6OV06qdJXc@vger.kernel.org
+X-Gm-Message-State: APuU4Z+SumiQ9hRQ1xf6ts3/GPET/1h2qOwdeSAj9LNyBNfCJC3ZJA7D
+	V/ei9F9T4PORaCTLKxtQReUVGe2WgSSsupN5U552GeUUdHiFi5Rl2i8j+K6r1CuhOw==
+X-Gm-Gg: AZFdTZcf/m4uygAfVp77UhE9zZqaufu9ITH2oS7HWgjTt9eAY9ja3GMz393bQBScMy7
+	g5dw+jZrgyN5lrChsfZSFwSwt8xpnXHp467/qQQm7NEXl3zyQuhsBGqnpPowlSXoeuAsz/vD9xF
+	4hOoewLqSSHGUxMwWbNTr1zLkQ6KbyS39ede5NbWK8RjjvlgvEWiqnt6oO/YtjuXBWQ/eyZLYpc
+	CR1WwsrEFK9yOU4E/Nj66v1hCjnXDCrOZIg+XzAqi2wQ6+Ze0P4Z2zwbGrUIthtu50rAonkNosv
+	oTJEORlPyt/ijK70q5cfQbM2l8hCXgeHrgz9GVamFu9S/+DeFlVIG/HQ2wyDq9ESENosrR0LwYm
+	QyqjLmbPQ+F6wVhWg9PNCNRZTG8iZagJ3JDEy4nz7nzBl7ZhiOLL50GU54pChphGQ/QhMDkUnKi
+	U80F+YDSRBdUXhthoa/GvkR9ubg6eEYdEVfDvezHlrbaPMYWQZNJyoQ2hpnmPY38iOGuUeYr26L
+	9z+1+BHXc2nGcqNOTu8GowX/bLvzgl4OaSbG0bbeDS0+Sw75qOgtI33SWP3vEvU4/OfVH2ISi7l
+	iPMr2aokGyyjxLlE5WY8Xgs66hAHxFpTwnPCc3rRcjKdnMJyjYAVVYUPhz7/cbzjHSY9oVm6q9T
+	SbpEpqzowo7UjRIOnD/4beA==
+X-Received: by 2002:a05:7022:3a8c:b0:1b5:3490:d715 with SMTP id a92af1059eb24-1b55691e0camr20072859c88.34.1795674317094;
+        Wed, 25 Nov 2026 22:25:17 -0800 (PST)
 Received: from fshao-cloudtop.c.googlers.com (123.142.199.104.bc.googleusercontent.com. [104.199.142.123])
-        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b56ef9fd16sm36793186c88.4.2026.11.25.22.25.01
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b56ef9fd16sm36793186c88.4.2026.11.25.22.25.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 25 Nov 2026 22:25:08 -0800 (PST)
+        Wed, 25 Nov 2026 22:25:16 -0800 (PST)
 From: Fei Shao <fshao@chromium.org>
-Date: Thu, 26 Nov 2026 14:23:48 +0800
-Subject: [PATCH 6/8] drm/v3d: Use DEFINE_DRM_GEM_FOPS()
+Date: Thu, 26 Nov 2026 14:23:49 +0800
+Subject: [PATCH 7/8] accel/ivpu: Use DEFINE_DRM_ACCEL_FOPS()
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,7 +91,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261126-drm-fops-show-fdinfo-v1-6-7cb1d1a5d6ef@chromium.org>
+Message-Id: <20261126-drm-fops-show-fdinfo-v1-7-7cb1d1a5d6ef@chromium.org>
 References: <20261126-drm-fops-show-fdinfo-v1-0-7cb1d1a5d6ef@chromium.org>
 In-Reply-To: <20261126-drm-fops-show-fdinfo-v1-0-7cb1d1a5d6ef@chromium.org>
 To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
@@ -123,31 +123,34 @@ Cc: Lucas Stach <l.stach@pengutronix.de>,
  linux-arm-kernel@lists.infradead.org, Fei Shao <fshao@chromium.org>
 X-Mailer: b4 0.16.0
 
-DEFINE_DRM_GEM_FOPS() now wires .show_fdinfo to drm_show_fdinfo() by
-default. Migrate the driver to use DEFINE_DRM_GEM_FOPS().
+DEFINE_DRM_ACCEL_FOPS() now wires .show_fdinfo to drm_show_fdinfo() by
+default (evaluating to NULL when CONFIG_PROC_FS is disabled). Migrate
+the driver to use DEFINE_DRM_ACCEL_FOPS().
 
 Signed-off-by: Fei Shao <fshao@chromium.org>
 ---
- drivers/gpu/drm/v3d/v3d_drv.c | 6 +-----
- 1 file changed, 1 insertion(+), 5 deletions(-)
+ drivers/accel/ivpu/ivpu_drv.c | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/drivers/gpu/drm/v3d/v3d_drv.c b/drivers/gpu/drm/v3d/v3d_drv.c
-index b790be8a7fac..bde3561c0e69 100644
---- a/drivers/gpu/drm/v3d/v3d_drv.c
-+++ b/drivers/gpu/drm/v3d/v3d_drv.c
-@@ -240,11 +240,7 @@ static void v3d_show_fdinfo(struct drm_printer *p, struct drm_file *file)
- 	drm_show_memory_stats(p, file);
+diff --git a/drivers/accel/ivpu/ivpu_drv.c b/drivers/accel/ivpu/ivpu_drv.c
+index 28cb18dcfa9b..933edc272f05 100644
+--- a/drivers/accel/ivpu/ivpu_drv.c
++++ b/drivers/accel/ivpu/ivpu_drv.c
+@@ -609,13 +609,7 @@ int ivpu_shutdown(struct ivpu_device *vdev)
+ 	return ret;
  }
  
--static const struct file_operations v3d_drm_fops = {
+-static const struct file_operations ivpu_fops = {
 -	.owner = THIS_MODULE,
--	DRM_GEM_FOPS,
+-	DRM_ACCEL_FOPS,
+-#ifdef CONFIG_PROC_FS
 -	.show_fdinfo = drm_show_fdinfo,
+-#endif
 -};
-+DEFINE_DRM_GEM_FOPS(v3d_drm_fops);
++DEFINE_DRM_ACCEL_FOPS(ivpu_fops);
  
- /* DRM_AUTH is required on SUBMIT_CL for now, while we don't have GMP
-  * protection between clients.  Note that render nodes would be
+ static int ivpu_gem_prime_handle_to_fd(struct drm_device *dev, struct drm_file *file_priv,
+ 				       u32 handle, u32 flags, int *prime_fd)
 
 -- 
 2.56.1.839.g22a8290db9-goog
