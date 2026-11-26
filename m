@@ -1,103 +1,57 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.6
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795728621;
-	b=CJ1B4AAs0vfMJrBg6o/8jJwnyCP/fsxV2SAS0maOKOTydVpNniHfcINtBPPRch1IoCt2
-	 mSwPVoUr1x6MsSfiJpr/Kmr0cshiS/Su5546mkQ8VHjke8J9B4eBZ/FeAurR+emAGt33E
-	 kMAkopMeYb7dA5eLrRwt8l+cEocgsw25nR5y9glmm6cibBfcclaAxslmpviw6fniJPd7l
-	 kMaRnwB4m44mStxhO0FTkXfXH7rHjqTmhQ4yk4s9PqemxdoeFYKA9zWi74UW1gKrAlAN/
-	 gSs/FcGrBEGVCJC6IeMDptC25eCcMnzuD4PF65SWgqvBAIkO2Ajrun6UwgzlnStsKgQ==
+	t=1795734851;
+	b=cuq/X8nDdGicmh6B1KaLkr26KGH++TKITrCid80RNjMANvDwrSQdlb8gfFs2wbl4vh8D
+	 9iuUKe0RJK0Kd6JfHGrd2wDG1SWk58ZARhQCopULXgyV2OGRLv71AQPwI1LcjZdZeKGU7
+	 DWgIt+ORLeNpDauWFwv3YKcdOUK+0E5u/6qD5ZbWmS7GZQGnoFU95Shb5zaCuACqrtUtB
+	 8BZF7d2mZn7OcwTX+dvIvKSHVFs/9yhPQbd4xQwKtFX/w4ad7HKipGqRc5LyKTG55somX
+	 fb67C70qQgLH7UmI05q3I8zw2BVNLRx8OpTCI3KQTV0+a9LN4czCjCtPlbKt050khZw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795728621;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=hEM7O+SfQ/P5il8iwTrMriaGVNGLOg5byRDEqHK9yNo=;
-	b=fgeiP3zi90sxH4k6CLIO72vxpTqJoOo3+sdi185lULSG6tWWwfBuvF09xloH1hrwXZP1
-	 BNd/xcFwVpVsI4xsXG/8/2fM263C2zk+lgQFXJ+VJIM5XWdRenIynvCNxaXYnvXhNIkCH
-	 iS9zdtAMl/ObQOC4vwP4YUIEAoEdgJYbSN1Urzc6V6HA02HBl9JA8lrQLv+QMcCzq4KPb
-	 f+qj8oViVtmOPCTmgOde/EPgkejMi7kwlnb3JhktCXiNJfMwRWhzC/6ZtqxVrSyDyMX3h
-	 VgXf0ijvy3qwTSbYE9eSIsSeRchULV332Y3fkSj5bH79xiOTX9XrOd3y09Uf8jcvMVA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795734851;
+	h=Received:DKIM-Signature:From:To:Cc:In-Reply-To:References:Subject:
+	 Message-Id:Date:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=2V0mx8KvDSloADKsFMwUZp/ao86S1YvoNPEoPKACjso=;
+	b=jqj1GCDP7USkw/iQUXLDvucQNmDCLQ9JZZwz+07eGIaHzUHFKGsvtiyOh3wQ3jQVeGAI
+	 j+iabNMyo9ej7iTJwynXejtvHJSkk1UJVNsBfkhzIiyItuMwHk+gVKh5PllyhhCk/I2og
+	 IJMPfmeYJghewGNibndAIbLgzEgZZJnX+6O5jo5fK98GK7gZHLPKmHkZgIX4G3rX7e+6T
+	 +6bqsKc/KmkWNpzjjdlnZBzaHW6vCJnR5gDfwHQQK7gCKBvbgsutRGaV4mSXGWja2hOdg
+	 aot3eFTvNpOwNXcXED3JM3ba46hXlyLl6z/FvLt6EIAU45asDbdzFvxHMNaRX9F8sjw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=URqkVqlt;
-	arc=none smtp.remote-ip=74.125.229.6
-Received: from mail-dy2-f6.google.com (mail-dy2-f6.google.com [74.125.229.6])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oCTLrGw1;
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2C975606A688
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 21:30:21 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2C975606A688
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFEB8606A31C;
+	Thu, 26 Nov 2026 23:14:11 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=URqkVqlt
-Received: by mail-dy2-f6.google.com with SMTP id 5a478bee46e88-35adc681e1aso5034439eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:30:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795728620; x=1796333420; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hEM7O+SfQ/P5il8iwTrMriaGVNGLOg5byRDEqHK9yNo=;
-        b=URqkVqltcCp6tYYsAnW+MQMrKHnDknW44h9foigyBf0TJ4Vsan3Gf0UJirvtTJrt+J
-         WujgepDn5L1petCEPYiFNlMT5fuB0SvwDJGXp162y31T8Bs8yaYmrUEFvwwN6FzIi5EN
-         pGMomnXg+xik5H1LgAFV11e9EMNllvX5OJLO6+gB5tNg27ZsYKiLPsePkNnFKysZM0pG
-         BHtAKYopBgeT3gFvf5NVSIvDG+UV4nFQxyme2MGRNK1JdDXrpEL/hdv3TfES9+VLZECc
-         3LMskwwIkyHJeGjW48E5I7suk/OqXvBwrvhiVTlFL8yi9cPrAW26dltLsE6mE48AT0O4
-         4p2g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795728620; x=1796333420;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=hEM7O+SfQ/P5il8iwTrMriaGVNGLOg5byRDEqHK9yNo=;
-        b=rw1MJkRPgqNSC5IZLJIwNTpboarE/jdVLhnqrKwu8Q0OlzUn6vWFIT/LZAUw2tHacW
-         qC6xMCUIQDzJ6K4aVmDA2Y3vFSTv+c5XWcOS1rGDZbleo+M9YtKPjgc5kSnhp9jG+u9k
-         r38GWL7pmPzDacPYB2HzcLlyKepZ8jyazpDuNi2n6kcKoHNyVwHFjPOKyx7EhYqx7+81
-         wU7HxM6o4GTD6iyvRwH3WEox2sXTbibEmDSSRWWHjey+QW1G4eFY6vIdE1AklAd2Ys2m
-         G3C/HCZULB33jP8b4nGyzyoC7ljshUFoarrDb96r3jFPUTpOzWdgUlwi7fwgm7rn37Cr
-         txAQ==
-X-Forwarded-Encrypted: i=1; AL+hErFfT5JvkER2zdixfAJHYfA0TaV8/OPdhxwV0G/vXjqRwiVSHe4hYs8Haen5EfOjbTHnlPmwn0szhwZPo1tD@vger.kernel.org
-X-Gm-Message-State: APuU4Z/5SuqBe7ylY86hV0SRoL9FDgP67q9Zlmijq49aORM4PEq1dXc6
-	FPkD7W0E+/en9lExPQqrqCfT7GQ7E4Uy7qgDdYj+62Y+EBLF85et99Kk
-X-Gm-Gg: AZFdTZfuOMM40zLbCKkXT0TZn7UIYVNwvTJMKNnoqoio7oUaRxiljXjLtBQt0OxnuN+
-	MI9/fWhgP+dJk2vUvC4OwNMlKiyVcDoLVU7J6EMFRozj5onfit8v2f+jrufdZQdVhCd64ZWUQAU
-	XZz12Uyc+NCzxYjT5I6e3N9Dbd3ZrCmtDvgUJoX6zAAaNO/cVmOrWdwJ3bYpsx9CxMSDV6X+RZx
-	EhvfjHE2fEBOy7Vi5MBxamKSov2Y79iqvOugsFYXH7WdRhd/3uKhwoKwMs0iTZEUQdKsTiDRJ4g
-	zxTDBvN2JHzdqzLJ/H5Sygl0wCIqZLeBmGAzPt5psMTeCPkhSqmCTjWO5uokQ2DY19ASqLQ9p4s
-	p6vbwPOczTa/VgowJ9BnnqwfGR/+v6vrcca6jtb454eQH8NSXfqdNcpX9iFywrffSCflglrLH0C
-	jneh4CNpmfqtBsAJUhw8E2mlriijs3zb8cxpWmYOfyx7AsoGcpQphqzV+urzj/WOlMyQHcdRe/l
-	tEw/kTKeTGPa4Sy83xIKV1tAweqD/AXUClysDTulEKLjeYJlenF9VeaSkKccyUzvG02KOpymTjP
-	0GG5jxh1jFBfrzcgTAfg0fKv9eELYKz3I04t2LYyiLwcPyKX+Y8kd5GMk0gFIFAtK7APkYGH1o0
-	NUy7Nr80fHTFkdu6swLbAU8IkuQrGh9XMvHtF67Jb
-X-Received: by 2002:a05:7300:c38f:b0:386:e4ce:7524 with SMTP id 5a478bee46e88-386e4ce7546mr2012754eec.36.1795728620238;
-        Thu, 26 Nov 2026 13:30:20 -0800 (PST)
-Received: from localhost.localdomain ([76.33.234.50])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386b9bdafb5sm33434219eec.9.2026.11.26.13.30.19
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 13:30:19 -0800 (PST)
-From: Hungyu Lin <dennylin0707@gmail.com>
-To: vikash.garodia@oss.qualcomm.com,
-	dikshita.agarwal@oss.qualcomm.com
-Cc: abhinav.kumar@linux.dev,
-	bod@kernel.org,
-	konrad.dybcio@oss.qualcomm.com,
-	mchehab@kernel.org,
-	hverkuil@kernel.org,
-	stefan.schmidt@linaro.org,
-	linux-media@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	dennylin0707@gmail.com
-Subject: [PATCH v2 3/3] media: iris: fix out-of-bounds read in gen1 sequence change event
-Date: Thu, 26 Nov 2026 21:29:04 +0000
-Message-ID: <20261126212904.27207-4-dennylin0707@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261126212904.27207-1-dennylin0707@gmail.com>
-References: <20261126212904.27207-1-dennylin0707@gmail.com>
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=oCTLrGw1
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 19B3A1F00893;
+	Thu, 26 Nov 2026 23:14:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795734851;
+	bh=2V0mx8KvDSloADKsFMwUZp/ao86S1YvoNPEoPKACjso=;
+	h=From:To:Cc:In-Reply-To:References:Subject:Date;
+	b=oCTLrGw1uj64SziI7K6oLwymGAPjp5MEqzlPsRxeedivzAL1Zk9amSoQ/mWGEu15A
+	 7P3sh2ri4/gxGCfPEum/uiOE7G7jT20bzxegU/SUSkwm1XcE7t9sGmyhAjPUkcGuqP
+	 30Lg7qlg1aWhCg2Xm6exSSvEaJ73enTX9KTlYXfnZTD+pkP8pFCofGyZSTUxVZlphU
+	 KZor9Wev08ly6FpYjXCiFZpzsv4jbydhnxFyhqZFS8bpJ9qqJJmuCzkV+Kplq5BbXj
+	 CAWQ7VUv7QhSePPitF0FglqicNTzxnwMPYTVw39yC3HrCIDFRXLx+fl6pBSVKPpdEi
+	 YuY4u5B1rh15g==
+From: Mark Brown <broonie@kernel.org>
+To: Srinivas Kandagatla <srini@kernel.org>, 
+ Liam Girdwood <lgirdwood@gmail.com>, Jaroslav Kysela <perex@perex.cz>, 
+ Takashi Iwai <tiwai@suse.com>, Perry Dale <techluddite@outlook.com>
+Cc: linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
+ linux-kernel@vger.kernel.org
+In-Reply-To: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
+References: <LV5PR84MB40268B01B9F458296BE453ACA7782@LV5PR84MB4026.NAMPRD84.PROD.OUTLOOK.COM>
+Subject: Re: [PATCH 0/2] ASoC: qcom: q6apm-dai: stop the playback queue
+ from wedging the DSP
+Message-Id: <179572375936.838304.12750230700944585596.b4-ty@b4>
+Date: Thu, 26 Nov 2026 20:09:19 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -107,166 +61,55 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.17-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1588; i=broonie@kernel.org;
+ h=from:subject:message-id; bh=9xx5kMezR5vVzYWuK+csQ5UgfhjXK4Y0X0r9cyL6JHs=;
+ b=owGbwMvMwCWm/754w+YLFp2Mp9WSGLI59jroXK6P3357/ux5xy/KXNeo4lHb6PKEuzVSxejss
+ 3VRU4xPdZSyMIhxMciKKbLEZXG/rC95vYbv4MI2mDmsTCBDGLg4BWAimtMYGVplb125u8lzl7qD
+ 5OnX7wP9Kleorz/rHlNy5+2FyQ7c8k8Y/teKKSuURYrzuzPM7l15Vytt6QG9F+7nH95vb736VYj
+ 9HwsA
+X-Developer-Key: i=broonie@kernel.org; a=openpgp;
+ fpr=3F2568AAC26998F9E813A1C5C3F436CA30F5D8EB
 
-iris_hfi_gen1_read_changed_params() walks the properties of a
-HFI_EVENT_SESSION_SEQUENCE_CHANGED event. The number of properties comes
-from the firmware in event_data2 and the payload is never checked against
-the size of the packet. A count that is larger than what the packet holds
-makes the loop read past the end of the packet and, if it is large enough,
-past the end of the response buffer. The values that are read end up in
-the formats and in the crop rectangle that user space can query.
+On Fri, 20 Nov 2026 11:47:23 -0800, Perry Dale wrote:
+> ASoC: qcom: q6apm-dai: stop the playback queue from wedging the DSP
+> 
+> On the AYN Odin 2 Portal (SM8550) the audio DSP stops answering GPR
+> commands when a game pauses its stream, and every later prepare times
+> out until a reboot. q6apm_dai_ack() queues one write per period of the
+> whole appl_ptr after a trigger stop has reset queue_ptr.
+> 
+> [...]
 
-The same code in venus was fixed by commit 06d6770ff0d8 ("media: venus:
-Fix OOB read due to missing payload bound check"). Do the same here: keep
-track of the bytes that are left in the packet and put the instance into
-the error state when a property does not fit.
+Applied to
 
-Fixes: 84e17adae3e3 ("media: iris: add support for dynamic resolution change")
-Cc: stable@vger.kernel.org
-Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
----
- .../qcom/iris/iris_hfi_gen1_response.c        | 73 ++++++++++++++-----
- 1 file changed, 54 insertions(+), 19 deletions(-)
+   https://git.kernel.org/pub/scm/linux/kernel/git/broonie/sound.git for-7.5
 
-diff --git a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-index ffa98139f0eb..a5b43a408e55 100644
---- a/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-+++ b/drivers/media/platform/qcom/iris/iris_hfi_gen1_response.c
-@@ -34,72 +34,102 @@ static void iris_hfi_gen1_read_changed_params(struct iris_inst *inst,
- 	struct hfi_framesize *frame_sz;
- 	struct vb2_queue *dst_q;
- 	struct v4l2_ctrl *ctrl;
--	u32 full_range, ptype;
-+	u32 full_range, ptype, rem_bytes;
-+	u32 size_read = 0;
-+
-+	rem_bytes = pkt->shdr.hdr.size - sizeof(*pkt);
- 
- 	do {
-+		if (rem_bytes < sizeof(u32))
-+			goto error;
- 		ptype = *((u32 *)data_ptr);
-+
-+		data_ptr += sizeof(u32);
-+		rem_bytes -= sizeof(u32);
-+
- 		switch (ptype) {
- 		case HFI_PROPERTY_PARAM_FRAME_SIZE:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_framesize))
-+				goto error;
-+
- 			frame_sz = (struct hfi_framesize *)data_ptr;
- 			event.width = frame_sz->width;
- 			event.height = frame_sz->height;
--			data_ptr += sizeof(*frame_sz);
-+			size_read = sizeof(struct hfi_framesize);
- 			break;
- 		case HFI_PROPERTY_PARAM_PROFILE_LEVEL_CURRENT:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_profile_level))
-+				goto error;
-+
- 			profile_level = (struct hfi_profile_level *)data_ptr;
- 			event.profile = profile_level->profile;
- 			event.level = profile_level->level;
--			data_ptr += sizeof(*profile_level);
-+			size_read = sizeof(struct hfi_profile_level);
- 			break;
- 		case HFI_PROPERTY_PARAM_VDEC_PIXEL_BITDEPTH:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_bit_depth))
-+				goto error;
-+
- 			pixel_depth = (struct hfi_bit_depth *)data_ptr;
- 			event.bit_depth = pixel_depth->bit_depth;
--			data_ptr += sizeof(*pixel_depth);
-+			size_read = sizeof(struct hfi_bit_depth);
- 			break;
- 		case HFI_PROPERTY_PARAM_VDEC_PIC_STRUCT:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_pic_struct))
-+				goto error;
-+
- 			pic_struct = (struct hfi_pic_struct *)data_ptr;
- 			event.pic_struct = pic_struct->progressive_only;
--			data_ptr += sizeof(*pic_struct);
-+			size_read = sizeof(struct hfi_pic_struct);
- 			break;
- 		case HFI_PROPERTY_PARAM_VDEC_COLOUR_SPACE:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_colour_space))
-+				goto error;
-+
- 			colour_info = (struct hfi_colour_space *)data_ptr;
- 			event.colour_space = colour_info->colour_space;
--			data_ptr += sizeof(*colour_info);
-+			size_read = sizeof(struct hfi_colour_space);
- 			break;
- 		case HFI_PROPERTY_CONFIG_VDEC_ENTROPY:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(u32))
-+				goto error;
-+
- 			event.entropy_mode = *(u32 *)data_ptr;
--			data_ptr += sizeof(u32);
-+			size_read = sizeof(u32);
- 			break;
- 		case HFI_PROPERTY_CONFIG_BUFFER_REQUIREMENTS:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_buffer_requirements))
-+				goto error;
-+
- 			bufreq = (struct hfi_buffer_requirements *)data_ptr;
- 			event.buf_count = bufreq->count_min;
--			data_ptr += sizeof(*bufreq);
-+			size_read = sizeof(struct hfi_buffer_requirements);
- 			break;
- 		case HFI_INDEX_EXTRADATA_INPUT_CROP:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_extradata_input_crop))
-+				goto error;
-+
- 			crop = (struct hfi_extradata_input_crop *)data_ptr;
- 			event.input_crop.left = crop->left;
- 			event.input_crop.top = crop->top;
- 			event.input_crop.width = crop->width;
- 			event.input_crop.height = crop->height;
--			data_ptr += sizeof(*crop);
-+			size_read = sizeof(struct hfi_extradata_input_crop);
- 			break;
- 		case HFI_PROPERTY_PARAM_VDEC_DPB_COUNTS:
--			data_ptr += sizeof(u32);
-+			if (rem_bytes < sizeof(struct hfi_dpb_counts))
-+				goto error;
-+
- 			iris_vpu_dpb_count = (struct hfi_dpb_counts *)data_ptr;
- 			event.buf_count = iris_vpu_dpb_count->fw_min_count;
--			data_ptr += sizeof(*iris_vpu_dpb_count);
-+			size_read = sizeof(struct hfi_dpb_counts);
- 			break;
- 		default:
-+			size_read = 0;
- 			break;
- 		}
-+		data_ptr += size_read;
-+		rem_bytes -= size_read;
- 		num_properties_changed--;
- 	} while (num_properties_changed > 0);
- 
-@@ -170,6 +200,11 @@ static void iris_hfi_gen1_read_changed_params(struct iris_inst *inst,
- 			event.bit_depth, event.pic_struct);
- 		iris_inst_change_state(inst, IRIS_INST_ERROR);
- 	}
-+
-+	return;
-+
-+error:
-+	iris_inst_change_state(inst, IRIS_INST_ERROR);
- }
- 
- static void iris_hfi_gen1_event_seq_changed(struct iris_inst *inst,
--- 
-2.43.0
+Thanks!
+
+[1/2] ASoC: qcom: q6apm-dai: queue playback buffers only while the graph runs
+      https://git.kernel.org/broonie/sound/c/a81d29df131f
+[2/2] ASoC: qcom: q6apm-dai: keep a playback stream running across a PCM reset
+      https://git.kernel.org/broonie/sound/c/164041af6ce0
+
+All being well this means that it will be integrated into the linux-next
+tree (usually sometime in the next 24 hours) and sent to Linus during
+the next merge window (or sooner if it is a bug fix), however if
+problems are discovered then the patch may be dropped or reverted.
+
+You may get further e-mails resulting from automated or manual testing
+and review of the tree, please engage with people reporting problems and
+send followup patches addressing any issues that are reported if needed.
+
+If any updates are required or you are submitting further changes they
+should be sent as incremental updates against current git, existing
+patches will not be replaced.
+
+Please add any relevant lists and maintainers to the CCs when replying
+to this mail.
+
+Thanks,
+Mark
 
