@@ -1,97 +1,98 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=185.203.200.13
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795686149;
-	b=F1qQPnjQgxVTzS/80OJAJHUz0Qj9TsoErzpr6lXI42fdxvXXfvo77JlPDrbqUT5tZUBK
-	 TfnQuw0bXNwlFN7QMfLnmbiUOFDOKQWaSlQOj3daoSbrws2Sf/P2vcOGhJCiaGUUseNeg
-	 CIzg9cNNRu+LFQdZgjGF8LnQh2JUtW2yjbncg9mrL0yvsILNuhUQpWnEBLOuHXMkaXF3N
-	 YGdaNooIRXYLumR2woiNjCpGTGC/pQB4V6FV0K1HC5YZ018hrrwj+l3BMMu9tgHQcQvwf
-	 UxhaRF2+2G+Dm8eCMsXeT3vp6zKdCAi/m5KazKEmyi+DTMrPKYuFDXoQ8ITUcZlH3Ow==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795686149;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Subject:From:To:Cc:
-	 Date:In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
-	 User-Agent:MIME-Version;
-	bh=0rasQBT9o9rNgelEjBt6NiFeFY0ARPWtWWDxp9ttzOs=;
-	b=WCha4FALiJZzRE5MLFbzPCq1xzYqpq+UqAN/ZgSIy/SZBNwVVCAwyyLFOGNcv3JGGGt8
-	 32lAJUtfGn5f2IvP1AF1lzzPytQUZZbv9wnZfYurLUirSOrmyQEQU55P18LvOJ0pllA/a
-	 9xCfBY7Edp8A/GVOwVCrOYOEaFzfwQPJX9o9i+KxevhHB9j/6GwJEEHuvvYD6h6A1Lm9q
-	 mLXtBjz2mbqK2v2m0wjt8CBz45aSiodXdeZppo1ZqrXAd6D8zdbKD318yxREPv+6wUwyw
-	 Wmp6ToOeVA5NAcmqw2wKwXZQNkLiRdaUVyUDQCKSO/ayHNaVVxn/lXgPJCCH6xOMwJA==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=none header.from=pengutronix.de;
-	spf=pass smtp.mailfrom=pengutronix.de;
-	dkim=pass header.d=pengutronix.de header.i=@pengutronix.de header.a=rsa-sha256 header.s=20260414 header.b=Asqz6pu2;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=185.203.200.13
-Received: from mx1.white.stw.pengutronix.de (mx1.white.stw.pengutronix.de [185.203.200.13])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.82.41
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795686511;
+	b=1tGGdxPCbSWuphnqn+/I/RTNqXInWwdIorhDP/iETkaPSYfGNJwalZQ0nLmItZbqqHt0
+	 566UVg1Fcjy4EV8gvGnIfs6eYOTB3OPZSlScKZZsHK9HoXOTOijc5YnSbKEPBnwIg1x4m
+	 SqcGgHXhkUgL6OGCk323+N9nhUpMnUTAPeJGBHe5V1ydCablsRetSJfiOGyBs+uAJER9C
+	 C3nJZo4ocP0ow6HTfTSLg3VtQ2ANMPqw49FIGTLc0EsePezr9kG8HRnZktzPYvrxoryQN
+	 Y1+dwyksbbE/bkeAs/v3uo6TvgDsCo1WB1Uq0moXSrR1lyC7OTGSmGESOF+8VRazFJQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795686511;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=2Za6MacJG/4uYb3nMvFDyzid4e9GAP1DjcxkycMoIOM=;
+	b=L/QsiPeVs2DCWyBG9tsk/c8PrlbiYnwKFSXnhzEdi8Z9JXnAVJfXdgKYuFLWBjzAibGV
+	 AO6J3JnJA+x9i3Pi9WrH896eVXvFx22sdWPQCxFs+AAAl8LZY+4f9d1lV6xWUFUuE58u/
+	 vA+2PlvCcK8NBxzn+IZHtQD6KXklvNVh8gkN3ZJA4ICyfjA8eVPhqBmQtuLxFyu8YmoJm
+	 zcudrrC9wNRMKgaHbwlOjYxBEI6ILKN8U/EhTXX6wMSpARNDhVaS7BlCACGKBYdVdpwZL
+	 EHH1CmESYqAEmyzflG2cKBpFwxle+Y/RNmZiDoPtb+aQF1RWwkVW3jfuaP7m80E68RQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DMxaLUjL;
+	arc=none smtp.remote-ip=74.125.82.41
+Received: from mail-dl1-f41.google.com (mail-dl1-f41.google.com [74.125.82.41])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DD48606A31E;
-	Thu, 26 Nov 2026 09:42:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7DD48606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=none (p=none dis=none) header.from=pengutronix.de
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=pengutronix.de
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ADEE7606A321
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 09:48:30 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org ADEE7606A321
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=pengutronix.de header.i=@pengutronix.de header.a=rsa-sha256 header.s=20260414 header.b=Asqz6pu2
-Received: from [IPv6:2a0a:edc0:0:900:1d::4e] (lupine.office.stw.pengutronix.de [IPv6:2a0a:edc0:0:900:1d::4e])
-	(Authenticated sender: pza@pengutronix.de)
-	by mx1.white.stw.pengutronix.de (Postfix) with ESMTPSA id 40F742007F9;
-	Thu, 26 Nov 2026 10:42:26 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1795686146;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=0rasQBT9o9rNgelEjBt6NiFeFY0ARPWtWWDxp9ttzOs=;
-	b=Asqz6pu2/htdPlCLCe92qDIaPszxnIFVFcQepq6D9vq5LmgwYn1IRb6sjDdVHnjNvXT4Th
-	4lxEa867dru0441J2QWYEvaKk/Ch/FOXqrN6g6W/d3UvInXSDOvXS/7HhPVn9AAR35UVYK
-	pcPhjAsiknUAAzNtKGA883fjrowMB2TS5ZhvWj8m8jecPVAmC8HXaz6tb0dFDsPYVgjPOy
-	UBFpgivf/OROj0xwYnHyzMz7sHC4qJEIM1X5XoTI2W3rRK/YESkPMqKYJSS96BCwlfreTb
-	NL5e57B+wabDNeS81Vmwnq9gXD8TJyathwJuGrcfl0YDwjfw04mV5sFhFEQa1w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=pengutronix.de;
-	s=20260414; t=1795686146;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=0rasQBT9o9rNgelEjBt6NiFeFY0ARPWtWWDxp9ttzOs=;
-	b=SpcukA+S47QnkuyenAPZyURmkrFLcNezRlbMAASnzrLfBkBLysKnDrdYU3ORQih3OTPcGq
-	pS8ZcvCgyLNF5aYNNe1SExujbjVaXuxW8L/vxQKc+9Ze7WTHHoRNRsEV1p/GJB7f3uey+5
-	r5XDOO576Sqe/9e3Urb+dhK6NZNtdjAWRyF16/GjT35pCrSGUOZ7yXwFA7r39+n20dpuZs
-	C7Q96t1cjhaoaOioVI6uOm6KaMz9ygFplw/UGehEnC3G2GCIx9T9+y2SPsoXKGsuOK3374
-	yXSV/we0jDh/PydFIzeEWI5btbxP7839G98rfJMMA476wYZ8TelKfniESu2pDg==
-ARC-Authentication-Results: i=1;
-	ORIGINATING;
-	auth=pass smtp.auth=pza@pengutronix.de smtp.mailfrom=p.zabel@pengutronix.de
-ARC-Seal: i=1; s=20260414; d=pengutronix.de; t=1795686146; a=rsa-sha256;
-	cv=none;
-	b=V5yBHuckXzB379SzM1jWCjlXii0PY5KxetW+MlvSdvboLltKFux2RbhegITItvaGl0W++c
-	z1AnpDuE7f3/0AhibBnliF08uDwqYdA6Ie99/NuFqsgwJG4d7xkE0v0lM2RTdk+IaO4Bix
-	MxBTVCuA9trL4Lk8S3xNCzDRVg2pd3RBy3CJP+JvEM62aAiFVBCLUi6umv7N4nDNIuI87I
-	3PjFMoQDl1pGHkh55sy2LykV91T1wk4P24LS7Af1x8oFFt8SvDfZ8gL4JIIRCEAKQa2msV
-	uAC5tDv1aQydugWG2wq6C12QrN2yU+R9Sor/JAWuqYmfkP7oYkpjXU+XWlRaoQ==
-Message-ID: <579859f0e1b53aa6506492a2e5d073f3f991014c.camel@pengutronix.de>
-Subject: Re: [PATCH v3 2/3] clk: toshiba: introduce a TC9564 clock/reset
- driver
-From: Philipp Zabel <p.zabel@pengutronix.de>
-To: Alex Elder <elder@riscstar.com>, sboyd@kernel.org,
- bmasney+clk@redhat.com, 	jbrunet+clk@baylibre.com, robh@kernel.org,
- krzk+dt@kernel.org, conor+dt@kernel.org, 	andersson@kernel.org,
- konradybcio@kernel.org, abelvesa@kernel.org
-Cc: daniel@riscstar.com, mohd.anwar@oss.qualcomm.com, 
-	lorenzo.bianconi@oss.qualcomm.com, fabrice.gasnier@foss.st.com, 
-	alexandre.torgue@foss.st.com, marex@nabladev.com, 
-	changhuang.liang@starfivetech.com, devicetree@vger.kernel.org, 
-	linux-clk@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
-	linux-kernel@vger.kernel.org
-Date: Thu, 26 Nov 2026 10:42:26 +0100
-In-Reply-To: <20261125202141.1288493-3-elder@riscstar.com>
-References: <20261125202141.1288493-1-elder@riscstar.com>
-	 <20261125202141.1288493-3-elder@riscstar.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.56.2-0+deb13u1 
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DMxaLUjL
+Received: by mail-dl1-f41.google.com with SMTP id a92af1059eb24-1b24f4b15c4so3075265c88.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 01:48:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795686510; x=1796291310; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2Za6MacJG/4uYb3nMvFDyzid4e9GAP1DjcxkycMoIOM=;
+        b=DMxaLUjLA5BlKaT6YX+N2yYET838u0pZcFVXo+fjXewh8keajOCnUP+WEalIa0pm4M
+         scCx4aQLbdiRKGI3dAts5WvNvtN92ADRV+PDuZKBKnZte2uCb7aUcwwNosGaUhGfFbou
+         /4fGB2k9MpVzhDxUhhd/f774mnw7RoeSuszx/XksflzDlHUMar4VDueO2H9wpvl05r97
+         Ds52aKW7qa8CoDQOhKF/FafV+zawzdjTjllz7buM6pwiIQCqs0ULFzR41yvedG+idzlB
+         yrqIN192zJFzz3mnlsRxNP6w3qq+ySVLKCM73/zH8wkZ46oihXrjSwEY/SeQNTveXDzg
+         VrFw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795686510; x=1796291310;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2Za6MacJG/4uYb3nMvFDyzid4e9GAP1DjcxkycMoIOM=;
+        b=quCzu2ncID3n30bFkFjWBYUOd8A18Og/YmBMvEWelbGW/3WYvk/Dsm4yz1uAncTGRq
+         cmbn+um8fmzTUlXqWIfAheAG1nZEfBpIXarttaJy9rZboZZLRbrCrCRzTHq8/DXWKyxo
+         QabTrjQrkDjPevEM1fdw5XAllj7jxS6DOZZWWPQAsCWzqpuEz1AJX+2OcIytS1x+JiTh
+         7R5vXkRG1+kzjRs4YcDX8HzqttWbrHJVONwzeYyHzSm4Ewlu5WL99lxqa+Wg/KTyq2PV
+         Ua+Pr9egRD+FQEj7rvJuET3P3Kzj7uhbQ3yjuPtgffr06v8OWwXuxgUxcDIBWNbDFlKw
+         utvw==
+X-Forwarded-Encrypted: i=1; AL+hErH+6MG5azexUrnaYN5yqNj3isxfo1IN32+gKAvw7SNV+Rht2mdbWIjYv0Y97lSMyE+zvyvG56j8EwwASQTf@vger.kernel.org
+X-Gm-Message-State: APuU4Z8RndRLxNL0R7Dtp2etgdcPSdRaCjEHySoJNX2QP+14kjxIPUuq
+	bv2GcrHSo1mAdHan6jFhSWWIJUqN0+zPMT7s97ifkLUL9+7v7Tq1A65U
+X-Gm-Gg: AZFdTZc8G6qvWOGhYEsStsAys+FT8OuxDNq7/HlHHZmmh9RmJ0v4K+ic9cZ2Qksq/k5
+	qDJLYJM1hx+ZUUNmi6koE1IXqIAwSLuSjuuFx4YO16sOgIyp4GI7ixQHV9FDCKxulYFGDdb8GwY
+	lj3L8YcuySw52VV36WsS4OT6fmR+tt2oSUST85wFYsKJyGlKJnzueoXEG6bJLtvq/WniC7dyzNE
+	CNV+mKSnBKC/uK10jUsX4fWsmWhS6vxJITPrjKqQtGbtcHelh45YrLbUYvYn86UGw9BEENV8Htc
+	ISYkvJS5xNTQhX2NMvC90/GrQP91asdtIusb8biy97EFP7KQwo8gMvIoR7bY37oG/amcw0Km/+7
+	nJyYbTt0UYybiXqWXl6UvtikppvqUhd9fF/clc0/MDWWolv9saW4Mn5TE7p++oCiYDoS5ZUKZW/
+	4TZYBJ12rzsylQVZnI+vGI2kbsdqfhIvCx6frpokuK22i1MT2AwRTCPy88L6epO7b9MyDM98MFz
+	HK+NoOSlgwW2jVwGIiKJvuAm7zNSeY3V4e6ql4JWyWIfxDV4ePVjsJuh/1LLLMht1F46kRGTSS5
+	Pg7amPAqZGeVR0qTjWQ0EU7IYtKVwFk5kx/bsyG9Rd42gWpKAVEEmez3RwZtRvfQmiMCQzMxTw=
+	=
+X-Received: by 2002:a05:701b:21cd:b0:1b3:be0d:696c with SMTP id a92af1059eb24-1b5567e661emr20009355c88.1.1795686509781;
+        Thu, 26 Nov 2026 01:48:29 -0800 (PST)
+Received: from 192.168.1.36 ([2402:a00:163:2ce9:ad38:eaaf:b00d:c452])
+        by smtp.gmail.com with ESMTPSA id a92af1059eb24-1b55684c85fsm71781172c88.14.2026.11.26.01.48.25
+        (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+        Thu, 26 Nov 2026 01:48:29 -0800 (PST)
+From: Ajit Singh <blfizzyy@gmail.com>
+To: andersson@kernel.org
+Cc: konradybcio@kernel.org,
+	abelvesa@kernel.org,
+	robh@kernel.org,
+	krzk+dt@kernel.org,
+	conor+dt@kernel.org,
+	linux-arm-msm@vger.kernel.org,
+	devicetree@vger.kernel.org,
+	linux-kernel@vger.kernel.org,
+	Ajit Singh <blfizzyy@gmail.com>
+Subject: [PATCH v4 0/1] arm64: dts: qcom: Add Vicharak Axon Pro
+Date: Thu, 26 Nov 2026 15:18:17 +0530
+Message-ID: <20261126094818.77473-1-blfizzyy@gmail.com>
+X-Mailer: git-send-email 2.50.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -101,86 +102,34 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 
-On Mi, 2026-11-25 at 14:21 -0600, Alex Elder wrote:
-> Define a new platform driver that manages clocks and resets implemented
-> by the Toshiba TC9564 SoC.  There are 21 gate clocks that can be enabled
-> and disabled, but currently only the clocks that are (or will soon be)
-> used are defined to be controllable.  There are also 13 resets that can
-> be asserted or deasserted, but support for some of these is omitted as
-> well.
->=20
-> Two registers manage the state of the clocks, and two others manage
-> the state of the resets.  All four registers are found in a region
-> mapped for MMIO.  The region is provided via a BAR on one of the PCI
-> functions embedded in the TC9564 SoC.
->=20
-> The I2C and PCIE clocks and resets are treated as CRITICAL, meaning their
-> state should never be changed (and a warning is issued if changing their
-> state is attempted).
->=20
-> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
-> Signed-off-by: Alex Elder <elder@riscstar.com>
-> ---
-> v3: - Fixed problems/garbage in the patch header
->     - The Kconfig option now depends on RESET_CONTROLLER, and can now
->       be enabled if COMPILE_TEST is enabled
->     - The generic gate clock controller code is now used rather than
->       implementing a custom one
->     - The PLL and internal fixed clocks IDs are no longer available
->       outside "clk-tc9564.c"
->     - The PLL is initialialized, followed by all fixed rate clocks,
->       followed by the gate clocks, to ensure each clock's parent is
->       initialized before the clock is
->     - Updating the reset registers (read/modify/write) is now protected
->       by a spinlock
->     - "Unnecessary newlines" have been removed
->=20
->  MAINTAINERS              |   1 +
->  drivers/clk/Kconfig      |   9 +
->  drivers/clk/Makefile     |   1 +
->  drivers/clk/clk-tc9564.c | 456 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 467 insertions(+)
->  create mode 100644 drivers/clk/clk-tc9564.c
->=20
-[...]
-> diff --git a/drivers/clk/clk-tc9564.c b/drivers/clk/clk-tc9564.c
-> new file mode 100644
-> index 0000000000000..306781e2f7b4f
-> --- /dev/null
-> +++ b/drivers/clk/clk-tc9564.c
-> @@ -0,0 +1,456 @@
-[...]
-> +
-> +static int reset_update(struct reset_controller_dev *rcdev,
-> +			unsigned long id, bool assert)
-> +{
-> +	const struct reset_init *reset;
-> +	struct tc9564_clock *clock;
-> +	unsigned long flags;
-> +	void __iomem *reg;
-> +	u32 mask;
-> +	u32 val;
-> +
-> +	/* Warn on any attempt to change state of a critical reset */
-> +	if (WARN_ON(id =3D=3D RESET_I2C) || WARN_ON(id =3D=3D RESET_PCIE))
-> +		return 0;
+Add initial devicetree support for the Vicharak Axon Pro SBC based on
+the Qualcomm QCS9075 platform.
 
-Can't this be checked at reset_control_get() time (in fwnode_xlate) so
-that critical reset controls aren't given out to consumers in the first
-place?
+The board description includes the debug UART, UFS, USB 2.0 host with
+an onboard hub, PCIe1 (NVMe), GPIO LEDs, GPU and DSPs.
 
-> +
-> +	clock =3D dev_get_drvdata(rcdev->dev);
-> +	reset =3D &reset_init[id];
-> +	reg =3D clock->ioaddr + reset->offset;
-> +	mask =3D BIT(reset->bit);
-> +
-> +	spin_lock_irqsave(&clock->lock, flags);
+The compatible string was merged separately as a917cf9dc0e9
+("dt-bindings: arm: qcom: Add Vicharak Axon Pro").
 
-Consider using guard(spinlock).
+Changes in v4:
+- Move the PCIe1 PERST# and WAKE# GPIOs to the root-port node.
+- Describe WAKE# as active low.
 
+Changes in v3:
+- Rebase on linux-next and include lemans-embedded.dtsi after the
+  platform resource split in 1f90a2bab7f6.
+- Drop the binding patch, which is already merged.
 
-regards
-Philipp
+Ajit Singh (1):
+  arm64: dts: qcom: lemans: Add Vicharak Axon Pro
+
+ arch/arm64/boot/dts/qcom/Makefile             |   1 +
+ .../dts/qcom/lemans-vicharak-axon-pro.dts     | 517 ++++++++++++++++++
+ 2 files changed, 518 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/qcom/lemans-vicharak-axon-pro.dts
+
+-- 
+2.50.1 (Apple Git-155)
+
