@@ -1,86 +1,112 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.52
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795710137;
-	b=3Iq1y3c6CaCTXR79hUDq9+xP6mDtNC+2ThmiAwqqWN+zEWYMeiz+OeeDtK9tUmoND354
-	 LbKfSEtTqkOTyW712ifElS1Nq6uJAJSN3PRrlp5jIWBjI5mV34GH9oAwsON+QdSJcZB7w
-	 61udttv3vQGMVIotPwb7aw8qidmcJXF8OOR/6dsO7lmioNoMu6GMzfPDjdjHpKQTMlzCg
-	 A2qJYLpZLuUqJQwjumgwBWPnAvgZDiFL5QCHoquNSBM6+m3LbbyxjUSsdteiEWtWBt10A
-	 czFImsjqw+HqS70f29QNjTfmTVl6zyDS4OfCbOye7KdS1iHliC+2KzRE1tyVDnHi6iA==
+	t=1795710965;
+	b=Uk/yvEwFikfIAJWSxw5lNQmh5POApcabeNe+wkQ1hLpwf1aDy+hEW7T45nx774P52QM8
+	 zVmde3O7lu8Xgu6qOznIIZyh3Fqi5o4aRicAw5MhsvSGGTAbDsltLUKo4hFARJUSmMU96
+	 w7fKw8vD2PLHzrQB6vbHncVuSOAVTuBtGn7LovuR2gdt3NumTxqlYzTw889nm0nvKdxTp
+	 ObhGoqr/w/zHppGUCngztoaf9gMf7DwPc3p6VR5ZFd0Txwa84FP/0dYnIJXa0IxnAHC/3
+	 iG2Md3Ar0PIMbB5b5RWWacC1qWQBLbClDFnYX8I4yQ6+GK0oJ1WL54ezMC1x1wnw+0w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795710137;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
-	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=LhXW6WWxyK5q9TLN7DF86Y32xXd7qR1sGyUm/tXFhic=;
-	b=p09RluOaIqqJZ8iw/Yi2s4j0fZZ3WRJbLBkfeH0gDJoCtvDk1PdlLDo3ygBYkHNjoUiu
-	 n5K64m+NMqBJ5waDs2bYnae7PSfSgyli2GR9KZRvt6eWDabTk7VNX+UScEu5nkCEmh67q
-	 JlEy1w2fykL/xDgXDwq15xQvYXxO8AOYWUBTxed7jQ/gY9JnCmZC8WspoS08stTBCnZDX
-	 lkqoPtvSeh17uPD8r1MdFcSWsoySkg3hNeazxAwnR92P4EnoILArWn0ZP0CDqlDlHlOL3
-	 DT5lXvf+/0TjLkZ9d0EbqIUHgFqMoSOxtYpr6IaM/KXcDtINlIA7DFNOh+zS4iRAe0Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795710965;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
+	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-GUID:X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=uISJzFxV0O31D/gpj/FTdd8YZSexVP2lB3q9flFxsSs=;
+	b=Ml7O8YTswX/Dso4q+s7hk43WQLl5WMjb6N+zKBETGs6FHNHEWAKos+oSY9eocYXO+A/b
+	 SDItOE4NfmPSJtPm3NtlEe6MGVQ0VVrGEsJJXMgCKsmIZPGOdR9gR98QzofFF1m+3eXKW
+	 fa32sl5RfICArlrf9vPkiM8Wtlz90qj50Vi90eA3pwCgEiY8ABHYIc6abIa1JrcigdOk/
+	 OlkbxuHwZV2ioZlpVEoxEGpKyuQFrq73Q/CetZS7pOEIT5G64SKhO5m8LzZVSrl/TOo/F
+	 K+n3gulxkSOWXPxu/ncdCjjAiom0ioLJVcPNpXEbW6ap9xkM6JhSMNz2ZvSMJ7tO6cw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=linaro.org;
-	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sTXcBPYS;
-	arc=none smtp.remote-ip=209.85.128.52
-Received: from mail-wm1-f52.google.com (mail-wm1-f52.google.com [209.85.128.52])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mKLKSeR9;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FSkcXtol;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC1E5606A31E
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 16:22:15 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC1E5606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CEF86606A33A
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 16:36:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CEF86606A33A
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=sTXcBPYS
-Received: by mail-wm1-f52.google.com with SMTP id 5b1f17b1804b1-4b79502c27aso72513355e9.1
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:22:15 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mKLKSeR9;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=FSkcXtol
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFu87V2068329
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 16:36:04 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=uISJzFxV0O31D/gpj/FTdd
+	8YZSexVP2lB3q9flFxsSs=; b=mKLKSeR9sAN+KL3+WuKi6yV3MZIFforh8qB5i/
+	K7c/s/e2S0RmmPQh9N8A9xEY+SL2FshepmZx3NwU/X0lYU9yqg4thxPBlqNdJhLG
+	BEDgVKvW+xGloWDanN1JnM9vdVzHpAle9JcusrGBkfUYlr2+roPG0AvdBb3Lx7Vz
+	cQ2WOzFah88bmLY5CW+mciylc2syM2byDgN7g8hWkPEu7VLmKtLiyH/NQH7TjKTQ
+	V7KRS6cUAoPfmIZb8TukE16+O0MaNr8Iw0R0j3tBg0d3V25d2hUgQQ6TkUBLLwuT
+	RK9yLHNpmRv5PrqX/YpLqgJ0n8KZLxOxuKXmDDExZuQCiMdw==
+Received: from mail-dy1-f200.google.com (mail-dy1-f200.google.com [74.125.82.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y3v1m-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 16:36:03 +0000 (GMT)
+Received: by mail-dy1-f200.google.com with SMTP id 5a478bee46e88-386c3309469so3120369eec.0
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 08:36:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795710134; x=1796314934; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LhXW6WWxyK5q9TLN7DF86Y32xXd7qR1sGyUm/tXFhic=;
-        b=sTXcBPYSeisnxxEwCZoFkwQP+w7rdOFVMnhCKwiTziMru4eR0LHtPa3aha6YYT1ceV
-         CpmeE513GLsWm9+qqjK7wKXB7vapqRlPYKpQoB2Ffc9EdCY+CCjbwfy+QZtVgr+irFW7
-         t7ufYEZ20H0Co2XeU4yJTf+3t5lazV15Y+cqlO2YwdB+787Modeuo0nGWcjCuGYRXVs4
-         1akr24E0Xmdr7WT1m0mICXL/8lEGMedXGadIfV4wgf3HNI8HwypKypK5K0gSj5mGxN/v
-         JA8ugjrD5VOLGnQbchT19EMbtRo1ALPIhUVBZwx+eaKKg/diWEezfOsKAZtwL1w1todn
-         U0rA==
+        d=oss.qualcomm.com; s=google; t=1795710963; x=1796315763; darn=vger.kernel.org;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=uISJzFxV0O31D/gpj/FTdd8YZSexVP2lB3q9flFxsSs=;
+        b=FSkcXtol4xHJN0Bn2xrwAX5ZbVv69OPTcpK4Nx7WKmP2PCCbAvzGI+0EOoEci9ByAK
+         YPf6xWXvTbka10p2SsR3YbMXLYtWPe/0S/vo73X3xP/ev8u7xexXwy/ArlJG0Eg0C98A
+         MaiMO/+EE/qsRY/Y2ZgUKdsJDpJrospiwLONRIM5culAXZ9sXwdjEOQtTZqE4PjnAgfs
+         IZiG10z5wQfP2Mgdhh6hH+eWsASAqxmot4h7TF+11VjwKKBqWmwih6+oxkPaLuPyHwOx
+         fB4fl0czS52pG4oe+2YX23Os1t3X0+NWD/1W7KazJuQNTyJk0h0VdAmG9Q19uwlZh/n8
+         PLQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795710134; x=1796314934;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=LhXW6WWxyK5q9TLN7DF86Y32xXd7qR1sGyUm/tXFhic=;
-        b=PG7rB8rzcEur1/DtrrYhH6KB0cSuJiC/hwB0X/9Vd8eEWMx+y1UxUaUhSSZG+6TLyI
-         5X6G87MmIKzEKfCMGnovG+lQ6KiivlbpeTMKZPHQk0YOhRvXJ6JJVC0Q/h7r6S9XPiw3
-         psqutYn+1+uTGXGIoK+ZZPMzVQgYIWMeBng1dpLCqBiIlf8drDCgfxtWn3K1hlacJnAI
-         Ix/zF/HIUhkKkLvKYVTql+sVkFMudOE8ua4gcNXUpMEA/Km8Oa5sNwOyDpFX9Xn49g3/
-         f7uD0yyROlMfXfz5wULoOzGeIvHjEAmC9vne5LbFhZfFshUkBXi7MUvpvNRiBWDUxaKG
-         EnTQ==
-X-Forwarded-Encrypted: i=1; AL+hErF4sCeqJl+DhscpP8s/K5r2cQ5TtwaWxfdkHl+Hbj6dqzFFzXp+UO7hrLmff76fy2sWI1LaJV2qWbX2WU+X@vger.kernel.org
-X-Gm-Message-State: APuU4Z9bVdAZochBeVHQz3AeXvzZ7UcpIYIxpOxem+vZgejhWb/he/u3
-	U1s8tGTEaMe4Rna21ioOIlZu9/uyNtB0pBsrzZYLHSTkgaF67B4eyPmfVy1P6t5pG4A=
-X-Gm-Gg: AZFdTZfOarC/lDHVXq4xjGSE5F/0DxsEtt2deiRs3LuyTfxKK3PInWeSmDJ+DpSlWLk
-	Hv96Tw76g5BapuO264jKz+nBmsquxvC8GnDFj77clwQADMZDvDfmu6p6MY4O5xhGBY5RfpOxz0M
-	PBVa9PqwDW1/YXesdUatf1vljsqhHancfRFl7Ww0jmDDbVvK732nm8puFn3n6mPJSKS7zSpL0A7
-	gMlYSAQx1UlQzDF0Mi0wWknxzwiXMKbrCAkgb2tM6mTzjGPFXAuU2BkQXMwls4dOTWDpWs0bB3k
-	Wv/oQFL+Ab/8aGaAnjj07AC4pIOwdb1xOOpao9YWUewJBvtPPuy7klCRda3sw28gSaqq+6oOgi7
-	yhbilx+R7fRnnU/E6R3uxGVNhI+6FoiLX+Q6Q0QFc9/nl0PHPiguGghUXCAHWjrmR0uLYbT4IGG
-	49vgrvvjSwUMwwCbG5KCy7R/Ulo+sQm4OAiB/SBs2IjdZxPJ8NxT+reSEGL5KZpDWve8GpmcjHI
-	XZIyFsC9CIxB88G6/hM/wzrLaWItE0L5QK7CzA8rygS4vVhfgNmjLEqmF77j244dA/8g7Sr2qR0
-	yGMzNUW5zsVztD6s8ftyvH0n1ShqsCjoqZ0pbMK9k+q4XTK75nZxDeqPmuGL8CE=
-X-Received: by 2002:a05:600c:4e02:b0:4bb:5d39:95fa with SMTP id 5b1f17b1804b1-4bb88811c82mr422575235e9.12.1795710134157;
-        Thu, 26 Nov 2026 08:22:14 -0800 (PST)
-Received: from [192.168.0.167] ([109.77.24.219])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab658e2c8csm42722484f8f.2.2026.11.26.08.22.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Nov 2026 08:22:13 -0800 (PST)
-Message-ID: <c7e1b25b-23c4-4598-9a22-577e105cacf0@linaro.org>
-Date: Thu, 26 Nov 2026 16:22:12 +0000
+        d=1e100.net; s=20260707; t=1795710963; x=1796315763;
+        h=cc:to:message-id:content-transfer-encoding:content-type
+         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
+         :cc:subject:date:message-id:reply-to:content-type;
+        bh=uISJzFxV0O31D/gpj/FTdd8YZSexVP2lB3q9flFxsSs=;
+        b=cYUDIKC021ARwL5Vn4vTW06i78gvcl9XzSXLa0kEGbhgzi8+djt5f4GJLmz8J2GHcv
+         zr+8yQ7+V1BhKLYRl5MPAymCnIrHHi1pIwmflo4bJH8gBmDPbWZGCKa5kJXnUYKaNUYl
+         K3QOAhGl6s+DvJvI8axJLOOVuqGK9jH6p64CAToYHSXBo0ERMF93M0T9SP6+wtTJW62i
+         NC1/OkQyAV2M957o9myh9PckC4UQrtGcntqsuKWjVfuam2wMTHjoMSr/mk+8NO2KrJb/
+         jWAY8Ds1czSZnofEF1GVjX4sNukD7RTyJotyseyoLTnMAOih3gEyHNjJ5/079IfchyZy
+         ht3Q==
+X-Forwarded-Encrypted: i=1; AL+hErG+985bEZiSK8ZdKMBL8hpbh5YEulDy1PAp2yQscLiqJWKL4DQdfIVdUfhRYvBbxirCb3Fl1ApHTld++4kU@vger.kernel.org
+X-Gm-Message-State: APuU4Z+h07weBYwbgYd0k/g6wTJ0HPATtRL51Rli41rNs2gkBWvKmlQK
+	kC0iZCeD2pbB19aGqwt0rAUg9myM5zsdhFXHvOgDXw7RatE+qnH5AiyE3hwPu/SRV2P86ochR3L
+	K0DhInEuZOgFg64o1wHjAZX9JeYLvy4qnJLN4H9mqXiiLK9Iid62swARDfCuoX4Fn9vCALlUyly
+	Q7
+X-Gm-Gg: AZFdTZca1aEEONOiiF7lcmWx9Gmsk2yh10eMyvvjCGdphi1AuZ/L7AbXB4SJlLIYKi3
+	X7QqNK7/lmCXqAk1ZqoLQ0iyXN3x+8iFXV0wiGka52ED/kunmWKboc48k2iD95l/BaMLFnV/1c1
+	UkWhwj9sHmgQfx6JA2+LDvR33g1G1RwhGaI3p7sO9WrjWnC1xf8RbRkNyZhnLqlg5G5Gaw0Xe1P
+	LDUqavbk5irqk22OTyPhXIeY9CcLW10YXc+PkJI9M4+oH+04pfC2Dz3WPAoJ0HfKIfP75jlSyr8
+	zRrrIX56EqeF4JCCW316/cOlAc5wwarbMNWZfDlr0iI3tsZKNA822jSZ9xzXBxoLXk/R3Q0nsKB
+	UllHFirHeKZN9PKQtb6LOm/HqsAhYFNogssU2YEbLDwxcNIoyfIPw4ID3TTTuytTK3hLjBKHGb4
+	to2432T+Q6jfJDMm0td8YJwEz0i2+OLjpkexlcCjq610k=
+X-Received: by 2002:a05:7300:1c17:b0:386:a105:fa66 with SMTP id 5a478bee46e88-386a105fd17mr16389448eec.7.1795710962874;
+        Thu, 26 Nov 2026 08:36:02 -0800 (PST)
+X-Received: by 2002:a05:7300:1c17:b0:386:a105:fa66 with SMTP id 5a478bee46e88-386a105fd17mr16389426eec.7.1795710962325;
+        Thu, 26 Nov 2026 08:36:02 -0800 (PST)
+Received: from hu-kriskura-hyd.qualcomm.com ([202.46.22.19])
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-385677c0c1dsm72474910eec.21.2026.11.26.08.35.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 26 Nov 2026 08:36:01 -0800 (PST)
+From: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 22:05:56 +0530
+Subject: [PATCH v2] usb: dwc3: qcom: Add support to skip phy management by
+ USB core
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -90,79 +116,164 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] media: qcom: camss: x1e80100: Fix CSID2 routing to
- nowhere
-To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
- Loic Poulain <loic.poulain@oss.qualcomm.com>,
- Mauro Carvalho Chehab <mchehab@kernel.org>,
- Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
-References: <20261122-camss-routing-fixes-v1-0-0deeeaca2622@kernel.org>
- <20261122-camss-routing-fixes-v1-1-0deeeaca2622@kernel.org>
-From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-Content-Language: en-GB
-In-Reply-To: <20261122-camss-routing-fixes-v1-1-0deeeaca2622@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+Message-Id: <20261126-xhci-skip-phy-init-v2-v2-1-004f9c5597e5@oss.qualcomm.com>
+X-B4-Tracking: v=1; b=H4sIAOtfCGsC/yXMQQrCMBBG4auUWTuQjjSIVxEXJh3NrxBDppZK6
+ d2NuvwW761kWqFGx26lqjMMz9wgu45iuuSbMsZmEie+78XzkiLYHihc0puRMfEs7EcX9sPgDsE
+ Fam2pesXy+57Of9sr3DVO3xlt2weVmU5geQAAAA==
+X-Change-ID: 20261126-xhci-skip-phy-init-v2-6d0b35508b0b
+To: Thinh Nguyen <Thinh.Nguyen@synopsys.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795710959; l=4629;
+ i=krishna.kurapati@oss.qualcomm.com; s=20260707; h=from:subject:message-id;
+ bh=U1VV7d+fhg7DNP43HmWOjbdH2R3wn//2Gj++GTx/bJI=;
+ b=nX6d37aJ4dvKjXnb8JtWn8BI2KdslB/Oe6eVYpSeKrWAnXe37oPjwNP9swr3Lnr3dEbaZz61g
+ xR1LS4aWP+aBxJmWze/3ktaHoYBOxw4KfjymGS4mclmMAEVPa/5bIyE
+X-Developer-Key: i=krishna.kurapati@oss.qualcomm.com; a=ed25519;
+ pk=6PmiuwGCdov3wRO+bdmRlRxRtmJyDKz3ED57LLPVgds=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2NSBTYWx0ZWRfX59qBRQx41dir
+ uVNrCz+zf9IJr7+pLdl+yJheHBN7uc1BrAYGdK1Ug5ZhOt2O05bvyIjbAeMUVcB+os5CxtmYeE0
+ qmux0Z9uTVPACF4maLYb0XP3kAeoSEgEWGa0kyZ9mXO9pGemtLZgxqSED8rEkUFTqJRyIQAuQFu
+ KLD9J+xiAiKDfGPCciqvji+CmJsH3P7c1+I3s7m+uigVFbwKZe7ZQEcFB6bOi8o44gQV4FjJGwW
+ MVFqNm38isdMJoA3xgIOfFXi57QU5Iv7wGMiUlapoYkBjdCTcRwBrZbLCkb0JCTdyUHIqVJXHPJ
+ kusUtqt0hpsjvIMjyaEOOfpsEipQVuwSoyjN62LwO3XJdpSv4a1zFzmM5i06PcHWjN7KGpgrgTz
+ FTC+1DRwa+7CkcAfZPNc47korbLwzpuMR3VvRmaDD4Y/MU5b6jiTAX+H3wo2V4C1v/5lScKaYjE
+ R4mNNNfYd1gF7fP3vig==
+X-Proofpoint-GUID: atz8FOoecMYuky1rgHuQShbWJnSjhiIO
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2NSBTYWx0ZWRfX5h5b3G2R+bLF
+ wWrU9i1glbHfjAInllSqSvgQdj5TceRrACIWFwqBj0+0nZKXn3kfK/BvYH6bfPPIvKT7nMz+Xqo
+ u1mFIb8rAeZFW/C3FdW7RatOcLfL5t8=
+X-Proofpoint-ORIG-GUID: atz8FOoecMYuky1rgHuQShbWJnSjhiIO
+X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b085ff3 cx=c_pps
+ a=PfFC4Oe2JQzmKTvty2cRDw==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
+ a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
+ a=VwQbUJbxAAAA:8 a=EUspDBNiAAAA:8 a=jIQo8A4GAAAA:8 a=FBhBF43qowX6Y76zbycA:9
+ a=QEXdDO2ut3YA:10 a=6Ab_bkdmUrQuMsNx7PHu:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260065
 
-On 22/11/2026 02:10, bryan.odonoghue@linaro.org wrote:
-> From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> 
-> CSID2 doesn't actually have a corresponding VFE it can receive CSIPHY input
-> and raise an interrupt but it can't drive any VFE write-master. This is
-> basically useless and not worth coding around in the upstream driver. If we
-> find a real use for this we can turn this back on. In the meantime drop the
-> definition, it only confuses things.
-> 
-> Fixes: 1830cf0f56c3 ("media: qcom: camss: Add x1e80100 specific support")
-> Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-> ---
->   drivers/media/platform/qcom/camss/camss.c | 21 ---------------------
->   1 file changed, 21 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
-> index 26e3f2aa3ef24..aa6d01d8fcb2a 100644
-> --- a/drivers/media/platform/qcom/camss/camss.c
-> +++ b/drivers/media/platform/qcom/camss/camss.c
-> @@ -4515,27 +4515,6 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
->   			.formats = &csid_formats_gen2
->   		},
->   	},
-> -	/* CSID2 */
-> -	{
-> -		.regulators = {},
-> -		.clock = { "gcc_axi_hf", "gcc_axi_sf", "cpas_ahb",
-> -			   "cpas_fast_ahb", "csid", "csid_csiphy_rx" },
-> -		.clock_rate = { { 0 },
-> -				{ 0 },
-> -				{ 64000000, 80000000 },
-> -				{ 80000000,  100000000, 200000000,
-> -				  300000000, 400000000 },
-> -				{ 300000000, 400000000, 480000000 },
-> -				{ 300000000, 400000000, 480000000 }, },
-> -		.reg = { "csid2" },
-> -		.interrupt = { "csid2" },
-> -		.csid = {
-> -			.frame_sync_en = true,
-> -			.hw_ops = &csid_ops_680,
-> -			.parent_dev_ops = &vfe_parent_dev_ops,
-> -			.formats = &csid_formats_gen2
-> -		},
-> -	},
->   	/* CSID_LITE0 */
->   	{
->   		.regulators = {},
-> 
+DWC3 driver does manage phys itself sufficiently for Qualcomm platforms.
+If xhci-skip-phy-init is not set, the HCD core does a phy_init and phy_
+exit is done only when roothub is being destroyed. Due to this, during
+system suspend in host mode, although phy_exit is done by DWC3 core, the
+init_count on phy is never down to zero since HCD core also did an init.
+consequently causing phy's exit routine to not be called. Hence, add
+support to skip phy management by USB core.
 
-This patch is too naive, it leads to:
+Some Exynos platforms still do rely on USB core for phy_calibrate calls,
+hence disable USB core management for Qualcomm platforms only.
 
-20261126-purwa_camss-v6-2-5ab97aea3832@oss.qualcomm.com
+Signed-off-by: Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+---
+Initially, a patch was sent adding software_node properties [1]. But it
+was causing a bootup issue as mentioned in [2]. Hence a revert was sent
+to fix it [3]. This patch uses a different approach as opposed to adding
+sofware node properties and was tested on sm8750 mtp.
 
-I'm going to NAK myself here and do something better.
+Changes in v2:
+- Rebased on top of Thinh's latest patch series [4]
+- Removed Thinh's ACK since code changes are different in this version
 
-v2 incoming
+Link to v1:
+https://lore.kernel.org/all/20260914-xhci-skip-phy-init-v1-1-9c46b31a5a39@oss.qualcomm.com/
+
+[1]: https://lore.kernel.org/all/20260723-dwc3-skip-init-quirk-v1-1-97682bb44ebd@oss.qualcomm.com/
+[2]: https://lore.kernel.org/all/cbb4ae94-7862-4d91-b01d-0d7f18d49a45@packett.cool/
+[3]: https://lore.kernel.org/all/20260909-xhci-fixes-revert-v1-1-7cc97fa0f307@oss.qualcomm.com/
+[4]: https://lore.kernel.org/all/cover.1795559405.git.Thinh.Nguyen@synopsys.com/
+---
+ drivers/usb/dwc3/core.h      | 3 +++
+ drivers/usb/dwc3/dwc3-qcom.c | 7 +++++++
+ drivers/usb/dwc3/host.c      | 5 ++++-
+ 3 files changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/usb/dwc3/core.h b/drivers/usb/dwc3/core.h
+index d103a637a4f7..9b9714fdba9e 100644
+--- a/drivers/usb/dwc3/core.h
++++ b/drivers/usb/dwc3/core.h
+@@ -1139,6 +1139,7 @@ struct dwc3_glue_ops {
+  * @usb2_gadget_lpm_disable: set to disable usb2 lpm for gadget
+  * @needs_full_reinit: set to indicate the core may lose power and need full
+  *			initialization during system pm
++ * @skip_phy_init: set to skip xHCI PHY initialization on host init
+  * @disable_scramble_quirk: set if we enable the disable scramble quirk
+  * @u2exit_lfps_quirk: set if we enable u2exit lfps quirk
+  * @u2ss_inp3_quirk: set if we enable P3 OK for U2/SS Inactive quirk
+@@ -1408,6 +1409,8 @@ struct dwc3 {
+ 		unsigned		usb2_gadget_lpm_disable:1;
+ 		unsigned		needs_full_reinit:1;
+ 
++		unsigned		skip_phy_init:1;
++
+ 		unsigned		disable_scramble_quirk:1;
+ 		unsigned		u2exit_lfps_quirk:1;
+ 		unsigned		u2ss_inp3_quirk:1;
+diff --git a/drivers/usb/dwc3/dwc3-qcom.c b/drivers/usb/dwc3/dwc3-qcom.c
+index ef38308023aa..3fe2e0fb3eb7 100644
+--- a/drivers/usb/dwc3/dwc3-qcom.c
++++ b/drivers/usb/dwc3/dwc3-qcom.c
+@@ -636,6 +636,12 @@ static struct dwc3_glue_ops dwc3_qcom_glue_ops = {
+ 	.pre_run_stop	= dwc3_qcom_run_stop_notifier,
+ };
+ 
++static void dwc3_qcom_fixup_properties(struct dwc3 *dwc,
++				       struct dwc3_properties *props)
++{
++	props->skip_phy_init = true;
++}
++
+ static int dwc3_qcom_probe(struct platform_device *pdev)
+ {
+ 	struct dwc3_probe_data	probe_data = {};
+@@ -745,6 +751,7 @@ static int dwc3_qcom_probe(struct platform_device *pdev)
+ 	probe_data.dwc = &qcom->dwc;
+ 	probe_data.res = &res;
+ 	probe_data.ignore_clocks_and_resets = true;
++	probe_data.fixup_properties = dwc3_qcom_fixup_properties;
+ 	ret = dwc3_core_probe(&probe_data);
+ 	if (ret)  {
+ 		ret = dev_err_probe(dev, ret, "failed to register DWC3 Core\n");
+diff --git a/drivers/usb/dwc3/host.c b/drivers/usb/dwc3/host.c
+index c5674161b2b0..3fb8be8be590 100644
+--- a/drivers/usb/dwc3/host.c
++++ b/drivers/usb/dwc3/host.c
+@@ -130,7 +130,7 @@ static int dwc3_host_get_irq(struct dwc3 *dwc)
+ 
+ int dwc3_host_init(struct dwc3 *dwc)
+ {
+-	struct property_entry	props[6];
++	struct property_entry	props[7];
+ 	struct platform_device	*xhci;
+ 	int			ret, irq;
+ 	int			prop_idx = 0;
+@@ -174,6 +174,9 @@ int dwc3_host_init(struct dwc3 *dwc)
+ 	if (dwc->usb2_lpm_disable)
+ 		props[prop_idx++] = PROPERTY_ENTRY_BOOL("usb2-lpm-disable");
+ 
++	if (dwc->skip_phy_init)
++		props[prop_idx++] = PROPERTY_ENTRY_BOOL("xhci-skip-phy-init-quirk");
++
+ 	/**
+ 	 * WORKAROUND: dwc3 revisions <=3.00a have a limitation
+ 	 * where Port Disable command doesn't work.
 
 ---
-bod
+base-commit: a431ab75251f0ae5b7019efe7221b851716c2c3c
+change-id: 20261126-xhci-skip-phy-init-v2-6d0b35508b0b
+
+Best regards,
+--  
+Krishna Kurapati <krishna.kurapati@oss.qualcomm.com>
+
