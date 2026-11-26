@@ -1,63 +1,62 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795670465;
-	b=37VDy5wXh4ItsIq0p45Re7iV5L6OWiRkUYBD61quIMWL/OZG6FyFba3O563gW0epj9sk
-	 jkxxSszbi9fDkddHKGnTgrYWCf4AGhvbwR8Umtg9q/QZsf15yi7cp9ZRpzr2oRhc/Q5qx
-	 hHjAD1OzmbWHlbvFg5YX514DaxiQyS9VVxYuf0cd4pGJXrqHNuu5r9crHzoknXDLLmvNr
-	 /KJNrI+7T9XLC7vQrS+X4IiMHkNhBhUzrKiWHPy87AY/Piy7na5tALNJFI6Imw3+ujCuD
-	 zqEEl4cwyaB1aBH2dExI4H0UlBrUhB0Ne7HmwO/7gnQq22tAOdykpfovEWQRf5RXwGg==
+	t=1795670472;
+	b=BYc9vQtYn4R4LUu22ZGOafBVwbNyuk5y7i6zL0olSjZAZXZ6ts5HXk7x3CNoo8YboJd6
+	 BBV6t7CSBcd16JtBwHkwC4a73Z7JBJvlFiBopMDEQj2b0TwGkeYss8cxrBK9aHHpPlM1o
+	 fAX2siCxpLf7XLQCaA3AXGv02as+/IHfTOYzLETZXGG7Ssev+dkMuL2TGoPmz1DB+6kdn
+	 y92zlms0vUogqnp9XGlDRBwh2VdN2U4Li1Cck69DoXLHvLXYh3mSOUzOntqOdl+byk5Xx
+	 /Ur0plLBi5VOSNxCfEN+eUj0TWxnpJD1JPmbJzZMolRyYzKdWEhdaiQxLiMuqTEIduA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795670465;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795670472;
 	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=9IGvHQF73alEoj112r5lUUW1Yg+2wm87TDakeFNsZLA=;
-	b=ZCYhy1JP6yT9OAbQc+/4nZKWGDyoAvYrhK84iubIbd6Y0qFZ6Tv+kKqg2PS8AZZlpeG9
-	 VsY6eqhkQjlkx01HNuTWFOE3XjHWBcqxB2QES34OolP0q6ioh8Dytd4PZMiiaH/HCvmaE
-	 MTyiBlcDLFlWM+ZcFbSp4IYvsS0x6HRuE7ae5PajWFFo0fe65Hi7yRrCxwKGJQmvN5lTW
-	 tcR/rSqQdjQZES6KhQi67+WixQf+TLlJpn//iLmz2KRQZmvmaKuYrA7SK0LUxXF/mu2Oh
-	 WHxmMf4xW8DA8+wmROcPrLnBDD+hW57N4as6Zik3UFLjPMTAYvdfV7t+YoGkanzcdkQ==
+	 Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding:
+	 X-CM-TRANSID:X-Coremail-Antispam:X-CM-SenderInfo;
+	bh=eu+ywC0LoiybpoOGKD6TPtsSSzAfxkgin+Y/1iYsRoc=;
+	b=x8nLqbDY4y59/noBnBN8pzfYzJoEzaDfgjzjO0sXmJDxbNddatynwAC2TPQ2+TVgej3t
+	 Slq3LbeBCU8GjXIDnBuM8qfLlJTkwqnXUDcgwlLP2rxLVRktT2r4SHSfkHbGtOff6gl2I
+	 t2HQAb4HExbgImVUsLIIddZNkjvkuFKCbw2hyiuQsicza0BcT3Y1x4xUbtOir6sqI+UqX
+	 TW9UB87F7CCX73kQpDsmubpKJwPL2S8SXXly7jEw044es5abLkpFf+bxigKywPVXNP90V
+	 sl+5OItV39RsVH3Kgmjhr7rFwJTsAq3dWT9plsqNoQQFejS46wNGIFzjJjDrL9h4nTQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=mail.ustc.edu.cn;
 	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=dBxRt763;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=YVFOUtdU;
 	arc=none smtp.remote-ip=202.38.64.46
 Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id B6970606A31E;
-	Thu, 26 Nov 2026 05:21:02 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B6970606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 5F211606A329;
+	Thu, 26 Nov 2026 05:21:10 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 5F211606A329
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=dBxRt763
+	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=YVFOUtdU
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=9IGvHQF73alEoj112r5lUUW1Yg+2wm87TD
-	akeFNsZLA=; b=dBxRt7632IMzXEYNZvZUhP5wxPE+8C0/cxNki/ny9KZ3GILhwl
-	MvSlWxDfAZs8KyEo8nmCI5qiKcvnRYT8fDfFTQKPRWl/4DORv+Hf2qC+vgBUnz8z
-	KwQGfmH4pynOMXkbFoVE337eLHtBGMfjuGiv0cRGA4w/KShyQp3nWg0N8=
+	Message-ID:MIME-Version:Content-Transfer-Encoding; bh=eu+ywC0Loi
+	ybpoOGKD6TPtsSSzAfxkgin+Y/1iYsRoc=; b=YVFOUtdUuT4YXHUJ/FqoVYaiSt
+	V322a/6Mr/N7gPH9zX/KbfUtKcXTSNYBo2tlX5R+Ex2xmx/k7gPxCm2t3FYYR9j9
+	OnZrYR6w4CMjbuLQUVla9vqOPiZrvFDztmVIo90Xtb3If3y4J6Zth4vJT0vtlpOe
+	2wbYAr49EVTEMi2EE=
 Received: from xuqianhui.ustc.edu.cn (unknown [114.214.224.120])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgDHNSq5wQdreQ77AA--.266S3;
-	Thu, 26 Nov 2026 13:20:58 +0800 (CST)
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCXI0ixwQdrYw77AA--.360S2;
+	Thu, 26 Nov 2026 13:20:50 +0800 (CST)
 From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: andersson@kernel.org,
-	konradybcio@kernel.org
-Cc: abelvesa@kernel.org,
-	mitltlatltl@gmail.com,
-	robh@kernel.org,
-	krzk+dt@kernel.org,
-	conor+dt@kernel.org,
-	devicetree@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH v10 1/2] dt-bindings: arm: qcom: document the Lenovo Legion Y700 Gen4
-Date: Thu, 26 Nov 2026 13:20:56 +0800
-Message-ID: <20261126052057.1544590-2-xiaqinghuan@mail.ustc.edu.cn>
+To: dri-devel@lists.freedesktop.org,
+	linux-arm-msm@vger.kernel.org
+Cc: freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	robin.clark@oss.qualcomm.com,
+	lumag@kernel.org,
+	abhinav.kumar@linux.dev,
+	jesszhan0024@gmail.com,
+	sean@poorly.run,
+	marijn.suijten@somainline.org,
+	liujianfeng1994@gmail.com,
+	Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Subject: [PATCH v3] drm/msm/dsi/phy: program PLL_SYSTEM_MUXES on the first PHY enable
+Date: Thu, 26 Nov 2026 13:20:49 +0800
+Message-ID: <20261126052049.1544229-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261126052057.1544590-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261126052057.1544590-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,51 +67,96 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgDHNSq5wQdreQ77AA--.266S3
-X-Coremail-Antispam: 1UD129KBjvdXoW7JF1kAr18uFW5Jryftr18Zrb_yoWDGrcEya
-	1xX3W0van3JFnYgrs8Zan3tF15Jw48Xr97Aw15tFn2y34qy398Caykt34xAryUur47ur1f
-	uF48Gr9IkwsrGjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUb9xYjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Xr0_Wr1l1xkIjI8I
-	6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
-	IE14v26r18M28IrcIa0xkI8VCY1x0267AKxVWUCVW8JwA2ocxC64kIII0Yj41l84x0c7CE
-	w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6x
-	kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
-	c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
-	8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCF
-	s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACI402YVCY1x02628vn2kIc2xKxwCY1x
-	0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_GrWl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC
-	6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWw
-	C2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_
-	JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJV
-	WUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIY
-	CTnIWIevJa73UjIFyTuYvjxU2DDGUUUUU
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARECB2sGHiAuFQA8sB
+X-CM-TRANSID:3pYKCgCXI0ixwQdrYw77AA--.360S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAF45Cr1DAr1rXrWxZr47urg_yoWrGw4Upr
+	W5Kw1a9rWDtrWxX397Z3W5u348Cw4Sgw4akFnrKa4ruan8X3W8ZFyxKa1YgFyUCr1fJw1F
+	vFs3CFyDuF1UArJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUU9K14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+	6r4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+	Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+	I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+	4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+	n2kIc2xKxwCY1x0262kKe7AKxVWUtVW8ZwCY02Avz4vE14v_GrWl42xK82IYc2Ij64vIr4
+	1l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
+	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
+	8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAv
+	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14
+	v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUYE_MDUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiARECB2sGHiAuFQA5sE
 
-The Lenovo Legion Y700 Gen4 is an SM8750 tablet that ships with the
-lenovo,elden board compatible. Add it to the SM8750 section of the
-Qualcomm board binding.
+From: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
 
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-Acked-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+dsi_7nm_phy_enable() pre-seeds pll_enable_cnt to 1 while de-asserting
+DIGTOP_PWRDN_B and PLL_SHUTDOWNB, and dsi_pll_enable_pll_bias() returns
+early whenever the counter is already non-zero.  On the first PHY
+bring-up the bias helper therefore never reaches its
+PLL_SYSTEM_MUXES = 0xc0 write, and nothing else programs that register
+before the panel is powered up: PLL_SYSTEM_MUXES keeps 0x0, the locked
+PLL outputs are not routed to the lanes, and a panel wired for bonded
+DSI comes up with the backlight on and no image.
+
+The combination is old.  commit cb55f39bf7b1 ("drm/msm/dsi/phy: Fix
+reading zero as PLL rates when unprepared") introduced both the counter
+and the pre-seed.  commit 93c97bc8d85d ("drm/msm: dsi: fix PLL init in
+bonded mode") briefly dropped the pre-seed, which made the write
+reachable again.  Its revert,
+
+commit 44784327815b ("Revert "drm/msm: dsi: fix PLL init in bonded mode"")
+
+restored both sides, so on current master the muxes are once more never
+programmed during the first bring-up.
+
+Program PLL_SYSTEM_MUXES in dsi_7nm_phy_enable() next to the CTRL_0
+write that powers the PHY up, while the same lock is held.  This only
+adds a register write to a path that already programs CTRL_0: no
+existing write moves, and the counter, the locking and the order of the
+rest of the PHY programming are untouched, so the byte-clock regression
+that led to the revert cannot come back through this path.  The bias
+helper keeps its own write for the paths that raise the counter from
+zero.
+
+Measured on a Lenovo Y700 Gen4 tablet (SM8750P, bonded dual-DSI CSOT
+PP8807HB1-1 panel, "novatek,nt36536"): without this change
+PLL_SYSTEM_MUXES reads 0x0 at panel bring-up and the panel stays dark;
+with it the register reads back 0xc0, the panel initialises and the DSI
+host starts receiving interrupts (41 in /proc/interrupts, 0 before).
+
+Fixes: cb55f39bf7b1 ("drm/msm/dsi/phy: Fix reading zero as PLL rates when unprepared")
+Signed-off-by: Xu Qianhui <xiaqinghuan@mail.ustc.edu.cn>
+Tested-by: Jianfeng Liu <liujianfeng1994@gmail.com>
 ---
-Changes in v10:
-- Unchanged since v9.  Carry the Acked-by Krzysztof gave on v8 1/2
-  (2026-11-25T12:04:02Z): v9 was posted after it but missed the tag.
- Documentation/devicetree/bindings/arm/qcom.yaml | 1 +
+
+Changes since v2: no code change; the diff --git section below is byte-for-byte
+identical to v2.  This version only adds Jianfeng Liu's Tested-by (Xiaomi Pad 5
+Pro) and is sent as a new thread because the 2026-11-17 v2 mail suffered thread
+breakage / a missing subject on some archives; version history and links are
+preserved below.
+
+Changes in v2: move the explanation out of the source comment and into the
+commit message, as requested; the code delta is the same single writel().
+Fixes: is re-pointed at cb55f39bf7b1, which introduced both the counter and
+the pre-seed, instead of at the revert that restored them.
+
+Link: https://lore.kernel.org/all/20261019130041.305805-1-xiaqinghuan@mail.ustc.edu.cn/
+Link: https://lore.kernel.org/all/e4ul4zxjta4oyo5fpjjzwkykb4gicztcn7yrgjw7aer6bqowkw@6nx2arhvmyca/
+Link: https://lore.kernel.org/all/20261117052047.32129-1-xiaqinghuan@mail.ustc.edu.cn/
+ drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/devicetree/bindings/arm/qcom.yaml b/Documentation/devicetree/bindings/arm/qcom.yaml
-index 121ca557ce..a32cfb30a1 100644
---- a/Documentation/devicetree/bindings/arm/qcom.yaml
-+++ b/Documentation/devicetree/bindings/arm/qcom.yaml
-@@ -1220,6 +1220,7 @@ properties:
+diff --git a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
+index ce86dbf618..98df2d994a 100644
+--- a/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
++++ b/drivers/gpu/drm/msm/dsi/phy/dsi_phy_7nm.c
+@@ -1096,6 +1096,7 @@ static int dsi_7nm_phy_enable(struct msm_dsi_phy *phy,
+ 	data = DSI_7nm_PHY_CMN_CTRL_0_DIGTOP_PWRDN_B |
+ 	       DSI_7nm_PHY_CMN_CTRL_0_PLL_SHUTDOWNB;
+ 	writel(data, base + REG_DSI_7nm_PHY_CMN_CTRL_0);
++	writel(0xc0, pll->phy->pll_base + REG_DSI_7nm_PHY_PLL_SYSTEM_MUXES);
+ 	spin_unlock_irqrestore(&pll->pll_enable_lock, flags);
  
-       - items:
-           - enum:
-+              - lenovo,elden
-               - qcom,sm8750-mtp
-               - qcom,sm8750-qrd
-           - const: qcom,sm8750
+ 	/* Assert PLL core reset */
 -- 
 2.53.0
 
