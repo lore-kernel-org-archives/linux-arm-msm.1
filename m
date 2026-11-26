@@ -1,49 +1,124 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795707999;
-	b=JnYQCDUfWra9IsBWKlpUxoCEOhO/H/rmJunugz6GgcK987w6wQOSoQrR8YihR2AG3Ti9
-	 z8cozLM87ANMVCUa9juU5Muqgn4vePNCUKVOv61ajbzjHBf3a4/4QaTejeYsRLt4PiFz+
-	 IO9wKeh3zT+yvzwRP6k7xqJkpVIuOkG7UINrWUzCxJwB8l19CWGZuTGxqwfgkMPFGr7K9
-	 ty8souMvuHayHRLtoypYbyDndBxjEExbJ2CxsZ3LscnBJNkx0eV3xJGxVe2+O988l7D99
-	 ZTBB45pyw5JYycu7Uysz8WOUfYKs6oHjr8P1BxGBFuN4n2Er82hi9OcqepBR2KOPJ5Q==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795707999;
-	h=DMARC-Filter:Received:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
-	 References:MIME-Version:Content-Transfer-Encoding:Content-Type;
-	bh=aNk1CIxhOLAytGei6bBD68KqohNxTSwFnPHNn3X83Eg=;
-	b=W9VPjYPFd4x/wIQQJw8ImezThKUeeAQdRfr2U2AIiMP7BEhXz7HP3X+j493ZzDE6p9rb
-	 JpUmjHC7YLGzdqbyXtKbrWf7beIMv7ksMgZvEJcLr1oDafL8hu74uEgULsrJLtfUmjm6a
-	 QZSWKYrCYpiQgFpxT8Sgew2oZAtao1MniS97PnRrdltZ9J5KJ0KtuYAIqFWRb/Aaipktt
-	 m4TYPPVCmip1EVucVO1j1XRTFb9hDkFLI1Ur57QaPUQTAJcNlPSCW//pdKZEa3ttvK8qA
-	 VFJxJ0A31mC0dcxUcildGt0QG/jfCvzPxbHrCifzZhKsaJt/l6ieCAVGJS99xI2/eag==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=krgm.moe;
-	spf=pass smtp.mailfrom=krgm.moe;
-	arc=none smtp.remote-ip=103.47.186.116
-Received: from krgm.moe (krgm.moe [103.47.186.116])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 38282606A31C;
-	Thu, 26 Nov 2026 15:46:39 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 38282606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
-Received: from yuno-laptop.localnet (unknown [103.47.186.116])
-	by krgm.moe (Postfix) with ESMTPSA id F171582E;
-	Thu, 26 Nov 2026 21:16:35 +0530 (IST)
-From: SignKirigami <prcups@krgm.moe>
-To: Georgi Djakov <djakov@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzk@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-pm@vger.kernel.org,
- devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject:
- Re: [PATCH v2 2/2] interconnect: qcom: Add Netrani RPMh interconnect support
-Date: Thu, 26 Nov 2026 23:46:29 +0800
-Message-ID: <OK0H2hoOTniUo1R7Fcnn2Q@krgm.moe>
-In-Reply-To: <7384bab0-5196-4286-a9bc-52166ed31068@kernel.org>
-References:
- <20261125-netrani-interconnect-v2-v2-0-4eab92854137@krgm.moe>
- <20261125-netrani-interconnect-v2-v2-2-4eab92854137@krgm.moe>
- <7384bab0-5196-4286-a9bc-52166ed31068@kernel.org>
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795708797;
+	b=PzqhgApHIi26aRATPK4ylFZZA3ecy1M+0CFwEE6aL0LujH/djvkHIbdDq3aRFSRMhdMN
+	 Gua4CMLDFTh+YwwnAkSsbqfh6iJ1BXRI3pR7Bh+78YE2UjP2J5KRrtUlHFHb4PqE3zfBf
+	 jNNJYYDrVv0kr1c0/UE2AVLzfEjyV/5YefF1kJKAuMb0jmCxUDBD8gIjaN9EL+5T43N9e
+	 TKKtiE88TjmK3P7p7NAUp6Bz7Oyp0rakRF3qGpac2OfDtnoFXewy9jajfRZ+924Hk2NHO
+	 IbngsQQ8b8zPJPsJwjm6YOXHQvpsmsm5AL8XlBRRxpTT32A3++HCV8+DizluyqRcCvQ==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795708797;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
+	 References:In-Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:
+	 Cc:Content-Type:Content-Transfer-Encoding:
+	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-GUID:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Authority-Analysis:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=C8yeyIqOC3W9aXuBesLk0QQ9NHdeL+wkXCVAFp+Tjio=;
+	b=eEalJfyx6UH8KTiD26CoPKLLDlxfwFzqYqWApAZDisiwMOQ+BSaSXJDMFq9hdFBfxcbG
+	 iFGNZEM80BGoVez0Ph/zoab1rMDSOBSMRylUULdoP7zDMVcKHuhATX+r1OuFC1c39pk9+
+	 WFS18xP5WkCgs2Ikqx+WAoYEAa/rDQplNGvsKbyeyl+A0Z3CxaqCDOfGnZk5igteyVzlF
+	 Yv2ZxuS8fJHFvuy+mCdePDsxkUwXZ3uMv4p1Zg516rti+MTKtpc5MwZ9ghEAhdOZMt7PJ
+	 M+ttUnRpCtgj7QstWsChBSiDdDTfIesJdW7nXbyniysy7VmlkL91Vl+5HP7ZY5zbAaA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DhABBdDL;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CT+Y6Tez;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CD79B606A31E
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 15:59:56 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org CD79B606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=DhABBdDL;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=CT+Y6Tez
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AQFuIEi2068824
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 15:59:56 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	C8yeyIqOC3W9aXuBesLk0QQ9NHdeL+wkXCVAFp+Tjio=; b=DhABBdDLvQum7O59
+	AQvVo8O50yWYH+5zhVt/6j6Vqgfjjnij8Az8qaMhwCEyV3CPKRfqLrkEG3VuAsnk
+	0FNCfNzlgWNW/xBcZqPfmY9lQQDOabPQHzkV77VHy03nfjujNO2Cb0zlE0e99XMm
+	28NfwbtwNOiYDWAVV05jHM2VkSnvLv8pf1qKccyx/zQ+kAePPWp0xAcO+uoYue61
+	vjPbmCDQjEkHNcg+RemJp103hjez7Z2Gb9bmgOD4Gkx/dZcgIintmjJuG92kCrxM
+	b7JRTDq5zQr5lTh1KgnjL3kSpOEci+MBDOaoduULzXPBKXJttr9n+/QsTlCwIFES
+	JsFuaw==
+Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com [209.85.222.197])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j662y3rc2-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 15:59:55 +0000 (GMT)
+Received: by mail-qk1-f197.google.com with SMTP id af79cd13be357-9495a1f5e47so1082741685a.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 07:59:55 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795708795; cv=none;
+        d=google.com; s=arc-20260327;
+        b=iS8jbprJunzm6DFpIvWqLGcBpBuF02QgSXCvLnUfuSVtmF6LHgx9rGCsCh1wvLDObN
+         lA1BrcgxN+v2NSF44cFKkd9d8+w92rPYDeb0SLByPRyMb/BYSpXWmySwt/yEr4d5IICb
+         H44fY/vZLP0XJirDWHyr/RgWtsSnYGnkWmeutN9jQ3q9539nRGsRqsOqSbCpKUzZuymX
+         XNtsTFlE+XiFchTzQPRf6NnPtPFIW5yGRRPlZEqd+YqYej8PpPl3kmggQf01cWsdh3f8
+         XRZWavAZqLeCGa7dLzcDMohFFw5cql1dDlhVSzqpjHBRPJXIydH7tv8nv8rcymMKpp6O
+         hNGQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=C8yeyIqOC3W9aXuBesLk0QQ9NHdeL+wkXCVAFp+Tjio=;
+        fh=RV2d+rgD0Y4zUbVtMt0vZtdWgHrBE6OtOFLnmHLPJUw=;
+        b=RJDYF/WBL0KSTjQOGkSbe9fnB8kwTIXXVBjS8KiX+sGsZqb7aqg2LvBA1iLKy9M7c9
+         tvrp7U11X1fmMQg0uU+zvZukGTC3amUtVhscEyq3eW3PhNp75iuA1+Piex79V4WlE/JJ
+         NzopFUa25ClP5oMiNoQuVBhej+YltovLWSzFgpf+b2mYqSWEljBVREJD7H4/DuSg/ka6
+         e9AJ3Cqsqoru4cE0mfyh34FCWWG3rh4mS7CKzwbDZF/goA6+VgNaDPBzNXLQohGm+gn0
+         xTqMGm8IIK8oSeIyDLoTl0OBIgKKjhF+bsazF52N75chlCUFFfiFz/5nfacNxHdLQdyq
+         W4bw==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795708795; x=1796313595; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=C8yeyIqOC3W9aXuBesLk0QQ9NHdeL+wkXCVAFp+Tjio=;
+        b=CT+Y6TezZ7fQMIfeKzR2Ayn/82qAzLdh1YpUAKIJNZPrSx2LVBATcZwit7PO6aB5ud
+         0wnt7UFMNo6uMxXg9Xv8IfgF6KlBz75Dy7Yrbbk1dJKTq70VVfmnvMMyorpqGFHDjC+t
+         CeM0tHiq02YSKwuJ468cHRV+QlB8ma508eFOGJB259H4l0UArpJgQYV1XBUl5kVb7eNr
+         odhI+xoYTtBgTxjrzQqGq1WE0iyYP0hqTH9Og/8qYp4chvdxlEs9JzMznAKdou5I0X3z
+         8QuKTn3rchF4yeW3dpaYyUz4UklVGtP3Gunx2TUTRb5t+ienYNZY3NdUTrO7/ddfMOSj
+         HHbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795708795; x=1796313595;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=C8yeyIqOC3W9aXuBesLk0QQ9NHdeL+wkXCVAFp+Tjio=;
+        b=GuFb3W5zot4cYGSfLGtSHeHqSWqbxLNBXxtRjQGHTuM40OafVKOmTZ9CGktocvcv2b
+         X5ESD3y/CXxIdDznhMOQq2Tls5Sl7R/WgpeZBRyh9gGfOmPXq8a/+eZn/VKbnp7fj2NY
+         aOuw7kYh+RSYJ86rkqS4g0UjWORyAuhbZZHO2CneqZLXs3BB1qzoiP2rIQxWZDaV+NEx
+         KC+X70pvmzcMlkZetPkjZecfkotNGLpyU0rsrNTJnStdxrXTWg8L302IIbe7DBl94647
+         yfQEq8Mmu02F/ZtA0aZEmxVi8lp68MM4v3kBZZSFXabFgBbR/vNGlE9azQhpQssPts44
+         rPGg==
+X-Forwarded-Encrypted: i=1; AL+hErE2xGLq3RZdrgNJuhYyxtyaiIbuNv6rlxtbNOJUzrwRtfFICtOh9dRjXvOX4Vwk0kP9yGwwolYfcaWKacew@vger.kernel.org
+X-Gm-Message-State: APuU4Z9ULW24gy/dyeuQ7XxsKjyncPwUlwTHk6W9ts3QyQCeRgiQvw6s
+	pxr5jqIW+EyN0Ih4keMq8G0HBv2ziJLL/BXqgLmwef23SYIra88vSVNBBV5j4IgHOhtwG7a356m
+	YaPAUUvYoa6ZP3gLXUlar6FngCQU8GWVLlfWONCqsyB7uIKGIybCZ9tknlhh3kOX4c29ggQjNqP
+	3G0mEIWxRbA3fKPFpfQqnyFh4nioPOaVpBv1lS7jdCjsQ=
+X-Gm-Gg: AZFdTZeklZ3vKSjMQDE5pDzyj67BZj0aiw1KHbePBuiTzCiiUpIyQRc5izZb/yyNIVY
+	sTvjCAzv9nmEbJPDP8vBhFSBl6gVEHp0Bq9P+GWjahHzhFpxZcYnxB+kHSQylBce5/W4rXDH+Ta
+	USQqlZwIBbSm0GtCUNEifcD7xnoG9c+GCPGQ/sfpfAh+zLb+MdM7VN3f79BlXb+FPl3cUNfH53G
+	S0stSsRqY89LvMWt4IRKZOuO8q2U1SCTZUEH7atHqB0pRTF3ECzSqb+4FzO9ur5K9Wy3BhOiIR1
+X-Received: by 2002:a05:620a:45a2:b0:945:d1b3:f047 with SMTP id af79cd13be357-949ba9acb4amr3818800485a.37.1795708794843;
+        Thu, 26 Nov 2026 07:59:54 -0800 (PST)
+X-Received: by 2002:a05:620a:45a2:b0:945:d1b3:f047 with SMTP id
+ af79cd13be357-949ba9acb4amr3818795285a.37.1795708794291; Thu, 26 Nov 2026
+ 07:59:54 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -53,52 +128,179 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+References: <20261031112203.545319-1-vladimir.zapolskiy@linaro.org>
+ <20261031112203.545319-2-vladimir.zapolskiy@linaro.org> <CAFEp6-0Ykn4VNMMAa-WzCDcJ9=Z0x9Vd5e7z8FSNf72gGL7c2Q@mail.gmail.com>
+ <8a34e083-f364-4eee-9a46-9533647f323a@linaro.org>
+In-Reply-To: <8a34e083-f364-4eee-9a46-9533647f323a@linaro.org>
+From: Loic Poulain <loic.poulain@oss.qualcomm.com>
+Date: Thu, 26 Nov 2026 16:59:43 +0100
+X-Gm-Features: Aa3M54peUk6XV8OD7QKnhkjRXQ2GxSLWWVGI6NCDtwyBprAYGTAHPkFhcVa-1Ws
+Message-ID: <CAFEp6-09L0nwaRv-SQ2dXutFZwR1Vj56C_9bHXai8CPa=mqQ3g@mail.gmail.com>
+Subject: Re: [PATCH 1/6] dt-bindings: media: qcom,sm8650-camss: Add test
+ pattern generators
+To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
+Cc: "Bryan O'Donoghue" <bryan.odonoghue@linaro.org>,
+        Hangxiang Ma <hangxiang.ma@oss.qualcomm.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Bjorn Andersson <andersson@kernel.org>,
+        Konrad Dybcio <konradybcio@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        linux-arm-msm@vger.kernel.org, linux-media@vger.kernel.org,
+        devicetree@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI2MDA2MiBTYWx0ZWRfXwv9aR5swdCtl
+ qkQyiIkJlTYBN6OuHgj3VkXfP0B7CPVcvrn3NRePbmLP25z8qlsluwv/PV1M/ayJIvg27Um4KLy
+ bKp0yFU9RCWgJXcfq8BxRdI7FC1OCvol+0D85G2CEK2u2c9qKp5gERw3snWuIdEH+GUq/h2VwUn
+ dquyX4BRVzlVbAqqBDNVfa0i4Gr/1pOzZckKf91auw7eoO5qJ+6Hz74ayeU8HFiwFRRKudKM1rJ
+ Cx0+dHqNeIlg1NwXfuBWxfIfinWxfgYJVxOvm3nMwKBjJJ0JNdvAP3Ysv+NZLmEK3k9wiEFtp49
+ xZKuRy4LV59xn8n0kaE/maA5akc6VRWTl7hPUsoTjTcfK5pnDRvjvgUyz0GGnF8WjALQS3oVBpj
+ +67wZA04wTVocxPcTyTWXgXKF1LEOeSbdRKLPeiPHIIqLahn0IkjF0wreQ2UAYkz5PlwoOfSHAW
+ IJSt6oW8v0KynCBD4VQ==
+X-Proofpoint-GUID: p6CTksxfLu3OtDPTJnAr__9MFeUWnJ0V
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI2MDA2MiBTYWx0ZWRfX/l/dDm6SQRig
+ Z36k/4GuY/lFY8diugSEnxz8cHDXXppsd6PFFIiAM66CJFTVAFhnhZ/gzC50PYC4Qb0GxJFgqNu
+ vp0oyh+7LFsem1mx0SHU7TatvQ37Vcw=
+X-Proofpoint-ORIG-GUID: p6CTksxfLu3OtDPTJnAr__9MFeUWnJ0V
+X-Authority-Analysis: v=2.4 cv=W/KtxhWk c=1 sm=1 tr=0 ts=6b08577c cx=c_pps
+ a=50t2pK5VMbmlHzFWWp8p/g==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
+ a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
+ a=DJpcGTmdVt4CTyJn9g5Z:22 a=KKAkSRfTAAAA:8 a=EUspDBNiAAAA:8
+ a=rdiVOT_3p2XUELqUUpsA:9 a=QEXdDO2ut3YA:10 a=IoWCM6iH3mJn3m4BftBB:22
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-26_04,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 impostorscore=0 phishscore=0 malwarescore=0 adultscore=0
+ suspectscore=0 spamscore=0 lowpriorityscore=0 priorityscore=1501 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611260062
 
-=E5=9C=A8 2026=E5=B9=B411=E6=9C=8826=E6=97=A5=E6=98=9F=E6=9C=9F=E5=9B=9B =
-=E4=B8=AD=E5=9B=BD=E6=A0=87=E5=87=86=E6=97=B6=E9=97=B4 22:49:08=EF=BC=8CKrz=
-ysztof Kozlowski =E5=86=99=E9=81=93=EF=BC=9A
-> On 25/11/2026 16:10, SignKirigami wrote:
-> > Add a driver for the twelve Netrani RPMh interconnect providers
-> > described by the previous binding patch. The provider tables define
-> > the bus topology and BCM mappings used to send aggregate bandwidth
-> > votes through the applications RSC.
-> >=20
-> > Signed-off-by: SignKirigami <prcups@krgm.moe>
-> > ---
-> >=20
-> >  arch/arm64/configs/defconfig        |    1 +
-> >  drivers/interconnect/qcom/Kconfig   |   13 +
-> >  drivers/interconnect/qcom/Makefile  |    2 +
-> >  drivers/interconnect/qcom/netrani.c | 1723
-> >  +++++++++++++++++++++++++++++++++++ 4 files changed, 1739 insertions(+)
-> >=20
-> > diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-> > index 6ec8d3a69..ff46c6915 100644
-> > --- a/arch/arm64/configs/defconfig
-> > +++ b/arch/arm64/configs/defconfig
-> > @@ -1875,6 +1875,7 @@ CONFIG_INTERCONNECT_QCOM_KAANAPALI=3Dy
-> >=20
-> >  CONFIG_INTERCONNECT_QCOM_MSM8916=3Dm
-> >  CONFIG_INTERCONNECT_QCOM_MSM8953=3Dy
-> >  CONFIG_INTERCONNECT_QCOM_MSM8996=3Dy
-> >=20
-> > +CONFIG_INTERCONNECT_QCOM_NETRANI=3Dy
->=20
-> This should not be here, drop completely. You based your work on some
-> older kernel. Take upstream as reference, not downstream commits.
->=20
-> Best regards,
-> Krzysztof
-I have sent v3 revision to fix this: [1]. For base, I will be more careful =
-next=20
-time. Should I resend this patch?
+On Thu, Nov 26, 2026 at 12:23=E2=80=AFPM Vladimir Zapolskiy
+<vladimir.zapolskiy@linaro.org> wrote:
+>
+> Hi Loic.
+>
+> On 11/26/26 12:52, Loic Poulain wrote:
+> > On Sat, Oct 31, 2026 at 12:22=E2=80=AFPM Vladimir Zapolskiy
+> > <vladimir.zapolskiy@linaro.org> wrote:
+> >>
+> >> Qualcomm SM8650 CAMSS contains three test pattern generator (TPG) bloc=
+ks.
+> >> Describe their register spaces and the non-real time CAMNOC AXI clock,
+> >> which is required to get TPG output frames passed to VFE.
+> >
+> > Do you know why TPG support requires the non-RT CAMNOC AXI clock? Does
+> > the TPG perform any memory accesses?
+>
+> No, I don't know the details, here it is a simple experimental evidence,
+> basically TPG works with this clock enabled and does not work without it.
+>
+> I believe the NRT clock is "cheaper" and good enough for TPG usecase, and
+> to some extent it is a buffer data copying from some (static?) memory pag=
+e
+> sitting inside a TPG IP block, while dealing with PHYs requires more
+> expensive RT clock.
 
-Best regards,
-SignKirigami
+Ok thanks, checked internally and it looks like there is some 'hw
+channel handshake' requiring both RT and NRT AXI clocks. So fair
+enough.
 
-[1]: https://lore.kernel.org/linux-arm-msm/20261125-netrani-interconnect-v2=
-=2Dv3-0-1136e2cc6e3e@krgm.moe/
+>
+> >>
+> >> Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 
+Reviewed-by: Loic Poulain <loic.poulain@oss.qualcomm.com>
 
+> >> ---
+> >>   .../bindings/media/qcom,sm8650-camss.yaml     | 24 ++++++++++++++---=
+--
+> >>   1 file changed, 18 insertions(+), 6 deletions(-)
+> >>
+> >> diff --git a/Documentation/devicetree/bindings/media/qcom,sm8650-camss=
+.yaml b/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+> >> index 9c8de722601e..50ae30cdcb82 100644
+> >> --- a/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+> >> +++ b/Documentation/devicetree/bindings/media/qcom,sm8650-camss.yaml
+> >> @@ -17,7 +17,7 @@ properties:
+> >>       const: qcom,sm8650-camss
+> >>
+> >>     reg:
+> >> -    maxItems: 17
+> >> +    maxItems: 20
+> >>
+> >>     reg-names:
+> >>       items:
+> >> @@ -38,9 +38,12 @@ properties:
+> >>         - const: vfe2
+> >>         - const: vfe_lite0
+> >>         - const: vfe_lite1
+> >> +      - const: tpg0
+> >> +      - const: tpg1
+> >> +      - const: tpg2
+> >>
+> >>     clocks:
+> >> -    maxItems: 33
+> >> +    maxItems: 34
+> >>
+> >>     clock-names:
+> >>       items:
+> >> @@ -77,6 +80,7 @@ properties:
+> >>         - const: vfe_lite_ahb
+> >>         - const: vfe_lite_cphy_rx
+> >>         - const: vfe_lite_csid
+> >> +      - const: camnoc_nrt_axi
+> >>
+> >>     interrupts:
+> >>       maxItems: 16
+> >> @@ -226,7 +230,10 @@ examples:
+> >>                     <0 0x0ac71000 0 0xf000>,
+> >>                     <0 0x0ac80000 0 0xf000>,
+> >>                     <0 0x0accc000 0 0x2000>,
+> >> -                  <0 0x0acd1000 0 0x2000>;
+> >> +                  <0 0x0acd1000 0 0x2000>,
+> >> +                  <0 0x0acf6000 0 0x400>,
+> >> +                  <0 0x0acf7000 0 0x400>,
+> >> +                  <0 0x0acf8000 0 0x400>;
+> >>               reg-names =3D "csid_wrapper",
+> >>                           "csid0",
+> >>                           "csid1",
+> >> @@ -243,7 +250,10 @@ examples:
+> >>                           "vfe1",
+> >>                           "vfe2",
+> >>                           "vfe_lite0",
+> >> -                        "vfe_lite1";
+> >> +                        "vfe_lite1",
+> >> +                        "tpg0",
+> >> +                        "tpg1",
+> >> +                        "tpg2";
+> >>               clocks =3D <&camcc CAM_CC_CAMNOC_AXI_RT_CLK>,
+> >>                        <&camcc CAM_CC_CPAS_AHB_CLK>,
+> >>                        <&camcc CAM_CC_CPAS_FAST_AHB_CLK>,
+> >> @@ -276,7 +286,8 @@ examples:
+> >>                        <&camcc CAM_CC_IFE_LITE_CLK>,
+> >>                        <&camcc CAM_CC_IFE_LITE_AHB_CLK>,
+> >>                        <&camcc CAM_CC_IFE_LITE_CPHY_RX_CLK>,
+> >> -                     <&camcc CAM_CC_IFE_LITE_CSID_CLK>;
+> >> +                     <&camcc CAM_CC_IFE_LITE_CSID_CLK>,
+> >> +                     <&camcc CAM_CC_CAMNOC_AXI_NRT_CLK>;
+> >>               clock-names =3D "camnoc_axi",
+> >>                             "cpas_ahb",
+> >>                             "cpas_fast_ahb",
+> >> @@ -309,7 +320,8 @@ examples:
+> >>                             "vfe_lite",
+> >>                             "vfe_lite_ahb",
+> >>                             "vfe_lite_cphy_rx",
+> >> -                          "vfe_lite_csid";
+> >> +                          "vfe_lite_csid",
+> >> +                          "camnoc_nrt_axi";
+> >>               interrupts =3D <GIC_SPI 601 IRQ_TYPE_EDGE_RISING>,
+> >>                            <GIC_SPI 603 IRQ_TYPE_EDGE_RISING>,
+> >>                            <GIC_SPI 431 IRQ_TYPE_EDGE_RISING>,
+>
+> --
+> Best wishes,
+> Vladimir
