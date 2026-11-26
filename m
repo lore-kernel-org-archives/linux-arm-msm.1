@@ -1,83 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.5
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.229.8
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
 	t=1795728619;
-	b=GB4ktasXeeYdYpYIJwHatZlpHQMjQBENVtrstVO9HQtA4ZGwj6RYTRoiO3iPFR2Pqhs7
-	 q1RyyFUn3H8VjNPs8Dc8Ov3GlUt1gsZH9e31EmbrGvZPKeWUmFgjcyLwoCqaFfoc/w1qy
-	 l3r5lEfmSFvhHuSB3HBNhgIvt9/1jIf+uPQMz96ArKzu9kvloBv6UrRykcqm35MMUahVg
-	 K7RKq4SKie7W/SmtkyW8lm9sDH3QGbqf/c45LSSKbvYMnmOmJXK9DdJWNXop4loJ1eb9z
-	 tSX4pW3g0PziyzzBYPS5LT9E+NjwcmWyxMlhdgpQPodNwyMXVYfPNBz1R745xPBd9Lw==
+	b=J81JuCGUKz9EQ4+wcF1KPBywEsk6Z1Ph/gkbBNMGV3h21AhfOS4KqOoAPlC+uu3s8AeZ
+	 6rtagzkpoN3VybmxIv+9zB+CZ0R1HNG1bmFiv3ztiwIA5qD4B5Pjv4CKdSXq3cq0DsqX/
+	 ReM4RXewLAuH8pFelIKPrVhjmf4OiajNgtef5K3gI1i9K9xcHHDyzwUKrHUYciLvwZj6X
+	 9wtUR5YH7263Tnp/OB2tUw1m8wWyyhzvthGzAINQCiSOT89rxzvNo/tqt8fc1iKHuqqUv
+	 LaEsRwFvHwP+yAetbrXdjI/+npuqm1DOk6KxcHSmmych+gWQ9m0861Vq3Sg6o8vAMqA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
 	a=rsa-sha256; c=relaxed/relaxed; t=1795728619;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=4RtbJlUlsczj6paARvmlvvR8jJ/pnRQ0EKYrkUxZGMs=;
-	b=V1/VB4aXunfb4tIi/n3y5031PRlASmJ3jc/ZYcahxL3rD/KavvlDGoz4b1rFNpvf5JF7
-	 q2/LYBhI3zSgUH8QfMZBMXq8JVKTU/K2J1t3Txd4IeY1Wt3+9QyYBEhpvEGjndizEUXiQ
-	 RBScf4t9S2KfVoYpH4Dyfj8lukA1d8CKwqB8YbPIW4qhINVO1IqGoUvKpD2i6r0CseSso
-	 53O0rmThOBbTXNIuDJR8V8sR8Kd0gj8LhXmsA7V9WDmhllZlEvOmAkr2vi6A6CFKy3gUi
-	 t6ma1rxOAaEBVDXVhxUB+DpW6aWJVG/NvAzFRWvgMonF/SSjaAsZOv/RmXT6WP5Yt0Q==
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=iOPO62h/bywbh8sInLBXyMX7z+WqEK1+RUSrIN2sZII=;
+	b=ZUdqlF5bIQ091v8nlsk2NOdfT+Oiz6gBesSq1EHaARB9++REEpywECz/13O7e0Kf19WM
+	 LBx1hNx900ybwAkq/5VyrKNpmWgvGJ9/kfJfTRlTOsL0vNrLq8Ii7eZJiD+3I1FaPPrA0
+	 bBVBnGZNfHi++UbgV/UpCq2UowNz85nYuLKCKS93sj6HgItGmXN00HUdyX7mS8MC3eaY7
+	 MAgZBlc46mgdPe58FLnQdlWe6gJWphOFylpBOdi8Smm+CmsJiEhTq05HTNIleJMthuEhL
+	 PY8ZvCPv1DMmk2WVYcVblmcQfwVk2g/073eW0lIlBG30CogEUun/8Xb0Bx9ehGJPbqA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rBisZxHH;
-	arc=none smtp.remote-ip=74.125.229.5
-Received: from mail-dy2-f5.google.com (mail-dy2-f5.google.com [74.125.229.5])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=I53YA52V;
+	arc=none smtp.remote-ip=74.125.229.8
+Received: from mail-dy2-f8.google.com (mail-dy2-f8.google.com [74.125.229.8])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97167606A31C
-	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 21:30:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 97167606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4D179606A327
+	for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 21:30:19 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4D179606A327
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=rBisZxHH
-Received: by mail-dy2-f5.google.com with SMTP id 5a478bee46e88-36ca2ffb757so214615eec.0
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:30:18 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=I53YA52V
+Received: by mail-dy2-f8.google.com with SMTP id 5a478bee46e88-36a6ce64b95so2640622eec.1
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 13:30:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20260707; t=1795728618; x=1796333418; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4RtbJlUlsczj6paARvmlvvR8jJ/pnRQ0EKYrkUxZGMs=;
-        b=rBisZxHHB05JDLE+7PoXSxuYALG/9iHUO6C/p/+sPT5zq+ULF64KAiBafYa02atIIi
-         braoxd2zOkGmFUcUOMsC99KRLXL76FjTtOpgYmi3aMsps6WqaFVB7UKPaX/qGPTgjdFI
-         BnQ0corxtMGU7WHBw5JBaB3K0wI+VN5XP4OGuG8ig4njmETAHoALabORMoXKW6SuNqIQ
-         5u1jtNLvh2Pl3nnKNcvZ2zS+BysbFDy40KUbvN5Lx3JLbQcnTyVd3cAS/F3FVkl72ZEq
-         kGuNYG9qY109JfKZWB9pCVBTgFjOc3W/m9WZJbyEuxikMueSZZxZHqawBOTe6HoZH3tv
-         zOYw==
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=iOPO62h/bywbh8sInLBXyMX7z+WqEK1+RUSrIN2sZII=;
+        b=I53YA52VS7cLPkGcXcn3YJRSmNvOvESU6KsDMe5/nmW/v1W3Yon18BsQkYZe3KPKZA
+         nH8Nar0mfXk2ugXmjESGCq6Ng+oTds1uE8CtK1dYDogmtWW26KNqpLtJSKXCfBZXq+9v
+         SlAVBsK2G2kovZj3YqhFHEmegv+Tknc0P7LGL8sxMjUE/63SlWzlfjmLiyG7KzGVtyP/
+         a64tF+sYGjZChHj9TG0x8vUW/jb4TvB+37bbXz0IgNpuLHfmgfkuGouTe1E5Dc/fNher
+         hYfXKzSQwJuqELTvNNYBeah4PA0DHLtNQ1V92xO0OYln3F4HmNJgdfgMUs9vUtbmsQYE
+         dRgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20260707; t=1795728618; x=1796333418;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=4RtbJlUlsczj6paARvmlvvR8jJ/pnRQ0EKYrkUxZGMs=;
-        b=SlR8N0HjeR2MgDbcIPQ9z4BgN8lWcLlL7Twg0s0uiN7++kok4Jdo1tnAVTbk3z55QH
-         sn24teifJqAc5oRleAOFYMH9+WQ10Z8kYNHinuIxyI8YVSVJoP1dkjP/MHc2/oHUFYAz
-         x8ovvoPqiJqRURG7jFYLmSgb5t89kJCnpNEArU/FZPsgvv8fPt/6jrbzRUprPFjK79ly
-         6FL7ihGzPQ0PxEBVligOwA8rV2rfox1hVuuNlN60Us8S1U5BPAIMs2gYTX0tyS6IgITn
-         XnB/eksYLpkGBtf/N/IgmIqo8VEjE7h/0sh3V7+mr6CLPnBHQO9yPhNC+PG2x/ajgdZt
-         cMoQ==
-X-Forwarded-Encrypted: i=1; AL+hErEF/T/AKomrIxJYyaAOBZcMy6EBwoluxIdUGpNpjcbsGJ8CC6UzvJ4qjKEetY+NWXKNAiLt3XVCh+PT2jZa@vger.kernel.org
-X-Gm-Message-State: APuU4Z8J/3aHDEMQG5GQkHER+DEJdjLdkQGQEOCSh6kVA8Cu2ijkEajz
-	CqKPhm5MT75kC4/2J0mTu23dEFSlhzZx0maqbb+e0TnB8Hoo5gD4Sfg4
-X-Gm-Gg: AZFdTZd2gOXeEyea3UT798ROYLsjjSGumnYlh0Zh/4q0xUYPlFJ/ZJA2AtumrXnyr1n
-	E1KPlQySH7l2Cc6QC4RwaPHdcIHm+iHLI3nr2dW5lq5KqTG0K2P1cUK5XqZLfEalODdiZnApfdQ
-	M0Rnu31ULt+z7KT/d90LirkHJkLqKJ8SLVTAGJ4cE4a320UK0zi9oUnqtA/GssBZLYk6cZpnxOE
-	oSglYaZTJwWT+FIVSszfxiCeexHMAQs7YaOdsYi4NVkLioZRlfsm1Bb4KxS9XnfKWkVma1awSGt
-	tt+37ZSVYOi7G0+gDGZiva3TtPjC7iM9lH6uuhgUK6Bb/9ZByLqCYRYcoh/6FOQx9iOgFYBnAoc
-	dTaWWATelpZF6tKS255ionFrvKMBJ6MOROCZSakWzUjjWaf0pihUKiXCg3QFgW31VpmqMhp7jn+
-	qcweQb4r/wxLHmoYQpctieQUIfvOCRPm76zMc6p6n9Ql6tvGLBwB9BoqWeV4fVoX/VpAJSLgby9
-	/REUB/TdKhPMybuP7Xlyf+SbDCOSBEeBGQhCxrx2STY3p3ND8RLmZTXxoxIcFTFqD52P+o66uag
-	e3OuU97cf9zZE8wIICLtr1sYkD5tRwTcDMcp7noA3gNzeBL7jLn6/oxWXCIczOocVjodt3XLIgY
-	UQHYfADlO9jKixUDqTzvyST1xehTLL+JGlhpi0huQ
-X-Received: by 2002:a05:7301:fd07:b0:36d:be15:2dd6 with SMTP id 5a478bee46e88-38570844f7cmr22309381eec.11.1795728617417;
-        Thu, 26 Nov 2026 13:30:17 -0800 (PST)
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=iOPO62h/bywbh8sInLBXyMX7z+WqEK1+RUSrIN2sZII=;
+        b=bMR73jOgDa80UOhbbx5H/wxaG9nhBrmUKrjPT529aDGRppo+n18YzE89le6VwY6msE
+         RfiKGhvFrnSfIfc6qcgfkh/VKcgkC4P/Q5dtAkgnlUQYl5bnyJ0jvXfj/ro/xh+r45ZD
+         UC/AvAxXJSsrdqQ1nchjZq0k7jY5daCt2BM5kGNPv+01ybgLRfEDt/aehmfv/ARiWDqk
+         ZqSt5JUaDoezDvw1KPgkjEiVUMg6A8r9Pal9/Esjcv8RW1VGMzVewqVIO9jIZjainr/N
+         MeqVSoLSNg1R/VKNOSSUyCGYO01KLNuc11E/Z2wu7KFnSc6E/s/BEjmmDQiv/SE8GcA0
+         u3jQ==
+X-Forwarded-Encrypted: i=1; AL+hErE/yj795F/jYepYOKEp5Jik2axP2CneHGvnkmsNiHATeTnFK//leVJrlu7nIX/E31pV5h5lKLT//HutWCrr@vger.kernel.org
+X-Gm-Message-State: APuU4Z+/7y7LYVDSvOWYmc8DNj7S+7/lnFKn2EjeUMhLHCbJGHex3kQz
+	pFrr+Pgk91xM28C+w32eRJ1jaxkeY9HmbV3ArnRlIoCREJnUm+JTViYp
+X-Gm-Gg: AZFdTZdHTXTW+0uwSrNQ7ufAn9Y0X2IPumoHqf82x0/y4yhc6G21Okjs8ZprylmlMTn
+	SNN3Y/50ry9X4lfnQtWrdf8P67h+eSi+3ScDZKNT6Fj6X21unRloNr71MSxjfU0oeqmwSzDKVu1
+	nAKfug4tWAanX1V2temVCExEQO6GF3dzKGbuJi+PVuRpC10pv9tKs/a7L4JsVSyuxr5zgHpCGXl
+	olFlUDr8PPeTpKDIO+D3Whv9dh+CFv7TdMvt7Upc8rVujjNuh+UPRPoS4x8X0JFtAlpVmJm026k
+	tOu/XOfJo7FOVjAtj3s6c407sp8Ui0USvQlCHIGbmOs6DH1hWItygHG7Ezh2RoJkbC/pW4HujFq
+	vr8KpRcKeZgR+q3tm3TH6FOPDRZxppuZzs6+zoCxmuvgBNjy3atVJEb4GbzKbtK4NZWhbNQKeb/
+	bC4pf6/ahS6xofuD8CFNEvZFtDU4hrIboOsA7NYKTcoBneqCtYD5oxbR99Ky5nknXNu6VWzXtyd
+	jvzdWR8tXinBacFY2Lm/HTImg5i6ba/0vjRahbL766roMbebvd0FzgOI02QBezVIwtC6ObNbqfV
+	1b6Exl1OF27NiKfCkiLUj90rJgGdUethXbrJdXMOJoo7vMsbdWnBEK/npk8krAm4ZnYCVSaJ1B9
+	+VRzaNXpx+mPS3zce3n4CjRxaSuvXpp33ZQWwVwPDziG1JNDJGn75WI/Cz9rGroM=
+X-Received: by 2002:a05:693c:638d:20b0:375:c862:31c with SMTP id 5a478bee46e88-38571816d35mr21751213eec.40.1795728618321;
+        Thu, 26 Nov 2026 13:30:18 -0800 (PST)
 Received: from localhost.localdomain ([76.33.234.50])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386b9bdafb5sm33434219eec.9.2026.11.26.13.30.16
+        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386b9bdafb5sm33434219eec.9.2026.11.26.13.30.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 13:30:17 -0800 (PST)
+        Thu, 26 Nov 2026 13:30:18 -0800 (PST)
 From: Hungyu Lin <dennylin0707@gmail.com>
 To: vikash.garodia@oss.qualcomm.com,
 	dikshita.agarwal@oss.qualcomm.com
@@ -91,10 +92,12 @@ Cc: abhinav.kumar@linux.dev,
 	linux-arm-msm@vger.kernel.org,
 	linux-kernel@vger.kernel.org,
 	dennylin0707@gmail.com
-Subject: [PATCH v2 0/3] media: iris: add missing packet size checks
-Date: Thu, 26 Nov 2026 21:29:01 +0000
-Message-ID: <20261126212904.27207-1-dennylin0707@gmail.com>
+Subject: [PATCH v2 1/3] media: iris: reject packets that are smaller than the size field
+Date: Thu, 26 Nov 2026 21:29:02 +0000
+Message-ID: <20261126212904.27207-2-dennylin0707@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261126212904.27207-1-dennylin0707@gmail.com>
+References: <20261126212904.27207-1-dennylin0707@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -106,35 +109,36 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-venus got two fixes in May 2025 for packets that the firmware sends
-through the shared queues:
+iris_hfi_queue_read() only rejects a packet size of zero. For a size of
+1 to 3 it copies less than the size field, returns success and leaves
+the read index where it was, because the index counts 32-bit words. The
+gen1 response handler drops such a packet as too small and reads the
+queue again, so it gets the same entry again and again and the interrupt
+thread does not return.
 
-  49befc830daa ("media: venus: Add a check for packet size after reading from shared memory")
-  06d6770ff0d8 ("media: venus: Fix OOB read due to missing payload bound check")
+venus_read_queue() converts the size to words before it checks it for
+zero. Reject a size that is smaller than one word here as well.
 
-The iris gen1 code has the same logic and has neither of them.
+Fixes: fb583a214337 ("media: iris: introduce host firmware interface with necessary hooks")
+Cc: stable@vger.kernel.org
+Signed-off-by: Hungyu Lin <dennylin0707@gmail.com>
+---
+ drivers/media/platform/qcom/iris/iris_hfi_queue.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Patch 1 rejects a packet size that is smaller than the size field itself.
-Patch 2 makes sure that the size field of a packet did not change while
-the packet was copied out of the shared queue. Patch 3 uses that size to
-bound the walk over the properties of a sequence change event.
-
-Changes in v2:
-- Add patch 1. A packet size of 1 to 3 was accepted, so the check in
-  patch 2 could compare bytes that were not copied (Konrad)
-- Link to v1: https://lore.kernel.org/r/20261117204946.21359-1-dennylin0707@gmail.com
-
-Hungyu Lin (3):
-  media: iris: reject packets that are smaller than the size field
-  media: iris: check the packet size after reading from shared memory
-  media: iris: fix out-of-bounds read in gen1 sequence change event
-
- .../qcom/iris/iris_hfi_gen1_response.c        | 73 ++++++++++++++-----
- .../media/platform/qcom/iris/iris_hfi_queue.c |  4 +-
- 2 files changed, 57 insertions(+), 20 deletions(-)
-
-
-base-commit: 7475ea8b58616b33c04afb976cf0fbaad9dd63fb
+diff --git a/drivers/media/platform/qcom/iris/iris_hfi_queue.c b/drivers/media/platform/qcom/iris/iris_hfi_queue.c
+index bf6db23b53e2..12a7fd0982c5 100644
+--- a/drivers/media/platform/qcom/iris/iris_hfi_queue.c
++++ b/drivers/media/platform/qcom/iris/iris_hfi_queue.c
+@@ -81,7 +81,7 @@ static int iris_hfi_queue_read(struct iris_iface_q_info *qinfo, void *packet)
+ 		return -ENODATA;
+ 
+ 	packet_size = *read_ptr;
+-	if (!packet_size)
++	if (packet_size < sizeof(u32))
+ 		return -EINVAL;
+ 
+ 	new_read_idx = read_idx + packet_size;
 -- 
 2.43.0
 
