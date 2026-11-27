@@ -1,47 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795781035;
-	b=pFBBDnxJVZciol4GYB9ayGfTJRVaD7ZumMashR8pQDJCk223sUSsfgB+ee30WuXUxMbk
-	 zB75wmtT9ydyjlE1g8BZe2hMC9FLQ4/mxX4yyr8MqmcfiaIYDhJIReQ0/RjspYYzILMg8
-	 LuIsNXdEw/GpyWAyo6dAZJ5jc70ezjFCUfIccuCkBh57FMU1lkfdaUtsSNSZ7uc16yFlV
-	 V1DgCLfivms7+ZBm1En9IK3tYfZlaW5vRLBX7l/FZff7mf8OkumYzx9m48M/mIFHSOgbz
-	 1i3SotxOFW+DEfCH+y/DuXV/x93Zj5GxpF83IPUTzDzN8RlAaSamtialM6Xq5N+n4SQ==
+	t=1795781144;
+	b=m5cTNY+OPCHSgIjBw0FzPohSvcZsp6m7jUkbFtnTJUBgLlaCsbWeY9Hu3VPCVFs+uiKl
+	 UW4hQOmZWC/okfuNp41qmk25A4Jmf2GZtbSlipITPk7+IQ5XxlnTFy2X/oQldoqUJqLGl
+	 i8UuJ7udHnS2lVG2yS9EiLMfXOlmC9PV29w6lna27SiF7Dlf0kO3wTIkSWoa0dnIyi91r
+	 I8xp69ZodwvbdvQHxfI9cyQuGgTqBm0kYNCvjhL3R24WfVWld1aD2JYvLDvXoda930mFV
+	 Y/IhNgGBpg6X8Ezd7NvVxx/TUaHQL7Ji5GFfKiBTkI4hp3HbwwTZELujdW5ZWPFp7Pg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795781035;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=Yik/n8iz7h63HECswpB5ExxSWT0WENJmafy9QiCrTEA=;
-	b=2ol8mdx6sRsTYTvePDndJssAUviIwxoB/ExMYwIDyB9EsWBJSIOp1l10FBKRIdpkGMYg
-	 sffdEkrWY6N68+QnuziA4xeHKPUJ5V6cQAOIvcUwckiX15OgfK07Vzbxpct8YIGc1Lm8P
-	 oVJjmagb7WeQ6R+vTgGScHMDbhKkK5Sdxn8aLKb4fOuuOIW6PAfusnutRaZ4X47vDAG2V
-	 vYhzVsdoD2gya8pnuyd3uzUk/WOxkSAi7Sv1LbcIp1L3w9rAKJegyrMJRkbYbcbWzrBAP
-	 v0swaOsNn+Uil3PUvSUKLoCAc2CYDKND9s+4vjEtFyVgyY7sWsBxIaiFOlYXz6ZZXEQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795781144;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:
+	 Content-Language:In-Reply-To:Content-Transfer-Encoding:X-CMS-MailID:
+	 X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:X-CMS-RootMailID:
+	 References;
+	bh=a9fm/uk5JQ3HNfgBODpdCWOALyft9Wz+Y8nV7YiTAZ4=;
+	b=ygVGXre8UfuLrN83ElHjWojGTb9CAg4KTPYvf+CZE/DF55jC1CexiglitlnWyllH3Ve0
+	 I3Qjk8K9V85D4q/59nftjwc08SZzkMkXK9jFNTAZsIvJWPQf6ZK3GJGtcc5l+q1WgqLkR
+	 T8uFMPxXsIU3T1TbSHODsFfn2kKHffdAnCy2UK9jHDhlv9WAtpPomlc5+X0mCzFSdNSX7
+	 rFR1TTbID19DhrUyumeCMB8HxywkiRx36tQ02rQmAGujK04ouksj62VvP2AJxIQ6FSbMt
+	 PV6Nj5HN2nXxyxk4XpG6DuZ1kwp8cogHyHnHmCN6/QTTjI5pttWpj6N/LokCd55zaXw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gaC6ydv1;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	dmarc=pass header.from=samsung.com;
+	spf=pass smtp.mailfrom=samsung.com;
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b="KNGq0ZK/";
+	arc=none smtp.remote-ip=210.118.77.12
+Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 74D76606A31E;
-	Fri, 27 Nov 2026 12:03:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 411C4606A32F
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:05:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 411C4606A32F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=gaC6ydv1
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 846271F000C1;
-	Fri, 27 Nov 2026 12:03:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795781035;
-	bh=Yik/n8iz7h63HECswpB5ExxSWT0WENJmafy9QiCrTEA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=gaC6ydv1hliAiu3WeXY2K5PW5f2w1B6vK3CXq/gu+3ee3Oykh3etdYgg/tAac4LNt
-	 Y6M7jEJ/5ZzRCGemihEVG/FK5/pSiJz5GKfAFQClS36cRY8GZNx2MBGActTeXPYkSv
-	 N5ycNTCj+bh2j0s4PvsEwrhDgrRjddG3aURXM3CzIRxRtvbfx42maDnqg7PseBs40X
-	 SOa9QiEkwG2fSbc5IiS+ykt7jOA+CO3BGZwb+vl+k+RZR5xkMuoJqL50S76vPIwM+r
-	 b10bD3PhT1w+GjvQNqPPAg9EC1wwn+fAtKeBgUxCjEIbjXsp1dpYU9o8ECealBwxLT
-	 tMP2GQo7DGj9g==
-Message-ID: <ec5e728c-e266-4df2-bdeb-6564444a7222@kernel.org>
-Date: Fri, 27 Nov 2026 14:03:50 +0200
+	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=KNGq0ZK/
+Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261127120540euoutp0282eea36565d63943d1d474bccba107ca~r5W66Fn4B2355323553euoutp02-
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:05:40 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261127120540euoutp0282eea36565d63943d1d474bccba107ca~r5W66Fn4B2355323553euoutp02-
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1795781140;
+	bh=a9fm/uk5JQ3HNfgBODpdCWOALyft9Wz+Y8nV7YiTAZ4=;
+	h=Date:Subject:From:To:Cc:In-Reply-To:References:From;
+	b=KNGq0ZK/A1D5c2Ml3AhUtZiXqmbgvORs6wpuuj660jbSCbmTazbj4gDyBZi+xLwiI
+	 jtaDAZpE0HohUhdFj0gD50kJaET1JfCEre56TVD/k5h5NcXWHcg/VQdC+xwKgQDRQI
+	 TeRudICmUo1K+W5W9nkh2uKF3tVqVniMXYWMtP4M=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+	20261127120539eucas1p10b2e005bf38fd3ff3ca53b48bf531777~r5W6fzJTf0959809598eucas1p11;
+	Fri, 27 Nov 2026 12:05:39 +0000 (GMT)
+Received: from [106.210.134.192] (unknown [106.210.134.192]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261127120538eusmtip27bba0cf597c14302cb8417c82729e000~r5W5u8fKU2205822058eusmtip2X;
+	Fri, 27 Nov 2026 12:05:38 +0000 (GMT)
+Message-ID: <d1660922-e3a1-4d13-8824-f0525f88f723@samsung.com>
+Date: Fri, 27 Nov 2026 13:05:38 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,44 +64,104 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] clk: qcom: gcc-qdu1000: Add sentinel to GPLL0 even
- post divider table
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
- Jerome Brunet <jbrunet+clk@baylibre.com>,
- Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
- Dmitry Baryshkov <lumag@kernel.org>, Taniya Das
- <taniya.das@oss.qualcomm.com>, Melody Olvera
- <melody.olvera@oss.qualcomm.com>, linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org
-References: <20261125213433.1438537-1-vladimir.zapolskiy@linaro.org>
- <20261125213433.1438537-3-vladimir.zapolskiy@linaro.org>
- <67b17c55-e87c-464d-8c1d-fb015041be2f@oss.qualcomm.com>
-From: Vladimir Zapolskiy <vz@kernel.org>
-In-Reply-To: <67b17c55-e87c-464d-8c1d-fb015041be2f@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+User-Agent: Betterbird (Windows)
+Subject: Re: [PATCH] Revert
+ "iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper"
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+To: Leon Romanovsky <leon@kernel.org>
+Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, will@kernel.org,
+	robin.murphy@arm.com, honghuan@amd.com, Jason Gunthorpe <jgg@ziepe.ca>,
+	joro@8bytes.org, prakash.gupta@oss.qualcomm.com, iommu@lists.linux.dev,
+	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
+Content-Language: en-US
+In-Reply-To: <c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20261127120539eucas1p10b2e005bf38fd3ff3ca53b48bf531777
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
+X-EPHeader: CA
+X-CMS-RootMailID: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
+References: <CGME20261125135138eucas1p141ba6b5e09623562e2033e290fba811c@eucas1p1.samsung.com>
+	<20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
+	<a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
+	<20261125183419.GB774860@unreal>
+	<c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
 
-On 11/27/26 13:04, Konrad Dybcio wrote:
-> On 11/25/26 10:34 PM, Vladimir Zapolskiy wrote:
->> The GPLL0 even output post divider table is not terminated by an empty
->> entry, the table is passed to divider_determine_rate(), and the generic
->> clock divider helpers iterate over a table until they find an entry with
->> a zero divider, thus they may read past the end of the array.
-> 
-> But there's a .num_post_div?
+On 27.11.2026 12:28, Marek Szyprowski wrote:
+> On 25.11.2026 19:34, Leon Romanovsky wrote:
+>> On Wed, Nov 25, 2026 at 06:21:06PM +0100, Marek Szyprowski wrote:
+>>> On 25.11.2026 14:51, Sibi Sankar wrote:
+>>>> This reverts commit 1acce29926d93f3eba427696fe3da6451504dae2.
+>>>>
+>>>> Before this commit, dma_iova_destroy() unmapped through
+>>>> __iommu_dma_iova_unlink(..., free_iova=true), which set
+>>>> iotlb_gather.queued from cookie->fq_domain, skipped iommu_iotlb_sync()
+>>>> and freed the IOVA with the queued gather, exactly like
+>>>> __iommu_dma_unmap(). After it, dma_iova_destroy() calls
+>>>> dma_iova_unlink() and then dma_iova_free():
+>>>>
+>>>>   - dma_iova_unlink() never marks its gather as queued and always calls
+>>>>     iommu_iotlb_sync() after iommu_unmap_fast().
+>>>>   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
+>>>>     the IOVA goes straight back to the allocator through
+>>>>     free_iova_fast() and never through queue_iova().
+>>>>
+>>>> DMA-FQ domains therefore get strict invalidation on this path. That
+>>>> includes the block layer's blk_rq_dma_map() path, which NVMe uses for
+>>>> all data transfers, so iommu.strict=0 has no effect on NVMe I/O.
+>>>>
+>>>> hw/sw details: Qualcomm Glymur CRD: SMMUv3 with no RANGE_INV,
+>>>> 	       4K pages; NVMe SSD on PCIe Gen5 x4
+>>>>
+>>>> Fio sequential read/write numbers:
+>>>>   Domain                          seq write    seq read
+>>>>   DMA (strict)                    2694 MiB/s   2693 MiB/s
+>>>>   DMA-FQ (lazy), flush queue      2707 MiB/s   2803 MiB/s
+>>>>     bypassed (this regression)
+>>>>   DMA-FQ (lazy), flush queue      10.6 GiB/s   11.9 GiB/s
+>>>>     used by dma_iova_destroy()
+>>>>
+>>>> Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
+>>>> Cc: stable@vger.kernel.org # v7.3+
+>>>> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+>>> The performance data clearly shows that the flush queue was there for
+>>> the reason. Together with this revert it would probably make sense to
+>>> apply the v1 of the reverted patch:
+>>>
+>>> https://lore.kernel.org/all/20260701092033.422867-1-honghuan@amd.com/
+>>>
+>>> Leon, do You see any other option?
+>> These numbers shows clearly that we had iotlb_gather.queued != 0
+>> and never performed iommu_iotlb_sync(domain, &iotlb_gather); while
+>> destroying mapped IOVA.
+>>
+>> I agree with you, v1 is the easiest solution, however my preferred one
+>> is to cache gather when it is created and keep it in dma_iova_state 
+>> structure for whole life cycle of that struct.
+> I've played with the code (using LLM ;) and there are some issues with this
+> approach:
+>
+> 1. tso_dma_map_completion_save() copies the struct dma_iova_state by value,
+> what breaks internals of the struct iommu_iotlb_gather.
+> 2. adding iommu_iotlb_gather to dma_iova_state increase the struct size
+> from 16 to 64 bytes, what lands in every NVMe request, RDMA rw contexts,
+> TSO maps and HMM.
+>
+> I've decided to put only the 'use_fq' bit in the __size entry and baked the
+> fix. It looks quite nice. This approach solves both above issues, although
+> it requires to also fix some drivers which already pokes __size directly
+> instead of calling dma_iova_size().
+>
+> I will post this in a few minutes.
 
-That is used by driver/clk/qcom/clk-alpha-pll.c internally. In fact, and
-in my opinion, it might be better to remove it and to rely on a sentinel
-only, if you also find it wanted and acceptable.
+For the reference:
 
-And if you look at clk_trion_pll_postdiv_determine_rate() or
-clk_alpha_pll_postdiv_fabia_determine_rate(), then, as it is stated, it
-becomes clear that the table without the sentinel is passed down to clock
-framework functions, and that's the critical problem fixed by this changeset.
+https://lore.kernel.org/all/20261127115849.2780625-1-m.szyprowski@samsung.com/
 
+Best regards
 -- 
-Best wishes,
-Vladimir
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
+
