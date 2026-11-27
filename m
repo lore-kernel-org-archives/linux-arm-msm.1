@@ -1,47 +1,48 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=51.68.154.128
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795735717;
-	b=YzLE4MI3afTut41+sY/8cqbhFLCeDELSyjtSvQqLzpcvC5GUGRKVxzepom7yMiRZX1GA
-	 bZbwbYQVMTEbvq/1X6LVtHV3RphAU+pTeR16s6mLDueu/ncxZLV3GyTYjXC5XIZl4Y2Wx
-	 ANj6AS4ZW48JGsi7Sfg9EWrbBFXAtcxYTPHGbeodbfs1hbih8mrqW2ytMFaZsmPthZKBT
-	 cY7sHM9BPF6Y+0FhZUdJileQG7w1CroTgYIod2iT5nYmBpvxNd3NRhA8ZDY8sBNJUD/Bc
-	 PdoJRC/yBP3S27GL0DUGf33/qzCYOB3R+8nfyO76MtDH2bm5jr2lI98Hyn3wZELIAWA==
+	t=1795739031;
+	b=FfoXIv1a8yFyBI3nxZClp581AtLdoywqQDDLGl4XrQeAE601NmNnenpaRTL72ysgOOBk
+	 i3IACF4JnpmwK84YcDjxoWx+byBXS0cImVYaq7t4efbDJtfepTuA61TIIzSVTM/wIOr11
+	 iPFpZzQQ8N8Y2j1LLsmby/5Up5ZKXvmKkNIgUFfWRqBKfX/qVg/6e1WSYr8VEuRkpVsfq
+	 iusGwQn7TiCY/Tu50d5pvewbA0nF3nzZEqTz1QJzDybBw4fIu7gG6jtY1/dspkqYoSTlO
+	 8zDSI9OGAcE7EfVkvmu9vspCI0nNtQLs4LyG2+3uDGJe2b/Jeg2gSsvuR3cR81nmwYg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795735717;
-	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
-	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding;
-	bh=twJo0s/v3DoMCfRKsRe0tacmP7SwLMnarbIHRsOnhSk=;
-	b=NRYueYPWc3wtaGVe9/p7do/rDZqt6QsSm4877RRe/uRfGUFn0xJvizCtqU6rHzmiZseE
-	 krb9xRuf6jOLm/fpMsgCarCZMHbG8Riq7DWYfI5m73yJsyio4FYxXASr3rKPYAStYNtqx
-	 GPGrdP8u1aeor/H7ZLI8j+eS4A+AxtYQoGxGrY+itMWmRW3MNth/No2t81ayyidUrxERi
-	 sjXaa7z7TrOhB265mrA19FopO/vwIYMKjJKpsqhpAktN2xeH486/9k7RHPooJ8PrQXOU8
-	 E9QEbeyqkhsBMTQ6Kh3980kfz+epsvKuBxkQTKoWMpOnIsJ21vjiBEPk3STe3cSfo3A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795739031;
+	h=DMARC-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
+	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=y/6ETTKQWSdIBrWUEiwvoMMufChdxlb4i9BGax6LuFU=;
+	b=VhCLiK9nvGvY8zFca0aHqHJGe9MbYE8ZJbYJCgXzw0FCd6g9WpQ0gA8h6NZxQu5T1cnX
+	 BElMJEfGKcju4QR45WuVS0ZqTRe2vQQDrui+Ta4TbDDfVrB6Q93SoxXzrLYf1MYNStLhp
+	 lPJdQH0e7gkIzHdMcWWDKbjtF065zHyf5ehIbS5a0YBTH5KyP+S/kjz7YXENi35538gWs
+	 +aWl120UI3XaGBttDu6vprjBzisl/UIQkGnuHt0GRDeK6k/4/PMpjvCiDKYH5wl/oYVtz
+	 8g39DUfaXX9bNvECqLBnCNaMAjbxQ+vM81Avp9xa9vSroZAmAI7oxSScYaTVnVj+rSw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U7ZbglIA;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	dmarc=pass header.from=fromdisposition.org;
+	spf=pass smtp.mailfrom=fromdisposition.org;
+	dkim=pass header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=GJ6xOBiY;
+	arc=none smtp.remote-ip=51.68.154.128
+Received: from 4do.net (4do.net [51.68.154.128])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F386606A31C;
-	Thu, 26 Nov 2026 23:28:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73FFD606A31C;
+	Fri, 27 Nov 2026 00:23:49 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 73FFD606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fromdisposition.org
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fromdisposition.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=U7ZbglIA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 42ADD1F00896;
-	Thu, 26 Nov 2026 23:28:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795735716;
-	bh=twJo0s/v3DoMCfRKsRe0tacmP7SwLMnarbIHRsOnhSk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=U7ZbglIAgnBUb1FyCSiXFC/ZLo+9zT0z6Rt0oYfS0FYCrrx0KP156t2tkIKtHpWEK
-	 NIjkkPBlILs1Nl9hWUJhwXS9XzOswgun92FX6zjFxTqRFWBjTz1wBwkpuj+9Yd4/NL
-	 FEwBDtI/ozU6QXG/vlVTgWe5QS4KqFtNjat6LydP7Ju+Zby4sNb4c1uSTBR4yw7mFn
-	 +43A3SIRkTFFygfMy9H3nxOJaQ+Myf1ny6Ghm8lwp6tH66KnTXvBRwnLDLKp/s0Hxw
-	 OGCTZY3mbEpcjqoBer0xN88h7eBbyJ0Kt9StiYi/3OnCNnd697vLhQKdy3DhnWduPs
-	 yKWvN4Qt1gihg==
-Message-ID: <cf06a649-a5ef-45d3-a103-a71ba5e1d3d3@kernel.org>
-Date: Thu, 26 Nov 2026 23:28:33 +0000
+	dkim=pass (2048-bit key, unprotected) header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=GJ6xOBiY
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fromdisposition.org;
+	s=mail; t=1795739021;
+	bh=y/6ETTKQWSdIBrWUEiwvoMMufChdxlb4i9BGax6LuFU=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+	b=GJ6xOBiYoBrEWnjMrWSkiXDKvAaWHx2DvTRrl5E/mL0yfgq9Jv2ArGR4bMk+cP0jB
+	 2Va1SfUz69eKBK7UkB9IXw8zLipNSNxWeik4ouLvIO3O0hwYXOWLLzX01k43yh8qJP
+	 QPXrAVsWv5KRbgPMKxo+cYrtikxoqQ2gdk8EXt0NM1z0ONU5vI8zeuDg0i+NorpzKj
+	 tvftMw/iu/nzGwK+y46W4J7KYWaTJMG5M3iptLCFS8Bcto8xi26E692vZcBhTm1apt
+	 BcVzAkcFHRCUsVOqQle9DYDEkLgKfQcJI6eZ6cnoBStqJzWiV+vg6iPtAf0SxXaAjN
+	 /gotfd+jzbFsw==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,86 +52,41 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/7] media: qcom: camss: icp: Add HFI/ICP v4l m2m driver
- for x1e80100 BPS/IPE
-To: =?UTF-8?Q?Ram=C3=B3n_Jes=C3=BAs_Miranda_Hern=C3=A1ndez?=
- <ramonjesusmiranda@gmail.com>
-Cc: vladimir.zapolskiy@linaro.org, rfoss@kernel.org, todor.too@gmail.com,
- linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org
-References: <3_3nc2zwTAg_ilwaJQ7XHrQP0IbIlCBzBpK9k8iKBgiG8UyinhJKSas3kGkpfyPoaD7YrdqwgL1w06xY1yoa5g==@protonmail.internalid>
- <CAP08=V0F+A9AP7ShGDXqgWgpX3EMi5sFeqPBEWK0WM1PQ4GN5w@mail.gmail.com>
-From: Bryan O'Donoghue <bod@kernel.org>
-Content-Language: en-GB
-Autocrypt: addr=bod@kernel.org; keydata=
- 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
-In-Reply-To: <CAP08=V0F+A9AP7ShGDXqgWgpX3EMi5sFeqPBEWK0WM1PQ4GN5w@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Date: Fri, 27 Nov 2026 00:23:41 +0000
+From: Demeter Barna <me@fromdisposition.org>
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
+ <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Rob Herring
+ <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
+ <conor+dt@kernel.org>, Srinivas Kandagatla <srini@kernel.org>, Rob Clark
+ <robin.clark@oss.qualcomm.com>, Sean Paul <sean@poorly.run>, Akhil P Oommen
+ <akhilpo@oss.qualcomm.com>, Dmitry Baryshkov <lumag@kernel.org>, Abhinav
+ Kumar <abhinav.kumar@linux.dev>, Jessica Zhang <jesszhan0024@gmail.com>,
+ Marijn Suijten <marijn.suijten@somainline.org>, David Airlie
+ <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+ linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
+ linux-kernel@vger.kernel.org, dri-devel@lists.freedesktop.org,
+ freedreno@lists.freedesktop.org
+Subject: Re: [PATCH 4/5] drm/msm/adreno: Add speedbins for A660 GPU
+In-Reply-To: <56ac1346-3164-4418-a00a-168323787535@oss.qualcomm.com>
+References: <20261105-b4-sm8350-gpu-v1-0-a7175cdd6512@fromdisposition.org>
+ <20261105-b4-sm8350-gpu-v1-4-a7175cdd6512@fromdisposition.org>
+ <56ac1346-3164-4418-a00a-168323787535@oss.qualcomm.com>
+Message-ID: <9bb065d6e969a550eec543cc888d1bfb@fromdisposition.org>
+X-Sender: me@fromdisposition.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 26/11/2026 22:58, Ramón Jesús Miranda Hernández wrote:
-> Not working yet: frames wider than one stripe (1920 gives a bus
-> write violation) and enabling demosaic (luma stalls).
-> 
-> Not related to camera, but found on the way: qcom_scm_assign_mem()
-> accumulates the destination VMIDs in an int with BIT(), so *srcvm comes
-> back as 0 for any VMID >= 32.
-> 
-> I am happy to share the code or test patches on this machine if that
-> helps.
-> 
-> For transparency: the reverse engineering and the test code were done
-> with the help of an AI coding assistant (Claude). Everything above was
-> checked on the hardware.
-> 
-> Thanks for the RFC,
-> Ramón Jesús Miranda
+On 2026-11-26 14:29, Konrad Dybcio wrote:
+> I only see at most 2 bins, what's your source?
 
-Great thanks for trying.
+The downstream devicetree. The one on my device (from
+lahaina-v2-gpu.dtsi) has two as well, 900 and 840 MHz, and my unit
+reads fuse 1.
 
-We have an update pretty much ready to roll in the next few weeks please 
-hold tight.
+The 738 MHz one I took from a newer copy of the same file, where there
+is a third table for speed-bin 4, for example in what OnePlus publishes
+for the OnePlus 9 on Android 14:
 
----
-bod
+https://github.com/OnePlusOSS/android_kernel_modules_and_devicetree_oneplus_sm8350/blob/oneplus/sm8350_u_14.0.0_oneplus9/vendor/qcom/proprietary/devicetree/qcom/lahaina-v2-gpu.dtsi#L903
