@@ -1,113 +1,60 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.11
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795790474;
-	b=h3umhOM2EIyb6NZAo0mV22Hnlju9/8REMmst0pUiW8SN4tjWrhVUGEb6XxyAVaVUdTHY
-	 7ZFZBp+fTv/hu00Kk3s5BzRSkloJbIT0TOd16XX9iFgzauPG4HS3x1QFobJXzTBGwtc+q
-	 LLxfUo6tWwB7F/0kR+IM6d6tCbpK0THZpmv6R0/xDAb7vMbEIVgdrEtt81+xqyIO6sjYY
-	 hXPg/cCz3wv+TPpuzf4BF9khzCYMCnuUQcCwQQj6OluXdmPnaDycZdrsOqRtR8rngE+hv
-	 cu3bLcHnfDt2fD2N72Hze9S5qmAVWN9kgOkx9TqZ/zkIci8WzH+hmf4LVjh8DbOKJbQ==
+	t=1795790723;
+	b=qZVVH/Aoa2nUwS+0jgm6ZtJt9QIeXG+XaM0zCGjkjkrClVhNG6nxl1IWvWUo9cpxLGYk
+	 8WnZHovEcNQwmrT+8opAHoZY8gR9ytwDWo2ZRET17Az21Ebv/Rf9E+MlZG+XsXz2K7dFW
+	 DG20Z8FPGQDi8gvG5jMAFJPAsXt4hwPZdsrwIJhnXZXzaP6haD+6st0fCIlVPyPXGHmzK
+	 0dJnlYUKprWnHd+Gk/ES0vO8MP0HCsm3P26d2UKQnCzAdaeCwCB97isQD+mPtlr0ae1RY
+	 B8ksXnns4M0E6oE67ru8tyfvqMBPtVhhm/3r/rnuAw7I63gjaWFQ54G9QnU/CJZgRMg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795790474;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:From:Date:
-	 Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
-	 X-Developer-Signature:X-Developer-Key:X-Authority-Analysis:
-	 X-Proofpoint-GUID:X-Proofpoint-ORIG-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=lVQeGD9agzy0mh5pcwZtPylSjLuXqaDKZw1i3CUR2Tk=;
-	b=R0x/VTQGKM4FUJQmktQYQ425H9hjM93aeXl3HqawNG7TWhj8bBMG1ke6ZNc9efl21I4N
-	 eN5AwZuXlB6O1/2V90cPwAtBejDaI93DFiGmrgKDXAEE4bm6L0SzwC0A/n3JOQ/zyfV8y
-	 4VRZalWfrxvGbSvF/EQNnZd06/nrtIn4d2i9QaI+jwbUYfRUiUfO6/vhy2GIX4cHqHupH
-	 oxFUpi/3taZZCY1hYhamt5ykzc2iKmS+ncBOyb9upOGNF4gZBfeO0+0ozbk2K+yvI2bLv
-	 +HgAuHJ4Lgo8kdv1jjg2Ot3u+VjEfpk84rdQhLIXDaOTLHB23AhDz1R2nQUmTAdSEoQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795790723;
+	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:
+	 Content-Language:From:In-Reply-To:Content-Transfer-Encoding:
+	 X-CMS-MailID:X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:
+	 X-CMS-RootMailID:References;
+	bh=LO23VuR8oz1He3kunSDVbm/R/AJdXLqeSuquj/Un54I=;
+	b=bLxf80u5DDTjPE+jufb1oCHGpmUe5GRa/owwtgF7fEDoFVBDX/38NVSX7nBIC8e66APd
+	 DGrLV1hKjdnj0acxoH24WPPhwE/IjE1TGeNpKEUIDdr0liig/PlesH0xWHmLngtSswidh
+	 A0ht6BCU9S+YddyTmgpm6Rf+XkgXZ1C7Hc+r/swNCkGoMSydp/v+BLYVb0P7a3M1OCJjf
+	 pEDmTOgv6KPqlepWKdiL9l+v3CImHOKr914qTQa4Rrj0IWrsOWXPICq5gp8WVPSZILBhC
+	 UW464RoOiwondrumQBElu5bk+FoAIKM9uVNgEUgEU6+dHEEExEgVX51x1yFPeC7j5Hw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Ssso1Gle;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cH4i+qHv;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=samsung.com;
+	spf=pass smtp.mailfrom=samsung.com;
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=tH0WWuAW;
+	arc=none smtp.remote-ip=210.118.77.11
+Received: from mailout1.w1.samsung.com (mailout1.w1.samsung.com [210.118.77.11])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D938E606A333
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 14:41:13 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D938E606A333
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A2B7606A680
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 14:45:20 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3A2B7606A680
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=Ssso1Gle;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=cH4i+qHv
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARE1Kjk1790961
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 14:41:13 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	lVQeGD9agzy0mh5pcwZtPylSjLuXqaDKZw1i3CUR2Tk=; b=Ssso1GleEDHSTzLM
-	sp2sNzcakwartjCQnM5P/CTfPdLeWreJp+TnQUMCfuUd5uFHkbz3w/8UvlJEjcdg
-	Wn7blh3ANiIZLPngdjrVmgBgKFBDQJzuA9h5BYc6bk9f1plVNKSF1R9959ZbAOae
-	SBooI9zvxysI4jwGmNuJxPmSSrKem8YWvFaKKMe2goff71qDxUYW8KKcT0udk4kh
-	l8A4JAY/jwzRy6sig+uQQIL3P98H+jqXm1ROvhgbl03L+sNMwnv+9EqubscZpE62
-	h0DMKdRBtnPTEJu99y9w5oPceP+i9k5VAQopRBcr3xu69Fy61SXssxTw5F28rriG
-	0Xk9vQ==
-Received: from mail-dy1-f197.google.com (mail-dy1-f197.google.com [74.125.82.197])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ru3b044-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 14:41:13 +0000 (GMT)
-Received: by mail-dy1-f197.google.com with SMTP id 5a478bee46e88-386a0f79047so8789252eec.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 06:41:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795790472; x=1796395272; darn=vger.kernel.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lVQeGD9agzy0mh5pcwZtPylSjLuXqaDKZw1i3CUR2Tk=;
-        b=cH4i+qHvWtghUOuIDKphBJGjGOWzdm/RrN7ah3U3Acs6u+3y8klNmHghB1dmjxC4EA
-         jm3eCjI+CDPUmxOAa3chO6cX6LaL3O5RxQmh6eyXEQj0VDby1X7JvFxLv4CAJ0hvmMjl
-         dOKeLd6TFrp4UEjm5e5JX3o3Za0zeQLJpRF4c0DVbVihwMw+8/4nVl2sdXFG5WvJ7Hnl
-         SU5hwggF87sPBtyZLEQxfs1F5d2eYneTmq5WZBz4o4WqBPSa3tFRSK3b0+28ZG73PeBw
-         Z3eiPqw7hyf3SXPBIWOKRM/Pa+hDyoubyGObe2NTYd+zXr/s0OgAtdZ+WGCGioCNNznp
-         dCxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795790472; x=1796395272;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lVQeGD9agzy0mh5pcwZtPylSjLuXqaDKZw1i3CUR2Tk=;
-        b=rVeXvn9ZK/rYrKuaN61ui/P6LVsyZPQoywwbIF6qFwymPWVnj7iuqKT6qN2Qt1tE+S
-         naH03C1AolWwBiz8oa3geMfYePbKddG49CzmcCxNyfIm5EwRGwebvyokTlXuPz/NyrQ3
-         eSiTdBmq13RcNacIcTLK+N8vywEsNbMa9v4fEH78jGt4cOZb48tF/NbMCnJlWm21ezTY
-         kF0Y3jjLzHdJQYkLloGae72btpRBbjvXK6hXnULm7TZlK4DZGT4KxVcIKqF4DTGYnHxf
-         D9k/Z5IxESjMroNOzi0DsgIk96qtyIYyEFVncjNgcB0BEEHVJqojP2GPqetSXZnzdFzI
-         fO9Q==
-X-Forwarded-Encrypted: i=1; AL+hErEAbfv0jnds4z9iobkesFm3dtcfUhRofurz67Vk2ejdBL5qnbD1PEUXS9woVeKfO4/aczOoiMJ8hAQDmOry@vger.kernel.org
-X-Gm-Message-State: APuU4Z9Lek6Go3q4XhlFBzkBzNqQ7Yi+zc8wpDOKVKzQV0FqRU9MwOKt
-	4HCAd3HQX/G3XGoVfVIhzuldbZoWdOA5B9uGd7w9RyWDFE3ArY9PpHAb5fMhaFujT/Zvw2ZMSof
-	qut8H6fevHeOdRop8xNx027zxHQpJBJFfV+Ga1H9K8u0mSoKNj5Bxsmz5TFTbps35jMDI
-X-Gm-Gg: AZFdTZe+OQj8nlwCQArND/5RzB9K9EZNJ6H9C8WhCkNf4fka2jbSQ5zLTdF4Z35UL25
-	E0vBHiuUKPz+BQGXEMRaZ8F2DgT2CUaQ6VOpuAy67cqR7XCLeWfQVSucRIUw08bvHH2UPhtviu7
-	PodtTTMWKnLBJxRLzbsQ+FLHkl+pCpPcKYwi+tQoWPGtZMY9cniINvdV0SNq6fWpf0tKNGbUBD8
-	vTLbA0KV5Nyi3owdhefdTk/hcT5kep1ghI9M22xq8b5agNXM2UHBY1WaBzLQzFv/e2SyrQUkmQM
-	TTLWHyPmdJ42ZEns3tp4Q3wzFTnGwmN0pkDb0pK+wY1s6+ACxkMGvCm7Jr9CCAXFnGEgSbyJufO
-	tockBMY31MbLj/fCTxxtbpSpc9kocp7nVKmDG6eApYsht6/bjZUsT5VlpnvEyH0wW5KjwRs6TDD
-	4mC6ozow==
-X-Received: by 2002:a05:7301:650c:b0:386:cca5:3626 with SMTP id 5a478bee46e88-386cca53bd1mr12721521eec.31.1795790472095;
-        Fri, 27 Nov 2026 06:41:12 -0800 (PST)
-X-Received: by 2002:a05:7301:650c:b0:386:cca5:3626 with SMTP id 5a478bee46e88-386cca53bd1mr12721485eec.31.1795790471557;
-        Fri, 27 Nov 2026 06:41:11 -0800 (PST)
-Received: from hu-msarkar-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-38567cafec4sm82970809eec.26.2026.11.27.06.41.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 06:41:11 -0800 (PST)
-From: Mrinmay Sarkar <mrinmay.sarkar@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 20:10:50 +0530
-Subject: [PATCH v2 2/2] PCI: qcom: Reinitialize MSI on resume for
- firmware-managed controllers
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=tH0WWuAW
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout1.w1.samsung.com (KnoxPortal) with ESMTP id 20261127144518euoutp01dda34c5c4690939ebf26e469bff0a8ec~r7iTVvM8_2015820158euoutp01a
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 14:45:18 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.w1.samsung.com 20261127144518euoutp01dda34c5c4690939ebf26e469bff0a8ec~r7iTVvM8_2015820158euoutp01a
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+	s=mail20170921; t=1795790718;
+	bh=LO23VuR8oz1He3kunSDVbm/R/AJdXLqeSuquj/Un54I=;
+	h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+	b=tH0WWuAWuzPYHQm+soNKBsCky89aAJhBeNMAl+NLBMauK5hFl+uh1UAcu8tbLdEG8
+	 nfJHn+PQMz0l0380GnH9tpUphr2qR24lltrW+TLLa0SnHNNvRebMYggDeIzGPDKUTM
+	 7619QSF/iwix+iDn0+A0kvV6ZYYjAB+a2KaAoYZs=
+Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20261127144518eucas1p22cf8f824453316c6bfb1f0a0066453b3~r7iTA2KY93155031550eucas1p2D;
+	Fri, 27 Nov 2026 14:45:18 +0000 (GMT)
+Received: from [106.210.134.192] (unknown [106.210.134.192]) by
+	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
+	20261127144515eusmtip242d75ac11ad94c4e4ca4316ca179bbe6~r7iQ-8K-m1223712237eusmtip2d;
+	Fri, 27 Nov 2026 14:45:15 +0000 (GMT)
+Message-ID: <feec2436-ad15-4aa6-a53f-800869bfac21@samsung.com>
+Date: Fri, 27 Nov 2026 15:45:15 +0100
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -117,103 +64,139 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+User-Agent: Betterbird (Windows)
+Subject: Re: [PATCH 4/4] iommu/dma: restore flush queue use in
+ dma_iova_destroy()
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: iommu@lists.linux.dev, linux-media@vger.kernel.org,
+	linux-arm-msm@vger.kernel.org, kvm@vger.kernel.org,
+	linux-kernel@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>, Joerg
+	Roedel <joro@8bytes.org>, Will Deacon <will@kernel.org>, Leon Romanovsky
+	<leon@kernel.org>, Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Honglei Huang
+	<honghuan@amd.com>, prakash.gupta@oss.qualcomm.com, Alex Williamson
+	<alex@shazbot.org>, Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, Abhinav Kumar
+	<abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, Mauro Carvalho
+	Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil+cisco@kernel.org>,
+	stable@vger.kernel.org
+Content-Language: en-US
+From: Marek Szyprowski <m.szyprowski@samsung.com>
+In-Reply-To: <20261127143740.GM114472@nvidia.com>
+Content-Transfer-Encoding: 8bit
+X-CMS-MailID: 20261127144518eucas1p22cf8f824453316c6bfb1f0a0066453b3
+X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-pcie-controller-reset-v2-2-17467b64f5f5@oss.qualcomm.com>
-References: <20261127-pcie-controller-reset-v2-0-17467b64f5f5@oss.qualcomm.com>
-In-Reply-To: <20261127-pcie-controller-reset-v2-0-17467b64f5f5@oss.qualcomm.com>
-To: Manivannan Sadhasivam <mani@kernel.org>,
-        Lorenzo Pieralisi <lpieralisi@kernel.org>,
-        =?utf-8?q?Krzysztof_Wilczy=C5=84ski?= <kwilczynski@kernel.org>,
-        Bjorn Helgaas <bhelgaas@google.com>
-Cc: linux-pci@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Rama Krishna <rama.krishna@oss.qualcomm.com>,
-        Nitesh Gupta <nitesh.gupta@oss.qualcomm.com>,
-        Ayiluri Naga Rashmi <ayiluri.rashmi@oss.qualcomm.com>,
-        Krishna Chaitanya Chundru <krishna.chundru@oss.qualcomm.com>,
-        Shazad Hussain <shazad.hussain@oss.qualcomm.com>,
-        Mrinmay Sarkar <mrinmay.sarkar@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795790457; l=1624;
- i=mrinmay.sarkar@oss.qualcomm.com; s=20250423; h=from:subject:message-id;
- bh=WX7R2eiTg1XRmSTdE1ID9a+HknD/KT/w9md6BbR8JFY=;
- b=iB9pAwj2cwwXHXvZfP2boU6JGBIx0XChK8Hj92BtJ0pmCggskWkOwT81GsjYJTl7rTs4Eji3a
- IUxOtyCrudQAn/CvKuCLsB1UiqrxsW1OAws/yLPfFKlGfbNK2TLNYVw
-X-Developer-Key: i=mrinmay.sarkar@oss.qualcomm.com; a=ed25519;
- pk=5D8s0BEkJAotPyAnJ6/qmJBFhCjti/zUi2OMYoferv4=
-X-Authority-Analysis: v=2.4 cv=cOF1IVeN c=1 sm=1 tr=0 ts=6b099689 cx=c_pps
- a=Uww141gWH0fZj/3QKPojxA==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=_K5XuSEh1TEqbUxoQ0s3:22
- a=EUspDBNiAAAA:8 a=VdY5-eERFFFFdNr3g4sA:9 a=QEXdDO2ut3YA:10
- a=PxkB5W3o20Ba91AHUih5:22
-X-Proofpoint-GUID: xXLwXSCjhvDnvVtDGwsJghZuq6273PD-
-X-Proofpoint-ORIG-GUID: xXLwXSCjhvDnvVtDGwsJghZuq6273PD-
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA1OCBTYWx0ZWRfX2kpW+T3SEI9l
- h0AH2QudwJxJXFB/E0oeCG1EmQ52gnQ47wcHRCAkMvZ4GqSqfAufStN65y1/KqyjyVaZi+BP+5E
- T7KX8XVqSuv75oTYp99F1TOReeDoksJgGhKIFWtDH2JhIuHbahFaW5fLWupD2KmWya15+WahVT8
- Y5l6iHR4rWTwg/Q9potk2HOUcA7RNiC5G+wwuLsKa7AtVcDtCq9HrOu127ntlQUKsjPliD4IrOk
- w1b6yVaEjqwp2KQTikcz5xYpf4gslKr1s9L/ci7GV26Lpk7JexELDG5Nrw3z0mspBcQ/zR9Qd8q
- 5/JxJjssd7zB+FNYrrQ+aR+dBUvg21p0HHZl3bHZglB0/5PSugiNN2kiSeYfVpZIBcbYbbg3Yz4
- kUqkei7JvJJoD3OtRQlDo+RCqU+BMPBHb5H3rUwu3NNLeB5WE9lpFeXflVM2XYYFLuI8rfmDIjw
- AKfd3iSDPTcbBVvp+EQ==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA1OCBTYWx0ZWRfXybEFZTWOBgbz
- 3LpP7Tone7bPKVUpT+/5EEpnT4mA5jEk2amlbslRtwH38e9BHy5B3g5ooLKQ4zZcmBHZ1K380mI
- E90oRj3T/ky6NeAYZn6XLQxMJVbr+K4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-27_02,2026-11-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
- adultscore=0 spamscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270058
+X-RootMTR: 20261127115903eucas1p27ccc4cddb7f705d6afa5c2603597b97a
+X-EPHeader: CA
+X-CMS-RootMailID: 20261127115903eucas1p27ccc4cddb7f705d6afa5c2603597b97a
+References: <20261127115849.2780625-1-m.szyprowski@samsung.com>
+	<CGME20261127115903eucas1p27ccc4cddb7f705d6afa5c2603597b97a@eucas1p2.samsung.com>
+	<20261127115849.2780625-5-m.szyprowski@samsung.com>
+	<20261127143740.GM114472@nvidia.com>
 
-On firmware-managed PCIe controllers, hardware context is lost across
-system suspend. While firmware reinitializes the controller through
-the power domain framework during resume, the DesignWare MSI registers
-are not preserved across the power cycle and must be reprogrammed by
-the driver.
+On 27.11.2026 15:37, Jason Gunthorpe wrote:
+> On Fri, Nov 27, 2026 at 12:58:48PM +0100, Marek Szyprowski wrote:
+>> Commit 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop
+>> the free_iova helper") turned dma_iova_destroy() into dma_iova_unlink()
+>> followed by dma_iova_free(). Before it, the destroy path marked its
+>> IOTLB gather as queued for DMA-FQ domains, skipped iommu_iotlb_sync()
+>> and handed the IOVA over to the flush queue, exactly like
+>> __iommu_dma_unmap(). After it:
+>>
+>>   - dma_iova_unlink() never queues its gather and always calls
+>>     iommu_iotlb_sync() after iommu_unmap_fast(),
+>>   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
+>>     the IOVA goes straight back to the allocator via free_iova_fast().
+>>
+>> DMA-FQ domains therefore get strict invalidation on this path. This
+>> includes blk_rq_dma_map(), which NVMe uses for all data transfers, so
+>> iommu.strict=0 has no effect on NVMe I/O. On a Qualcomm Glymur CRD
+>> (SMMUv3 without RANGE_INV, 4K pages, NVMe on PCIe Gen5 x4) sequential
+>> fio throughput drops from 10.6/11.9 GiB/s (write/read) to the strict
+>> mode level of ~2.7 GiB/s.
+>>
+>> Instead of reverting, decide once in dma_iova_try_alloc() whether the
+>> IOVA space is going to be released through the flush queue and record
+>> it in a new DMA_IOVA_USE_FQ flag in dma_iova_state::__size, next to
+>> DMA_IOVA_USE_SWIOTLB, so struct dma_iova_state does not grow.
+>> dma_iova_destroy() then unmaps with a gather queued according to that
+>> flag, skipping the sync for flush queue domains, and passes the same
+>> gather to the IOVA free, so the IOVA space (and any page table pages
+>> released by the unmap) goes through queue_iova() again. dma_iova_free()
+>> honours the flag as well. The whole reservation is still freed, keeping
+>> the size fix of the reverted commit.
+>>
+>> A gather must always be retired, either by iommu_iotlb_sync() or by
+>> handing it to the flush queue together with the IOVA, and the IOVA must
+>> never be returned to the allocator while a queued invalidation for it is
+>> still pending. To keep that obvious, the internal unlink helper only
+>> unmaps into a gather supplied by its caller, and each caller retires it
+>> right away: dma_iova_destroy() syncs or queues it together with the IOVA
+>> free, exactly like __iommu_dma_unmap(), while dma_iova_unlink() always
+>> uses a never queued gather and syncs it, as the unlinked range remains
+>> owned by the caller and may be linked again immediately.
+>>
+>> Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
+>> Reported-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
+>> Closes: https://lore.kernel.org/all/20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com/
+>> Suggested-by: Leon Romanovsky <leon@kernel.org>
+>> Cc: stable@vger.kernel.org # v7.3+
+>> Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
+>> ---
+>>  drivers/iommu/dma-iommu.c   | 103 ++++++++++++++++++++++++++----------
+>>  include/linux/dma-mapping.h |   8 ++-
+>>  2 files changed, 83 insertions(+), 28 deletions(-)
+> Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
 
-Reinitialize the DesignWare MSI configuration during resume for
-firmware-managed controllers to restore MSI functionality after
-the controller is power-cycled.
+Thanks!
 
-Signed-off-by: Mrinmay Sarkar <mrinmay.sarkar@oss.qualcomm.com>
----
- drivers/pci/controller/dwc/pcie-qcom.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/pci/controller/dwc/pcie-qcom.c b/drivers/pci/controller/dwc/pcie-qcom.c
-index fe86b8fbc895..51299dfd574c 100644
---- a/drivers/pci/controller/dwc/pcie-qcom.c
-+++ b/drivers/pci/controller/dwc/pcie-qcom.c
-@@ -2325,6 +2325,7 @@ static int qcom_pcie_probe(struct platform_device *pdev)
- 		bridge->msi_domain = true;
- 		if (IS_ENABLED(CONFIG_PM_SLEEP))
- 			bridge->reset_root_port = qcom_pcie_fw_reset_root_port;
-+		dev_set_drvdata(dev, cfg);
- 
- 		ret = pci_host_probe(bridge);
- 		if (ret)
-@@ -2552,8 +2553,14 @@ static int qcom_pcie_resume_noirq(struct device *dev)
- 	int ret;
- 	const struct qcom_pcie_cfg *pcie_cfg = of_device_get_match_data(dev);
- 
--	if (pcie_cfg && pcie_cfg->firmware_managed)
-+	if (pcie_cfg && pcie_cfg->firmware_managed) {
-+		struct pci_config_window *cfg = dev_get_drvdata(dev);
-+
-+		if (cfg && cfg->priv)
-+			dw_pcie_msi_init(cfg->priv);
-+
- 		return 0;
-+	}
- 
- 	pcie = dev_get_drvdata(dev);
- 	if (!pcie)
+What about the issue pointed by sashiko.dev? My LLM said that this will fix it:
 
+
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index 0e329ecd7dfa..106da975bf0f 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -1892,11 +1892,12 @@ static void __dma_iova_free(struct device *dev, struct dma_iova_state *state,
+  */
+ void dma_iova_free(struct device *dev, struct dma_iova_state *state)
+ {
+-       struct iommu_iotlb_gather iotlb_gather;
+-
+-       iommu_iotlb_gather_init(&iotlb_gather);
+-       iotlb_gather.queued = state->__size & DMA_IOVA_USE_FQ;
+-       __dma_iova_free(dev, state, &iotlb_gather);
++       /*
++        * Nothing is linked any more and every dma_iova_unlink() has already
++        * invalidated the IOTLB synchronously, so there is no deferred
++        * invalidation to wait for and the IOVA can be reused right away.
++        */
++       __dma_iova_free(dev, state, NULL);
+ }
+ EXPORT_SYMBOL_GPL(dma_iova_free);
+
+@@ -2190,12 +2191,13 @@ void dma_iova_destroy(struct device *dev, struct dma_iova_state *state,
+        struct iommu_iotlb_gather iotlb_gather;
+
+        iommu_iotlb_gather_init(&iotlb_gather);
+-       iotlb_gather.queued = state->__size & DMA_IOVA_USE_FQ;
+
+        /*
+         * We can be here if the first call to dma_iova_link() failed and
+-        * there is nothing to unlink, so let's be more clear.
++        * there is nothing to unlink, so let's be more clear. Only queue the
++        * gather if there is an unmap whose invalidation can be deferred.
+         */
++       iotlb_gather.queued = mapped_len && (state->__size & DMA_IOVA_USE_FQ);
+        if (mapped_len)
+                __dma_iova_unlink(dev, state, 0, mapped_len, dir, attrs,
+                                &iotlb_gather);
+
+
+
+Best regards
 -- 
-2.43.0
+Marek Szyprowski, PhD
+Samsung R&D Institute Poland
 
