@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795793087;
-	b=3TO2m5BPGJQ97l6fcoBW6n84t0iVJkvVNzb2pUO3ZgHTtrBYg0oqnIQQS5zCnHWfltFc
-	 2g+2Q78kLAzP0nGGON0pdANKNKdwMKNjVC1NtLywuLfBQv/sLz9OebYfS703JuZsKQdp+
-	 zvSUKc8cSVvUoDXWywNqmQh+e9+fdmUfco7j45HFLThyB7vlHn4gxiNFq8WdLNt4HV8aW
-	 w5G+frVT1r8VmGrxVBuDwDItU++F6gSCbUZrVqM429BqtDeaOuKaIdMDM32LN65+hEbYv
-	 0dTuEtO+kh7zkm/PEZItceTSAIByxk+R/o9oHSKiYJGYmWncB53PE4s0olpqbAlfR2g==
+	t=1795793094;
+	b=N4bHKvQktVoSDyxABUqFPYRH57B5RtcgfHZB5GKEuhQkxYQyv0e9gRK8AdX7UiRF3Zbp
+	 O/p4QyLAm5tUx7Qm7ebRIJmicVgvg/aVd/uh7Nh6v+BZcpQx7+brY/D+1OG2F/lXDenNe
+	 ik1a8M/7zvcRuT3NwOT8CDmhh+0sq5FlcM9copyBKBLoYxcIsHBuh/BgpUtp/dFGcU53r
+	 gOM0ByNio7GyI9U82XPBa1hEMHdijjKgB/3qMIeYdWDp32RXjhRjf153EcRWizQKfHp+0
+	 Aa7rvRIdiuKZInml2FSH48ihP1/yfEb5NYB8ZovPFCS6bo1P/M+6Fuod0pRqoxF/2mw==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795793087;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795793094;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=oyltaPshj86SQiBIh7ht6WCdgIXYX+7eF9ei2KjJcmc=;
-	b=sNMOdBzIFi+fJPGbNZcvrAqZkHYhF7FD/PMJ3Fg0KofzRwUWTAQmvtX7cjBc8h2PvT2d
-	 sizP9FOoTyJxB85dzucAveyW9ORxBF7K7QONX4cwiM0dlJT3r+/IpoariJN0JXXM7G7/b
-	 ACqHIsqVfKeT6OhaY09kF2XumvgqDcqARxq9N+LS8N07++ZNmBLRci3ggNr26pTVlRK+O
-	 Hlf7qiwgz6G19Atn/rpOTmmwF9Rrw94ZLFdubM7a4E25ujTexVTuTeXkxOQajyPdzAT34
-	 iGCpBhZV6nfa9EP/mD1M4PkRnu2xz33P9L92LE2FDUCZR59fBGbZxPtS/soNowFqoSA==
+	bh=JQ3aam2jLOFpYrKlCUnHuVKdqm91LCjlOXB+O2uB1uM=;
+	b=njt8Bf+8uwIMQ7n7C2l1+ZFyTecSIt9KYu++nMD/8L1iFzowHLzfiQFurb3kbha5E/Hs
+	 FMnj74YMd5JzBvVIABO4dt8uHda8yGdRACQeRa6AjEbnWCo7y34ouxGpQx3V5LXdQgLue
+	 97w98+uTyk1n196oAnMMO4A+Sy/WyGHQq6hQpCV3gYeZDI9TlHHDw9DyMrvdh4uka5x6v
+	 Na0NU62Xp6NL5QNw/9ShYRQ70MqdaxQCS2kZ6YGLpeAK/IHY+omdzV6jzMl580UBVoxNb
+	 xbONhNr+Gki3iVJEjOmFztP9XeFC92Z6Hj4eDgKzde227doXNRDqLdaXHSiXZiaZPsw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="dxjQss/i";
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=REy9Wo72;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B0797606A327;
-	Fri, 27 Nov 2026 15:24:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16054606A31F;
+	Fri, 27 Nov 2026 15:24:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=dxjQss/i
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=REy9Wo72
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795793087;
-	b=hxn7QJX4IJR6LHhskUeljcd/Bh1YgQi+0nb5+yErOKNRrPnrupYbaOLCjQzA2RMVUdtf
-	 iYUEP2eqj5x0Jh6JA7MypSGtyozdCRXi7T26KqqL66rchWhOWdDMYSsWAUiHCz3CvOUGy
-	 i789Bz59SDJixfe3t1LnQFXvULaorPnpwo9JGVKnMucVjlkdTtsJN6jnli5p8PyyREQxu
-	 kEvjoYWyRXkxvXWAS0eauM2nU+EqqYJGvqkJA1Dtb9ssH1cFC/6l0NDmlGVOKv5vQ8LrL
-	 I/jyX8n573ht0TVWNzYX1b8+yK1bJqPPrNOJfmB6jl/jnovF9qY23VZF3W59X7iSnTw==
+	t=1795793093;
+	b=YVjv9mvi8aKA4/cex8stUKTgvEC/cquMvVUTS7gKGO8pbSMNKVX5RJJ1P6lcKB3JIi6S
+	 wKc1gGTz1DpL418HYQNAMDahmSrn3L5PdsVY9s76kwwjqH84Mm1VwErhmIty/LBOAQ7Cz
+	 iqPN9WEhPIRwiRhod40MvDLoh1g5ideCRRA1A81xKOY3kJU0eCb2YOys5D6/j2GrBBRKA
+	 TzNnn/DGD0lX4SqaTUHBZ4U+jVLYwzrcKPAKP0KE3Euk3G+hE39JrZRgKhxd1RkjwUkTp
+	 ODIH4k9eo6AdEZ6oCm7dmwY9jJNU/nv5TvDW8+8z4NXj6laG5iiT2N+CvkI2zDVVsnQ==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795793087;
+	c=relaxed/relaxed; t=1795793093;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
-	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=oyltaPshj86SQiBIh7ht6WCdgIXYX+7eF9ei2KjJcmc=;
-	b=p9YW03cnPhSp3gPZO/WFipor+rHXz8VG5IGqy/0Rwh85BnuUE+F9bHzgkucsKV91gv4B
-	 KUetfSzif9PGoCUXoDUrYWX0g2XUGDn9/AJmnoN7xTu/l06E/oFroXMhhYRIIuSI9kEYQ
-	 O6UzDKBh8IG4JST3n91nMFMAfiz/5+OuGU3UJzc2CcjYqw6n10yBsLzPp+QJihIDNMyQQ
-	 czjqkMJEUxXfd5LCfb0jwo6zFCjm+aiGKWK//JLi3IJvnsz6YYYYTImNT90fnLL/Inxkn
-	 EATp8w5JRHytOkqi1t0aCrM4Z9bAmTxJaIlfVkmcIy64Y5/SP9LLNstkWRhDAuFg/Mw==
+	bh=JQ3aam2jLOFpYrKlCUnHuVKdqm91LCjlOXB+O2uB1uM=;
+	b=GwJkaVLycVQOHisBhTvWA3mckyelQo+IlqxorVXBm4lOS50Fulf9OBncNwHDUedIc5+9
+	 9IU5tv0YiqVfsH/jp5JOcuVMh/M5byYQftDN1Uzr/uafJ4yy2beLK5NdDU8a9/t/FL0UW
+	 r5H3zVC/OK4gr+540WCwVPJoJLntV82rDxqQ3Z3wKU7SgN1QP78JlhJpBX+0s93ijVpOD
+	 QnlmVP9UIGoDgwCZJg/Z23jNNaDix3xFw0zBbFT8DBbxuiPji+VRE3uSto82g9qU+6yIm
+	 Z5okNwpFIyrXK/gpxJcZY0FvH9bLOjSSSZzx25kcZpcxHc4nBc8vzJ/dWlapw6vXCNg==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 7DC141F0089A;
-	Fri, 27 Nov 2026 15:24:28 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id 7A83C1F00929;
+	Fri, 27 Nov 2026 15:24:39 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795793087;
-	bh=oyltaPshj86SQiBIh7ht6WCdgIXYX+7eF9ei2KjJcmc=;
-	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=dxjQss/iVDkEpaos4EAqNqUI/W5gjHRT7xZJABLMQL10/Jb+8GMixLo2Yjj5TLSyV
-	 ZjmM3nBoMxtzSrXnfl8a+uyNY329DaN0rIyo8+HAJ8apNQ8yaiWr/M5DUW4SLKPv7P
-	 oPUF+v1UJsrjmQV3QGDqoi4VjXFYjmAbLMo3j7+PsCNf0mVvLCI8yskl7IVeB6N4O8
-	 SC/03eylmBt6KHSR101f29Th80WXp8oea2g5T+y33HOOh7iTOpbnmY3KvtbVFJj7Zf
-	 spUYoJYIvx/JJ6ZJ7WSACXjuCaTW1B5+LO17Jmhe+KGxTjCz96lpUjmZ3dNTzKwWY4
-	 uAfQDzQGccDog==
+	s=k20260515; t=1795793093;
+	bh=JQ3aam2jLOFpYrKlCUnHuVKdqm91LCjlOXB+O2uB1uM=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=REy9Wo72gMdfhefW3kXWoB9U6nHeNrUN+EimeM5jCkovfpigajJlLq5jeKg7NN+wu
+	 TdygJ2c4Neg9pnv88M3p0S2PfDKdGRaEFUinQedJKW7KSEldyh/CBvIhVeJvr1Nod3
+	 9g6OjSUhVYgeuBKb1fP4+6BQSrF+096vGaTzt6IbnJEVUwZzlehprOIaQN1SQdlzOK
+	 9nORzIr8g6aSgycJiJNnzyh0+LU4xSQCgnrM0kzGhA9zvq4oGoa7X14QQs7IFwnS54
+	 mzZUph9XP0m5sIcqO4Z+YCzdLY77jbLBLjqqCFJPWPVAcNdhpj3NQP71SD2Gka0qNC
+	 eBi/fByHetvlg==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id 0AE834D853;
-	Fri, 27 Nov 2026 15:24:28 +0000 (UTC)
-From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
-Date: Fri, 27 Nov 2026 15:24:25 +0000
-Subject: [PATCH v3 1/2] dt-bindings: crypto: qcom,inline-crypto-engine: Add
- SM8350
+	by lkml.kernel.org (Postfix) with ESMTP id 023244B85E;
+	Fri, 27 Nov 2026 15:24:39 +0000 (UTC)
+From: Zhendong Liu via B4 Relay <devnull+yzddmr6.gmail.com@kernel.org>
+Date: Fri, 27 Nov 2026 23:24:37 +0800
+Subject: [PATCH v2] drm/msm/dsi: Fix double put of the PHY device on probe
+ deferral
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,60 +84,110 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261127-b4-sm8350-ice-v3-1-39c5b4f562cd@fromdisposition.org>
-References: <20261127-b4-sm8350-ice-v3-0-39c5b4f562cd@fromdisposition.org>
-In-Reply-To: <20261127-b4-sm8350-ice-v3-0-39c5b4f562cd@fromdisposition.org>
-To: Abel Vesa <abelvesa@kernel.org>, 
- Herbert Xu <herbert@gondor.apana.org.au>, 
- "David S. Miller" <davem@davemloft.net>, Rob Herring <robh@kernel.org>, 
- Krzysztof Kozlowski <krzk+dt@kernel.org>, 
- Conor Dooley <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, 
- Konrad Dybcio <konradybcio@kernel.org>
-Cc: linux-arm-msm@vger.kernel.org, linux-crypto@vger.kernel.org, 
- devicetree@vger.kernel.org, Demeter Barna <me@fromdisposition.org>, 
- Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
+Message-Id: <20261127-upstream2-msm-dsi-phy-ref-v2-1-be82aab71166@gmail.com>
+X-B4-Tracking: v=1; b=H4sIALSgCWsC/42Oyw6CMBBFf8V07SAtL+PK/zAs+higxgLpAJEQ/
+ t0WE9cuz507J3djhN4isdtpYx4XS3boA4jzielO9i2CNYGZSEXJuUhhHmnyKJ0ARw4MWRi7FTw
+ 2oLDJjMbMNFiy8D+G0L4P96P+Ms3qiXqKwthQkhCUl73uYvRTX47DUiU5eJ3FZmdpGvx6zFx4N
+ P6zaOHAwYiyUtfKFHnR3Fsn7SvRg2P1vu8ffpuClv4AAAA=
+X-Change-ID: 20261120-upstream2-msm-dsi-phy-ref-bef3dce3dfe6
+To: Rob Clark <robin.clark@oss.qualcomm.com>, 
+ Dmitry Baryshkov <lumag@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Abhinav Kumar <abhinav.kumar@linux.dev>, 
+ Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>, 
+ Marijn Suijten <marijn.suijten@somainline.org>, 
+ David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
+ Miaoqian Lin <linmq006@gmail.com>, 
+ Christophe JAILLET <christophe.jaillet@wanadoo.fr>, 
+ linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org, 
+ freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
+ Zhendong Liu <yzddmr6@gmail.com>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795793066; l=1295;
- i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
- bh=jT68xkxxz5/EVqIPjmJKY8VY49FYVLS9vEllgykpp6Y=;
- b=oVptq1TzpVLZzr5nYHObZUa4FX2l/0VGIPaxRY2sW8pLRH7oKRQQ7VoG91ioQ0dQnMGmWtof1
- R8Lz58ciB6KDjtq6vxUhK0Iqslap6MJkw4FOSkQjaL8DtTPwdQYF2Qh
-X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
- pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
-X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
- auth_id=1163
-X-Original-From: Demeter Barna <me@fromdisposition.org>
-Reply-To: me@fromdisposition.org
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795793078; l=2946;
+ i=yzddmr6@gmail.com; s=20261028; h=from:subject:message-id;
+ bh=7pDeVytCnO+Ht8gillWTKBsW0hZk8jkNgWUnJt2sCQc=;
+ b=OP/iel1IqGfob8BkPZuho3vNQCEgYSMhN1s5aYKbitq3QmqUqaPt8DOPBLz+9gYhVM0WI8chv
+ FLaoDIVNTruAwtKO+up8aAXOqEGzDbNxK6geJVWNHxPH5Pf8bqEBBP1
+X-Developer-Key: i=yzddmr6@gmail.com; a=ed25519;
+ pk=QLT2mwairk4R38oU379hkHynqjoLrlqd0Cl1ERUqIqY=
+X-Endpoint-Received: by B4 Relay for yzddmr6@gmail.com/20261028 with
+ auth_id=1489
+X-Original-From: Zhendong Liu <yzddmr6@gmail.com>
+Reply-To: yzddmr6@gmail.com
 Content-Transfer-Encoding: 7bit
 
-From: Demeter Barna <me@fromdisposition.org>
+From: Zhendong Liu <yzddmr6@gmail.com>
 
-SM8350's UFS host has an inline crypto engine, version 3.2.0, with a
-hardware key manager behind it, clocked by the UFS ICE core and AHB
-clocks and powered by the UFS PHY GDSC. Document the compatible. Being a
-new SoC, it stays off the legacy single-clock list, so both clocks and
-the power domain are required.
+Since commit 6977cc89c875 ("drm/msm/dsi: Fix some reference counted
+resource leaks"), dsi_get_phy() stores the PHY device it looked up in
+msm_dsi->phy_dev before it checks whether the PHY driver has bound, and
+dsi_destroy() drops that reference. dsi_init() calls dsi_destroy() when
+dsi_get_phy() fails.
 
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@oss.qualcomm.com>
-Signed-off-by: Demeter Barna <me@fromdisposition.org>
+Commit c04c3148ca12 ("drm/msm/dsi: Fix missing put_device() call in
+dsi_get_phy") then added a put_device() for the case where the PHY
+device exists but has no driver data yet. In that case the reference is
+now dropped twice, once in dsi_get_phy() and again in dsi_destroy(), so
+each probe deferral for this reason takes one reference too many from
+the PHY platform device. Enough deferrals underflow its refcount and
+free it while it is still registered.
+
+fw_devlink normally keeps the DSI host from probing before its PHY has
+bound. The path is reached with fw_devlink=permissive or off, and after
+the deferred probe timeout when no driver matches the PHY device, as
+the device link is relaxed then and every probe retry of the DSI host
+drops another reference.
+
+Drop the put_device() and leave the reference to dsi_destroy(). This
+effectively reverts that commit and brings back the single check that
+it split in two.
+
+The double put was found with the help of an AI coding assistant during
+a review of the driver.
+
+Fixes: c04c3148ca12 ("drm/msm/dsi: Fix missing put_device() call in dsi_get_phy")
+Signed-off-by: Zhendong Liu <yzddmr6@gmail.com>
 ---
- Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml | 1 +
- 1 file changed, 1 insertion(+)
+Found by reading the code; I have not hit this on hardware, and there
+is no reproducer. Build-tested only: drivers/gpu/drm/msm/ with W=1
+(arm64 defconfig) on the base commit below, no new warnings.
 
-diff --git a/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml b/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
-index a45a4ac5d..e808af8dd 100644
---- a/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
-+++ b/Documentation/devicetree/bindings/crypto/qcom,inline-crypto-engine.yaml
-@@ -28,6 +28,7 @@ properties:
-           - qcom,sc7280-inline-crypto-engine
-           - qcom,shikra-inline-crypto-engine
-           - qcom,sm8150-inline-crypto-engine
-+          - qcom,sm8350-inline-crypto-engine
-           - qcom,sm8450-inline-crypto-engine
-           - qcom,sm8550-inline-crypto-engine
-           - qcom,sm8650-inline-crypto-engine
+I used an AI coding assistant for this work. It found the double put
+while reviewing the driver and drafted this patch and changelog. I have
+reviewed the change.
+---
+Changes in v2:
+- Use my legal name in the From: and Signed-off-by: lines, as requested.
+- Link to v1: https://patch.msgid.link/20261120-upstream2-msm-dsi-phy-ref-v1-1-d267b87d545f@gmail.com
+---
+ drivers/gpu/drm/msm/dsi/dsi.c | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
 
--- 
-2.53.0
+diff --git a/drivers/gpu/drm/msm/dsi/dsi.c b/drivers/gpu/drm/msm/dsi/dsi.c
+index 090726be5061..5f9a1409432a 100644
+--- a/drivers/gpu/drm/msm/dsi/dsi.c
++++ b/drivers/gpu/drm/msm/dsi/dsi.c
+@@ -44,12 +44,7 @@ static int dsi_get_phy(struct msm_dsi *msm_dsi)
+ 
+ 	of_node_put(phy_node);
+ 
+-	if (!phy_pdev) {
+-		DRM_DEV_ERROR(&pdev->dev, "%s: phy driver is not ready\n", __func__);
+-		return -EPROBE_DEFER;
+-	}
+-	if (!msm_dsi->phy) {
+-		put_device(&phy_pdev->dev);
++	if (!phy_pdev || !msm_dsi->phy) {
+ 		DRM_DEV_ERROR(&pdev->dev, "%s: phy driver is not ready\n", __func__);
+ 		return -EPROBE_DEFER;
+ 	}
+
+---
+base-commit: aebb7274476403040d582c61478df8f4a7bf9cd3
+change-id: 20261120-upstream2-msm-dsi-phy-ref-bef3dce3dfe6
+
+Best regards,
+--  
+Zhendong Liu <yzddmr6@gmail.com>
 
 
