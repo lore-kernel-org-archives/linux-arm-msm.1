@@ -1,106 +1,100 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.171
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795787180;
-	b=V9JE+Ku6kLHrsJXEmJs0PxPqnvo3tc9upqsbCDHoimtSctz68BgkWR79dCUzta/br1l7
-	 WuYKRBlSZLrzD6CWh6cMxYQJgp7yrXnttjtCmbRxrlsFoJY+Thx1qfv/ylyl8f/d0ZJlu
-	 LDtDVCyXL675YQ/KaI4xfDHjdU3QzVOMHwlR+xa+h29dbb3nz4S1DXIHHuU5a2Qfa+yNu
-	 /3+2zXFE4P25O372T55nM0scxPkJmlKmP1gyAvXxwhOFEl2sBIxFcR9owNMJm230eIVHH
-	 MuC+WUmtH8lrB8BvEfifUtxhCoQXXKJdzexV4DNcjPbpPU3NKP71UWnktBVmM183EcA==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795787180;
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.177
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795787403;
+	b=OtjEl2loS93n01pnmmmermSUnnINlQ/GAaeosaH5Oin9DwdyofiQqbSArmFIymLSYic0
+	 nEWJ9bQiiBJuJIENGNYzA0QQFzvxb9NJ76bkj9Jg4ltc0wq0JQejx7c6NZsM5Bu1yn2aQ
+	 YJhEcifGdmq1FQqKZOgI/YOUZ8YFehpKIOq8/0wGn2d1tgmGLsSqnf59f7+A00eZI89RU
+	 kDkEmP8a7CRqZvWDQ6xyycwMm8jPKVG4DbVMfPfTphGh9WnIVQ/HDbUWc/27l58Oc6WqP
+	 8oroynVvKWPEsynOC76BnSio4nXay+TB1zQ193BU7Y5VuXgBA40RRpe733trs9JgarA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795787403;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:References:
-	 MIME-Version:Content-Transfer-Encoding;
-	bh=xR4yuXTQOAyEDilHAtowb56eXirOM8/fc1liK2FFiQk=;
-	b=vdWpN5fFZxpk6vvFPh4WJRF/8EtUnGNrYoXqw2ZWRXxzHwwR6vos1R43OyYc+ewTLprK
-	 yLoZ+TyPyb7yBITX5T9Q3LbkfOBlA83Y4dElkA0MRvO8nqbEvhCAqi+uKF1FIOijhB5Dw
-	 HqNY7Z4mPqfdY1RW495WH1hM2YDqnRd/Up+ZNvxP7PT8wbhE/J/vBdUTqsrU0ERzoVlEp
-	 5K77nuST/wM9z24pPPp1GRK5apHFSYCca9uy+dPMStZtw4Y88Hq/SUr96AOPh0SmQ1Z3T
-	 WzrK34nZa9a0ZVOZ64YRB1+EiwU7p45/hEcDqmNQNNTVFYuL/CHgrrSNOAgke4/oJ8Q==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:
+	 MIME-Version:References:In-Reply-To:From:Date:X-Gm-Features:
+	 Message-ID:Subject:To:Cc:Content-Type:Content-Transfer-Encoding;
+	bh=EILx4C81IcuhQhfNn6eUO2v7ek7ffLRIIkY0aN4K7xc=;
+	b=oZQ0jk08hxnU8gd/yzjPNrKf+as0N+AD4uLUteyt8ZgAGnitNsKxX9J9w+fSr2K5+Qn9
+	 /DHT7Do3mLWnt4WKl+6y7jOlPuu3eNa0ii46XxJrAV0Nem1ZAul4ito7aUiQhvY9ht+MC
+	 3Ee+wPsTNq4nzQhIDpRJCQ9OgTfsTsH1o4arLpWwkqDfDZbNbMXXOB3EzNYdrLq+n3foq
+	 IeP8lE1FgjwtXPP8xiF+U0HVOPk9f3ql+DHFCMQKLKWLaeDnI/tMFutGID6GsN0UslX4w
+	 DNIKhbKRt1OBsI9sdsYzAyX1Ss40FP6nC2wepKiQi1CDx+LQFc+THBem1qBkwgpUN5g==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AGAU9Liq;
-	arc=none smtp.remote-ip=209.85.214.171
-Received: from mail-pl1-f171.google.com (mail-pl1-f171.google.com [209.85.214.171])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lEeJGHVH;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=209.85.208.177
+Received: from mail-lj1-f177.google.com (mail-lj1-f177.google.com [209.85.208.177])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 664F3606A336
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 13:46:20 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 664F3606A336
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A1331606A31F
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 13:50:02 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org A1331606A31F
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=AGAU9Liq
-Received: by mail-pl1-f171.google.com with SMTP id d9443c01a7336-2f037bc348dso64306655ad.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 05:46:20 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=lEeJGHVH
+Received: by mail-lj1-f177.google.com with SMTP id 38308e7fff4ca-3acd523a802so69368811fa.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 05:50:02 -0800 (PST)
+ARC-Seal: i=1; a=rsa-sha256; t=1795787401; cv=none;
+        d=google.com; s=arc-20260327;
+        b=jrLd9/f5/jaH2U/V/L9czUhTP5cxvOO3XMgTou/5tX0/ZAee6nJbp3il7ZMRXFB/Lb
+         hTuYGHk6PLuyXEoxF0X/VXGQ4lL+9pz0pM81kCt3rdYxVksrdWLqexoZbNPOdDf2cv/2
+         hDQhRSBbEdF9EZH8NG3ngV7tXkt1gJGyl0kKtziStpNd2RMVFg4YzgDqVTqRLwf17Z9J
+         Z2O+0UXJ7gonKoz1YaUVk6Gvce1XTZLP6DyiCOnDPaJIWFn97ri3SEzmsbg434l4GU9r
+         wJg7lwMJnn8gaUGh2woBaWAcBvj8ksMV8ha59UP4dH9Vj0BqndsramYbaequcKesWhQy
+         aZVA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=EILx4C81IcuhQhfNn6eUO2v7ek7ffLRIIkY0aN4K7xc=;
+        fh=MsH8WCt1miOChrFAesVxyoggzlBmAQ6dW1z8QYIT0hA=;
+        b=L4soE6dObb+7E+qBp4taMtWdLHuKbyusdY/o3fuIvJFQr52fKgEs7M1tmK40iJJOHT
+         AF7K0nSzOcUshzEE9u+Mn9yY8QL3nNdxxKEEaIRUqQtvyY63iYO+AkMiK+vD6qPXFMDF
+         XJm6zunj8AnyOnVSKIN6KJZFPPuoCCxX1CQ8mZUm2GImWcHQ86lOfo0MeQQLaO8gglf8
+         s7II19BJA4fW3G3xcbr/waxM4Dj0aJTh0N7kEGwBcPWvCYT6dkrViLl1OcCrlrd3yLLZ
+         jwfPZ0h9Xbhq+Bl3ceZoEQWO9BvZTVgaVEsxkjWvSGgHgxCbDV2j80PGNkusRS1JaHdy
+         8D5w==;
+        darn=vger.kernel.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795787180; x=1796391980; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xR4yuXTQOAyEDilHAtowb56eXirOM8/fc1liK2FFiQk=;
-        b=AGAU9LiqypIjJWbA2RTVEHqWz5tvzMFqIsD8s1V5CDz+EW7FfM3OriPXCqsaoNZLgQ
-         nqGFaMjS4ne/xpB5yy/LZzPc1VcmsSa0irm6uqtGhsWDLTs8bXCwRpSK1Gv+NiCbX1yj
-         bi3khFFKtSsb9eaQ7bGRDEvTyImK0razii0vhPgaANtQwHbgXf8J9+0yklkltlc32nf2
-         Sq6z5R+lQF0DYvJi7G7iwrQKd4irmMu06/LWJtdZWchrqPOtPbHPDoygyDLNUyc+t6LP
-         4bCmzj8Rg3nk5ZvfJi2xUVwYnxm13ocBw5dvFeK9vnGsPNppJGPRoRFwt76RQOhVgll1
-         EaUw==
+        d=gmail.com; s=20260707; t=1795787401; x=1796392201; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=EILx4C81IcuhQhfNn6eUO2v7ek7ffLRIIkY0aN4K7xc=;
+        b=lEeJGHVHehQkDw5MC7zJtSUaXXPlVVQ2pYqVaXLag6CFCjgoqsgWiajg7qoDprouuv
+         ODxiHNZjov+QcD1i/SGwCsTIxdsB1pV85HyqTcT3/Cm5fuI9IbMS4CDowk0CR0ie6P/e
+         3o6TYFXF/WxXOHFfhpdd0gpMwY3WzTKjdBldo+0MSMWILg8M8eacgE9VS/aP2PohV2nC
+         nvZPtvxwJFJKhC3qwc9+jRpLIK7Pewm/CQuLVOuDnRIaOVZCGPodFmjgmF4JIYGj7M97
+         B7iX1bSflHUJIRzingrPKi0HoGU1njcl+wD5A1uSISgQhcizlrpUcFWRZpohuEDyEryG
+         hzWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795787180; x=1796391980;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=xR4yuXTQOAyEDilHAtowb56eXirOM8/fc1liK2FFiQk=;
-        b=AGRix7Qcp+zE3IVaheV09eHrKMBlloMMT++q7DXFR2XqLWgrJQjBccIuuRLD/YitqC
-         yKTQn8+mlQ3Q53HN5x/7hDQT+9i3JrpSQDY4EQAtg5Bgo6ojL7+ediyX9nXzVTOMkdKb
-         eepTBTcA4mI0lOJleOWd5wBqbeIVNh2HerWKF7WCGyPdvMWo6Op6C3EGvu+y/HrVtUVU
-         me5P+Jzbs5B9JB38VgZLx5IPzyMyt5DmHWuoblJAUGiPAzOYklr1ypO8ByhRjTYqo+Df
-         DNMkDBdx14FHNmRxFbGiT4asXhcGs8P8A4F07guPfBtnO8s+58y7BPRF5aqiS+mgyihj
-         k9oQ==
-X-Forwarded-Encrypted: i=1; AL+hErE4JJg1ZTZYQPyTYGpsevnpiM8DierfFomJ/6X32bzMLvNILClR2tWMyBqr20EjwPC7uCEOj4hZ8BfzwWhE@vger.kernel.org
-X-Gm-Message-State: APuU4Z8VHmhpTzTBwXbjuQIuaSEH/K/vRKw7o9pVuWOOj7jECdL/XYeG
-	WXLqFMzY0u+6jkBVpyZ1+9iRi8/EBHkqA2s4W7amptShORG3iITdM0TY
-X-Gm-Gg: AZFdTZfxnMA3jkawFgrMhiuRNFaOZ6cl8FHQoCDN5uBLMWWHVOczydloaKH/YtBLdnf
-	MF18woBuy+7ZBUjDVwY180otj4EGAGA0b75S0ifnibnv2ufSoTmZYeDiT2vN9Ik3yRRer1H8DLm
-	7mHOO6MArPFGU7noI7MYPwz3c5hpHiVFMhm3o6NS7rwwWE0svKHCASSwkxzX/orZP2aATJ5qrgf
-	aHIO150jNDtZDYK4ySGVWs21zmo9CvF6zmm5f/v69x8IjaBG+eBeqyUSk88+k+6eOLgjAuHtIFu
-	V3vbEsDfff8a59Sf7qVakK2JNp4zQpJ6e+eo5Vk08UZTKA8b16y8XcCw87S7kk7bMoSZXasjPGo
-	4solz+ku/YRKoBNE9Q7k0r6dBUlrW3Frx4LPBfwhvG8N2Qa8lSZO+alALJbUodshbACCBq0CqVI
-	r9PQw7nBYYTzRmEvkYGNveqzfy2eqHYhtdj4+pVoXdFLYbIfWDzHYOiDVEkn4tpnvVAlMnfU9YN
-	MozNvxdgOiCBfK19BdLUbNjhHCN1NxkpDHAbA5rT0QaoSXS/9yIbGMkaMPVo3EOFrp1iXVYvkf/
-	MAAK7LJM5rb2eBeelGYaWmuaWINGLks8Gq8b0kmsEDMYWAY=
-X-Received: by 2002:a17:902:cccc:b0:2f0:d976:651d with SMTP id d9443c01a7336-2f0d9767d6amr88871745ad.14.1795787179570;
-        Fri, 27 Nov 2026 05:46:19 -0800 (PST)
-Received: from localhost.localdomain ([2404:c0:aa07:12b3:e89:dfdd:d14b:d911])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03f0c1f2csm121741545ad.22.2026.11.27.05.46.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 05:46:19 -0800 (PST)
-From: Hikmah Gumelar <hikmahgumelar@gmail.com>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Stephen Boyd <sboyd@kernel.org>,
-	Brian Masney <bmasney+clk@redhat.com>,
-	Jerome Brunet <jbrunet+clk@baylibre.com>,
-	Sakari Ailus <sakari.ailus@linux.intel.com>
-Cc: linux-media@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org,
-	linux-clk@vger.kernel.org,
-	Abel Vesa <abelvesa@kernel.org>
-Subject: [PATCH v5 7/7] arm64: dts: qcom: msm8953-xiaomi-tissot: enable front and rear cameras
-Date: Fri, 27 Nov 2026 20:45:07 +0700
-Message-ID: <20261127134507.125513-8-hikmahgumelar@gmail.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20261127134507.125513-1-hikmahgumelar@gmail.com>
-References: <20261127134507.125513-1-hikmahgumelar@gmail.com>
+        d=1e100.net; s=20260707; t=1795787401; x=1796392201;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=EILx4C81IcuhQhfNn6eUO2v7ek7ffLRIIkY0aN4K7xc=;
+        b=KizU3g+ljymxJXrVWWbHfyRYyr9yEcObjQO17I8akGOrVcGCdM4QL0q0Dt45VmzC7y
+         Yt3KeAeWmKie7SATQ2mH7WG2pDPtHDiwNHR5ShDlSNl1nqF6ZWr7d4nhrkXfdlkdaN1n
+         MTXVwmRbOFDSYaFyGHMrTLrcdFPL0mg/F+bSLSRX7a1fByEMSBihimGHB8wTrAfcSohO
+         tw/u5L7X9gsMIpF//ke1XXznFmMk8rRr6/WcGV5rZO91by+O2LG31vYpzjc8vr6j53ba
+         w7hi5doXqbwcvH64HW9Ea5iGqKfqLGc7m7ZNuVQo98AOB2JEvMsJN0oCaSFwnwwTqoI0
+         0BjA==
+X-Forwarded-Encrypted: i=1; AL+hErGyaTLLaR7D1UikKGSjDq2wI8vGARMZ05KwQF/Cim/S2xm7ycxOuNTVmA8nq7etGgbjUJ2hZtGgb3vLgTy/@vger.kernel.org
+X-Gm-Message-State: APuU4Z8LDWVpW98Y0fM73+jK7tLVxW/QD5caucTRztkT4c+A/bj8C9tN
+	O0ELL+C+eTEgxHpgGaf+WZhwqctQ9wAyt7XfCetBuIts5V8offpMvvAinBPj0/0/okgk+/Y9B7p
+	up+FdvV6OGmbO5lWaTZdQp2dhcJfvQbI=
+X-Gm-Gg: AZFdTZf7v+n7vUqfLbX4CEzrNVDw16Z4aw2tevLQJzbs9VSxrQnmLH6Nr+9AwR0KIa+
+	ppaq474sHuKAeIEGo6R8KRjCiNJeb1ej6owK6LQRtYtWwUQdtcdBIt7iQV62oBXaT6soadmHNpt
+	70kQsGLSgz1HZm/aoD7WSPQ7Xmu4TkKknGezObYo6MJQykMAVKTpnJjZ7Gp2/7kPRFhEmiWd4wq
+	7Kku4FeyMxrkKjErlCjBUs7bghS+d8t4YfbL15jLl9FIFH+Aik2bYrp5FsA9M1eOyG2nBYbtDAL
+	DI4RxVQY3ROKEGkgTjPtHZle/EoZwSh44jGiJQ2By5hZz3MPyjOtRf8xM8ez5OpvpvN7RVh4QMV
+	ciNaTUQGkUwRzZ5G/Qb34iKvK2cirpd+6JZBY
+X-Received: by 2002:a05:6512:3093:b0:5c1:595f:b370 with SMTP id
+ 2adb3069b0e04-5c1bc6d253fmr7284015e87.3.1795787400636; Fri, 27 Nov 2026
+ 05:50:00 -0800 (PST)
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -110,166 +104,55 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20261114020509.632311-1-jeff.roach0@gmail.com>
+ <20261114020509.632311-3-jeff.roach0@gmail.com> <dd4e15d2-5037-4610-9a80-5c330f436263@oss.qualcomm.com>
+In-Reply-To: <dd4e15d2-5037-4610-9a80-5c330f436263@oss.qualcomm.com>
+From: Jeff Roach <jeff.roach0@gmail.com>
+Date: Fri, 27 Nov 2026 07:49:49 -0600
+X-Gm-Features: Aa3M54pHYzzfFU4Xc2un7T9P8fzKCah6MxwtII6nKZyi50ZBPS2sY1vNA4Vb8NA
+Message-ID: <CAAnD8Rak9BJ2WTHxz+i3ETm6vJQ7EOy8zSfJa-ejoHqWidM6mQ@mail.gmail.com>
+Subject: Re: [PATCH v5 2/2] arm64: dts: qcom: Add HP OmniBook X 16-cp1
+To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Cc: Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
+	Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
+	Abel Vesa <abelvesa@kernel.org>, linux-arm-msm@vger.kernel.org, 
+	devicetree@vger.kernel.org, linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Enable CAMSS, CCI, CSIPHY0/CSIPHY2 ports, and the OmniVision OV12A10
+On Fri, Nov 27, 2026 at 6:12=E2=80=AFAM Konrad Dybcio
+<konrad.dybcio@oss.qualcomm.com> wrote:
 
-rear and Samsung S5K5E8 front image sensors on the Xiaomi Mi A1.
+> > +&usb_2_qmpphy {
+> > +     /delete-property/ mode-switch;
+> > +     /delete-property/ orientation-switch;
+> > +
+> > +     status =3D "okay";
+> > +
+> > +     ports {
+> > +             port@0 {
+> > +                     #address-cells =3D <1>;
+> > +                     #size-cells =3D <0>;
+> > +
+> > +                     /delete-node/ endpoint;
+> > +
+> > +                     usb_2_qmpphy_out_usb: endpoint@1 {
+> > +                             reg =3D <1>;
+> > +
+> > +                             data-lanes =3D <1 0>;
+> > +                     };
+> > +             };
+> > +     };
+> > +};
+>
+> Does simply leaving status=3Dokay also work here? I think it should
+> simply never enter DP mode since there's no altmode notification
 
-Signed-off-by: Hikmah Gumelar <hikmahgumelar@gmail.com>
----
- .../boot/dts/qcom/msm8953-xiaomi-tissot.dts   | 124 ++++++++++++++++++
- 1 file changed, 124 insertions(+)
+Yes, that works. With just status =3D "okay" on &usb_2_qmpphy, a USB 3
+flash drive on the USB-A port comes up at 5000M, and still does after
+a replug and after s2idle suspend/resume. No PHY errors.
 
-diff --git a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-index fccb9c4360ca..d8db3567fd36 100644
---- a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-+++ b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-@@ -74,6 +74,108 @@ vph_pwr: vph-pwr-regulator {
- 		regulator-always-on;
- 		regulator-boot-on;
- 	};
-+	vreg_cam_avdd: regulator-cam-avdd {
-+		compatible = "regulator-fixed";
-+		regulator-name = "vreg_cam_avdd";
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+		gpio = <&tlmm 62 GPIO_ACTIVE_HIGH>;
-+		enable-active-high;
-+		pinctrl-0 = <&cam_vreg_avdd_default>;
-+		pinctrl-names = "default";
-+	};
-+};
-+
-+&camss {
-+	vdda-supply = <&pm8953_s3>;
-+	status = "okay";
-+
-+	ports {
-+		port@0 {
-+			reg = <0>;
-+
-+			csiphy0_ep: endpoint {
-+				clock-lanes = <7>;
-+				data-lanes = <0 1 2 3>;
-+				remote-endpoint = <&rear_cam_ep>;
-+			};
-+		};
-+
-+		port@2 {
-+			reg = <2>;
-+
-+			csiphy2_ep: endpoint {
-+				clock-lanes = <7>;
-+				data-lanes = <0 1>;
-+				remote-endpoint = <&front_cam_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&cci {
-+	status = "okay";
-+};
-+
-+&cci_i2c0 {
-+	camera@10 {
-+		compatible = "ovti,ov12a10";
-+		reg = <0x10>;
-+
-+		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
-+		assigned-clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
-+		assigned-clock-rates = <24000000>;
-+		pinctrl-0 = <&cam_sensor_rear_default &camss_mclk0_default>;
-+		pinctrl-names = "default";
-+
-+		reset-gpios = <&tlmm 33 GPIO_ACTIVE_LOW>;
-+		powerdown-gpios = <&tlmm 39 GPIO_ACTIVE_LOW>;
-+
-+		avdd-supply = <&vreg_cam_avdd>;
-+		dvdd-supply = <&pm8953_l2>;
-+		dovdd-supply = <&pm8953_l6>;
-+
-+		rotation = <270>;
-+		orientation = <1>;
-+
-+		port {
-+			rear_cam_ep: endpoint {
-+				data-lanes = <1 2 3 4>;
-+				link-frequencies = /bits/ 64 <216000000>;
-+				remote-endpoint = <&csiphy0_ep>;
-+			};
-+		};
-+	};
-+};
-+
-+&cci_i2c1 {
-+	camera@2d {
-+		compatible = "samsung,s5k5e8";
-+		reg = <0x2d>;
-+
-+		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-+		assigned-clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-+		assigned-clock-rates = <24000000>;
-+		pinctrl-0 = <&cam_sensor_front_default &camss_mclk1_default>;
-+		pinctrl-names = "default";
-+
-+		reset-gpios = <&tlmm 129 GPIO_ACTIVE_LOW>;
-+
-+		avdd-supply = <&pm8953_l22>;
-+		dvdd-supply = <&pm8953_l23>;
-+		dovdd-supply = <&pm8953_l6>;
-+
-+		rotation = <90>;
-+		orientation = <0>;
-+
-+		port {
-+			front_cam_ep: endpoint {
-+				data-lanes = <1 2>;
-+				link-frequencies = /bits/ 64 <418000000>;
-+				remote-endpoint = <&csiphy2_ep>;
-+			};
-+		};
-+	};
- };
- 
- &hsusb_phy {
-@@ -169,6 +271,7 @@ regulators {
- 		vdd_l4_l5_l6_l7_l16_l19-supply = <&pm8953_s4>;
- 		vdd_l8_l11_l12_l13_l14_l15-supply = <&vph_pwr>;
- 		vdd_l9_l10_l17_l18_l22-supply = <&vph_pwr>;
-+		vdd_l23-supply = <&pm8953_s3>;
- 
- 		pm8953_s1: s1 {
- 			regulator-min-microvolt = <870000>;
-@@ -302,6 +405,27 @@ gpio_hall_sensor_default: gpio-hall-sensor-state {
- 		bias-pull-up;
- 	};
- 
-+	cam_sensor_front_default: cam-sensor-front-default-state {
-+		pins = "gpio129";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	cam_sensor_rear_default: cam-sensor-rear-default-state {
-+		pins = "gpio33", "gpio39";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
-+	cam_vreg_avdd_default: cam-vreg-avdd-default-state {
-+		pins = "gpio62";
-+		function = "gpio";
-+		drive-strength = <2>;
-+		bias-disable;
-+	};
-+
- 	ts_int_default: ts-int-default-state {
- 		pins = "gpio65";
- 		function = "gpio";
--- 
-2.47.3
+I'll drop the override in v6.
 
+Thanks,
+Jeff
