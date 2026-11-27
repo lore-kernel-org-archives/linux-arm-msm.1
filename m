@@ -1,89 +1,90 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.42
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.43
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795752942;
-	b=YtRP0rKtTcjxk8opnOOGHnu+3WOGVJ2w2S1mx5EhhuNQ0durcuTsr3wxfA8zzGpTaDWv
-	 PiQBlF/YUjf1PuD30qm6ET3P7kKnncSGBUZY6g3ufm5OTkKNcSgYQ7U/+GBg3fBUE1MF9
-	 nUwIsGgb4Ne6gu17Dp0w3TTgUnfCgXJATFga45zRDu0mCvdLAz4z5XtSVdv3AgByoASHD
-	 R9rPIi11B92QT2gBACUuiiN1g6H1G0TGMkhqdaYpsZE7GP8iQIAj361TMaUQf5Xvime8Q
-	 NyuKfeVu+MwmchLLhCcqU+HG4DDMuyzM+DoE9NDq8nfCuLGQnJWJkPdN9YT4sQU7Vgg==
+	t=1795752943;
+	b=wKuSMNhOrfS0rd/zXDhhfdEOUDnneFM7VQ3hFyzqvFWJV0DbZzAdJNYi/1jaSDSf9nX/
+	 tdL8U45WOVAmbzNdeT2J1oe0/LYHwRrRLSiDGyk1fyjE2KeO5n1jHZgJsus51gVVFpoF2
+	 43kRtYjvt7Q8OPaTdrmBBWvec2psmw6GTro+jGuA82ejk2LLqXw0vOFkECnGblNAoJa5v
+	 m4XpgYpFJJaz8/BVry9w+ViUOAzKj8dDYxbFhFTf6sNVM/Dg0yrZ7tA/0Dzc5k749IuIx
+	 9VIw4Mx8hlx8YEa2gQXCeBLc2bOouUT7UkCHLP6IFc72yk0xbPkvAVc6RWPvuT5PD0A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795752942;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795752943;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:X-Google-Original-From:Subject:Date:Message-Id:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
-	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=bHf5cXXltkgpad2vo/4TSgTr50gXfdBsa3VtXa/31i4=;
-	b=kKlZhyvvrRStVNDYSSC4KZHIjbO7lBMhJ/H4OP3+g672nW+plWsKEm7VFLkjmOl/M7lJ
-	 oaIT/exJrsBiWfCRZwenn4Dim9Z7tEXThVnexT7LAP5g5EPB8TV16hzI2xl9BB6NxjIfd
-	 6Kcoo5k+98/LkapsADRl9NAQahB19UEACcOTRA4KRyMW3MIiIVPNOs1mNtqScgaJbniGa
-	 MH52L7dSqQlJprPRZsOketRw1TT4qfqgUfpd4LgPWD+jA6BASAPHS6dIoUY8Rz0uitFdN
-	 R3zx2SI+vMRY5jUn5DK8Zptrjld1TE6R8HIAMutqmMO9QwlinrWbqi9ity4DT6nm9ag==
+	 From:X-Google-Original-From:Date:Subject:MIME-Version:Content-Type:
+	 Content-Transfer-Encoding:Message-Id:References:In-Reply-To:To:Cc:
+	 X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=AUB64VNIzJTRYwgLY9UIrrai4m1rHZRHhbzJpiOg2E0=;
+	b=i5Hy6ZVlljTFmmMP9GaPYkVwoBBMcsuOGZLA6XCIpx+nRJnRyk5YLLskruyL7a6NuH28
+	 P2Rm2fA5SItsFbVLH7Go1uI04DTVjXAcHTN6fewaeJHH8oVjxxEZVrvgwXo/cth42GSsV
+	 aEqf4hHs5lqGKX8kK7KhlFQ3oiST1Kzv3t+7BWBCFR2cWlfaHwkFerRXruWkOgC4vzcAD
+	 qhoRX4antETAQK6V+8OcqN1epmBL2tOXX/I+vE1ugZh/K91z6FboNsgvwy/kYVFwmmz9c
+	 LTlT6FrtpdC2Nq41CMmPym+6Ej0lcjvFrlkmuSDJkZhjscMaIFUz8ujGgg7MwcGMKdA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b="QOM/UIr7";
-	arc=none smtp.remote-ip=209.85.128.42
-Received: from mail-wm1-f42.google.com (mail-wm1-f42.google.com [209.85.128.42])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=dWTGluol;
+	arc=none smtp.remote-ip=209.85.128.43
+Received: from mail-wm1-f43.google.com (mail-wm1-f43.google.com [209.85.128.43])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 35407606A321
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 04:15:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 35407606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 04C64606A336
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 04:15:42 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 04C64606A336
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=QOM/UIr7
-Received: by mail-wm1-f42.google.com with SMTP id 5b1f17b1804b1-4bb606491faso40446405e9.3
-        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 20:15:40 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=dWTGluol
+Received: by mail-wm1-f43.google.com with SMTP id 5b1f17b1804b1-4ba013938d7so72071745e9.2
+        for <linux-arm-msm@vger.kernel.org>; Thu, 26 Nov 2026 20:15:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795752939; x=1796357739; darn=vger.kernel.org;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=bHf5cXXltkgpad2vo/4TSgTr50gXfdBsa3VtXa/31i4=;
-        b=QOM/UIr7Ult8U4nZY1f0BqSwC+4kTp0bzbhKCPnhI/erSvvH8DsPAmohIbPwwdTWNN
-         sQE6r0/wGWihhyG3mX7KuXSNXEqfz7aTqM6Vh3B9TCINNB+PxRrCUfKxFFiCvfd+wPAO
-         IQMAAmmBO56QgEqHb9r4id46ByAgUkUK/0v8RSpD9voEMMYXu8mkmvkWgxlM0x14+euh
-         qF4P5npcMlzD7Rtmh0yxiBJ7j71c5Tyl0FzpZxkHcW5XrkTMo3RzDn1nJznNpQUOe3mw
-         eYC6SBQ46KWwlTBfsvBavtNTZBnO2as3rmD2lmeHnVuUlQuNqPr+/SOhgcHb/N2ETzDB
-         ULuA==
+        d=linaro.org; s=google; t=1795752941; x=1796357741; darn=vger.kernel.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=AUB64VNIzJTRYwgLY9UIrrai4m1rHZRHhbzJpiOg2E0=;
+        b=dWTGluolpsrWyrUM1RyAS+8Q0ti13VGXx5T0Rq06jHsKRGi4oIWZhDS4zYo8/mI3/A
+         FhgZ34FytsVTzaCyvckCkLTEK5SziaMZXeXgCFJlk0UusOjwt95G34HjlPaamIi3lZjL
+         x/ZQSNydQDvrVvl/YEmsa6P+Q4ozvLI8qeeRWhhNL8Ldabonux6DKjrh8/MGzCGozBgv
+         fjDFvsS4Rq/x2fT2CdWp6W1BqLquF9aJrMFcFnbUNI7BAop9GVeddMn326Rss2pOQ19h
+         5X8Df+tSzG1efvXUU6pyrl4pJzfPnCuempTiM0Gca6Dq7LRBlnLAspVvfVE5az2+5aB+
+         USGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795752939; x=1796357739;
-        h=cc:to:content-transfer-encoding:content-type:mime-version
-         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=bHf5cXXltkgpad2vo/4TSgTr50gXfdBsa3VtXa/31i4=;
-        b=ROJ7NZRpPFdSIwZ96jH/HIB6PoXd9J9er87Yd1u84HAxXrx/i7H/H1klYoMU8ZL4V/
-         GOf+wAvbJQlztA+S/ilcdyKSxwX2wOkjzkyhnM67n0KMx9P92HgAIYhWzmm6p+bXvtVK
-         K0jv604yzBWVw7SshMFxYWCVfjfZO5FYPN0tTEPitwTKG4MdO0dnfRYzls4JUmZJgZn9
-         UUoEbQ2sgK/xDUFQk6CclUFd8uo6u4qa+jI/Jy24WBPaY9o9ScvDZSA+kcPAcERRzicN
-         nCu+UXRDVnO7Au1BIGf3x3X9asVIIsMB9PRuY3lLUGwYPCTTyzN2KohFoyNjvTGGJ+Xr
-         aFng==
-X-Forwarded-Encrypted: i=1; AL+hErFNxIYk8eKzsv5w8S7u6CBCOB7ZGFgPlJ3cfY1hkn0bbHdA8u+QzP7DsALnN4DZP+mHTUhbea+4irj+IXRI@vger.kernel.org
-X-Gm-Message-State: APuU4Z83nomB4nkwPkTz59HSQIGv6Kg60pv+0LI1ZDeill3TIFEN83Ag
-	PUjz9i4hiABCmQ0pwLXZUCV9ft9oIYGeWUGH5b5PBs9zlO0UUX6aBDo+LYGZPhSd4nM=
-X-Gm-Gg: AZFdTZeLXgSpYUaUJD0il34WKohgGDOo3hEke97OJ5M2RbEkW8xeZBC9ETvnaXgqmRl
-	yMCzYgIrFPFJAB3Ww+jY6TYLgEISYP7R1nuGfT9mL5raosmPtKWyw0/uHxnh/8xgVLdzeFXJDdc
-	HJgyyqB/ipOC1rDR0Ox0bUBk15VTQBdd0I93A0By+l9Uem8VJ/bfCfbQA70eoOjMSE9T29fss7q
-	HiFS4jrpoyX8tTp/FwQ/K4cJapUzUT3BISsbROfvQsr0NkmvqM5KQeAgnWTkF+M03O0Lv975ZlU
-	YDIcw6wzgCUJLrDBtnK9op8RAV+YgAGinhhFudY5r3oGP9CDNxd3ZVTsHvi1k8XMYizWFI6g/TJ
-	OHgsbZk9bcccFlNnAALI8nS60KlCce2EURUzWTOoSd84eakqvpufPkZAMVkI+0Xh9jofsbQNKJa
-	sIO08M+qlu3cUXPM/wCKfRuVtipG9ISs1zZ8T5XD+UJ26YdmKDxME3YvWuaBGJ0Yks9jYQZZhzz
-	XBf2WYir1J48Tw1jZn8fddMpSVmB19qB4Eq8r6ItVWSkApaT8Ik7w9/ewXsP2T0IoZ/+hViaPoG
-	r6Wrt0KFXECnjnECcuU=
-X-Received: by 2002:a05:600c:1384:b0:4a2:1612:6367 with SMTP id 5b1f17b1804b1-4bb88816c44mr470580845e9.15.1795752939556;
-        Thu, 26 Nov 2026 20:15:39 -0800 (PST)
+        d=1e100.net; s=20260707; t=1795752941; x=1796357741;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=AUB64VNIzJTRYwgLY9UIrrai4m1rHZRHhbzJpiOg2E0=;
+        b=nq/aWQfQjUF1oWNRm0UdurbnxsudB4FeucGveAOowhc8UgJSYDYMZZXlnf/o9TPTkb
+         /7J4LzfqD67oyUEZbJUqrZf7uufqpJaqY3egTPWOGmxu1TkbEgqluBauLNPUC+IxU0rF
+         oPUL5yoe1fRioz3Rv0hQksPNdaKFd4iiT7ikdC7PRFfNh7ABLyw3++ijkZxTf904Negu
+         h5wgEBbo9wYwQoSLwnoggEy8tzZGu6kBmy5Ev9clicHXgPhNbz0QAlh+GocoubWMou9I
+         JPMa2+0RuA//ys64/qeLskIb9gKyqHNfUaP+LguIMOeK3xx/p8+IUn6/2U5WQ9pGBZj6
+         a5Mw==
+X-Forwarded-Encrypted: i=1; AL+hErGT8thY/OarkC/jNXCs1gP0oIZdUE/emzk+gbVFVtU30z1Qi7v85Mc+CURcojfsnLXbF4luj/rofAj0XGEe@vger.kernel.org
+X-Gm-Message-State: APuU4Z84DIXBzvQAII7b5z21MfXsce6R5E5CI8xPKWV0s9mlVechGwZw
+	cgf7Aw8n5ZJpNITra3DHr0Wgvf0hTkBslV3Qw4g1Dr0GiVN0cTwQ/Pn4VBbhCwLTTJI=
+X-Gm-Gg: AZFdTZfox2IiQCLoXEfSSWsUHxQHFnh4euYrzxgYaIJbREyvz600ImzQfGmN1A4P/Se
+	AphxhrmbJDBGUICCld5iPW2RDJkSFJVwX/2z1j5KX8xE2bAAcSvPd7IyMQjq6Q91pA7OSeANmIf
+	hy1Xr9dM+KK1aLIOinuJjXcogl6kdZKM8VF80kwGi5f2jPayCc9y6A74DPvMahDxJbn9QMFm/wh
+	egRkKNDKKoV1rb0Lyo1Uvun/U13WNmBHqblxbQqoBZWIHAZeBuPOgsLxlg3z3b3ZlXnhASvQMFM
+	4R2WAKr53iKHToiblfQKrejqBVZpe7gtIPZt8hPyabgfgqUCH8JjRnjn8esNXOyLYfBKAngyreY
+	CFlbesKsMWb3j1qL9PNPmFhYXrwAiZWWND6zYegQEx/Poi3+ixagnTHmiFhqHZeh2QPto+iQF+L
+	+5kQjsptsQ2KWRYZ/mZvBtbKXjwZ57RSZupxbZCbp2jPOUGlZpCD14r91F+bpyOkC+pFLYWY36j
+	OmXBzEj0qePDpjgHt+m0b8l5dN6wsoO+rgngzvtybIHsg/YM1mrn/nLgm2sWdK/XqWYhmn3Jt03
+	nav8F4ViDPXpVYiBbdA=
+X-Received: by 2002:a05:600c:1993:b0:4bb:8711:fcb9 with SMTP id 5b1f17b1804b1-4bb88941bcemr431987795e9.33.1795752941232;
+        Thu, 26 Nov 2026 20:15:41 -0800 (PST)
 Received: from [127.0.0.1] ([109.79.27.52])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88442995sm686987465e9.2.2026.11.26.20.15.37
+        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb88442995sm686987465e9.2.2026.11.26.20.15.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 26 Nov 2026 20:15:38 -0800 (PST)
+        Thu, 26 Nov 2026 20:15:40 -0800 (PST)
 From: bryan.odonoghue@linaro.org
 X-Google-Original-From: bod@kernel.org
-Subject: [PATCH v2 0/3] media: qcom: camss: Two routing fixes
-Date: Fri, 27 Nov 2026 04:15:29 +0000
-Message-Id: <20261127-camss-routing-fixes-v2-0-b7152f0af49a@kernel.org>
+Date: Fri, 27 Nov 2026 04:15:30 +0000
+Subject: [PATCH v2 1/3] media: qcom: camss: csid: Add and enumerate an id
+ field for CSID entries
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -95,126 +96,665 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/32NzQ6CMBCEX4X07Jp2Y5B48j0Mh7YssP60pAtEQ
- 3h3C949fpn5ZhYllJhEXYpFJZpZOIYMeCiU723oCLjJrFBjaQwiePsSgRSnkUMHLb9JwJlz5Rp
- XnVrUKptDoj3I4q3+sUzuTn7cprZGzzLG9NlvZ7P1/j/MBjTohoist1giXh+UAj2PMXWqXtf1C
- 975VzzJAAAA
-X-Change-ID: 20261122-camss-routing-fixes-b178bdb84f20
+Message-Id: <20261127-camss-routing-fixes-v2-1-b7152f0af49a@kernel.org>
+References: <20261127-camss-routing-fixes-v2-0-b7152f0af49a@kernel.org>
+In-Reply-To: <20261127-camss-routing-fixes-v2-0-b7152f0af49a@kernel.org>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
  Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>, 
  Loic Poulain <loic.poulain@oss.qualcomm.com>, 
  Mauro Carvalho Chehab <mchehab@kernel.org>, 
  Hans Verkuil <hverkuil@kernel.org>
 Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>, 
- Gjorgji Rosikopulos <gjorgji.rosikopulos@oss.qualcomm.com>
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bod@kernel.org>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3835; i=bod@kernel.org;
- h=from:subject:message-id; bh=aycJqlvHjcbzLgomZhj0p03rDZMloDfOoT2gyU2UeYU=;
- b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrCQPnGrJsjZzNLDuNRaTCr2RvMuc79AkF34iYH
- 9/Ps9azxVuJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawkD5wAKCRAicTuzoY3I
- OgFDD/4/u1qzcCepVc4Uy/d6YkUynbhm9fPpqrLIaLPiM2uEkjMDhnGkBGnS68S6Fj5okvWrnE7
- K2jcz6yNlIq0P4Vz7CqK6nGFKrQlUMGu5F6b+TMI8f37W/G7KZvjXQrZawTxw8+69uXO0cqX3Da
- peU6vapMxK7M1nj9GF9ZHr+szDmGvtj1Kd2xor+QLSNh1cVH1bq/722EBra0z0bQx56MKFgPv5A
- i0O4za1/MqSz9qpWwcL//Wo0AoOB3HWFamRU16Pnvu1vO3ok6xL87G2WCUW6dYQxF56uqKtBoPx
- vhzXli+wI4xQj6fSgHIKrpIzxSUNKz68Z7rIU8lJBcKl++fSK1YGHwpTdLnf3wTYUCn6ikf4OwD
- sHpWF02ievtjSIHaTeTxPcT8drrhvWtH4vkUNMwFM0n4dzyjZWqInTPB8m3NY3TZzuozfnAm/lD
- J3EY1uJuJ8k5JQHSBKdFRsC6ThEWmCZiPd4AeAsCu4q9PTXRjlZiv/dLVAilCZ+R4CGksOIS6+p
- g+RaIdJE3Y0dLnUnBzGZ3mtHVgaAShqNTKHKzryuAHzGJrbQkowNRW5HHA0SU/DZ0GasL7xZYKX
- vitoXIzD3020U6jZAxCzIQ0o98x4LMpqBdwYaazNBLEvFkx/3b/I1p7zoN3rcPNCPDwpMmhfvxN
- 96DflvC+G9MpISg==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=21284; i=bod@kernel.org;
+ h=from:subject:message-id; bh=jpVhL6zN8Na9+/htzgoQenAggoEiZBAGXzHDQyJYPLs=;
+ b=owEBbQKS/ZANAwAKASJxO7Ohjcg6AcsmYgBrCQPoF/t/XS88nDvzs6EH+lsMzHmeN+bYcZ99K
+ 7zeCO7XEMuJAjMEAAEKAB0WIQTmk/sqq6Nt4Rerb7QicTuzoY3IOgUCawkD6AAKCRAicTuzoY3I
+ Os38EACrkP/UGRwMvrxF0zVzvkiGuVcrYCZPPSUYJv3nkov10f1kM7ZAmfMi8BAiXA/Go3NmNQe
+ m2CyOXgBYmkup+ViJyTZsGCdilpGia9EYhTeVTHdBC62C0R9H5f1XJPHyRkV6Tgorw2h9hvwaoH
+ m/PuHn5dLh4pgy6EGUsGLTaj4mtOVy/SJFlbIubEmyYWEEs3z7z00QoE99t8ZUAZppVZlTi5CTE
+ WdLFXygqXx0WR+/YT2PZBrhCZPlaK3KDINoLTL6yP1Fcb3dWkRCa8XQdclcLRRL26rpN/5HR7Dg
+ vWNFeHouACPbtcgKuEsZo7sZLrWHF7NYAW8wFbKe44HnPbNSeVJH3hIyShm/FOd0nOln4rjiOvF
+ HITXuJDpgjETdsWaO7XDzh2E5MGiFldl2dPDKIFMB/IyF7EqJQnGsw0GtEsxEeQ/VL+NsfIQOfq
+ ZjhIXto2XZBrJaZTEIWpMKxbnhMHcLFMlkenSeIvJRzJDtw3VuBwC6wc0M+H4e3sfhsX5VEQSaL
+ B7pFuAeTvsAmLe2Z42ZU7gSQSjhv3kYVSeIjzPtQu3Tui9WKR29c4/XJe6FRf7PY8ziT8T6Mwea
+ zIhW7VJhDZoEIsjqqBvFGEKTLnIw2q/f5JiIM81d6g6pIThAPaxXmC5JocxKqSzC72DCnsVxXJ0
+ d6wKnZXdU3saJLA==
 X-Developer-Key: i=bod@kernel.org; a=openpgp;
  fpr=E693FB2AABA36DE117AB6FB422713BB3A18DC83A
 
-v2:
+From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 
-I reviewed-by and then wasn't very happy with adding a new field
-to CSID resources hw_id because this means we would have two
-identifiers despite already using csid->id to mean index and hwid.
+We have a need to differentiate between CSI index and CSI hardware ID.
+Rather than have csid->id and res->csid->hw_id with the two values meaning
+different things - provide a .id field that struct resoruces enumerates.
 
-Bite the bullet and make the conversion.
+Do this for every SoC we currently have.
 
-This is the way - bod.
-
-- Adds a precursor patch which provides a .id in place of CSID.
-
-- Converts from using csid->id as both hardware identifier and index
-  Instead helper functions make clear and explicit do you mean csid_index()
-  or csid_hwid().
-
-  Several callsites need to be updated to make this happen, but that's
-  life. I'm a big fan of patch granularity however the differentiation
-  between index and hardware id must be done simultaneously.
-
-  Follows the precedent of csiphy.id - bod, Wengmeng
-
-- Straight drop of CSID2 retained. This is the right thing to do, CSID2 is
-  useless dead silicon, already RB by several community members.
-
-- Link to v1: https://patch.msgid.link/20261122-camss-routing-fixes-v1-0-0deeeaca2622@kernel.org
-
-- Applies to camss-next from
-  https://gitlab.freedesktop.org/linux-media/users/bodonoghue.git
-
-v1:
-
-This series lands late-enough in the kernel cycle and applies against the
-camss-next branch staging to linux-media/next.
-
-Link: https://gitlab.freedesktop.org/linux-media/users/bodonoghue/-/tree/camss-next
-
-First up a patch drops the declaration of CSID2 from x1e/Hamoa since this
-CSID doesn't have a corresponding VFE it is entirely useless and violates
-our 1:1 mapping between VFE and CSID. Since CSID2 routes nowhere there's no
-reason to keep it around.
-
-Second is a fix for a longstanding error in CAMSS which as stemmed from
-the original development of post ISPIF devices. These devices have a 1:1
-mapping between CSID and VFE so the mapping we have given to user-space
-which declares each CSID as connecting to each VFE is just plain wrong on
-these devices and has always been.
-
-So the second patch addresses that longstanding issue but, I've been
-holding off on fixing this for a while since I believed it might require
-extensive surgery, but in the end its quite simple to do.
-
-Finally the third patch is a tidy-up patch which inverts our current logic
-of continuously adding new elements to the src_pad_code switch for new SoCs
-filtering those SoCs down to a default: statement. In fact is is the old
-SoCs which are the exceptional case so, just do the switch for the old and
-the default for the new.
-
-To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
-To: Loic Poulain <loic.poulain@oss.qualcomm.com>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>
-To: Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-Signed-off-by: Bryan O'Donoghue <bod@kernel.org>
-
+Signed-off-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 ---
-Bryan O'Donoghue (3):
-      media: qcom: camss: csid: Add and enumerate an id field for CSID entries
-      media: qcom: camss: csid: Stop using csid->id as both index and identifier
-      media: qcom: camss: x1e80100: Fix CSID2 routing to nowhere
+ drivers/media/platform/qcom/camss/camss-csid.h |  1 +
+ drivers/media/platform/qcom/camss/camss.c      | 75 ++++++++++++++++++++++++++
+ 2 files changed, 76 insertions(+)
 
- .../media/platform/qcom/camss/camss-csid-1080.c    |  2 +-
- drivers/media/platform/qcom/camss/camss-csid-340.c |  6 +-
- drivers/media/platform/qcom/camss/camss-csid-680.c |  4 +-
- .../media/platform/qcom/camss/camss-csid-gen3.c    |  4 +-
- drivers/media/platform/qcom/camss/camss-csid.c     | 34 +++++---
- drivers/media/platform/qcom/camss/camss-csid.h     | 18 ++++
- drivers/media/platform/qcom/camss/camss-csiphy.c   |  2 +-
- drivers/media/platform/qcom/camss/camss.c          | 98 +++++++++++++++++-----
- 8 files changed, 126 insertions(+), 42 deletions(-)
----
-base-commit: 91ff71dce5e770e7965cb3b09c87f6d334c6c4c5
-change-id: 20261122-camss-routing-fixes-b178bdb84f20
+diff --git a/drivers/media/platform/qcom/camss/camss-csid.h b/drivers/media/platform/qcom/camss/camss-csid.h
+index ccafdbf3a9fe0..6e329789826ca 100644
+--- a/drivers/media/platform/qcom/camss/camss-csid.h
++++ b/drivers/media/platform/qcom/camss/camss-csid.h
+@@ -153,6 +153,7 @@ struct csid_subdev_resources {
+ 	const struct csid_hw_ops *hw_ops;
+ 	const struct parent_dev_ops *parent_dev_ops;
+ 	const struct csid_formats *formats;
++	u8 id;
+ };
+ 
+ struct csid_device {
+diff --git a/drivers/media/platform/qcom/camss/camss.c b/drivers/media/platform/qcom/camss/camss.c
+index c5fdc79c32d39..3b569a6e88150 100644
+--- a/drivers/media/platform/qcom/camss/camss.c
++++ b/drivers/media/platform/qcom/camss/camss.c
+@@ -47,6 +47,7 @@ static const struct camss_subdev_resources csid_res_kaanapali[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_1080,
+ 			.formats = &csid_formats_gen2
+@@ -60,6 +61,7 @@ static const struct camss_subdev_resources csid_res_kaanapali[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_1080,
+ 			.formats = &csid_formats_gen2
+@@ -73,6 +75,7 @@ static const struct camss_subdev_resources csid_res_kaanapali[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_1080,
+ 			.formats = &csid_formats_gen2
+@@ -86,6 +89,7 @@ static const struct camss_subdev_resources csid_res_kaanapali[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 3,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_1080,
+@@ -100,6 +104,7 @@ static const struct camss_subdev_resources csid_res_kaanapali[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 4,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_1080,
+@@ -298,6 +303,7 @@ static const struct camss_subdev_resources csid_res_8x16[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.hw_ops = &csid_ops_4_1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_1
+@@ -322,6 +328,7 @@ static const struct camss_subdev_resources csid_res_8x16[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.hw_ops = &csid_ops_4_1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_1
+@@ -424,6 +431,7 @@ static const struct camss_subdev_resources csid_res_8x39[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.hw_ops = &csid_ops_4_1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_1
+@@ -446,6 +454,7 @@ static const struct camss_subdev_resources csid_res_8x39[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.hw_ops = &csid_ops_4_1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_1
+@@ -468,6 +477,7 @@ static const struct camss_subdev_resources csid_res_8x39[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.hw_ops = &csid_ops_4_1,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_1
+@@ -534,6 +544,7 @@ static const struct camss_subdev_resources csid_res_8x53[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -559,6 +570,7 @@ static const struct camss_subdev_resources csid_res_8x53[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -584,6 +596,7 @@ static const struct camss_subdev_resources csid_res_8x53[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -746,6 +759,7 @@ static const struct camss_subdev_resources csid_res_8x96[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -770,6 +784,7 @@ static const struct camss_subdev_resources csid_res_8x96[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -794,6 +809,7 @@ static const struct camss_subdev_resources csid_res_8x96[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -818,6 +834,7 @@ static const struct camss_subdev_resources csid_res_8x96[] = {
+ 		.reg = { "csid3" },
+ 		.interrupt = { "csid3" },
+ 		.csid = {
++			.id = 3,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -938,6 +955,7 @@ static const struct camss_subdev_resources csid_res_2290[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_340,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -955,6 +973,7 @@ static const struct camss_subdev_resources csid_res_2290[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_340,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -1099,6 +1118,7 @@ static const struct camss_subdev_resources csid_res_660[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -1127,6 +1147,7 @@ static const struct camss_subdev_resources csid_res_660[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -1155,6 +1176,7 @@ static const struct camss_subdev_resources csid_res_660[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -1183,6 +1205,7 @@ static const struct camss_subdev_resources csid_res_660[] = {
+ 		.reg = { "csid3" },
+ 		.interrupt = { "csid3" },
+ 		.csid = {
++			.id = 3,
+ 			.hw_ops = &csid_ops_4_7,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.formats = &csid_formats_4_7
+@@ -1339,6 +1362,7 @@ static const struct camss_subdev_resources csid_res_670[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -1359,6 +1383,7 @@ static const struct camss_subdev_resources csid_res_670[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -1379,6 +1404,7 @@ static const struct camss_subdev_resources csid_res_670[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -1571,6 +1597,7 @@ static const struct camss_subdev_resources csid_res_845[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -1600,6 +1627,7 @@ static const struct camss_subdev_resources csid_res_845[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -1629,6 +1657,7 @@ static const struct camss_subdev_resources csid_res_845[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -1786,6 +1815,7 @@ static const struct camss_subdev_resources csid_res_sm6150[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -1802,6 +1832,7 @@ static const struct camss_subdev_resources csid_res_sm6150[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -1818,6 +1849,7 @@ static const struct camss_subdev_resources csid_res_sm6150[] = {
+ 		.reg = { "csid_lite" },
+ 		.interrupt = { "csid_lite" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -1991,6 +2023,7 @@ static const struct camss_subdev_resources csid_res_sm6350[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2007,6 +2040,7 @@ static const struct camss_subdev_resources csid_res_sm6350[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2023,6 +2057,7 @@ static const struct camss_subdev_resources csid_res_sm6350[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2039,6 +2074,7 @@ static const struct camss_subdev_resources csid_res_sm6350[] = {
+ 		.reg = { "csid_lite" },
+ 		.interrupt = { "csid_lite" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2278,6 +2314,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2296,6 +2333,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2313,6 +2351,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.is_lite = true,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2331,6 +2370,7 @@ static const struct camss_subdev_resources csid_res_8250[] = {
+ 		.reg = { "csid3" },
+ 		.interrupt = { "csid3" },
+ 		.csid = {
++			.id = 3,
+ 			.is_lite = true,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2569,6 +2609,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2589,6 +2630,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2609,6 +2651,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2629,6 +2672,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2649,6 +2693,7 @@ static const struct camss_subdev_resources csid_res_7280[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 4,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2870,6 +2915,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2890,6 +2936,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2910,6 +2957,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2930,6 +2978,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid3" },
+ 		.interrupt = { "csid3" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_gen2,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -2949,6 +2998,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid0_lite" },
+ 		.interrupt = { "csid0_lite" },
+ 		.csid = {
++			.id = 4,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2969,6 +3019,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid1_lite" },
+ 		.interrupt = { "csid1_lite" },
+ 		.csid = {
++			.id = 5,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -2989,6 +3040,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid2_lite" },
+ 		.interrupt = { "csid2_lite" },
+ 		.csid = {
++			.id = 6,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -3009,6 +3061,7 @@ static const struct camss_subdev_resources csid_res_sc8280xp[] = {
+ 		.reg = { "csid3_lite" },
+ 		.interrupt = { "csid3_lite" },
+ 		.csid = {
++			.id = 7,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen2,
+@@ -3353,6 +3406,7 @@ static const struct camss_subdev_resources csid_res_8550[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3369,6 +3423,7 @@ static const struct camss_subdev_resources csid_res_8550[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3385,6 +3440,7 @@ static const struct camss_subdev_resources csid_res_8550[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3401,6 +3457,7 @@ static const struct camss_subdev_resources csid_res_8550[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3417,6 +3474,7 @@ static const struct camss_subdev_resources csid_res_8550[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 4,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3770,6 +3828,7 @@ static const struct camss_subdev_resources csid_res_sm8650[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -3785,6 +3844,7 @@ static const struct camss_subdev_resources csid_res_sm8650[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -3800,6 +3860,7 @@ static const struct camss_subdev_resources csid_res_sm8650[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -3816,6 +3877,7 @@ static const struct camss_subdev_resources csid_res_sm8650[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -3833,6 +3895,7 @@ static const struct camss_subdev_resources csid_res_sm8650[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 4,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -4132,6 +4195,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4150,6 +4214,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.is_lite = false,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4169,6 +4234,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4187,6 +4253,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 3,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4205,6 +4272,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid_lite2" },
+ 		.interrupt = { "csid_lite2" },
+ 		.csid = {
++			.id = 4,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4223,6 +4291,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid_lite3" },
+ 		.interrupt = { "csid_lite3" },
+ 		.csid = {
++			.id = 5,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4241,6 +4310,7 @@ static const struct camss_subdev_resources csid_res_8775p[] = {
+ 		.reg = { "csid_lite4" },
+ 		.interrupt = { "csid_lite4" },
+ 		.csid = {
++			.id = 6,
+ 			.frame_sync_en = true,
+ 			.is_lite = true,
+ 			.hw_ops = &csid_ops_gen3,
+@@ -4587,6 +4657,7 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 		.reg = { "csid0" },
+ 		.interrupt = { "csid0" },
+ 		.csid = {
++			.id = 0,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_680,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -4608,6 +4679,7 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 		.reg = { "csid1" },
+ 		.interrupt = { "csid1" },
+ 		.csid = {
++			.id = 1,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_680,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -4629,6 +4701,7 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 		.reg = { "csid2" },
+ 		.interrupt = { "csid2" },
+ 		.csid = {
++			.id = 2,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_680,
+ 			.parent_dev_ops = &vfe_parent_dev_ops,
+@@ -4650,6 +4723,7 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 		.reg = { "csid_lite0" },
+ 		.interrupt = { "csid_lite0" },
+ 		.csid = {
++			.id = 3,
+ 			.is_lite = true,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_680,
+@@ -4673,6 +4747,7 @@ static const struct camss_subdev_resources csid_res_x1e80100[] = {
+ 		.reg = { "csid_lite1" },
+ 		.interrupt = { "csid_lite1" },
+ 		.csid = {
++			.id = 4,
+ 			.is_lite = true,
+ 			.frame_sync_en = true,
+ 			.hw_ops = &csid_ops_680,
 
-Best regards,
---  
----
-bod
+-- 
+2.56.1
 
