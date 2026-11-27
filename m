@@ -1,109 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.204.34.129
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795769350;
-	b=ajit241Qebc6oOQGrsnPd1+AjBqMq9UMD/68PC28H3wvplR62R4i6n2fTQjs3869220G
-	 qhf3wek50j06KX5qAi4g0VGEe2EJluuu0474RX6k2uY4rheU/XxBgCnhQRHdXCsQ8fXhy
-	 FdU9m5QJpRHzL0S40a9JBpFpRlSXnYr23toa/dMtDcvyhFKaYt6PJ6/dZm4tWR+xdDJC2
-	 EMmL54WGTjy0wJgCSerFcpJxwjFRwl44ZcaM5qmGH6mLhVMtwJOi2oXkrBsYAOWlUn7gr
-	 eUe7eVzWTQk2NiOmJ1xbWHBPrIk55TU6xhQI9KefeHBRS/khZ156bWcm9txN8SFjUWQ==
+	t=1795769370;
+	b=GVSLICmMeoVLqengjSWHYd3OQ+RN/2NwhKXV6sY1+s2xw9UB85StfY0F3P1eob++xo0c
+	 LYfSOBcj7HvonfAugN4iK31nU0x54+QwshEEv9+WfllITsA9WCtPUpJkH/vx0+FZIc+jm
+	 szU8lqy4VME5+SOsyMzJLLPn/xq872oSIHsykVzgye0J+AV6k/9h6lCBqxZUSU1zpzqr/
+	 JS98OL6YbXa+G2okSlH7c2yrdJj9ij/tP/4OeP2Ak4E44kgeN5XkjE0U2+3+yI0Kt7swJ
+	 rNz/C9TWkp1/VKIrRWgm7XIfyjPKtT0CvAORDeS7O3MSHPmNoBLLoX3s+Dja6c767HA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795769350;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:From:Content-Language:In-Reply-To:
-	 Content-Type:Content-Transfer-Encoding:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Info:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
-	bh=uHvTs+HH7bruiV6BQeGrEYCg6+e6jxPYYWTFTxOaZz8=;
-	b=HBh45RbXoNtkkacziYP+qj/+K88382ce48/J1JZK2axkN6VJAk56giqphGBttSXfPzJK
-	 J/PVnGVw2pbVQaVpDUu/i6YYr1uk9xT+XypC2p9dvkWiKLH0VSVHfIm3dhb9OJkQgoa+l
-	 fmtgJPuR1E+HXIRG3KAhZHnCtwUTIRlbbRbhu/ytX/EnVs5gc3pGGVFvfFKjjHnR8rm3d
-	 o5eBeNdPiTzQ6yQ3OBFHu1WAeCqZVBffDDIRHWRrLvV4Ygzagc2HdSWipInGz0rDuZVTF
-	 YIk2+eVQz5a15FmhDJQDfArOT7FsVAGmCwrSd4XEtYndEuU9MhKN/G921q1uROhUO/Q==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795769370;
+	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
+	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:Message-ID:Date:
+	 MIME-Version:User-Agent:Reply-To:Subject:To:Cc:References:From:
+	 Organization:In-Reply-To:Content-Type:Content-Transfer-Encoding:
+	 X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:X-QQ-RECHKSPAM;
+	bh=Wwoqopybt2NkQoUUX4NVoj5SPusPRcp6x5MKRWSnaYo=;
+	b=v9GpErl+xwES96bqTAweK2ls+mS9a3CLmcClGsTINBJLXYvB4QvLqH5KpmBEo4r1TDD/
+	 9SuIYxRBEJK2DNhCNO81s5qpibhr9C2kSbwhAWsH3AS0qyPOEZP2+JcguKn3Sud+ddXSs
+	 nhCbFlinN7GCWrKcdq8GTHjRMsASnB2j3YvbCBEWpYgA1vlgWBTlSYR0gNj0WlOzUn9ev
+	 OF+WD5LqVsFICfoNUL3EJtDSyGIad+UDObE+TEWlNWjQ4a/P04RSvZvB4s1iECuxbtvrw
+	 P2fDNrdWjrelJkJVB6zvTv5fqRuQ34Z1LyOAiEqj7oasccMV//PiLHq+GLDpfxVxdyA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="GOe0/uRS";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=E4zxEdJr;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=radxa.com;
+	spf=pass smtp.mailfrom=radxa.com;
+	arc=none smtp.remote-ip=54.204.34.129
+Received: from smtpbguseast1.qq.com (smtpbguseast1.qq.com [54.204.34.129])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37F5760A2600
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 08:49:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 37F5760A2600
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=GOe0/uRS;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=E4zxEdJr
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AR7GbFp3983840
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 08:49:09 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	uHvTs+HH7bruiV6BQeGrEYCg6+e6jxPYYWTFTxOaZz8=; b=GOe0/uRSkU8GHkm4
-	jfY1ctRutj19A+SOZUVmlj7w6bpKHHBs5Ul+CQoIEquKlzW3A5X3C4qF/g+mxVmt
-	y+6XU3zuXX1Gw9LME4mZ+dP+eM50S70LnO5vRK9hdXAkcoibfxyi7oiHuZm9s+IA
-	+dS2iIak2VcDw5LrJf64jnTzVz9FxAvEVzNOga/MeVrp6OqJwCniLmAoRYhTwk/Y
-	KYaZZiV5b160jBOWucV5PMB6hdUAvQ36DDDZK3NV/lhammz91I07v2w4kM4OiEUl
-	ax5F19uhiTHB8QtKE2dTt4G1DbnDpMQFXkxLWASYOHpuTJJXHcssKCLhmZRvX+Bk
-	CG40BA==
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6u49a4cx-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 08:49:09 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-9495c71055bso559546685a.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 00:49:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795769349; x=1796374149; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=uHvTs+HH7bruiV6BQeGrEYCg6+e6jxPYYWTFTxOaZz8=;
-        b=E4zxEdJrYDJcXogKPmvBdZQm4r+9Q2zTkUqftWp8GhTnV0w9T82Fs3XjKBsn7EsobO
-         ITE4I32R1KRQg9UTTRLGnYRMI0ZADJ3sHKXOUMcxlf6TELNRCRqPSQt+S4U+T/zkPgWJ
-         BbHxZIQ4OBEC8wzEjXTb6dAUCZOe9aBVXYPuO7dejzNyPgWEVpNSFZ6W/FwTESTTWJ8t
-         qaDIeim4INVkOJdURvbl8r+EuOUPpncIMc3H/DiLrjXn6U8Tu1q30oftnaFSxf6Z0RbI
-         Q9fDL4W6K/eoYniw+FQDp080gBXUfAF8FcC8yRIrC7Fe5SpI9YY9a9tQ+6FUHJZUhm0A
-         X4Mw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795769349; x=1796374149;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :from:references:cc:to:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=uHvTs+HH7bruiV6BQeGrEYCg6+e6jxPYYWTFTxOaZz8=;
-        b=sAcm0dqyjCcAtaTkRmow62OAP14FuQr6+iYTB0QMZ7sDHgbtoryVm4Qnq51FqCicrT
-         cbJu62yKX9ee56zgLq8zUMr1l9zoPa5uFh9Pb7ghksNFACzpDVQMLQeSWUeHF3TAwmrT
-         hWD8szt75gGpObdQAsMb38y9NQ5Em4+FmHUzQxgQInqIUsA8mPomqhD+aXtUHerHPjKn
-         mD/h1YIaBcx0O8dOTp0360O8Yr8qx1Z+W1F+NsOL7DuhBUZGCbdATC0PNEhumvRR9TgU
-         sQ4t9hxgpRp7mOuqEhpao/dMLWf1aLI3KvVStNZI+caNWht3tn1Z3aJky1D55HMtYSrH
-         rHOw==
-X-Gm-Message-State: APuU4Z+Ro8EwIQkBxJ+PgJrHf5mR952IlqmQzepEZEVrWvE6wWQFF6GB
-	9AwkkOpD+m29AbY/Atu+KrvfN0r3DABfsxVHj9VCkQFkw/RCLh3Nu+kZjuhifezOsLFr/J3VOur
-	M8nwizla/oSTc2KySWym+7GDplXSj7+AK7w4ijUJaszs6ewmPCN9JlLkHkO9982qnGJKU
-X-Gm-Gg: AZFdTZeItoYdZdvOi0QggfnWNkxjrVvpsJxcBfRN/b23sfXX71D9G12kVKSCbNrnqyw
-	5/o3kDX3Krb8QiIjwAnBa0DufHekfzPcPlFp93qBuHFKTgejmmoBO/nfAJJS4+Y0QHH8qJunPeG
-	OGMnn2uJgikAaink/xaVec5/KK9JT7cQ6TCV1bA9yDbH6pZK313sGtFXNpsGMNfwZfaYeAyLumP
-	hzFdpJboGE3hDezaJsOZKTJz4ju+Ka0wE/NfiUr9erCQel8hwWPXkZ/LM1inWk5IV6P9nt8ZJnp
-	ggV7B3PBzfE7HFpUCjAsPWfohm6e78508Hfy+emoXPEBGY26kBTUANlOZBXiTmXccVDJ0GpvTgJ
-	Imco7DTb14KqNqyXKqM+5EEq84uxhuYRFsFH+TTbkPfDPBXvboogdtYr+95VEPPiAlkrKPXoFI0
-	0H4A==
-X-Received: by 2002:a05:620a:6c17:b0:93f:167e:d990 with SMTP id af79cd13be357-949bab3264emr3923739785a.50.1795769348597;
-        Fri, 27 Nov 2026 00:49:08 -0800 (PST)
-X-Received: by 2002:a05:620a:6c17:b0:93f:167e:d990 with SMTP id af79cd13be357-949bab3264emr3923736785a.50.1795769348204;
-        Fri, 27 Nov 2026 00:49:08 -0800 (PST)
-Received: from [192.168.68.120] ([5.133.47.210])
-        by smtp.googlemail.com with ESMTPSA id 5b1f17b1804b1-4bb884911e3sm821554315e9.6.2026.11.27.00.49.07
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 27 Nov 2026 00:49:07 -0800 (PST)
-Message-ID: <d24318db-c2a7-4bd2-9216-1ed5eb90a226@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 08:49:06 +0000
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97FB8606A334;
+	Fri, 27 Nov 2026 08:49:26 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 97FB8606A334
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
+X-QQ-mid: zesmtpip2t1795769339t6a52fd24
+X-QQ-Originating-IP: sFjkWrNCksvxt1xzmVjQ45eWjno04DA8p5gSSaqrrRc=
+Received: from [127.0.0.1] ( [localhost])
+	by bizesmtp.qq.com (ESMTP) with 
+	id ; Fri, 27 Nov 2026 16:48:57 +0800 (CST)
+X-QQ-SSF: 0000000000000000000000000000000
+X-QQ-GoodBg: 0
+X-BIZMAIL-ID: 2061607346592919020
+EX-QQ-RecipientCnt: 17
+Message-ID: <7D55C8EF5D49B457+c68b044f-b636-4a4d-8f6f-eb4a3c333e7b@radxa.com>
+Date: Fri, 27 Nov 2026 16:48:56 +0800
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -114,65 +52,88 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] arm64: defconfig: enable SDCA class driver and
- WCD9378 codec
-To: Krzysztof Kozlowski <krzk@kernel.org>, andersson@kernel.org,
-        konrad.dybcio@oss.qualcomm.com, abel.vesa@linaro.org, robh@kernel.org,
-        krzk+dt@kernel.org, conor+dt@kernel.org
-Cc: linux-arm-msm@vger.kernel.org, devicetree@vger.kernel.org,
-        alsa-devel@alsa-project.org, linux-sound@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20261126183806.172485-1-srinivas.kandagatla@oss.qualcomm.com>
- <20261126183806.172485-8-srinivas.kandagatla@oss.qualcomm.com>
- <68d1f55c-ddcf-4081-8111-9773c484ca07@kernel.org>
-From: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>
-Content-Language: en-US
-In-Reply-To: <68d1f55c-ddcf-4081-8111-9773c484ca07@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-GUID: 5ph9z6Tk1AJn9v7XMp64_PRT-IGbUPCP
-X-Proofpoint-ORIG-GUID: 5ph9z6Tk1AJn9v7XMp64_PRT-IGbUPCP
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDAzNCBTYWx0ZWRfX6pVMWfjBc01M
- 8N1RNcc9I/zL/zfxp4vz/vAdPKo+294P7230RKzMI5w6e//wRxIYY5vRHompPRvrTGv4pBf8d9K
- b1KLEZTMHaDCbZPItQ7anYwuoUcRP8A=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDAzNCBTYWx0ZWRfX5eUQR7j3H5Sv
- gFtromnhUfYHAZkBvTpaCn8Adm/xg4ENe1BUvFCgBmyxLXe6fhGMkA+Z1OVDKx2G+f1NYmLwO8I
- rL1JnydU4X+IRsj2lXRPjGxgqY/uY8cSlKQ20BIxaaO3fLwfTocSXLKicR+jJWWVZfDWqNLtxLA
- VaaRn8rZodnleHqaLhCSt2ApTCF5EuKLtsfX4/ndf+dMA4SxfMTI8t9DRcLCQ3iFYk3uw3T4KBV
- /XtDoNwR3+jScBYbqZiCG4Q7JbO+v2U/EbmA9oVN+uV1DHNMr7igq+snd6umwHvuS5AS3HWHEte
- EWI2W2wo5Q3MgLkL5OZj+jOnqsmroKJCBOOGu2TnPmAHefR0argOoHlAD+atFuldHo+8BKMaKgD
- 2GlyBFC4HK0ssfi50QZQBnkaE1jZhkQP4p/Pe98W98GKJA8yd5BR5UgLXSgXmkdARm9pjtDlt4X
- EyVNGuGk/zBcqT/e3cQ==
-X-Authority-Analysis: v=2.4 cv=A875rKWG c=1 sm=1 tr=0 ts=6b094405 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=ZsC4DHZuhs/kKio7QBcDoQ==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=R3xOvuxQfeku2NNc9hcA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-27_01,2026-11-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- phishscore=0 spamscore=0 lowpriorityscore=0 bulkscore=0 malwarescore=0
- priorityscore=1501 adultscore=0 clxscore=1015 suspectscore=0 impostorscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270034
+Reply-To: sophon@radxa.com
+Subject: Re: [PATCH 2/5] media: iris: allow larger capture buffer pools on HFI
+ gen2
+To: Nicolas Dufresne <nicolas@ndufresne.ca>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Hans Verkuil <hverkuil@kernel.org>
+Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
+ dragon@radxa.com, Chris Obbard <chris.obbard@oss.qualcomm.com>,
+ Deepak Sikri <sikrid@qti.qualcomm.com>,
+ Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>,
+ Loic Minier <loic.minier@oss.qualcomm.com>,
+ Jason Pettit <jason.pettit@oss.qualcomm.com>
+References: <20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com>
+ <20261029-iris-va-fixes-v1-2-44a2783f782b@radxa.com>
+ <456a7ad925afe7caf52d39ff300089c8ec79e4e8.camel@ndufresne.ca>
+From: Xilin Wu <sophon@radxa.com>
+Organization: Radxa Computer (Shenzhen) Co., Ltd
+In-Reply-To: <456a7ad925afe7caf52d39ff300089c8ec79e4e8.camel@ndufresne.ca>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-QQ-SENDSIZE: 520
+Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
+X-QQ-XMAILINFO: NWujniBqiFoNlZ+4V+Wrw+yx0aQq+LaC1FCxLB0YMWYpV3LPruOxLYII
+	9ecBp7J1rAcSqPhWUJVDeorhzRHJnWAekhdulGFPVJ8TmmxAu90aXKB4sYm8jsnsY1ekYmI
+	Qp91qsl2Th9TzsYcfjDGAcSnn+ZdG5slXVu42dj38ZnspIXAtNAukHvlg/R6jD/WuMvxXG4
+	O0LJTVGQF1LFk7ZARhwoxtLj9dR6Q4hcdirnU5JLqvMKzN+4DT31vPQM09pVXPOVgLBumZp
+	Y5KEtM/T1cvk9vVZ4hTZ1ENsayfvYIHYplwrraSsVakbqoiDaaZCns1bbw5901A2/AOJvPq
+	yJhI42aeFP81slEk9L26qV2rKr/ZSECDpPVs3jW5eFhbALKOPzJRTkP+fWHzAWalH0m5rVA
+	+1mMSf39sFL5pa5H5jbYhDkiO2fkwtA9QLF5mJCZAkwSSKZXHO4WdhFV9LfBXy22ehg0LnY
+	HAmBnnEgguRoFN/7G1LgiojPOBbtLB4dsqZfHLC7/SmTJ4XlhwkT/FKdT5+EaHjxhSBBeKf
+	7I5Z0sNr4fmZQdgVco8UEQWdau0Z2Li4xmo9BbxmMynidhejAawdOwDCQguMALiyQCV5Txn
+	Xi7XOZrmpW3enx+zOO1Ab2bUGqWZMJOrzUdS2UCHLZqsRT8+eQKqpvfoXiRAOEq9pHi4NTU
+	BXhQ2KOPf40WoVjwU0D/Xlvzpuam5OSWir+t2DPkgxaW0y4c+ia6caQAziWdO2FOwIsqqxd
+	Ve7FVNJo3+Bwnxi/AkuGrYi9zVgllIWwyCYQh+9+hJnzdmrUcqBixj6ZmG/vzKpkrz8kDGg
+	n5ozA+IJiCPAto8Vs0T7mKC6fE1QcpegxTp73Gahp0P6zRstDyKRktVgEtaVvLnpoemp19o
+	EXXifwD2GZTrogKHbShWENaLT2f2nGNk/9LW44Qq0gyloAIXqWylqI+2agnIjzhlxayktPp
+	baAvUxVr4DZ0OIrBvXhQG6NTHSpLDh4q2OuZB2d8IkXookNosoHjfdOvX31fWwOsxKwQCRD
+	tbatTuNdf3J0cdI6X8KTyKiqmwMVjElgaIh3p6oJjg025/ED++
+X-QQ-XMRINFO: M/715EihBoGS47X28/vv4NpnfpeBLnr4Qg==
+X-QQ-RECHKSPAM: 0
 
-On 11/27/26 1:42 AM, Krzysztof Kozlowski wrote:
-> On 26/11/2026 19:38, Srinivas Kandagatla wrote:
->> Enable CONFIG_SND_SOC_SDCA, CONFIG_SND_SOC_SDCA_CLASS and
->> CONFIG_SND_SOC_WCD9378_SDCA so Qualcomm Glymur-based laptops have
->> working headset audio out of the box.
+On 11/4/2026 6:20 AM, Nicolas Dufresne wrote:
+> Le jeudi 29 octobre 2026 à 11:58 +0800, Xilin Wu a écrit :
+>> VLC with VA-API frame threading can require more than the default vb2
+>> limit of 32 CAPTURE buffers.
+>>
+>> Raise the HFI gen2 decoder CAPTURE queue limit to 64 buffers.
+>>
+>> Signed-off-by: Xilin Wu <sophon@radxa.com>
+>> ---
+>>   drivers/media/platform/qcom/iris/iris_vidc.c | 3 +++
+>>   1 file changed, 3 insertions(+)
+>>
+>> diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+>> index 05aab6e3005d..8c96b007b391 100644
+>> --- a/drivers/media/platform/qcom/iris/iris_vidc.c
+>> +++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+>> @@ -140,6 +140,9 @@ iris_m2m_queue_init(void *priv, struct vb2_queue *src_vq, struct vb2_queue *dst_
+>>   	dst_vq->drv_priv = inst;
+>>   	dst_vq->buf_struct_size = sizeof(struct iris_buffer);
+>>   	dst_vq->min_reqbufs_allocation = MIN_BUFFERS;
+>> +	if (inst->domain == DECODER &&
+>> +	    inst->core->iris_firmware_data == &iris_hfi_gen2_data)
+>> +		dst_vq->max_num_buffers = DEFAULT_MAX_HOST_BUF_COUNT;
 > 
-> All of them? This is board specific, not SoC, thus please name at least
-Yes, this codec using generic sdca class drivers, all the glymur
-laptops, like T14s, A16, CRD and other models use this codec for analog
-audio.
-> few upstream examples.
-Sure, WIll add that in next spin.
+> Why is this limited to decoders? Also, why not move the max into the firmware
+> data, so this code path can stay idiomatic.
+> 
+> Nicolas
+> 
+The limit comes from the firmware: HFI gen2 decoders advertise 
+OUTPUT_BUF_HOST_MAX_COUNT (HFI_PROP_BUFFER_HOST_MAX_COUNT = 64) on the 
+CAPTURE port, while gen1 has no such property and the gen2 encoder caps 
+only define it for the OUTPUT queue. In v2 I'll derive max_num_buffers 
+from that capability when the platform provides it, instead of checking 
+the firmware data pointer.
 
---srini
-> 
-> 
-> Best regards,
-> Krzysztof
+-- 
+Best regards,
+Xilin Wu <sophon@radxa.com>
 
