@@ -1,48 +1,39 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=51.68.154.128
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=103.47.186.116
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795783947;
-	b=y+/TdYwLMBpqupArcerr8Y8Y0XIHKo26D1+iKkfSS2xYb0qPJf7GH8h3W8UuuRKuTl/V
-	 hVu/BSUr5x1iys9XCZIlz+MLBzlaTXycfxOtSsk8lr0zEbb1gzHC7O6KQRh13olggfd3A
-	 JiE0nIIaoADQWfgPwMDxVBxWAn1G5UlriFswKYKtGZnKoyxRuH07dDYeBXBsPhFl5p7o7
-	 oMg8fmxeW4/RsUwubBXkajdJxo5PIzG25lmugmbaQXEmfpWIHToJPS9oTQ3MjHfDdECV4
-	 7k7+u5xGiaicn59ctTbg0OvmZA1ftmB/8qUkmdY9FDMVjZt1LWo7AzlAgcpS3fJt1ZA==
+	t=1795783955;
+	b=G0SuQVOXYU4DlEf4efiCdzYKaP7Phzc8Aln47A4s3kXwP3h9VT7tASizb6VVCUd8IXqV
+	 0ODvE4xRXVJWfniS9fZjMkKBn/DjsDhz7+8LbwxMyrE+GebGYOOtu6TMgy+qkOr6H+nFa
+	 eZmQ/He+cH3z7n5vXkBnjy5S7+EANLpWkLYlzr2GtFG10UDliXXWLgZosgNVBWz6hpvqn
+	 35QJznBHnmiYrkjB6S7/5QjRHxRKUoDLstjEjFxl6hlFXDzIUtCJE0RV66Rw0dNOCXq3o
+	 t3T+/7PHeSkDuHWNRnldacBOnfpSO1qfxQcddczu51dr2LYfjorV18XsCqnfd04f/sQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795783947;
-	h=DMARC-Filter:DKIM-Signature:MIME-Version:Date:From:To:Cc:Subject:
-	 In-Reply-To:References:Message-ID:X-Sender:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=XBVMhubxDrjgosRtIYyRUup87SqKUzHHbgoUgAZzknY=;
-	b=GZLdm34VCZMCH2hm/AjHIdovx+mo8vP9KrGO0z5Dns/TAi/5+hS2O2Zc86zRkRnJqQBP
-	 i7p26lPvZ/za9Xq2bwgPNOxiqfK6ksFxeUKbB7a7i54D3IiWFzKorIA6K5ibJpClKavYX
-	 Z+9joukAMUHBbzaoZSTzX4/mtXktosCH6i/0q41fRbSp4Y3uv3pAxsQRlgN7L+X2Xv2w5
-	 rpQs+HebdInp/pggVSw90rJ14ang6BnmEyuRwAeqDzJq6sOY/KrbcCDAq2UrTre8LWaIL
-	 8fhba/ddKg3+oBUOkefkWAQthB7BA0SkqkBq8jNp7BVe4EBeC06MRJoZPGMnl//JSyw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795783955;
+	h=DMARC-Filter:Received:From:Subject:Date:Message-Id:MIME-Version:
+	 Content-Type:Content-Transfer-Encoding:X-B4-Tracking:X-Change-ID:To:
+	 Cc:X-Mailer:X-Developer-Signature:X-Developer-Key;
+	bh=PG18Lu/jBLcAhzP7RES/rcnEfIki8FVwtayDLRvjJPg=;
+	b=Ht5tqKCmUeaR2tEYZxfuZ55QUy/hLHEl50//PgocpYw8qKHUDTNSdmGXOMUcWUe1XfYd
+	 vR6j72MkzViVUw4+jmIbPrVCz1bbb8vsqTggwxjDrPpOFDURAI6f1UkN0lj0UwMk5lBFw
+	 IV3ixvTjFDg7EbS70vGho7rGnot8Dda8Hc9mVv8EEl/TCevErYT68yo9U4LhGFBR+FFl7
+	 KyUfroSw/By7JOPqiYeB0KBb/7lgPjSQQK97Pl0gwvyDXLsJu8KdbjC3KLlatFFgSnGMO
+	 9kzESs1nTloMvxCFU5nEUluHVK9pcTBBwWWzE06krwX67Z2JYRpXa3ptNOC7AyrqnPw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=fromdisposition.org;
-	spf=pass smtp.mailfrom=fromdisposition.org;
-	dkim=pass header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=r5AuHYg+;
-	arc=none smtp.remote-ip=51.68.154.128
-Received: from 4do.net (4do.net [51.68.154.128])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DBB44606A31C;
-	Fri, 27 Nov 2026 12:52:26 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DBB44606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=fromdisposition.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=fromdisposition.org
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=fromdisposition.org header.i=@fromdisposition.org header.a=rsa-sha256 header.s=mail header.b=r5AuHYg+
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=fromdisposition.org;
-	s=mail; t=1795783944;
-	bh=edUFFxktQm+Xw+Y/mOQbI+L/hma7NQuxzUFWhwq8Nhc=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-	b=r5AuHYg+ii2n3YE1xLPkqKTA3yWAicbeT9zAdmh05SoD/WznV8eMPEuPyrMAim8CX
-	 w9NDxEOqxjPKV/Hg7ORHBLIYOIrY8JsAodv7rNo0WTXubhgXPMdralM7guoW4kaZzN
-	 tflNiOFu83QyGOmdP6c7kMahebmgwwSyodhwQNrfoTs5r2nuLyhV49nezCkiIDI4a8
-	 da5VQ6RIBhCkmRyJYwXWC2wE0FSwHP4Hxs7UWqG9D8AfePI0TaSN6ISyaH815c3fzz
-	 jM0L8dQYiCkvp3EXYHORO/om+Bx00pcYONjyjUCr6Cjof5tfbR0fb6FQBMbhfWa+zs
-	 m+u9TRnPeAulg==
+	dmarc=pass header.from=krgm.moe;
+	spf=pass smtp.mailfrom=krgm.moe;
+	arc=none smtp.remote-ip=103.47.186.116
+Received: from krgm.moe (krgm.moe [103.47.186.116])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 7BCDE606A335;
+	Fri, 27 Nov 2026 12:52:34 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7BCDE606A335
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=krgm.moe
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=krgm.moe
+Received: from yuno-laptop.local (unknown [103.47.186.116])
+	by krgm.moe (Postfix) with ESMTPSA id 53D6782D;
+	Fri, 27 Nov 2026 18:22:24 +0530 (IST)
+From: SignKirigami <prcups@krgm.moe>
+Subject: [PATCH v5 0/2] Add Qualcomm Netrani TLMM support
+Date: Fri, 27 Nov 2026 20:51:55 +0800
+Message-Id: <20261127-netrani-tlmm-v5-v5-0-f60f7b45c3dd@krgm.moe>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -52,42 +43,68 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Date: Fri, 27 Nov 2026 12:52:24 +0000
-From: Demeter Barna <me@fromdisposition.org>
-To: Val Packett <val@packett.cool>
-Cc: Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>, Srinivas
- Kandagatla <srini@kernel.org>, Liam Girdwood <lgirdwood@gmail.com>, Mark
- Brown <broonie@kernel.org>, Jaroslav Kysela <perex@perex.cz>, Takashi Iwai
- <tiwai@suse.com>, Bhushan Shah <bhushan.shah@machinesoul.in>, Luca Weiss
- <luca.weiss@fairphone.com>, Antoine Bernard <zalnir@proton.me>,
- ~postmarketos/upstreaming@lists.sr.ht, phone-devel@vger.kernel.org,
- linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
- linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 5/6] ASoC: qcom: sm8250: shut down MI2S/TDM AFE port
- clocks
-In-Reply-To: <f090337e-e817-41d3-8fc6-0c64cd71fba4@packett.cool>
-References: <20260506204142.659778-1-val@packett.cool>
- <20260506204142.659778-6-val@packett.cool>
- <dd0e22ed-e464-4d61-b354-b396f9694976@oss.qualcomm.com>
- <f090337e-e817-41d3-8fc6-0c64cd71fba4@packett.cool>
-Message-ID: <6929a7cdb1b48a5edb057669ed5ea5aa@fromdisposition.org>
-X-Sender: me@fromdisposition.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQ6DIBBA0auYWTtJxSjoVYwLwWk7RtEAJU0Md
+ xfb5Vv8f4Inx+ShL05wFNnzbjOasgDznuyLkOdsEA/RVpWQaCm4yTKGddswNqhlp2bVmlrVEnJ
+ 1OHry93ccxr/9Ry9kwr2BlC6U1XVzcwAAAA==
+X-Change-ID: 20261127-netrani-tlmm-v5-b798d86c3837
+To: Bjorn Andersson <andersson@kernel.org>, 
+ Bartosz Golaszewski <brgl@kernel.org>, Linus Walleij <linusw@kernel.org>, 
+ Rob Herring <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, 
+ Conor Dooley <conor+dt@kernel.org>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ linux-arm-msm@vger.kernel.org, linux-gpio@vger.kernel.org, 
+ devicetree@vger.kernel.org, linux-kernel@vger.kernel.org, 
+ SignKirigami <prcups@krgm.moe>
+X-Mailer: b4 0.15.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1447; i=prcups@krgm.moe;
+ h=from:subject:message-id; bh=HwAU4KaMS3rzF+SX8da1ceH2N/P1sKtIDxDSbDmixpw=;
+ b=owEBCQL2/ZANAwAIAUNLJdlxtMKiAcsmYgBrCX0ADiEcRxGwjAlEFjDSgZRGw9hX99AlznUr+
+ SmJtHiDO5SJAc8EAAEIADkWIQQKI/ZJLAWGn9r1JLZDSyXZcbTCogUCawl9ABsUgAAAAAAEAA5t
+ YW51MiwyLjUrMS4xMiwyLDIACgkQQ0sl2XG0wqIS+QwA3WNOrpWuuucAbP8eDesuu2LMZqA+JIM
+ XV4bhGANwomQJL27+9qRW8P5GyVVsBUqgCaz3XyHt8oWgJsqV3qQpqNBnV9uFsbv/JYflCDv0UZ
+ Yx43yVcmHk/NvRHHxSt3PfW1BDZmN8HYypKtxlKs2kR7BWaCTeDB4L/i1zICY0yH1zn0vzVnG4f
+ KrZzPEnqqyXnTQ+4BKInTjCyK8yW7ShqG9J8wzbw9LI5NGTArlcI/Gt88AoFvih0OLjvXCW5oCV
+ b4kJknLuh38ZWqFoh1RkMyfIsr4t24U9AYpTH0gN6MGJ6QiIFbWrUxwnZAMczWWhUIRsrmLc7fy
+ 8a9KoNRVvAQ3iAnX7fQ2r6el3P69Im7Q5A+QpOPZ4KjRWShReDF97lbu6SVJVWqbadzki+7bxQi
+ hy6isg2cipgjVPUaklx3BqfxrQHmaqGoKZl28lSymgK4s4PmaStaY0eBB5VA9wl24Bw90MI1HA6
+ 0qWn1klZIpV3w/5WAUFozy+vqWKT+oq
+X-Developer-Key: i=prcups@krgm.moe; a=openpgp;
+ fpr=0A23F6492C05869FDAF524B6434B25D971B4C2A2
 
-On 2026-05-07 20:44, Val Packett wrote:
-> On 5/7/26 5:57 AM, Srinivas Kandagatla wrote:
->> In your setup are you sharing BE dais to multiple FE?
->> 
->> if not you would really not need the count, startup and shutdown are
->> paired for single PCM stream.
+Add the devicetree binding and pinctrl driver for the Qualcomm Netrani
+(SM7435) TLMM controller. The controller provides 142 GPIOs, pin
+configuration, eGPIO, dedicated SDC/UFS pins and a PDC wakeup mapping.
 
-SM8350 has the same problem (speakers on PRIMARY_MI2S_RX). Without
-turning the clock off, the ADSP never sleeps again after the first
-sound: 0.0 s of 30 s idle. With a .shutdown that sets the same IBIT
-clock to 0, it sleeps 29.7 s of 30 s.
+Changes in v5:
+- Move GP_MN on GPIO18 from selector 2 to selector 4.
+- Add GP_PDM_MIRA on GPIO14 (selector 4) and GPIO15/17 (selector 3).
+- Add GP_PDM_MIRB on GPIO59/60 (selector 2) and GPIO61 (selector 1).
+- Add RFFE0_CLK/DATA through RFFE4_CLK/DATA on GPIO76-85 at selector 1.
+- Add GRFC0-GRFC9 on GPIO76-85 at selector 2, plus GRFC12 on GPIO86,
+  GRFC0_MIRA on GPIO87 and GRFC10/11 on GPIO90/91 at selector 1.
+- Rebase onto the latest brgl/pinctrl-qcom/for-next branch.
 
-I tested it without the counters, and that works here.
+Link to v4:
+https://lore.kernel.org/all/20261127-netrani-tlmm-v4-20261127-v4-0-a77415255784@krgm.moe/
 
-If there is a v3, I am happy to test it on SM8350.
+Signed-off-by: SignKirigami <prcups@krgm.moe>
+---
+SignKirigami (2):
+      dt-bindings: pinctrl: Add Qualcomm Netrani TLMM
+      pinctrl: qcom: Add Netrani TLMM support
+
+ .../bindings/pinctrl/qcom,netrani-tlmm.yaml        |  144 ++
+ drivers/pinctrl/qcom/Kconfig.msm                   |   10 +
+ drivers/pinctrl/qcom/Makefile                      |    1 +
+ drivers/pinctrl/qcom/pinctrl-netrani.c             | 1489 ++++++++++++++++++++
+ 4 files changed, 1644 insertions(+)
+---
+base-commit: 55d571be69fa9b1ecf8b417fdf768c4eb8b28d23
+change-id: 20261127-netrani-tlmm-v5-b798d86c3837
+
+Best regards,
+--  
+SignKirigami <prcups@krgm.moe>
+
