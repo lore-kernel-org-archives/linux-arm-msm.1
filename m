@@ -1,60 +1,123 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795781144;
-	b=m5cTNY+OPCHSgIjBw0FzPohSvcZsp6m7jUkbFtnTJUBgLlaCsbWeY9Hu3VPCVFs+uiKl
-	 UW4hQOmZWC/okfuNp41qmk25A4Jmf2GZtbSlipITPk7+IQ5XxlnTFy2X/oQldoqUJqLGl
-	 i8UuJ7udHnS2lVG2yS9EiLMfXOlmC9PV29w6lna27SiF7Dlf0kO3wTIkSWoa0dnIyi91r
-	 I8xp69ZodwvbdvQHxfI9cyQuGgTqBm0kYNCvjhL3R24WfVWld1aD2JYvLDvXoda930mFV
-	 Y/IhNgGBpg6X8Ezd7NvVxx/TUaHQL7Ji5GFfKiBTkI4hp3HbwwTZELujdW5ZWPFp7Pg==
+	t=1795781194;
+	b=EB1tBzrkHKzcm2LtagMLod5k1BH3Ockj0coDIoxjVxlNcQxYFCJThxwohJ88vOA067tw
+	 +T5GaK5yy1wqZY7HYoD+dlFqtS2CtNQ+TnBqNpj+FK7mrB3nk2YP+uj6ZUHy07YNfRKxy
+	 /Zi1hTJv3hIStJv7y2ZC6wXRmEFK/PnjtcNzGcfultUNDW0DQVgZgGDIffo6JVVTKvFhg
+	 tQK3rY8u8O8QiMpCO7t1xnO3XySEqnmqVNF6HMEY+dltyf69tSfydMpOi/xlgkSvP+Vm+
+	 1G+ECLeDx0eVbCRW57ZvcwcwYR6y/wKuYpNzQEmuXfvbiqC2USRuky4BNYcimv+hmfg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795781144;
-	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
-	 Message-ID:Date:MIME-Version:User-Agent:Subject:From:To:Cc:
-	 Content-Language:In-Reply-To:Content-Transfer-Encoding:X-CMS-MailID:
-	 X-Msg-Generator:Content-Type:X-RootMTR:X-EPHeader:X-CMS-RootMailID:
-	 References;
-	bh=a9fm/uk5JQ3HNfgBODpdCWOALyft9Wz+Y8nV7YiTAZ4=;
-	b=ygVGXre8UfuLrN83ElHjWojGTb9CAg4KTPYvf+CZE/DF55jC1CexiglitlnWyllH3Ve0
-	 I3Qjk8K9V85D4q/59nftjwc08SZzkMkXK9jFNTAZsIvJWPQf6ZK3GJGtcc5l+q1WgqLkR
-	 T8uFMPxXsIU3T1TbSHODsFfn2kKHffdAnCy2UK9jHDhlv9WAtpPomlc5+X0mCzFSdNSX7
-	 rFR1TTbID19DhrUyumeCMB8HxywkiRx36tQ02rQmAGujK04ouksj62VvP2AJxIQ6FSbMt
-	 PV6Nj5HN2nXxyxk4XpG6DuZ1kwp8cogHyHnHmCN6/QTTjI5pttWpj6N/LokCd55zaXw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795781194;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Date:From:
+	 To:Cc:Subject:Message-ID:References:MIME-Version:Content-Type:
+	 Content-Disposition:In-Reply-To:X-Proofpoint-ORIG-GUID:
+	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Details;
+	bh=FELi3FLt/Pi/OkzOMRJ8+hRRlAJ733i1PeWjERVJCog=;
+	b=WXn1sWG0AP8fhETHu+UGwzJHjoAtovtqsJcFCLI7/E9jUYjW8vYDQr4ObBjeyHsyYBXX
+	 VIaRZKmfKuQBc1DfUqQ3G2bgdyOSiK4+/WJ5I2VCOK8puhYaSkCL1bJXwxniQY/HUI6vb
+	 /TVbaa4jLAry+c14JYPoHWsR4ruAoLA//IIlwL5/YI+rvyKK7fnpMfOFympfzQe4VVT97
+	 J3GnSoVSFnj96ecZkLKTUvbAkQZrhner5d1p6OewoRRs7xpI8wxmRrMmFJ7NbsYGU22W/
+	 fzTxYYtzOSGbFPf/XzE7KZqsoG0Xp+5HoMaOwI2h5/Mub0dA9DfF15ZhEUMwjIHKuSw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=samsung.com;
-	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b="KNGq0ZK/";
-	arc=none smtp.remote-ip=210.118.77.12
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E+Wy2cEE;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=biOFgqye;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 411C4606A32F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:05:42 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 411C4606A32F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E4245606A335
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:06:33 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org E4245606A335
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=KNGq0ZK/
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261127120540euoutp0282eea36565d63943d1d474bccba107ca~r5W66Fn4B2355323553euoutp02-
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:05:40 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261127120540euoutp0282eea36565d63943d1d474bccba107ca~r5W66Fn4B2355323553euoutp02-
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1795781140;
-	bh=a9fm/uk5JQ3HNfgBODpdCWOALyft9Wz+Y8nV7YiTAZ4=;
-	h=Date:Subject:From:To:Cc:In-Reply-To:References:From;
-	b=KNGq0ZK/A1D5c2Ml3AhUtZiXqmbgvORs6wpuuj660jbSCbmTazbj4gDyBZi+xLwiI
-	 jtaDAZpE0HohUhdFj0gD50kJaET1JfCEre56TVD/k5h5NcXWHcg/VQdC+xwKgQDRQI
-	 TeRudICmUo1K+W5W9nkh2uKF3tVqVniMXYWMtP4M=
-Received: from eusmtip2.samsung.com (unknown [203.254.199.222]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261127120539eucas1p10b2e005bf38fd3ff3ca53b48bf531777~r5W6fzJTf0959809598eucas1p11;
-	Fri, 27 Nov 2026 12:05:39 +0000 (GMT)
-Received: from [106.210.134.192] (unknown [106.210.134.192]) by
-	eusmtip2.samsung.com (KnoxPortal) with ESMTPA id
-	20261127120538eusmtip27bba0cf597c14302cb8417c82729e000~r5W5u8fKU2205822058eusmtip2X;
-	Fri, 27 Nov 2026 12:05:38 +0000 (GMT)
-Message-ID: <d1660922-e3a1-4d13-8824-f0525f88f723@samsung.com>
-Date: Fri, 27 Nov 2026 13:05:38 +0100
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=E+Wy2cEE;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=biOFgqye
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARApACM2906439
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:06:33 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=qcppdkim1; bh=FELi3FLt/Pi/OkzOMRJ8+hRR
+	lAJ733i1PeWjERVJCog=; b=E+Wy2cEEGp8cp9ec8ULDVVwt6zaET6LAMFhORq3/
+	yfd67peeBurtHEtZgo52TiKmrOvoe6BVCBInWBPoKwApmXdisvXsEXYYW6rq/jMd
+	kx6KQKyWZnD02QTRElFZgRnP5ubMkMFDepJawLPNrPemza5H4qunjxIvs8J/59Y3
+	bTftW9LSA4ftxYqXvm3c74OQ1dXzYWD+RX6Wn7Yje1lCIjZX3rSvdpkRArqYump4
+	Q1qnk5H6VHzoVwyM79CYICdIpcoQRlH3QrSWDtEsRfqnV7qX+nAnvC6olcMMJyCN
+	JNe/jbVgU7HxNAf1lB0u4HwNHavdJFz5g7BQF42HHSvS8g==
+Received: from mail-vk1-f199.google.com (mail-vk1-f199.google.com [209.85.221.199])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6rf93drm-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 12:06:32 +0000 (GMT)
+Received: by mail-vk1-f199.google.com with SMTP id 71dfb90a1353d-5eab0467c89so8466432e0c.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 04:06:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795781191; x=1796385991; darn=vger.kernel.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=FELi3FLt/Pi/OkzOMRJ8+hRRlAJ733i1PeWjERVJCog=;
+        b=biOFgqyes6rdNtNL+EX3DLscZYqZEeElPupO9KqIN7mhBjdQ0Civ8C/Z/pDlNh3t+5
+         0N/tAfVB1UFbQ9jjBPlP4zD30tOh/zkzH3usDaNhUvDL5qOgwfkDVGMLcSaR8pMP7sKV
+         LlVSbndPqSOkyx3Pbtd51wEsJKG3KsrlepRWXMN7GWSFFSur9sKFYt34Hud2MfW2xVac
+         afBwZDFTq+oR87Px8Pv2hFQG9/m8O0fjE8EbJLo689ZsuGAtwa7uE69Av2tVD/0YowBg
+         e4RHKYMO7rnkkjlyesEMqnEoHa/yrWJeOM4paMYrM3crgGkEUtQk1z7BvMHleHOSyj8x
+         jPQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795781191; x=1796385991;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FELi3FLt/Pi/OkzOMRJ8+hRRlAJ733i1PeWjERVJCog=;
+        b=2Yusboh/IqGhfm3A6RDZN8XSScGN4w6KCI+cYS5xPvA5xU4rX3iotvTrh5MWHZ97uY
+         JI0QcTN870BehPX7+aCQ0XP1kcKL0HNF+B10f9L8X8De1E9AWYzKn7WsWaKIHXC+MF20
+         c5oYZAhDCXcBhJLQlTWoJsgH7+iudH++sw0qA82Kt4WUgdUPSa6C/4Ryhpjv42eT/rWe
+         +1pUgrCCkFZG34Dy+kCh11z07AKj0Mg9Pncz+HBIYvtswQGjzgyAUeiqict6T9hBTFl1
+         GZeqxY+kZzahc/I4C2BHSg6X1p5izPRWRCGfY6BHKXNyOAjUVL6hnMZZDvQRV2bWRiN+
+         5Njg==
+X-Forwarded-Encrypted: i=1; AL+hErGWxtFYV52BuTTa06zM00nPm/HmKRj7Jb1YDmB/TP/SStU6o/hmWIaptPWkfoW8EhZD0L+np6y/XgZbTwpk@vger.kernel.org
+X-Gm-Message-State: APuU4Z9Uias+3wHFgcuH4rambVx48792xwwXlAZh8lwGrZ3a+fACGFfK
+	Z8AeFBBeqBv9DfS9AiQPiv6kPriJXvTR9h6CqENK2DDkCc1SIqYsom5b5mqIEEWy9aMNbld5J9w
+	k577JDhdjdRaIIPMBWaA08mxL3xXPT+oTeTyw3wBBkvMd1fbNJzXT7qP1+nNq/cgQTr9J
+X-Gm-Gg: AZFdTZfMvTQD9R9869epaeTiqxSG7C0gmC51fbHWezz80u2LNsmuLD/fCKAR2PmYJac
+	06cgHPrYRuQBFOKs0LoZx6QEJ0SOieML/wAKt7cunVPXgRM87ZdANDbpTdMFAOJlqJX2V/PX6Gk
+	imB2Yh9SVLLKaxHQiPicpxcDePSrgapUueBNqzqzkPs0a9i0+ZlkEPyewMI+awHzzTHSk01rYRj
+	bBlnsvHao2PV2C+Rgm2DnDxzJCgeLWpBAavgs7jJAKjb26490/OX7pRO8uFnF3JBA7jYo9jrG5F
+	ZIpNqTOrctp6PQQVwq+Gyp/410JuJ4owS5K1+3Fhh/Xwdrhn95lwV4AP+6Qjlff4ZAgAZS2sceO
+	2svZAMaRLLdxshAEVnOW4Cc7S4EgjqA4qwLGt2WbmV1ACSUM9BDPGXVVKMtJVWwxsghCy2z1K7s
+	kWApUq0MfaDFKQjIhhxBSfz5HpJ5u0VEntvsDQyoC8YDFm3OvhLyUsQAcaabbKcw==
+X-Received: by 2002:a05:6122:32c8:b0:5eb:7686:48f5 with SMTP id 71dfb90a1353d-5ee8af0af4bmr14128016e0c.8.1795781190756;
+        Fri, 27 Nov 2026 04:06:30 -0800 (PST)
+X-Received: by 2002:a05:6122:32c8:b0:5eb:7686:48f5 with SMTP id 71dfb90a1353d-5ee8af0af4bmr14127954e0c.8.1795781190044;
+        Fri, 27 Nov 2026 04:06:30 -0800 (PST)
+Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
+        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bd04451csm5860852e87.59.2026.11.27.04.06.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2026 04:06:28 -0800 (PST)
+Date: Fri, 27 Nov 2026 14:06:27 +0200
+From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
+To: Michael Burch <me@michaelburch.net>
+Cc: Rob Clark <robin.clark@oss.qualcomm.com>,
+        Dmitry Baryshkov <lumag@kernel.org>,
+        Abhinav Kumar <abhinav.kumar@linux.dev>,
+        Jessica Zhang <jesszhan0024@gmail.com>, Sean Paul <sean@poorly.run>,
+        Marijn Suijten <marijn.suijten@somainline.org>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Jun Nie <jun.nie@linaro.org>, linux-arm-msm@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Subject: Re: [PATCH v2] drm/msm/dpu: count the pending frame before kicking
+ it off
+Message-ID: <kcjghu2lpoijzanqtdvd3zid6g4onyesvsouqnehepo6q7liws@af36abycxzzh>
+References: <20261013172703.12273-1-me@michaelburch.net>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -64,104 +127,76 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Betterbird (Windows)
-Subject: Re: [PATCH] Revert
- "iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper"
-From: Marek Szyprowski <m.szyprowski@samsung.com>
-To: Leon Romanovsky <leon@kernel.org>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, will@kernel.org,
-	robin.murphy@arm.com, honghuan@amd.com, Jason Gunthorpe <jgg@ziepe.ca>,
-	joro@8bytes.org, prakash.gupta@oss.qualcomm.com, iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Content-Language: en-US
-In-Reply-To: <c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
-Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261127120539eucas1p10b2e005bf38fd3ff3ca53b48bf531777
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
-X-EPHeader: CA
-X-CMS-RootMailID: 20261125135138eucas1p141ba6b5e09623562e2033e290fba811c
-References: <CGME20261125135138eucas1p141ba6b5e09623562e2033e290fba811c@eucas1p1.samsung.com>
-	<20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
-	<a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
-	<20261125183419.GB774860@unreal>
-	<c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261013172703.12273-1-me@michaelburch.net>
+X-Proofpoint-ORIG-GUID: q_pc0myZM8832tSPQG07nQ7P4kErHME_
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA0OCBTYWx0ZWRfX2P9hoLjzInjE
+ nPSY26kigQ2/7sDaiYleObiE8xSbfkN/cMdEhWhcNOQ3Gxl9PgSg76jbuMTeyqBxAH0Cp337a7G
+ Ghzy4JY6XvIylhk88UA1YfMoJxd2gP/0w82wh4UXELCFWn0P9BCljt5hgd2cBi35ICoyLtrLQJs
+ vpVkmLrGj0ftR0fe5/EFOAsxrlBs2y+JWkYR6T3VK9gO3bI15hJbnONPZowzHxeaUintU9vS7Cb
+ XzRcaw6fFw+/Y2qFiw+XYnm/QTVZflM2uUAsROVCMSgu8VCeynjftzB8sWb0zA2WFpKL7y6dFJe
+ RRCcfBzse+MXdhlG2hcNGo4jrGgFjZLC/goxNgRxtF8+6DnYkoe/oAoD/tBCvixFzVaq+Y4fArR
+ 59i7hT4doboWlyxOLiTKIbRmNWPyXjJ07sKDQYYD8osQvZwflDrrkFhahyAV0iUwt2i8nEI+X4A
+ B8x4WpD8WKQSQyogG8A==
+X-Authority-Analysis: v=2.4 cv=cpkOAF4i c=1 sm=1 tr=0 ts=6b097248 cx=c_pps
+ a=+D9SDfe9YZWTjADjLiQY5g==:117 a=xqWC_Br6kY4A:10 a=kj9zAlcOel0A:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=eoimf2acIAo5FJnRuUoq:22 a=VwQbUJbxAAAA:8
+ a=OZ7Xlw-yAAAA:8 a=EUspDBNiAAAA:8 a=o7I13pbtrd0snOxpb2YA:9 a=CjuIK1q_8ugA:10
+ a=vmgOmaN-Xu0dpDh8OwbV:22 a=qwMvOfr3u-Fs83Rmfh-C:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA0OCBTYWx0ZWRfX71v67aUAAqNZ
+ SwTBlgEeGGXjfg7gG5emVgBlOBJ0s/TNtDgMyR4Yoiiwry6xc4NfeIFUvE/oIN5S6Y4OUJos1Tc
+ SvoHbfVbJEW+4I2othTPufWo0VFYmW4=
+X-Proofpoint-GUID: q_pc0myZM8832tSPQG07nQ7P4kErHME_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-27_02,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 adultscore=0 priorityscore=1501 spamscore=0 phishscore=0
+ suspectscore=0 malwarescore=0 lowpriorityscore=0 impostorscore=0 bulkscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270048
 
-On 27.11.2026 12:28, Marek Szyprowski wrote:
-> On 25.11.2026 19:34, Leon Romanovsky wrote:
->> On Wed, Nov 25, 2026 at 06:21:06PM +0100, Marek Szyprowski wrote:
->>> On 25.11.2026 14:51, Sibi Sankar wrote:
->>>> This reverts commit 1acce29926d93f3eba427696fe3da6451504dae2.
->>>>
->>>> Before this commit, dma_iova_destroy() unmapped through
->>>> __iommu_dma_iova_unlink(..., free_iova=true), which set
->>>> iotlb_gather.queued from cookie->fq_domain, skipped iommu_iotlb_sync()
->>>> and freed the IOVA with the queued gather, exactly like
->>>> __iommu_dma_unmap(). After it, dma_iova_destroy() calls
->>>> dma_iova_unlink() and then dma_iova_free():
->>>>
->>>>   - dma_iova_unlink() never marks its gather as queued and always calls
->>>>     iommu_iotlb_sync() after iommu_unmap_fast().
->>>>   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
->>>>     the IOVA goes straight back to the allocator through
->>>>     free_iova_fast() and never through queue_iova().
->>>>
->>>> DMA-FQ domains therefore get strict invalidation on this path. That
->>>> includes the block layer's blk_rq_dma_map() path, which NVMe uses for
->>>> all data transfers, so iommu.strict=0 has no effect on NVMe I/O.
->>>>
->>>> hw/sw details: Qualcomm Glymur CRD: SMMUv3 with no RANGE_INV,
->>>> 	       4K pages; NVMe SSD on PCIe Gen5 x4
->>>>
->>>> Fio sequential read/write numbers:
->>>>   Domain                          seq write    seq read
->>>>   DMA (strict)                    2694 MiB/s   2693 MiB/s
->>>>   DMA-FQ (lazy), flush queue      2707 MiB/s   2803 MiB/s
->>>>     bypassed (this regression)
->>>>   DMA-FQ (lazy), flush queue      10.6 GiB/s   11.9 GiB/s
->>>>     used by dma_iova_destroy()
->>>>
->>>> Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
->>>> Cc: stable@vger.kernel.org # v7.3+
->>>> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
->>> The performance data clearly shows that the flush queue was there for
->>> the reason. Together with this revert it would probably make sense to
->>> apply the v1 of the reverted patch:
->>>
->>> https://lore.kernel.org/all/20260701092033.422867-1-honghuan@amd.com/
->>>
->>> Leon, do You see any other option?
->> These numbers shows clearly that we had iotlb_gather.queued != 0
->> and never performed iommu_iotlb_sync(domain, &iotlb_gather); while
->> destroying mapped IOVA.
->>
->> I agree with you, v1 is the easiest solution, however my preferred one
->> is to cache gather when it is created and keep it in dma_iova_state 
->> structure for whole life cycle of that struct.
-> I've played with the code (using LLM ;) and there are some issues with this
-> approach:
->
-> 1. tso_dma_map_completion_save() copies the struct dma_iova_state by value,
-> what breaks internals of the struct iommu_iotlb_gather.
-> 2. adding iommu_iotlb_gather to dma_iova_state increase the struct size
-> from 16 to 64 bytes, what lands in every NVMe request, RDMA rw contexts,
-> TSO maps and HMM.
->
-> I've decided to put only the 'use_fq' bit in the __size entry and baked the
-> fix. It looks quite nice. This approach solves both above issues, although
-> it requires to also fix some drivers which already pokes __size directly
-> instead of calling dma_iova_size().
->
-> I will post this in a few minutes.
+On Tue, Oct 13, 2026 at 12:27:00PM -0500, Michael Burch wrote:
+> dpu_crtc_commit_kickoff() increments frame_pending only after
+> dpu_encoder_kickoff() has sent the frame to the hardware. If the frame
+> completes before the increment, dpu_crtc_frame_event_work() sees
+> frame_pending == 0 and ignores the frame-done event. The increment that
+> follows is never matched, so the count stays one too high until
+> dpu_crtc_disable() resets it.
+> 
+> With frame_pending stuck at 1 or more:
+> 
+> - dpu_encoder_resource_control(FRAME_DONE) sees a pending count above 1
+>   on every frame and never queues delayed_off_work. A video-mode encoder
+>   therefore never reaches ENTER_IDLE and keeps its vsync interrupt
+>   registered for as long as the display is on.
+> - dpu_crtc_frame_event_work() never sees the count drop to zero, so
+>   dpu_core_perf_crtc_release_bw() is never called.
+> 
+> On an X1E80100 laptop with a 120 Hz eDP panel this left the vsync
+> interrupt firing 120 times a second on an idle desktop: 14,407 vblank
+> callbacks against 21 commits in 120 s, with no vblank events requested
+> by userspace. Every frame-done took the frame_event_more_pending path
+> (591 of 591 in one trace) and the encoder never entered idle. After a
+> suspend cycle reset the count, the same desktop showed 3 commits, 3
+> frame_event_done, 3 encoder idle transitions and 25 MDSS interrupts in
+> 60 s.
+> 
+> Until commit ad06972d5365 ("drm/msm/dpu: Reorder encoder kickoff for
+> CWB") the increment came before the kickoff. Move it back: count the
+> frame in each kickoff path just before its encoders are kicked off. A
+> clone-mode commit that fails its encoder lookup is then never counted.
+> 
+> Fixes: ad06972d5365 ("drm/msm/dpu: Reorder encoder kickoff for CWB")
+> Cc: stable@vger.kernel.org
+> Assisted-by: Copilot:claude-opus-5.5
+> Signed-off-by: Michael Burch <me@michaelburch.net>
 
-For the reference:
+Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 
-https://lore.kernel.org/all/20261127115849.2780625-1-m.szyprowski@samsung.com/
 
-Best regards
 -- 
-Marek Szyprowski, PhD
-Samsung R&D Institute Poland
-
+With best wishes
+Dmitry
