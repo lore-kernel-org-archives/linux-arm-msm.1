@@ -1,122 +1,88 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795806651;
-	b=MysbbPy5sp2+72+Iid9ACdcISfgTmBwt542wMJlNXP9UkUJbgXcwjhLp13qTHWNZ3LHi
-	 ew71VqUQZsdDYXrJxfifXIQSdRijQsEV7NCp3ULyJ6T2QmbPEULtXJCRoa970CKGoZsOH
-	 cPoIGK3oYZucI9PsWNsIgxvv69ouGC0Oe6qB/SwSgfJBDcS+QBYVOpXan3qNRt1owpLBZ
-	 PYxF7vKGAkpYnzuy4PP9xOG1AvLcjBji7vIgxcBrS7WfPkv4i4SXTPqtqLZ/ucd94Q/Ed
-	 xeXsAfzPV3z7GgqO6rLS9fmV4F3STkuKd8Gt2vf0QFC2A4xJZM2zMAnXQqoke00W/uw==
-ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795806651;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:MIME-Version:
-	 Reply-To:From:Date:X-Gm-Features:Message-ID:Subject:To:Cc:
-	 Content-Type:X-Authority-Analysis:X-Proofpoint-GUID:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Spam-Details-Enc:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=qUJKQY+6chdkwpLeZq8BndlS+hMFSdfQnsQ2JazMNJ8=;
-	b=iY7u26p0Tz0hbstsroPf9YnGBvi1h1HfZK9D+w+1fG7gkhlXTBfx1RiffoWpIH0zQnEi
-	 asd5aI4n3C8+2dIQC7HSNjXjxDhDcb8gUnKpHvkfzNtZdebP2VSSa02x9ovaYh2kyrmBY
-	 SshKfbjMEaDT/9rP2kDQlvvVkUskNoOgGEsppBQarDVABMDB79VED5SaybWgsF/AapTWj
-	 OHkp257AFNgyMl+JU5+RcAQvz44ABzK1/ZaDvUCjYruxYHt5UNEdzUYw4oTEVbkvAKs5u
-	 gNihx6fGiqgD+144s+zn25HTU/dCsaVC+gGHsOeBHdp3A/BpbMOFDFW2JUQaT2P3DwQ==
-ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eCvRqXDb;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DIntB5uP;
-	arc=pass header.oldest-pass=0 smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.160.51
+ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
+	t=1795807260;
+	b=A+A2ykHcvMUMuTVVhyaqUzvAfxQJh81tJgLgwTtStZ3H3PyjcjdFV52MlEBw11gOUc5s
+	 ii+++my4ozUl/DB1k6fOPOKhy/5MkA91b1xow7cMIkZQeVxrT2Vuxd2ZieSXeOioGcFDY
+	 nCIC+Z85aglV3a685xqvoHVyoYi7CRNxUGH064l1cZAlfwmlBuTcRjZczM4eGFuNLD3SO
+	 eyo2SIYWCXyazIlF3a5bNx/OpvmmAJ2yDj/QuYL4DZ25SwsEj1uadS9pIuN6awWcb+VEI
+	 rOWoDBXyi1SV7kIG+0e5locwYMPrUXQnof7dJgROksVxNjmYf+6PwXPsMMzM4H1pbpQ==
+ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795807260;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:
+	 Content-Language:From:In-Reply-To:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=spMqGTfvnGebTBmWprGkb0+x7mXa+78W7iVJ0EOMLGA=;
+	b=3gJbOtlv1PGunMx0+zP7fbaMx3U1rVqyKfBDPuHxOrn6VpoU1hFS/5l82+7eWRxYBjJo
+	 O3PefexwY4O2+SrAjhwqZFEbKw29vkJIy4f1f4AqnqIUwoD53g6vgASeuE3rwCoLzSTTO
+	 0kLwyQXzCWQPq7J8GMWW6fWngNkzd/bYZiU8vgrshiZKZ+i/9g+N/hKtxJTUPD44wCJIg
+	 K/6qCE73RczBygS5GTIxe1US2lDfH+DEzyjeK2TCABB6fWeFQh4pc47+/5xBLtfqBnXzN
+	 pbiwStcO8JooN2NnPouCGNsbVMqNhfi/SzhsGU366X3VBa0do+4f4O9A0UNiKMFOgZQ==
+ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
+	dmarc=pass header.from=riscstar.com;
+	spf=pass smtp.mailfrom=riscstar.com;
+	dkim=pass header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=zpxwhrjq;
+	arc=none smtp.remote-ip=209.85.160.51
+Received: from mail-oa1-f51.google.com (mail-oa1-f51.google.com [209.85.160.51])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 98409606A31C
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:10:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 98409606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31B50606A31E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:20:59 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 31B50606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=riscstar.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=riscstar.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eCvRqXDb;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=DIntB5uP
-Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARFpGS02032584
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:10:49 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-type:date:from:message-id:mime-version:reply-to
-	:subject:to; s=qcppdkim1; bh=qUJKQY+6chdkwpLeZq8BndlS+hMFSdfQnsQ
-	2JazMNJ8=; b=eCvRqXDbIa3DKZBgk8oFuNz0VcpsB2ggJihA1wNBhB/S9c8C/aw
-	ZB/08H4o2ShRZakLs7qc+Dfm3yi+We3BUHd/F0e+9iWl3qjK8dmBnXJi7ccxiKO/
-	9zrIYIlQmSjcbwvmNFKjp7YJrRcp1TCSdrCbifdxu6gwppBYIhecZNRfkjnFmkJc
-	I75yj5TtaR84S5v3Pq15gzsaJA70t9cQ40exEALvggGXUXAo/f+2VuQqLB+ds7gq
-	IJkJ/oLx0HDN8/8KlJNmR5Ax0820DOyBTXEgk+k5UHi1HriTZYBRUICdzudJBviA
-	jCHyoVOpwjLgl8aOpUT4AKLpgMGp0oDyZ8A==
-Received: from mail-oa1-f72.google.com (mail-oa1-f72.google.com [209.85.160.72])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j6ru3bt8w-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:10:49 +0000 (GMT)
-Received: by mail-oa1-f72.google.com with SMTP id 586e51a60fabf-46509ab0149so6277847fac.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:10:49 -0800 (PST)
-ARC-Seal: i=1; a=rsa-sha256; t=1795806648; cv=none;
-        d=google.com; s=arc-20260327;
-        b=gagL247lksaYPPRzliv/cUPJa6jJ/MCkHvjb/IXBeNL8k4ffYMn866+WN2VStQM2gE
-         /are+uFYn8BTH7pwqPeV9rEmeBJ45kypK/+p4jamUduYFICztGG1f5394XshMNmArM5y
-         xWpjoivUKd5eszX/V3tDf4/QwhfZHLv0Q7rBn1f2LWXHKkyGS2CwQUevq0kC1TlyNEAe
-         c4MHjqFRiqfI2k1sRndY4LIvrq/RF57UDmms0+5+bleNxeHmUKhiOKDWfCO3MyqACvO8
-         2pA1PbikoVeiDPxn6fHxV8Xxb7D2QRzVJqMfTcry4mZbLPsEchCjPrp+rEbhetuJ6p0z
-         40NA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:reply-to:mime-version
-         :dkim-signature;
-        bh=qUJKQY+6chdkwpLeZq8BndlS+hMFSdfQnsQ2JazMNJ8=;
-        fh=3s6LjUL/tLG6/F8WcolfERaP3TzGpn79fE7mu9AFuDo=;
-        b=rCV5U9MIJ7nDRq9aVlKzI2rnXrC98v+o0Ma1oqLQ8n/xnTyL/KiYsj1YXAXMHeZdX5
-         Nd1aLEpNxvIW65sEZEf+XbJVWOKlLX+fww1UA2OiZXNby8FhXDMBQwSDR4UYjWF47OSi
-         S5kikij0kwFeYoR02Sl7ievc6o0ZkpsDkwQ4VQ27gftdBfhH99XXIZYwwdocEb0o2E4v
-         Di+I0SGO14DsDPGX57e2G2B7T9a+uLYQzLL8cOx8j+hXzrOOLTy3ga8sJ/p2jFuudHc5
-         otVJV6Xm+PM5a5aAk6w5vWJTQevjW60rs0k+CQaiobV97enxholyMw9fPu4kD0VPiL8x
-         730w==;
-        darn=vger.kernel.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+	dkim=pass (2048-bit key) header.d=riscstar.com header.i=@riscstar.com header.a=rsa-sha256 header.s=google header.b=zpxwhrjq
+Received: by mail-oa1-f51.google.com with SMTP id 586e51a60fabf-4adea5b7a2fso3073067fac.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:20:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795806648; x=1796411448; darn=vger.kernel.org;
-        h=content-type:cc:to:subject:message-id:date:from:reply-to
-         :mime-version:from:to:cc:subject:date:message-id:reply-to
+        d=riscstar.com; s=google; t=1795807258; x=1796412058; darn=vger.kernel.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=qUJKQY+6chdkwpLeZq8BndlS+hMFSdfQnsQ2JazMNJ8=;
-        b=DIntB5uP471BnRvvjkReF1dfWGcg7z0pqq9LaR8amAuKscao9SJkt11Z+DwwI5odCQ
-         pbaz5mWmXD2Ss5v4i94nX3mXs5E7VRDamjvTKqmld6dN+xJk0eNqDOLW4jZfzJMwxivV
-         v3e+kszPhHPgJhjcxFCgxs6BEvuxMnGyb6bUAxhvnsLs7AtX9VTtrt0CJuZRFJUqnzpO
-         8tN0qjqqPu0VzstqsZenxifyU0CW5MfuG8lv2vChSyTqEStsunEdAlPjMWsI+OYXUUrc
-         brWzHM43h7mQV6zfVLkyOiGHMHUCNsbmUWcGUejYQWvfUBkzrJ9EsXo4UqcbfGS6+F5z
-         ijtA==
+        bh=spMqGTfvnGebTBmWprGkb0+x7mXa+78W7iVJ0EOMLGA=;
+        b=zpxwhrjqox6YfuCTWrzRVOWk/4CVM967EA+Cngu4+HkdwOwzD5v5CkTuX26trlmyRz
+         cnUAca3Rt+Xic1vR7J4cW8ymBJKXorlJT2fB8tHIUHNIWykz+EvzjlLrta+B2wZjzxnd
+         n0MOnfiLYicEwWeVjayTpdmUd5EwFTV7INcfzr1aBCm6Fs7wCL5Ef12OC6ZuN0dQge06
+         XnYz1i0+1huzx96eJIdp6bsuYUReBtu323z/4W9JnVJ3PlZ1m35gXvqbbKIKs9P0emlJ
+         //KkKxeamwWNRf2xLYSJKMkJ8JZCpPCPz82sNL88rq64bISmxAbq234Hh38fVoTf7pW1
+         TsFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795806648; x=1796411448;
-        h=content-type:cc:to:subject:message-id:date:from:reply-to
-         :mime-version:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1795807258; x=1796412058;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qUJKQY+6chdkwpLeZq8BndlS+hMFSdfQnsQ2JazMNJ8=;
-        b=SmEi4InFqdYLZCohTftokATTNLyUAgjQfq+jixL5RXR+zrwhkmB9diJCANOBitctbe
-         Ju8brKI8oMJhcPj6bEFe4kCAoMfn1o97kWEj28kuRrpj3oEFwxUm7RcT03C506gGwEje
-         oLdxg/8cr2ykKmP0nwc/YzWxgAMLC1ztDd8Z0hoN+rLxobxlqaXJpm5qQzCVVzsRyWbt
-         S4JCnGOgCRqyhViMaEYn5eItu8J7fy78n0YpejswwK43L9qV1k3vk8XEP1oGmI5ZvubM
-         nUKDHAIk/YwzQDmKtA9QK2gcwbp7os2+NN1p+6g8OgRRI6yLn5omn26JmH2yIqk/DwH1
-         WoyA==
-X-Forwarded-Encrypted: i=1; AL+hErETPY/0+XoZbTsSI/rr+xKjO6D4n6DSnhTAdeuyG4tWzofp5h2NLCjkBJIWSb3cDUJfJpOL2D2/ESm1GvSu@vger.kernel.org
-X-Gm-Message-State: APuU4Z+LcbZ53a4apKxDdoAautkEF19AucWySzEed4gWOZ3Dc/P9Mtcm
-	IMZcvZ13xiCJYdLbzm2Oir3Z64p2At+W9lTLAxiRl3NxzpITvnuyK7dlo0fj1SRWFCL8Zz8SYt1
-	Tuwpib+Btw4w+8o6UryouXakSg7wyXhoZOb6H1elhSTg4BavY9errLNYmK4P0klXaWTVBEt6PMo
-	HCNVneAcZwYn/7x8ItFSKSVmsxXqeZdF+h6lMUOJSH5MQ=
-X-Gm-Gg: AZFdTZdx95rucog0LhcjP8JsUhWgVRfmZ1696Yg6KsKqA4zMFR4kdbxiIv7bWVeLkPY
-	9bo2avwvAq5m1jEZ4yl+6DzTtXmzLsOebknZqtp/R85T/6cWnj71KbxW0j/a/sHybzFnrPaGAh5
-	nc8g0/4DdRe6VS9ThAUCg2z9zIXodn1it1tV1uhg/X8rFxE/bO2toDfAMFuNhWfGXI1GXvmKYTZ
-	SMZkXi+c8G+f/Dl5H2guA==
-X-Received: by 2002:a05:6870:c087:b0:4a9:58d3:b60c with SMTP id 586e51a60fabf-4bc835713b6mr23882306fac.32.1795806648411;
-        Fri, 27 Nov 2026 11:10:48 -0800 (PST)
-X-Received: by 2002:a05:6870:c087:b0:4a9:58d3:b60c with SMTP id
- 586e51a60fabf-4bc835713b6mr23882274fac.32.1795806647955; Fri, 27 Nov 2026
- 11:10:47 -0800 (PST)
+        bh=spMqGTfvnGebTBmWprGkb0+x7mXa+78W7iVJ0EOMLGA=;
+        b=fYoUXJ9nj9Oopmcu3qnzv4z1E4juI6O/djCjHtIkA8UsedKjkwP1deLz+iuW8lN570
+         w+OPBbkTEcsM564/AEk448rKIeHjkqbKLxoDB/WCZDHiA192Th1crjs2Mxw123N8l55D
+         kcNO8Z0Ee/4SaGQFeGqmixKlMurhc+NM63/kcFEWWc2xaVD2+CmBXovdfGoGR66J7s9W
+         8qug82wi1BHCrayLGADXWZ6P4b4wVanorHbllR6Vh+gMcWW8tEclyOwlaQAd5P7FWlya
+         JRSulwfexmg+2UmCulas45sqUsD3zlbGJCFd3nAHOai5EZbJ0DSAGMOc+1eeFaevDf19
+         //+g==
+X-Forwarded-Encrypted: i=1; AL+hErELpU10xAr/evn+dd/ORU+SOKs6QBG1I3LAHFfe1VAmT/ex3EPAicBoPVKNsylaEgcpjPPBwgWpLdhYRVVp@vger.kernel.org
+X-Gm-Message-State: APuU4Z9e3iV9Tkah9QfensrjW1Ald97DYXjumVPmJJBpa7D0vHUFar1E
+	M05sOrbMZlo0uSvhRJLOlbCkabKmfT6XB4EDZ8RFL0Kl1XcIirsqaDqgHI6w5Cm5NE0=
+X-Gm-Gg: AZFdTZcdyFgOdDcyBATBr3jAyXsv8lNLCYz+XGUWHHjYLVu2ydDRjxxQ5VkB571j39/
+	ip5ImiAUO/26/kebhABohwTcs2QOy6XPAoRbvK60WMIJ46n2as5U7HVcuhMrgZPscGkNtWDOZ93
+	NVnUtMmQ81ir5ro75PL6NLQS2nWvM466tvcYF5MAd6TTKIbtIBdzN1tAIqURdplfmEu1Cnw6nb7
+	WeftyiKh6az86WyGwtXf8P11b9kzNiDZ16Qoquz7VpzL9OjDAEJilHOhfIwWuQW5aDBtgcplQyR
+	aOy2/zO68pgpw7/ej5sEQ9BfZev9rgFEq28iZRl2XY5mNNvth86kGU9Klw6/cVTzFjoPr8nrlh2
+	nvVlDaZGtS8JCqINW3KAuPDguKLf1Tt5ZyD+Iq8lEdjs8z5+hwdel0qGQvYgfNogYZjam3/Pi4l
+	CmGPCNqWGB18Wd2Oy8dNEUu9W/R5fPHX9ptMyQngO6aSOLpKzP4e5gwO6vip/OmekH3Jw0Zfnk7
+	BYhuLxPYWWQUJ1fJKkPJ0dCgdosub3OLziWe0rKpEynAX82qrJSrOPZeEhoK/Dd5Qes7mM826B6
+	/7b7nCyg9Em52Y8Md3U3dRguVRrG8bZK
+X-Received: by 2002:a05:6870:6b8b:b0:4ba:35b1:7227 with SMTP id 586e51a60fabf-4bc7782a116mr20876208fac.0.1795807258018;
+        Fri, 27 Nov 2026 11:20:58 -0800 (PST)
+Received: from [172.22.22.28] ([76.156.233.211])
+        by smtp.gmail.com with ESMTPSA id 586e51a60fabf-4bc5ebdc0acsm24208446fac.3.2026.11.27.11.20.56
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 27 Nov 2026 11:20:57 -0800 (PST)
+Message-ID: <5f389412-a036-4792-bdd9-e86377ee7e44@riscstar.com>
+Date: Fri, 27 Nov 2026 13:20:56 -0600
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -126,116 +92,149 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Reply-To: rob.clark@oss.qualcomm.com
-From: Rob Clark <rob.clark@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 11:10:37 -0800
-X-Gm-Features: Aa3M54or7po1wOJDBldCWAtXw4-4b2F5L7dB7l0quEcTlymd-Cv_Z8mSfMZvETU
-Message-ID: <CACSVV03hO_QBSuk9ueAKve0PF5wkXYY0FXWBq1c3mvP374Ggcg@mail.gmail.com>
-Subject: [pull] drm/msm: drm-msm-fixes-2026-10-27 for v7.4-rc5
-To: David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>
-Cc: dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-arm-msm@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-X-Authority-Analysis: v=2.4 cv=cOF1IVeN c=1 sm=1 tr=0 ts=6b09d5b9 cx=c_pps
- a=Z3eh007fzM5o9awBa1HkYQ==:117 a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10
- a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22
- a=_K5XuSEh1TEqbUxoQ0s3:22 a=e5mUnYsNAAAA:8 a=AAlKfgPkOSAJutToXukA:9
- a=QEXdDO2ut3YA:10 a=eBU8X_Hb5SQ8N-bgNfv4:22 a=Vxmtnl_E_bksehYqCbjh:22
-X-Proofpoint-GUID: bfJfFzG9uNF6RceSlQRHmTFGm1nwE6E1
-X-Proofpoint-ORIG-GUID: bfJfFzG9uNF6RceSlQRHmTFGm1nwE6E1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA3NiBTYWx0ZWRfX3A1Vg2akUtth
- fkcvyBG4kj+wj+o0iNphPoMdNnKa6kpn0tP1H6qn6/LLNPyAswvss5ehWh6IPR8fYdA/BWuGien
- 6coyhTyFeFfszhVdx/8URXn/BgJGsATy/NItGbsZM9SlfNUZfiryF3LiTgGnPZSVWJwpfgBzzBq
- v3KPrA/qDjcrdhtzlkldZlp1hYrx5aUekFROfWOEnit11I//XFJVxG+9P/lkyHWAyg7mzBWRjhW
- G/rFqInPlKzunj4FQ8ICZ5ZssYnjbblUZF8lR0YHVXud4J9FwyTdEbBNKeWcKLxRLwsgoDmOwQh
- K7jTmdUZg7NoqKJLyVandTBOpGYW3EuoQttaoGhyNZ9YkSSRUItPHDLPBYFXSxyJa19INmwBYJD
- rkDEr+fj34GD+w+vm9/7+vV+loN+Qt2zkQ5deDkbElP5kts3o5Yd6N6+PVZ45YwNkvb6aPCZUaH
- p3s+tukozzLpzwb4Ksg==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA3NiBTYWx0ZWRfX4ttjrwNvcRVC
- uqL93ieQNQ7vq8aoFLeoAgSm5Zo/dAvlhOvQ4l/mge2fj7ycZ1cbD2YHNOg1FsHrX74Uifi1GQJ
- gsE82WJytmFJaDmkHYoW3aeCF25nfok=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-27_03,2026-11-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 priorityscore=1501 impostorscore=0 phishscore=0 bulkscore=0
- adultscore=0 spamscore=0 suspectscore=0 malwarescore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270076
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/3] clk: toshiba: introduce a TC9564 clock/reset
+ driver
+To: Lorenzo Bianconi <lorenzo.bianconi@oss.qualcomm.com>
+Cc: sboyd@kernel.org, bmasney+clk@redhat.com, jbrunet+clk@baylibre.com,
+ robh@kernel.org, krzk+dt@kernel.org, conor+dt@kernel.org,
+ p.zabel@pengutronix.de, andersson@kernel.org, konradybcio@kernel.org,
+ abelvesa@kernel.org, daniel@riscstar.com, mohd.anwar@oss.qualcomm.com,
+ fabrice.gasnier@foss.st.com, alexandre.torgue@foss.st.com,
+ marex@nabladev.com, changhuang.liang@starfivetech.com,
+ devicetree@vger.kernel.org, linux-clk@vger.kernel.org,
+ linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20261125202141.1288493-1-elder@riscstar.com>
+ <20261125202141.1288493-3-elder@riscstar.com> <awgCFMH6xerE510f@lore-desk>
+Content-Language: en-US
+From: Alex Elder <elder@riscstar.com>
+In-Reply-To: <awgCFMH6xerE510f@lore-desk>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi Dave, Simona,
+On 11/26/26 3:55 AM, Lorenzo Bianconi wrote:
+> On Nov 25, Alex Elder wrote:
+>> Define a new platform driver that manages clocks and resets implemented
+>> by the Toshiba TC9564 SoC.  There are 21 gate clocks that can be enabled
+>> and disabled, but currently only the clocks that are (or will soon be)
+>> used are defined to be controllable.  There are also 13 resets that can
+>> be asserted or deasserted, but support for some of these is omitted as
+>> well.
+>>
+>> Two registers manage the state of the clocks, and two others manage
+>> the state of the resets.  All four registers are found in a region
+>> mapped for MMIO.  The region is provided via a BAR on one of the PCI
+>> functions embedded in the TC9564 SoC.
+>>
+>> The I2C and PCIE clocks and resets are treated as CRITICAL, meaning their
+>> state should never be changed (and a warning is issued if changing their
+>> state is attempted).
+>>
+>> Co-developed-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Daniel Thompson <daniel@riscstar.com>
+>> Signed-off-by: Alex Elder <elder@riscstar.com>
+>> ---
+>> v3: - Fixed problems/garbage in the patch header
+>>      - The Kconfig option now depends on RESET_CONTROLLER, and can now
+>>        be enabled if COMPILE_TEST is enabled
+>>      - The generic gate clock controller code is now used rather than
+>>        implementing a custom one
+>>      - The PLL and internal fixed clocks IDs are no longer available
+>>        outside "clk-tc9564.c"
+>>      - The PLL is initialialized, followed by all fixed rate clocks,
+>>        followed by the gate clocks, to ensure each clock's parent is
+>>        initialized before the clock is
+>>      - Updating the reset registers (read/modify/write) is now protected
+>>        by a spinlock
+>>      - "Unnecessary newlines" have been removed
 
-Fixes for v7.4 as described below.
+. . .
 
-The following changes since commit d024361c631b3f020a26c07d683e5103404b0fbf:
+>> +struct tc9564_clock {
+>> +	void __iomem *ioaddr;	/* Mapped clock/reset registers */
+>> +	spinlock_t lock;	/* Protects reset register updates */
+>> +	struct clk_hw_onecell_data *clk_data;
+> 
+> I think it would be more readable to have 3 different pointers here:
+> - struct clk_hw_onecell_data *clk_pll_data;
+> - struct clk_hw_onecell_data *clk_fixed_rate_data;
+> - struct clk_hw_onecell_data *clk_gate_data;
+> 
+> (using the same logic you implemented for fixed_init, gate_init stucts).
+> 
+> Doing so, I guess the code that is allocating the clock data would be
+> easier to manage.
 
-  drm/msm/a6xx: Split out a7xx/a8xx device tables (2026-10-10 15:00:45 -0700)
+I don't know that it's easier but it would avoid keeping
+track of the difference between array indexes and identifiers.
+I think I was trying to avoid registering three different
+providers, but I think you're right, the result will be
+simpler and more readable.
 
-are available in the Git repository at:
+The PLL is a single clock, so it will be more like:
 
-  https://gitlab.freedesktop.org/drm/msm.git tags/drm-msm-fixes-2026-10-27
+	struct clk_hw *pll_hw;
 
-for you to fetch changes up to cdc466fd769b9f29887f5921d2db5b7205120973:
+So I will implement your suggestion.
 
-  drm/msm/a8xx: Add missing preempt_record_size (2026-11-25 05:31:48 -0800)
+> 
+>> +	struct reset_controller_dev rcdev;
+>> +};
+>> +
+>> +/* Indexes into the fixed_init[] array */
+>> +enum fixed_clock {
+>> +	CLOCK_62_5M,
+>> +	CLOCK_125M,
+>> +	CLOCK_250M,
+>> +	CLOCK_312_5M,
+>> +};
 
-----------------------------------------------------------------
-Fixes for v7.4-rc4:
+. . .
 
-GPU:
-- Fix GMEM_BASE on gen8
-- VM_BIND parameter validation and related fixes
-- Reset preemption records across suspend
-- Fix missing CLX request
-- Fix lock leak
-- Add missing AQE fw for x2-90
-- Fix 1/2b alpha filtering precision on gen8
-- Fix priority inversion caused by commit 38f922a563aa ("drm/sched:
-  Reverse run-queue priority enumeration")
-- Fix missing preempt_record_size on glymur/mahua
+>> +/* Caller must free the returned pointer if non-null */
+>> +static const char *clock_name(struct device *dev, const char *name)
+>> +{
+>> +	return kasprintf(GFP_KERNEL, "%s-%s", dev_name(dev), name);
+>> +}
+> 
+> nit: clock_name() is running just during probe, I would prefer to use
+> dev_kasprintf() instead and get rid of the related kfree(). Moreover,
+> clock_name() is just a wrapper around kasprintf(), do we really need it?
 
-----------------------------------------------------------------
-Akhil P Oommen (4):
-      drm/msm/a6xx: Check BX dependency vote index
-      drm/msm/a6xx: Reset preemption records across suspend
-      drm/msm/a6xx: Request CLX enable from secure world
-      drm/msm/a8xx: Add AQE firmware to Adreno X2-90 GPU
+I think you mean devm_kasprintf(), but I still don't like keeping
+that allocated memory around for every clock for the entire life
+of the device.  It's just a waste.
 
-Bart Van Assche (1):
-      drm/msm: Fix a lock leak in msm_ioctl_gem_info_set_metadata()
+What I'll do, to get rid of what seems like a weird kfree() call,
+*and* avoid having the allocated memory hang on longer than needed
+is have all the callers do something like this:
 
-Connor Abbott (1):
-      drm/msm: Fix GMEM_BASE on a8xx
+         const char *name __free(kfree) = clock_name(dev, "pll");
 
-Jie Zhang (4):
-      drm/msm/a6xx: Fix GMU shutdown idle check
-      drm/msm/a6xx: Fix stale boot up BW vote
-      drm/msm/devfreq: Record idle_time at GPU idle onset
-      drm/msm: Fix sched_prio inversion within a ring
+I do agree it's a simple wrapper but it's used in three places to
+create a consistent name, so I prefer to keep it.
 
-Rob Clark (7):
-      drm/msm/adreno: Soften no-firmware message
-      drm/msm/gem: Fix VM_BIND range check
-      drm/msm/gem: Disallow nr_bos for VM_BIND contexts
-      drm/msm/gem: Decrement loop idx if handle lookup fails
-      drm/msm/gem: Clear nr_ops in lookup_ops() failure path
-      drm/msm/a8xx: Fix 1/2b alpha filtering precision
-      drm/msm/a8xx: Add missing preempt_record_size
+>> +/* Initialize the PLL (parent is the input oscillator); called from probe */
+>> +static int pll_init(struct device *dev, struct tc9564_clock *clock)
+>> +{
+>> +	struct clk_hw *hw;
+>> +	const char *name;
+>> +
+>> +	/* Initialize the PLL clock first (input oscillator is parent) */
+>> +	name = clock_name(dev, "pll");
+>> +	if (!name)
+>> +		return -ENOMEM;
+>> +
+>> +	hw = devm_clk_hw_register_fixed_factor_index(dev, name, 0, 0, 50, 1);
+>> +	kfree(name);
+>> +	if (IS_ERR(hw))
+>> +		return dev_err_probe(dev, PTR_ERR(hw),
+>> +				     "failed to register pll\n");
+>> +
+>> +	clock->clk_data->hws[CLOCK_PLL] = hw;
+>> +
+>> +	return 0;
+>> +}
+Thanks for the review.
 
- drivers/gpu/drm/msm/adreno/a6xx_gmu.c             | 31 ++++++++++++++-----
- drivers/gpu/drm/msm/adreno/a6xx_gmu.h             |  1 +
- drivers/gpu/drm/msm/adreno/a6xx_gpu.c             |  2 ++
- drivers/gpu/drm/msm/adreno/a6xx_gpu.h             |  1 +
- drivers/gpu/drm/msm/adreno/a6xx_hfi.c             |  2 +-
- drivers/gpu/drm/msm/adreno/a6xx_preempt.c         | 37 +++++++++++++----------
- drivers/gpu/drm/msm/adreno/a8xx_catalog.c         | 15 +++++----
- drivers/gpu/drm/msm/adreno/a8xx_preempt.c         | 11 +++++--
- drivers/gpu/drm/msm/adreno/adreno_gpu.c           | 12 +++++---
- drivers/gpu/drm/msm/msm_drv.c                     |  3 +-
- drivers/gpu/drm/msm/msm_gem_submit.c              |  5 ++-
- drivers/gpu/drm/msm/msm_gem_vma.c                 | 11 ++++---
- drivers/gpu/drm/msm/msm_gpu.h                     | 24 ++++++---------
- drivers/gpu/drm/msm/msm_gpu_devfreq.c             |  3 +-
- drivers/gpu/drm/msm/msm_submitqueue.c             |  2 +-
- drivers/gpu/drm/msm/registers/adreno/a6xx_gmu.xml |  1 +
- 16 files changed, 101 insertions(+), 60 deletions(-)
+					-Alex
