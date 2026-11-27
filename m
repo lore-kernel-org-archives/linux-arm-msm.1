@@ -1,62 +1,62 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795792696;
-	b=D7+/Z4kbRdJ9Ue0/tq7L95J10Pt1Wn91ik4Ezl6SPuBjTLBBr6qqdKN4ynAjK5hw/3nn
-	 cjsRNQSVDN799jCg8Zu3hCWRcZycEdyxz5Qz/EtcqndRFNhXB6P1EDsiNY/fZyUzH5eQu
-	 Dk3Zm7NcU9DcXy36oz6YCythRIVCGe/AXphlubPbGcv3XXiwVouz4Tc6k1BAcN5YnYa90
-	 OX1qbyVnFv4OqRLwa+ZWlupQEUCiJULAHotP+QhkTwa2JCmOMzz3i2DTYouB2VIt2DpBF
-	 WVoigyFJTJjINMWtzhpMQsDBKXI42sr722dDzSyjICWGRgpPMV3J0mHiX5JFd0/DAdA==
+	t=1795792840;
+	b=JUKh0CzGV+6vQUE1wSf/sfReBvWGpcw6KeH2U9MwDi/gN2Rapfk/gkqvqRT6Dit2Knph
+	 I7AA4hBAKC3LHUH63O3uiATOVzoxXX8T7CcaRS9D5LZ8qAcK/BiBTjINH8/0OB9HKiw63
+	 mpqJUrM0ospdyg5z+FiKTMYVX+RPxT1wMPs0sHVfAgK+7+wdukl+Om1dDvMYhWP2wCIHz
+	 OniNIXwqtJrB2oXn166hcp/x61iP2bZNluXrYniP2Uo3gdhFKT96B0FMvg/ymvT+fyO3F
+	 cJxAEZMSwuphUS/azaXEwK2HXfRzMMRd6vixEwOgLC3vnlslPfhPf4Fcmyju+l9ClCQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795792696;
-	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
-	 References:MIME-Version:Content-Type:Content-Disposition:
-	 Content-Transfer-Encoding:In-Reply-To;
-	bh=4N5oFs5XGGfdpJJghwLFB6jh87JUfQpfrYkhGaeqDvk=;
-	b=OYNn4oGcpizpWUuC7D50yydfYIa6/TSw59adJidw1QoFSD7Z8lzaAk8hmNXIZxUgLLPn
-	 5EBP6BkzHnoqbvNGTku8lodpvpAtUryAnacCSvx53rrPzRZxdAlPJjMThpKs/sjt3Dns6
-	 NsEqWNNwtm+ZhyR3oLUzf9BVCkz9C0r8/Z/nBtS1C0Zr7uzd/UXsvhuz+jKlguDsLTlZy
-	 oDoaO03Ulz0kr9sCTW/FGZlG0wGr85YO3QejwkENKypAyYi9JpBR6bZYsynjfZ+Hekkry
-	 /lGdZcHkbDeHCu8Lo01jj47LxdqxAul6QsXeLZX6IOu6wnMDSygH398wCaSzU0SZCqg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795792840;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=9Ow8Vx4ve7utxk43EYAIvtTIwB9HiNFVy5ocA2uOO84=;
+	b=gemElLYjnJ+WS/QotHUaDV0seBWtovhRjnwVJ24rlQ+g6B+FcKQoKYlmv/sOfiOJztMV
+	 6QITUeG6WB0ia1cuAXX8B3AQ62bSbXWfP2d3NbYCp6sw8nyRVDr8ebWQSk0HCWY/LC0CO
+	 aLXCVJ1w54GzTPRmYWGaUgs69BW8IKdZ0OBUZrlM1TuVMMrVJUcYy5slnpYbV1PHE0njQ
+	 ASsNE3+WHuOgj+cyMW9dALxjWQydRThyRS3+nf1pkqW6ODJuBRVFqQXTUJrclOLo+ndoM
+	 dEdA0SGw7xk0S9iAtu0CfJ+bbrGcsroEMkI7PTt0LmiHWvz9BPlBVi76aE9BoWXzZxA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HpQ0YQxA;
-	arc=none smtp.remote-ip=100.103.45.18
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1))
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A2F5A606A31C;
-	Fri, 27 Nov 2026 15:18:16 +0000 (UTC)
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iHU9oFp+;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 60F9F606A31F;
+	Fri, 27 Nov 2026 15:20:36 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 60F9F606A31F
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=HpQ0YQxA
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BB59A1F00893;
-	Fri, 27 Nov 2026 15:18:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795792696;
-	bh=4N5oFs5XGGfdpJJghwLFB6jh87JUfQpfrYkhGaeqDvk=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=HpQ0YQxAnusmuRaNs4tTcwEQ/b1d6koqApQDvRHKjYGaKhTnuPdhXDNDkBGXYB96s
-	 EJUCRJdN7iHUTiKxIJ2+iDj/sTwBIJdsortJKvb2OccZLqYF4CIm9ZVB1UNTuxJ7Cg
-	 bGFgEinKOfyEJaY/YsRoPj9Uk2fINqD/WWlgihUCxE9M9g/RZTcl9eKkb/CPrE82l3
-	 mZfyOGubCvh+47ZOHO/b2Z72JWUDCTiIuo4EZNJrGSrRh3jNcx9iysHb2GEFltEdwj
-	 rpHbLgO2WXeWHpaiadfvygOieEaGCE9vQ1lfe2O8Lvxj5r/oRVNLqSFvO8BRWGcX3W
-	 a4yolim8zvXLw==
-Date: Fri, 27 Nov 2026 17:18:13 +0200
-From: Leon Romanovsky <leon@kernel.org>
-To: Marek Szyprowski <m.szyprowski@samsung.com>
-Cc: Sibi Sankar <sibi.sankar@oss.qualcomm.com>, will@kernel.org,
-	robin.murphy@arm.com, honghuan@amd.com,
-	Jason Gunthorpe <jgg@ziepe.ca>, joro@8bytes.org,
-	prakash.gupta@oss.qualcomm.com, iommu@lists.linux.dev,
-	linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-	linux-arm-msm@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH] Revert "iommu/dma: simplify dma_iova_destroy() and drop
- the free_iova helper"
-Message-ID: <20261127151813.GZ774860@unreal>
-References: <CGME20261125135138eucas1p141ba6b5e09623562e2033e290fba811c@eucas1p1.samsung.com>
- <20261125135120.1126571-1-sibi.sankar@oss.qualcomm.com>
- <a3722347-4b88-41ad-926b-455530020c6b@samsung.com>
- <20261125183419.GB774860@unreal>
- <c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
+	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iHU9oFp+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:
+	Content-Transfer-Encoding; bh=9Ow8Vx4ve7utxk43EYAIvtTIwB9HiNFVy5
+	ocA2uOO84=; b=iHU9oFp+TekRt/94wUaalFbBeUtctirUSU0RSuPNr0b32K5tFD
+	jQFEqoI86TSW2LPZ7Eww0+WW8D3Jbg01JAtGqxcfIfhkMlCZyE2eg6ti1h1kuwrq
+	k+OoeZftYQaH8xRiW869DceOuNDpCqnfs0V31CxdzDcxKfrcbwj0KzfWU=
+Received: from xuqianhui.ustc.edu.cn (unknown [114.214.180.66])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgCnMke4nwlrB1EDAQ--.2959S3;
+	Fri, 27 Nov 2026 23:20:25 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: linux-media@vger.kernel.org
+Cc: linux-arm-msm@vger.kernel.org,
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Stefan Schmidt <stefan.schmidt@linaro.org>
+Subject: [PATCH 1/3] media: iris: report a platform bus_info prefix
+Date: Fri, 27 Nov 2026 23:20:22 +0800
+Message-ID: <20261127152024.2149804-2-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,86 +66,52 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <c5e4fc4e-0e63-47cf-8b88-93ecfb3646de@samsung.com>
+X-CM-TRANSID:3pYKCgCnMke4nwlrB1EDAQ--.2959S3
+X-Coremail-Antispam: 1UD129KBjvdXoW7Wr4kAryrCFWxXrWUGryUKFg_yoWDZFc_Gw
+	n7GFWxWr48Ars7tw4Yyrn3A3srXrsY9r1rAanIqFy2yrW5Wwn3J3yvvr42qwnrCa1vvFnr
+	CFn8ur9rurWfCjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbh8YjsxI4VWxJwAYFVCjjxCrM7AC8VAFwI0_Xr0_Wr1l1xkIjI8I
+	6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7
+	IE14v26r18M28IrcIa0xkI8VCY1x0267AKxVWUCVW8JwA2ocxC64kIII0Yj41l84x0c7CE
+	w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6x
+	kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
+	c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
+	8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCF
+	s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwCY1x0262kKe7AKxVWUtVW8ZwCF04k20x
+	vY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I
+	3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIx
+	AIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAI
+	cVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF0xvEx4A2js
+	IEc7CjxVAFwI0_Gr1j6F4UJbIYCTnIWIevJa73UjIFyTuYvjxU4ksqDUUUU
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2sHyZtdggAtsY
 
-On Fri, Nov 27, 2026 at 12:28:16PM +0100, Marek Szyprowski wrote:
-> On 25.11.2026 19:34, Leon Romanovsky wrote:
-> > On Wed, Nov 25, 2026 at 06:21:06PM +0100, Marek Szyprowski wrote:
-> >> On 25.11.2026 14:51, Sibi Sankar wrote:
-> >>> This reverts commit 1acce29926d93f3eba427696fe3da6451504dae2.
-> >>>
-> >>> Before this commit, dma_iova_destroy() unmapped through
-> >>> __iommu_dma_iova_unlink(..., free_iova=true), which set
-> >>> iotlb_gather.queued from cookie->fq_domain, skipped iommu_iotlb_sync()
-> >>> and freed the IOVA with the queued gather, exactly like
-> >>> __iommu_dma_unmap(). After it, dma_iova_destroy() calls
-> >>> dma_iova_unlink() and then dma_iova_free():
-> >>>
-> >>>   - dma_iova_unlink() never marks its gather as queued and always calls
-> >>>     iommu_iotlb_sync() after iommu_unmap_fast().
-> >>>   - dma_iova_free() passes a NULL gather to iommu_dma_free_iova(), so
-> >>>     the IOVA goes straight back to the allocator through
-> >>>     free_iova_fast() and never through queue_iova().
-> >>>
-> >>> DMA-FQ domains therefore get strict invalidation on this path. That
-> >>> includes the block layer's blk_rq_dma_map() path, which NVMe uses for
-> >>> all data transfers, so iommu.strict=0 has no effect on NVMe I/O.
-> >>>
-> >>> hw/sw details: Qualcomm Glymur CRD: SMMUv3 with no RANGE_INV,
-> >>> 	       4K pages; NVMe SSD on PCIe Gen5 x4
-> >>>
-> >>> Fio sequential read/write numbers:
-> >>>   Domain                          seq write    seq read
-> >>>   DMA (strict)                    2694 MiB/s   2693 MiB/s
-> >>>   DMA-FQ (lazy), flush queue      2707 MiB/s   2803 MiB/s
-> >>>     bypassed (this regression)
-> >>>   DMA-FQ (lazy), flush queue      10.6 GiB/s   11.9 GiB/s
-> >>>     used by dma_iova_destroy()
-> >>>
-> >>> Fixes: 1acce29926d9 ("iommu/dma: simplify dma_iova_destroy() and drop the free_iova helper")
-> >>> Cc: stable@vger.kernel.org # v7.3+
-> >>> Signed-off-by: Sibi Sankar <sibi.sankar@oss.qualcomm.com>
-> >>
-> >> The performance data clearly shows that the flush queue was there for
-> >> the reason. Together with this revert it would probably make sense to
-> >> apply the v1 of the reverted patch:
-> >>
-> >> https://lore.kernel.org/all/20260701092033.422867-1-honghuan@amd.com/
-> >>
-> >> Leon, do You see any other option?
-> > These numbers shows clearly that we had iotlb_gather.queued != 0
-> > and never performed iommu_iotlb_sync(domain, &iotlb_gather); while
-> > destroying mapped IOVA.
-> >
-> > I agree with you, v1 is the easiest solution, however my preferred one
-> > is to cache gather when it is created and keep it in dma_iova_state 
-> > structure for whole life cycle of that struct.
-> 
-> I've played with the code (using LLM ;) and there are some issues with this
-> approach:
-> 
-> 1. tso_dma_map_completion_save() copies the struct dma_iova_state by value,
-> what breaks internals of the struct iommu_iotlb_gather.
-> 2. adding iommu_iotlb_gather to dma_iova_state increase the struct size
-> from 16 to 64 bytes, what lands in every NVMe request, RDMA rw contexts,
-> TSO maps and HMM.
+v4l2-compliance rejects the bus_info because it does not start with a
+recognised bus prefix:
 
-I had that idea before AI era and before TSO was converted to use
-dma_iova_state. :)
+  fail: v4l2-compliance.cpp(669): missing bus_info prefix ('plat:aa00000.video-codec:dec')
 
-> 
-> I've decided to put only the 'use_fq' bit in the __size entry and baked the
-> fix. It looks quite nice. This approach solves both above issues, although
-> it requires to also fix some drivers which already pokes __size directly
-> instead of calling dma_iova_size().
-> 
-> I will post this in a few minutes.
-> 
-> Best regards
-> -- 
-> Marek Szyprowski, PhD
-> Samsung R&D Institute Poland
-> 
+The device is a platform device, so use the "platform:" prefix that
+v4l2 core and v4l2-compliance expect.
+
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+ drivers/media/platform/qcom/iris/iris_vidc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_vidc.c b/drivers/media/platform/qcom/iris/iris_vidc.c
+index 1edd2a4..9634f4b 100644
+--- a/drivers/media/platform/qcom/iris/iris_vidc.c
++++ b/drivers/media/platform/qcom/iris/iris_vidc.c
+@@ -466,7 +466,7 @@ static int iris_querycap(struct file *filp, void *fh, struct v4l2_capability *ca
+ 		info = "enc";
+ 	}
+ 	snprintf(cap->bus_info, sizeof(cap->bus_info),
+-		 "plat:%s:%s", dev_name(core->dev), info);
++		 "platform:%s:%s", dev_name(core->dev), info);
+ 
+ 	return 0;
+ }
+-- 
+2.53.0
+
