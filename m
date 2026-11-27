@@ -1,51 +1,94 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=5.75.144.95
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.214.180
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795797292;
-	b=V3rP3U0hRMddRbz1IpFF1xPd/jvC4qne1WIBppdpid4w4MJ1/4cXWNHbPMRd+inUkEsF
-	 CQgM/3xIEufzijNz6By6tsaTGjyFKaVWnRUN0hXLIkybAInQ3kKn6UzZwOosY0H6lr1+y
-	 1eQIYpTwE2I8Evkip0iMIQe2qm67NHqDo/wriQ8uCBj/Vcbo8Wsth3UyEeE+qS48IFXCO
-	 RxgvmbfXSBLTYPaD/A/Q43J1DrsS9eX4sj6sXKTLkXBcU3y8NRR2kywJ0xmq9g34ng+lF
-	 v2oC3HpOCceSkMbXEqv2gmSVvoG+LrBYFjJ5Hf38Ox8HWNayrfs/+B+JULK678Lnpdw==
+	t=1795797302;
+	b=Xhqnf0ODilFhT5cGbt5ROLsA0FdibX4+63hROC5dh0IIjL6+bKeSC9PRKvBWG3y3DewW
+	 UogNesEpOE3J0cgew3S3bodCPxSs2xei4b3SrwD0llSZLxyjGy7cMoM4V6IBEFmyFv2Sw
+	 Q9eFup86Hnx90eFWBu6IOtpCn/rpI5LeHFI1pRkOTi0qf4UAstzNwLdZ7S+YfFuiTRKHF
+	 rA02/4t4ekeg07lgfU6uB7hZzA8qcKMjJw1J8RrY/BoVkMlq8agoZ2olzZGHHnzrYBBPP
+	 T+/FBeycgNYub58BEh3RDhaxuwWzqEjMDo4nPtk5u9DMiSMXuKufRW0wbckAXUipKMA==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795797292;
-	h=DMARC-Filter:DKIM-Signature:DKIM-Signature:MIME-Version:Date:From:To:
-	 Cc:Subject:In-Reply-To:References:Message-ID:X-Sender:Content-Type:
+	a=rsa-sha256; c=relaxed/relaxed; t=1795797302;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:MIME-Version:
 	 Content-Transfer-Encoding;
-	bh=c0qKPSezpyQX6145fZoLLQhWhdlg5ooKrELDhZsi1pk=;
-	b=BBI4HVG3sxKrO3X3Q0q1V4v7pui8qyvHZVZWoxqsgxZiWcUZ/rVf2jd7GtRzaqQj1DOi
-	 RsKRRwYs84pwsZC93ivvlh618m5VwuUKYXH8YI+p8Dc67oO+DyOzXKKdQTm59BkNEDW9g
-	 L35ha6kcd6zgm5U6Qfgb5I1FvK7dh1QMIR9pT9IlKKQBN4Fs4Lt839E+0xfaWFL3ezOnj
-	 X9FAmeVxMt5HAmblIZfINDk5DvURJ9h/wCLT01CLZiZKlLLZTc7CYs3jmkw4jjXtfUrz8
-	 hhKhvNlHea7J0eDcEr3TtkTaEtz91v1kGTSGqeSje4eI2bXAVQO9mc87RdiwgKB+/Wg==
+	bh=08/+Tw1oVd8ocLS95JJDAmqhnR/TTdXdQcTFOlKFwGQ=;
+	b=cQzexKJ2Z623oSR10CdAyHLya62nvN8ppMh4orMBLWjdAJS2Flk10aExX0u9i3hSTJWl
+	 vbuP44CJoMKZ3KJQ6ZFgcpcJ87QftS7wHbWDfmSRubUFYD3rlKsPZK5/lZvDcF54PHcWA
+	 hy9NcbajuhOw9gPcos8+ziOLeT+W6ZMpZVPfwiaAW5NnoWm9bBaE8PYiss+sHUE9Fz77U
+	 3836Uz0ktRZRU2PL8VpqVr/RIywYY+e0xJr7z7jPG7nC0GbGQUUcvodhAdbhvHRHETb8w
+	 1vdTcBCkTlNpqDktBBZueYR5unzxLcwCAzXPExy3awB7rXC18McJ10c3NgEtFfnJ3NQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mainlining.org;
-	spf=pass smtp.mailfrom=mainlining.org;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=BfuOYT2u;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=vgM0Afhq;
-	arc=none smtp.remote-ip=5.75.144.95
-Received: from mail.mainlining.org (mail.mainlining.org [5.75.144.95])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b="HZ/x4nYd";
+	arc=none smtp.remote-ip=209.85.214.180
+Received: from mail-pl1-f180.google.com (mail-pl1-f180.google.com [209.85.214.180])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2DD41606A31E;
-	Fri, 27 Nov 2026 16:34:50 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 2DD41606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=reject dis=none) header.from=mainlining.org
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mainlining.org
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D3F4D606A31C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 16:35:01 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org D3F4D606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=mainlining.org header.i=@mainlining.org header.a=rsa-sha256 header.s=202507r header.b=BfuOYT2u;
-	dkim=pass header.d=mainlining.org header.i=@mainlining.org header.a=ed25519-sha256 header.s=202507e header.b=vgM0Afhq
-DKIM-Signature: v=1; a=rsa-sha256; s=202507r; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1795797273; bh=c0qKPSezpyQX6145fZoLLQh
-	Whdlg5ooKrELDhZsi1pk=; b=BfuOYT2ut11PQPwRzzBin2s6kNOs3djGjBEZtpdknFMlGjQFtm
-	Mhwg0o7fZymFzl2zizLmI6uJgAyCLVJYfoen7r6xxlVMLqPw2Zkkfzt/wT6A6t8aDL3rzHI8N+N
-	fKzbUKF5PpKh5qrWF6nmW8YvtQ/kE/tnFDunFnQfT6H0cY+RU7Y7duL6Z7JU5Untd8BKGJi74is
-	P4kps3yS3kx3BgxfF96ObakqmhF2aCtQztqQTJ/JGAyKbQvZoCZUR8xTykCFS6bwHRZ00AZgBnf
-	C5fqYF4g/t7HjZdaluNfBjEDS0mtttOzJVD24I7q95w6kvN0+thz0FuoiTpJyPi1KSA==;
-DKIM-Signature: v=1; a=ed25519-sha256; s=202507e; d=mainlining.org; c=relaxed/relaxed;
-	h=Message-ID:Subject:To:From:Date; t=1795797273; bh=c0qKPSezpyQX6145fZoLLQh
-	Whdlg5ooKrELDhZsi1pk=; b=vgM0AfhqbZqTUIbGj7xSYxVvg0MYuWqKGxZfEj5PyIeB4vuhAH
-	sfr6dOSp2DjEMIsNNAIRAx/NnEyi9jVNKEDA==;
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=HZ/x4nYd
+Received: by mail-pl1-f180.google.com with SMTP id d9443c01a7336-2f07a960666so59057005ad.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 08:35:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20260707; t=1795797301; x=1796402101; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=08/+Tw1oVd8ocLS95JJDAmqhnR/TTdXdQcTFOlKFwGQ=;
+        b=HZ/x4nYdEFjLN0H/Y+nuL/VXorbJWVqyhL3/AaIpw0FNAqNJtW1POFVnP2dIpfIPHd
+         9RddiArK4HpszxhjFlFHVN5yeim3bWwcMl6xYbTU++uhfWqmaHBgcv1QbPUU+RLp/pz4
+         QkCp5Cn8IStarn3NL14VP+a7hj5Z62BucX9IXG93eGN8fBQltS/m2ixPEDXM7SDEOZsX
+         /QeW1fc2SFRNihMJYkjEzWvWXsp1nyIdkJcFHTlc2R0cl5A/hCHzrNx5jvYEJQqEagjp
+         9KBFSk4v8oTLlRP5FIgdGzEDca7+1Tf4mgYkK77ejnJlklIYhvsPScUR4kctdeeP9n8q
+         myOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795797301; x=1796402101;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=08/+Tw1oVd8ocLS95JJDAmqhnR/TTdXdQcTFOlKFwGQ=;
+        b=uN1HU/895iiAMUstXhcgjqJs3SiDxn3P+iqX/lsVVPqa7MrlTZcMKClP9BQhTEzaCs
+         DNiz6E/ZLZPWYJ+unBIwfq+w1G99wk8gsQNBWGrDlFu+rDLcgDeWaq6ASJqjHTJUKDEJ
+         YxLV/YZtJm528N+banpPo1dHtemftdkW5+73ec+0XBbwt0IUMvP/tlWKnnbPwIAwu/1Q
+         10hR4ess8saRUokmHngI5MFH298O2JzwErPW/CFotg/PA9Kb61MgnfPS10/+9h40Y9wX
+         8Z26la1jG+h68rWplwHrtgpST2VcGUOC1Uf+l6P7oZ+ON+AxqoKTUGb1SHUUX3TX4SxJ
+         8nhA==
+X-Forwarded-Encrypted: i=1; AL+hErHl5dRWUJYabD1CB8derIIZW8K5clqMJBPL5g0kkLXAGBCyfle3XhyRV3GPo5u7NR47Tkr+0vM5Hh3vQWbi@vger.kernel.org
+X-Gm-Message-State: APuU4Z+ZvXZXmW5yyiijWLR7odhIhtf52tfKZX0RT5sXq7Q1/I27DSdi
+	GZgUMgy5NgPfwakzF7itCCnmje11yOfn6b+x2MoYvKtzur8WL0iMRX+w
+X-Gm-Gg: AZFdTZf5kwHWPN5R1asOjAbMy18tr+DB2990G9wtGjcsmmEOss1I6niWJ+wJxwSkn38
+	lZYe5REPHx9AJ+FS4VZtjH1lXLNYdrtUxCx9XietCXFCmpLv+hAO6tBG1V8N16lTkiF/fdM3xMk
+	xXzqgPBWZH9SdyiXU0RmkMsKcxtSRVF9phV11BcR5jEMP5D5klV4YffhQu3ISjaZ2W2lefn/LQX
+	VySzz+jkQD9LdAIKdpakeAkE8fMMOtP8+t3y2ZpUF3dr3ly1PDttoJ6OzkJ9PbrhQipc3++Lld9
+	ZlR4Nmiwlu7bm6kXjqrG6HjcxYULUOJFOcZhTpYOlY5jolsoIPMuHlaaH1PHcAnXPQ2YxZSg9Gi
+	5DNlACWplF59XvY/GKCHQU2+XyXPO6tjJkE1MI1FoRuRmzukHX+B0kkX6TENiU5hvr8Iq6V4Rcz
+	ZNEr7Bu3bUxWOkUIJu+jEmx3zLhMq5LBov6BW2y6Lg1u3y9RlMCUCCMmusBv2EAz4QgMHkTDMyY
+	QQAnbjN9VZeEOgvpcOl0oIg7gCFB3wG98puCQY+qJSs+XK0ZtkWwwT4xnAIA6N6UVV1eHe58AUq
+	rbreiSpcg+yrtp1iwHeRt8hX9v+DWuwDrZdM0OqFdnZqqfewhitb96w2w73mbP1zyEC7sGXfKuF
+	NvUongaYhHskNc7Voo07Ns9/ubIruu8ooTzVRtsHqAZynXN1jDe2uDh9K6LAugg==
+X-Received: by 2002:a17:902:e80b:b0:2ed:2b2f:8632 with SMTP id d9443c01a7336-2f03f11e582mr276703145ad.22.1795797301078;
+        Fri, 27 Nov 2026 08:35:01 -0800 (PST)
+Received: from localhost.localdomain (bb121-7-41-33.singnet.com.sg. [121.7.41.33])
+        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f070a12491sm100482945ad.8.2026.11.27.08.34.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2026 08:35:00 -0800 (PST)
+From: Suyuan Wang <shyckless@gmail.com>
+To: ulfh@kernel.org,
+	adrian.hunter@intel.com
+Cc: konrad.dybcio@oss.qualcomm.com,
+	linux-arm-msm@vger.kernel.org,
+	linux-mmc@vger.kernel.org,
+	linux-kernel@vger.kernel.org
+Subject: [PATCH v2] mmc: sdhci-msm: Disable clocks when runtime resume fails
+Date: Sat, 28 Nov 2026 00:34:47 +0800
+Message-ID: <20261127163447.238-1-shyckless@gmail.com>
+X-Mailer: git-send-email 2.55.0.windows.5
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -55,190 +98,85 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Date: Fri, 27 Nov 2026 17:34:32 +0100
-From: =?UTF-8?Q?Barnab=C3=A1s_Cz=C3=A9m=C3=A1n?=
- <barnabas.czeman@mainlining.org>
-To: Hikmah Gumelar <hikmahgumelar@gmail.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>, Rob Herring
- <robh@kernel.org>, Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley
- <conor+dt@kernel.org>, Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio
- <konradybcio@kernel.org>, Abel Vesa <abelvesa@kernel.org>, Stephen Boyd
- <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet
- <jbrunet+clk@baylibre.com>, Sakari Ailus <sakari.ailus@linux.intel.com>,
- linux-media@vger.kernel.org, devicetree@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-clk@vger.kernel.org, u.kleine-koenig@baylibre.com
-Subject: Re: [PATCH v4 7/7] arm64: dts: qcom: msm8953-xiaomi-tissot: enable
- front and rear cameras
-In-Reply-To: <20261125123146.379057-8-hikmahgumelar@gmail.com>
-References: <20261125123146.379057-1-hikmahgumelar@gmail.com>
- <20261125123146.379057-8-hikmahgumelar@gmail.com>
-Message-ID: <eae86bfe27d119c6170b25de5a917df3@mainlining.org>
-X-Sender: barnabas.czeman@mainlining.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
-On 2026-11-25 13:31, Hikmah Gumelar wrote:
-> Enable CAMSS, CCI, CSIPHY0/CSIPHY2 ports, and the OmniVision OV12A10
-> 
-> rear and Samsung S5K5E8 front image sensors on the Xiaomi Mi A1.
-> 
-> Signed-off-by: Hikmah Gumelar <hikmahgumelar@gmail.com>
-> ---
->  .../boot/dts/qcom/msm8953-xiaomi-tissot.dts   | 124 ++++++++++++++++++
->  1 file changed, 124 insertions(+)
-> 
-> diff --git a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts 
-> b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-> index fccb9c4360ca..87db6b18d191 100644
-> --- a/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-> +++ b/arch/arm64/boot/dts/qcom/msm8953-xiaomi-tissot.dts
-> @@ -74,6 +74,108 @@ vph_pwr: vph-pwr-regulator {
->  		regulator-always-on;
->  		regulator-boot-on;
->  	};
-nitpick: add an empty line here
-> +	vreg_cam_avdd: regulator-cam-avdd {
-> +		compatible = "regulator-fixed";
-> +		regulator-name = "vreg_cam_avdd";
-> +		regulator-min-microvolt = <2800000>;
-> +		regulator-max-microvolt = <2800000>;
-> +		gpio = <&tlmm 62 GPIO_ACTIVE_HIGH>;
-> +		enable-active-high;
-> +		pinctrl-0 = <&cam_vreg_avdd_default>;
-> +		pinctrl-names = "default";
-> +	};
-> +};
-> +
-> +&camss {
-> +	vdda-supply = <&pm8953_s3>;
-> +	status = "okay";
-> +
-> +	ports {
-> +		port@0 {
-> +			reg = <0>;
-> +
-> +			csiphy0_ep: endpoint {
-> +				clock-lanes = <7>;
-> +				data-lanes = <0 1 2 3>;
-> +				remote-endpoint = <&rear_cam_ep>;
-> +			};
-> +		};
-> +
-> +		port@2 {
-> +			reg = <2>;
-> +
-> +			csiphy2_ep: endpoint {
-> +				clock-lanes = <7>;
-> +				data-lanes = <0 1>;
-> +				remote-endpoint = <&front_cam_ep>;
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&cci {
-> +	status = "okay";
-> +};
-> +
-> +&cci_i2c0 {
-> +	camera@10 {
-> +		compatible = "ovti,ov12a10";
-> +		reg = <0x10>;
-> +
-> +		clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
-> +		assigned-clocks = <&gcc GCC_CAMSS_MCLK0_CLK>;
-> +		assigned-clock-rates = <24000000>;
-> +		pinctrl-0 = <&cam_sensor_rear_default &camss_mclk0_default>;
-> +		pinctrl-names = "default";
-> +
-> +		reset-gpios = <&tlmm 33 GPIO_ACTIVE_LOW>;
-> +		powerdown-gpios = <&tlmm 39 GPIO_ACTIVE_LOW>;
-> +
-> +		avdd-supply = <&vreg_cam_avdd>;
-> +		dvdd-supply = <&pm8953_l2>;
-> +		dovdd-supply = <&pm8953_l6>;
-> +
-> +		rotation = <270>;
-> +		orientation = <1>;
-> +
-> +		port {
-> +			rear_cam_ep: endpoint {
-> +				data-lanes = <1 2 3 4>;
-> +				link-frequencies = /bits/ 64 <216000000>;
-> +				remote-endpoint = <&csiphy0_ep>;
-> +			};
-> +		};
-> +	};
-> +};
-> +
-> +&cci_i2c1 {
-> +	camera@2d {
-> +		compatible = "samsung,s5k5e8";
-xiaomi-tissot can come with ov5675 also.
-> +		reg = <0x2d>;
-> +
-> +		clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-> +		assigned-clocks = <&gcc GCC_CAMSS_MCLK1_CLK>;
-> +		assigned-clock-rates = <24000000>;
-> +		pinctrl-0 = <&cam_sensor_front_default &camss_mclk1_default>;
-> +		pinctrl-names = "default";
-> +
-> +		reset-gpios = <&tlmm 129 GPIO_ACTIVE_LOW>;
-> +
-> +		avdd-supply = <&pm8953_l22>;
-> +		dvdd-supply = <&pm8953_l23>;
-> +		dovdd-supply = <&pm8953_l6>;
-> +
-> +		rotation = <90>;
-> +		orientation = <0>;
-> +
-> +		port {
-> +			front_cam_ep: endpoint {
-> +				data-lanes = <1 2>;
-> +				link-frequencies = /bits/ 64 <418000000>;
-> +				remote-endpoint = <&csiphy2_ep>;
-> +			};
-> +		};
-> +	};
->  };
-> 
->  &hsusb_phy {
-> @@ -154,6 +256,7 @@ &pmi8950_wled {
->  };
-> 
->  &rpm_requests {
-> +	vdd_l23-supply = <&pm8953_s3>;
-It should be placed under vdd_l9_l10_l17_l18_l22-supply = <&vph_pwr>;
->  	regulators {
->  		compatible = "qcom,rpm-pm8953-regulators";
-> 
-> @@ -302,6 +405,27 @@ gpio_hall_sensor_default: gpio-hall-sensor-state {
->  		bias-pull-up;
->  	};
-> 
-> +	cam_sensor_front_default: cam-sensor-front-default-state {
-> +		pins = "gpio129";
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-disable;
-> +	};
-> +
-> +	cam_sensor_rear_default: cam-sensor-rear-default-state {
-> +		pins = "gpio33", "gpio39";
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-disable;
-> +	};
-> +
-> +	cam_vreg_avdd_default: cam-vreg-avdd-default-state {
-> +		pins = "gpio62";
-> +		function = "gpio";
-> +		drive-strength = <2>;
-> +		bias-disable;
-> +	};
-> +
->  	ts_int_default: ts-int-default-state {
->  		pins = "gpio65";
->  		function = "gpio";
+From: Suyuan Wang <stevewong@hust.edu.cn>
+
+sdhci_msm_runtime_resume() enables the bulk clocks first. If restoring
+the SDR DLL config or resuming the ICE fails after the clocks have been
+enabled, the callback returns the error without undoing the clock
+enable. On the ICE error path the OPP performance vote also stays in
+place.
+
+The PM core then keeps the device in the suspended state, so
+sdhci_msm_runtime_suspend() does not run and nothing drops the vote or
+disables the clocks.
+
+On both error paths, disable the clocks first and only then drop the
+performance vote with dev_pm_opp_set_opp(dev, NULL), so the clocks are
+never left running after the vote is gone. On the DLL error path the
+vote has not been taken again yet; the OPP core returns early in that
+case, so dropping it there is harmless.
+
+Found with a static analysis tool and checked by hand.
+
+Fixes: 21f1e2d457ce ("mmc: sdhci-msm: Re-initialize DLL if MCLK is gated dynamically")
+Fixes: c93767cf64eb ("mmc: sdhci-msm: add Inline Crypto Engine support")
+Cc: stable@vger.kernel.org
+Co-developed-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+Signed-off-by: Kaixuan Li <kaixuan.li@ntu.edu.sg>
+Signed-off-by: Suyuan Wang <stevewong@hust.edu.cn>
+---
+Compile tested on arm64 (W=1, sparse). I don't have the hardware.
+
+sdhci_msm_runtime_suspend() also drops the vote before disabling the
+clocks. I left it alone to keep this fix small, and can send a separate
+patch for it if you want.
+
+Changes in v2:
+- Disable the clocks before dropping the OPP vote, and drop it with
+  dev_pm_opp_set_opp(dev, NULL). dev_pm_opp_set_rate(dev, 0) does not
+  touch the clock, and calling it first left the clock running without
+  the vote (Konrad)
+- Link to v1: https://lore.kernel.org/r/20261124-sdhci-msm-v1-1-75c70ed6569f@gmail.com
+---
+ drivers/mmc/host/sdhci-msm.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/mmc/host/sdhci-msm.c b/drivers/mmc/host/sdhci-msm.c
+index 32b1bcba4..967843a30 100644
+--- a/drivers/mmc/host/sdhci-msm.c
++++ b/drivers/mmc/host/sdhci-msm.c
+@@ -2978,20 +2978,27 @@ static int sdhci_msm_runtime_resume(struct device *dev)
+ 	if (msm_host->restore_dll_config && msm_host->clk_rate) {
+ 		ret = sdhci_msm_restore_sdr_dll_config(host);
+ 		if (ret)
+-			return ret;
++			goto err_disable_clks;
+ 	}
+ 
+ 	dev_pm_opp_set_rate(dev, msm_host->clk_rate);
+ 
+ 	ret = sdhci_msm_ice_resume(msm_host);
+ 	if (ret)
+-		return ret;
++		goto err_disable_clks;
+ 
+ 	spin_lock_irqsave(&host->lock, flags);
+ 	host->runtime_suspended = false;
+ 	spin_unlock_irqrestore(&host->lock, flags);
+ 
+ 	return ret;
++
++err_disable_clks:
++	clk_bulk_disable_unprepare(ARRAY_SIZE(msm_host->bulk_clks),
++				   msm_host->bulk_clks);
++	/* Only drop the performance vote once the clocks are off. */
++	dev_pm_opp_set_opp(dev, NULL);
++	return ret;
+ }
+ 
+ static int sdhci_msm_restore(struct device *dev)
+-- 
+2.43.0
+
