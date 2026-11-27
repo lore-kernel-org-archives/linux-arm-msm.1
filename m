@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.43
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.47
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795774474;
-	b=mZz8N8vYqWdHTZJPQU8jSMUwa4ZToWDI99kyZaiGc+7q+ZQu7wQk+WSn3dreSKwb6VnB
-	 JmtIIwFRqa8Q3NIhBq0aOvKXi7VjSChD9EV0UWonCjgfUQOForr6AmCEx1tYrvPzeUEkq
-	 m5ra/ywwZOft51CLhDEmISlCKZAqmew4hbFbR6gDFJS7TvkDVIKLhfe3PFI5jAYBYG8Dz
-	 zov6QDDxli138bVxmRUbD6BMKC77irZrTaHjXOJJ5vvCjiIw72d+7KS2bkfYOpA4L/pCP
-	 YtiOSln0/pxJvNEthPrD7MCtxheBk3dt3T1ssvGU/8K08FSZAAIaRBYZfqVpSUDOh6Q==
+	t=1795774476;
+	b=tEF1lSyBchbuKfLQP3lqdTmtks8O88DJvSFZvoHAVsW85Hb9OGTCjoChTmk4CtOnookF
+	 E3+Issy4+7N/a4SoysrwvpfPYzf1S7cV1rJm8zOxg/pEJ2FyvIm+BPmvKyOCQe62St4ja
+	 u5eW5+uXgTdn/2m+459bFOQrN4gSWnMXR7FfSCPWJ55mzMkoW+DX5KzkAjJu7gmQp8bYI
+	 vu/R0WIew8g7CF80NG9SwU1kV/6QviWPUfxjTCp3yzmaLWF57Fo/NA6NxNScMHe905iSi
+	 UwxhJ/Oel3a8noqG1N/WuHdXK7s5WLLwiOSCIfIuo0pzstrUH+vdUMjZMsgLrrp7d+w==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795774474;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795774476;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=rdDl7Q4foQHYAjSl826AE0/syYoFqrpNAcvwAyqjlxc=;
-	b=feByfPtwDuyp6Q+w8IgeI/U2KKzXuu9irPbQVx2W/gxT48JmYw2b8NgjLwU+9BABJhDR
-	 qiUHUilZ77XOBYnuxFaKN25K4XlpPT06LTotGI1Ke97Oz6dU4bzkwPQHt9dJ7748nftKU
-	 SUUrAPrgoGf00fg4DcdVmRaOl+rl9FizJERMzQtFgMYjevpDQC66oAJcgCxhTkOkauFiH
-	 IW4J5Axu6Xz7vTSzxrhFrXytgSuxTffIOkZEUJp+7eEoJZq7v57Qn1yn0Syq7mFwUGLnx
-	 nYDb1m6YvRprTeP4fL5yXd059P7pF1edpTJ0rrE5NWRWkg71rfq8wD9uhytxk1O8o+Q==
+	bh=ZfuPsc7xLuv7FveL7LRtKmIlOFCOOjMPi+YwZzyG6OM=;
+	b=LQRXrv/5cMSEsPvLwrvlEbI2tzg0i3yIuI+6RHV+wCZyXWvJ2mFfq9OTJS2Mhk09ukGG
+	 kjPIGG+bcpYJYObBlRK9vZ4cv9tQf81JXXAAeg+7rHwsVXEpT1EbNCriDFtIqlTi4qX6K
+	 H0QVu3oGkphGzBz9NDBDYShivoeaW9OXwPuSJ+8DfMCCK6vqWUnsDHJWvEUwFIy4wyxsO
+	 I6RImpUdHAGnuBy+/J7H/WXBSEtcXeKzURe0/zNYn4BddymQT0AfWsOumXNH77SFOut2D
+	 ofhDKwCV/bVSZwRNmRb0akJqpLqN0ug4PaT51BdCLplzu+UOgx69RAaguUnbWNnkfgg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UfuyINck;
-	arc=none smtp.remote-ip=209.85.221.43
-Received: from mail-wr1-f43.google.com (mail-wr1-f43.google.com [209.85.221.43])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=X+iKsD6g;
+	arc=none smtp.remote-ip=209.85.221.47
+Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0318F60A2610
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:33 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 0318F60A2610
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4A46560A5BDF
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:35 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4A46560A5BDF
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=UfuyINck
-Received: by mail-wr1-f43.google.com with SMTP id ffacd0b85a97d-4ac08f4a0b2so5616879f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:33 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=X+iKsD6g
+Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-49a92144733so3962189f8f.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:35 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795774472; x=1796379272; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795774474; x=1796379274; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rdDl7Q4foQHYAjSl826AE0/syYoFqrpNAcvwAyqjlxc=;
-        b=UfuyINckwgc2hPjGbLkcbnYhUtHN/BJ7AsmfkJrwi6qUFYw6/UEG4eU0tXYu5gd6me
-         avs+XWJmLKo8wbUvTXZB0JeD5WcC9YlfQtJ/Hetujggt+RsqvJpdLKhsxp+11AFhGaxr
-         3A/jf8Cr9eoMggZ6DXJR6jCPiJ0tzrt+zO0Vasec8v63ARyeDWDCc9YAWBc/6VND5Y0e
-         wr52ICxqcet5uL666PY+8L7wWbWCZAu4dCAODVp2ROADy/98+FNsNIX39GfB4UXXqED6
-         k/5opcriwUD8CNqp1kzRImuf59pJwVifJU6TVMSPSyx3M0rOrqJxztkqGT4L1ePvMJCZ
-         FYHQ==
+        bh=ZfuPsc7xLuv7FveL7LRtKmIlOFCOOjMPi+YwZzyG6OM=;
+        b=X+iKsD6gkrlerHvrXktIyubXchqylq33XM16vx9ulS+Sm50x8mKPK1SMioelnl24Ha
+         6+2gyJrlu/jYKuDDQ5Hq9WQWocSm8seUt3Lad7/65czR9xLndmULyOThxeMQkuv2OwN/
+         svN1r01hTKW06Ult382XUal/Rv2h0Ol6MFGYP9mGjI9wqQyAvNmqHwKD53shRH6mIF1k
+         yw2B3faf47+nZjQBo2d60FoO0OyoL1KmTsMHCWzFCPFWwZWGn4oyferIJ/sOkcScYNM6
+         +WVGutkgaCejViF7vwcGl2qF4eqngx603yuiuqj8iDbfCQVCBg/ukz1y+4t2Dmj66uyn
+         ZW5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795774472; x=1796379272;
+        d=1e100.net; s=20260707; t=1795774474; x=1796379274;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=rdDl7Q4foQHYAjSl826AE0/syYoFqrpNAcvwAyqjlxc=;
-        b=ROI0AtM4HkSGdJaIYGVzpAoElwNwhN/hRA0xW53F0fMBEqWJYvyFFpdtpxwPsottLn
-         adZ7Ql09YK34NW3ThvGXWiMM9M1owCc3/H/9cnk57rkAZcpTbRRNxvfY9vxvrKwZRufN
-         87dRvmcC9WKndfYsxSlz0EqP/VCzTiODx08i9z4PNMGTVnQBdM8f3JBTM9VFo8yIRTAR
-         x+9HpQiJmENoRSKQNi/S5rh4VD8M42zeq4+TyMp4MDupltRSCYC2n6VFS+LBuk524BFb
-         8JOGc4Cpq0WM6mIT2AaYKDRMCCzZzgQQLc7wQqAEMmN+yHZzbDZDdsw/yJijYHJj4iki
-         rKSQ==
-X-Forwarded-Encrypted: i=1; AL+hErHd+84FOgwiSdllaSN7tPxe6vnhyzY9p11ntVC9c9QgaK9lrEfZ390YrWPYsJ28R5ToIWZ0pXNDfp4Bd6Mk@vger.kernel.org
-X-Gm-Message-State: APuU4Z8xZc3D/ZUdSCSDk4VftlK4Dddx9eOh/q0WsDyVGD96Gy3xe5go
-	u5HIBNnJZ0XIBG+GvKplL84tKztrPMDEd47FW+rqaKCBKkrRuPqdc2U=
-X-Gm-Gg: AZFdTZcQd40PPJq4M3ZoswZ+oK9AvH1zGK3ZJgf57uSaOOhPGrsRWdhlTbUJHD2PgZL
-	YI7oUsaVb9V9SkIeDpw+jdyCdLHeTzl4W1H67dze0ivKOHs0nBwdoJd8OrBJriqESMGgQ1ZXdIr
-	M73gPh+GcK0UkgWErIt2GEPPYlw8ad0s34Pk4SRBB2+9boUSzcgslG3tUCLHAFn5821HxFyxsBD
-	gYIs+8XtjJrcoK8oSH5ct8U4PEMYWOBAGXPsOIn8vOg84B6G0YJgydEGoSrJgB26fnWWk9eLHfJ
-	BiSMY3sPQoqByVkUP5Fhwx4xFwHjwJeCgzaHFBciJl6IreMG1NWQ43sbwrP/v1rZa9okVd9lH8b
-	VwAXYIKjCBPxezydnPxoFsqEz17A49sZX/MNCJbSXdg30nS5ow0PGDnR+onSIrcFIgEsEtVbeba
-	oTjKVhYDsw8Kygqxo637Ufpe1hB2Xha+TNcy+3bHjGEsgKQgoMMWkX3ZYb0TPTl4ylVpmto1C1D
-	1LrZxCYvArJvTub0GqGrKkhDyqWTu70BvWg1NuDNCjlq5tLT04HMtxzzZiD4X0/4s/lyLA//Zge
-	/A/KBCrAH+NR2gXvfXrgt6kBotmIDfibCZxclaWKk4r74jHXAsCMkmRQBXE3jKIIzJY/xnoFyMz
-	cyIviGUfHgZX1uBChI65b2FpiiIuFZfrI0P8n/L37AxbcEQqXK/KvclsZsTg=
-X-Received: by 2002:a05:6000:2607:b0:48f:bb92:c5a7 with SMTP id ffacd0b85a97d-4abb0c5d665mr47747367f8f.9.1795774472210;
-        Fri, 27 Nov 2026 02:14:32 -0800 (PST)
+        bh=ZfuPsc7xLuv7FveL7LRtKmIlOFCOOjMPi+YwZzyG6OM=;
+        b=0MrLBiWuFzXGvqn7KHQdangqOcWkKcRuLX+UJyQ3k25+yjRCERhHzTKmyyMD9NcwkK
+         yz2fNATJbj1VNxuLRDjuFr/NW2Mr8jHrAZi7gVk/dZh81idQbKHElWCPLX+TbzMiZZpb
+         /0yo3YSa3oRak7qubY7yCbWhTrEyofrZshH1Hu9bODGOLFZF3+lhyJqhAAFHXjNn8bKm
+         jV3kZu4zXkMgVB2exfcTrvPI5BLhDbX9wobgGeSUA6fz0BYaCK7ld0X+iWJG++E773s+
+         Byxz60SKYD8B8wR9eT5Kdfuuz1y3Ou91N11WhZTzKYk2rtZwLnpOzkih4jpHexR8PmVU
+         MEIw==
+X-Forwarded-Encrypted: i=1; AL+hErEoKG645pW3wWldk8PYwIBPIP7WyWRFqk1445KqiEXW2gdBnIXCzKqDCGjRWfWgeIdazueeKTm12aomquHb@vger.kernel.org
+X-Gm-Message-State: APuU4Z+eGGAdSLoFqRp/s3GoXzZ1Shc4PmiiCI4r/lWXXhT9QE2WeX7T
+	iYxEtLxHcRIArJFb/MbNpJKlM+gLhpL0AOgA636CYC9jbZmK7zLXr6s=
+X-Gm-Gg: AZFdTZf4Xbh1HeIVCmT4FQq+S4T3QIJQQ/mIa3v7PzkrQ1p8/AOd9JuZItIQki/Ac2E
+	Rk0TW0MUBQ8GgSc+CLt4cLA5KriSGPW8rQWGNW/JFdJImRJmRXrDECiJGLoL0AzhJUFJ5XWo8wh
+	YcdkgA29LY2vNE4oOpB2WLT/xIyHvMN4K4nwOkNILl+JW6FJqMVHiffUsVNNreQVG3QFuIYZlqt
+	bpUyuMYagoaJsdoB+ov7IRYX1SOGUqoYJktIgpu+e7wSr9WhTCrLZ9UzF7acYBShA17GgXl1zm3
+	wKJh/4i78vj1dgApGdkgi6NfgQL9x9p6/XfisEUFaB/44dIZg8Tb1E9nED9ykbWIpyv8ja+LTJ6
+	+/aBVvM1NMZFX1VDREUffxr8/djBBH6cu76A3amI1M4hxL5HUBzCqTlwnsVVTNRfqXyu49v5CJH
+	LtebXCmju/I4p4VjiSbbULn4/1SZCTdg1Tns8xSxROE3R7OjmqmAmBboz1MwARj1JnMEF7SSitI
+	aOgaqlUb6E7ZkEZdn7Nk/rBZClkpQ4xj+OZtLU0eMjblCbNBZpgEGzI4jLfURzOZO+YBBVl3QKs
+	+xjqXaDX6J3CiCGdBtH0AcCRxPYhGM+tqGleefKMv1sbTmLMLLCzB/qRH1Oqokutgk/3mJkhNsG
+	BFX4TmzmIRTJVOVu1CyxjYPD15IJPOih2j+cZxHTbYxs4zbmTYMm5j7l7BnA=
+X-Received: by 2002:a05:6000:1789:b0:491:971a:c568 with SMTP id ffacd0b85a97d-4abb3861356mr43995162f8f.10.1795774473594;
+        Fri, 27 Nov 2026 02:14:33 -0800 (PST)
 Received: from localhost.localdomain (host-94-89-17-99.business.telecomitalia.it. [94.89.17.99])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.30
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 02:14:31 -0800 (PST)
+        Fri, 27 Nov 2026 02:14:33 -0800 (PST)
 From: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
@@ -98,9 +98,9 @@ Cc: Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
-Subject: [PATCH v2 07/10] drm/msm/dp: fix HPD plugged, AUX gate, and runtime PM tracking
-Date: Fri, 27 Nov 2026 11:14:14 +0100
-Message-Id: <20261127101417.24303-8-gianfranco.mariotti94@gmail.com>
+Subject: [PATCH v2 08/10] drm/msm/dp: keep PHY initialized while plugged across link unprepare
+Date: Fri, 27 Nov 2026 11:14:15 +0100
+Message-Id: <20261127101417.24303-9-gianfranco.mariotti94@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
 References: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
@@ -115,220 +115,142 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Keep dp->plugged, AUX transfer enablement, and runtime PM reference
-counts balanced across hotplug, detection, and link preparation:
+When a DisplayPort output is disabled while a sink remains physically
+plugged in (e.g. DPMS off or connector force-off),
+msm_dp_display_unprepare() calls msm_dp_display_host_phy_exit() whenever
+sink_count != 0, leaving the PHY uninitialized while dp->plugged and AUX
+transfers remain enabled. Subsequent AUX transactions (from IRQ_HPD or
+connector re-detection) then stall and time out with -ETIMEDOUT. For the
+sink_count == 0 case, msm_dp_ctrl_reinit_phy() bypassed
+msm_dp_ctrl_phy_reset(), triggering spurious DP_INTR_PLL_UNLOCKED AUX
+interrupts.
 
-- In msm_dp_hpd_plug_handle(), return early when dp->plugged is already
-  set, unwind AUX transfers, PHY init (if initialized by this call), and
-  runtime PM on DPCD/AUX failures, and keep dp->plugged = true when an
-  empty branch device returns -ENOTCONN so downstream hotplug events
-  remain observable.
-- In msm_dp_hpd_unplug_handle(), avoid clearing video_test or disabling
-  AUX transfers when !dp->plugged.
-- In msm_dp_bridge_detect(), stop mutating priv->plugged (leaving
-  ownership with the HPD plug/unplug handlers), disable AUX transfers on
-  exit whenever !priv->plugged, and unconditionally drop detect's own
-  runtime PM reference.
-- Serialize msm_dp_display_prepare_link() under dp->plugged_lock and
-  require dp->plugged before bringing up the link.
-- Preserve dp->plugged in msm_dp_bridge_hpd_notify() when detect reports
-  connector_status_disconnected for an attached empty branch dongle.
+Serialize msm_dp_display_unprepare() under dp->plugged_lock, replace the
+sink_count split and now-unused msm_dp_ctrl_reinit_phy() with
+msm_dp_display_host_phy_exit() followed by
+msm_dp_display_host_phy_init() whenever dp->plugged is true, exit the
+PHY in msm_dp_hpd_unplug_handle() whenever !power_on, and balance PHY
+exit/init across system sleep in msm_dp_pm_runtime_suspend()/resume().
 
 Fixes: 3ea2d1c3d154 ("drm/msm/dp: turn link_ready into plugged")
-Fixes: 5043357e75ba ("drm/msm/dp: rework HPD handling")
+Fixes: 1bda647ce61b ("drm/msm/dp: move link-level teardown from display_disable to display_unprepare")
 Signed-off-by: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 ---
- drivers/gpu/drm/msm/dp/dp_display.c | 71 +++++++++++++++++++----------
- 1 file changed, 46 insertions(+), 25 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_ctrl.c    | 13 ------------
+ drivers/gpu/drm/msm/dp/dp_ctrl.h    |  1 -
+ drivers/gpu/drm/msm/dp/dp_display.c | 33 ++++++++++++++++-------------
+ 3 files changed, 18 insertions(+), 29 deletions(-)
 
+diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+index 7201b7b513a3..1b2ab7db28cb 100644
+--- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
++++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+@@ -2679,19 +2679,6 @@ int msm_dp_ctrl_on_stream(struct msm_dp_ctrl *msm_dp_ctrl, struct msm_dp_panel *
+ 	return ret;
+ }
+ 
+-void msm_dp_ctrl_reinit_phy(struct msm_dp_ctrl *msm_dp_ctrl)
+-{
+-	struct msm_dp_ctrl_private *ctrl;
+-	struct phy *phy;
+-
+-	ctrl = container_of(msm_dp_ctrl, struct msm_dp_ctrl_private, msm_dp_ctrl);
+-	phy = ctrl->phy;
+-
+-	/* aux channel down, reinit phy */
+-	phy_exit(phy);
+-	phy_init(phy);
+-}
+-
+ void msm_dp_ctrl_off_link(struct msm_dp_ctrl *msm_dp_ctrl,
+ 			  struct msm_dp_panel *panel)
+ {
+diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.h b/drivers/gpu/drm/msm/dp/dp_ctrl.h
+index 80d9258501b4..ea3a42e9b624 100644
+--- a/drivers/gpu/drm/msm/dp/dp_ctrl.h
++++ b/drivers/gpu/drm/msm/dp/dp_ctrl.h
+@@ -56,7 +56,6 @@ void msm_dp_ctrl_core_clk_disable(struct msm_dp_ctrl *msm_dp_ctrl);
+ void msm_dp_ctrl_enable_irq(struct msm_dp_ctrl *msm_dp_ctrl);
+ void msm_dp_ctrl_disable_irq(struct msm_dp_ctrl *msm_dp_ctrl);
+ 
+-void msm_dp_ctrl_reinit_phy(struct msm_dp_ctrl *msm_dp_ctrl);
+ bool msm_dp_ctrl_stream_clks_on(struct msm_dp_ctrl *dp_ctrl,
+ 				enum msm_dp_stream_id stream_id);
+ #endif /* _DP_CTRL_H_ */
 diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index 7831dd13b067..a48f42a17365 100644
+index a48f42a17365..d3f4b5a9e723 100644
 --- a/drivers/gpu/drm/msm/dp/dp_display.c
 +++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -408,8 +408,9 @@ static int msm_dp_display_handle_irq_hpd(struct msm_dp_display_private *dp)
- 
- static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- {
--	int ret;
- 	struct platform_device *pdev = dp->msm_dp_display.pdev;
-+	bool phy_deinit;
-+	int ret;
- 
- 	drm_dbg_dp(dp->drm_dev, "Before, type=%d sink_count=%d\n",
- 			dp->msm_dp_display.connector_type,
-@@ -417,6 +418,9 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- 
- 	guard(mutex)(&dp->plugged_lock);
- 
-+	if (dp->plugged)
-+		return 0;
-+
- 	ret = pm_runtime_resume_and_get(&pdev->dev);
- 	if (ret) {
- 		DRM_ERROR("failed to pm_runtime_resume\n");
-@@ -425,9 +429,16 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- 
- 	msm_dp_aux_enable_xfers(dp->aux, true);
- 
--	msm_dp_display_host_phy_init(dp);
-+	phy_deinit = msm_dp_display_host_phy_init(dp);
- 
- 	ret = msm_dp_display_process_hpd_high(dp);
-+	if (ret && ret != -ENOTCONN) {
-+		msm_dp_aux_enable_xfers(dp->aux, false);
-+		if (phy_deinit)
-+			msm_dp_display_host_phy_exit(dp);
-+		pm_runtime_put(&pdev->dev);
-+		return ret;
-+	}
- 
- 	drm_dbg_dp(dp->drm_dev, "After, type=%d sink_count=%d\n",
- 			dp->msm_dp_display.connector_type,
-@@ -435,8 +446,8 @@ static int msm_dp_hpd_plug_handle(struct msm_dp_display_private *dp)
- 
- 	dp->plugged = true;
- 
--	return ret;
--};
-+	return 0;
-+}
- 
- static void msm_dp_display_handle_plugged_change(struct msm_dp *msm_dp_display,
- 		bool plugged)
-@@ -458,10 +469,6 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- 
- 	guard(mutex)(&dp->plugged_lock);
- 
--	dp->panel->video_test = false;
--
--	msm_dp_aux_enable_xfers(dp->aux, false);
--
- 	drm_dbg_dp(dp->drm_dev, "Before, type=%d sink_count=%d\n",
- 			dp->msm_dp_display.connector_type,
- 			dp->link->sink_count);
-@@ -469,6 +476,9 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- 	if (!dp->plugged)
- 		return 0;
- 
-+	dp->panel->video_test = false;
-+	msm_dp_aux_enable_xfers(dp->aux, false);
-+
- 	/* Don't forget modes for eDP */
+@@ -483,8 +483,7 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
  	if (!dp->msm_dp_display.is_edp)
  		drm_edid_connector_update(dp->msm_dp_display.connector, NULL);
-@@ -497,10 +507,8 @@ static int msm_dp_hpd_unplug_handle(struct msm_dp_display_private *dp)
- 			dp->msm_dp_display.connector_type,
- 			dp->link->sink_count);
  
--	if (dp->plugged) {
--		pm_runtime_put(&pdev->dev);
--		dp->plugged = false;
+-	/* triggered by irq_hdp with sink_count = 0 */
+-	if (dp->link->sink_count == 0)
++	if (!dp->msm_dp_display.power_on)
+ 		msm_dp_display_host_phy_exit(dp);
+ 
+ 	dp->link->has_sink_count = false;
+@@ -1330,10 +1329,9 @@ static int msm_dp_pm_runtime_suspend(struct device *dev)
+ 
+ 	disable_irq(dp->irq);
+ 
+-	if (dp->msm_dp_display.is_edp) {
+-		msm_dp_display_host_phy_exit(dp);
++	msm_dp_display_host_phy_exit(dp);
++	if (dp->msm_dp_display.is_edp)
+ 		msm_dp_aux_hpd_disable(dp->aux);
 -	}
-+	dp->plugged = false;
-+	pm_runtime_put(&pdev->dev);
+ 	msm_dp_display_host_deinit(dp);
  
  	return 0;
- }
-@@ -641,13 +649,15 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- 	if (msm_dp_display->is_edp)
- 		msm_dp_hpd_plug_handle(dp);
- 
-+	guard(mutex)(&dp->plugged_lock);
-+
- 	rc = pm_runtime_resume_and_get(&msm_dp_display->pdev->dev);
- 	if (rc) {
- 		DRM_ERROR("failed to pm_runtime_resume\n");
- 		return rc;
+@@ -1349,12 +1347,15 @@ static int msm_dp_pm_runtime_resume(struct device *dev)
+ 	 *
+ 	 * for DP, only host controller is enabled here.
+ 	 * HPD block is enabled at msm_dp_bridge_hpd_enable()
+-	 * PHY will be enabled at plugin handler later
++	 * PHY will be enabled at plugin handler later, or restored here
++	 * across system suspend if a sink is already plugged in
+ 	 */
+ 	msm_dp_display_host_init(dp);
+ 	if (dp->msm_dp_display.is_edp) {
+ 		msm_dp_aux_hpd_enable(dp->aux);
+ 		msm_dp_display_host_phy_init(dp);
++	} else if (dp->plugged) {
++		msm_dp_display_host_phy_init(dp);
  	}
+ 
+ 	enable_irq(dp->irq);
+@@ -1533,19 +1534,21 @@ static void msm_dp_display_unprepare(struct msm_dp_display_private *dp)
+ {
+ 	struct msm_dp *msm_dp_display = &dp->msm_dp_display;
+ 
+-	/* dongle is still connected but sinks are disconnected */
+-	if (dp->link->sink_count == 0)
+-		msm_dp_link_psm_config(dp->link, &dp->panel->link_info, true);
++	scoped_guard(mutex, &dp->plugged_lock) {
++		/* dongle is still connected but sinks are disconnected */
++		if (dp->link->sink_count == 0 && dp->plugged)
++			msm_dp_link_psm_config(dp->link, &dp->panel->link_info,
++					       true);
+ 
+-	msm_dp_ctrl_off_link(dp->ctrl, dp->panel);
++		msm_dp_ctrl_off_link(dp->ctrl, dp->panel);
  
 -	if (dp->link->sink_count == 0)
-+	if (!dp->plugged || dp->link->sink_count == 0)
- 		return -ENOTCONN;
+-		/* re-init the PHY so that we can listen to Dongle disconnect */
+-		msm_dp_ctrl_reinit_phy(dp->ctrl);
+-	else
++		/* Keep PHY initialized for AUX and IRQ_HPD while a sink remains plugged */
+ 		msm_dp_display_host_phy_exit(dp);
++		if (dp->plugged)
++			msm_dp_display_host_phy_init(dp);
  
- 	if (!msm_dp_display->power_on) {
-@@ -926,26 +936,22 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 	DRM_DEBUG_DP("aux link status: %x\n", ret);
- 	if (!priv->plugged && !ret) {
- 		DRM_DEBUG_DP("aux not connected\n");
--		priv->plugged = false;
- 		goto end;
- 	}
+-	msm_dp_display->power_on = false;
++		msm_dp_display->power_on = false;
++	}
  
- 	ret = drm_dp_read_dpcd_caps(priv->aux, dpcd);
- 	if (ret) {
- 		DRM_DEBUG_DP("failed to read caps\n");
--		priv->plugged = false;
- 		goto end;
- 	}
- 
- 	ret = drm_dp_read_desc(priv->aux, &desc, drm_dp_is_branch(dpcd));
- 	if (ret) {
- 		DRM_DEBUG_DP("failed to read desc\n");
--		priv->plugged = false;
- 		goto end;
- 	}
- 
- 	status = connector_status_connected;
--	priv->plugged = true;
- 
- 	if (drm_dp_read_sink_count_cap(connector, dpcd, &desc)) {
- 		int sink_count = drm_dp_read_sink_count(priv->aux);
-@@ -958,18 +964,17 @@ enum drm_connector_status msm_dp_bridge_detect(struct drm_bridge *bridge,
- 
- end:
- 	/*
--	 * If we detected the DPRX, leave the controller on so that it doesn't
--	 * lose the state.
-+	 * Leave AUX and PHY enabled when the HPD plug handler already owns a
-+	 * plugged sink; always release detect's own runtime PM reference.
- 	 */
- 	if (!priv->plugged) {
--		if (phy_deinit) {
--			msm_dp_aux_enable_xfers(priv->aux, false);
-+		msm_dp_aux_enable_xfers(priv->aux, false);
-+		if (phy_deinit)
- 			msm_dp_display_host_phy_exit(priv);
--		}
--
--		pm_runtime_put_sync(&dp->pdev->dev);
- 	}
- 
-+	pm_runtime_put(&dp->pdev->dev);
-+
- 	return status;
- }
- 
-@@ -1598,6 +1603,22 @@ void msm_dp_bridge_hpd_disable(struct drm_bridge *bridge)
  	pm_runtime_put_sync(&msm_dp_display->pdev->dev);
- }
- 
-+static bool msm_dp_display_is_dongle_plugged(struct msm_dp_display_private *dp,
-+					     u32 hpd_link_status)
-+{
-+	u8 rev;
-+
-+	guard(mutex)(&dp->plugged_lock);
-+
-+	if (!dp->plugged || !dp->link->has_sink_count || dp->link->sink_count)
-+		return false;
-+
-+	if (hpd_link_status != ISR_DISCONNECTED)
-+		return true;
-+
-+	return !drm_dp_dpcd_read_byte(dp->aux, DP_DPCD_REV, &rev);
-+}
-+
- void msm_dp_bridge_hpd_notify(struct drm_bridge *bridge,
- 			      struct drm_connector *connector,
- 			      enum drm_connector_status status)
-@@ -1626,7 +1647,7 @@ void msm_dp_bridge_hpd_notify(struct drm_bridge *bridge,
- 		} else {
- 			msm_dp_hpd_plug_handle(dp);
- 		}
--	} else {
-+	} else if (!msm_dp_display_is_dongle_plugged(dp, hpd_link_status)) {
- 		msm_dp_hpd_unplug_handle(dp);
- 	}
  
 -- 
 2.25.1
