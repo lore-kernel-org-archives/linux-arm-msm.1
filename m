@@ -1,83 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795774464;
-	b=ElLzX/FGomLCB2uPq16vNmNp9RKWqT2s1dw3QwE6iaSxxVCjIs9ln2IaNca1abv0VxKp
-	 MsL+sZSCnCpGmsKCr/fN8qP5DXrvkq9/Nh41LP/nrw+/5FDO+1carsQQX2FOmWcZWkqEJ
-	 cwk+PeDBkOUe2rX/t3jzI2QzUHFvFly0+T2GmJv/CgWyVaWopBdviTUlf1PLrzEqvXbfT
-	 e96WXmvVarQKKvzVWXUfUK0DWPYl4L4qIQngIngVwBaf9bErMOu/7SY0BB/czv+1KEugr
-	 iD47vp6bh5iKfcBcycKUuQ1p3+c1S3r4XRZRGaa17SvE9X5VgXa+gDGUo+VizsuV/8A==
+	t=1795774466;
+	b=XR+3/3UvFieI9B3tEgHfZOeRYdkxyrqGdTJ2FhVwPrC7bX3+CBuUAKceqdv8dK+E3FOd
+	 x9PcQL6dWgukFF3u6doFYDV3CNDqPpCizk/woTZsNzEtm+Dynv/nYtm0150KxevtskHC7
+	 aJZ3LkT5M3sNNlfn4WjEMIDLqtjwgLc05gRMxCuiidZerQsriTOzDbLuXv+Q9ldKAjprx
+	 v0uywGWH7CEqiuonnD9yBPGC7TlguALjOfTnM0IK3EjIIgyk3vLsKTd0Je9eiOoyYwMia
+	 Ef9WkVFAA87uMvLXaeEF09g8H6SI9eN4NDkk81r+L7MNekkmVvfNUN21kpElOCCP1Zw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795774464;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795774466;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
-	b=FiyJ8WFiEeCd3SkJqQMq8s6erUdC9mwmSR/qP0LtM0+/7Dci5v2sDopSqokZsFKcoWqg
-	 7mBnGikxvVDYj1RuS5lNFOioMkFIWM5Pqj/uuflzmaDa4fgOQuIQT9gqnLcz04ihmA+JR
-	 eXWDN/hJ3CNtrfukjRmjJbn99NKSz4qQzaCMHiiWDzDXB3x3EIJIHQbuy+AQsjnsiZysl
-	 bvgSDaYYcrBvobxixwH8iMSLn7lUXiIK0CJ6cF6mNaJLtD8qbETJa7/3ofQCh2ejuKjz2
-	 3WHmqKlWwlY5uBE8VdqXJlskaTcetaKUg0GAG+19MTa43+feQ+c9kKc7xpl9uPfZJQQ==
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
+	 MIME-Version:Content-Transfer-Encoding;
+	bh=mLyO4AhRjnRtKKiwchzwSdvyP2jX085GcQOLd7xPquo=;
+	b=DGfbPc3g2QcYL/gq3Lx4Ahvj2d8EEjVrX1xRdLsi7DDmLQzfEbSDHozMAAuh+P0WmmiA
+	 mge8BlAP/i+INHckSmqc8SQXHVzJ3X2m3HUHvZ1fOh/4hCtudsU8/nviUNpjwluNpSrOh
+	 R/ACxQGGAvo8h9ueb8fm4tksV0ueafd4/nVVhnHREViUpEMPyK89h+Lsj24O73fjQH2MB
+	 0LHw5qZxd6EDr72oWFhwjJ6F+TC7e1E77r3BJ6blDwo5vTLp1lCF7aCAFOqIBzpV9Tw/I
+	 7c6J0yh5i7fK3Kpl4fqsXb0drGg5i3nviqSuhI/ymLl1VFMTN4pdriU2C8hsY1P15Dw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GbXH75zm;
-	arc=none smtp.remote-ip=209.85.221.50
-Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Uw7NnkGR;
+	arc=none smtp.remote-ip=209.85.221.46
+Received: from mail-wr1-f46.google.com (mail-wr1-f46.google.com [209.85.221.46])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84A8F606A33C
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:24 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 84A8F606A33C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 89B5C606A33C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:25 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 89B5C606A33C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GbXH75zm
-Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-498f5fa5103so4698574f8f.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:24 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=Uw7NnkGR
+Received: by mail-wr1-f46.google.com with SMTP id ffacd0b85a97d-4a357b1c649so4559295f8f.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795774463; x=1796379263; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
-        b=GbXH75zmMZq1wH6lilVCPrq1meQRkGymzEwoGp022+Rs7/GpALnIWBBO6kh+GPhwUa
-         q+TeLZ7DENQDAAFV1C6mdk6CqJNXa6YjFNlwJR3yO0ZwIkInbzAhb0AH7HbG2ASoYXDq
-         UlzrE9o81lgR71VFUEmY2GtFkdqdURvxHisTtdsh+podXGA+rwGSTjHgILpcFfG/jyeA
-         REY8Sp+3soFJpYuWT60MCg9Vy23yjkdcjTo5vgn6+sAaf4PjgM5CHUM9g7dteli0tipP
-         IUc0uElq6JsJ1YsHI3eknwGfpvcEfckjlTd2u1VSrsMyLqmdf1MTktKewdjmPlGyelca
-         yfhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795774463; x=1796379263;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=gmail.com; s=20260707; t=1795774464; x=1796379264; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
-        b=pnTx3Ktn9KOxhBr9ZFy5IyjdXmO77pnfMb7l76js8Q+ceAXAZyPjJkV0lmClLFyLCF
-         v76XeIEfXOxvwAwqxyG6LG8S2Fpzv0kqTSZUoCcSfi3PCumzsjS0ttTkQaeEeXFc4FZ5
-         9Kd0h5blB1eYvU1CTWP8wWQn/vDL33fIXbLW6suUnRzVaSmNjDTFiRolFW2DwO6tZvpN
-         l+GFw8u7Iz0NeXfBGivbU5EkRFZ+ddAhD9U5DWh5rPTply+9w8FLxRzs0tpoPHAeUKPX
-         ys2Vl4JC7wGwgscq3UDaFG5N61Dv+B7CadkNHr+ZqNKOMt3iFQFTL2yL6dRVvtRj9WbH
-         H5oA==
-X-Forwarded-Encrypted: i=1; AL+hErGKlhcEQFcdNT+RFsILN7Ty+ShyAU/UAjFKG9xQRc63wVNphuOOvoqkRBNgn/HMihFARd/cnIImjgE1LHOC@vger.kernel.org
-X-Gm-Message-State: APuU4Z/H8qFHNgRhQLtcQrwLkCB4lsiFnMDPpqmTDtrMBGc15rqDVcnQ
-	KHLhL1XVr97SUfVMu/PC093RpiOeBeAgYu9fx+r3T5QATDi1EqJGRak=
-X-Gm-Gg: AZFdTZdEF49/4aIbQWVrgILYtHr58WMb5IeQhRfHY3Mx0iyqVDgTLMNs303f++Oabtd
-	spGnDOvrykHCxAhWceaX+24VdZeUag2DyXBfpgTTLB6SR9O9B+7mZgpxGCyPrz8Hr4/nlEltlq3
-	igItg7lMpgcDDZOOGuJwShgWMazLx4qSqqzWD4bI/YtShW4S4v0S1c7bnNrUC9zxYQMZDW9Ckg2
-	y9/i5nO1TdF8DO2pkRAgFjk28T3UDfukBxur0SDhsf68aJM1+HI0igyh+OsG10nzUiqmRzvpvH+
-	5fn+UuCHeb+mu5WzxTWWXRVKQxHtKxiQ1dicCqGDYKOtYMcVUFnwCRa4fudg0YaSqM4j3HCOOyL
-	BFWEceG5zSskvgJFzp+bW90V/X0gV0J7z2eDvrhimyVqNXyjZSNPCCI984N0ORfKBXQeHa41RqK
-	W5QfYc7SJU3xQ1qSA0F1JCyk02KTUmVRnxA4LE3Gb6vB/l/n9o+WMW1p5DbyRGTmD2G1omS5sJw
-	92HyD+ljJRGxI9n0L7KIbVkJXefhqsaTtniJA56b25rXmFjf/w+v4boHuguYKZXnEDRnQfyCDH3
-	9hEpjbpaorhT92/Q5MTWovfn0+OZEThz252UbmAK/oDUn4JJU//TVY2l0tZy8Q4qzo43B+ghp7m
-	B8mF7c5KYsS45YfljVBkolNuDiE9nJr3qh59LWSDw2nV/fET5NRdU4iEff44=
-X-Received: by 2002:a05:6000:2308:b0:49b:587:121a with SMTP id ffacd0b85a97d-4abb36787afmr49730970f8f.16.1795774462607;
-        Fri, 27 Nov 2026 02:14:22 -0800 (PST)
+        bh=mLyO4AhRjnRtKKiwchzwSdvyP2jX085GcQOLd7xPquo=;
+        b=Uw7NnkGRkLh49953F7eE1v7yBLfV4URKaGKqNm+8ZwSGyjtZJgJk/mOnvMi9aXzarC
+         4LCZWbGi2zaNQRRVI4qbR8eyi+w7ewRwBqVgE9W/XsrGsOleq4WO9MJjl5BBHcitY5O6
+         QVImHQ9MYlgLndgxNMbIQtufvb2tRdaX+05OYqYTnkRbUxGFlNd+MdzD0oZjWf8Uyo87
+         HyJK7dHL3HXgx/NBrjJz49C/FFSefMirzHoj1Bx6yzCAHIkCRZytmLAPqsbYYCLurXQr
+         HQ+UNkdqqxfYwGQN02jaGLjSUlXCS/0xnsRVcfJA4ZvbC+9YnQOWI+v88BQbPwdja2YJ
+         E3hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795774464; x=1796379264;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=mLyO4AhRjnRtKKiwchzwSdvyP2jX085GcQOLd7xPquo=;
+        b=dZE4csbpcX0OAQDWVgpM6YpcmMD5pSjo8dWmVIvLF4QAhRXs/DNSxNu6o3WnTBdM2T
+         dM11Xp2E2KH8kpLtgWImUKTEhm/9FNXCyJ98MbvtX04DycTTyOpKCOiKohcl3kZGqyQ6
+         MQrk0jnsW/AAQmZMNVNmnvyn5xh85F2rGBSFwBcPm6JszhPpHyy1AHJI4bIeSQmfRBGT
+         3nq76iwHsrVveZ0G07skQB2E8nREx9CFPxW02Dxlm+7ReY8gAe2WSNysjV+xh8h3wy1R
+         lvCXNfRHSra736eThgsNTI1NGuVscAWRDloMXpAOW8Kk9VtIhvxzt8Fzgz4bguWjb4z2
+         T9EA==
+X-Forwarded-Encrypted: i=1; AL+hErHyhWKUYWxzYNY5hp9uk1Vt/JMLymuJq40HhckjWlg3r4eHJrp7Rk/ZjWs/ljjjPGD98qtklrle8adhnR2F@vger.kernel.org
+X-Gm-Message-State: APuU4Z8/2iu5Jyg4LNFzF651s4Z+E/XbpiI+By7BOsBEaDtc6j3OR4xS
+	J3diZrIg+8BPA6Y6ovf3rbNyaKrIN95k+yQymu+DWKSYjFzw+UlvJUw=
+X-Gm-Gg: AZFdTZcAktsUAeO6ExQ2SRGdkjsbhaVpMwrhQoRwSX7/9jdsmbTHxQCKn/xmoJOtFig
+	qOEKwZnvz5MsjrFA4rIDJ4O4thwUbvI0hoDNbM0l6ADmfpd5H3sLpbENgNOBU/aP1aqqiojGyYA
+	RQQtjaJ0PcxuNn0mMapWpCmdmudzq4UTnZk3sC/ZhW/eX2SYYiyUV79oXlirHOKCXuKTX+Uj5S+
+	zX4kG+a5iqvkEE3kOz6C/QMoXnVm26xeN48M7sEeVG4DB21JeEi7t5NuEzrPKgGlwz4KmUGJ2Hx
+	W6z0jVpLqqHlvwWU+C6jYkdJ1OVX8Gtekm2j8KUjeBdTuMaeFcMX97A4FMLMOHxKNfGa9Ur+5M6
+	W07LvjMHIdoJE4o43zCoeaKvcPtBK8BSOdcwsvNvKdcvjmnxY3MLzlQngeb12OXK6FB5HrkuBmP
+	FOBfUZ1nYlPGtDbSbPZ5HUlaf+yUFIxj6UKvdKfzRL6q/RsErQLr7wco5QIBLidS+29m15rRUoO
+	USvQLAtFRYDW7duhKDvC5A8Gc5KGZ9qk0TySjkidAfhVh2HWDqkSVvFH8eso5mBItKr/vZwNAfJ
+	tdVGpmuQ4hHZ5o59ZmzfomDqRRGmoAM86KyB5pq6KMIMexlg2a/9U+50BC9U9O0KgPm1MS/hb2X
+	YkBlWYBXQoaMdnERO78Rd7ScNvupmMbnzCUIIoFlW4SqcnN9pIQS6cpxZxlM=
+X-Received: by 2002:a05:6000:299c:20b0:4aa:2bf2:4d98 with SMTP id ffacd0b85a97d-4abb0f3b4b0mr35473305f8f.29.1795774463951;
+        Fri, 27 Nov 2026 02:14:23 -0800 (PST)
 Received: from localhost.localdomain (host-94-89-17-99.business.telecomitalia.it. [94.89.17.99])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.20
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.22
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 02:14:22 -0800 (PST)
+        Fri, 27 Nov 2026 02:14:23 -0800 (PST)
 From: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
@@ -97,10 +98,12 @@ Cc: Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
-Subject: [PATCH v2 00/10] drm/msm/dp: fix DisplayPort hotplug, link training, and multi-lane PHY setup
-Date: Fri, 27 Nov 2026 11:14:07 +0100
-Message-Id: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
+Subject: [PATCH v2 01/10] drm/msm/dp: configure voltage swing and pre-emphasis for all active lanes
+Date: Fri, 27 Nov 2026 11:14:08 +0100
+Message-Id: <20261127101417.24303-2-gianfranco.mariotti94@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
+References: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -112,110 +115,50 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-On platforms with a native DisplayPort connector using direct HPD
-interrupts, DisplayPort initializes on cold boot, but physical cable
-unplug and re-plug cycles leave the display blank even though link
-training and stream enable callbacks report success.
+msm_dp_ctrl_set_vx_px() only populated voltage[0] and pre[0] in struct
+phy_configure_opts_dp and relied on phy_opts->dp.lanes and
+phy_opts->dp.link_rate remaining unchanged since
+msm_dp_ctrl_enable_mainlink_clocks(), which leaves them stale if link
+parameters change during link maintenance (e.g. DP_TEST_LINK_TRAINING).
 
-This series fixes the underlying PHY lane setup, DPCD link-info caching,
-SST training-pattern handover, link maintenance completion/stream
-handling, and HPD / sink_count / runtime-PM / PHY / EDID state tracking
-issues:
+Populate phy_opts->dp.lanes and phy_opts->dp.link_rate from the active
+link parameters and program voltage swing and pre-emphasis across all
+active lanes to match the generic PHY DP configuration contract.
 
-1. Configure PHY voltage swing and pre-emphasis across all active lanes
-   and refresh lanes/link_rate in msm_dp_ctrl_set_vx_px().
-2. Zero out cached link_info in msm_dp_panel_read_dpcd() so re-plugging
-   a different sink does not reuse stale rate, use_rate_set, or
-   capability flags.
-3. Avoid redundant back-to-back link training in
-   msm_dp_display_prepare_link() and keep DP_TRAINING_PATTERN_SET active
-   until msm_dp_ctrl_on_stream() is ready to switch REG_DP_STATE_CTRL to
-   DP_STATE_CTRL_SEND_VIDEO.
-4. Guard msm_dp_ctrl_push_idle(), reinitialize ctrl->video_comp, and
-   keep training pattern active until stream clocks are enabled in
-   msm_dp_ctrl_link_maintenance().
-5. Use asynchronous pm_runtime_put() on HPD unplug/notify paths called
-   from msm_dp_display_irq_thread() to avoid a synchronous disable_irq()
-   self-deadlock in msm_dp_pm_runtime_suspend().
-6. Track drm_dp_read_sink_count_cap() in link->has_sink_count and keep
-   sink_count and prev_sink_count synchronized across plug and unplug.
-7. Keep dp->plugged, AUX transfer enablement, and runtime PM references
-   balanced across plug, unplug, detect, prepare_link, and empty branch
-   dongle notifications.
-8. Keep the DP PHY initialized across msm_dp_display_unprepare() and
-   system sleep while a sink remains plugged in (removing now-unused
-   msm_dp_ctrl_reinit_phy()).
-9. Re-read EDID on demand in msm_dp_display_get_modes() when
-   edid_blob_ptr is NULL (e.g. after DRM_FORCE_OFF).
-10. Dispatch DP_DP_IRQ_HPD_INT_MASK to msm_dp_irq_hpd_handle(), skipping
-    sink requests when mainlink clocks are off and emitting bridge HPD
-    notifications on branch DS_PORT_STATUS_CHANGED events (kept at the
-    end of the series so it can be dropped if superseded by in-flight
-    DRM_CONNECTOR_DP_IRQ_HPD changes).
-
-Changes in v2:
-- Add Jens Glathe's Tested-by on unchanged patches 1, 3, and 5.
-- Patch 1: clarify commit message regarding persistent ctrl->phy_opts
-  staleness on link maintenance and update Fixes tag to 937f941ca06f.
-- Patch 2: zero out the entire link_info struct (rate, use_rate_set,
-  and capabilities) before parsing DPCD.
-- Patch 4: drop redundant msm_dp_ctrl_configure_source_params() call (as
-  msm-next already calls msm_dp_ctrl_config_ctrl_streams() inside
-  msm_dp_ctrl_link_train(), avoiding unclocked pixel_base access when
-  no stream is active), guard msm_dp_ctrl_push_idle() and
-  msm_dp_ctrl_clear_training_pattern() / SEND_VIDEO with stream_clks_on,
-  and update Fixes tag to 8ede2ecc3e5e.
-- Reorder and split HPD changes (was patch 7) into four focused patches
-  (patches 6-9):
-  - Patch 6: DP_SINK_COUNT capability and prev_sink_count synchronization.
-  - Patch 7: dp->plugged, AUX gate, msm_dp_bridge_detect() runtime PM
-    release, prepare_link locking, and empty branch dongle handling.
-  - Patch 8: PHY lifecycle across msm_dp_display_unprepare(), unplug, and
-    system sleep, removing msm_dp_ctrl_reinit_phy().
-  - Patch 9: on-demand EDID re-read in msm_dp_display_get_modes() and
-    DRM_FORCE_OFF error log suppression.
-- Patch 10 (was 5): move to end of series, guard
-  msm_dp_ctrl_handle_sink_request() with ctrl->link_clks_on, guard
-  msm_dp_irq_hpd_handle() with dp->plugged, and handle branch
-  DS_PORT_STATUS_CHANGED connect/disconnect with non-reentrant
-  drm_bridge_hpd_notify().
-- Link to v1: https://lore.kernel.org/r/20261121214105.32596-1-gianfranco.mariotti94@gmail.com
-
-Testing:
-Hardware-tested across cold boot, unplug/re-plug, monitor swap (4K60
-native DP and DP-to-HDMI branch adapter), connector DPMS/off cycles, and
-IRQ_HPD link-retrain cycles on a QCS8275 (Monaco) SMARC board (SECO F86)
-with a native DisplayPort connector running v6.18 + the FROMLIST DP
-HPD/MST series (Qualcomm Linux / QLI 2.0), then forward-ported and
-build-tested against msm-next.
-
+Fixes: 937f941ca06f ("drm/msm/dp: Use qmp phy for DP PLL and PHY")
+Tested-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz> # x1p42100-lenovo-ideacentre-mini
 Signed-off-by: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
+---
+ drivers/gpu/drm/msm/dp/dp_ctrl.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
-Gianfranco Mariotti (10):
-  drm/msm/dp: configure voltage swing and pre-emphasis for all active
-    lanes
-  drm/msm/dp: reset cached link_info before reading DPCD capabilities
-  drm/msm/dp: keep training pattern active until stream video is ready
-  drm/msm/dp: reinit video_comp and guard stream state on link
-    maintenance
-  drm/msm/dp: avoid synchronous runtime PM put from HPD IRQ thread
-  drm/msm/dp: track DP_SINK_COUNT capability and sync prev_sink_count
-  drm/msm/dp: fix HPD plugged, AUX gate, and runtime PM tracking
-  drm/msm/dp: keep PHY initialized while plugged across link unprepare
-  drm/msm/dp: re-read EDID on demand in get_modes when blob is missing
-  drm/msm/dp: dispatch native IRQ_HPD directly to
-    msm_dp_irq_hpd_handle()
-
- drivers/gpu/drm/msm/dp/dp_ctrl.c    |  44 +++---
- drivers/gpu/drm/msm/dp/dp_ctrl.h    |   1 -
- drivers/gpu/drm/msm/dp/dp_display.c | 228 +++++++++++++++++++---------
- drivers/gpu/drm/msm/dp/dp_link.c    |  26 +++-
- drivers/gpu/drm/msm/dp/dp_link.h    |   2 +
- drivers/gpu/drm/msm/dp/dp_panel.c   |  20 ++-
- 6 files changed, 215 insertions(+), 106 deletions(-)
-
-
-base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
+diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+index abd3dcdad03c..b896196cf244 100644
+--- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
++++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
+@@ -1374,13 +1374,18 @@ static int msm_dp_ctrl_wait4video_ready(struct msm_dp_ctrl_private *ctrl)
+ }
+ 
+ static int msm_dp_ctrl_set_vx_px(struct msm_dp_ctrl_private *ctrl,
+-			     u8 v_level, u8 p_level)
++				 u8 v_level, u8 p_level)
+ {
+ 	union phy_configure_opts *phy_opts = &ctrl->phy_opts;
++	int i;
++
++	phy_opts->dp.lanes = ctrl->link->link_params.num_lanes;
++	phy_opts->dp.link_rate = ctrl->link->link_params.rate / 100;
+ 
+-	/* TODO: Update for all lanes instead of just first one */
+-	phy_opts->dp.voltage[0] = v_level;
+-	phy_opts->dp.pre[0] = p_level;
++	for (i = 0; i < phy_opts->dp.lanes; i++) {
++		phy_opts->dp.voltage[i] = v_level;
++		phy_opts->dp.pre[i] = p_level;
++	}
+ 	phy_opts->dp.set_voltages = 1;
+ 	phy_configure(ctrl->phy, phy_opts);
+ 	phy_opts->dp.set_voltages = 0;
 -- 
 2.25.1
 
