@@ -1,62 +1,68 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795792840;
-	b=arPEA65YBryFpppA49/4tEagU+JaRhKR6/SPqNuCaLMXuBwZgbFeXGMekQp2kkgAoOiR
-	 m2xYegz+m+qt4fJNwAajtbt/aBgs9Oah8DVTdFbIt49MpkVCB3cS3X6GxSp8D+/0PckW+
-	 Y/ek3yrrSpiXaG1w38V5bFl90lJOXbSEALqbvojNjWrmNdg8v4RLsTvOVkfaNrJTdYNOC
-	 1/ETN20XerG7S+1NdHLqWgxZrRF1grKYnZPJnmfr/9G/Z1IJrOE9E8cW3K2sPAWaE0GBR
-	 c46XWNPwgWZviEinnoWdJ25yUJJRVr7R5nTXgKqYiMSfJvcPtVOJun/eHvga3BVsWyA==
+	t=1795793080;
+	b=o2RgwBcgCtkNcSqyyMb9uU5jYVVJ+Zn95rZ9gMyvscAfMvOeZhG+stZAD3R8DWkmhLy8
+	 xDbAAT4lPvMf0B8qO27kaGLfAcP9FW1yQ8CKQzKIwbbqbM/1Jw44hejY4sG+FRkjCtYCU
+	 u4g0VVWjl+R34b6R9uYEoXipwDwDxibQOR3dqgVogR9Te/ELeOM1DXUYpiPPBRxjvT8AL
+	 gjM+IpWCbmHD0d2/u2HXdDdGI0E3xVUt3NIq/l1qVMurCsc4A0zFiBfmG5x5yjc41yOwu
+	 ehC74igNeQuuHmNn03WOrVlKQB7eWq6m7bq+7SE7WNNScK9yoPtBl0xifY3l8QQzMuQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795792840;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=2RvOvHeeOrCTjfQHXhosaTxRY6j72mnCuAK7MgOgoIU=;
-	b=0K802hWQAhfDB9ITGEDbKvvJqm4Ndyxc+Or4zDgsWC5FqWrJgtJO2BH+MKZuQSMxa7N5
-	 udewHii4jpA9hySPytlHpBI70F35EzgsIdICpxaU2HNLQni98Q6GRLj/811bGrf/0OOAO
-	 xAAVmelqRiIUeUvJWcwaeP6UPGOb5JYdkNnhD5JRzevSz6RQZRy6Mr0lI5tNjuhLQ8C3Q
-	 dY5vxPgTiXwHhOsYZKVOxi8LHSVoOKfMRtiwVIluyb95V7ioy0QoCQJPGzeR1ZiSWVJlH
-	 lKhtpY5EH+UlPXRyReZLT1nCrRybHVsS73LJBSPLY4FfVruhUjCKKvySb+aUDRhR3+w==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795793080;
+	h=Received:DKIM-Signature:Date:From:To:Cc:Subject:Message-ID:
+	 References:MIME-Version:Content-Type:Content-Disposition:In-Reply-To;
+	bh=w46lPKdDZuz+yasVArT/wiplTje3J5dokSU77xqqMi4=;
+	b=su7BOBExFI0wrpdWNGS0468+dkdm5jEMRff/SjG12duNnmIHC/3fi7bHvFzlqI7J0wEx
+	 FP8KPJ/BnoOoCvRv8Bv60zK+isfETJjS3umC+2T/rq+AGSH1ohLyZEtyKCSwIO2pIM/TR
+	 s0T1HKHRGVMNSjOXJFR47nqeQjp9G0ZZLe5VXYaY0PIIzTVDKAUYl8ImpjvWcTkBqaTGZ
+	 YJYUtiIhK9y8hiuiPA28qFxyn2xPcrunRTIlzW76+Ps9t6nXB3HAEzmm3ZraDyHXQ5mxP
+	 x7TMkiOBRq6P8oOe9abHEqahfxxSFfv3oLg8UFFherpnqCtLa6Gm7aKkfUbbWXxy1nA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iihmbFg0;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 9B18D606A324;
-	Fri, 27 Nov 2026 15:20:36 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9B18D606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="ce/7JmhM";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F244606A32F;
+	Fri, 27 Nov 2026 15:24:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=iihmbFg0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=2RvOvHeeOrCTjfQHXhosaTxRY6j72mnCuA
-	K7MgOgoIU=; b=iihmbFg0I5Bz36s/gAdckXR47qHXjOLVqopWfFyVR3jKmEapVb
-	x4Ayeft7xN1145qtijBb9Yyuan8gX36qcOor5DaSpofK+hySwUylvcYy3NohNXSP
-	ZizVyptHRGsOHzTOp39U793ueTCj4LaVQBaBOf0qbiP6XspqtGWYnDrko=
-Received: from xuqianhui.ustc.edu.cn (unknown [114.214.180.66])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgCnMke4nwlrB1EDAQ--.2959S5;
-	Fri, 27 Nov 2026 23:20:26 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-media@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org,
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=ce/7JmhM
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id C0AA41F00936;
+	Fri, 27 Nov 2026 15:24:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795793080;
+	bh=w46lPKdDZuz+yasVArT/wiplTje3J5dokSU77xqqMi4=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=ce/7JmhMaWBK3DgK3DD0Ozh3QLSoA9Xvt+KOdMa6gPyAOjhVBUO/9UDY7FWR2ZlG6
+	 Qn7g8LeKTavr/tjs7mtAxNNmEjFLZgRtcxvQEFdJCBRXLt5a7v9V+kv2H6cT0V316y
+	 +uVrBxhQxfWrJI6qzG6OgT4mqgyFjGQ6WTAur+qJ5fiZUDi+bVwukPoOW0MlfN2JqT
+	 GMMkdV/NWdCetVEERBZkPMLUvrA1SWCS7gCevy9LwDiTDCNg1pn/o+xM0dEVlQBJhG
+	 FBWarQivAZQCbDNA3DIimJhoJrFYDQTrUp8baWgX0Bs2cHBHp7KUchpIWXAMTajdrR
+	 wF0/snaNYH5/Q==
+Date: Fri, 27 Nov 2026 17:24:36 +0200
+From: Leon Romanovsky <leon@kernel.org>
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>, iommu@lists.linux.dev,
+	linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+	kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+	Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+	Will Deacon <will@kernel.org>,
+	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
+	Honglei Huang <honghuan@amd.com>, prakash.gupta@oss.qualcomm.com,
+	Alex Williamson <alex@shazbot.org>,
 	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
 	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
 	Abhinav Kumar <abhinav.kumar@linux.dev>,
 	Bryan O'Donoghue <bod@kernel.org>,
 	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Stefan Schmidt <stefan.schmidt@linaro.org>
-Subject: [PATCH 3/3] media: iris: seed the crop rectangle when only CAPTURE is formatted
-Date: Fri, 27 Nov 2026 23:20:24 +0800
-Message-ID: <20261127152024.2149804-4-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
+	Hans Verkuil <hverkuil+cisco@kernel.org>, stable@vger.kernel.org
+Subject: Re: [PATCH 1/4] media: venus: use dma_iova_size() to check the
+ reserved IOVA size
+Message-ID: <20261127152436.GA774860@unreal>
+References: <20261127115849.2780625-1-m.szyprowski@samsung.com>
+ <CGME20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9@eucas1p1.samsung.com>
+ <20261127115849.2780625-2-m.szyprowski@samsung.com>
+ <20261127142912.GK114472@nvidia.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -66,81 +72,39 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgCnMke4nwlrB1EDAQ--.2959S5
-X-Coremail-Antispam: 1UD129KBjvJXoWxGFyxtFWUKry5tr45Kry5twb_yoW5Xry5pF
-	y7Ca9xCF4UGw48Z3WUXw48CFnxJrWFqrWYgrs7W3y2yF1Uuw1ruryrKFykJF48Xw4Sgry5
-	uw15GrWDArs5WrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUBqb7Iv0xC_Zr1lb4IE77IF4wAFF20E14v26rWj6s0DM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI
-	8067AKxVWUWwA2048vs2IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF
-	64kEwVA0rcxSw2x7M28EF7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcV
-	CY1x0267AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv
-	6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c
-	02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE
-	4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82
-	IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
-	0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
-	IF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
-	0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87
-	Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU8AgA5UUUUU==
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2sHyZtdggAvsa
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261127142912.GK114472@nvidia.com>
 
-After the source-change rework iris_vdec_s_fmt() keeps inst->crop as the
-visible rectangle of the stream and clamps it against the CAPTURE size:
+On Fri, Nov 27, 2026 at 10:29:12AM -0400, Jason Gunthorpe wrote:
+> On Fri, Nov 27, 2026 at 12:58:45PM +0100, Marek Szyprowski wrote:
+> > The IOVA reservation code compares dma_iova_state::__size directly with
+> > the requested chunk size. __size is internal to the DMA IOVA API and may
+> > carry flags in its upper bits, so use the dma_iova_size() accessor
+> > instead.
+> 
+> WTF is this even doing?
+> 
+>     Fix this by reserving the 0-600MB range, below the boundary the
+>     non-pixel stream cannot address, using dma_iova_try_alloc() so the
+>     IOMMU-DMA core never hands that range out to a real DMA mapping. This
+>     reserves only IOVA space, it does not allocate any physical memory.
+> 
+> That isn't what this API is for, and it isn't how it even works! It is
+> pure luck that the first call to it happens to take out the lower
+> address space.
+> 
+> We even had a long discussion about this driver and this need in
+> another thread and this is the hack job you guys merged?
 
-	inst->crop.width = min(inst->crop.width, fmt->width - inst->crop.left);
+You should also mention that NONE of the DMA/IOMMU developers or the authors
+of that API were CCed when the change was merged.
+https://lore.kernel.org/all/20260818-reserve_iova_in_driver-v2-2-5005a1154408@oss.qualcomm.com/
 
-inst->crop is zero-initialised and only seeded by S_FMT(OUTPUT). A client
-that formats only the CAPTURE queue (which v4l2-compliance does) therefore
-keeps a 0x0 crop and G_SELECTION reports width/height 0:
+> 
+> And it couldn't even use the right APIs??!
 
-  fail: v4l2-test-formats.cpp(1617): !sel_crop.r.width || !sel_crop.r.height
-  fail: v4l2-test-formats.cpp(1769): !sel_compose.r.width || !sel_compose.r.height
+And proposed for the stable@ :(
 
-Fall back to the CAPTURE dimensions when the rectangle has not been seeded
-yet, preserving the clamp for the normal OUTPUT-then-CAPTURE order.
-
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
----
- drivers/media/platform/qcom/iris/iris_vdec.c | 24 ++++++++++++++------
- 1 file changed, 17 insertions(+), 7 deletions(-)
-
-diff --git a/drivers/media/platform/qcom/iris/iris_vdec.c b/drivers/media/platform/qcom/iris/iris_vdec.c
-index 32d4368..65e7550 100644
---- a/drivers/media/platform/qcom/iris/iris_vdec.c
-+++ b/drivers/media/platform/qcom/iris/iris_vdec.c
-@@ -318,13 +318,23 @@ int iris_vdec_s_fmt(struct iris_inst *inst, struct v4l2_format *f)
- 		inst->buffers[BUF_OUTPUT].min_count = iris_vpu_buf_count(inst, BUF_OUTPUT);
- 		inst->buffers[BUF_OUTPUT].size = fmt->fmt.pix_mp.plane_fmt[0].sizeimage;
- 
--		/* inst->crop is the visible rectangle of the stream */
--		inst->crop.left = min(inst->crop.left, fmt->fmt.pix_mp.width);
--		inst->crop.top = min(inst->crop.top, fmt->fmt.pix_mp.height);
--		inst->crop.width = min(inst->crop.width,
--				       fmt->fmt.pix_mp.width - inst->crop.left);
--		inst->crop.height = min(inst->crop.height,
--					fmt->fmt.pix_mp.height - inst->crop.top);
-+		/* inst->crop is the visible rectangle of the stream. Until an OUTPUT
-+		 * format has seeded it, fall back to the CAPTURE dimensions so a
-+		 * standalone S_FMT(CAPTURE) still reports a usable crop.
-+		 */
-+		if (!inst->crop.width || !inst->crop.height) {
-+			inst->crop.left = 0;
-+			inst->crop.top = 0;
-+			inst->crop.width = fmt->fmt.pix_mp.width;
-+			inst->crop.height = fmt->fmt.pix_mp.height;
-+		} else {
-+			inst->crop.left = min(inst->crop.left, fmt->fmt.pix_mp.width);
-+			inst->crop.top = min(inst->crop.top, fmt->fmt.pix_mp.height);
-+			inst->crop.width = min(inst->crop.width,
-+					       fmt->fmt.pix_mp.width - inst->crop.left);
-+			inst->crop.height = min(inst->crop.height,
-+						fmt->fmt.pix_mp.height - inst->crop.top);
-+		}
- 		break;
- 	default:
- 		return -EINVAL;
--- 
-2.53.0
-
+> 
+> Jason
