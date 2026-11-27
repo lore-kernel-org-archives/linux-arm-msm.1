@@ -1,86 +1,86 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.128.50
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795779642;
-	b=K9D6gix9Ix5w7B+WUli5amBnl/HcyuAVwL0IqjlmKaUvAqwHjxF3wNM9UFdJt3qowTvI
-	 z6p5tkUbxqCuKnd7vqkqRWloKlXeipTFmsN1SM+9ZNILzXVEmCXVugDGHCqd04XffKKW2
-	 p3LGLGF0HIizNw5NmKkHZilww1baxregFANF7VNmCCy0y7WmRKB7qbhrTiSwXlc0ujOWD
-	 MxBohI3MOf9jnqwRAN2D+rPgHwk1z+zlZVzclbHSJW7a510vMLKdQI1QnWOxH9o7zwFCT
-	 1uMNEargp4sW0HpKSwekYipljdJjXl3nmxVRw77Xux1Xhn1FSwJn6pC5Al6wDWOqmQQ==
+	t=1795779668;
+	b=jR+GXER811BvauUPlIPAN5iJ49b9heL29hXzN58s81+lYkECLKcoIYzDdd/5UW0zMiHw
+	 vvrr5XnexgCRwPzz/HJBWOT4VcGsOQw128Rhz//qGEhsnrGJ6owExcklEQPUrndpJfrqy
+	 lTsvs+kP9ADK6myzGyNsaeELc7hYeG1SiIdwZbSvbPV1AqzpOh+prYpi/bcGu8Z4Z1orq
+	 5sx2YoA1M4PBYEp5EkUMIW0qbcw9lveuit6u8wrrYjFpwU8O4CUrHCt7sy8uk+0a9ONE6
+	 JrzGzS7TZIxBLc5ygj1kyEc6lv2FWWSbhknaA9KhHAlhJrsRTy+Xe0F1/umy2nmVU0g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795779642;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795779668;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 Message-ID:Date:MIME-Version:User-Agent:Subject:To:Cc:References:From:
 	 Content-Language:In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=o8EZjWxTXRcbyoEOqIHRMz+zl1HnNBukS9h+Zm+DoZE=;
-	b=emd55Brr3AwhxnTynxSWSbtxevSKym3+JQ9pakd6d9NTPbEoMDY9yyHnNHf35ynsdA1K
-	 fgb9LWIL7CSeUMgZxCUTy9Bqgw7UiSlwkK2duw429HVRiYLN/3AdPchQXkIi9xQ9PQxcZ
-	 qLRe8KrRgAfyz4OfRr5uCtxZ5KrCKN3GBZPWxFDxI+TtiPokwrGmxnP/6jMhDhqq5jATk
-	 NYMcr17JWK/mu9gOFnb2h1HeUVLp0bfqg6PtCI9aJLKzQ4clVUgLaJiGSaukn7IrrAelx
-	 WgSlYNt6PNn73qc9sDo2OpwKHbuR/HBjP9ZKNmriWqICZ4pbW73V+Muggu/zSJTV9ew==
+	bh=sspZMan8fZ1WKgEVFRKxVskK0Kuw/s541urtuJ+3PO4=;
+	b=A5WQofbIcfYExYMcmWgcin7cb0tOmP114kOGmvbfMaF75TuXkOEM/tVGl1VlGCrvQmhE
+	 o62ADmMtyEO1zZ9z0BsNqrshznPyEszCZlr2oPbwLyd0v7JaCVjQJA+v27cuHM1asdoMv
+	 D6HOZp8XnYFThV/hT5W+oAHTqrOU7WpZvWvPycHsQKJPlwgBi0SHqbfasXF80gNjFDbNu
+	 dNsaFDMfJ0XSTF8ZJU8fMdachKrKWF+Iut0Qd/Y4Yp1ZPQGKDzGA95XvnHKim3neDXdL7
+	 4gCuFpA4+zf/gVhwWU7SndAy0zDWMysXOR/XD0/+HeOhouQQTvxR4mjlFrL67y/NwCQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=linaro.org;
 	spf=pass smtp.mailfrom=linaro.org;
-	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ygnNNrYj;
-	arc=none smtp.remote-ip=209.85.128.50
-Received: from mail-wm1-f50.google.com (mail-wm1-f50.google.com [209.85.128.50])
+	dkim=pass header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=z4pBFq4D;
+	arc=none smtp.remote-ip=209.85.221.53
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DB156606A31E
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:40:41 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DB156606A31E
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE8BB606A32E
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:41:06 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org DE8BB606A32E
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=linaro.org
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=ygnNNrYj
-Received: by mail-wm1-f50.google.com with SMTP id 5b1f17b1804b1-49d05d51553so56348635e9.2
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 03:40:41 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=linaro.org header.i=@linaro.org header.a=rsa-sha256 header.s=google header.b=z4pBFq4D
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-4a68190a2a7so6785231f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 03:41:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1795779640; x=1796384440; darn=vger.kernel.org;
+        d=linaro.org; s=google; t=1795779665; x=1796384465; darn=vger.kernel.org;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=o8EZjWxTXRcbyoEOqIHRMz+zl1HnNBukS9h+Zm+DoZE=;
-        b=ygnNNrYjECMONs5ImETaNDap3ahwaqQ/ApDKpPoyDE73kISxX4kXZO/n987uZ9zpZD
-         DlFG9P4DHKAW+1R3FTUBokWg5G2vHzaZ0aF7JTKvmbA4JDVSZflB0lFoQahZeB/VHK7/
-         +Tm0D6RPNLEHhJXoodnHX0QTaiqKt3D1utEJGtu45UEAvZ3MNrv2j/s1gVMnML8eYMx4
-         T67LcvyrPoKjlVuTt79XlyPcZfyfPsGALwL9SKb70cAxv3ObWo0zdU4UQUmk00u7+ZV5
-         nMRp5EjIfxUAzCTzB/heUzRZOidhnY/+xL0Kgg4KRLSkhQvMkF5TCyOFuEVVaq1KJQXD
-         LXxA==
+        bh=sspZMan8fZ1WKgEVFRKxVskK0Kuw/s541urtuJ+3PO4=;
+        b=z4pBFq4DGHKRE2CBAC7ty61dVHmbS2uoKy5+23PG0TJDFwxOfoFOlm9eP3TDnJHqRI
+         ccu4+SlDcaPkkLcFHu0crmlJqfq1PbjWdliPwcS/No2cyEeDk7S5WIO8zm6zml+VZtob
+         R+9t8aP9NWgE3e+nTwdEN2XbTaDxbGG83deHMMoPTi9Pa+J0jSdfbEuNFUxBDZpqiMzM
+         a7JN2wZgcLi3Zrt8TmRf7MyzgK9cr3lqYtJsm9Qgt0RzqnkUu9yMhmSXhoi+I5raFcHq
+         D9iv7tBT1jRXDeeNzzaQuvblcCvhQ5B6dgXG6Ji51CvS5oOvKljcIef5m9itZK27aaiC
+         LSMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795779640; x=1796384440;
+        d=1e100.net; s=20260707; t=1795779665; x=1796384465;
         h=content-transfer-encoding:content-type:in-reply-to:content-language
          :from:references:cc:to:subject:user-agent:mime-version:date
          :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=o8EZjWxTXRcbyoEOqIHRMz+zl1HnNBukS9h+Zm+DoZE=;
-        b=lHIHRRL26NWHdrigSx2c43reePQsSRIKqtTlGr8RUbPKKXriACtGKFEDKANUrbbVOL
-         0vBo1RPfYKaYxho5OckvGYcKTXnLwZ1742Kqc0w5yYPvWGv6u13/91RN7NRkI8dVJS/c
-         b0f0xDlEmBXDt4VSGj4vmrXvE08LBkesTyxWCdndjuLQUlexNFkeUkxVXqj3k4IDnjxg
-         l+gxq9+jPPoafdzag0N3rgUDijplx4BHpci90cQEPdguFzQ9ry9Jf0SaGDyoaFA6y7Pv
-         yL6czHqORk5Ctsbq8iFKWKy9i4X+WF7nOgZAaw1rJ8aIGoGWKtz/x8vGp4H1gfdnpJ0k
-         V4pA==
-X-Forwarded-Encrypted: i=1; AL+hErGG5oxJwNKhOC3SZb+ldceuVnDyi10FA14Z1g1MDAjnnXNn8q6cQqB16gtQzGyEJlWVeNvCAC11SznuvVSZ@vger.kernel.org
-X-Gm-Message-State: APuU4Z+npHja67QQcdt2TAYHUjA9LsEhRnPsD9/rkFrbFc4DqyULAvdQ
-	XpjMX0+CWU8aT770XiKg+16/nMwPUvitcnMDhkSQyrCxo5bihgBe6Z0AexB6TEckezk=
-X-Gm-Gg: AZFdTZeNfOAm0ofZ9Cm1TlHcigJq3/T9C9Pk6VJgfb6all8JkV82zMAkosCUhcsYAOh
-	7k7OX8dX7yLPRcs3KnauLz/lvhlEKfmP8lJB3Ze9wLO4JR6QD/VF53O8jQ+hVOY5MRP0dE8GDwy
-	/nTsA5dkzwUZXN+cTxrysGE/XZcAMfS8TyIPRK4kPZlhdHBqSiuqC4W8V+MQeNSU+iMNSQ/Rlw9
-	dCmUty4XFYzyvfKNK4dfOiFCQGLtOEQIPBXKSGtSNJHH7S1Yq2hJIejJNhkziIyZprCtWV8alWb
-	tQruDN/8J//YUGJfDoXIQ4TqLH6pVt+RS3SnhAWxvdLewSIUi/qWRyV145E1xg6444xU4S8aeZV
-	7Ol7FygRYCSSiDbQPT9TrR6mzu2uhB3iNOeOkDjdvoffawrrNyoSI3d8z5F62hcKSsTmnVDb6+B
-	fMqKVQNaRtRJBpbUTU19Q31Mikq1Iq8Fp95bG4+nKnCeW3SScMbLB4OY1Mx4M8VafJUKfebMWVn
-	uKR76tGoawaXGVwX9FrQ5fZqZ2Aa1pHfdIFriuVU52SDlcXLhIEB8imva3qMWsrSZiLmRcD+kj6
-	18xUx63QxiCiX5yPxfdQ44WyVQrA02ueeOO3ycTB
-X-Received: by 2002:a05:600c:1d09:b0:4bb:73d5:ab33 with SMTP id 5b1f17b1804b1-4bb88816acemr527719505e9.22.1795779640144;
-        Fri, 27 Nov 2026 03:40:40 -0800 (PST)
+        bh=sspZMan8fZ1WKgEVFRKxVskK0Kuw/s541urtuJ+3PO4=;
+        b=PIo6GxQU2PGSNj18783J7XLTEtQM/MuDlGU4v4SBe0MYveBxlKKGe0sJjMBIAv+wj4
+         em4ri2UGWWYih1Lw7boNm1tU6zrw1Vq+STU3MCFb7dyKPcMWfJDFmGexMaEhOuh33eGW
+         52e4JZqGKKljpIRvCu58SgL0FgKaATeBOHb2wg+BxUCzFSOlo6gNTPqhR/tE3qcS5Ddm
+         yHjVpyLBuLE5QHlf4jxXaKoBpk/tYC/eBiBDFtgAPL6QrS6jTo+N7AXUFA8opoJvzxiH
+         dDVhckbqOQHNkZLtL+DoYK9xvCNUfleGUAqQc/2XVPzoFpjB/RdBvQnRfIAy0M9uRhja
+         yjRA==
+X-Forwarded-Encrypted: i=1; AL+hErGt+s2/IjXRFHpxQBSpv9mo5fGFzRSCaq8WbQ+FAUzTXiw6iKGZ0HKJvTAlSp/ayxw/T37i+pCh2OWc+y2m@vger.kernel.org
+X-Gm-Message-State: APuU4Z8Rk9eRbqTswFRpm+kKCNGbpd+nBVRjiIvVkcRiKlHLC5yYyWSN
+	j/QNEacejD+zDqfarmy5k1iXCvYBgLb+gGkRpy2iKkHfNc0PzxGm4Fk8U4eBtXWOm04=
+X-Gm-Gg: AZFdTZfOJiCh8Pey0rybiIne6pNY3imIRUFYnlwqRig/GHuy5lsVwbWMsegpbenpiL5
+	Hd1fC2FAhmTNIEK5gzKWp2fWm0VHM9rHjbTBa8vqz9tvrHWBA1X9I0SpH7RAYulvfBAlCYeTial
+	6O+jHgtO4FS9ytyjdqRXszKEKzd3JVj5SeiAWe+WXO5Vvfb+7Kw5xn6/2FP+XVV+NJuBsmn74DW
+	O1C7M3OlhYFK5eBlP3ZRWZkPfatPfMh1ozQ+AET7u7N3F/Uu9XiTOT/OhhGx9m8TS812XCixxV7
+	gUjnfEcQHF3h6O2K/pEEF640Gb4NTy+S5r53mOGrvizpSySsbBPPseqEorb5LuEHQbzgNeqInx/
+	oGF6SdsTfVyaeyHzCUPfjziflDB5uId8bveq94UIsxsgzWnZbTIKzGe1gOf9Xn3FvxF6rW8i+t1
+	UcYthFpERTa0xnC3AQU0zz9XckSbQcCyziiNTZQSNzGRkVqOH69WJAj9+4a4ztujnfENZPdTS+1
+	FyVfzvvhMQAipjg6BjWhRjTdO2cMtQJvi4yvF12i+mGdfg8uXPijN8u6d+NRgcn4lQGbx5YI6Cb
+	ewjbz1zlyXMl5LaVungKaw5Z2MFc1xob3znLvbNf
+X-Received: by 2002:a05:6000:4617:b0:48d:f464:6989 with SMTP id ffacd0b85a97d-4abb18cbe2cmr47257937f8f.27.1795779665260;
+        Fri, 27 Nov 2026 03:41:05 -0800 (PST)
 Received: from [192.168.0.167] ([109.79.27.52])
-        by smtp.gmail.com with ESMTPSA id 5b1f17b1804b1-4bb9066f6e6sm330037855e9.3.2026.11.27.03.40.38
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab658e2c8csm47672583f8f.2.2026.11.27.03.41.04
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 27 Nov 2026 03:40:39 -0800 (PST)
-Message-ID: <19724121-c02f-4ad5-a6da-eb01b6c63006@linaro.org>
-Date: Fri, 27 Nov 2026 11:40:38 +0000
+        Fri, 27 Nov 2026 03:41:04 -0800 (PST)
+Message-ID: <fe014b6a-964f-47dc-b16f-301762b4534a@linaro.org>
+Date: Fri, 27 Nov 2026 11:41:03 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -91,8 +91,8 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] clk: qcom: camcc-sc8280xp: Add sentinels to post
- divider tables
+Subject: Re: [PATCH 2/2] clk: qcom: gcc-qdu1000: Add sentinel to GPLL0 even
+ post divider table
 To: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>,
  Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>
 Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
@@ -101,26 +101,21 @@ Cc: Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
  Melody Olvera <melody.olvera@oss.qualcomm.com>,
  linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org
 References: <20261125213433.1438537-1-vladimir.zapolskiy@linaro.org>
- <20261125213433.1438537-2-vladimir.zapolskiy@linaro.org>
+ <20261125213433.1438537-3-vladimir.zapolskiy@linaro.org>
 From: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
 Content-Language: en-GB
-In-Reply-To: <20261125213433.1438537-2-vladimir.zapolskiy@linaro.org>
+In-Reply-To: <20261125213433.1438537-3-vladimir.zapolskiy@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 
 On 25/11/2026 21:34, Vladimir Zapolskiy wrote:
-> The PLL post divider tables are passed to divider_determine_rate() from
-> .determine_rate of clk_alpha_pll_postdiv_lucid_ops, and the generic
+> The GPLL0 even output post divider table is not terminated by an empty
+> entry, the table is passed to divider_determine_rate(), and the generic
 > clock divider helpers iterate over a table until they find an entry with
-> a zero divider, however the tables are not terminated by an empty entry.
+> a zero divider, thus they may read past the end of the array.
 > 
-> This may lead to the out-of-bounds access by setting a rate of a clock,
-> which is supplied by a PLL post divider, for instance a rate change of
-> IFE, BPS or IPE clocks propagates to camcc_pll{0,3,4,5,6}_out_even
-> clocks, since the RCGs and post dividers have CLK_SET_RATE_PARENT flag.
+> Add the missing sentinel to the table to fix the issue.
 > 
-> Adding the missing sentinels to all post divider tables fixes the issue.
-> 
-> Fixes: ff93872a9c61 ("clk: qcom: camcc-sc8280xp: Add sc8280xp CAMCC")
+> Fixes: 1c9efb0bc040 ("clk: qcom: Add QDU1000 and QRU1000 GCC support")
 > Signed-off-by: Vladimir Zapolskiy <vladimir.zapolskiy@linaro.org>
 Reviewed-by: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
