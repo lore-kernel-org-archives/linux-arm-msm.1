@@ -1,45 +1,45 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795779884;
-	b=X/Z0l6quy+ySvUIIR8PhIeA8bji+O8gnjv5FwZAbNqt9K6Uz30pgebQqi0LNBzGlNkIY
-	 X2QvLr6Y/tNmtf3HBfgbnzvgg2VQ1Nlod31KVfoVKYHlr+S52jyixdW94BKjoWqYCVxYy
-	 bjbIYKQvrfmWoa1EHSufXy5asi3kkQ07mLurESvGQBcvfxLgDb/Bew43L+oq/UJSPopU9
-	 8onqCW/EpJ++IQ1Swr2hETyoDj5JALl3ZTVftSIHq9g48m1Alk7wueGFSaINtvGqROm5v
-	 XO86QZPvwCnm7A128XBm1g5+5u2p/RNmTFUFwg4jED3A03fbV+UBdERYtei+rSQ9icA==
+	t=1795779979;
+	b=oMv1k8KGOUD5KSaK1L3jTyYBSsTloJH0909w3L95u1wz/Uj8gpp5aXLhhxol7niH9YT/
+	 /dcCPamJh6Y3DOB7S2VfESuNeJ/bwqjf4ArBimUbsTOKL6SuqwLGgl1fpLV4o767D02c1
+	 N3nT8i0uhyCWADTuKVYDoM0f8ipG29mM/SUPajQVos68dsdOc48+v7gkXARYTIpKRToOf
+	 Wa1RoY5scdCuvsM9T65CDZBE02WxkRv21ldbLU72sVsg6O4Fy3cfMJpWVFjboNZr62IVe
+	 FJUE6XyEatOGXCv/75Vz5JDoPyBJRi14J1NwPsJ61lOxsDu/bRA0e9joN9C2fsbFKng==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795779884;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795779979;
 	h=Received:DKIM-Signature:MIME-Version:Content-Type:
 	 Content-Transfer-Encoding:Subject:From:To:Cc:In-Reply-To:References:
 	 Date:Message-Id:X-Mailer:X-Developer-Signature:X-Developer-Key;
-	bh=whClQKJ7bilwLLcVXchgxYVKnvUQImcedOodgOWy20Q=;
-	b=bZQ7JYhaGu1JuvJcc968BOZVJkXZQIem9ZXuAiK4NN4oB87+O56cVb6oBL48O4hrNCs7
-	 NmiIqUYoYKgIX/7q6R6CTq8ImkeQdjz5ukxa4DB/OCtFxBFaRS+SpeQTRnQghcXfEtY0F
-	 p1S9DcETovB66u9L+k1b8huGHQuCN2MnhJ6TwikklTTgHjgb8VfuI+MUnr/diMVuhdQdI
-	 fgi9MQTZiRJzARDF914PJ2BELJn2DBG0kIma1/YKnRpu4bsJXRIs8Sm2M18fWzoIvGwqs
-	 /Kx8WtKcISi6OrUdf1WaNlEjaTnjbmWREjd50/ZCiChhuNwKVO2+WJXg2ySCsyVvpCA==
+	bh=hDE38ildb/m8QpK4Cv4GoDJgJeQFFRZzMq88sVk2Y0o=;
+	b=FH0n2Xd5IXdnahQJvRYZ1/sFVGNBNgmORLJIScr+pn0r4Nt4836qXCT1MNDu1qZXRO3+
+	 xcux3VlgA2Cpk2HDEkpUH290SI1YhM2m6A0oN2N7XKvvyii8yL2SLv4ff429CLJlgpbti
+	 NHDwnV/8G63zj48U3X54zxiumxOxttGJ5xSN3E5yKC1ckGL4eh6IFChMg41/Gnbu8ttOw
+	 Z8OLmb4rpVTgJ1h8j9IpW5vWv70H07/XwEOBzO3t7HUpWGt55iv0Y8RcS5MC2JKKx9Xto
+	 6XQK0UV2yS9lxyyQPT8S/ZeYK/FL1v6fcftWGcHWHB/jd6Qdk2A9nkb2bFnYpOIx2Iw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hVtAIhKT;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NmxxlZ35;
 	arc=none smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D14E7606A31C;
-	Fri, 27 Nov 2026 11:44:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C0EB606A33C;
+	Fri, 27 Nov 2026 11:46:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=hVtAIhKT
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A5191F00893;
-	Fri, 27 Nov 2026 11:44:41 +0000 (UTC)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=NmxxlZ35
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A0D851F00923;
+	Fri, 27 Nov 2026 11:46:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795779884;
-	bh=whClQKJ7bilwLLcVXchgxYVKnvUQImcedOodgOWy20Q=;
+	s=k20260515; t=1795779979;
+	bh=hDE38ildb/m8QpK4Cv4GoDJgJeQFFRZzMq88sVk2Y0o=;
 	h=Subject:From:To:Cc:In-Reply-To:References:Date;
-	b=hVtAIhKThEF0buv2a4dNOWJKjK8VSh1H/obscDvnse7JWoE6BgK/AX9d4fv8kgVFf
-	 CEoeGNFxtv1cUu2B6iQnyTEVmu5K24CJgqSz5N8lFb3oYAy3pgqdMW18/JsD8N/i+6
-	 rqXwrAhPtaCbRWyh4IghdyQgvMGscdkQKMkioFK5bDNAiPgGMwdgRzP/E3Gkfa2ZS2
-	 DSnr0OZiKgXsOSu8GtW7HwsW8DK9ZfFxBnCRHgGAFna/qpQkje2Eic6hx9YfMoawKh
-	 8S6iuXBAav742iqR6e2fYvvUl2fvYUa3PTeFjD349X5/o3iDkxUkfvymHakN5a6mda
-	 kDOBDFPvb9ytg==
+	b=NmxxlZ35KMtuxLfQos55vwJ3klDxP8nwO1RbXInG43AKxfM2pdEw092D1xL/ojo3r
+	 bHfLSa+hdZI/xdKOV8rPdsP5tDeQdwozoA5Ypxm9yynwSZuQ4jI3yTkjCxZzvffLkB
+	 2aZkU7/R2KCQIqCdjl/8aVwGpUPG5L4kluFoS1nQcOVrZMlDEcm/86usGITC0OgQvw
+	 bM5vbRfK6MzJJhJdy044NOAU4ImJnWExH16aPtmhG5mZoIyZtbfqnjGhgDHuysdjoM
+	 pYG6VtCy/AU3a98sghYmKAWdGjsoUOp2+S/ZfQ9qGAy6yjTxKLZZbphtGKg5ADT9rK
+	 7mhfBYr63tw8w==
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -51,46 +51,39 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH] phy: ath79-usb: fix the suspend override reset name
+Subject: Re: [PATCH 0/4] phy: Do not request resets by index
 From: Manivannan Sadhasivam <mani@kernel.org>
-To: Rosen Penev <rosenp@gmail.com>
-Cc: linux-phy@lists.infradead.org, Alban Bedel <albeu@free.fr>, 
- Vinod Koul <vkoul@kernel.org>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Manivannan Sadhasivam <mani@kernel.org>, 
- Kishon Vijay Abraham I <kishon@kernel.org>, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org
-In-Reply-To: <20261106011142.516478-1-rosenp@gmail.com>
-References: <20261106011142.516478-1-rosenp@gmail.com>
-Date: Fri, 27 Nov 2026 17:14:37 +0530
-Message-Id: <179577987749.13164.3981219899044180404.b4-reply@b4>
+To: Philipp Zabel <p.zabel@pengutronix.de>
+Cc: Vinod Koul <vkoul@kernel.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Manivannan Sadhasivam <mani@kernel.org>, linux-arm-msm@vger.kernel.org, 
+ linux-phy@lists.infradead.org, linux-kernel@vger.kernel.org
+In-Reply-To: <20261106-reset-deindex-phy-v1-0-6a9c9f428be8@pengutronix.de>
+References: <20261106-reset-deindex-phy-v1-0-6a9c9f428be8@pengutronix.de>
+Date: Fri, 27 Nov 2026 17:16:12 +0530
+Message-Id: <179577997271.13164.8916074772303090339.b4-reply@b4>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=753; i=mani@kernel.org;
- h=from:subject:message-id; bh=k4r3F9uNkJHA54pn7+unObljLT9MHxgoO6rb9JuAa+4=;
- b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBrCW0ozuBOiQ6/3amQf8E4xn+/ypf5GromKFHCV
- 7iWFLdlztaJATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCawltKAAKCRBVnxHm/pHO
- 9ShkB/9429HCrug9mkge5t/UM8prguPgQMDShIIqrqvP5co34oUjd5BvfriYwgcPjMu1IZl8jgH
- p1VYVAnEgclnonaujDLDm2rd18ffY+mWH2H+8/fd3qVbVbVo9Gx7Bv6vDYULE3VVrFTIo1DDja5
- iGLWNZbekjPJ4x4elE6WsOxNj5n9lOK5JYIQhJclKwSmdOtkYPMpgOCiRpeMhLCs6UBnWm7tDUn
- D80SG4zU7NCgL/ZDmalAzFpN9VDRodBjJNwFDHp+dY2JcA4xQ4icQKilREz2RvOnjGHPpLGv3xq
- jt5JHOmibcRrbVwq757q8Wdpf76yfi4wnxOLbbWZjMq/dRbk
+X-Developer-Signature: v=1; a=openpgp-sha256; l=505; i=mani@kernel.org;
+ h=from:subject:message-id; bh=HbXhu7ELoyyCBk4+Liocm9WY8LgJ6dugTmbT2N0WVjk=;
+ b=owEBbQGS/pANAwAKAVWfEeb+kc71AcsmYgBrCW2HTIryjokwPa9ucHcX0bYVwG/PcKr6MnlPR
+ Y1BTmfn6m6JATMEAAEKAB0WIQRnpUMqgUjL2KRYJ5dVnxHm/pHO9QUCawlthwAKCRBVnxHm/pHO
+ 9eYmB/9o8gTQd24KjP0mGMVzIYPBdX3KT+Zh9RdEodwD0OVvNk4NbWFRJIa+dKPRCcWTJal41yR
+ tWzKWtNv0TEDULo7aY6jn6OEMGrZa3yA7xmyP2n9jjJF1iPWxluV83SB+hi7l/amrkfN2n+5Wjw
+ XQgssnvne26RwfhnQH6HKL6N8IdOvcinN7al9uz/TI7sykiq5EprWgdYY6PGsQCq0V2Fs4mAqyx
+ WiWmJ0rR9SeadFycBCH4COLnjajMfrA/oMYc5CK3zRUI4SW1ffMniu+oQoiNijVjNRsIaJKBGrH
+ 1pp40UJmZidx3jCUv6hUe9I7/nPMLJpkUk+C7sLR27U4e2E8
 X-Developer-Key: i=mani@kernel.org; a=openpgp;
  fpr=C668AEC3C3188E4C611465E7488550E901166008
 
-On 2026-11-05 17:11 -0800, Rosen Penev wrote:
-> The driver gets the suspend override reset as "usb-suspend-override",
-> but the binding and both device trees that use it call it
-> "suspend-override". The reset is optional, so the lookup silently comes
-> back empty and the suspend override has never been used.
+On 2026-11-06 16:01 +0100, Philipp Zabel wrote:
+> There is no need to request a single reset (or even the first
+> of multiple resets) by index.
 > 
-
-Good catch!
-
-> This is the same binding update that commit 827cb0323928 ("phy:
-> ath79-usb: Fix the main reset name to match the DT binding") followed
-> for the main reset. Follow it for the suspend override as well.
+> Replace usage of devm/of_reset_control_get(_exclusive)_by_index()
+> with devm/of_reset_control_get_exclusive() so the _by_index() API,
+> which is only ever called with index == 0, can be phased out.
 > 
-> Fixes: cd3bf368aa7a ("phy: Add a driver for the ATH79 USB phy")
-> Signed-off-by: Rosen Penev <rosenp@gmail.com>
+> Signed-off-by: Philipp Zabel <p.zabel@pengutronix.de>
 
 Reviewed-by: Manivannan Sadhasivam <manivannan.sadhasivam@oss.qualcomm.com>
 
