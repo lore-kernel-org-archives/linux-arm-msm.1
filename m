@@ -1,112 +1,106 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.50
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795774141;
-	b=xeQ1pq0/r9PR5uEfDiX1mQXxDQF2qVwLBk5npvqj0ZDBmRXaYz6DlzB5xnuzwOUH4tJ7
-	 enacnLTb5sZQZzIcW3E3DZenDdLpRfPYpVryvAssYJW+a3J6lHTpBkV4psCk3EsusdXr/
-	 djVxVdlthUXYeMLRJQ4jSjn0o5eGAjhNw+SJau0p8sQ54QohjpXy+qz3KAczdyzCU0VsK
-	 Y1bBsn8wexQHmwlh4Vf1ucTjMYdpmUaunwTpGSmtt8AbDddpFmItTdMT3XE+lYIIyyiHo
-	 PKJ7OW2lUn2pJmoqn+2CKpNbiFv0Gl9XWKdIJdg8wEpjgcrvl9zTN7jXyw8F828Icjw==
+	t=1795774464;
+	b=ElLzX/FGomLCB2uPq16vNmNp9RKWqT2s1dw3QwE6iaSxxVCjIs9ln2IaNca1abv0VxKp
+	 MsL+sZSCnCpGmsKCr/fN8qP5DXrvkq9/Nh41LP/nrw+/5FDO+1carsQQX2FOmWcZWkqEJ
+	 cwk+PeDBkOUe2rX/t3jzI2QzUHFvFly0+T2GmJv/CgWyVaWopBdviTUlf1PLrzEqvXbfT
+	 e96WXmvVarQKKvzVWXUfUK0DWPYl4L4qIQngIngVwBaf9bErMOu/7SY0BB/czv+1KEugr
+	 iD47vp6bh5iKfcBcycKUuQ1p3+c1S3r4XRZRGaa17SvE9X5VgXa+gDGUo+VizsuV/8A==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795774141;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Forwarded-Encrypted:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:X-Received:Received:Message-ID:
-	 Date:MIME-Version:User-Agent:Subject:To:Cc:References:
-	 Content-Language:From:In-Reply-To:Content-Type:
-	 Content-Transfer-Encoding:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=gxIqLV3ljqmx0hCCgWmazrwJHEtX76k6mOrNaOf+W4Y=;
-	b=z5X3w0P8AcwiV8lV9Rz49entqzym8R5kK/oz/mIT60APUzU1Rid9XA1Xg1YgI1VeMBTy
-	 BVYLOAUKa6kvzEOgaXHzrW3cRIotvZDrPkPflttXI+ZE5JOorgq6ISZrdDFcRiO0PuviG
-	 x6cjyb/+QIuVfVpm9FC0EQZCQLqUsZ2cle9XlPwPERWDjkeudIZ3NyEzfbiW6Eld4gGis
-	 2Dub35uhbhXlRjOKK32fd7BE7qLnbcoKePpz3wNXwM1YHEytlc5IiSW95RO+7bFaSbWb3
-	 zz4fP3eyzyOFkioJ/CnZQaUmgvYJ/T71/CohtlQsfCsYUY0AicRbnaSO3fAk5ih7+AA==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795774464;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
+	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version:
+	 Content-Transfer-Encoding;
+	bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
+	b=FiyJ8WFiEeCd3SkJqQMq8s6erUdC9mwmSR/qP0LtM0+/7Dci5v2sDopSqokZsFKcoWqg
+	 7mBnGikxvVDYj1RuS5lNFOioMkFIWM5Pqj/uuflzmaDa4fgOQuIQT9gqnLcz04ihmA+JR
+	 eXWDN/hJ3CNtrfukjRmjJbn99NKSz4qQzaCMHiiWDzDXB3x3EIJIHQbuy+AQsjnsiZysl
+	 bvgSDaYYcrBvobxixwH8iMSLn7lUXiIK0CJ6cF6mNaJLtD8qbETJa7/3ofQCh2ejuKjz2
+	 3WHmqKlWwlY5uBE8VdqXJlskaTcetaKUg0GAG+19MTa43+feQ+c9kKc7xpl9uPfZJQQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b="EaV/RRhH";
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EgLAE1Q+;
-	arc=none smtp.remote-ip=205.220.180.131
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
-	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GbXH75zm;
+	arc=none smtp.remote-ip=209.85.221.50
+Received: from mail-wr1-f50.google.com (mail-wr1-f50.google.com [209.85.221.50])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9579B606A33F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:09:00 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9579B606A33F
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84A8F606A33C
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:24 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 84A8F606A33C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=EaV/RRhH;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=EgLAE1Q+
-Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AR7Gbgx1564716
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:08:59 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	gxIqLV3ljqmx0hCCgWmazrwJHEtX76k6mOrNaOf+W4Y=; b=EaV/RRhHnPtzMO1X
-	UWWTdxaQV4xaqoCvSX9qEt5LlmEHCdBKWOCsiG8j3j1H07pLiOeZMg7e31DqTGBf
-	Z9+E5o0GtaIJuwwVdYIO1ZT2oyUOivgKjiGNngR0fr9pw6jRlL07YRmowvBkJ0jO
-	wUW9N6vRxAHMgk3fMq1wqLapcqjNQ+BPK0ABIiN+/HUmf01Q/UxH2Tb6HgIKAnUE
-	4VyjhwSdhjeq7OmUFv2wCa+hTL/qneYSocn10A8YRL8iKE7Gv00MxkON6fR3Skjx
-	6zmk6/holfwIU+zlIJAHwJKxy/8AzdqduY9ZkDAWgHH9jZYPzDL2cmGPiVsmguVa
-	fg/d3A==
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com [209.85.215.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j74garwwk-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:08:59 +0000 (GMT)
-Received: by mail-pg1-f198.google.com with SMTP id 41be03b00d2f7-cd3b9e70f88so2644639a12.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:08:59 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=GbXH75zm
+Received: by mail-wr1-f50.google.com with SMTP id ffacd0b85a97d-498f5fa5103so4698574f8f.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795774138; x=1796378938; darn=vger.kernel.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=gxIqLV3ljqmx0hCCgWmazrwJHEtX76k6mOrNaOf+W4Y=;
-        b=EgLAE1Q+M/67GsEL5D+SS/BC3URMOb2i7EqkCL2Y4HnsW3mmVY+W2j7a+9Q1CITE1E
-         E29eMdFMRGUTMjTP7uxDUOh6BVlBXaZ6a4x1y8B2orx4BtcS6QsXsG6ClxQgzVJVFvbE
-         yCclS37AfdjCrhmBCDTVBwMRIN5L23PfVMOcGW2/E3sYZc3MLspsxCoSOSqHNrGHb/dl
-         JWw8rYc67FU9MeVvUWh/G2vsd8rb5QXKOPcRV7JW/UWBYf8q2yonge/ra0kDk1We+NMQ
-         6uciHsJCwXQt+LRtLnPP7bWQi/4lusdim4NVFxpm0W2xBpst7pZJNenSWz/8/IDDftm0
-         jiNg==
+        d=gmail.com; s=20260707; t=1795774463; x=1796379263; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
+        b=GbXH75zmMZq1wH6lilVCPrq1meQRkGymzEwoGp022+Rs7/GpALnIWBBO6kh+GPhwUa
+         q+TeLZ7DENQDAAFV1C6mdk6CqJNXa6YjFNlwJR3yO0ZwIkInbzAhb0AH7HbG2ASoYXDq
+         UlzrE9o81lgR71VFUEmY2GtFkdqdURvxHisTtdsh+podXGA+rwGSTjHgILpcFfG/jyeA
+         REY8Sp+3soFJpYuWT60MCg9Vy23yjkdcjTo5vgn6+sAaf4PjgM5CHUM9g7dteli0tipP
+         IUc0uElq6JsJ1YsHI3eknwGfpvcEfckjlTd2u1VSrsMyLqmdf1MTktKewdjmPlGyelca
+         yfhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795774138; x=1796378938;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1795774463; x=1796379263;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gxIqLV3ljqmx0hCCgWmazrwJHEtX76k6mOrNaOf+W4Y=;
-        b=JKzhU/L7lq3cjUl6LsThRTuLT2M2HQPC1rx4y6M9/tBcps15l9tdgt+M4+juHZVeXx
-         DNlFDKGAMDdgV95Dx666De7LNAwbgWd1045exoYLQ3cRvgEpjV732RuNL5Q0dT0P5rKy
-         nUI2XmS84CZNYc2A4VyUUYFZMx3Fzm1e2p9fkBDvjAoKtNkzZQWGuinYQ40WISH+YAoI
-         Ic3U5L0ktWwc/VD5unr6pIB+0jKapkKxeOkTJDlmJWxuTsVRfjjmLqmPEHIBveYY+Sdo
-         VYFxv7pomA3sEM5RL9ww0DuplrydPIfJy0rc5NUoryhVRld0H3GapNLJSykTJIQh9F2K
-         IcCA==
-X-Forwarded-Encrypted: i=1; AL+hErFD22zFIIvMf9d9Gy6urA6BiaFK7si8GJxfhb8nvLbG+5nwpIbPU2wmEe4pGYHD+tyhe6k0M8izsQzMXdfz@vger.kernel.org
-X-Gm-Message-State: APuU4Z/qlgYehYZiNyflnbgpDXiT+qZBJFvA9Kd5VVpR6fY/ZQXMpghX
-	eU7yom8NUU1rv16QTltkylHDDIJKaSkw4mCirONhghJuMG2Qpkgtnq59MOogP2Y13NoD6dWVjs8
-	0Bt2nLdLit7gCdMV1cRdP7bH/RosUJI9GOp2Ul6xm+U2H4XmsG9SkqoE5i7pFcxfVRbUc
-X-Gm-Gg: AZFdTZeZW4D6GiIF+Spiya88gcAr8/ktIzRQkbP/A8rNbgNnumJQ+OB5MXFr2uN2K5I
-	SdaieC5FQgR0i5oGEsy94ZyKxfHq+VKCqUxljpt46g5nmt8vDOaCmIiADRovgwb9yGMjVFmfM3Q
-	S2C8wv4AAtTAxO3+oGuKxL/5ueltzDe2GGUDELm3ZSROFH/MXzRdFJmGB4eQoAQMQcRWIxQtpqc
-	mJNdn55AQfo8iCmQIWyqHIMPHOiPCtARADuo/+d6WTnvN+11xkfxrIfycgVo+ET0W+uo5anJe50
-	jRqJndxdjEIwcPxARadz9zUV/Kt9HzZCWXz8ETNICu3xqhUJAtxmx9SC0tuXb6QJk3XzlurhEyg
-	+2t/5ej3T74DEoRaiaasN8ZPay8nK0SpcKshdvt7xHtTF0QiYfezMKxzvPNdMHXkt4IWStRXPEa
-	MaaBHr
-X-Received: by 2002:a17:903:4b2b:b0:2f0:e66c:4c42 with SMTP id d9443c01a7336-2f0e66c521bmr73777195ad.42.1795774138351;
-        Fri, 27 Nov 2026 02:08:58 -0800 (PST)
-X-Received: by 2002:a17:903:4b2b:b0:2f0:e66c:4c42 with SMTP id d9443c01a7336-2f0e66c521bmr73776695ad.42.1795774137878;
-        Fri, 27 Nov 2026 02:08:57 -0800 (PST)
-Received: from [10.204.101.118] ([202.46.23.25])
-        by smtp.gmail.com with ESMTPSA id d9443c01a7336-2f03ee84294sm115589195ad.9.2026.11.27.02.08.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 27 Nov 2026 02:08:57 -0800 (PST)
-Message-ID: <a07186d1-2c7f-483e-ba02-74e4cd078b1b@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 15:38:46 +0530
+        bh=N6GqXV/LyNS1eXCOHO9HEI0k077DJHCbRkOPximIJxE=;
+        b=pnTx3Ktn9KOxhBr9ZFy5IyjdXmO77pnfMb7l76js8Q+ceAXAZyPjJkV0lmClLFyLCF
+         v76XeIEfXOxvwAwqxyG6LG8S2Fpzv0kqTSZUoCcSfi3PCumzsjS0ttTkQaeEeXFc4FZ5
+         9Kd0h5blB1eYvU1CTWP8wWQn/vDL33fIXbLW6suUnRzVaSmNjDTFiRolFW2DwO6tZvpN
+         l+GFw8u7Iz0NeXfBGivbU5EkRFZ+ddAhD9U5DWh5rPTply+9w8FLxRzs0tpoPHAeUKPX
+         ys2Vl4JC7wGwgscq3UDaFG5N61Dv+B7CadkNHr+ZqNKOMt3iFQFTL2yL6dRVvtRj9WbH
+         H5oA==
+X-Forwarded-Encrypted: i=1; AL+hErGKlhcEQFcdNT+RFsILN7Ty+ShyAU/UAjFKG9xQRc63wVNphuOOvoqkRBNgn/HMihFARd/cnIImjgE1LHOC@vger.kernel.org
+X-Gm-Message-State: APuU4Z/H8qFHNgRhQLtcQrwLkCB4lsiFnMDPpqmTDtrMBGc15rqDVcnQ
+	KHLhL1XVr97SUfVMu/PC093RpiOeBeAgYu9fx+r3T5QATDi1EqJGRak=
+X-Gm-Gg: AZFdTZdEF49/4aIbQWVrgILYtHr58WMb5IeQhRfHY3Mx0iyqVDgTLMNs303f++Oabtd
+	spGnDOvrykHCxAhWceaX+24VdZeUag2DyXBfpgTTLB6SR9O9B+7mZgpxGCyPrz8Hr4/nlEltlq3
+	igItg7lMpgcDDZOOGuJwShgWMazLx4qSqqzWD4bI/YtShW4S4v0S1c7bnNrUC9zxYQMZDW9Ckg2
+	y9/i5nO1TdF8DO2pkRAgFjk28T3UDfukBxur0SDhsf68aJM1+HI0igyh+OsG10nzUiqmRzvpvH+
+	5fn+UuCHeb+mu5WzxTWWXRVKQxHtKxiQ1dicCqGDYKOtYMcVUFnwCRa4fudg0YaSqM4j3HCOOyL
+	BFWEceG5zSskvgJFzp+bW90V/X0gV0J7z2eDvrhimyVqNXyjZSNPCCI984N0ORfKBXQeHa41RqK
+	W5QfYc7SJU3xQ1qSA0F1JCyk02KTUmVRnxA4LE3Gb6vB/l/n9o+WMW1p5DbyRGTmD2G1omS5sJw
+	92HyD+ljJRGxI9n0L7KIbVkJXefhqsaTtniJA56b25rXmFjf/w+v4boHuguYKZXnEDRnQfyCDH3
+	9hEpjbpaorhT92/Q5MTWovfn0+OZEThz252UbmAK/oDUn4JJU//TVY2l0tZy8Q4qzo43B+ghp7m
+	B8mF7c5KYsS45YfljVBkolNuDiE9nJr3qh59LWSDw2nV/fET5NRdU4iEff44=
+X-Received: by 2002:a05:6000:2308:b0:49b:587:121a with SMTP id ffacd0b85a97d-4abb36787afmr49730970f8f.16.1795774462607;
+        Fri, 27 Nov 2026 02:14:22 -0800 (PST)
+Received: from localhost.localdomain (host-94-89-17-99.business.telecomitalia.it. [94.89.17.99])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2026 02:14:22 -0800 (PST)
+From: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
+To: Rob Clark <robin.clark@oss.qualcomm.com>,
+	Dmitry Baryshkov <lumag@kernel.org>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Jessica Zhang <jessica.zhang@oss.qualcomm.com>,
+	Sean Paul <sean@poorly.run>,
+	Marijn Suijten <marijn.suijten@somainline.org>,
+	David Airlie <airlied@gmail.com>,
+	Simona Vetter <simona@ffwll.ch>
+Cc: Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
+	Xiangxu Yin <xiangxu.yin@oss.qualcomm.com>,
+	Dale Whinham <daleyo@gmail.com>,
+	Stephen Boyd <swboyd@chromium.org>,
+	Jens Glathe <jens.glathe@oldschoolsolutions.biz>,
+	linux-arm-msm@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	freedreno@lists.freedesktop.org,
+	linux-kernel@vger.kernel.org,
+	Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
+Subject: [PATCH v2 00/10] drm/msm/dp: fix DisplayPort hotplug, link training, and multi-lane PHY setup
+Date: Fri, 27 Nov 2026 11:14:07 +0100
+Message-Id: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
+X-Mailer: git-send-email 2.25.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -116,175 +110,112 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/9] media: iris: migrate firmware loading to
- qcom_mdt_pas_load() and qcom_pas_prepare_and_auth_reset()
-To: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>,
-        Sumit Garg <sumit.garg@oss.qualcomm.com>,
-        Bjorn Andersson <andersson@kernel.org>,
-        Konrad Dybcio <konradybcio@kernel.org>,
-        Rob Clark <robin.clark@oss.qualcomm.com>,
-        Dmitry Baryshkov
- <lumag@kernel.org>, David Airlie <airlied@gmail.com>,
-        Simona Vetter <simona@ffwll.ch>,
-        Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-        Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-        Bryan O'Donoghue <bod@kernel.org>,
-        Mauro Carvalho Chehab
- <mchehab@kernel.org>,
-        Alex Elder <elder@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>,
-        "David S. Miller"
- <davem@davemloft.net>,
-        Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>,
-        Paolo Abeni <pabeni@redhat.com>, Jeff Johnson <jjohnson@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc: Abel Vesa <abelvesa@kernel.org>, Sean Paul <sean@poorly.run>,
-        Akhil P Oommen <akhilpo@oss.qualcomm.com>,
-        Abhinav Kumar <abhinav.kumar@linux.dev>,
-        Jessica Zhang <jesszhan0024@gmail.com>,
-        Marijn Suijten <marijn.suijten@somainline.org>,
-        linux-arm-msm@vger.kernel.org, linux-kernel@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, freedreno@lists.freedesktop.org,
-        linux-media@vger.kernel.org, netdev@vger.kernel.org,
-        linux-wireless@vger.kernel.org, ath12k@lists.infradead.org,
-        linux-remoteproc@vger.kernel.org
-References: <20261116162148.2864501-1-mukesh.ojha@oss.qualcomm.com>
- <20261116162148.2864501-5-mukesh.ojha@oss.qualcomm.com>
-Content-Language: en-US
-From: Gourav Kumar <gourav.kumar@oss.qualcomm.com>
-In-Reply-To: <20261116162148.2864501-5-mukesh.ojha@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Proofpoint-ORIG-GUID: Jf8g9W4vlNtcZuEqeQ_MsFehkK1bgWYX
-X-Proofpoint-GUID: Jf8g9W4vlNtcZuEqeQ_MsFehkK1bgWYX
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA0MCBTYWx0ZWRfXwx9Yi+Kp5mLL
- zKrpQ0Ay9KOAqVbOZ3rCUA2MvnHavTVBmmO64xHVkSjhBYNKtWgLr5yPKohZeuYhQWttdSP4WR2
- pG0zh5c1S4nN1mhfbgEcF6PdVDzt0I97pOnvTs108yVPN/vXjiv67uS/Qw/5cKJ7+OodrJVe+8C
- BbAYCuof0KpdrQBBJQFBzNnQPmRBSCW4dJ6wIV+3fXgIyTCeM/UmHmnPC+cd5UaTt5DqyfwrwUX
- tIpTeblr/cLy8res+cI27v4bTkS1hWNxCk5ZjIuCHaAdApsRuKTxcCx59Fgx3o7Hwz2IAP5A/XD
- PWKrTeUNhKfajrzq8R6TElWUHXY3wk9+vUvZgzKKCW31nVhvYnUa9X8kkXs44VyZj7Yski60afY
- kJpWZn2omkniE1A9TpjznwQgHRoS+aX+Adj3E9XBYKbQW/ZoODzTxhP+ZoYnp3Y1UmMD1MoPPgJ
- wDc+ekkb96A9csRffag==
-X-Authority-Analysis: v=2.4 cv=I5bw19gg c=1 sm=1 tr=0 ts=6b0956bb cx=c_pps
- a=Qgeoaf8Lrialg5Z894R3/Q==:117 a=ZePRamnt/+rB5gQjfz0u9A==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
- a=EUspDBNiAAAA:8 a=F4YNwraytLJjv4g9V0YA:9 a=QEXdDO2ut3YA:10
- a=x9snwWr2DeNwDh03kgHS:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA0MCBTYWx0ZWRfX0W1scY2r6ZUU
- weDFQ4ZTjJGD13ic3p6AuiPifOKLsDFWNx+V/XNYCFhsyOXTL5gkBTlSzAFohU07QBfSzDpMuml
- X5xy4fKOjdYUPpuYC7FMvsd5mu37DT4=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-27_01,2026-11-26_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- spamscore=0 phishscore=0 suspectscore=0 bulkscore=0 priorityscore=1501
- malwarescore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270040
+Content-Transfer-Encoding: 8bit
+
+On platforms with a native DisplayPort connector using direct HPD
+interrupts, DisplayPort initializes on cold boot, but physical cable
+unplug and re-plug cycles leave the display blank even though link
+training and stream enable callbacks report success.
+
+This series fixes the underlying PHY lane setup, DPCD link-info caching,
+SST training-pattern handover, link maintenance completion/stream
+handling, and HPD / sink_count / runtime-PM / PHY / EDID state tracking
+issues:
+
+1. Configure PHY voltage swing and pre-emphasis across all active lanes
+   and refresh lanes/link_rate in msm_dp_ctrl_set_vx_px().
+2. Zero out cached link_info in msm_dp_panel_read_dpcd() so re-plugging
+   a different sink does not reuse stale rate, use_rate_set, or
+   capability flags.
+3. Avoid redundant back-to-back link training in
+   msm_dp_display_prepare_link() and keep DP_TRAINING_PATTERN_SET active
+   until msm_dp_ctrl_on_stream() is ready to switch REG_DP_STATE_CTRL to
+   DP_STATE_CTRL_SEND_VIDEO.
+4. Guard msm_dp_ctrl_push_idle(), reinitialize ctrl->video_comp, and
+   keep training pattern active until stream clocks are enabled in
+   msm_dp_ctrl_link_maintenance().
+5. Use asynchronous pm_runtime_put() on HPD unplug/notify paths called
+   from msm_dp_display_irq_thread() to avoid a synchronous disable_irq()
+   self-deadlock in msm_dp_pm_runtime_suspend().
+6. Track drm_dp_read_sink_count_cap() in link->has_sink_count and keep
+   sink_count and prev_sink_count synchronized across plug and unplug.
+7. Keep dp->plugged, AUX transfer enablement, and runtime PM references
+   balanced across plug, unplug, detect, prepare_link, and empty branch
+   dongle notifications.
+8. Keep the DP PHY initialized across msm_dp_display_unprepare() and
+   system sleep while a sink remains plugged in (removing now-unused
+   msm_dp_ctrl_reinit_phy()).
+9. Re-read EDID on demand in msm_dp_display_get_modes() when
+   edid_blob_ptr is NULL (e.g. after DRM_FORCE_OFF).
+10. Dispatch DP_DP_IRQ_HPD_INT_MASK to msm_dp_irq_hpd_handle(), skipping
+    sink requests when mainlink clocks are off and emitting bridge HPD
+    notifications on branch DS_PORT_STATUS_CHANGED events (kept at the
+    end of the series so it can be dropped if superseded by in-flight
+    DRM_CONNECTOR_DP_IRQ_HPD changes).
+
+Changes in v2:
+- Add Jens Glathe's Tested-by on unchanged patches 1, 3, and 5.
+- Patch 1: clarify commit message regarding persistent ctrl->phy_opts
+  staleness on link maintenance and update Fixes tag to 937f941ca06f.
+- Patch 2: zero out the entire link_info struct (rate, use_rate_set,
+  and capabilities) before parsing DPCD.
+- Patch 4: drop redundant msm_dp_ctrl_configure_source_params() call (as
+  msm-next already calls msm_dp_ctrl_config_ctrl_streams() inside
+  msm_dp_ctrl_link_train(), avoiding unclocked pixel_base access when
+  no stream is active), guard msm_dp_ctrl_push_idle() and
+  msm_dp_ctrl_clear_training_pattern() / SEND_VIDEO with stream_clks_on,
+  and update Fixes tag to 8ede2ecc3e5e.
+- Reorder and split HPD changes (was patch 7) into four focused patches
+  (patches 6-9):
+  - Patch 6: DP_SINK_COUNT capability and prev_sink_count synchronization.
+  - Patch 7: dp->plugged, AUX gate, msm_dp_bridge_detect() runtime PM
+    release, prepare_link locking, and empty branch dongle handling.
+  - Patch 8: PHY lifecycle across msm_dp_display_unprepare(), unplug, and
+    system sleep, removing msm_dp_ctrl_reinit_phy().
+  - Patch 9: on-demand EDID re-read in msm_dp_display_get_modes() and
+    DRM_FORCE_OFF error log suppression.
+- Patch 10 (was 5): move to end of series, guard
+  msm_dp_ctrl_handle_sink_request() with ctrl->link_clks_on, guard
+  msm_dp_irq_hpd_handle() with dp->plugged, and handle branch
+  DS_PORT_STATUS_CHANGED connect/disconnect with non-reentrant
+  drm_bridge_hpd_notify().
+- Link to v1: https://lore.kernel.org/r/20261121214105.32596-1-gianfranco.mariotti94@gmail.com
+
+Testing:
+Hardware-tested across cold boot, unplug/re-plug, monitor swap (4K60
+native DP and DP-to-HDMI branch adapter), connector DPMS/off cycles, and
+IRQ_HPD link-retrain cycles on a QCS8275 (Monaco) SMARC board (SECO F86)
+with a native DisplayPort connector running v6.18 + the FROMLIST DP
+HPD/MST series (Qualcomm Linux / QLI 2.0), then forward-ported and
+build-tested against msm-next.
+
+Signed-off-by: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
+
+Gianfranco Mariotti (10):
+  drm/msm/dp: configure voltage swing and pre-emphasis for all active
+    lanes
+  drm/msm/dp: reset cached link_info before reading DPCD capabilities
+  drm/msm/dp: keep training pattern active until stream video is ready
+  drm/msm/dp: reinit video_comp and guard stream state on link
+    maintenance
+  drm/msm/dp: avoid synchronous runtime PM put from HPD IRQ thread
+  drm/msm/dp: track DP_SINK_COUNT capability and sync prev_sink_count
+  drm/msm/dp: fix HPD plugged, AUX gate, and runtime PM tracking
+  drm/msm/dp: keep PHY initialized while plugged across link unprepare
+  drm/msm/dp: re-read EDID on demand in get_modes when blob is missing
+  drm/msm/dp: dispatch native IRQ_HPD directly to
+    msm_dp_irq_hpd_handle()
+
+ drivers/gpu/drm/msm/dp/dp_ctrl.c    |  44 +++---
+ drivers/gpu/drm/msm/dp/dp_ctrl.h    |   1 -
+ drivers/gpu/drm/msm/dp/dp_display.c | 228 +++++++++++++++++++---------
+ drivers/gpu/drm/msm/dp/dp_link.c    |  26 +++-
+ drivers/gpu/drm/msm/dp/dp_link.h    |   2 +
+ drivers/gpu/drm/msm/dp/dp_panel.c   |  20 ++-
+ 6 files changed, 215 insertions(+), 106 deletions(-)
 
 
+base-commit: d024361c631b3f020a26c07d683e5103404b0fbf
+-- 
+2.25.1
 
-On 11/16/2026 9:51 PM, Mukesh Ojha wrote:
-> iris_load_fw_to_memory() calls qcom_mdt_load(), which bundles
-> metadata initialization, memory setup, and segment loading into a
-> single API that does not expose a PAS context.  iris_fw_load()
-> calls qcom_pas_auth_and_reset() for TrustZone authentication,
-> which is the intended behaviour. However, a new
-> qcom_mdt_pas_load() has recently been introduced that works with
-> a PAS context and can handle everything qcom_mdt_load() provides,
-> along with additional functionality such as shmbridge creation
-> and retrieving memory from the shmbridge buffer when the same
-> remote processor needs to run while Linux runs at EL2.
-> 
-> Embed a struct qcom_pas_context directly in struct iris_core and
-> initialize it with qcom_pas_context_init() inside
-> iris_load_fw_to_memory() on each call.  Replace qcom_mdt_load()
-> with qcom_mdt_pas_load() and replace qcom_pas_auth_and_reset()
-> with qcom_pas_prepare_and_auth_reset().  The
-> iris_detect_firmware() scan retains a separate memremap window
-> after qcom_mdt_pas_load() completes, since it needs to read back
-> the loaded image data.
-> 
-> Signed-off-by: Mukesh Ojha <mukesh.ojha@oss.qualcomm.com>
-> ---
->  drivers/media/platform/qcom/iris/iris_core.h  |  2 ++
->  .../media/platform/qcom/iris/iris_firmware.c  | 27 +++++++++----------
->  2 files changed, 15 insertions(+), 14 deletions(-)
-> 
-> diff --git a/drivers/media/platform/qcom/iris/iris_core.h b/drivers/media/platform/qcom/iris/iris_core.h
-> index 3e4cf652bf39..ac73bda072f8 100644
-> --- a/drivers/media/platform/qcom/iris/iris_core.h
-> +++ b/drivers/media/platform/qcom/iris/iris_core.h
-> @@ -9,6 +9,7 @@
->  #include <linux/types.h>
->  #include <linux/dma-mapping.h>
->  #include <linux/pm_domain.h>
-> +#include <linux/firmware/qcom/qcom_pas.h>
->  #include <media/v4l2-device.h>
->  
->  #include "iris_hfi_common.h"
-> @@ -129,6 +130,7 @@ struct iris_core {
->  	struct platform_inst_fw_cap		inst_fw_caps_dec[INST_FW_CAP_MAX];
->  	struct platform_inst_fw_cap		inst_fw_caps_enc[INST_FW_CAP_MAX];
->  	struct dma_iova_state			*iova_state;
-> +	struct qcom_pas_context			pas_ctx;
->  };
->  
->  int iris_core_init(struct iris_core *core);
-> diff --git a/drivers/media/platform/qcom/iris/iris_firmware.c b/drivers/media/platform/qcom/iris/iris_firmware.c
-> index 21f57d37da18..b701a7f43514 100644
-> --- a/drivers/media/platform/qcom/iris/iris_firmware.c
-> +++ b/drivers/media/platform/qcom/iris/iris_firmware.c
-> @@ -201,21 +201,20 @@ static int iris_load_fw_to_memory(struct iris_core *core)
->  		goto err_release_fw;
->  	}
->  
-> -	mem_virt = memremap(mem_phys, res_size, MEMREMAP_WC);
-> -	if (!mem_virt) {
-> -		ret = -ENOMEM;
-> -		goto err_release_fw;
-> -	}
-> -
-> -	memset(mem_virt, 0, res_size);
-
-Restoring memset() is needed.
-iris_detect_firmware() scans the whole res_size window for
-"QC_IMAGE_VERSION_STRING=", but the loader only writes the firmware
-segments, so the rest of the carveout can hold stale data. With a
-firmware-name override on a platform that has both Gen1 and Gen2
-descriptors, this could make a Gen1 image look like Gen2.
-> -
-> -	ret = qcom_mdt_load(dev, firmware, fw_name,
-> -			    IRIS_PAS_ID, mem_virt, mem_phys, res_size, NULL);
-> +	qcom_pas_context_init(&core->pas_ctx, dev, IRIS_PAS_ID, mem_phys,
-> +			      res_size);
-> +
-> +	ret = qcom_mdt_pas_load(&core->pas_ctx, firmware, fw_name, NULL);
-> +	if (!ret) {
-> +		mem_virt = memremap(mem_phys, res_size, MEMREMAP_WC);
-> +		if (!mem_virt) {
-> +			ret = -ENOMEM;
-> +			goto err_release_fw;
-> +		}
->  
-> -	if (!ret)
->  		iris_detect_firmware(core, fw_name, mem_virt, res_size, desc);
-> -
-> -	memunmap(mem_virt);
-> +		memunmap(mem_virt);
-> +	}
->  err_release_fw:
->  	release_firmware(firmware);
->  
-> @@ -233,7 +232,7 @@ int iris_fw_load(struct iris_core *core)
->  		return ret;
->  	}
->  
-> -	ret = qcom_pas_auth_and_reset(IRIS_PAS_ID);
-> +	ret = qcom_pas_prepare_and_auth_reset(&core->pas_ctx);
->  	if (ret)  {
->  		dev_err(core->dev, "auth and reset failed: %d\n", ret);
->  		return ret;
-
-- Gourav Kumar
