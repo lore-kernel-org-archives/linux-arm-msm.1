@@ -1,112 +1,112 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.180.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795808711;
-	b=TC1Afp8huU6AVzY6lnAbsXP034s+aI3NVGMC1yM9xfjjmfZFIN5iwdupQtPe7oQssNNM
-	 Y7DaFOufadPF1lBVdkDETbbgXMFQWIf6INtXdOyvwK3B/BVmisaCcABUgKswD65/4Ogcw
-	 giJdSIhbiyZQExEje86A2IDt2ae+9jhNK9bYQPNfPQ8QzI0jKcTknyiBKnXBH55JHy2Be
-	 S3hkiE6x/y4bI5tIH3QoUhH4/aHvN87i4rN1+aDWE92NFKkGd9BJgCkUkinCeN5tT0QQ+
-	 ScUNrM2tjiDqJgbmCem0c6bpKOFKSg9GCZ4gclt1fMLwXogwQmTQG58V/AkCcZcsxBg==
+	t=1795808713;
+	b=bIfEJo1nyH+DgwzTk4CCeuNXIJITq9ZIXJsabHfgBZfUHjFD/k/nJPBypuvqGV8vXlHT
+	 Tqf+NEub2o4TJDgyn7Rhr4q3lcj7d20e1gFZeLgCRmE+OwhAARjvjDKBcQ6Cg87Y+ewjk
+	 r8zo1uV12BGORaNw6phJpM7zdHqXPY2C/6FkE0MDE6zUDQdOQRxiJFjkEc4jC448r3AHr
+	 cJRNOYXINBqbkH5NWP7I+WIlpVsUt/CTkI8xidfBSItT1A+qj8ln4ry18P5PnokJaDxou
+	 +PT/GiotGm7aw0ZpcKeHXOgr+Xan9Js7S1Da+ye+xImimKs3ncXBtgm2RMssMogTK5Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795808711;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795808713;
 	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
 	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
 	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Content-Transfer-Encoding:Message-Id:References:
 	 In-Reply-To:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
-	 X-Proofpoint-Spam-Info:X-Proofpoint-GUID:
+	 X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
 	 X-Proofpoint-Spam-Details-Enc:X-Authority-Analysis:
-	 X-Proofpoint-ORIG-GUID:X-Proofpoint-Virus-Version:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-Virus-Version:
 	 X-Proofpoint-Spam-Details;
-	bh=hi2RgCzxsniZkcpizYBKzBTqqeH5jvUpama9Qmo6TGQ=;
-	b=TUol+J4Juele9l9byJIB9xBp5PcRwCo/sJm5aI9x9MD4Oa80laQ9f53AK2oz2hgbSQ8D
-	 jlHhPiwxY2OzpkssimrBG3McVBCQWc9L+//DKtuz9ELGrg6NdoNJePQHCzO7oVTBNdHPu
-	 0ilDMqbCjO+FTrmLscMBTc+vtjtX+8W70APIiMUs+Tgt77NbLNfu3IijTygM0PNSBW5nP
-	 LUtZeoVhvbxH2WGx2cyBhwA+eGV5XedikfrSrcdjkchN5a3N+gPpLyAMrFX/gTXNhvNnK
-	 hGazynk41NYfqQgA9YiWuexHwUSmHZWxJPBLZWeVvdgH5PxiXWEleEVtKCbkPtSsPjQ==
+	bh=hwNG2bG+XTPWI3596iFZ/msYtqga2lGkUMVk/EaARXc=;
+	b=H8oJLIC05+wgDxcrN3AzcFPkqftjuqk58Tr3Hgm4lVhVqUwAUsD9t0twwEQbcPJkPnQz
+	 IShmumEGQgEh1Hn7C3KK0IdjeA8NGVlWboh+mVP+v68vDgW9YHiFAKKXIWkBe8NXVd4TR
+	 6hY3g7p3WtyD99K53+CDDcGPUYcW++LG1neOcqw41RISLA8xNJCKIMx/FbLuW9DIuIbnY
+	 87IWURCYDSYHTbZ4E/IN72GsdsH6F3sDX1LwXY8EA6hKEHnyVivwhDTLoKFJ3TeL4n3Yk
+	 uzT41VyuCvmqHZLwnkLU3a/+czW3B94yoN7iVCOUgRVPEitE2ZTh84fd2S8pMHvZ7yA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=oss.qualcomm.com;
 	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=duV2URsl;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V9hcgY7J;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U3dc27p2;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z4VxJiSO;
 	arc=none smtp.remote-ip=205.220.180.131
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com [205.220.180.131])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C542D606A687
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:10 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C542D606A687
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B07E9606A32D
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:12 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org B07E9606A32D
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=duV2URsl;
-	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=V9hcgY7J
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARJB2Em3752853
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:09 GMT
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=U3dc27p2;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=Z4VxJiSO
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARJBT0C3134892
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:11 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
 	cc:content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	hi2RgCzxsniZkcpizYBKzBTqqeH5jvUpama9Qmo6TGQ=; b=duV2URslxQonYqnN
-	90AHfyEuqeukXJcKdOegFzUbAv298WpYy8WXqN6MLc60Z9iCQBJwegXRVyZnqZxh
-	6lO7eFBvWqBawflDt4TeseIN8eLX4URm93LZEWieyHdo1wQWDGCbVwOuo9djqplM
-	WQ5YUEErnUy1spneq0yuto3Lw8A7u9x5cG9WghPJgwlwrA9qsZQKvNXwdhUk16UL
-	9JXxYxKk/NAM1lpkIVzvTmIdRiblhJTsGxNgw2jkU3FWazh2edpxHH38p+tR3tEV
-	qh7M+gEMAAjFGquIpNDQ57y4eKsmHeSEujaz4BqUiPKallrbUDpnp1KUNGNcDqfP
-	C/k5eA==
-Received: from mail-qk1-f198.google.com (mail-qk1-f198.google.com [209.85.222.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j74ghapn4-1
+	hwNG2bG+XTPWI3596iFZ/msYtqga2lGkUMVk/EaARXc=; b=U3dc27p2k4VVY2+2
+	xMUAePyEVFBkJ/HC6Pyv1ZmJV69zKrong1Dh0D76out/4APji81IMTdOzHeHfiTj
+	sleu5T6RgS/gU5kiIfb0jeH91Ql2s4CJdoIstfUwuCqUKWUIVaROcaNeOGBlpzlb
+	sO6H0lpaLqXp7TdXjaJbhhJwckiYdswmhUO3KtxjakJHkJgq149zHaF0ccxoJG/e
+	3MZV4zNWtOyM/7Oz86lZK2Ed3JsDiUVBcsWG/L0QpmleUlEFIb+Ka9Pt7SP9XGyF
+	TAYOUCxiQ/poo9UomDj+Xb7NqUqCFIJSc07W2TPyB75dSfIpTj50PTJgypzSgZZ7
+	7vDwzQ==
+Received: from mail-qv1-f71.google.com (mail-qv1-f71.google.com [209.85.219.71])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j74gatrv3-1
 	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:09 +0000 (GMT)
-Received: by mail-qk1-f198.google.com with SMTP id af79cd13be357-93f5844e383so1225830585a.1
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:45:09 -0800 (PST)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 19:45:11 +0000 (GMT)
+Received: by mail-qv1-f71.google.com with SMTP id 6a1803df08f44-92114c39cadso151341866d6.2
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:45:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795808709; x=1796413509; darn=vger.kernel.org;
+        d=oss.qualcomm.com; s=google; t=1795808711; x=1796413511; darn=vger.kernel.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=hi2RgCzxsniZkcpizYBKzBTqqeH5jvUpama9Qmo6TGQ=;
-        b=V9hcgY7JFx6leALyF+Ls5XwJt0YzGoigrJmyGHvn9WZ0h/zaBLOVUZwzYldapQIiW+
-         yv4BzmDi97ViXEHMFS165rngUwJeaEODl66c9WtswyFQmZy2fqe7UQqVXdY5RCX78csy
-         TxXBXYLCokgkQ0Fohg+i+XT9fTXRlBV1VszlYPPdrmb4X83sWvhvDbJTmA1NOyILaAto
-         elgjc7yNwHunYhCbR7S57qwxKWI0zQ1mvJm12v/9skVspUufOGtEvSPp6fHYwwzXPt0X
-         XqtbbcZQEtxK76VQCivkdpTEk8Zo2oFWoHiXhSqgWtH3BZdpDtnsX0293UsQ8hbiebq/
-         WzZg==
+        bh=hwNG2bG+XTPWI3596iFZ/msYtqga2lGkUMVk/EaARXc=;
+        b=Z4VxJiSOnWiv4lwOTIs0kyJaLoV99KpB5hBRRC5XL5vCvcBjHh8hzJFLu4svl0rW67
+         SPIuJCd4Mhjjja/EZMsVB1gdg9rZ+7I3aOSaYfOKjS6WvVbzFVrxi0SCpdV0xYDdeQBk
+         q36jxxC2lEP+RdeeILs5KP78ZQg3TnJMt4bVtvDOHxAAImlppPu9j+GGv/TZc+jYWNYT
+         zNVowyVU1fgyQSIoZcpb8A028mU/AjzLPEftplB2s6EjkSEJUU4uaG99SzpuYoGKVFOE
+         QcHRD+Dbc9m5cqNzueO/nh+akqFEy3L5zXasmb0L3Ee2WlwCVte8ZP8rQiHfgA6k9zzB
+         rmBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795808709; x=1796413509;
+        d=1e100.net; s=20260707; t=1795808711; x=1796413511;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=hi2RgCzxsniZkcpizYBKzBTqqeH5jvUpama9Qmo6TGQ=;
-        b=B4a24ULJV6kBn+B5UQk3nuyHZEW1qbU8jGKhau8fqXwH+ZtDVGvHQndtYgwblxQSKK
-         DhLT+tuJCYq/Um8fvSvcu5ASlggacE3Wp7JMrsiQLh5MnuMTM3ApSADYfTq8Ps6RCrnJ
-         yI41L9UEweehgodCfL3xpUQ3wCV4/kNo1DZk+V+RDG4+fZHAJi5bm34lxDbHYum2uhDF
-         i92U1KSKzRzH6JYEB+r8+O5hE9N9jxetrmTN1bPSijTYs39NQsJIYgvNh6v/IBsQxLsC
-         ZopiO4RVAIgDEJu5Gu7JKo5TJ/lH6SaHzLFdHIrUmQsAhoLy0RZWnvDpRbVvPg4Ebhof
-         ZDuQ==
-X-Gm-Message-State: APuU4Z9zcCxKAWRAaGEOKyNaSPxKjSLs9lXgHacoYGqg+3i4/AvjXLAb
-	Rl75DuJEJRwcQaOvsA8H7g2y7iU+o7P0S65r/de4F20j75p04Co1MNlIaNcNndxtOgDgQGfHMJA
-	u4WgP+CqsKS7KzLu3tTyKe64HzT+i+/QrqrmwCQn3p2WmdyLvpVq61d6YooiDc//jbSMJ
-X-Gm-Gg: AZFdTZdcDwc5cwdKMCX9LWxLD3voSdt3SxQwwaMtQQrJiRtI3oUW11arpXKu3Eib2sP
-	EjwjGhc58ZFKKiAs/kB2HjpXMdch9ExMrXpw1S3LDS0AWsh4Uwfm0RISSFyYpCVCJTnSmA86Y6D
-	G9yRnBw75c5LtLu2TzVKkFeg4FQABxZTBGpcMH7TzlBVIisRX6j9oRyYzol66lBa7Z2eAJ64JYg
-	SgDGotMPU6NCW296g7sCt9RN4OWNfg1viJk97h8319AFVKI3MQLRdUXBuX9pCp2YVA8LrvC436y
-	IsLha7kE9czMDX62mpIzTLhRxUPjglmd+DG82LECDY10tOCNei4+pLaRdvwXGxM6WGHvBHAPZla
-	mdlNQMffLbuUwhP99Vqe4VLN8SmTKFqPd4SuQYwDj/KqWS92RSH9/jSTNG+Dw2jgTFt+y9kL+cL
-	5AdNNo1Zdaojk2CMAGa4y3ukt7Abqc+8082Y0dAOeaHl9DO68JKlkpnMwcWqBG0g==
-X-Received: by 2002:a05:620a:5394:10b0:949:bda2:194d with SMTP id af79cd13be357-949bda21c95mr3243191785a.83.1795808709044;
-        Fri, 27 Nov 2026 11:45:09 -0800 (PST)
-X-Received: by 2002:a05:620a:5394:10b0:949:bda2:194d with SMTP id af79cd13be357-949bda21c95mr3243187585a.83.1795808708535;
-        Fri, 27 Nov 2026 11:45:08 -0800 (PST)
+        bh=hwNG2bG+XTPWI3596iFZ/msYtqga2lGkUMVk/EaARXc=;
+        b=Lsi/6k5A4NcLOMOzcsirdQplYIGf1ZHqf1QJHXPhlvwhU/Go/aWJCH9NSOMTThqzg1
+         grhheg90HuIKqKbXrApjJCV+x/7qOsmBXQz0ahcbaUzgg/bOqUct7y8jSpGA573zh1GU
+         mlJ8/XE5Q6XbGw2UiQLreyIQukYItf78NGa9kxNksIt9S22X7v2YW4pbiuETHwk0VEx0
+         Qepp40DiGPl+r7OyvgJmc/bmAGrcmU8z0Yz6DZo88HHDWf6cZkZYWoY3NGxt+5wvk/lw
+         UGggO8r0KKJjO+qwlSFU1nz3bdqXZEHx2qwHWS4+y8kLWgfR8Dzg223Hm0/24NuMvtoj
+         OB2Q==
+X-Gm-Message-State: APuU4Z/Xw1iI/lKwC23L+1XmXvYXnjPIsw99D1ROT2EajMQ1pRcjbdvd
+	08aM17vamZf9mS3fkV0YQ1LvRHhCRcjTN/913rj6iasOkhRmdxFwPvnhMtlZqWUpgGn7P/w3kwX
+	WvhQknA8LwP0cK9pZO7rzFJyVySY8ooFzQu5fn/D2H4N8ijO6ZwtSDpzvNndyzABnFc9s
+X-Gm-Gg: AZFdTZcRXidS2W6kceLy3M6Xu1008WoZrXf1rzoYczlNRZW38HojD/4ZNi+SQ0rcH5q
+	/tJiUvW78JJdcSypkI7wItzcyV5EXrtmN8I0F6dRZdpIv+xyVvbazROJfAg6ipTeUUDHl9P1UMj
+	dhE3UMr2KR8L+GnY4Y1IAy+WRJ7q+vDaWIjGL9zo66yTpyE0kxvs89OlbBM86xzC7Eu4y83Vu16
+	dG6FXtPkdMkwiLxMVeaYFg5aiiHVs5lgczspulOf6hLqU9DWqkze1l6lesdNGG6actlmUQTC3KI
+	XpAtvpOOblenxtkwhaIwzrU/EI9vp4uGFobVi5H745DSAED0fQnIgX4e0avgwOln6NodFq7nOnG
+	YbLpPgjHMaoUVqy/Moyl851Xyv/Mg/5w/ZparsYxz+UqJcf695nElss728XVjVl2wTozWTaHvo2
+	1HHr+6r7dJRtO+/xF+YhxGVwTbhinWct2BgQZA28QrGDX2nbPJNS87OaKcTVrLjQ==
+X-Received: by 2002:a05:620a:40c2:b0:949:6768:fae8 with SMTP id af79cd13be357-949ba9e160bmr4631493485a.49.1795808710765;
+        Fri, 27 Nov 2026 11:45:10 -0800 (PST)
+X-Received: by 2002:a05:620a:40c2:b0:949:6768:fae8 with SMTP id af79cd13be357-949ba9e160bmr4631487785a.49.1795808710297;
+        Fri, 27 Nov 2026 11:45:10 -0800 (PST)
 Received: from umbar.lan (2001-14ba-a073-af00-264b-feff-fe8b-be8a.rev.dnainternet.fi. [2001:14ba:a073:af00:264b:feff:fe8b:be8a])
-        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae805575b5sm59655571fa.34.2026.11.27.11.45.07
+        by smtp.gmail.com with ESMTPSA id 38308e7fff4ca-3ae805575b5sm59655571fa.34.2026.11.27.11.45.08
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 11:45:07 -0800 (PST)
+        Fri, 27 Nov 2026 11:45:08 -0800 (PST)
 From: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Date: Fri, 27 Nov 2026 21:44:23 +0200
-Subject: [PATCH v4 10/14] drm/msm: tear down only a successfully
- initialised KMS
+Date: Fri, 27 Nov 2026 21:44:24 +0200
+Subject: [PATCH v4 11/14] drm/msm/dpu: clean up the self-refresh helpers on
+ teardown
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -118,7 +118,7 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261127-msm-kms-destroy-fixes-v4-10-242b0a3f8e47@oss.qualcomm.com>
+Message-Id: <20261127-msm-kms-destroy-fixes-v4-11-242b0a3f8e47@oss.qualcomm.com>
 References: <20261127-msm-kms-destroy-fixes-v4-0-242b0a3f8e47@oss.qualcomm.com>
 In-Reply-To: <20261127-msm-kms-destroy-fixes-v4-0-242b0a3f8e47@oss.qualcomm.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
@@ -134,172 +134,103 @@ To: Rob Clark <robin.clark@oss.qualcomm.com>,
 Cc: linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
         freedreno@lists.freedesktop.org, linux-kernel@vger.kernel.org
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4504;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2200;
  i=dmitry.baryshkov@oss.qualcomm.com; h=from:subject:message-id;
- bh=v7Mlp0RWyEHoJHxf2OONOylgsUewN5Mb0W8CnMnixnE=;
- b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBrCd2mkBra9+DbLS1cq/6zB6w6gPspz7g9Yw5Od
- 9ZA497Hp12JATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCawndpgAKCRCLPIo+Aiko
- 1U6WB/0YngWOTcYQOCIvcyFPXNqfa9S73l1L1PGsWaAGoADnOfA9OtJZ2oBnpRJre8A8AY7pIW0
- btpxh5lXs58eIttKIA/4wVaoVdZjA676k86qto2NxMRlny+P44GLs9UnIi2wa6C80mkG7BviJy3
- PUYgSYhHGfpZ9L3GgMWS12JZR9d3hHjM0Nk0AYoXz/BOh3uIYfAyEYBYPTzGc0Cex0QJuUdCJju
- TxPUg118fUz1Vb4CIKYfAWHXRoiN6Sfa7R70OQFrXOKeyU1szC6EYCW/MDrKTnOnTx/K8UbE/m7
- 87iGJXiwFwoBcjQGnfcGj6H2rcZwSOlqrkaT495ChKBaBBrm
+ bh=D/uWkxcvDmXzNDWbOytGgnOpR8lFPnO6KIN97YblHnw=;
+ b=owEBbQGS/pANAwAKAYs8ij4CKSjVAcsmYgBrCd2pv7q3g4iU6+NyAMh9IDYZqTyzPL49qurKH
+ qDOv7/cHGSJATMEAAEKAB0WIQRMcISVXLJjVvC4lX+LPIo+Aiko1QUCawndqQAKCRCLPIo+Aiko
+ 1QqeB/94oTDnZNMGJ6YKAksRLJJdpbjeiRB956P/JWKiejc/Vv0hieQseh3gQhxFbGMtXR75sd4
+ bURWLq8gHYa2CUpVvSR6Ak+rbVKdFMNP4q0mbAzcqNFnLwnMsJdjm7Qqm7srZh5TExp3umG8hpM
+ yIC2hTx9mAzGn5h/TOAcr+Oo8oiX/TRhmAmgthAikS6NVKDE30ppFnq0U4IXAqXpxpt+TGf46YL
+ I+gf3vZnC4TwOGNvuLrdwTuEZN3SDuj4Prbn5F/dpv3EvH1cns8o5+Ec4uejqYaMz9klK+rBzLB
+ p4nhQITPDG870+P11onzAui0hzHUj6eku9iqLj0euXT/ZQqN
 X-Developer-Key: i=dmitry.baryshkov@oss.qualcomm.com; a=openpgp;
  fpr=8F88381DD5C873E4AE487DA5199BF1243632046A
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA3OCBTYWx0ZWRfXygwK+AFdnI5W
- 0tT4MRRBL5aQIxAio/nLBmbUPIIPSt/5MjEwDsqjEediWOQDRVruYw+6MorEYwDuS1oyPfhtDik
- hiSSIEWAIBqbU061BLimJ9e71e0VvYU=
-X-Proofpoint-GUID: w1LGyHqQMRmbkMFIYiN99MOzpdyAJ5Zx
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA3OCBTYWx0ZWRfX5i0kjqWx5Aiw
- iNyJXw6NQOQTifo8gYmknzaLRPFfu/RRwN9v2KFiJJZUH5jDHOY5gl9u7PELrIK3ni8rr+egdGN
- KgBF4RL2T/akCH8plKDCiAw8+ykW9SwCqYXrS2Y9qoON3F35Qem0pskH69YgQHiKHHQnenlRrtC
- tfd84ROwPt4dR5MJMpkgK5LgJUcUjgfqsp8Yh15qL7zeLca3oYw75kmfl7wOTK4zZkRwZ51EVvA
- cnVoi4yVieTun16C1XwLPg4RmaezgAP2F34uWUcLYFOtwtoLY3yqCugQh/t9pSMX9B/IPfo74A8
- VTF2x4ZIh+TMbSmkWzUSAOCLvPO3YAXIn3R9w5hT+Pmp9CA5gaTiC8ewd609Vp+7MZmnnfrDZ1P
- uqLjSSpCfBTEOx0Or0rYKFMN6myp9HdQ3BcFEdfVUv6XDX4JwaQYnPMa6vqgRXuseKJj7NiNJXS
- bzUPtrP4NqAeHjN03yg==
-X-Authority-Analysis: v=2.4 cv=U5kHnuru c=1 sm=1 tr=0 ts=6b09ddc5 cx=c_pps
- a=qKBjSQ1v91RyAK45QCPf5w==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+X-Proofpoint-ORIG-GUID: FwhVchFcDyN_zqjbyiGuBI80deexf7fh
+X-Proofpoint-GUID: FwhVchFcDyN_zqjbyiGuBI80deexf7fh
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA3OCBTYWx0ZWRfX5WArTxyvE79i
+ ZEAb7SJIBxPlBI7a56Q1QhbB8UeNumXa1stQvHoGn+m7cbC43EF5N8wfsYQBkjQSSaWvHE8oT3J
+ Z39yj1dmuNAb2aEsJ6wtdy2d+oeT4OCLgI5CpEdZaL2yoK+RVfnGgnYoukywbA5NlkEcpDgigei
+ /dtXs1gOOYyFrYHT5TdESBRsHufJNdmk1w8puv7fPEBH6HtjIAaXKCbcXAgm9cIQEWPCwdDx2vc
+ v0Vg+escyS30nPCxknY3C7D+YChTpu1GtwAAyvZSh60yXzA8R/JDqnttM5nWkPMBmANNe1aCvOr
+ kM33ZmSoxuHNpxHhJ44R7r1UvzBffKVn9fsbGizDPpr83PkRw4ATd3ZDWXcRZNnsjtYfO3FaHut
+ REG9r2CTUsr5oGK9hdTH8QHDGt87ougxRncUSGmnNM0X2SY1bu2A18wEHsYYCspxdv+OTvztHH/
+ 7pc/mFaquc2h7yb108A==
+X-Authority-Analysis: v=2.4 cv=I5bw19gg c=1 sm=1 tr=0 ts=6b09ddc7 cx=c_pps
+ a=UgVkIMxJMSkC9lv97toC5g==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
  a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=u7WPNUs3qKkmUXheDGA7:22 a=_glEPmIy2e8OvE2BGh3C:22 a=EUspDBNiAAAA:8
- a=kQpT_P1mV4N9NWRngdgA:9 a=QEXdDO2ut3YA:10 a=NFOGd7dJGGMPyQGDc5-O:22
-X-Proofpoint-ORIG-GUID: w1LGyHqQMRmbkMFIYiN99MOzpdyAJ5Zx
+ a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22 a=EUspDBNiAAAA:8
+ a=r-hXt3OJkovplFG2WMgA:9 a=QEXdDO2ut3YA:10 a=1HOtulTD9v-eNWfpl4qZ:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA3OCBTYWx0ZWRfX4CaaLg1tLN2H
+ hqharV4b0Clun9pVsjyrRbHzHAVnQd7fZ2p/7BJNjLpKrOn7k360Yeq6dQPQCKKTRSGLhXfbkyv
+ yYtfGUQbPSnEFC7SCg6WUYBTgyN+gB8=
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
  definitions=2026-11-27_04,2026-11-27_03,2025-10-01_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 adultscore=0 malwarescore=0 suspectscore=0 spamscore=0
- priorityscore=1501 lowpriorityscore=0 bulkscore=0 impostorscore=0
- phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2611040001
- definitions=main-2611270078
+ spamscore=0 phishscore=0 suspectscore=0 bulkscore=0 priorityscore=1501
+ malwarescore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270078
 
-All the kms drivers now undo their own failures in kms_init() and have
-folded their hardware setup into it.
+Unbinding the display driver on MSM8996 with DPU oopses about a second
+later:
 
-Drop ->hw_init(), call ->destroy() only for a KMS which was initialised
-successfully, and remove the flag which let the drivers opt in to that
-one at a time, as well as the handling of a half torn down KMS in
-msm_kms_destroy().
+  Unable to handle kernel NULL pointer dereference at virtual address 0000000000000870
+  pc : drm_atomic_commit_alloc+0x10/0x9c
+  lr : drm_self_refresh_helper_entry_work+0x5c/0x1dc
 
+dpu_crtc_init() sets up the self-refresh helper for each CRTC, but
+nothing ever calls drm_self_refresh_helper_cleanup(). Every modeset
+commit, including the one which shuts the display down on unbind, queues
+the delayed entry work of the helper, which then runs after the CRTC
+and the DRM device have been freed, and its data is leaked.
+
+Clean the helpers up when tearing down the DPU hardware, which cancels
+the pending work while the KMS is still intact. Doing it from a managed
+action instead would not be enough: the DRM device, and its managed
+resources with it, outlives the unbind as long as userspace holds it
+open.
+
+Fixes: 1122697810e5 ("drm/msm/disp/dpu: add PSR support for eDP interface in dpu driver")
 Assisted-by: LLM
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
 ---
- drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c  |  2 --
- drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c |  1 -
- drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c |  2 --
- drivers/gpu/drm/msm/msm_kms.c            | 16 ++--------------
- drivers/gpu/drm/msm/msm_kms.h            | 10 ++--------
- 5 files changed, 4 insertions(+), 27 deletions(-)
+ drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-index 255beb83fc94..65ba8fa697e9 100644
+index 65ba8fa697e9..934ba47b2dae 100644
 --- a/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
 +++ b/drivers/gpu/drm/msm/disp/dpu1/dpu_kms.c
-@@ -1290,8 +1290,6 @@ static int dpu_kms_init(struct drm_device *ddev)
- 	int ret = 0;
- 	unsigned long max_freq = ULONG_MAX;
+@@ -17,6 +17,7 @@
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_file.h>
+ #include <drm/drm_framebuffer.h>
++#include <drm/drm_self_refresh_helper.h>
+ #include <drm/drm_vblank.h>
+ #include <drm/drm_writeback.h>
  
--	dpu_kms->base.init_unwinds = true;
--
- 	opp = dev_pm_opp_find_freq_floor(dev, &max_freq);
- 	if (!IS_ERR(opp))
- 		dev_pm_opp_put(opp);
-diff --git a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-index c2172e5f9e85..c1f61ecf800f 100644
---- a/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp4/mdp4_kms.c
-@@ -409,7 +409,6 @@ static int mdp4_kms_init(struct drm_device *dev)
- 	/* TODO: Chips that aren't apq8064 have a 200 Mhz max_clk */
- 	max_clk = 266667000;
- 
--	kms->init_unwinds = true;
- 	mdp4_kms->dev = dev;
- 
- 	ret = mdp_kms_init(&mdp4_kms->base, &kms_funcs);
-diff --git a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-index 30af8ef51e4c..c349eedd55a6 100644
---- a/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-+++ b/drivers/gpu/drm/msm/disp/mdp5/mdp5_kms.c
-@@ -505,8 +505,6 @@ static int mdp5_kms_init(struct drm_device *dev)
- 	struct drm_gpuvm *vm;
- 	int i, ret;
- 
--	kms->init_unwinds = true;
--
- 	ret = mdp5_init(to_platform_device(dev->dev), dev);
- 	if (ret)
- 		return ret;
-diff --git a/drivers/gpu/drm/msm/msm_kms.c b/drivers/gpu/drm/msm/msm_kms.c
-index da9ba8583420..838bcb2c9e19 100644
---- a/drivers/gpu/drm/msm/msm_kms.c
-+++ b/drivers/gpu/drm/msm/msm_kms.c
-@@ -293,17 +293,7 @@ int msm_drm_kms_init(struct device *dev, const struct drm_driver *drv)
- 	ret = priv->kms_init(ddev);
- 	if (ret) {
- 		DRM_DEV_ERROR(dev, "failed to load kms\n");
--		if (kms->init_unwinds)
--			goto err_destroy_snapshot;
--		goto err_destroy_kms;
--	}
--
--	if (kms->funcs->hw_init) {
--		ret = kms->funcs->hw_init(kms);
--		if (ret) {
--			DRM_DEV_ERROR(dev, "kms hw init failed: %d\n", ret);
--			goto err_destroy_kms;
--		}
-+		goto err_destroy_snapshot;
- 	}
- 
- 	drm_helper_move_panel_connectors_to_head(ddev);
-@@ -347,10 +337,8 @@ int msm_drm_kms_init(struct device *dev, const struct drm_driver *drv)
- 
- err_destroy_event_threads:
- 	msm_drm_kms_destroy_event_threads(kms);
--err_destroy_kms:
- 	msm_disp_snapshot_destroy(ddev);
--	if (kms->funcs)
--		kms->funcs->destroy(kms);
-+	kms->funcs->destroy(kms);
- 
- 	return ret;
- 
-diff --git a/drivers/gpu/drm/msm/msm_kms.h b/drivers/gpu/drm/msm/msm_kms.h
-index 2f097e23e2e9..b5e1cd38cd8a 100644
---- a/drivers/gpu/drm/msm/msm_kms.h
-+++ b/drivers/gpu/drm/msm/msm_kms.h
-@@ -23,8 +23,6 @@
-  * for constructing the appropriate planes/crtcs/encoders/connectors.
-  */
- struct msm_kms_funcs {
--	/* hw initialization: */
--	int (*hw_init)(struct msm_kms *kms);
- 	/* irq handling: */
- 	void (*irq_preinstall)(struct msm_kms *kms);
- 	int (*irq_postinstall)(struct msm_kms *kms);
-@@ -149,9 +147,6 @@ struct msm_kms {
- 	int irq;
- 	bool irq_requested;
- 
--	/* set by the kms drivers whose kms_init() undoes its own failures */
--	bool init_unwinds;
--
- 	/* rate limit the snapshot capture to once per attach */
- 	atomic_t fault_snapshot_capture;
- 
-@@ -214,9 +209,8 @@ static inline void msm_kms_destroy(struct msm_kms *kms)
- 	for (i = 0; i < ARRAY_SIZE(kms->pending_timers); i++)
- 		msm_atomic_destroy_pending_timer(&kms->pending_timers[i]);
- 
--	/* the kms drivers' ->destroy() also runs after a failed init */
--	if (kms->wq)
--		destroy_workqueue(kms->wq);
-+	destroy_workqueue(kms->wq);
-+	kms->wq = NULL;
+@@ -885,8 +886,18 @@ static int _dpu_kms_drm_obj_init(struct dpu_kms *dpu_kms)
+ 	return 0;
  }
  
- #define for_each_crtc_mask(dev, crtc, crtc_mask) \
++static void dpu_kms_self_refresh_cleanup(struct dpu_kms *dpu_kms)
++{
++	struct drm_crtc *crtc;
++
++	drm_for_each_crtc(crtc, dpu_kms->dev)
++		drm_self_refresh_helper_cleanup(crtc);
++}
++
+ static void _dpu_kms_hw_destroy(struct dpu_kms *dpu_kms)
+ {
++	dpu_kms_self_refresh_cleanup(dpu_kms);
++
+ 	dpu_kms->hw_intr = NULL;
+ 
+ 	/* safe to call these more than once during shutdown */
 
 -- 
 2.47.3
