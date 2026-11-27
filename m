@@ -1,56 +1,78 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=84.42.129.46
-ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795791768;
-	b=O7Dbxm1WsbGZ4e0uSCeHJ+5dmvM14/LLZcopx5AggvmJe0GxmJmu/vzkKkY6MFyaZknI
-	 6+gl3tinzGZsT4c2ZcJNqT9e8YshemKhXfhEhmfRGtQ/SkW3laPNge+uS2aRHTvfArm3Q
-	 J80NRsTF/KVY+bjC5IEPhOOcRVveQTsir0WYSs1sCTyOOrTkTifxtlc9qXtiS66ay29Eg
-	 +JpJTN6b9m4F+M0ydA9Q9dmihqAdPqxYkx/H1ggieDAJnCrFgh6Bv74j449qxpxFZcjuB
-	 6UqnKFs/Nzn1WYBNjNQcg6WDm/rn9D2ZQggJSxqF3bVW3F9kcB1L8qipFF3ce6Ln3yg==
-ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795791768;
-	h=DMARC-Filter:Received:DKIM-Signature:Message-ID:Date:MIME-Version:
-	 User-Agent:Subject:To:Cc:References:Content-Language:From:Autocrypt:
-	 In-Reply-To:Content-Type:Content-Transfer-Encoding;
-	bh=onDhl6RsecVlyNP/9RWRWVuN3lsmBMqoUnPI1wwAWi0=;
-	b=YVhByqc3JrH+qziiKm5c/banhnl3upe2OlTTqQBb5K+HCKsUIrK1aZHXlDvi2TiM+ppB
-	 0VH2LGiWcZy/cpus0w0lNQl8AEf/x6gqPL7z/CuIBcYv2E5qdzT0Gr15ykdFPqxjqsplO
-	 VGUvp5q68buZLlObB08Pht8EYoEamlZuWHbOiglImciAWDyNK4cEq6W2jAu4eFCAUDB+B
-	 pmU3EcmwXukiUgrAD8PNNGiLflCS13hCtQzQhovjqHoMH04n3NR3ppZnWK7NDyqckTDvu
-	 AI8R8Or7fQcq+jbSOBv/zrKLdgnIJZOPNrlyOGCKxZflvWSXzvCXi6dQv2GUncoKP3g==
-ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=ixit.cz;
-	spf=pass smtp.mailfrom=ixit.cz;
-	dkim=pass header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=EptLPe2q;
-	arc=none smtp.remote-ip=84.42.129.46
-Received: from ixit.cz (ixit.cz [84.42.129.46])
+Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
+	t=1795792200;
+	b=HEs6KnEo4iUaJ6+yeQyc1wrhfXedCpixk6Q2GW6DEtKj8zSP943hU4RzT6LMk37wVP03
+	 Wnu7hGSanSAM0qYu2verya7Ww8YOnPC8G4wQdAhd37p39Bsq5uKJJdGVEB3uCVy1alakJ
+	 nK2ZdPFIoo7GtcOdMSEB59KAjNjlN439POanOkqs9FsCjZz+Ecypj8hWAubB5pJ6BOYF/
+	 qefxHcivlJTa578s0vU7uXA2uqpVux2HzYGNaMWkKb0nizGicnTjyHm/Ue1jajHpGhYA+
+	 alDrIe98VZgNBgWH4A66khSSoLweWJPzZPpkXz4iB7stH+p7IkxaiugKQaSw+wJhlrA==
+ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795792200;
+	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
+	 Content-Type:Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=p/BjwoNWsWBfBd7g3YoqB/kDkE+stJC7UVk+WjdS+Y4=;
+	b=WCvyF+oGkSTrn1vdRwJj1Yvx3etZlzhtJclJB++eO6qUaGWaKSkUNlNbO3P+roIlCVgK
+	 ShUgQKJn3ndWObu0aRoL1ESzxFF3Wq+nXse8Zl5AHM3s5BAZ76E2YsW4sef8HfMqVHz+Z
+	 hpy7Yi5CTkKChJ9swrMKhnSf/2V6tHpm/+cWcXWRUETYdCinUnAlD4w6JkXT493dG1uuQ
+	 47iJRDssYnJacotFs1EgKvAsjnjUdgjQBUQnonwqF6NShKymOLcpClHFENOCvnxDOiwp8
+	 cDQj7PVIbHNQPWArRzHqWcmZ7WypuROHwiGXTrPy3Cwf8RkQh6+hrjBt9qCV73fvPlA==
+ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mPNpWr9A;
+	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06606606A31C;
+	Fri, 27 Nov 2026 15:09:59 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=mPNpWr9A
+Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
+ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
+	t=1795792199;
+	b=AS/6q+gr0KWZWiPfNr/5Vep19wVIWKV0quq9hl/OMPqWutvwdsPbEh6Mwcrr9eKweF3N
+	 IhDA6j6+T+knB3Ee5oCTW/xf/Mb2DA5qJCQp/CrmmFWjVDiihc2z2St8KWug/WrKIfJVe
+	 4g1H6bxiaUm5xVZSvgZVu3iNvWw/fe1V57EcRgR3Hgr1PZMBmeiRajwmcueTCUJ5yRa5/
+	 hcDRA5WZHh3SAqKC0nIGYqsrfPz/SfVRDQSAWxK/KHmNdeL86iF0h8kwU9hhPN6WXd3kw
+	 /GOFuh78h3lcWy5VL9w0XO7yW0bty9DeCV9fr8L5VoyXFPRf7Z7UW05WFHRDNsim74Q==
+ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
+	c=relaxed/relaxed; t=1795792199;
+	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
+	 Message-Id:X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:
+	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
+	 X-Original-From:Reply-To:Content-Transfer-Encoding;
+	bh=p/BjwoNWsWBfBd7g3YoqB/kDkE+stJC7UVk+WjdS+Y4=;
+	b=y0BOyzyW0JKMSPxv04LyRDF7x6Ny3dyKIcQ1h5tlW6F3FeEAwK4zP9XXaLYtXN5KDALw
+	 nMjGMgUSHvfDX2XOOn7RSZfKNywsXjNIjJqP05/fK6q96Y0Raac51nDgEhQ7+qvea3/Mx
+	 +Cd+h5/nMDGSQUQjLsrc09+zzNAOqD6hR4Vk37r4KBbgp+NuTKkksQ/2IuS2UFWC2/ANL
+	 M0/3DWIetJr9YfwQg9nfkUYR0+z1jSLKHLT6e2vPg6GsqsdSB2N+0TgZpPvVjDMyrFHNW
+	 Wrln0GvgJ54g5bbXImPMt2Pr3jdz5BI8O4ecUjPbE1j72RzjvaUPhqVUpsvPROMLUkg==
+ARC-Authentication-Results: i=1; smtp.kernel.org; 
+	arc=none smtp.remote-ip=100.80.115.77
+Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 45AE7606A31C;
-	Fri, 27 Nov 2026 15:02:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 45AE7606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=ixit.cz
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=ixit.cz header.i=@ixit.cz header.a=rsa-sha256 header.s=dkim header.b=EptLPe2q
-Received: from [IPV6:2a02:8308:209:d600::5a9a] (unknown [IPv6:2a02:8308:209:d600::5a9a])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange x25519)
-	(No client certificate requested)
-	by ixit.cz (Postfix) with ESMTPSA id 88E6A5340322;
-	Fri, 27 Nov 2026 16:02:44 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ixit.cz; s=dkim;
-	t=1795791765;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=onDhl6RsecVlyNP/9RWRWVuN3lsmBMqoUnPI1wwAWi0=;
-	b=EptLPe2qMPqoF2UrRSGGAZNr2zSiLCF562MYqzzn6mKWA0mO+ibU81ZDXNJOMbHwuRG95Z
-	kRuc/hR4uM744fctF+kHyg7C/+f7KHlUTsJt4DVBJvCE5bZB93MOBIenfBUX5Oki8d2sEW
-	qrURMKgjHLT+PcCGi0DrL5z9a/rPViM=
-Message-ID: <b8a6d6da-da6b-4788-b6fa-dca9d4eb9d1b@ixit.cz>
-Date: Fri, 27 Nov 2026 16:02:44 +0100
+	by smtp.kernel.org (Postfix) with ESMTPS id 91E431F00893;
+	Fri, 27 Nov 2026 15:09:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795792199;
+	bh=p/BjwoNWsWBfBd7g3YoqB/kDkE+stJC7UVk+WjdS+Y4=;
+	h=From:Date:Subject:To:Cc:Reply-To;
+	b=mPNpWr9AJqzlPMgWpob0ETsreH7blybNx+q7I5+Aya3OWBuFP9DtdvdT21SOp9Wb/
+	 rDDT76BOEPUhE10qkO23EC3ouVr1faagVJvnOt5nWLBdRNiCwb67IvYj3QZBLiDQry
+	 HbbfhS2cW6nokihiqYBrA97cKSIDP4ewD4DClHQ5U+dtVhIMqUUrdgtAwGrtO4RS5f
+	 7zGJ6jg1TbWZHg+bXcRydX0rdptA6lzWL/D7zO7yN6A5SQPKXsYCuuzGY5WyCc36Xu
+	 LxYPUHcRaI9F6d9Z6NGV/fj/dsbmny583n3OPJO2gYiwt3k27Ofz8t/8yNX3zxhTN+
+	 5+NIyGaARHSYQ==
+Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
+	by lkml.kernel.org (Postfix) with ESMTP id 26EDC4B849;
+	Fri, 27 Nov 2026 15:09:55 +0000 (UTC)
+From: Demeter Barna via B4 Relay <devnull+me.fromdisposition.org@kernel.org>
+Date: Fri, 27 Nov 2026 15:09:10 +0000
+Subject: [PATCH v2] iommu/arm-smmu-qcom: Add SM8350 MDSS compatible
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -60,115 +82,80 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/2] arm64: dts: qcom: sdm845-google: Add basic audio
- support
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
- Srinivas Kandagatla <srini@kernel.org>,
- Srinivas Kandagatla <srinivas.kandagatla@oss.qualcomm.com>,
- Liam Girdwood <lgirdwood@gmail.com>, Mark Brown <broonie@kernel.org>,
- Jaroslav Kysela <perex@perex.cz>, Takashi Iwai <tiwai@suse.com>,
- David Rhodes <david.rhodes@cirrus.com>,
- Richard Fitzgerald <rf@opensource.cirrus.com>,
- Bjorn Andersson <andersson@kernel.org>,
- Konrad Dybcio <konradybcio@kernel.org>, Rob Herring <robh@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- David Rhodes <drhodes@opensource.cirrus.com>,
- Conor Dooley <conor+dt@kernel.org>, Abel Vesa <abelvesa@kernel.org>
-Cc: Viken Dadhaniya <viken.dadhaniya@oss.qualcomm.com>,
- linux-sound@vger.kernel.org, linux-arm-msm@vger.kernel.org,
- linux-kernel@vger.kernel.org, patches@opensource.cirrus.com,
- devicetree@vger.kernel.org, phone-devel@vger.kernel.org
-References: <20261111-pixel3-audio-v7-0-ecf28efc5c33@ixit.cz>
- <20261111-pixel3-audio-v7-1-ecf28efc5c33@ixit.cz>
- <765f3451-0f2e-4783-9a7e-893c06b2a735@oss.qualcomm.com>
-Content-Language: en-US, cs-CZ
-From: David Heidelberg <david@ixit.cz>
-Autocrypt: addr=david@ixit.cz; keydata=
- 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
-In-Reply-To: <765f3451-0f2e-4783-9a7e-893c06b2a735@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
+Message-Id: <20261127-arm-smmu-qcom-sm8350-mdss-v2-1-dad015f87aa2@fromdisposition.org>
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/42OQQ6CMBBFr0K6dkxbCoor72FcVDpATUpxBogJ4
+ e62egF385L/359NMJJHFpdiE4SrZx/HBPpQiHawY4/gXWKhpa6VVBosBeAQFni1MV/nspIQHDM
+ 0znTlyTmtKytSfyLs/Pvrvt1/zMvjie2chTnRUVLMA6H9d2NVoMChRWPqpiqlumaH8zxF9nP6/
+ RipF/v+Aacf9bHYAAAA
+X-Change-ID: 20261012-arm-smmu-qcom-sm8350-mdss-9d4f37dd225a
+To: Rob Clark <robin.clark@oss.qualcomm.com>, Will Deacon <will@kernel.org>, 
+ Robin Murphy <robin.murphy@arm.com>, "Joerg Roedel (AMD)" <joro@8bytes.org>
+Cc: iommu@lists.linux.dev, linux-arm-msm@vger.kernel.org, 
+ linux-arm-kernel@lists.infradead.org, 
+ Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>, 
+ Demeter Barna <me@fromdisposition.org>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795792194; l=1791;
+ i=me@fromdisposition.org; s=20261012; h=from:subject:message-id;
+ bh=BVU49xzmqJjxmH+k6PMmulmhXXlj79Xhc52D5bfuUbk=;
+ b=YbEWNyPc8BUkUkaGUJdU/Zak+9zk3D1uiiv/GYOKJW8JIoxTOd8jHloFEXknVQJcyViNDFhOz
+ hyuagtPMO1jBBM8eeATMF8dWws+e2b8wX+864v/hd8xzjpA3al/Whd7
+X-Developer-Key: i=me@fromdisposition.org; a=ed25519;
+ pk=S0QFlGq1BQEaAtPPdAH8YKEOXMeRuSkTgctXuvtU+1Y=
+X-Endpoint-Received: by B4 Relay for me@fromdisposition.org/20261012 with
+ auth_id=1163
+X-Original-From: Demeter Barna <me@fromdisposition.org>
+Reply-To: me@fromdisposition.org
 Content-Transfer-Encoding: 7bit
 
-On 27/11/2026 13:27, Konrad Dybcio wrote:
-> On 11/11/26 6:41 PM, David Heidelberg via B4 Relay wrote:
->> From: David Heidelberg <david@ixit.cz>
->>
->> Introduce support for sound card and wire two CS35L36 audio codecs for
->> top and bottom speakers.
-> 
-> [...]
-> 
->> +&sound {
->> +	compatible = "qcom,sdm845-sndcard";
->> +	model = "Pixel 3";
->> +	pinctrl-0 = <&quat_mi2s_active>, <&quat_mi2s_sd0_active>,
->> +		    <&quat_mi2s_sd1_active>;
->> +	pinctrl-names = "default";
->> +
->> +	/* mm[0-9]-dai-link nodes must be positioned first regardless of sorting */
-> 
-> Could you try the patch in
-> 
-> https://lore.kernel.org/linux-arm-msm/655212ed-4812-4747-ba5a-f0093bf05411@oss.qualcomm.com/
-> 
-> ?
+From: Demeter Barna <me@fromdisposition.org>
 
-Sure, I'll test today.
+SM8150, SM8250 and SM8450 MDSS are in the list of identity clients;
+SM8350 looks to have been missed.
 
-Thou, changing this patch without precursor being merged would mean +- delaying 
-patch inclusion at least by one merging window*.
+Without it, the framebuffer left by the bootloader takes unhandled
+context faults (SID 0xc20) as soon as arm-smmu probes, and the panel
+shows no picture.
 
-I'm very much fine thou bind to this patch and when included send sorting for 
-all sdm845-* devices.
+Signed-off-by: Demeter Barna <me@fromdisposition.org>
+---
+Changes in v2:
+- Dropped the Assisted-by trailer.
+- Rebased on next-20261126.
+- Cc Konrad, who reviewed the SM8450 and SM8550 entries.
+- Link to v1: https://patch.msgid.link/20261012-arm-smmu-qcom-sm8350-mdss-v1-1-deae44695301@fromdisposition.org
 
-*still having patches for Pixel 3 camera in my fork ~ 4 month from these patches 
-has been reviewed and ready for merge, due to recommendation to use header which 
-didn't got in Linux in time.
+Tested on a Razer Edge 5G (SM8350): without this patch there are 10
+context faults and the panel stays black; with it there are none and
+the picture is there. An AI assistant pointed out that SM8350 was
+missing from this list.
 
-David
+This one is important for SM8350: without it the display does not come
+up at all. Thanks for having a look!
+---
+ drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-> 
-> Konrad
+diff --git a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+index 795e8ec7e..3dd8335c4 100644
+--- a/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
++++ b/drivers/iommu/arm/arm-smmu/arm-smmu-qcom.c
+@@ -425,6 +425,7 @@ static const struct of_device_id qcom_smmu_client_of_match[] __maybe_unused = {
+ 	{ .compatible = "qcom,sm6375-mdss" },
+ 	{ .compatible = "qcom,sm8150-mdss" },
+ 	{ .compatible = "qcom,sm8250-mdss" },
++	{ .compatible = "qcom,sm8350-mdss" },
+ 	{ .compatible = "qcom,sm8450-mdss" },
+ 	{ .compatible = "qcom,x1e80100-mdss" },
+ 	{ }
+
+---
+base-commit: a9c48428cbd8d96b26f92631d0db6f8519c5fcc5
+change-id: 20261012-arm-smmu-qcom-sm8350-mdss-9d4f37dd225a
+
+Best regards,
+--  
+Demeter Barna <me@fromdisposition.org>
+
 
