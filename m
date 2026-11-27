@@ -1,50 +1,109 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=54.92.39.34
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795779690;
-	b=xiXnpXiQk/GdhuFO/cXTvF7RwzTaHfCabH/m4blfKsxI8fgtX3j3YjWe6p3nmzYVrA1z
-	 fr43MhrZ5ajVJV/EtyVAbDG+iOGL9TBXDRfGya3n/ayEy0ulGJUv6j/81j3tQHexnq+++
-	 ibp+1M8QKXWieGpG9yVsqOl6nKV624lSQnBasbaH7T0wujh0eZ//wsjZMR4ku8LIZ/+PT
-	 /HdYV4+CeofIcIC+CaKt4QkilR1LyXh2rGg04qSzAkTBVkQxn0zK4hVHh3VxHxGD0B2oF
-	 f2NmRGLC5noJk/eY/Yh+jrA1gjwQa1VnQ9deqTz9DVhne+h+xuAbfBgCIDrIFQ/bpJg==
+	t=1795779702;
+	b=cnM8p/GAq93xAkTgCmR0T6PLggdUDqE5dU4TvXBhLelLHLXEWmgMbZD32Qfj2lT1kG47
+	 TheCWtfn0UE9xwFdlk+hxtWRCrM1iUeITJyI8JT0FVMSimxybJ/dxgqaE87JP84PfL9bl
+	 eCdcM0/33z8PhmGlupKTTBg4VY0VNOKJo8NjLfCiR98BFqcH/tQ9KH+7pC/q2HxYlAJfD
+	 SRfRM+D2A8mKTpWoQYxjXKgOPINRsLtCMd7bcj1sUZi4yDhUCl1JJZ4hNKJyT07iCAz94
+	 r6mXCKmO5ulRMlOK4V4uuFxJDL3e2AmyPpYejcAnkJ2hvQaNGI9JnNQqvEd973xWKew==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795779690;
-	h=DMARC-Filter:X-QQ-mid:X-QQ-Originating-IP:Received:X-QQ-SSF:
-	 X-QQ-GoodBg:X-BIZMAIL-ID:EX-QQ-RecipientCnt:From:Subject:Date:
-	 Message-Id:MIME-Version:Content-Type:Content-Transfer-Encoding:
-	 X-B4-Tracking:X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:
-	 X-Developer-Key:X-QQ-SENDSIZE:Feedback-ID:X-QQ-XMAILINFO:X-QQ-XMRINFO:
-	 X-QQ-RECHKSPAM;
-	bh=NNuD8/rD+CZ7LYGMl3ibAfsexedc4A/iD1FFwvCyjRs=;
-	b=QiH0glLYAgDALkOccWEKguZqZFZ9WKRnxnvGL5AXU7CEAronYxC1o1ko8QhUUwetYKLw
-	 ho51J6xWyy9b8ovGXjFKP+MAdEIXKj01Hs634ZlDM5pYfou/Q5g9jL5QAJVvGn7rlYJbl
-	 Qepn92VVUaI1Aj8VD7isrfZu0lBRnoKwus49hp4Iu21mUXiEBcFP2aPVEQhyecaZwgWiv
-	 0mwCtLP0ZPpTW+b5X1e81GkeYc7biarFMYpoh6puC4yGezfWhziLLu9iw22LjnfAcDw7w
-	 VoTkyHmc4xR59gMB2U+mdA4M/3WiKbJHmvjfrXW3IA7PUmDMb5RJ13jQYnoABTq6fiw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795779702;
+	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
+	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
+	 X-Received:X-Received:Received:From:Subject:Date:Message-Id:
+	 MIME-Version:Content-Type:Content-Transfer-Encoding:X-B4-Tracking:
+	 X-Change-ID:To:Cc:X-Mailer:X-Developer-Signature:X-Developer-Key:
+	 X-Proofpoint-Spam-Info:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
+	 X-Authority-Analysis:X-Proofpoint-Spam-Details-Enc:
+	 X-Proofpoint-Virus-Version:X-Proofpoint-Spam-Details;
+	bh=GZ05oO4YTSpT04Ds9K/avLZv5nZ4BZSN3UPY5ipnDKw=;
+	b=eMP7o9OagD8YcnvdQo0d3WtnGmHV7JEM34rCvPURDlEMhMXkBF6bWnwDJrWL/w30u59E
+	 rWnx6iFEKKsdCUeQ0fM5oZ9X2PuDzTEBg3Hgzl0t/um4ps83EU/lOB42uZdt0opn69nlD
+	 udO+MrOIZvnH6FfFttr4vzlWpFJC2nkbvtJ7CVP6Y77cFexcYKsGKOm1hBpfJn+TKFu1C
+	 hG2tOR3vPfEuBgYUt6WjCwl/R8FBx3FKZ80GntB8IVdbJ5O2/cYzI/svI1imZKCblaO6I
+	 IPe0Eb4qjgPa2vXgPn4aRUlHNwWPnRIyohJR+GUtSxv9GHDDO5sMuivbz73/qvbdJJQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=radxa.com;
-	spf=pass smtp.mailfrom=radxa.com;
-	arc=none smtp.remote-ip=54.92.39.34
-Received: from smtpbgjp3.qq.com (smtpbgjp3.qq.com [54.92.39.34])
-	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
+	dmarc=pass header.from=oss.qualcomm.com;
+	spf=pass smtp.mailfrom=oss.qualcomm.com;
+	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oVDxxVWj;
+	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UV6NjaRC;
+	arc=none smtp.remote-ip=205.220.168.131
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C1E1606A31E;
-	Fri, 27 Nov 2026 11:41:27 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 7C1E1606A31E
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=radxa.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=radxa.com
-X-QQ-mid: zesmtpip3t1795779668te8a8b6bf
-X-QQ-Originating-IP: qsSUy/zeJaXmnDwEj9xqT8wBZ7ebb7+1Mc0we8fEgz4=
-Received: from [192.168.30.32] ( [localhost])
-	by bizesmtp.qq.com (ESMTP) with 
-	id ; Fri, 27 Nov 2026 19:41:00 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 2641158068435523113
-EX-QQ-RecipientCnt: 20
-From: Xilin Wu <sophon@radxa.com>
-Subject: [PATCH v2 0/5] media: iris: HFI gen2 features and fixes for VA-API
-Date: Fri, 27 Nov 2026 19:40:53 +0800
-Message-Id: <20261127-iris-va-fixes-v2-0-385e8636c22d@radxa.com>
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 24C15606A687
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:41:41 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 24C15606A687
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=oVDxxVWj;
+	dkim=pass (2048-bit key) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=UV6NjaRC
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6ARAp7B72268628
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:41:41 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:message-id
+	:mime-version:subject:to; s=qcppdkim1; bh=GZ05oO4YTSpT04Ds9K/avL
+	Zv5nZ4BZSN3UPY5ipnDKw=; b=oVDxxVWjt/7YI1pynIUkqfMVsusntOWqcekg4C
+	eGGla5+dNVCQW3DRpPA6FmFx1srIpryCKVH0xfn7NQ8PaWESWaDx+rvskF1MwAuz
+	vn6OKQYI3rE/2XucA5D40VlXpnVCH4KGCWNc2Dy224ILMLOVxE3UeSAwr11rYlNP
+	AyYEt+10u3p81c/VyOdwON10f/8cbnhYobx3F/Hj6RKbWftKK9mxRkonLT9MK/vn
+	oQrURZkOLGCMSmnVClnGHebEYPalCq4eDa2x0vN+U8NRVhnRz6BGKhACH5tvh7U4
+	NZhHcIYaimlVyFC9e0pzZmPGsPh/mhxms+hoAVF4l41t1c5A==
+Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com [209.85.222.200])
+	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j73uhhdwf-1
+	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:41:41 +0000 (GMT)
+Received: by mail-qk1-f200.google.com with SMTP id af79cd13be357-93f2005ce21so1229891185a.3
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 03:41:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=oss.qualcomm.com; s=google; t=1795779699; x=1796384499; darn=vger.kernel.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=GZ05oO4YTSpT04Ds9K/avLZv5nZ4BZSN3UPY5ipnDKw=;
+        b=UV6NjaRCjQgIj2AmzkRdp0SjCOuxw2YFouBeS73E0vrRSxm1YMl1x3LIXIUpAPy7do
+         NtwbkkoRKyxfNP/2Vtwa/eC3WvMkMayCFofLyBY221NZtchHu1fF8H3ySmmxSZ2BU24G
+         jOxs/oJyvMqDmPNqCL0rbFdD43yJvmsH246f5vtvb9WOWHNNq6NkcWk1ZX3uQPKZsZiv
+         XN/oyi7hN7pe3Up0wtAA4NMd8NJ+LXeL6WiWm7NdU4kXkVzlyHP68JM2slxF7E9OHhRm
+         1d5pyh2ytc/F+SLhnYSniXP/S/LqBmO2lLrQA6JtgSeXQrBWNfAB67V4FkQDSXYYJt6v
+         IOxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795779699; x=1796384499;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=GZ05oO4YTSpT04Ds9K/avLZv5nZ4BZSN3UPY5ipnDKw=;
+        b=PC/IA4DHP39BgBfLouqRQBiJeB4/iLTG3gI96ThMIiLc7vp59+HrJ20eb4BUXXw0Xs
+         RgQwPjmgKI5/4204pv/J/620euF5GPd5f9rn91XT0rQnFM1wo7VGmhr2R7x2trlkyVNR
+         LGj/dMmqYqNE/iXR3MJKTYUvRhFGCy8m1yeXsvNgPpebv2MoxQVdMQTkhdTSd2Jt3DI4
+         366qZJUOcs/7xjUddQUUQrxYg4UClEwU24OpgIdfUd3PAsUxPT+M6IAv/Zi0lnw+KRNe
+         +sryLskLJZCmT5J8+8oF5Fi57y4zNBkS1D53N8un+nLWPGpaQ9CK2dzgkMoKt3PBnY1x
+         zqZg==
+X-Gm-Message-State: APuU4Z/HcBxfT+m8UIROscYHOjZNZp+v5kV0ndySQnF4RxNzduOACWYg
+	FkWobWkgSRmIZ8BImT8zRIKI0kDwvyY8uFbYvw3PhhFNwa5CwtxngEX2ek4foqsMLXQeQOvk48T
+	1EWnUZTW+DGz2wp4VIeaQoXCc362LZ8fwRKeugU3f0VOZg29fZIagKGMKGB0G2+2rI/aR
+X-Gm-Gg: AZFdTZdXzM74nYKChJa2OcoBY8W+uAH/PGrKw397aKHUai9Cly30CvKhz8ufPtT74HM
+	HYNbnG5yduIdD0t7ARvq1SXxYy8ECxkjKHvpNUgh67IiqoSbPOWzRBf1qHIYdejR4VXkuj8j/7V
+	D62ITHqm9vogjnxmvCGEgmAesf8vkioJxF2SZHV04LGMhkRwi2MoRlhQ+M43fVd3MQLO053a1QN
+	xMXRbBTlKwJHA2g+ZyPrChgIiPrxzjnU6O8W3s7EU60absOSZ5GBhWr/WoCKlCZcr91AX4OSim5
+	MrtVcpS5+uoQ5RyeOmgKoyR7AQW0IrRGiaURb/Bwg/OsyTWl4LJdoAsNs13bTHd0n2OoDRWHMv0
+	ndcE5UNPBMpbErWiZ9T8KbDxa0CCqOxNV9nzm99jKIrKnrnBGOohsNLVVaAB9uOw8X1+fR51qxD
+	if5nY77jITo+Jsk1ADX5466uec8CRg57eLN9Fb6/e0413aRaHBVleYJ+9Y/QshZQs=
+X-Received: by 2002:a05:620a:199b:b0:947:7857:bb73 with SMTP id af79cd13be357-949bab0ee8emr4421406385a.63.1795779699418;
+        Fri, 27 Nov 2026 03:41:39 -0800 (PST)
+X-Received: by 2002:a05:620a:199b:b0:947:7857:bb73 with SMTP id af79cd13be357-949bab0ee8emr4421399185a.63.1795779698830;
+        Fri, 27 Nov 2026 03:41:38 -0800 (PST)
+Received: from brgl-qcom.local (2a01cb1d00dc7e0089167b9b97a26c96.ipv6.abo.wanadoo.fr. [2a01:cb1d:dc:7e00:8916:7b9b:97a2:6c96])
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab65cb41f4sm45137049f8f.7.2026.11.27.03.41.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2026 03:41:37 -0800 (PST)
+From: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
+Subject: [PATCH 0/6] clk: qcom: add clock drivers for Qualcomm Seca
+Date: Fri, 27 Nov 2026 12:41:29 +0100
+Message-Id: <20261127-seca-clocks-v1-0-1781298e658b@oss.qualcomm.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -56,142 +115,103 @@ Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAAAAAAAC/3WNwQ6CMBBEf4Xs2TVtJVA9+R+GwwKLrIlguthgC
- P9uwbPHl5k3s4ByEFa4ZAsEjqIyDgncIYOmp+HOKG1icMYV1rgzShDFSNjJzIreejamKImch+S
- 8Au9BUm7Vj/VdP7iZtpGt0YtOY/jsh9FuvX/b0aLBPCdX+lNXeldfA7UzHZvxCdW6rl9sQRZ8v
- AAAAA==
-X-Change-ID: 20261029-iris-va-fixes-818e0067aa28
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>, 
- Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>, 
- Abhinav Kumar <abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, 
- Mauro Carvalho Chehab <mchehab@kernel.org>, 
- Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
- dragon@radxa.com, Chris Obbard <chris.obbard@oss.qualcomm.com>, 
- Deepak Sikri <sikrid@qti.qualcomm.com>, 
- Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>, 
- Loic Minier <loic.minier@oss.qualcomm.com>, 
- Jason Pettit <jason.pettit@oss.qualcomm.com>, Xilin Wu <sophon@radxa.com>, 
- sakimidare <ssmzhn@163.com>, 
- Nicolas Dufresne <nicolas.dufresne@collabora.com>, 
- Vishnu Reddy <busanna.reddy@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3881; i=sophon@radxa.com;
- h=from:subject:message-id; bh=iPhwtFpnpU2UaCAbG8CAkdvNEWSBR7PWJzlhi0bDqwo=;
- b=owGbwMvMwCVmdFg0fe08Iz/G02pJDNmcOb7VjrWtBcw61VYFu6sqMlnStISe5GzYy/hVYNnfb
- zyHdhR3lLAwiHExyIopsijEM8xlr8y99lSsVA9mDisTyBAGLk4BuMmzGBlWlgc8uVHsmfzgL8ft
- WMNDZScb11//7TPTMapXaOfjGb6LGX48L3K9FFtYkbPQ5HqG05zVrHYFO4Mu8cn+/FznxW8ozgk A
-X-Developer-Key: i=sophon@radxa.com; a=openpgp;
- fpr=205F009D07796DD6E516752E32C31567AD9E324E
-X-QQ-SENDSIZE: 520
-Feedback-ID: zesmtpip:radxa.com:qybglogicsvrsz:qybglogicsvrsz3b-0
-X-QQ-XMAILINFO: OETN/NFvgZ2KibuvaaDtXyzv6Qty1neV99HfYRAEpn9GFQ+0oMJkxg1i
-	YHkdIQkFTe/5S0cLXqEkRJf3xktf1mXfrhkCQUP0Cv2mkwmFqnlCPRAHkxuD7zeV9loXhKb
-	av+5txycsgIgKd3/IBWvYOc5O2ynP+M6RUdeL8MYai/iGP0R5JGbIgVwMcgSjeU2wPJ8vvn
-	XpMHR3J5XBmFOuq5OF6k6nBpVy6slXNgZ/4n/DuTp4m59rrK1/53ByXxOuu7d8+OamvOJ/7
-	vC8uPcR6FoCI8IobOoOvLQyMu9aFdptXDXKgbZ5La5iR8LjPRZMDkcfcCnO/dkodBWDWJ9/
-	UA0eZwD/DWiy9ml/xhmLfbIbpksiCPXCCHdrqCmTK+p6dusVbD27/r/OIxINNQGzQv1OT0p
-	03yvlBTY8nZc1QRtLX4F+SMQRzRDynP7IdJwBzTlixjLRW0ixf8HrKx2NXy+pQatd9xZvh1
-	N0WofGsAAwpE3oIhgx0YBYpLYaBOWMbOsyTtSvq8EaaoiJgF4DX5k67UbvReycSgqC1kcB4
-	5mzQQQSBtf5Qyxr0AbBk8rKWdO6XG+n7m5xnzPBMlLupyEW0lBsPiTFgpbJBYCGR+yjbJsq
-	wCZCxoqeLBZWCRk/H4xQ3oKVbe1As3jno8WaZL/9Ssr0KQqZszq/SwSHxLmKhXG2bhxHSDj
-	OX8PZMVtXTnZgd0clvFM4P91lEEuWoSrA77z64t1YZwZQd+1X+m8kuSFzAHnYIZAr8GGP9h
-	TbKv7kOH8CG3Fzm4jh8wRDahv0ze4tazyx3Q8uF/Y/01PKa+ZKw24cRL2dljsTSNUPGAnG6
-	8XAFLbe7KqbzXXRsL5PLKJICdS5rbjfrgkUL9WjctzGcOZj35u3i1FqCQ4L/0dDGEZQgg9D
-	D662kyvfi7Ai/eM6BB1jIzxCAoIvOUTfBxQ7lYo9GRDJO2WSue4dRSiZBAy5iAOMCV1L6Ik
-	CKfIzFw/CDBTRP57WOcURzLA1FrG4IuU/t3IttxbwQ3SAR5VgNZzVt7QRvkpWaPP/JN9rA5
-	vAVi/ONyOsjbKN/djmx+Kn4D7AQjMTIyogDZM+vSvIu4ErfQvnQYpf3SggliQq/PGuYOLum
-	w==
-X-QQ-XMRINFO: NI4Ajvh11aEjEMj13RCX7UuhPEoou2bs1g==
-X-QQ-RECHKSPAM: 0
+X-B4-Tracking: v=1; b=H4sIAGlsCWsC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIzNDQyMz3eLU5ETd5Jz85OxiXSOLVBOTFBNTYyMTQyWgjoKi1LTMCrBp0bG
+ 1tQDB3j4SXQAAAA==
+X-Change-ID: 20261126-seca-clocks-28e44d453241
+To: Bjorn Andersson <andersson@kernel.org>, Abel Vesa <abelvesa@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, Brian Masney <bmasney+clk@redhat.com>,
+        Jerome Brunet <jbrunet+clk@baylibre.com>,
+        Rob Herring <robh@kernel.org>,
+        Krzysztof Kozlowski <krzk+dt@kernel.org>,
+        Conor Dooley <conor+dt@kernel.org>,
+        Bartosz Golaszewski <brgl@kernel.org>,
+        Taniya Das <taniya.das@oss.qualcomm.com>
+Cc: linux-arm-msm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>,
+        Tyler Baker <tyler.baker@oss.qualcomm.com>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1843;
+ i=bartosz.golaszewski@oss.qualcomm.com; h=from:subject:message-id;
+ bh=MVKj71IQINUpCIFknUYnCMbOt0BCNz+psO47csbCB4g=;
+ b=owEBbQKS/ZANAwAKAQWdLsv/NoTDAcsmYgBrCWxw7IMxd0JvPeN3gybQzd2kn6MD0/Kl8ygGo
+ 5biI1HyTbKJAjMEAAEKAB0WIQSR5RMt5bVGHXuiZfwFnS7L/zaEwwUCawlscAAKCRAFnS7L/zaE
+ wxybD/91QEsPl9W0Q2ozDzIdYqshSwgdnK2Kx0mFMn/D75AyZq5XzwXWJUYho0mshE49vZP0KCJ
+ YZ0U1dvZqffK2rdz0jvuU7GozvUglHJpF/Y5+EcdMj84fvz/GLDJqxEiYrqfa8PYierxmMfCVs0
+ 8wi7y66FB0VjjgzqoQdXb19KZTQapcPK/IOB9arNn1PmXjtsLOc/tc+rD3u4q7q1ILB9gsK4yuT
+ BKb4LPYsTR7Rw/e+YcrsxcAcnf2Awmwo/0+9yuVCn0QImWFSHdoeOsUJcmU95fITdpt+D5iEJ6d
+ PFieNqoMBwLzDZd2QKr/Zyc7fJsjMbxY0zU+XZ+OCjyKATtDjNv02g2bCyOtGrXJLXBuQ+qHxSs
+ 9FabWYIbuct4mSe178qo2HuJn0wv9xk8OVMDIs2VH+Qa4OVNiBbmeFc7HywbC5mRw3AsUsWb02f
+ Z6HqfhwfCswNhiA1Payq3Wqh9NvR70CJ1Vwq+I4LlDMcZ+XW4oiAkFQ+vgQrwk2OCHe7PImBa4X
+ AN1ajNKaWjj+UpNu1WRGpVhnvvWcBcLdid1c9JZe2m7s2fwYCYh0OA1m8jTY4C2lM99cQ+HdhWH
+ MeV81EzbFo6g+ZjLU18y2NBWRLj0VXnKgqU2TeJevQHbhj4Zf2QlI0Tv/kkW60LSKqJN2QpV8vo
+ Dp3BnorYvEoQSsw==
+X-Developer-Key: i=bartosz.golaszewski@oss.qualcomm.com; a=openpgp;
+ fpr=169DEB6C0BC3C46013D2C79F11A72EA01471D772
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI3MDA0NiBTYWx0ZWRfX2RhVWYXys2I1
+ j4cEzskO0jxqe4DawKgCZyUR8edpRL13J3SQKMkfRByihPvjHYx1dXwAv3BOZZt25OkK/iD52WX
+ hBSoEdcdMVP511pcm8V2QyviAkOAouI=
+X-Proofpoint-ORIG-GUID: EVCReVKA13AYRb6YhtbDyPSiLPZmS-F0
+X-Proofpoint-GUID: EVCReVKA13AYRb6YhtbDyPSiLPZmS-F0
+X-Authority-Analysis: v=2.4 cv=BbBNQbt2 c=1 sm=1 tr=0 ts=6b096c75 cx=c_pps
+ a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=u7WPNUs3qKkmUXheDGA7:22 a=Um2Pa8k9VHT-vaBCBUpS:22 a=EUspDBNiAAAA:8
+ a=ouYIBIRpUQI3KAHfuYgA:9 a=QEXdDO2ut3YA:10 a=PEH46H7Ffwr30OY-TuGO:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI3MDA0NiBTYWx0ZWRfXwsBWpkFxFPVP
+ YF7yhkvqYdkVocpFMDKekkW1VrP4oSBW8H8Zs2KYcBdVCGKC8L3IjpMCJuMvoJr6+wl+TbvluHQ
+ eW9ETL26HFOklhphhWkUcp2umanXYRNOCLd4nbAp0+HW9tksEKwNhHv+AmUZIJUazVJxS60cICR
+ frv54hayF3r+baYN6YTsqHrBR/zXqUQtwmPMK8C3hpUJ+vxP7c3Dz0XcCGwdILgHGY5OoV+7lXg
+ zCeBxWzvwvhsdoQtSy+WdOTw4q6aoYm5Vsl3Mlu+Yj7YvjKY9GXGbJ7lrYjzc3Kuxkm/D6KblSv
+ AaKQOpoucIESPuyGJiADnHwHcus1VMtiJgUvDGL+7s40BDtehdLkCRYmirutXHBhICMkrllRGt5
+ EalTmNI2EDcCvcTGGiAKVt7EwP1f0ka6SxDMOa7HLO8+zvO0r5UHLgAlnjHyWJEry+AvEM+xcak
+ IfQyMbqImEnsWvystgQ==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-11-27_02,2026-11-26_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 suspectscore=0 lowpriorityscore=0 bulkscore=0 adultscore=0
+ priorityscore=1501 phishscore=0 spamscore=0 impostorscore=0 malwarescore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611270046
 
-This series adds features and fixes to Iris HFI gen2 to support
-qcom-va-driver [1], a userspace VA-API backend for the V4L2 stateful codec
-interface.
+Qualcomm Seca is an automotive SoC with 12 Oryon CPU cores that's a
+slightly less powerful cousin of the Nord SoC.
 
-It enables decode-order output and larger CAPTURE buffer pools for VA-API
-clients, and exposes encoder deblocking controls. It also fixes
-error-buffer timestamps and handling of non-display AV1 and VP9 pictures,
-which affect both VA-API and direct V4L2 clients.
+Add the negcc, tcsrcc and nwgcc clock drivers along with bindings
+documenting the hardware and update the RPMh clock driver with Seca
+clocks.
 
-[1] https://github.com/radxa-pkg/qcom-va-driver
-
-Fluster results on SC8280XP (Radxa Dragon Q8B) with the HFI gen2
-firmware (video-firmware.2.4.2) and the GStreamer 1.28.9 V4L2 decoders,
-on a v7.3.6 based tree carrying this series, with and without patch 5:
-
-  Test suite        Decoder               without 5/5  with 5/5
-  VP9-TEST-VECTORS  GStreamer-VP9-V4L2        201/305   232/305
-  JVT-AVC_V1        GStreamer-H.264-V4L2       77/135    77/135
-  JCT-VC-HEVC_V1    GStreamer-H.265-V4L2      141/147   142/147
-
-Patch 5 fixes these 30 VP9 vectors, with no regressions:
-
-  vp90-2-02-size-lf-1920x1080
-  vp90-2-07-frame_parallel
-  vp90-2-08-tile_1x2, vp90-2-08-tile_1x2_frame_parallel
-  vp90-2-08-tile_1x4, vp90-2-08-tile_1x4_frame_parallel
-  vp90-2-09-aq2, vp90-2-09-lf_deltas
-  vp90-2-10-show-existing-frame, vp90-2-10-show-existing-frame2
-  vp90-2-11-size-351x287, vp90-2-11-size-351x288, vp90-2-11-size-352x287
-  vp90-2-14-resize-10frames-fp-tiles-* (all 14)
-  vp90-2-15-segkey_adpq
-  vp90-2-20-big_superframe-01, vp90-2-20-big_superframe-02
-
-The HEVC difference is PS_B_VIDYO_3 timing out once in the run without
-patch 5; it is not related to this change. AV1 was not tested, as the
-SC8280XP VPU does not decode AV1.
-
-Signed-off-by: Xilin Wu <sophon@radxa.com>
+Signed-off-by: Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 ---
-Changes in v2:
-- Patch 1: move the new caps entries and switch cases to the end, to
-  match the enum order (Vishnu)
-- Patch 1: describe the controls as feature parity with Venus
-  (Nicolas)
-- Patch 2: add OUTPUT_BUF_HOST_MAX_COUNT to the HFI gen2 decoder caps
-  and size the CAPTURE queue from it, instead of checking the
-  firmware data (Nicolas). Dropped the Tested-by, as the
-  implementation changed
-- Collect tags
-- Rebase on next-20261126
-- Link to v1: https://patch.msgid.link/20261029-iris-va-fixes-v1-0-44a2783f782b@radxa.com
+Bartosz Golaszewski (6):
+      dt-bindings: clock: qcom: document the Seca Global Clock Controller
+      clk: qcom: add the Global Clock Controller driver for Seca
+      dt-bindings: clock: qcom: document the Seca TCSR Clock Controller
+      clk: qcom: add the TCSR Clock Controller for Seca
+      dt-bindings: clock: qcom,rpmhcc: document the RPMh clock controller on Seca
+      clk: qcom: rpmh: add RPMh clocks for Seca
 
-To: Vikash Garodia <vikash.garodia@oss.qualcomm.com>
-To: Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>
-To: Abhinav Kumar <abhinav.kumar@linux.dev>
-To: Bryan O'Donoghue <bod@kernel.org>
-To: Mauro Carvalho Chehab <mchehab@kernel.org>
-To: Hans Verkuil <hverkuil@kernel.org>
-Cc: linux-media@vger.kernel.org
-Cc: linux-arm-msm@vger.kernel.org
-Cc: Bryan O'Donoghue <bryan.odonoghue@linaro.org>
-
----
-Xilin Wu (5):
-      media: iris: support decode-order output on HFI gen2
-      media: iris: allow larger capture buffer pools on HFI gen2
-      media: iris: Add deblocking filter controls for HFI gen2
-      media: iris: Preserve timestamps on error buffers
-      media: iris: Recycle decoder buffers for non-display pictures
-
- drivers/media/platform/qcom/iris/iris_buffer.c     |   3 +-
- drivers/media/platform/qcom/iris/iris_ctrls.c      |  93 ++++++++++++
- drivers/media/platform/qcom/iris/iris_ctrls.h      |   1 +
- drivers/media/platform/qcom/iris/iris_hfi_gen2.c   | 166 +++++++++++++++++++++
- drivers/media/platform/qcom/iris/iris_hfi_gen2.h   |   2 +
- .../platform/qcom/iris/iris_hfi_gen2_command.c     |  29 +++-
- .../platform/qcom/iris/iris_hfi_gen2_defines.h     |   9 ++
- .../platform/qcom/iris/iris_hfi_gen2_response.c    |  47 +++++-
- .../platform/qcom/iris/iris_platform_common.h      |   8 +
- drivers/media/platform/qcom/iris/iris_vidc.c       |   8 +
- 10 files changed, 360 insertions(+), 6 deletions(-)
+ .../devicetree/bindings/clock/qcom,rpmhcc.yaml     |    1 +
+ .../devicetree/bindings/clock/qcom,seca-negcc.yaml |   61 +
+ .../devicetree/bindings/clock/qcom,seca-nwgcc.yaml |   69 +
+ .../devicetree/bindings/clock/qcom,seca-tcsr.yaml  |   65 +
+ drivers/clk/qcom/Kconfig                           |   21 +
+ drivers/clk/qcom/Makefile                          |    2 +
+ drivers/clk/qcom/clk-rpmh.c                        |   16 +
+ drivers/clk/qcom/negcc-seca.c                      | 1458 +++++++++++++
+ drivers/clk/qcom/nwgcc-seca.c                      | 2138 ++++++++++++++++++++
+ drivers/clk/qcom/tcsrcc-seca.c                     |  147 ++
+ include/dt-bindings/clock/qcom,seca-negcc.h        |   98 +
+ include/dt-bindings/clock/qcom,seca-nwgcc.h        |  144 ++
+ include/dt-bindings/clock/qcom,seca-tcsrcc.h       |   25 +
+ 13 files changed, 4245 insertions(+)
 ---
 base-commit: a9c48428cbd8d96b26f92631d0db6f8519c5fcc5
-change-id: 20261029-iris-va-fixes-818e0067aa28
+change-id: 20261126-seca-clocks-28e44d453241
 
 Best regards,
---  
-Xilin Wu <sophon@radxa.com>
+-- 
+Bartosz Golaszewski <bartosz.golaszewski@oss.qualcomm.com>
 
