@@ -1,84 +1,84 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.47
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.53
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795774468;
-	b=sJj7qBWWEjBbrsmVEFkCpzHnGM3MTbG8fasiRgTnjo5keEC2ovZsfnOZGEl+wKb5Ubvu
-	 I0sWYpcrbkSZG+egLU5Oxx2jPBDf5JFa5/mNxb5Wa/ZlPfauxVsXdWrxsdw6ccNDxXJj5
-	 UG0JEDeUgbV7F3PniVM1OtMomhGZfz62s6IWFnc2VKXdol56DxUgIQZc5sxZ5jIFhC+it
-	 cSf6EZA4cZYuqPPjv0FxVXSH25GluSMO8hXK/rL/HyDMUi8FjN3HgUjyElECsJ4rrtloY
-	 uhR6ZvmPDhqN5QdvtJAATUaxTG1W/wQWQ9pCyZhYYIn6rMTYZzu02XYm5k9IpYR0lOA==
+	t=1795774470;
+	b=vcIHCWttq7hyPY2HcDeIV5d9JjjCvTcYk2KnXjSdDru9TSrzA67JhAFPozEkeKzoiIpK
+	 SMzKmAlYuXRWxzzhCSKOQyAzKZMdvm74rg4ZdJvLn9GMK6wcv+lc9oueO1n7Ptu4JvuQL
+	 V8qyH9iYSNAtjqxYviDD1E4DtEcQFCR0KLyxNm+AvGV6B8udm2lmyWEuVueBGd+pE5wEu
+	 WVEiQvL+rC5RBTD+I1UeYANlf91u9eS9Njw44QSNI2b7QNiHudnFRxoTg5W/oKWC81B7n
+	 Gygxv7mhA2jmZ3ODbJ6j4OxFO7MoMmYnMB/YuWIS/bg7D3w2wS49bHRAvUjNY3HmPUQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795774468;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795774470;
 	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
 	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
 	 From:To:Cc:Subject:Date:Message-Id:X-Mailer:In-Reply-To:References:
 	 MIME-Version:Content-Transfer-Encoding;
-	bh=tA+J6mGbIT9WLOmGI7WGSCcbG+FEuLz9DTzxi1U99nI=;
-	b=ErHA7odW1+a6gCUutqPjtXGVBoPHhk9OUhXGXQX0sAOkHTjc47PSqT8a9c7FBCsL9VPs
-	 0CGZrN3NgpKML7USn8jt3OXk5BAOoOHapUnacspUhcSbzVStJsWX96EFQzWBqauEYMyxc
-	 bzd7OH2iCZWkkqT8lS5bC0z3NwktSOx41IkxzId+l/7+Mj7eoXzONs10VzLf/j2oN+ruF
-	 bBQCiU5lHKj4NzKOFQ3ooLTQfhcxCmaBkcmFIi/Qw8EceaF7oZJVibiCB/7wdDrRFs4OH
-	 1tl/7m+JKAg+XFrH7ixebhbwE7gsZBRt27IN9dn5PpcaWr2rbQyQvy2ir1n81HreA+A==
+	bh=Mgx5cNkPMPqWVvWeuCS5VO4HsywH9BFvEOT6o0QcnWI=;
+	b=sIVmvXtVwqDaSEgA2FTn0GnpBQQLBA8Ir+etgdLQNHR4keT8BY7FUjnGT0g+7rkXXkx2
+	 47AigsMP810SZA58j2mhboVt7ohizTbPqYCjZyuTaDUPDtW8BZiMFDLkgZNehn9agK2S+
+	 P3GAfkFv0oniWsfvLFfpzvUCdOymXlcvvKQUN0ZXnZWPZpLQ5viY0jDRBf4Xr2C0ulE4S
+	 u6ibY6v45F9hGmOnCecIFpblOlkRuond5a/Ll3JX3YrlCOSc3JWxSKBnzL0GUdUH9joF0
+	 paJH6yHYamFSACYwkLK1xQK4ztAhvg+YJ7dJNwtcCYacWkaQp4EcvAZdw/9WDVkcobg==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=gmail.com;
 	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DROkTdgs;
-	arc=none smtp.remote-ip=209.85.221.47
-Received: from mail-wr1-f47.google.com (mail-wr1-f47.google.com [209.85.221.47])
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ArnXgH4K;
+	arc=none smtp.remote-ip=209.85.221.53
+Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com [209.85.221.53])
 	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85F73606A333
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:28 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 85F73606A333
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6D776076C2A
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 10:14:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org C6D776076C2A
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=DROkTdgs
-Received: by mail-wr1-f47.google.com with SMTP id ffacd0b85a97d-491846221ffso6954805f8f.3
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:28 -0800 (PST)
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ArnXgH4K
+Received: by mail-wr1-f53.google.com with SMTP id ffacd0b85a97d-49465892f7bso5790816f8f.1
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 02:14:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795774467; x=1796379267; darn=vger.kernel.org;
+        d=gmail.com; s=20260707; t=1795774468; x=1796379268; darn=vger.kernel.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=tA+J6mGbIT9WLOmGI7WGSCcbG+FEuLz9DTzxi1U99nI=;
-        b=DROkTdgsIXxvIEfby6vSOcPU3NgZLmXOd3CwmJz0216FnmWA8Lf667aB7N/zKVKTpp
-         vteBHX4RpS7u7y5UAxiOrY0tatlv+JpuWDO4R49gDD2M8T+Nm9RHqsVemylmyi+9Y8Iz
-         DkkWLfUFPn9sE4wZ+mZ88ftD8dvDrgaQjVmBCt9nEbIKlLXpZAdNsmLxoXoPemWnRHP5
-         l/NzPJYIzGSka/2bynBrfkXsv7+A52vARD2zwjKB2I+Lyo8wNqYgTUyEa3gdVV2OOysq
-         dwgp5WNlWiaKvXIDuk59jAVswjN0zvYnsq4auphsPB2Q6dWWXlaPR395cww1oA5sMjvJ
-         WKCw==
+        bh=Mgx5cNkPMPqWVvWeuCS5VO4HsywH9BFvEOT6o0QcnWI=;
+        b=ArnXgH4KVgo8ZsjzHE4ZEUcblsNUSn5rGz2IsOB2VH27OS3HwIcZxnKaToB+RtqbJP
+         MhJpxb+/7a321SykO+7kbw2lxM01U2LouQn5lvTYs3r6HdWKYVszgvlyq/Msl0ySEzfL
+         cl5wZPWiWGiYCkbaBQ3CRKQ1koMVb1bkKWhgiTcHZfTCcytoKcLmDa64x3AmNMKLIMCD
+         Z/SJ7QlDUPQMOFVKIycfhGgd/KGX3h5HdkKvbL6dD8RZ9+w0kicnwSq3+dku04tkd6C9
+         OWDDqgyy4xvRhzxqwcDY/3yiXzC4UlLPqm1pP3x78psiyEvEqKkA/OqPp1jIlavjnD/Y
+         jkag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795774467; x=1796379267;
+        d=1e100.net; s=20260707; t=1795774468; x=1796379268;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=tA+J6mGbIT9WLOmGI7WGSCcbG+FEuLz9DTzxi1U99nI=;
-        b=hyH7tfSf2rIXfcCiftfjYXzzsOdJ8g8r40GhzTzsqoACCBy5OcqNccEJIv3rudxYJ9
-         3pAd0wvHynSZr78+SoaPpYkkFC8bqaaTdbqwutGpapR6IUDPVRO5cCr+ppWf1TFPrLnz
-         HXCBkBhRnGDC4EOIT0Rs5O/8D1A7/zFRTfFdt8cgkB1QdWc1C0Vg42S46fKH18Qla+q7
-         QEAeGOmuqQzHN52DTG5BMfqWnyt18hZv5PrKFcpBgTtKbdP523Yor1hcF7TUXXss6hW0
-         53vOoCQaht09u782LITjP7u8MFmP3k7NkD50CRiMt+WScl050XnV0QQwx5be21Pxruzz
-         JB3g==
-X-Forwarded-Encrypted: i=1; AL+hErE6wvBgmue68futHIAC5u8ildb01e5BBi1lLuWPtqJH0INMu2W/RNf6rXR7gZZrl4O+cf/aI/bbdTTvOMJe@vger.kernel.org
-X-Gm-Message-State: APuU4Z/bCMfXA1dYhja3I360vJv/8CW+QkNFHYIqXgLTB9y+lUAIodeh
-	1peMVKO39OP59PBG8+LK1h+4c3DvK7ntCYHAH7Oj5pjbis/Q9proQdQ=
-X-Gm-Gg: AZFdTZf8vtzHpzecwOvnlC7mz/hfVekGH80Vro1Q89lYUB76VkC1UFJ0goVlnRQTS4p
-	Q1Aa5hi8Psr7XoLO0DXmysf3tC1kEuU62LIvkSruAtbNZzSnDlS8tCde0wpxwhFuBxqEKicA2Ed
-	Lr78o86Xa6yGxnppANhywwYIWayWxGOO/ZPIBrjxfuRa+Q8+PyrYAd75hH+UJrCQq3aLa5BNdGN
-	NJvFHCZNX3ID5PB9CYCWsiXdKYmydEHuDmLNjk3UCuS2TOXc8CTmmGgxirz8ROXCyo2YaZYOlNj
-	Fxi2tHwtIfY+6WmZUDkopAb1j28V/XgeQmbZiDUNPL4epMWWEIlT8At+TwPV+dw+MZI3+XTkqen
-	gqQktn7NQl4Dq9AAh+uRx+KqYHFuWClmwRbbB5B7E5E05h02LaBiGg0C2dOOXFAIzaiaaguyCPj
-	eIfgZOIwJOvUAT8MMP7B9esia9sa7Z7OV90kAq+XLugQlqG61WcgBDzxDp8fE3BomGcIit1530k
-	0PO95PDThHZzBS5q3Zz8RjzqJKLtdkR+19g+GmyeY/Pv+EOtb6vKl4k2lGcTubStcgspbKCaPsy
-	U2C9TNs3LpezRL3nrqXAkXLAbqv06h3WswZjnZrd6YZPqLstHWQaXDl79O409Eokja5zu2dWqLv
-	b4MqPDlhVABM+W2keqi+zZk2f2tNxKLRXC3Ld6wpjnr12nXZ+MZxVb7e/330=
-X-Received: by 2002:a05:6000:4014:b0:4b7:ae36:5493 with SMTP id ffacd0b85a97d-4b7ae36567emr25594210f8f.12.1795774466728;
-        Fri, 27 Nov 2026 02:14:26 -0800 (PST)
+        bh=Mgx5cNkPMPqWVvWeuCS5VO4HsywH9BFvEOT6o0QcnWI=;
+        b=qemHiSjy2Nek6JsTuhEVTrDBdlm0iz5Kz+lQf2JQax5A5lnDcJQ6fPuPWk4llufNOi
+         2irDKzoKdxjPkOHP+4NKJSy/4aQx+GHkCTSDPzdqvtRUbyltMplHWo6iqTipoFxy2z2Z
+         uz6xuDUW3lAX5zysCgLQb1lgKqt6NjJvmgTC/jGj3cfja8OqvdwvT0t1X9vWnJirVNs2
+         te/0bQdQkRK8Bx9c8MUmRU7BiOK3hNb4TwKShIsZ5wt73VXgK4S1SamjdI2Dtmcws13X
+         h1cQtclsC5iQabunudu3m0iTHJw8p9StYIAzL2l+GZb3lqyJgag+WMiYuaMfNjQn1cKX
+         sbnQ==
+X-Forwarded-Encrypted: i=1; AL+hErEkdbjxtOrMkaa1uKME7UUw1tJJAKEcuIuGKvwqYmmCRewmblUt1mvOwfIVtjz4DwybwsdGEhCo+UBm8srC@vger.kernel.org
+X-Gm-Message-State: APuU4Z8qvw8AU+zTP912uQZJXF6lybMGT2fcAeDn7OijN11H6Q8rMCeG
+	wMIMceGIU9+WlJuvhWbWbBnkqdIYlGgIkElOfQl8PFLlTThbq6gS1JM=
+X-Gm-Gg: AZFdTZe/f0fpaxJE3xArY/gEhxmxn7Aucjz9fHypdY0s+0nH4QlnIF5S7G2inr0t5a4
+	s/tragESCr6oyeyerXXVaUu4R+Pxz8aGQO1ujsTfetaXJpuSLBPZegkYwone2PgoS/YnQ39CWF9
+	l1S0Ox46uBzwMZJcWoFuZU6jrn7j8jHWxl/0d/C3FYGYdFQkf63angr27gttgj5JPnU70dRDkQr
+	UL6cipd+Nz9ATdaI2Gq8G1G9y39d3i8O+iWKHBDeXtGRq3ajHSwxpiJllyOCw5+VpA0oSLfXXua
+	yJLeG+RJULyB9aVg+jPxwTvPNxZlUYu9bw0+585yVucNS0Fq7lpvvtYruoRFsrHcqCXx4AiCurR
+	A6/u2yCR1vqjP9EkPHfoilHkhjOKV2N+rjG0PZwqfBfWSZcYiB1++R8HYnpyJuNEUFnycuPRh0v
+	UUvI+DYnZaihfR4RzoNf0J9EMfySLjSKbPhD6G4jXHARLL/kixiwHsO/pHxd8R8SBOTgfmnVE1z
+	nVVl7J371uaiNwxqn7eRFus1x16pPV/gaItqQWwI15OrPFivtl0V1h+DHB1g6ZjMqG2lcokq8g/
+	6hovM5E2OuQXtTuiehcAd/gM+glbXZlClkKY7wL288sj6hU8R8LV843ilrIOIyPSuwDj236rCxZ
+	kZ9IXK2UI7KFyZ+l/RxtvwOUneC5KeioY8ervOu6r2XcRtfZdH0j/2NRh0oE=
+X-Received: by 2002:a05:6000:2489:b0:4a5:8f40:a644 with SMTP id ffacd0b85a97d-4abb1baa9eamr48914855f8f.9.1795774468069;
+        Fri, 27 Nov 2026 02:14:28 -0800 (PST)
 Received: from localhost.localdomain (host-94-89-17-99.business.telecomitalia.it. [94.89.17.99])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.25
+        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fec7sm43651234f8f.26.2026.11.27.02.14.26
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 02:14:26 -0800 (PST)
+        Fri, 27 Nov 2026 02:14:27 -0800 (PST)
 From: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 To: Rob Clark <robin.clark@oss.qualcomm.com>,
 	Dmitry Baryshkov <lumag@kernel.org>,
@@ -98,9 +98,9 @@ Cc: Yongxing Mou <yongxing.mou@oss.qualcomm.com>,
 	freedreno@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org,
 	Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
-Subject: [PATCH v2 03/10] drm/msm/dp: keep training pattern active until stream video is ready
-Date: Fri, 27 Nov 2026 11:14:10 +0100
-Message-Id: <20261127101417.24303-4-gianfranco.mariotti94@gmail.com>
+Subject: [PATCH v2 04/10] drm/msm/dp: reinit video_comp and guard stream state on link maintenance
+Date: Fri, 27 Nov 2026 11:14:11 +0100
+Message-Id: <20261127101417.24303-5-gianfranco.mariotti94@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
 References: <20261127101417.24303-1-gianfranco.mariotti94@gmail.com>
@@ -115,99 +115,55 @@ Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-Commit ca16db3d18cf ("drm/msm/dp: break up dp_display_enable into two
-parts") introduced two regressions on DisplayPort re-plug:
+msm_dp_ctrl_link_maintenance() waits on ctrl->video_comp without
+reinitializing it first, causing msm_dp_ctrl_wait4video_ready() to
+consume a stale completion left over from initial stream bring-up.
 
-1. msm_dp_display_prepare_link() called msm_dp_ctrl_on_link() on every
-   prepare (even when power_on was already true) and unconditionally set
-   force_link_train = true when !power_on, causing
-   msm_dp_ctrl_prepare_stream_on() to immediately re-run link training a
-   second time right after msm_dp_ctrl_on_link() succeeded. Only call
-   msm_dp_ctrl_on_link() when !power_on, and pass force_link_train =
-   false to msm_dp_ctrl_prepare_stream_on() so it only retrains if
-   channel equalization was lost.
+In addition, if link maintenance runs while no video stream pixel clock
+is active (for example in the window between msm_dp_display_prepare_link()
+and msm_dp_ctrl_on_stream()):
+- Driving DP_STATE_CTRL_PUSH_IDLE via msm_dp_ctrl_push_idle() without an
+  active stream times out waiting for idle_comp.
+- Clearing DP_TRAINING_PATTERN_SET while REG_DP_STATE_CTRL has not yet
+  transitioned to DP_STATE_CTRL_SEND_VIDEO re-enables the sink
+  descrambler against unscrambled TPS symbols, and waiting for video
+  ready cannot succeed.
 
-2. Splitting msm_dp_ctrl_on_stream() left
-   msm_dp_ctrl_clear_training_pattern() in
-   msm_dp_ctrl_prepare_stream_on(), clearing DP_TRAINING_PATTERN_SET
-   (DPCD 0x102 = 0x00, which re-enables the sink descrambler) ~45 ms
-   before msm_dp_ctrl_on_stream() enables the pixel clock, programs the
-   TU, and switches REG_DP_STATE_CTRL to DP_STATE_CTRL_SEND_VIDEO.
-   During that window the DPTX remains in MR_LINK_TRAINING2 transmitting
-   unscrambled TPS symbols, causing SST monitors to lose symbol lock.
+Guard msm_dp_ctrl_push_idle() on ctrl->stream_clks_on, reinitialize
+ctrl->video_comp before retraining, and return early after
+msm_dp_ctrl_setup_main_link() when the stream pixel clock is off so the
+training pattern stays active until msm_dp_ctrl_on_stream() enables
+video.
 
-Move msm_dp_ctrl_clear_training_pattern() back into
-msm_dp_ctrl_on_stream() immediately before DP_STATE_CTRL_SEND_VIDEO.
-
-Fixes: ca16db3d18cf ("drm/msm/dp: break up dp_display_enable into two parts")
-Tested-by: Jens Glathe <jens.glathe@oldschoolsolutions.biz> # x1p42100-lenovo-ideacentre-mini
+Fixes: 8ede2ecc3e5e ("drm/msm/dp: Add DP compliance tests on Snapdragon Chipsets")
 Signed-off-by: Gianfranco Mariotti <gianfranco.mariotti94@gmail.com>
 ---
- drivers/gpu/drm/msm/dp/dp_ctrl.c    |  6 +++---
- drivers/gpu/drm/msm/dp/dp_display.c | 16 +++++++---------
- 2 files changed, 10 insertions(+), 12 deletions(-)
+ drivers/gpu/drm/msm/dp/dp_ctrl.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/gpu/drm/msm/dp/dp_ctrl.c b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-index b896196cf244..779f743f9418 100644
+index 779f743f9418..7201b7b513a3 100644
 --- a/drivers/gpu/drm/msm/dp/dp_ctrl.c
 +++ b/drivers/gpu/drm/msm/dp/dp_ctrl.c
-@@ -2616,9 +2616,6 @@ int msm_dp_ctrl_prepare_stream_on(struct msm_dp_ctrl *msm_dp_ctrl,
- 	if (force_link_train || !msm_dp_ctrl_channel_eq_ok(ctrl))
- 		msm_dp_ctrl_link_retrain(ctrl, panel);
+@@ -2089,13 +2089,16 @@ static int msm_dp_ctrl_link_maintenance(struct msm_dp_ctrl_private *ctrl,
+ 	int ret = 0;
+ 	int training_step = DP_TRAINING_NONE;
  
--	/* stop txing train pattern to end link training */
--	msm_dp_ctrl_clear_training_pattern(ctrl, panel, DP_PHY_DPRX);
--
- 	return ret;
- }
+-	msm_dp_ctrl_push_idle(&ctrl->msm_dp_ctrl);
++	if (ctrl->stream_clks_on[panel->stream_id])
++		msm_dp_ctrl_push_idle(&ctrl->msm_dp_ctrl);
  
-@@ -2663,6 +2660,9 @@ int msm_dp_ctrl_on_stream(struct msm_dp_ctrl *msm_dp_ctrl, struct msm_dp_panel *
+ 	ctrl->link->phy_params.p_level = 0;
+ 	ctrl->link->phy_params.v_level = 0;
  
- 	msm_dp_ctrl_setup_tr_unit(ctrl, panel);
- 
-+	/* stop txing train pattern to end link training */
-+	msm_dp_ctrl_clear_training_pattern(ctrl, panel, DP_PHY_DPRX);
++	reinit_completion(&ctrl->video_comp);
 +
- 	msm_dp_write_link(ctrl, REG_DP_STATE_CTRL, DP_STATE_CTRL_SEND_VIDEO);
+ 	ret = msm_dp_ctrl_setup_main_link(ctrl, panel, &training_step);
+-	if (ret)
++	if (ret || !ctrl->stream_clks_on[panel->stream_id])
+ 		goto end;
  
- 	ret = msm_dp_ctrl_wait4video_ready(ctrl);
-diff --git a/drivers/gpu/drm/msm/dp/dp_display.c b/drivers/gpu/drm/msm/dp/dp_display.c
-index bce641d7d893..b8373740275b 100644
---- a/drivers/gpu/drm/msm/dp/dp_display.c
-+++ b/drivers/gpu/drm/msm/dp/dp_display.c
-@@ -632,7 +632,6 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- {
- 	struct msm_dp *msm_dp_display = &dp->msm_dp_display;
- 	int rc = 0;
--	bool force_link_train = false;
- 
- 	drm_dbg_dp(dp->drm_dev, "sink_count=%d\n", dp->link->sink_count);
- 
-@@ -650,17 +649,16 @@ static int msm_dp_display_prepare_link(struct msm_dp_display_private *dp)
- 
- 	if (!msm_dp_display->power_on) {
- 		msm_dp_display_host_phy_init(dp);
--		force_link_train = true;
--	}
- 
--	rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
--	if (rc) {
--		DRM_ERROR("Failed link training (rc=%d)\n", rc);
--		// TODO: schedule drm_connector_set_link_status_property()
--		return rc;
-+		rc = msm_dp_ctrl_on_link(dp->ctrl, dp->panel);
-+		if (rc) {
-+			DRM_ERROR("Failed link training (rc=%d)\n", rc);
-+			/* TODO: schedule drm_connector_set_link_status_property() */
-+			return rc;
-+		}
- 	}
- 
--	return msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel, force_link_train);
-+	return msm_dp_ctrl_prepare_stream_on(dp->ctrl, dp->panel, false);
- }
- 
- static int msm_dp_display_enable(struct msm_dp_display_private *dp,
+ 	msm_dp_ctrl_clear_training_pattern(ctrl, panel, DP_PHY_DPRX);
 -- 
 2.25.1
 
