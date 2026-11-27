@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795811201;
-	b=aSvpOrOkRSzqBMyfmztVfgBCz10A5w3RbPtCZLkB/TgrXzGeJknstEc/R6dRtubsM9H2
-	 u7MrsQBlp67SQFdmYwGDiuN71g5GFLM8YY2a8Ma3eflzADO0RJtGIvaFxCtRc1tU+gZ0g
-	 0+46aJcwbOhK7O+O8X81fgtmNQhgIMOXhc7z5/VRhb6hmt3PVOYyYd+oR+en2DJ8Ikq5F
-	 LfV/PnWJ1gRw6n0ldxb0HB0HuGT/VFx1LdUmPrXHWRBW241+dcy94gBZKfs4hBlmeFxjc
-	 m4GNyocP42L83EL9c1o32JTc04RKM6TqgmqfwcjVHvjPZgHC8LCFo1UGW5vYP3IC+7A==
+	t=1795811199;
+	b=KL+5UdteCxRy6cpiQY0hWbHzOQfHKW8WlKb1+ckfpM6j0+Pcd6c01L4U8Pd1EDxUXB1w
+	 pIv5FTGfLPRPknYnM+x555LvNEtj+BCiCRtrYYfsbGQ/BWPCHaYJ9/o1CDacb7tQ/RkU3
+	 B8e6iT2ikqHSCffah55/XjMFlw/DTl9pBlp8X25Ldfj0WPcEGMgWIlhQYEgmaVTiTrdRC
+	 CQza13PvP7Zu/2Y1OQBOaROpqQ7k04WChoBnLABmYXSu+CK/Fa4iNqj2eJO1AIPMsognr
+	 m0IBVduhgrj0U5g8oZM3X1BPLshjjSRkSp+o85Vj5Hj8HvcihjYKrQcGA2eLwqWjosA==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795811201;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795811199;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=3l0a8dPgLt9arh9f1HV/W6Nn3zd029azUiMXffOcMqQ=;
-	b=CFGhaVWSc9JHJDTmN0/RxmKjSOSXkuIRS5a9c9OSeLdVtvV/Y3qszqyIY7lwMMXpTyKI
-	 jUa2JpK1rp2VkuvgE9A0yfnvMueY8xwP0g5e4jn3gEJ8TqH0fSzDgZlAX5ZCN/U1Dmlzl
-	 ykjAGT2+VRZWCniDWXmC4Zu/j7frOvtrHcO61bCtiGtpIT9yFNpYba80W7Qth4K+tT2Pm
-	 bi2J9ur6fbMFWxxxv3nipFITL2NSfGzIg5KlHvbc6ve+GxDWIU2T76vTGbT1FCTQ20bAG
-	 NwI//clSlkEcJKc6d5ql9Ug4uIeRocLjZugX4wf0IZnEoWh5XEoGksyr4rcj+2ZUeiA==
+	bh=ly8M7WDe9raewO79Xxx2tl2wk76vWEwlI68RasMjz+k=;
+	b=ZWe44hOKiLb2d5Mx6E0NWNut0F95ITnN+EG1XSfbEzquSlZDLu2nP5yWrqHyNsVE5xet
+	 BU9fIKNt1PUOfU4NJrKIIe/r8M8Oas9Ke43xj+N7VpRX6Vs2rlpMR3A3pR+gQE0pVDxL1
+	 1WBam/DclS3v0PzAzwG3OKi3ktkJwUlx0h9WLGUnzZROa88MmF3citekeF9jKOSEqLgoM
+	 g6IaH2ZzDXJ8+uEqYAL21h+2E8cfq9lMzP9eNpAVgd/PAKl//tN9sQSuTmL3W47PGEyHW
+	 bKYLh1Ssqv4PxvG4/kQACcWnejloH1zuMP8LKHJtJNlFcflX5RV0JCpawBTjnPUWdPw==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DkKrxuAx;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RHOlVkFf;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B02BD606A330;
-	Fri, 27 Nov 2026 20:26:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C6043606A334;
+	Fri, 27 Nov 2026 20:26:39 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=DkKrxuAx
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=RHOlVkFf
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795811201;
-	b=TbbjrwP12HVqgud35XmaCeP7MPpEkcwpKyGAsInwOxS10PenhsvL0HTwOvHiMDx09IY5
-	 lt4D/fsCM4uNA71BU+1+e4RrJavHmpRenxI+XBq5EaU/sRthgffUMbcemMyNzwxQVqjL+
-	 PcgY04A0nK9LOyfhxrrHvpN1grSGqwAMoYQ/zw7QZ0IXG2FHDOG0K3wKL61jJ1Dze43D/
-	 Qq/rlNdKj+f+nupSaxsFZAa2/2ZyRjN3KOFK/zfUb5a8p+tA+vk8PhW22kUt2/MpXFTuC
-	 OA/KYd0K/vwBKSNH1TkFOd73oyQUU3jing0WbpZ4KgiO4I3kwOoeu1myaOTvOpL2nKg==
+	t=1795811199;
+	b=h2Q4Ls+v2WTmT9JVFS0cToCJCo1vJeU4O8BDmo95fcD8GAe2+Einr1MyYCn4Op/uHDd8
+	 UHq4gGyNxN+pkQAJ1uj9FO3Q5WUj/HEAWwPkYV8oIis9IGnjTbTWfolP0aEL2hadJ67Bc
+	 sdl1sVO2DzgZrKZS+AnDh5DHspB9lkFEOsRJpbcycK+BP9AC9in7xjzvUoHcCMkxzHo2Q
+	 bwEzwk0jZCHz6w4d+yRIgf6YUqfR1fLr4FMcqZZZwPgw04fDa4d4k5v/V700t1tPTHfc9
+	 lDqeDrtrULBg7z0TJ0hTVHZQyd/3R/XGEK9JTwK5KaH+HDLxoMdKDlV+7QUufV2W1dg==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795811201;
+	c=relaxed/relaxed; t=1795811199;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=3l0a8dPgLt9arh9f1HV/W6Nn3zd029azUiMXffOcMqQ=;
-	b=axXiiqjZnW4/4JClQpBpxQ9qwqoKyFeVOkWd4vtN3334lRTC/ndShdmhzk+7xrPoYhju
-	 wzJAA9AlubcUKHvmkX5W/hT2zDrybqiD9dKbh/EpB95lrJ26hlZVrC1S4+AMUqeLXau5V
-	 KJiEVRwu5MZ0ttSN2MxjEdUDP9F/CXywFfExiojwLBM8DyijeOAW6DkJ1MC0xpUJnbYZk
-	 thvoiHy7igUh1/wkUclcxCMUSpj3NuWW3S6fgTmM6uDj8hAob73ANeqvg+x17FQZmrad6
-	 cO3vN2k4UE7WJmFzDrrT5ae3zJEeoXbnzh954ewWylZqROseQ1czpfHcr22mHllO65g==
+	bh=ly8M7WDe9raewO79Xxx2tl2wk76vWEwlI68RasMjz+k=;
+	b=E/r2rKV0Vj/rFTMLhUPk2+fpGnNZ+A1MD1KjVghiuL8vxa1cPqDH4XqhYJzp7eb+bvzb
+	 Uiuk3q5tE/8hZabczcZilmmIJV96eZEQEW21HtHqoAlt3F4o43Hs0hTWsS2WL0UQcqDss
+	 mHcQXL8BEyOgtEnBjGgMszkc00ERXg1Kwy4AYxQfTACSGE4+W/OEDdGEDtKbNcuOdLqu9
+	 8W/oMkkxcuaL1HZTPb/y7X3kN4jx7T3OZyhFGalj7kT1FnFBe1qrKyvlZXQ/KgVPw3EFJ
+	 k/G6sHLiKQkrGmC1fHADbLh2g5HOHzbK9QERkBDbyzRFvJvhnwo65MyfmdQNDlX1Iyg==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 209A31F0089A;
-	Fri, 27 Nov 2026 20:26:25 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id D34081F000C1;
+	Fri, 27 Nov 2026 20:26:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795811201;
-	bh=3l0a8dPgLt9arh9f1HV/W6Nn3zd029azUiMXffOcMqQ=;
+	s=k20260515; t=1795811199;
+	bh=ly8M7WDe9raewO79Xxx2tl2wk76vWEwlI68RasMjz+k=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=DkKrxuAxa42c1P/kcAK/YKWDcr6KMP+ixJ50F7QIpq7dVDgw1obJdS0q9uVNJQfWc
-	 0SOQ12T6E22jEnxOq5taMct9xmN5mywjF9hDpEru/SpYFZspYvHXSuWbbHYZPlFeFQ
-	 cFAhAm7nRaP8w7ax2Z/Gzk41ltSWG8b8hbM3OdQgXws8j+G8Sddn63RiZymaRorYPm
-	 TUSsiq3DFmK2ekbCl8tIzeRasiZ2SKZF/lyPUeDUv3ysqsOL0IGB6K7dA+m1a3CrBF
-	 hKdbQSW08tnFwFORgiD+vHmd58LSefKC47r5nE30qAfsYDx8s9F600hwQZ87JcF/1N
-	 k1g6FAk90jmMQ==
+	b=RHOlVkFfIIMcCikRZcWYVoqMR4DOsYmp6Z4Ku52IWYIUXuHUdgjjtti6Traev3jKY
+	 m2vmRKXuI0Oxa6UhM+ORDLoqqQeCAeqGE5VHyUkvwDF0CX0MP972c+IJHFHsk8+Zsp
+	 uG7SlWk6ahVSe+NPy++9+aG+TazbpM7Oll2ultvYdnwbiRGw3Rp6KyJt+YqgHLKQpD
+	 goJqDsAnLvYQMfapUQ7RSQ3oG6DuvXXJN3bUnIksPKVeM50w47yB3wxRavmEf5STas
+	 VZObVnJq66vfdpucx5D+eZyyJ1wELTmF7LBzq80LdVJNR4CobfuQ4DibV8k06eEAlq
+	 xrWLdJTojw6QQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id A4FF64DDB1;
+	by lkml.kernel.org (Postfix) with ESMTP id 6444E4DDA9;
 	Fri, 27 Nov 2026 20:26:24 +0000 (UTC)
 From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
-Date: Fri, 27 Nov 2026 21:26:27 +0100
-Subject: [PATCH 4/5] media: qcom: camss: vfe-17x: use vfe_buf_done() and
- defer WM enable
+Date: Fri, 27 Nov 2026 21:26:25 +0100
+Subject: [PATCH 2/5] media: qcom: camss: vfe: match numbered vfe_liteN
+ clock names
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261127-camss-titan17x-fixes-v1-4-541ab39e5889@gmail.com>
+Message-Id: <20261127-camss-titan17x-fixes-v1-2-541ab39e5889@gmail.com>
 References: <20261127-camss-titan17x-fixes-v1-0-541ab39e5889@gmail.com>
 In-Reply-To: <20261127-camss-titan17x-fixes-v1-0-541ab39e5889@gmail.com>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
@@ -100,11 +100,11 @@ Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
  linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
  linux-kernel@vger.kernel.org, Robert Ijtsma <robertijtsma@gmail.com>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795811183; l=5143;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795811183; l=3348;
  i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
- bh=QKzdaNX0ejvQy/NzKMFAMcwYp9tSII3/DNvIHJEEzdI=;
- b=pQueruEt74bFFnMxkCvtQ5ueakqF9H0/QMxGkxWE12XedkI4Fw8sSWzhN9jXy2Mqu0TUBqbBn
- 3ceDvy+PlMaC5d9kIHr+CxSyJmLlcMi4tbQ6rBhDHgB3FRPeIaXdeBQ
+ bh=IGn2MissXaSamQTI986UKKW4wZmXGmc2R/DeWGFygtc=;
+ b=JHiBPBmLyW/0sWrdZMUJc4q27EwzjTnxUfMkzGF5dLp8nZigPhOm0vLYYqCk7WGj90Rj5r/Kq
+ AGs0TLVgfz8AeqqKJxz3fcyvxEmMoZJf0HtUYzjZz5y0gKv2Pzfa5d9
 X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
  pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
 X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
@@ -115,139 +115,88 @@ Content-Transfer-Encoding: 7bit
 
 From: Robert Ijtsma <robertijtsma@gmail.com>
 
-camss-vfe-17x keeps a private copy of vfe_buf_done() in
-vfe_isr_wm_done() that skips calling reg_update() after updating the
-write master address, preventing the newly queued buffer address from
-being latched for the next frame.
+On SoCs where VFE-Lite entries follow full VFE entries in vfe_res[]
+(such as SC8280XP), vfe->id starts after the full VFEs while the
+device clocks are named "vfe_lite0", "vfe_lite1", etc. Constructing
+"vfe_lite%d" from vfe->id fails to match those clocks, causing
+vfe_set_clock_rates() and vfe_check_clock_rates() to skip scaling
+VFE-Lite core clocks.
 
-Reuse the shared vfe_buf_done() helper (after validating
-wm_output_map[wm] != VFE_LINE_NONE before indexing vfe->line[]),
-explicitly initialize the write master framedrop and IRQ subsample
-registers to 0/1 in vfe_wm_start(), and defer enabling WM_CFG_EN until
-vfe_wm_update() programs IMAGE_ADDR and FRAME_INC.
+Match any "vfe_lite<N>" clock name when vfe_is_lite(vfe) (without
+matching auxiliary clocks like "vfe_lite_ahb") in
+vfe_match_core_clock_name(), and reuse it from vfe_match_clock_names().
 
-Fixes: 7319cdf189bb ("media: camss: Add support for VFE hardware version Titan 170")
+Fixes: 546e9ba08625 ("media: qcom: camss: clamp VFE clock rates to the highest level")
 Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
 ---
- drivers/media/platform/qcom/camss/camss-vfe-17x.c | 66 +++++------------------
- drivers/media/platform/qcom/camss/camss-vfe.c     |  5 +-
- 2 files changed, 16 insertions(+), 55 deletions(-)
+ drivers/media/platform/qcom/camss/camss-vfe.c | 44 ++++++++++++++-------------
+ 1 file changed, 23 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-vfe-17x.c b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
-index 304dafb39ad5121ade50cf278e0ada53f5e5203e..9aceea8609753fe3a8015c41398bfbc4e769ea9d 100644
---- a/drivers/media/platform/qcom/camss/camss-vfe-17x.c
-+++ b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
-@@ -249,10 +249,14 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
- 	val = WM_STRIDE_DEFAULT_STRIDE;
- 	writel_relaxed(val, vfe->base + VFE_BUS_WM_STRIDE(wm));
- 
--	/* Enable WM */
--	val = 1 << WM_CFG_EN |
--	      MODE_MIPI_RAW << WM_CFG_MODE;
--	writel_relaxed(val, vfe->base + VFE_BUS_WM_CFG(wm));
-+	/* No dropped frames, one IRQ per frame */
-+	writel_relaxed(0, vfe->base + VFE_BUS_WM_FRAMEDROP_PERIOD(wm));
-+	writel_relaxed(1, vfe->base + VFE_BUS_WM_FRAMEDROP_PATTERN(wm));
-+	writel_relaxed(0, vfe->base + VFE_BUS_WM_IRQ_SUBSAMPLE_PERIOD(wm));
-+	writel_relaxed(1, vfe->base + VFE_BUS_WM_IRQ_SUBSAMPLE_PATTERN(wm));
-+
-+	/* Ensure WM configuration completes before buffer enqueue */
-+	wmb();
- }
- 
- static void vfe_wm_stop(struct vfe_device *vfe, u8 wm)
-@@ -270,6 +274,10 @@ static void vfe_wm_update(struct vfe_device *vfe, u8 wm, u32 addr,
- 
- 	writel_relaxed(addr, vfe->base + VFE_BUS_WM_IMAGE_ADDR(wm));
- 	writel_relaxed(stride * pix->height, vfe->base + VFE_BUS_WM_FRAME_INC(wm));
-+	/* Ensure IMAGE_ADDR and FRAME_INC land before enabling WM_CFG */
-+	wmb();
-+	writel_relaxed((1 << WM_CFG_EN) | (MODE_MIPI_RAW << WM_CFG_MODE),
-+		       vfe->base + VFE_BUS_WM_CFG(wm));
- }
- 
- static void vfe_reg_update(struct vfe_device *vfe, enum vfe_line_id line_id)
-@@ -475,55 +483,7 @@ static void vfe_isr_reg_update(struct vfe_device *vfe, enum vfe_line_id line_id)
-  */
- static void vfe_isr_wm_done(struct vfe_device *vfe, u8 wm)
- {
--	struct vfe_line *line = &vfe->line[vfe->wm_output_map[wm]];
--	struct camss_buffer *ready_buf;
--	struct vfe_output *output;
--	unsigned long flags;
--	u32 index;
--	u64 ts = ktime_get_ns();
--
--	spin_lock_irqsave(&vfe->output_lock, flags);
--
--	if (vfe->wm_output_map[wm] == VFE_LINE_NONE) {
--		dev_err_ratelimited(vfe->camss->dev,
--				    "Received wm done for unmapped index\n");
--		goto out_unlock;
--	}
--	output = &vfe->line[vfe->wm_output_map[wm]].output;
--
--	ready_buf = output->buf[0];
--	if (!ready_buf) {
--		dev_err_ratelimited(vfe->camss->dev,
--				    "Missing ready buf %d!\n", output->state);
--		goto out_unlock;
--	}
--
--	ready_buf->vb.vb2_buf.timestamp = ts;
--	if (line->sof_seq)
--		ready_buf->vb.sequence = atomic_read(line->sof_seq);
--	else
--		ready_buf->vb.sequence = output->sequence++;
--
--	index = 0;
--	output->buf[0] = output->buf[1];
--	if (output->buf[0])
--		index = 1;
--
--	output->buf[index] = vfe_buf_get_pending(output);
--
--	if (output->buf[index])
--		vfe_wm_update(vfe, output->wm_idx[0], output->buf[index]->addr[0], line);
--	else
--		output->gen2.active_num--;
--
--	spin_unlock_irqrestore(&vfe->output_lock, flags);
--
--	vb2_buffer_done(&ready_buf->vb.vb2_buf, VB2_BUF_STATE_DONE);
--
--	return;
--
--out_unlock:
--	spin_unlock_irqrestore(&vfe->output_lock, flags);
-+	vfe_buf_done(vfe, wm);
- }
- 
- static const struct vfe_isr_ops vfe_isr_ops_170 = {
 diff --git a/drivers/media/platform/qcom/camss/camss-vfe.c b/drivers/media/platform/qcom/camss/camss-vfe.c
-index b01c7c919de459bdb6581dba81c15a176e551208..71f3731f05f10194e36a5802065fb82f751baa16 100644
+index 0d80e6f12274cbbb3c8f551a573fab2d482309ee..b5a8196c9145163dfa3ee1af549a4684901e2fa7 100644
 --- a/drivers/media/platform/qcom/camss/camss-vfe.c
 +++ b/drivers/media/platform/qcom/camss/camss-vfe.c
-@@ -432,8 +432,8 @@ u32 vfe_hw_version(struct vfe_device *vfe)
-  */
- void vfe_buf_done(struct vfe_device *vfe, int wm)
- {
--	struct vfe_line *line = &vfe->line[vfe->wm_output_map[wm]];
- 	const struct vfe_hw_ops *ops = vfe->res->hw_ops;
-+	struct vfe_line *line;
- 	struct camss_buffer *ready_buf;
- 	struct vfe_output *output;
- 	unsigned long flags;
-@@ -447,7 +447,8 @@ void vfe_buf_done(struct vfe_device *vfe, int wm)
- 				    "Received wm done for unmapped index\n");
- 		goto out_unlock;
- 	}
--	output = &vfe->line[vfe->wm_output_map[wm]].output;
-+	line = &vfe->line[vfe->wm_output_map[wm]];
-+	output = &line->output;
+@@ -886,37 +886,39 @@ int vfe_pm_domain_on(struct vfe_device *vfe)
+ 	return 0;
+ }
  
- 	ready_buf = output->buf[0];
- 	if (!ready_buf) {
+-static int vfe_match_clock_names(struct vfe_device *vfe,
+-				 struct camss_clock *clock)
++static bool vfe_match_core_clock_name(struct vfe_device *vfe,
++				      struct camss_clock *clock)
+ {
+ 	char vfe_name[7]; /* vfeXXX\0 */
+-	char vfe_lite_name[12]; /* vfe_liteXXX\0 */
+-	char vfe_areg_name[12]; /* vfeXXX_areg\0 */
++	unsigned int lite_idx;
+ 
+ 	snprintf(vfe_name, sizeof(vfe_name), "vfe%d", vfe->id);
+-	snprintf(vfe_lite_name, sizeof(vfe_lite_name), "vfe_lite%d", vfe->id);
+-	snprintf(vfe_areg_name, sizeof(vfe_areg_name), "vfe%d_areg", vfe->id);
+ 
+-	return (!strcmp(clock->name, vfe_name) ||
+-		!strcmp(clock->name, vfe_lite_name) ||
+-		!strcmp(clock->name, vfe_areg_name) ||
+-		!strcmp(clock->name, "vfe_lite") ||
+-		!strcmp(clock->name, "camnoc_axi") ||
+-		!strcmp(clock->name, "camnoc_rt_axi"));
++	if (!strcmp(clock->name, vfe_name) || !strcmp(clock->name, "vfe_lite"))
++		return true;
++
++	/*
++	 * VFE-Lite instances follow full VFEs in vfe_res[], so vfe->id does
++	 * not necessarily match the 0-based "vfe_liteN" clock suffix.
++	 */
++	if (vfe_is_lite(vfe) && !strncmp(clock->name, "vfe_lite", 8) &&
++	    !kstrtouint(clock->name + 8, 10, &lite_idx))
++		return true;
++
++	return false;
+ }
+ 
+-static bool vfe_match_core_clock_name(struct vfe_device *vfe,
+-				      struct camss_clock *clock)
++static int vfe_match_clock_names(struct vfe_device *vfe,
++				 struct camss_clock *clock)
+ {
+-	char vfe_name[7]; /* vfeXXX\0 */
+-	char vfe_lite_name[12]; /* vfe_liteXXX\0 */
++	char vfe_areg_name[12]; /* vfeXXX_areg\0 */
+ 
+-	snprintf(vfe_name, sizeof(vfe_name), "vfe%d", vfe->id);
+-	snprintf(vfe_lite_name, sizeof(vfe_lite_name), "vfe_lite%d", vfe->id);
++	snprintf(vfe_areg_name, sizeof(vfe_areg_name), "vfe%d_areg", vfe->id);
+ 
+-	return (!strcmp(clock->name, vfe_name) ||
+-		!strcmp(clock->name, vfe_lite_name) ||
+-		!strcmp(clock->name, "vfe_lite"));
++	return (vfe_match_core_clock_name(vfe, clock) ||
++		!strcmp(clock->name, vfe_areg_name) ||
++		!strcmp(clock->name, "camnoc_axi") ||
++		!strcmp(clock->name, "camnoc_rt_axi"));
+ }
+ 
+ /*
 
 -- 
 2.47.3
