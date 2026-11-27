@@ -1,79 +1,79 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 ARC-Seal: i=2; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=pass;
-	t=1795811196;
-	b=G0OxhBJ34821YxO3Qe6LW9+IZTGcC2gxWk2ewLr4+8Y/84mRswPED0cfXh/pNz5Ub6CR
-	 D2CU2v+OvuFQrMgmHH0IaHVPFvHMaMgdbE1WwvLvgUbUQbg462ik49di+yy/pPNnGGxXf
-	 imowKZIl8eM6Ci+eRKdj0KnW04L7eNyO8B7Hd+0anqwxUxdyMXO6ODVEo9PkVSCKDE/GB
-	 BEKG2YRM/gSuHuMsA6gaDWC+8hOSyvBvlMWw2LmdJhlRGK6u33fff4SL6SU+YmowZ4ZB6
-	 5JQKmcgVrHen/zxKmAmfbd1/1SECBnw9HucjIaHkFR5xGqVi4EiGmyJmnOEnKk/Zwbg==
+	t=1795811194;
+	b=1NqougLIu9wtjbCXCZOczjcbFQyptPF7EDiUZWvhyF3TKxqURr2U0evhbOebW56cgTBO
+	 ZALX7SmWRxAQN0yujOMwCOWUVeMt5ksEuCKgX6BHYGRtlpll8KQ/yVsluDh8LPZdaJgIr
+	 X0AlYCk1PU6zuxqTq6wEzfW7Bz4QZncBw7NpQqcdDuMD0zNuNfCJwLotZYkEpEp3mgu1l
+	 HpSodXxa0cIDfS52oqTWiFqJT1pFd9mBItXH84khBE7jKfj1tkWZPwLLUdvFq5kISswbR
+	 g4pA6NQTM+dzBB/21DJHxoV+fsPd5ZYVP7Mf+fXMj7APeYyRC+6jcjLqHfDIZMJNMOQ==
 ARC-Message-Signature: i=2; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795811196;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795811194;
 	h=Received:DKIM-Signature:Received:From:Date:Subject:MIME-Version:
 	 Content-Type:Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=ZCZWqQ0lMucwJhS0m4gbpolmUfSCKEbqX9zkZqGK+Jc=;
-	b=a2jPuUyGhTB6uUZtVNJ8Prm4n0O0bMrYBHzG9WBVg40OVZsQBj89mlJS1HT1kxSslKAt
-	 24mlo30vOVpBCq8iSdGMWriLxe24G1HfrDuusRu6o6z8G4fy/2oQ+utNKPS4/2Xv2iyU2
-	 ndzFTN37x8tdrL0biLP4d8NFf6zuIo819JqOuAqKAYRznXMCENd6EkoGv1kcdgk24ICNa
-	 11Hyx9Gq5ZWmkfmxlFeytuBHd4WBMiMh3HdsWcPJDJX0MRgMbokqZWz5fC4uyZsI9oT5D
-	 aJf3BmlDw64fZQpGi/R4Cbsqn+/0MObs4VdCwcBsNUlkdK02uYSzhwoIxsEEDs3jmzA==
+	bh=3TPqzwt0V/lnHcficPJAMhV5XdhUA2vaUdjT2YpenhI=;
+	b=fPOu+w/SpWd8sGhAlaftfWm3BMR6zq2ooUx6H6+snswRxFX1KNp0ER/A67KMml8pIvRf
+	 wlcf+0nvl23adrRyYHP3ykcEHATA4gw9VH9bu+IEobYdzq68Ik7BoTB22vN+q3hatx605
+	 JrQMpw6rwleQj7cgiU//QfVxdPl9Dd4V2xuexK4y2OPkyP4X/HAb2iaNB7ZtQe0NCe77P
+	 RE1s9mdkYuGjE708//BTldVzMCkerYcSmBI2kgdF7TvtTvS8ICpijlcntSxR/OGvWPNx5
+	 Dhe65gW8RSyfI6HFzh1BlXM7p/yVaNHI+rO737HYOvfwV8spmyNoP/YNAOiPSLaH1+Q==
 ARC-Authentication-Results: i=2; smtp.subspace.kernel.org; 
-	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XkcRGPVE;
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CjTeyOAN;
 	arc=pass header.oldest-pass=0 smtp.remote-ip=100.103.45.18
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F1D7606A321;
-	Fri, 27 Nov 2026 20:26:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4987E606A31E;
+	Fri, 27 Nov 2026 20:26:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=XkcRGPVE
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=CjTeyOAN
 Authentication-Results: smtp.kernel.org; arc=none smtp.remote-ip=100.80.115.77
 ARC-Seal: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256; cv=none;
-	t=1795811196;
-	b=qOfjnYItppYCun3laWtuSXoXrHrbEKOkMR/C9CqT5lrREPIGFc3qDhXbpZAWDwgkk357
-	 IHhs+tYtAw3bmEKs3RyavfpYRFvpnXvp4FU8iG6WeoGc+e7NcufjwxmSKLvkhSuIEA9TB
-	 E0CmcKyCF/3/+oQ/19fa91pUmFCwLYTCJQDbHoffBjhccqaB6w6oc5V6kipfCaDeOsdb+
-	 Y6UfP//JRS1V3v8ek58vZUSJJblCW6lsQ2wpA38v15qg+sHpe2zI1dq34OeVSHIaKGg2E
-	 ATxUVw8OgcNCWSzYPyLS5im+PuUa6VJ/BRbbsTfVsbmSmeWFxA86IVGSMZXG7CQiMVg==
+	t=1795811193;
+	b=VVjFe3gr6jXX5idxWMBXpgXwHIFfUPygkFnxxthzI4hPQkBPIyMzEPKuHx5qWJMuFV7R
+	 KTFTOMUJbcqupnvFae6FTBdyCpv6n0ZgC/RCopAW/L0uNdWJG7a3sP8hCkrVMs6GkjU3D
+	 pTfQZk+KzfVngjvfze1VItyqOb+H35FrMP8y2qG2WeAb1fEoLG1upydfikiIdRx/zhXFd
+	 H7eME6fWiqFiWkzLO2yoONUrLPGfiGWYfBLTF2LNz2qdNvRCmtUfMypK70t5CFtPwqeUi
+	 n8Bjplmr09NhnjqAWkuo3CnhVU4wzg9g+lP8TyXWbVARe3e0151Pl9luGzr40pSYQjA==
 ARC-Message-Signature: i=1; d=kernel.org; s=arc20260519; a=rsa-sha256;
-	c=relaxed/relaxed; t=1795811196;
+	c=relaxed/relaxed; t=1795811193;
 	h=DKIM-Signature:Received:From:Date:Subject:MIME-Version:Content-Type:
 	 Message-Id:References:In-Reply-To:To:Cc:X-Mailer:
 	 X-Developer-Signature:X-Developer-Key:X-Endpoint-Received:
 	 X-Original-From:Reply-To:Content-Transfer-Encoding;
-	bh=ZCZWqQ0lMucwJhS0m4gbpolmUfSCKEbqX9zkZqGK+Jc=;
-	b=try/UCSagwdDNNevlookGSDdS4b/r719MhvYk/hao2dauvsREzUZmCIdS6c88SLdYf/m
-	 DWLH5Rzhl6K3I1hApRzObAhJLZPVoobydbQQL4+Xuzr3eIWPPwyRVKCpKBtffhsB66iGg
-	 TaFu6HNJ6oKjqNqZOQzbWBDh5tKuFPTMYTfQEjjty9jkZXR/zcGlPK4fEiGASjs/1aCeX
-	 1UJJW1cbApOfNQebqB01K/z3UDxTWQ7AXTMved3uJZKaamU4hU88zIbcDfWS2DhBhUbxZ
-	 soed73j8w4u7CXdNXtaq1FRVi229xg7G9+Q/iJQqQP4ZtMEzzAj635x1e12QkibX6sQ==
+	bh=3TPqzwt0V/lnHcficPJAMhV5XdhUA2vaUdjT2YpenhI=;
+	b=hFO6Ak3FDLuJllUCVU7SG1OF7KOzuCXgl3fcVgAh9HvkzctxmJd+m8MLgNDBivq2JHVo
+	 LuPuhgX40xYcVoI9ZAAywNaJyCyhqP3+SevrpKC1ICZPjdNLyvPJOyG/3/jVA2nWxwgZR
+	 BS290RIj1BozL6BSV2ZcQy1Va98O//tYYiaCavcYJMxj2yWkNklal7gEhtaKnsPRW/QDF
+	 glXleNNbD0eDnp1FvzGonb8jSpvFmp0oZbnyYy50FGrLmKKX4DS/0ty8cfzINrLR8OaE4
+	 bkpyKihpvL73to7mZyb/oJfWyjUMaNHrT0Jb/9fkhGaXOwPALoScmCZSmuuN6HNN9tQ==
 ARC-Authentication-Results: i=1; smtp.kernel.org; 
 	arc=none smtp.remote-ip=100.80.115.77
 Received: from lkml.kernel.org (nexus.subspace.kernel.org [100.80.115.77])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.kernel.org (Postfix) with ESMTPS id 7735A1F00925;
-	Fri, 27 Nov 2026 20:26:30 +0000 (UTC)
+	by smtp.kernel.org (Postfix) with ESMTPS id ABE5B1F00893;
+	Fri, 27 Nov 2026 20:26:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1795811196;
-	bh=ZCZWqQ0lMucwJhS0m4gbpolmUfSCKEbqX9zkZqGK+Jc=;
+	s=k20260515; t=1795811193;
+	bh=3TPqzwt0V/lnHcficPJAMhV5XdhUA2vaUdjT2YpenhI=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To;
-	b=XkcRGPVEO7G9VYtpReCrvAsSfuvMg2Q6AlpbQZPB2yZYzAGgglJqYJuUoB5U++MYx
-	 cJGK+8NnwM2Wsy5rvN9cwCztht/CvmNivWrS5fCRcnSwtXd7+PWfbRJ91WFQbJQxqv
-	 /3wWAee0YjrAcQNrb8sODHQ0V8qwFUzcYH/hveXMMyTXPq2cQLfu7dkBfylY825e2G
-	 eCO59sLgwzZuI4MvGw2CQqN3AMhsJ0lV60UztxzGnmj2sAM0VsEnA8Rfs5D1ARZ9bq
-	 spL0efWFg+x8NaNdv/ZzeEYmTcQntThpqO0gEN7/1Dd9YS2Tp9YGi6IbRTBxh8TM3I
-	 fkqfJAMG0JAHA==
+	b=CjTeyOAN0dOT8l/4nLzwmhe9NNoD9Qf8UtaP7+ua98X3s8pWNakUMzL7PDNS8AY3R
+	 SyFOy3uFVyGgMY91vsVoc6Zk2lfK8WCurTcmsWwZTcWtHPqFr4ngENbbTHB3knv4RL
+	 w6u5phELtfCrRV/VXqpg+NZ1/RT1y81x5Jav34e7hy1prPtjcKt+Ud/tMnCmWc3nRA
+	 +XWT8IZDEPLJNDypc6u7OqGjNKdQOjScIPmmjTzYFFUhLS1xR4AZg9yd1zlKHoqG/v
+	 qS3mT345NSZdHHbVkFygzfFrY/tlSE3Y3bBfuwBtL4ZjlKU2tnOzSDMAdXavN0E5pq
+	 1pCZDbOSGVZTQ==
 Received: from nexus.subspace.kernel.org (localhost [IPv6:::1])
-	by lkml.kernel.org (Postfix) with ESMTP id C8E2E4DDB5;
+	by lkml.kernel.org (Postfix) with ESMTP id 3D1F74DD84;
 	Fri, 27 Nov 2026 20:26:24 +0000 (UTC)
 From: Robert Ijtsma via B4 Relay <devnull+robertijtsma.gmail.com@kernel.org>
-Date: Fri, 27 Nov 2026 21:26:28 +0100
-Subject: [PATCH 5/5] media: qcom: camss: csid-gen2: support plain 16-bit
- LSB RAW10 formats
+Date: Fri, 27 Nov 2026 21:26:24 +0100
+Subject: [PATCH 1/5] media: qcom: camss: vfe-17x: fix VFE-Lite reset,
+ debug, and bus IRQ handling
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -84,7 +84,7 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Message-Id: <20261127-camss-titan17x-fixes-v1-5-541ab39e5889@gmail.com>
+Message-Id: <20261127-camss-titan17x-fixes-v1-1-541ab39e5889@gmail.com>
 References: <20261127-camss-titan17x-fixes-v1-0-541ab39e5889@gmail.com>
 In-Reply-To: <20261127-camss-titan17x-fixes-v1-0-541ab39e5889@gmail.com>
 To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>, 
@@ -98,13 +98,14 @@ To: Bryan O'Donoghue <bryan.odonoghue@linaro.org>,
  Gjorgji Rosikopulos <quic_grosikop@quicinc.com>
 Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
  linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org, 
- linux-kernel@vger.kernel.org, Robert Ijtsma <robertijtsma@gmail.com>
+ linux-kernel@vger.kernel.org, Robert Ijtsma <robertijtsma@gmail.com>, 
+ stable@vger.kernel.org
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1795811183; l=2857;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1795811183; l=4436;
  i=robertijtsma@gmail.com; s=20261122; h=from:subject:message-id;
- bh=OWlbMqX8jFwDrOqApkzGhlVoUAPe5r3DiPbb52QR850=;
- b=hBozxEXAM7jf3vqt18NhHBdNwpzBWbqrHNSqcNsEdz+Zj443e+itwIY77vkCP21gWeHygp5Qm
- lBNSbo/njsODp8xkh0d0pjBkMlfEnRULe2CEPBHmAnZ88i8Z4rX3ik1
+ bh=slCIoW8m+WuCtOrrO1UwNBrEMbQUo6Idymd4H2UtdxU=;
+ b=mQQOZQs7cEzHmU9BAbADjuQLqPqZn/K3vrt6TffVHzZYl34A39Lc8ATvYO8p4ibECaF3bHEfJ
+ Hl2sQTRHUB9CVgtIqO8+Pg2wpQbt49L8SEFJg+U2jgcf2P3BQwr9xbu
 X-Developer-Key: i=robertijtsma@gmail.com; a=ed25519;
  pk=qiDyKVqFicxFIR5sB5m+p9SWPKL2/+mMoiQnUx0C9P0=
 X-Endpoint-Received: by B4 Relay for robertijtsma@gmail.com/20261122 with
@@ -115,70 +116,108 @@ Content-Transfer-Encoding: 7bit
 
 From: Robert Ijtsma <robertijtsma@gmail.com>
 
-csid_src_pad_code() and vfe_formats_rdi_845 already expose
-MEDIA_BUS_FMT_SBGGR10_2X8_PADHI_LE and MEDIA_BUS_FMT_Y10_2X8_PADHI_LE
-for unpacked 16-bit RAW10 capture, but formats_gen2[] omitted both
-codes and __csid_configure_rdi_stream() unconditionally configured
-DECODE_FORMAT_PAYLOAD_ONLY.
+Titan 17x VFE-Lite instances differ from the full VFE in several
+registers and bus master counts:
 
-Add both PADHI_LE formats to formats_gen2[] and configure
-DECODE_FORMAT_UNCOMPRESSED_10_BIT with PLAIN_FORMAT_PLAIN16 and
-PLAIN_ALIGNMENT_LSB in __csid_configure_rdi_stream() when selected.
+- VFE-Lite does not implement CAMIF, bus bridge, testgen, or DSP blocks;
+  omit those bits from vfe_global_reset() when vfe_is_lite(vfe).
+- VFE-Lite lacks VFE_BUS_WM_DEBUG_STATUS_CFG (0x226c); guard writes to
+  it behind !vfe_is_lite(vfe).
+- VFE-Lite only has 4 write master clients rather than 24; program the
+  4-client WM_ADDR_NO_SYNC_LITE_VAL mask into
+  VFE_BUS_WM_ADDR_SYNC_NO_SYNC.
+- VFE_BUS_IRQ_STATUS(n) and VFE_BUS_IRQ_CLEAR(n) consist of 3 bus IRQ
+  registers (0..2), not vfe->res->line_num. On 4-line VFEs, iterating to
+  line_num reads/writes offset 0x2068 (VFE_BUS_IRQ_CLEAR_GLOBAL), and on
+  VFEs with fewer than 2 lines vfe_bus_status[1] would be left
+  uninitialized. Iterate over the 3 bus IRQ registers instead.
 
-Fixes: 729fc005c8e2 ("media: qcom: camss: Split testgen, RDI and RX for CSID 170")
+Fixes: 7319cdf189bb ("media: camss: Add support for VFE hardware version Titan 170")
+Cc: stable@vger.kernel.org
 Signed-off-by: Robert Ijtsma <robertijtsma@gmail.com>
 ---
- drivers/media/platform/qcom/camss/camss-csid-gen2.c | 11 +++++++++--
- drivers/media/platform/qcom/camss/camss-csid.c      | 14 ++++++++++++++
- 2 files changed, 23 insertions(+), 2 deletions(-)
+ drivers/media/platform/qcom/camss/camss-vfe-17x.c | 30 ++++++++++++++---------
+ 1 file changed, 19 insertions(+), 11 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/camss/camss-csid-gen2.c b/drivers/media/platform/qcom/camss/camss-csid-gen2.c
-index 44c6c214f50be13dfbb8ba5d9e2e16964ded9ef6..de9e2a3191448c617a4c732edbba346bf9eb5673 100644
---- a/drivers/media/platform/qcom/camss/camss-csid-gen2.c
-+++ b/drivers/media/platform/qcom/camss/camss-csid-gen2.c
-@@ -282,8 +282,15 @@ static void __csid_configure_rdi_stream(struct csid_device *csid, bool enable,
- 	val = 1 << RDI_CFG0_BYTE_CNTR_EN;
- 	val |= 1 << RDI_CFG0_FORMAT_MEASURE_EN;
- 	val |= 1 << RDI_CFG0_TIMESTAMP_EN;
--	/* note: for non-RDI path, this should be format->decode_format */
--	val |= DECODE_FORMAT_PAYLOAD_ONLY << RDI_CFG0_DECODE_FORMAT;
-+	if (input_format->code == MEDIA_BUS_FMT_SBGGR10_2X8_PADHI_LE ||
-+	    input_format->code == MEDIA_BUS_FMT_Y10_2X8_PADHI_LE) {
-+		val |= format->decode_format << RDI_CFG0_DECODE_FORMAT;
-+		val |= PLAIN_FORMAT_PLAIN16 << RDI_CFG0_PLAIN_FORMAT;
-+		val |= PLAIN_ALIGNMENT_LSB << RDI_CFG0_PLAIN_ALIGNMENT;
-+	} else {
-+		/* note: for non-RDI path, this should be format->decode_format */
-+		val |= DECODE_FORMAT_PAYLOAD_ONLY << RDI_CFG0_DECODE_FORMAT;
+diff --git a/drivers/media/platform/qcom/camss/camss-vfe-17x.c b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
+index 9606236046629c2210740d829bbf5f55cbc09f1a..304dafb39ad5121ade50cf278e0ada53f5e5203e 100644
+--- a/drivers/media/platform/qcom/camss/camss-vfe-17x.c
++++ b/drivers/media/platform/qcom/camss/camss-vfe-17x.c
+@@ -137,9 +137,12 @@
+ #define VFE_BUS_WM_ADDR_SYNC_FRAME_HEADER	(0x2080)
+ 
+ #define VFE_BUS_WM_ADDR_SYNC_NO_SYNC		(0x2084)
+-#define		BUS_VER2_MAX_CLIENTS (24)
++#define		BUS_VER2_MAX_CLIENTS		(24)
++#define		BUS_VER2_LITE_MAX_CLIENTS	(4)
+ #define		WM_ADDR_NO_SYNC_DEFAULT_VAL \
+ 				((1 << BUS_VER2_MAX_CLIENTS) - 1)
++#define		WM_ADDR_NO_SYNC_LITE_VAL \
++				((1 << BUS_VER2_LITE_MAX_CLIENTS) - 1)
+ 
+ #define VFE_BUS_WM_CGC_OVERRIDE			(0x200c)
+ #define		WM_CGC_OVERRIDE_ALL		(0xFFFFF)
+@@ -184,18 +187,20 @@ static inline void vfe_reg_set(struct vfe_device *vfe, u32 reg, u32 set_bits)
+ static void vfe_global_reset(struct vfe_device *vfe)
+ {
+ 	u32 reset_bits = GLOBAL_RESET_CMD_CORE		|
+-			 GLOBAL_RESET_CMD_CAMIF		|
+ 			 GLOBAL_RESET_CMD_BUS		|
+-			 GLOBAL_RESET_CMD_BUS_BDG	|
+ 			 GLOBAL_RESET_CMD_REGISTER	|
+-			 GLOBAL_RESET_CMD_TESTGEN	|
+-			 GLOBAL_RESET_CMD_DSP		|
+ 			 GLOBAL_RESET_CMD_IDLE_CGC	|
+ 			 GLOBAL_RESET_CMD_RDI0		|
+ 			 GLOBAL_RESET_CMD_RDI1		|
+ 			 GLOBAL_RESET_CMD_RDI2		|
+ 			 GLOBAL_RESET_CMD_RDI3;
+ 
++	if (!vfe_is_lite(vfe))
++		reset_bits |= GLOBAL_RESET_CMD_CAMIF	|
++			      GLOBAL_RESET_CMD_BUS_BDG	|
++			      GLOBAL_RESET_CMD_TESTGEN	|
++			      GLOBAL_RESET_CMD_DSP;
++
+ 	writel_relaxed(BIT(31), vfe->base + VFE_IRQ_MASK_0);
+ 
+ 	/* Make sure IRQ mask has been written before resetting */
+@@ -208,10 +213,12 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
+ {
+ 	u32 val;
+ 
+-	/*Set Debug Registers*/
+-	val = DEBUG_STATUS_CFG_STATUS0(1) |
+-	      DEBUG_STATUS_CFG_STATUS0(7);
+-	writel_relaxed(val, vfe->base + VFE_BUS_WM_DEBUG_STATUS_CFG);
++	/* Set Debug Registers (Full VFE only; VFE Lite lacks 0x226c) */
++	if (!vfe_is_lite(vfe)) {
++		val = DEBUG_STATUS_CFG_STATUS0(1) |
++		      DEBUG_STATUS_CFG_STATUS0(7);
++		writel_relaxed(val, vfe->base + VFE_BUS_WM_DEBUG_STATUS_CFG);
 +	}
- 	val |= format->data_type << RDI_CFG0_DATA_TYPE;
- 	val |= vc << RDI_CFG0_VIRTUAL_CHANNEL;
- 	val |= dt_id << RDI_CFG0_DT_ID;
-diff --git a/drivers/media/platform/qcom/camss/camss-csid.c b/drivers/media/platform/qcom/camss/camss-csid.c
-index 123c097ee54bfdcafbba02a6c01f51c545bf472e..12ffa438284806bc37fd150ca0e4c74d0706d2d1 100644
---- a/drivers/media/platform/qcom/camss/camss-csid.c
-+++ b/drivers/media/platform/qcom/camss/camss-csid.c
-@@ -424,6 +424,20 @@ static const struct csid_format_info formats_gen2[] = {
- 		10,
- 		1,
- 	},
-+	{
-+		MEDIA_BUS_FMT_Y10_2X8_PADHI_LE,
-+		MIPI_CSI2_DT_RAW10,
-+		DECODE_FORMAT_UNCOMPRESSED_10_BIT,
-+		16,
-+		1,
-+	},
-+	{
-+		MEDIA_BUS_FMT_SBGGR10_2X8_PADHI_LE,
-+		MIPI_CSI2_DT_RAW10,
-+		DECODE_FORMAT_UNCOMPRESSED_10_BIT,
-+		16,
-+		1,
-+	},
- 	{
- 		MEDIA_BUS_FMT_SBGGR12_1X12,
- 		MIPI_CSI2_DT_RAW12,
+ 
+ 	/* BUS_WM_INPUT_IF_ADDR_SYNC_FRAME_HEADER */
+ 	writel_relaxed(0, vfe->base + VFE_BUS_WM_ADDR_SYNC_FRAME_HEADER);
+@@ -223,7 +230,8 @@ static void vfe_wm_start(struct vfe_device *vfe, u8 wm, struct vfe_line *line)
+ 	writel_relaxed(0x0, vfe->base + VFE_BUS_WM_TEST_BUS_CTRL);
+ 
+ 	/* if addr_no_sync has default value then config the addr no sync reg */
+-	val = WM_ADDR_NO_SYNC_DEFAULT_VAL;
++	val = vfe_is_lite(vfe) ? WM_ADDR_NO_SYNC_LITE_VAL :
++				 WM_ADDR_NO_SYNC_DEFAULT_VAL;
+ 	writel_relaxed(val, vfe->base + VFE_BUS_WM_ADDR_SYNC_NO_SYNC);
+ 
+ 	writel_relaxed(0xf, vfe->base + VFE_BUS_WM_BURST_LIMIT(wm));
+@@ -337,7 +345,7 @@ static irqreturn_t vfe_isr(int irq, void *dev)
+ 	writel_relaxed(status0, vfe->base + VFE_IRQ_CLEAR_0);
+ 	writel_relaxed(status1, vfe->base + VFE_IRQ_CLEAR_1);
+ 
+-	for (i = VFE_LINE_RDI0; i < vfe->res->line_num; i++) {
++	for (i = 0; i < 3; i++) {
+ 		vfe_bus_status[i] = readl_relaxed(vfe->base + VFE_BUS_IRQ_STATUS(i));
+ 		writel_relaxed(vfe_bus_status[i], vfe->base + VFE_BUS_IRQ_CLEAR(i));
+ 	}
 
 -- 
 2.47.3
