@@ -1,57 +1,57 @@
 Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=210.118.77.12
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795780742;
-	b=05E1RMThSHPQT7juPdCnaiBj/OrJWFY0weLmsMvxjbUVEE2huZIrSv0mINE7EmwA7I6i
-	 o4Ha7fKvjg32edKQ8Nu8GF3omMinbxQLMdOLrtz5UrYSXYyztEGTwBQznkwhjoUiFTq/b
-	 qKGnMt09fNv6kGTRpOteCyitl3hhdJnBILpb9VB5VejCcni4+EKbBT6IwEDiHJzPCgDdq
-	 c5yuZP5xF5za1sNWQB36nz6cQIVicjt9TijvBwHmBg2ECyWicxZYZgwQUABELP/WyKQ2C
-	 GGoVEFcL9iuB9tJqEW2Zcu6utMVJV4duEVi96UcY3+emQQyB9/oDHsqXXvydDvZwFAw==
+	t=1795780745;
+	b=cjdcA0lgdB52KBgb5J46tzQ17sdXrvIfjatwbxHoPlyrbCgNwvXVhYwmOUTRsxPUlpUr
+	 MM35m3LsvgAnMhr6HImlYFZ+vJ4PS1xsnrdQI7181lX+WDIG1mTmQnbQwDyeC4LjEDvd3
+	 LcCP1MDAvaz4hZ3+ORXmV1mGbn+LpkAxeafQeAA7ExDjAdEWZfwJ+lTNCHI19CF86Csr+
+	 +gtvC+2ksHnfydWW2vS6KZVyM8AHtFiDD7slWVk/PtmRGJU9TN4+jP7jFWJwg5T6RgHK5
+	 WpLNCApqFaommfcSPAVFsY9CNBnKpJPm18AAB5F6WmEyBuqUt+x3W8ySiekfYv6QvNQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795780742;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795780745;
 	h=DMARC-Filter:Received:DKIM-Filter:DKIM-Signature:Received:Received:
 	 From:To:Cc:Subject:Date:Message-ID:X-Mailer:In-Reply-To:MIME-Version:
 	 Content-Transfer-Encoding:X-CMS-MailID:X-Msg-Generator:Content-Type:
 	 X-RootMTR:X-EPHeader:X-CMS-RootMailID:References;
-	bh=kU/vWsvzp/oeLbWN7RubnpobMMTsDvkHbxerPWgHnis=;
-	b=cUjQskFxkhG92BWFqWwsUqhg2iqvbP0XCQ1lVIRZxJB1mTwChO3uBB9vcX/3+Vokj9cQ
-	 XIFI9AoCGn1pu5ysy9xgmekXoWzC6qzcf/z66uETJ8ETev9vePLCN3MUKRQ6GKq1olbFL
-	 lpWYQiKVHvkRRtW2vpOX/jZdSWyKKNitSyDpx6ihO3i9RrnwE3N4A60KFOYcuKgz7/PnC
-	 0G/+Z+UXFZAA3JfCtkd66Wr5JJXO2KD2uhMrCHttDx+f9ZsuTsRu7rcl0jTLnx/3n3BeN
-	 +xB8sDE/EbRpu3tSeoYBTPF+YpphGoH8liAv3EXM7xsx09u4b7FHeqk/Tepm5DCgGxw==
+	bh=Id3upqDD1i+LHsGcQdVswyP8vuaFBxcYGp5N04HwHyM=;
+	b=Zy7hzsftceIZQUCbStf8MnI7foK9hZpEod9p1dPxTAEb3a4fdfZ7aCzBopRm5ZFMxjic
+	 AWYatWOdDKsrLHxsbcm9t9ZwpOGqZOLm7p//00wBMyTyB/oXdmz3apyeYapQlO6m6HOL3
+	 bCacLuybv59b9awLgMe/tJNal6v1ALaS4CBQsey9rctb5ZD4pSytb9Eg0sDNmGhIqlmcu
+	 iWoFc4fTAV0d0NPYHTV0JQN14nxH7ME4jqD9LCOMJ429yrfDDbJTcRsClR0Hldn6qEK86
+	 uZE/Cyacn76UBHK3D6sJEu1LBChfpmR/e+Q7f/wlrvkWIQS3F54YecUO70XdXQ4VhkA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=samsung.com;
 	spf=pass smtp.mailfrom=samsung.com;
-	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b="g/ETUpOx";
+	dkim=pass header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=eTDDdgdJ;
 	arc=none smtp.remote-ip=210.118.77.12
 Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com [210.118.77.12])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3052C606A32F
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:59:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 3052C606A32F
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 64CB3606A338
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:59:04 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 64CB3606A338
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=samsung.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=g/ETUpOx
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
-	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261127115859euoutp021c087a0659b05629902b0c620074a2e2~r5RGDBuwh1536315363euoutp02f
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:58:59 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261127115859euoutp021c087a0659b05629902b0c620074a2e2~r5RGDBuwh1536315363euoutp02f
+	dkim=pass (1024-bit key) header.d=samsung.com header.i=@samsung.com header.a=rsa-sha256 header.s=mail20170921 header.b=eTDDdgdJ
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+	by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20261127115902euoutp02d7dffc858debbb0c2550039cc7beea75~r5RIyVjfZ1288312883euoutp02c
+	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 11:59:02 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20261127115902euoutp02d7dffc858debbb0c2550039cc7beea75~r5RIyVjfZ1288312883euoutp02c
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-	s=mail20170921; t=1795780739;
-	bh=kU/vWsvzp/oeLbWN7RubnpobMMTsDvkHbxerPWgHnis=;
+	s=mail20170921; t=1795780742;
+	bh=Id3upqDD1i+LHsGcQdVswyP8vuaFBxcYGp5N04HwHyM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-	b=g/ETUpOxD/ZT0Oi4ngNjjkxmcCs2PjgFbZIjtugjnIvBV8v/PCWi5b70lRdHRBgEY
-	 J8aArwdHqiPq2Or+U5kHx6JPJhjRYBgyDw0xogGec9Df4A/835VSe/KLxsZCUQG9nX
-	 +p7D1rf4O8d4gCXWMoZUJMN75GEyngQrOh/tjRiU=
+	b=eTDDdgdJ9gPOOx7Xw2sMngNEd0oxJe1W9gj3acfWV4ZIIPZawecBhxm2tmZAPe5D4
+	 Mr6d8NPXukg82mYDgdIh30MdUfPD8obx07k9USmhKVWCJuASlFHqGczPi3hRN6shuX
+	 8wlZ3ncNeGtX/HG/xrhNoXuMLoemC0l92kG8WBFk=
 Received: from eusmtip1.samsung.com (unknown [203.254.199.221]) by
-	eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
-	20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9~r5RFsd37W0787907879eucas1p1w;
-	Fri, 27 Nov 2026 11:58:59 +0000 (GMT)
+	eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
+	20261127115901eucas1p22ee3dbe744707c23f8ac2442f755e041~r5RH9qnN12876328763eucas1p2J;
+	Fri, 27 Nov 2026 11:59:01 +0000 (GMT)
 Received: from AMDC4653.digital.local (unknown [106.120.51.32]) by
 	eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-	20261127115858eusmtip1fe13b1aeb26ee1104c142b331f20a2bc~r5REtVNTR0670706707eusmtip1t;
-	Fri, 27 Nov 2026 11:58:58 +0000 (GMT)
+	20261127115900eusmtip1b004ba38c6e7a6b1daeab6d50a5c4eca~r5RG3wJIQ0138901389eusmtip1M;
+	Fri, 27 Nov 2026 11:59:00 +0000 (GMT)
 From: Marek Szyprowski <m.szyprowski@samsung.com>
 To: iommu@lists.linux.dev, linux-media@vger.kernel.org,
 	linux-arm-msm@vger.kernel.org, kvm@vger.kernel.org,
@@ -66,10 +66,10 @@ Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Robin Murphy
 	<abhinav.kumar@linux.dev>, Bryan O'Donoghue <bod@kernel.org>, Mauro Carvalho
 	Chehab <mchehab@kernel.org>, Hans Verkuil <hverkuil+cisco@kernel.org>,
 	stable@vger.kernel.org
-Subject: [PATCH 1/4] media: venus: use dma_iova_size() to check the reserved
- IOVA size
-Date: Fri, 27 Nov 2026 12:58:45 +0100
-Message-ID: <20261127115849.2780625-2-m.szyprowski@samsung.com>
+Subject: [PATCH 3/4] dma-mapping: add DMA_IOVA_FLAGS mask for the
+ dma_iova_state size flags
+Date: Fri, 27 Nov 2026 12:58:47 +0100
+Message-ID: <20261127115849.2780625-4-m.szyprowski@samsung.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20261127115849.2780625-1-m.szyprowski@samsung.com>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -82,41 +82,87 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CMS-MailID: 20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9
+X-CMS-MailID: 20261127115901eucas1p22ee3dbe744707c23f8ac2442f755e041
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9
+X-RootMTR: 20261127115901eucas1p22ee3dbe744707c23f8ac2442f755e041
 X-EPHeader: CA
-X-CMS-RootMailID: 20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9
+X-CMS-RootMailID: 20261127115901eucas1p22ee3dbe744707c23f8ac2442f755e041
 References: <20261127115849.2780625-1-m.szyprowski@samsung.com>
-	<CGME20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9@eucas1p1.samsung.com>
+	<CGME20261127115901eucas1p22ee3dbe744707c23f8ac2442f755e041@eucas1p2.samsung.com>
 
-The IOVA reservation code compares dma_iova_state::__size directly with
-the requested chunk size. __size is internal to the DMA IOVA API and may
-carry flags in its upper bits, so use the dma_iova_size() accessor
-instead.
+dma_iova_state::__size uses its top bit to record that SWIOTLB was used
+for one of the linked ranges. Users that mask or validate sizes refer to
+DMA_IOVA_USE_SWIOTLB directly, so adding another flag would require
+updating all of them.
 
-Fixes: 953439251b59 ("media: venus: Fix iova allocation from restrict region")
-Cc: stable@vger.kernel.org # v7.4+
+Add DMA_IOVA_FLAGS covering all flags kept in __size and use it in
+dma_iova_size(), in the size check of dma_iova_try_alloc() and in the
+vfio-pci dma-buf length validation. No functional change.
+
+Cc: stable@vger.kernel.org # v7.3+
 Signed-off-by: Marek Szyprowski <m.szyprowski@samsung.com>
 ---
- drivers/media/platform/qcom/venus/core.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ drivers/iommu/dma-iommu.c          | 8 ++++----
+ drivers/vfio/pci/vfio_pci_dmabuf.c | 2 +-
+ include/linux/dma-mapping.h        | 8 +++++++-
+ 3 files changed, 12 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/media/platform/qcom/venus/core.c b/drivers/media/platform/qcom/venus/core.c
-index 7087af32060f..cec5db2bf755 100644
---- a/drivers/media/platform/qcom/venus/core.c
-+++ b/drivers/media/platform/qcom/venus/core.c
-@@ -408,7 +408,8 @@ static int venus_reserve_iova_region(struct device *dev, struct dma_iova_state *
- 		if (!dma_iova_try_alloc(dev, &state[count], 0, chunk))
- 			goto err_free_iova;
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index 78742aeba932..99eb382a1359 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -1838,11 +1838,11 @@ bool dma_iova_try_alloc(struct device *dev, struct dma_iova_state *state,
+ 		return false;
  
--		if (state[count].addr != end - chunk || state[count].__size != chunk)
-+		if (state[count].addr != end - chunk ||
-+		    dma_iova_size(&state[count]) != chunk)
- 			goto err_free_iova;
+ 	/*
+-	 * DMA_IOVA_USE_SWIOTLB is flag which is set by dma-iommu
+-	 * internals, make sure that caller didn't set it and/or
+-	 * didn't use this interface to map SIZE_MAX.
++	 * DMA_IOVA_FLAGS are set by dma-iommu internals, make sure that
++	 * caller didn't set them and/or didn't use this interface to map
++	 * SIZE_MAX.
+ 	 */
+-	if (WARN_ON_ONCE((u64)size & DMA_IOVA_USE_SWIOTLB))
++	if (WARN_ON_ONCE((u64)size & DMA_IOVA_FLAGS))
+ 		return false;
  
- 		rem -= chunk;
+ 	addr = iommu_dma_alloc_iova(domain,
+diff --git a/drivers/vfio/pci/vfio_pci_dmabuf.c b/drivers/vfio/pci/vfio_pci_dmabuf.c
+index c16f460c01d6..8bda610dd988 100644
+--- a/drivers/vfio/pci/vfio_pci_dmabuf.c
++++ b/drivers/vfio/pci/vfio_pci_dmabuf.c
+@@ -211,7 +211,7 @@ static int validate_dmabuf_input(struct vfio_device_feature_dma_buf *dma_buf,
+ 	 * dma_iova_try_alloc() will WARN on if userspace proposes a size that
+ 	 * is too big, eg with lots of ranges.
+ 	 */
+-	if ((u64)(length) & DMA_IOVA_USE_SWIOTLB)
++	if ((u64)(length) & DMA_IOVA_FLAGS)
+ 		return -EINVAL;
+ 
+ 	*lengthp = length;
+diff --git a/include/linux/dma-mapping.h b/include/linux/dma-mapping.h
+index efde0e5a58dc..0ebf3090ea0f 100644
+--- a/include/linux/dma-mapping.h
++++ b/include/linux/dma-mapping.h
+@@ -135,10 +135,16 @@ struct dma_iova_state {
+  */
+ #define DMA_IOVA_USE_SWIOTLB		(1ULL << 63)
+ 
++/*
++ * All flags stored in the upper bits of dma_iova_state::__size. Sizes passed
++ * to dma_iova_try_alloc() must not overlap with them.
++ */
++#define DMA_IOVA_FLAGS			DMA_IOVA_USE_SWIOTLB
++
+ static inline size_t dma_iova_size(struct dma_iova_state *state)
+ {
+ 	/* Casting is needed for 32-bits systems */
+-	return (size_t)(state->__size & ~DMA_IOVA_USE_SWIOTLB);
++	return (size_t)(state->__size & ~DMA_IOVA_FLAGS);
+ }
+ 
+ #ifdef CONFIG_DMA_API_DEBUG
 -- 
 2.43.0
 
