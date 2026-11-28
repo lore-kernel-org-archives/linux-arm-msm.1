@@ -1,104 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.167.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.87
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795874047;
-	b=tYymPX0tv4t9MIXIYh56MnbPJqaaGwKNoVXQrFLbKyq+UeAkabsorqZ31ewDaBGI4SsV
-	 OBxNT4TuposZFnITWeSHwTGZuZMAEcoG4Z4hyGdM7tOLNrrtiQML4cjMzw/75zpDd9ROz
-	 xdtSc71U2rvloUaVavYSeU2g2gUn0P+nWj+eQOY+7fjdVlguI6nFgm9V28pQyOfbKSx7X
-	 DzTFtuzYVvpi4bGiK4iocR1T2vNbWPNryDIEGmZn325tYu88M2hMkqRJOK+KJQV2cpaP8
-	 W0arlCPznWasfRWCgdB2qvcG1LZUBYZb8sduRzWfH5vF4lyhf2/v6j+xaIAzlV3exaA==
+	t=1795876546;
+	b=qOx1iy05JxrXv4CbbQPMaO1YFmirlrE3bs6XYfYWUL0vWkOKNh2F4WzyY7nsIg4M8xJN
+	 2s3qz4Qb79WtDUiDmz33M+x6ns72XoDN6ar/2ktdIK8rHIpZjDoDg7uvbFH7HdVMOpB6m
+	 M11SgH9o0UCdcgChzgm/eEWy86Bi5/YLDPiHc6aKpLTAN6XwBHTdoSK1XIK99vZJBDFkI
+	 3K+xnc73mzI6yPbvaNjZehemUmP++OVSLqOjCn0Q0IKSwvNMWPb/QL7/Q01jbf/oLY3Vj
+	 s17axLl69up0CaBB9lzGDtrCKUKnYhnhK3Kox4xKcnrIrKbrxVQk2rJHEBc33SY+muw==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795874047;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Forwarded-Encrypted:X-Gm-Message-State:X-Gm-Gg:X-Received:Received:
-	 Date:From:To:Cc:Subject:Message-ID:References:MIME-Version:
-	 Content-Type:Content-Disposition:In-Reply-To;
-	bh=9mX1XwkpZzZFlEfmqdehYAaIQV9Aq1Y+dGqXT/HOfNg=;
-	b=uPK5R8TdrnA+qxlswct5Ct6i0a7QMFnMnsJVfmIqonDq680rVH06XFL1oGVzVEdLmdbX
-	 3FhO0nvoqS6nvA5EcJT2SAuNPiWuJFP1RqLE3kEp0J/Z3VNILbgHBP+KkJcoZN7FXsP/1
-	 3W2/peoaeaq2dHTW6ZjXradFfjpWyDQOw2XJEAeJt4TsmOjve7Kvat8TAuMWiihH5s0NX
-	 rByepT2DpBrIM9P6Zc4xgJladIFZgDg2t+gOF4Pj9m4gGECsQbbqDJAuxTpN7UuozZMD/
-	 fxxdSh5zkRA24+955xeH++vY0TxADYzUY7kgEPobIDZuh9HYUQ88SLJE3FCAJKV2S+A==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795876546;
+	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
+	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:
+	 X-Mailer:Content-Type:Content-Transfer-Encoding:MIME-Version;
+	bh=/erwlKU4Qt5qlsYt+hD47EAu/kfrXvbGjQdsXs1DRRI=;
+	b=d904Mdh6H68vf8rdiiGydqPSrQvQW1ThfGmyD4llJAIkrxz7AqtKqzYJoxEDTDWBmojz
+	 b/Wib/0kNl8yO7GAYb8zfT0aN446NoGivFGBbvVfYshGW60HMZcYbID7tC0ch3PCdGACk
+	 HccRc5qkFaPrjnIWHGaiTokyK9YrYew1n8z29YaF8HN9fuDKTMFg6Ihu8Ds+tP+mCq+Ex
+	 zdvmb/1jnnTM8oiV1JrqzLvlsVm4e4GpDepnjx4r+7yLzNM7S6K0n6/7l7eo1qAV2oRIf
+	 BW0k/nZFPW/boJU7zE3MDguEBsQPORB6R4KrJN3qdnE1hr9w0A3vnPzGrooI6caamWw==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qi2hXA7x;
-	arc=none smtp.remote-ip=209.85.167.46
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com [209.85.167.46])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	dmarc=pass header.from=qq.com;
+	spf=pass smtp.mailfrom=qq.com;
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=VUY2wBNc;
+	arc=none smtp.remote-ip=162.62.57.87
+Received: from out162-62-57-87.mail.qq.com (out162-62-57-87.mail.qq.com [162.62.57.87])
+	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F712606A324
-	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 13:54:06 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 9F712606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F419606A31C
+	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 14:35:43 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F419606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=qi2hXA7x
-Received: by mail-lf1-f46.google.com with SMTP id 2adb3069b0e04-5c14f3dab09so4398800e87.0
-        for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 05:54:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795874045; x=1796478845; darn=vger.kernel.org;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=9mX1XwkpZzZFlEfmqdehYAaIQV9Aq1Y+dGqXT/HOfNg=;
-        b=qi2hXA7x7wrRxNS2ksI35vF6o18iVAI3siMasQCM0/EIvffM/SgAi9ZV87TC+rfFl+
-         H5C/YM1XB9Qut/evinyE8MGbSoyucEesjeEw1HI7Ta739KwyxudLpTEblh6MIA3s+WR5
-         +M7pCyTPFnJvc1NOGc6orBtpamkbWmSz03k4L26GfbeDECZPji8MhwOt8zFRsURVKAls
-         5cLsXHTN4w4d3Pp/ShBy/VwZIzTV+kfNVMNj17HuUUMXbgKdKYPb+Gh4sqTWys+zQDN3
-         u8+76dz5XMoumQKDrnAt5S1X3nDr0XG9tn5EtHgTikDZ8poG9RP7jcRfkfIablVyqSj7
-         1P5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795874045; x=1796478845;
-        h=in-reply-to:content-disposition:content-type:mime-version
-         :references:message-id:subject:cc:to:from:date:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=9mX1XwkpZzZFlEfmqdehYAaIQV9Aq1Y+dGqXT/HOfNg=;
-        b=QO9mpRQBbkAN+RiEaLVxCkGw2Ux0SF4C/phmShhA4DLE5JOSiEL9P0NK6MBmyQ4evm
-         GVLzjKN31bScvCQN+vfDGsG9n9LE9sw2tMGkEoG5tgX7I5wyvhxU+svjhrNnch4frkeP
-         Sz0APl911VFI4B3mLaVNJmtg0Jt+xqV1Du/SY7CfWdGWBeeQPJBCjTKDBR/IjA0aAgLh
-         kSEVg2HpRXGiQl5Uqdsz7RvDF83Uw+OGhKSzRbPN4Q8zXfZJwHvo8mvgYcS5i0GYRqWe
-         bpThKcaRtEHGDzQqhIveY2pcQ2bgKzg48LIe+kEAtGv5EuJ35okgujjkzJyK0DoxgpgJ
-         Nq5Q==
-X-Forwarded-Encrypted: i=1; AL+hErEh6T/5i8rik3TuFv5TXbUmAmrIR0bTV/iHEzetlyA8MGe7FCIM2Y2FjNZsIPBtvfmj55VEnj3is7oYByki@vger.kernel.org
-X-Gm-Message-State: APuU4Z/eZ3yTgclveXNyzGbctB/HtJ0S1PKYo3sGDsbRf/o8taFeC4Vf
-	KTJSPhIQz8GpxQFw1JShirgfXZ8dlOSllBQKbULPUoKXLTNM69jvWf5u
-X-Gm-Gg: AZFdTZfY2OiHjKUFFEeKWe7gxgqzQSCG9mE6TanlzliUN4LLPBpCA7A/wxW5ft2wsCR
-	bhlKq6tvH+WYBwlZfBaUWBWttOZN0HzM2fE24DK9CSmI+iGO9PsCjgHuc/K4JPXmQcvsDr56Wds
-	v1f259+19tHEBb/xiyAfQ227BoyVAYEE9Eo1pqvC6yJRtFPpGJA5ZPz4CA3Tgy8MCFJmFccfc0m
-	MvBV7IJFwoHAuCEx2p3BGCaTjS0KFLfsr+M+FW5SXixXPhGHfVh23vkiWxufS5iYlhT/dBu1HM2
-	rs6XLAZ21cgjv4f8gIl+gOnBvEdfPSqrGeZA9VXomnuRKEkiSzvHBF1RGb/o6VRUQYvrusU9FHW
-	K6q7SJkedE4TP6HUAd3ho0HjTUj7ZNJkjE2Q6HTL+VjBIV/kp+7T+YyewZ3u6iBpazigQaVeq6w
-	HL4ZZPW4QQNUnpCHpSHfncPoDSKb3lvyhBzi0Xp6vhXz0Ir/GPPQZy3pfLo3hTkmobIs2PGXwEj
-	bYv7oGOR38GznypihxQlhPool0FMRZGBxrY7AN8YYhSmzbbrU0luUxEd/9CgZyjiOuUJFedpiuJ
-	wiye8s/nAmHAvo4PAtr/QD2fuecPr9lV1jQKnMZwpkSfNcSZag==
-X-Received: by 2002:a05:6512:239f:b0:5c1:5e33:6994 with SMTP id 2adb3069b0e04-5c1bc7ad610mr8583121e87.12.1795874044617;
-        Sat, 28 Nov 2026 05:54:04 -0800 (PST)
-Received: from hekasnap.home.hekalab.eu ([2a00:fd01:82a4:d100:34c4:da37:4e1c:e424])
-        by smtp.gmail.com with ESMTPSA id 2adb3069b0e04-5c1bcff8bbdsm6725546e87.28.2026.11.28.05.54.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 28 Nov 2026 05:54:04 -0800 (PST)
-Date: Sat, 28 Nov 2026 14:54:03 +0100
-From: Troels Vognbjerg <hekatombe@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
-Cc: Vinod Koul <vkoul@kernel.org>, 
-	Neil Armstrong <neil.armstrong@linaro.org>, Manivannan Sadhasivam <mani@kernel.org>, 
-	Bjorn Andersson <andersson@kernel.org>, Konrad Dybcio <konradybcio@kernel.org>, 
-	Abel Vesa <abelvesa@kernel.org>, Stephen Boyd <sboyd@kernel.org>, 
-	Brian Masney <bmasney+clk@redhat.com>, Jerome Brunet <jbrunet+clk@baylibre.com>, 
-	Andreas Noever <andreas.noever@gmail.com>, Mika Westerberg <westeri@kernel.org>, 
-	Yehezkel Bernat <YehezkelShB@gmail.com>, Mario Limonciello <mario.limonciello@amd.com>, 
-	Philipp Zabel <p.zabel@pengutronix.de>, Rob Herring <robh@kernel.org>, 
-	Krzysztof Kozlowski <krzk+dt@kernel.org>, Conor Dooley <conor+dt@kernel.org>, 
-	linux-arm-msm@vger.kernel.org, linux-phy@lists.infradead.org, linux-clk@vger.kernel.org, 
-	linux-usb@vger.kernel.org, linux-kernel@vger.kernel.org, devicetree@vger.kernel.org, 
-	usb4-upstream@oss.qualcomm.com
-Subject: Re: [PATCH RFC DNM 13/15] thunderbolt: Introduce Qualcomm USB4
- router driver
-Message-ID: <awn29nfzVzPi-HDM@hekasnap.home.hekalab.eu>
-References: <20261124-topic-next-20261116-fsm-mvp-v1-0-a9b45c69cd38@oss.qualcomm.com>
- <20261124-topic-next-20261116-fsm-mvp-v1-13-a9b45c69cd38@oss.qualcomm.com>
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=VUY2wBNc
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+	t=1795876533; bh=/erwlKU4Qt5qlsYt+hD47EAu/kfrXvbGjQdsXs1DRRI=;
+	h=From:To:Cc:Subject:Date;
+	b=VUY2wBNc/YAUXNqwPc8kjJOmFk5sYt3zJNqw/dlXax3UDIxuM1qczDwpazUOOcvA+
+	 UTbsf4t3F5L5ltDuyiHrTuNqczTfa2nx8VhQevuMvsVmLBxDNtMkYUNuF6lPPhHf5G
+	 j2rYTbfnb4a49y0WdVAEm5/eWk1Y0bvzXNfe8MWU=
+Received: from PhorusPC.localdomain ([112.43.31.17])
+	by newxmesmtplogicsvrsza73-0.qq.com (NewEsmtp) with SMTP
+	id 8DFB9E06; Sat, 28 Nov 2026 22:35:31 +0800
+X-QQ-mid: xmsmtpt1795876531t9h3pnkbg
+Message-ID: <tencent_5ACF8B20776C5AA9A1C5D37C67600532AB08@qq.com>
+X-QQ-XMAILINFO: MBHEkxMsYPCYZ9dLnjPj1Rv6dND3vQgIg5c5uuKSR+38MBs1zEVodlsBCpS/Uh
+	 B4WLQAHZoDwdJDDDZ2eiJ+KD7UIqwF/fMrrtkSgH7kItfGC6o4mVZt7y5nJakywFaSZ7wn2he1Wv
+	 E53ONqh7OIZb25IXWzi0n+4nXCYIgHOVWyZRnXbsNJ6G7FpM78xdUwJT+bfdsmkNoPf1fSj8VBGu
+	 2P6SnncW8Rx3JA0UQMIbNOCb3b5ZbEnOUe+L3CZzKAuw4FP/ImRp5LADx1Dlb9mm+3hEsM3ojwm0
+	 2s5RoHDOLg36bnSe4WjbO4TtZx8M7nNvnv6ESa++ZkI0X9nFxuC9MFgWja0KNZ3IF33/lCf8wSVJ
+	 vWuKKbr4gSqlb52wmEYZVB1h8kVZYGQIF/3tfFbForUIeuxeh+SdLPH9Rq308kBcV5AaixjEqW/U
+	 eVRQUQxpFshjsdVKrfiysXPGp2BU+aJfBNOIDQFlCW49qfVVKaSyXI2/dnNo+tNc+NfVCYyShi4s
+	 uBfsE7i94WjNyyDdO6ke+ZAqgVdCNkbDJw1DAf4UbF+Zy6Or0pyDs/QzzI5nOR5ldXwyKFYCQiVZ
+	 5PIy6pI6kVom3HsUol+I/KI8lC/f/yJQ8krslMkS7A41FungnpwaTVy4OMpx2ywLlOYCzQOyS7sB
+	 3lCuh9cQqaup2qmteh4LqV/SkshnTJ+q74Uyp40SMHQRARNfin86Ly+lwn0lZi6eSnLNGzZkZlrU
+	 a1MR+Z030UdYxqSFsDq15XU7xs1ey/1Gwvn0aA8o3j0vc0rsX+bRMzwIz3vniESxclvCso0geUlZ
+	 6/tAWoNuQyh1AJQxmTCBXmKFsjp0La450MRnsgWpVIl54cOLHzcM2Iq8hn0TfdjTKIz1kn5QxmyC
+	 YRAdlbX6a5jdCMcDR2DnrHykJaHQ0TW47jJJYoKqSxpsZV8RTvBxC5oljA6X0DB71h8h1JFG8uc8
+	 dSTQ4kTAkl66+9GMYv2Nmc1rS0k9L/fMhfkIchqbSHemc3akRf5FAeYvWf564wwwOKksrJoSGCPl
+	 fhh3Rg8d/Okc5G+QCs2dhMXgaNeXxXFiWP/ss5iVyb0goe5SUpDqOJW+Rm6vUiU9PtiE/be1PwP/
+	 1SkaZNMxu/A9ogWE8=
+X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+From: Zhixiang Yu <littleyuer666@qq.com>
+To: dri-devel@lists.freedesktop.org
+Cc: linux-arm-msm@vger.kernel.org,
+ Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
+ Abhinav Kumar <quic_abhinavk@quicinc.com>
+Subject: [PATCH] drm/msm/dsi: use the DSC 1.2 RC table for 1.2 panels
+Date: Sat, 28 Nov 2026 22:35:17 +0800
+X-OQ-MSGID: <179587651736.1390.6674853883021858176@qq.com>
+X-Mailer: smtp-send (script)
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -108,51 +80,47 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261124-topic-next-20261116-fsm-mvp-v1-13-a9b45c69cd38@oss.qualcomm.com>
 
-On Tue, Nov 24, 2026 at 21:01:42 +0100, Konrad Dybcio wrote:
-[..]
-> +static int qcom_usb4_mux_set(struct typec_mux_dev *mux, struct typec_mux_state *state)
-> +{
-> +	struct qcom_usb4 *qcusb4 = typec_mux_get_drvdata(mux);
-> +	struct qcusb4_link_req req = { .usb4 = true };
-> +	struct typec_thunderbolt_data *tbt_data;
-> +	struct enter_usb_data *usb4_data;
-> +
-> +	guard(mutex)(&qcusb4->typec_lock);
-> +
-> +	if (state->alt && state->alt->svid == USB_TYPEC_TBT_SID) {
-> +		req.phy_submode = PHY_SUBMODE_TBT3;
-> +
-> +		tbt_data = state->data;
-> +
-> +		req.cable_max_gen = TBT_CABLE_SPEED(tbt_data->cable_mode);
-> +
-> +		if (FIELD_GET(TBT_CABLE_ACTIVE_PASSIVE, tbt_data->cable_mode)) {
-> +			req.active_cable = true;
-> +			req.cable_legacy_tbt3 = true;
-> +		}
-> +	} else if (state->mode == TYPEC_MODE_USB4) {
+dsi_populate_dsc_params() always programs the pre-SCR (DSC 1.1)
+rate-control parameters.  A panel that advertises DSC 1.2 needs the
+1.2 table: with the 1.1 values the decoder reconstructs the wrong
+quantisation parameters, and the result is horizontal banding across
+the whole picture.  Solid colours still look correct, which makes the
+problem easy to miss and easy to blame on the panel or the PHY.
 
-While testing this series on an ASUS Zenbook A16 (UX3607OA), I ran
-into an issue with a USB type-c display using DP Alt Mode.
+Pick the table from dsc_version_minor, as the DRM DSC helpers expect.
+Panels that report 1.1 keep the pre-SCR table, so existing devices are
+unaffected.
 
-TYPEC_MODE_USB4 and TYPEC_DP_STATE_C share the same integer value,
-causing a DP Alt Mode request to be interpreted as a USB4 request.
+Tested on Xiaomi Redmi K80 Pro (SM8750, o11u panel: DSC 1.2,
+1440x3200, slice 720x20, 10 bpc).  Before: every non-uniform image
+shows horizontal stripes.  After: the panel renders correctly.
 
-Changing the above condition to
+Signed-off-by: Zhixiang Yu <littleyuer666@qq.com>
+---
+ drivers/gpu/drm/msm/dsi/dsi_host.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
 
-	} else if (!state->alt && state->mode == TYPEC_MODE_USB4) {
+diff --git a/drivers/gpu/drm/msm/dsi/dsi_host.c b/drivers/gpu/drm/msm/dsi/dsi=
+_host.c
+--- a/drivers/gpu/drm/msm/dsi/dsi_host.c
++++ b/drivers/gpu/drm/msm/dsi/dsi_host.c
+@@ -1910,8 +1910,12 @@ static int dsi_populate_dsc_params(struct msm_dsi_host=
+ *msm_host, struct drm_dsc
+ 	drm_dsc_set_const_params(dsc);
+ 	drm_dsc_set_rc_buf_thresh(dsc);
+=20
+-	/* DPU supports only pre-SCR panels */
+-	ret =3D drm_dsc_setup_rc_params(dsc, DRM_DSC_1_1_PRE_SCR);
++	/*
++	 * Match the rate-control table to the panel: a DSC 1.2 panel given the
++	 * pre-SCR (1.1) table decodes into horizontal bands.
++	 */
++	ret =3D drm_dsc_setup_rc_params(dsc, dsc->dsc_version_minor =3D=3D 2 ?
++				      DRM_DSC_1_2_444 : DRM_DSC_1_1_PRE_SCR);
+ 	if (ret) {
+ 		DRM_DEV_ERROR(&msm_host->pdev->dev, "could not find DSC RC parameters\n");
+ 		return ret;
+--=20
+2.43.0
 
-fixes the issue. The display works again with both USB-C ports.
-
-
-> +	} else {
-> +		/* Do nothing for e.g. DP altmode */
-> +		return 0;
-> +	}
-
-Regards,
-Troels
