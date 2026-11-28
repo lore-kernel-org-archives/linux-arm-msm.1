@@ -1,109 +1,47 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=205.220.168.131
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=100.103.45.18
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795851901;
-	b=Pwk961m5vdFplmtvEWWgu/dlnPUDtUVqFwOdrSht4LfwAkcNg6jdihqFQot9czLDvHhc
-	 1MwND7JdIxnd9N78d2UFCtkusml4l47rdp4ubQ1GeG8MZtGLR2GlimXYho6Gn3JEZlkRA
-	 fZqqDEHFnFPYRIPDP2RYH8qSHQ55ii1zokrhDnBRPzkJ7z/JF3wCsm7+p7TmQmu/E1etk
-	 iN2BVVGNzmd7I4e+d8xxr96GdnC2OCM19kxqhoSAzag6QjVF4hiUUys5I2H8mDH1lXpyg
-	 zJtUQIcxuuHS6ps7ue6aAgUcrSfHzN9NBhZARJqWUpAk3vrpCmr/o9LTWswL6H2UpoA==
+	t=1795856126;
+	b=j9PJNR6PAvpQOVQ0dnp+jKUrwBQlRtd/yoTxIXl5aimz6wkBbhAbZ9Jd5p5mmKVLn5pm
+	 fB5a+umlreKv7rTvxWUCggqPf1ITQ4mNk+Bv7AW53vGyaMkdN3gz3/JWZzqBa0irzU8aS
+	 0vUkzv1QthKozayFQz6R0DD4+jyOtuh89aaAWHLype1B2yAd/wwUieMQPmSXBmcvNDfJH
+	 uSvEW0mrnQcKWJnDi5g1seEqPiTVqSmVyESqvyuuB9nUE4KZn/LBXkFZ1XiAdp+uLIX/V
+	 CTx/NSgh59wNJ3b7Fq0/ONAvEpXsjkjUrZj8AqCTX680vPzamKtbV/Wz77gJzEr1u0Q==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795851901;
-	h=DMARC-Filter:Received:DKIM-Signature:Received:Received:
-	 DKIM-Signature:X-Google-DKIM-Signature:X-Gm-Message-State:X-Gm-Gg:
-	 X-Received:X-Received:Received:From:Date:Subject:MIME-Version:
-	 Content-Type:Content-Transfer-Encoding:Message-Id:X-B4-Tracking:
-	 X-Change-ID:To:Cc:X-Mailer:X-Proofpoint-ORIG-GUID:X-Proofpoint-GUID:
-	 X-Proofpoint-Spam-Details-Enc:X-Proofpoint-Spam-Info:
-	 X-Authority-Analysis:X-Proofpoint-Virus-Version:
-	 X-Proofpoint-Spam-Details;
-	bh=XSCbnCPHMeRDuEhGRMEEnnsMEwBvB/NgQ+oiTuIUzfA=;
-	b=JpWg7+mXvHMEQJQ4KDsV9uzgz3RJv6ksAUP0cEV6Lug2LMmbdGhTBDj0k2ghKIFS8LBv
-	 xlFWVt0Wg50uhp6l9bPamZraLqwZC5gBFIImSjqGeJfl+BdeVbM5PsE8N0OmH45K+QSa7
-	 rqxWm1Bm4blrJgq4saWT+VBYQE622KC11O3vi0kxfdIg3uDQKn8kONpjS20gX3xtsdvEF
-	 KBmlRpdi7qJiyJnRUCqeK/4T+uba4JYpjeZVlqpEaPL0XJ0NXomT1dz27TXVVEQrHXOJF
-	 jeAmC5lPs5PuEEy0NiOVLdq5aTQqvVPSzv5RWpu+Bh4+luDh2OGs3eVAr08+zu16Lnw==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795856126;
+	h=Received:DKIM-Signature:Message-ID:Date:MIME-Version:User-Agent:
+	 Subject:To:Cc:References:From:Content-Language:Autocrypt:In-Reply-To:
+	 Content-Type:Content-Transfer-Encoding;
+	bh=pT/Ty5tDobukfZnRUpr1Lr4sCBOaNehiDx5qlqzSLeI=;
+	b=QirWoE0lPzw9/kWtzfU+XeN5RbaOmHtT4FKeaCktLAOkCYLvEQGDaggB8F0tll4RAcqn
+	 VwsTYgWckJw9Vp57hlO4s5r1YrnZsMdLq36nRwubh5d/Cdcgl1GAPlmNbvWJAP+Sbt/+o
+	 /ITYf80oL/Cyo0Gou7KnIdGqUM0uJoBN7W1CluKqpU8nBOuk30HTxfKUc2wDVp2JnbAAG
+	 v9UU3S+JI9h1ggAS147QQVeamcmnLjU4Ua+2Fi9kXWG5+LXOpnv3JmB+NVRX54vh9kEzU
+	 4hSQQMNrQ5lkn7xW6t9t3p7MZ24BKTZydrYbsTFmWAwuqpNwUO4QABTynBaKT1H5U7w==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=oss.qualcomm.com;
-	spf=pass smtp.mailfrom=oss.qualcomm.com;
-	dkim=pass header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eldbdYe8;
-	dkim=pass header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kAaKlk4d;
-	arc=none smtp.remote-ip=205.220.168.131
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com [205.220.168.131])
+	dkim=pass header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b="a82/5EW2";
+	arc=none smtp.remote-ip=100.103.45.18
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	 key-exchange X25519 server-signature ECDSA (prime256v1))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4CE43606A324
-	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 07:45:01 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4CE43606A324
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=oss.qualcomm.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=oss.qualcomm.com
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CF011606A321;
+	Sat, 28 Nov 2026 08:55:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=eldbdYe8;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=kAaKlk4d
-Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
-	by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id 6AS4duZ82501801
-	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 07:45:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:message-id
-	:mime-version:subject:to; s=qcppdkim1; bh=XSCbnCPHMeRDuEhGRMEEnn
-	sMEwBvB/NgQ+oiTuIUzfA=; b=eldbdYe87ZT5sW2D9rVnaA/lNs6LYmCYelUOqk
-	64KchP0loPaabylQZHnG4zYMduUD/IvKJo11KkerxzGeiOi7dmflBJKfzvvhnzkp
-	pGjx+baL3/tAmOpVxD4tcrfO3O9X1AoQQNOe/3g+F6AEoG0C8MVkbD0vZL7EQlGQ
-	6HjraZ4UqzX6EqV/SznhIMEqzgY4IpYe/F3MyjyZCCtBdP9bjC7j/ZBP7kcJwNfE
-	VRpOUyUQNbs6r8cGnY78x3VJukUlC72wQLIkcn9HQLAjpCxIsbtnRmFJQXfFSoW3
-	sIlvVMJzVuzfjXOUo+K/jGIl+RJR+gU5yKgd1go4K2eJrhTw==
-Received: from mail-dy1-f198.google.com (mail-dy1-f198.google.com [74.125.82.198])
-	by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4j7r4j8aqq-1
-	(version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
-	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 07:45:00 +0000 (GMT)
-Received: by mail-dy1-f198.google.com with SMTP id 5a478bee46e88-3869865a304so5912816eec.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 23:45:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1795851900; x=1796456700; darn=vger.kernel.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=XSCbnCPHMeRDuEhGRMEEnnsMEwBvB/NgQ+oiTuIUzfA=;
-        b=kAaKlk4duvZDiQHfGKRR3xbV7nFWcjd9/UBjnWJnrlbdJh8gmLbiS6iihyH9LA0Y93
-         C0Vibrri+rL05Jndb7/m2UCu2Dhl9ZkpTAinCxyP/rFSIauBrsumLS9zwfcWGkmtI0xx
-         17T2IXdpS9Xm/nueaWNf/sTrV6hIWnHwECjNp1TU//N7muXTrjVfP3JzETQ3tC2QTtrs
-         veP6sKXlEoUUu7XN4HmyQWYe2TYBHRx4EBkuExvePjWBVH/o1yQRUUMjmKKu10FK01yo
-         Kqaii/EqoREctOXarmWD9d3QsefDndayyOpw5wBHwwEk1IO8YYtmOZyhmV9zSn7fvPRA
-         qA0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795851900; x=1796456700;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=XSCbnCPHMeRDuEhGRMEEnnsMEwBvB/NgQ+oiTuIUzfA=;
-        b=TPy5YeuZ1/6lgtcPgh8OQ+f1TXPMIWRVlLJIYq5m6jR0o4BUDaqtkXfwwmwQKJMt8q
-         oi4TBNAHelZvua6BZ7qN07jt1jz2yY3fq8gqnWXBtC6u18IlgCqs4hYEcaK2qKfqOSDE
-         cqSBZ2M1OCdpXlUQoXDhzkTEz8WDGu5UXxXiSxi+MXorBsBY7QVmb4O3BYWq0Aev1N5l
-         TGvpBJwlJg2WtwlnYo55tzNUpawgJW4c9w5ralJCs3Y7IYjvPKqNxNHzaH0yZCLXC1Q0
-         TArr4qXy+PB92nKrkkhe9qSVsg79VGaKLBIOzaV74sSCtKv1ZSQCstAWLoDMB3/dkgHy
-         eAuA==
-X-Gm-Message-State: APuU4Z8XawO3yuK7y52igjCJYBKt1wuYhXi8CTLVyZ6Mj0RE8cfVULUM
-	mZA00PKWAXyxTQfgkWlXy2IqzLY8ILTyEhDo+l6vtt2uJFfdrW06dX9aIQjcl3BYG9Ok66f7bXr
-	VRmr4NS97bQBhbKtd2Va+yTybSgAUKT1YgEpa/Y3U2nIwnq4sMIV1ruiGzu9gSmqUcZUL
-X-Gm-Gg: AZFdTZc2xMTMNpPVUgPMkcMzwFeVzF9wiikTtFL2Omm8NI/z5zrKV9ZUn+btWGi4UBM
-	IRFYr5fT7EeoEEFhY3nTH2EQlmwf/8NOp7K6lM0KKLBiTYc1ejijKVSmhixb5fBjvHP2u5Oq8B6
-	LD1LL6McJV1ZfkJv6nlCKqgVBWBMMY0uzQQjQlr7Co7p9gz+JDY37hwH0lM8JAI03dkNbwdqpUZ
-	/Buq3w0Gz8IuKPKFptykYJtu8fa+r85HGaf8G64m+iQO2xzFdOB7Uf97yB6wYMmGx5sl/ssd9ml
-	LDgXTtlxJ90CVnliLEl3v7fhogpYL3twqQMuBin2GJ/fkTYE3QTR8OMoLlgINjFqtUGQgXrjmc+
-	WnkG5BvXkoHWmgIeq11ejmCdlD+jbLCA0eTiktTw7gaH8qPGXpZVc6XmP0HpuxTn0kuDBusohPV
-	apyJc=
-X-Received: by 2002:a05:7301:b02:b0:382:48a5:cd53 with SMTP id 5a478bee46e88-3857111f187mr28521325eec.31.1795851899567;
-        Fri, 27 Nov 2026 23:44:59 -0800 (PST)
-X-Received: by 2002:a05:7301:b02:b0:382:48a5:cd53 with SMTP id 5a478bee46e88-3857111f187mr28521308eec.31.1795851899073;
-        Fri, 27 Nov 2026 23:44:59 -0800 (PST)
-Received: from hu-gkanala-hyd.qualcomm.com ([202.46.22.19])
-        by smtp.gmail.com with ESMTPSA id 5a478bee46e88-386992b404bsm65140367eec.1.2026.11.27.23.44.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 23:44:58 -0800 (PST)
-From: Gopi Chandra Sekhar Reddy Kanala <gopi.kanala@oss.qualcomm.com>
-Date: Sat, 28 Nov 2026 13:14:39 +0530
-Subject: [PATCH] soundwire: qcom: re-arm the controller interrupt after
- gating the clock
+	dkim=pass (2048-bit key) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=a82/5EW2
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id B8A991F00898;
+	Sat, 28 Nov 2026 08:55:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1795856126;
+	bh=pT/Ty5tDobukfZnRUpr1Lr4sCBOaNehiDx5qlqzSLeI=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=a82/5EW2OfNfsbisNQy+guLQbVhsz1qVvMs9F/Ys2r1NWSxIjxVbgPNIiLIyTxawm
+	 63d26N+kWSNTDaBQegZGajx2fig+KoU4kZ6MJFXA8xTGp5jZQuqLJcVzWeUN6NMd68
+	 gJEgbBgVvqFDeLfePo5ijOI5qMds/3InSMZ2LRJ8xdXF8u4ktAUYNxB/odGZzEjJIX
+	 VPKS/iasFIp+DR9UFQif07K/JL7CsGKiY4SS5NZSFz2WIJgqSgI3sGfEex1In37MPf
+	 IDTTVTRJQB7nCush8kTC4mSsgfF5xkIEtZ8BzlkdzXW0eZYIpMO2XvMT+Qab2tjfUv
+	 Uz67ViBQU+w5g==
+Message-ID: <0d77ebaa-fba4-4047-a43a-18b3c1ae242b@kernel.org>
+Date: Sat, 28 Nov 2026 08:55:20 +0000
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -113,115 +51,104 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] media: venus: use dma_iova_size() to check the
+ reserved IOVA size
+To: Jason Gunthorpe <jgg@nvidia.com>
+Cc: Marek Szyprowski <m.szyprowski@samsung.com>, iommu@lists.linux.dev,
+ linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+ kvm@vger.kernel.org, linux-kernel@vger.kernel.org,
+ Robin Murphy <robin.murphy@arm.com>, Joerg Roedel <joro@8bytes.org>,
+ Will Deacon <will@kernel.org>, Leon Romanovsky <leon@kernel.org>,
+ Sibi Sankar <sibi.sankar@oss.qualcomm.com>, Honglei Huang
+ <honghuan@amd.com>, prakash.gupta@oss.qualcomm.com,
+ Alex Williamson <alex@shazbot.org>,
+ Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+ Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+ Abhinav Kumar <abhinav.kumar@linux.dev>,
+ Mauro Carvalho Chehab <mchehab@kernel.org>,
+ Hans Verkuil <hverkuil+cisco@kernel.org>, stable@vger.kernel.org
+References: <20261127115849.2780625-1-m.szyprowski@samsung.com>
+ <CGME20261127115859eucas1p1ae20b01eec39080daf19dbd71aba10e9@eucas1p1.samsung.com>
+ <20261127115849.2780625-2-m.szyprowski@samsung.com>
+ <nohVXMHveO5nQuD8sOn0QoENkIUC-GQzMCh8HTX6v2eezbtW6OM5gX5JwJ7_MSwfWj3bC4Zmfz1CrxTDKJeFGg==@protonmail.internalid>
+ <20261127142912.GK114472@nvidia.com>
+ <dcc8689e-41bc-4a18-87fc-2fa76e11eab1@kernel.org>
+ <1MLPCyQ6FzkBIjdEja1y1xlc1P6WofGan08C2FN5E6caYBo9uKTCVFZXVujGWTLFgNm4nIXZGke0kdpRd8Z_BA==@protonmail.internalid>
+ <20261127172626.GQ114472@nvidia.com>
+From: Bryan O'Donoghue <bod@kernel.org>
+Content-Language: en-GB
+Autocrypt: addr=bod@kernel.org; keydata=
+ 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
+In-Reply-To: <20261127172626.GQ114472@nvidia.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261128-sdw-qcom-irq-v1-1-d053ac530faa@oss.qualcomm.com>
-X-B4-Tracking: v=1; b=H4sIAGaGCmsC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIzNDQyML3eKUct3C5Pxc3cyiQl0jA/PURANT4xQLSwsloJaCotS0zAqwcdG
- xEH5xaVJWanIJyAyl2loAHuTjtnAAAAA=
-X-Change-ID: 20261128-sdw-qcom-irq-207ea053d898
-To: Srinivas Kandagatla <srini@kernel.org>, Vinod Koul <vkoul@kernel.org>,
-        Bard Liao <yung-chuan.liao@linux.intel.com>,
-        Pierre-Louis Bossart <pierre-louis.bossart@linux.dev>,
-        Oleg Keri <okerixx@gmail.com>,
-        Dmitry Baryshkov <dmitry.baryshkov@oss.qualcomm.com>
-Cc: linux-arm-msm@vger.kernel.org, linux-sound@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Gopi Chandra Sekhar Reddy Kanala <gopi.kanala@oss.qualcomm.com>
-X-Mailer: b4 0.15.2
-X-Proofpoint-ORIG-GUID: S2wyic2kYLYVXUwAcv_kXkZ8Cj5U_oj0
-X-Proofpoint-GUID: S2wyic2kYLYVXUwAcv_kXkZ8Cj5U_oj0
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMTI4MDAzMCBTYWx0ZWRfX0p7v6LzGgaia
- BZ1O/HLMrjnalEoXY179Mzkmc5L+0hLABOHzl0kv+VW/TAmfRx06t5tNUI+6ynNGpd4kysuHVyR
- 1cu1DmrKoM30fQjNvLYfGBstkuevcJKoANxikwO+lyQKMfjzbO/6n5pkK0tdxWOEzlONWt4zirV
- WT4FHO4/e7iVSDb3OxDDLWJD030AZ9E0j8hrZxRolmyQNBG2y4864sQwSSSBW+lBPT/dp2ZCKC4
- 2SK8UEDIgk/psc1magysY7WjfyQOZcXyaVs3HQf7SaxqXMQyJs/QTCt93/iNnowdfKEZfTD/obp
- mh32TpoAA9s5AY0GmIG6Eye+hLrYi7VwmX20ZMk71RZgmGnNW5yee/MSBorwjHPWNvaF+lTKOG2
- 6ZZ3shj7STA2J6inffYjrmc9hvabraHL/lx/2shJHxQ/p0xy+1lLkT2sRLxQpRHPm99LBuyGwi1
- RHKAles77eMPA82P41w==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMTI4MDAzMCBTYWx0ZWRfX+lCiuWrcxK9r
- U6bbHcYps8SpKwIrwCjOlCEbBzZc6JVI6fX0ukQClix3/S1b7sGQ8t0AtbB7Qm83Ch9fCMuOf7E
- rcJMjqmfh4va2EqJrgXDKF1HZH4tY1o=
-X-Authority-Analysis: v=2.4 cv=Mdr5KJ/f c=1 sm=1 tr=0 ts=6b0a867c cx=c_pps
- a=wEP8DlPgTf/vqF+yE6f9lg==:117 a=fChuTYTh2wq5r3m49p7fHw==:17
- a=IkcTkHD0fZMA:10 a=zJRp6_cAMcgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=DJpcGTmdVt4CTyJn9g5Z:22
- a=EUspDBNiAAAA:8 a=QX-rXmrizRA3L83J75wA:9 a=QEXdDO2ut3YA:10
- a=bBxd6f-gb0O0v-kibOvt:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-11-28_02,2026-11-27_03,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- impostorscore=0 phishscore=0 adultscore=0 malwarescore=0 clxscore=1015
- priorityscore=1501 lowpriorityscore=0 spamscore=0 bulkscore=0 suspectscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2611040001 definitions=main-2611280030
 
-Commit 6c067677192f ("soundwire: qcom: disable the interrupt before
-gating the clock") correctly stopped the interrupt thread from racing
-with clk_disable_unprepare() in swrm_runtime_suspend(), but it also
-leaves the controller interrupt masked for the whole duration of clock
-stop, which breaks peripheral-initiated wake.
+On 27/11/2026 17:26, Jason Gunthorpe wrote:
+>> It would be possible to reserve this IOVA range in DT so given what you've
+>> highlighted I think this and the Iris commit should be reverted and the DT
+>> constraint implemented.
+> That was the other thread, obviously using DT to describe a hardware
+> issue is the correct choice. But there was some problem where they
+> also wanted to split the SID space using DT and then the DT mechansim
+> doesn't work because the whole thing becomes too hacky :\
+> 
+> Jason
 
-The driver is otherwise set up to service peripheral alerts while the
-clock is stopped.  swrm_runtime_suspend() masks only MASTER_CLASH_DET
-out of ctrl->intr_mask before writing INTERRUPT_CPU_EN, deliberately
-leaving SLAVE_PEND_IRQ enabled, and qcom_swrm_irq_handler() brackets
-itself with clk_prepare_enable()/clk_disable_unprepare() so that it can
-run while the controller is runtime suspended.  From there
-sdw_handle_slave_alerts() takes a pm_runtime reference on the
-peripheral, which resumes the controller and restarts the bus clock
-before any register is read over the bus.
+Actually I've been looking for some resolution on this.
 
-With the interrupt masked at the interrupt controller for the whole
-idle window that chain never starts.  On glymur an SDCA jack insert or
-removal while the bus is idle is not reported at all: the alert stays
-latched in the codec until something else resumes the bus, such as the
-start of playback.  Platforms that do not describe a usable wake
-interrupt have nothing to fall back on.
+https://lore.kernel.org/linux-media/d0e76f09-a360-4c1d-bfab-c5658f2a69e0@kernel.org
 
-disable_irq() is the synchronous variant, so by the time it returns any
-in-flight handler has been flushed.  That is all the race needed: once
-the clock is gated, re-arming is safe because the handler enables the
-clock itself.  Re-arm at the end of swrm_runtime_suspend() and drop the
-now unbalanced enable_irq() from swrm_runtime_resume().
+There's been radio silence on the method from the iommu maintainers so I 
+haven't merged the DT that would come to depend on it.
 
-Fixes: 6c067677192f ("soundwire: qcom: disable the interrupt before gating the clock")
-Signed-off-by: Gopi Chandra Sekhar Reddy Kanala <gopi.kanala@oss.qualcomm.com>
----
-The commit this fixes is currently only in linux-next and has not
-appeared in a release, so there is no stable backport to do.
----
- drivers/soundwire/qcom.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+If its mergable with changes then grand, if not then the approach needs 
+to be rolled back.
 
-diff --git a/drivers/soundwire/qcom.c b/drivers/soundwire/qcom.c
-index a4cb62897192..05ef7bb2c5f7 100644
---- a/drivers/soundwire/qcom.c
-+++ b/drivers/soundwire/qcom.c
-@@ -1801,7 +1801,6 @@ static int __maybe_unused swrm_runtime_resume(struct device *dev)
- 	}
- 
- 	clk_prepare_enable(ctrl->hclk);
--	enable_irq(ctrl->irq);
- 
- 	if (ctrl->clock_stop_not_supported) {
- 		reinit_completion(&ctrl->enumeration);
-@@ -1893,6 +1892,8 @@ static int __maybe_unused swrm_runtime_suspend(struct device *dev)
- 
- 	usleep_range(300, 305);
- 
-+	enable_irq(ctrl->irq);
-+
- 	if (ctrl->wake_irq > 0) {
- 		if (irqd_irq_disabled(irq_get_irq_data(ctrl->wake_irq)))
- 			enable_irq(ctrl->wake_irq);
+Either way several series in limbo and now this rollback.
+
+I would like to do the right thing _once_ to resolve.
 
 ---
-base-commit: 909ef7a9a30fa139e69e555e3606680f5cca7726
-change-id: 20261128-sdw-qcom-irq-207ea053d898
-
-Best regards,
---  
-Gopi Chandra Sekhar Reddy Kanala <gopi.kanala@oss.qualcomm.com>
-
+bod
