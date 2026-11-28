@@ -1,134 +1,63 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=209.85.221.54
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795821308;
-	b=I5dqbNmFrRsC6AlkH+zrRTrQzYvKN180YdlVnV8knzlAkyvlQ1EYyKHES7XnzIkx23Sf
-	 yB6H+unCvYl3k8eybsYGRElrgdzdBffc3NNRQfsTOF+PdwvzZdQWT2T0WdxbQzFYwRCvj
-	 EIPdjPvotT6XYNn3xsNOSQGG0mo0PwdHt8AN/IbT2UyQ9GdVfqN79cOMmtr2PNIkM4mVq
-	 rjO4bHkEEq6ac28vrktbStl/VC1dywSVZ+Rx5ojSQV+UG1/xBk/9hcaN6AUu828+xgE2g
-	 P0TuiyJZ1SFgT12tidqTcdKh9B1PPtS3P6bfk/20LnGTI0jpiKA+Pade+CX50pGktNQ==
+	t=1795826271;
+	b=EfqBadBxOfUpNZgAg5RHBuofR55P79W85NrUv9eOPJmuLw02jQCxMeYV4F1x0nqCybTF
+	 Ad8mE9ifnue01KcTKUmfUFarw+3GFzZL91zrCJn/n/YWokjkouCiRCLLWaFLJCzJKs1D6
+	 sWU7dE8C1ygzfVn/1EdZncdycmW3gU15NnZ0WGf8j7DEpIRDu3E1WLffark2M2HStPFgi
+	 OTDojBtpC6o4ZO0P1LTSsmr+D8/PZxQNlfzwMW4MJOGDBhLqiNLDMsw7g7URGr/jsYkbP
+	 ngBk6SAM0Eck29QBp6Ug+n7HeQqn2DyPlo5xc5yiXpTRF1FOnF9OmsxyKhlSH8wpV1g==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795821308;
-	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
-	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
-	 Date:Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding;
-	bh=U1M+MDeqlkODjZ50qKjXMO75f40J30DxxF3l7NYSGEM=;
-	b=k/ZrvPNbTgvmPrss/a1AlC9AAxwQQ3qk5LEDcyrd+IJrjP6PAyi+piMnAomk0ZqvymbC
-	 gNPN/nWai5CcTWJJKoXJ4Ae4BVkt5Hrq5ksqUlz37CYhKtDR3cMjyYDfXTZcfKl/d8wHP
-	 HH62vgiBpPvySkpib/ax3XTCVOyCvvlmcDLlBPT8oCQNckBzPpQ+HRUt/rhN/Kuc5eAvd
-	 v9Uz1gUQbMoZGF7DKrqyiaBpeaWRC324jEP5PhNOqfx0MZf7P89iZenAMsjoY0JmXX0sK
-	 dmBLFlp+IEeQIhfsfHUKb9XNRoLrYgqjb0m4gIXC8MymCY4bREUbbFBry8vlRYaGPAg==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795826271;
+	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
+	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
+	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
+	 X-CM-SenderInfo;
+	bh=XHNSyP9vXiUABekrjWdiq3Cv7yHc1OpTTdfPh3CIO9c=;
+	b=hFpun7QtcLY26026x2A4CqWLJtTyqYhsNCFfkybz2Blvnyhz0S4mlAuXgZpgE+9jJyuL
+	 XXiU1hhODDBKCF0B1ruqvZWJsRe4Of3GWlBb6o0fGxdrTTy/nbcxuLdcpF7x4S3CQ3945
+	 /XxGc17d23qSfbYunt+VJ1FKC0+MDds5RlIwNZdytXvBY5eaOz4aFmwaz19Fi4LDk3B2s
+	 rEA1J7Hb8573Va9SLYZWnhuAuzBe9RbzGWd6qmkh4sDSl1k9Zkpa+y5VBXAWLfRk6vpBA
+	 0twDIBgpbsOvwk0g+C4tyoZDGh3osZlbUNBzwXLvn3EwAu0F3VkUiyDDY+O2z7gvYrQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=gmail.com;
-	spf=pass smtp.mailfrom=gmail.com;
-	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WDrBk4z3;
-	arc=none smtp.remote-ip=209.85.221.54
-Received: from mail-wr1-f54.google.com (mail-wr1-f54.google.com [209.85.221.54])
-	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
-	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6A27D606A33A
-	for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 23:15:07 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 6A27D606A33A
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
+	dmarc=pass header.from=mail.ustc.edu.cn;
+	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
+	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=vO02KLo7;
+	arc=none smtp.remote-ip=202.38.64.46
+Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
+	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86698606A31C;
+	Sat, 28 Nov 2026 00:37:47 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86698606A31C
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=WDrBk4z3
-Received: by mail-wr1-f54.google.com with SMTP id ffacd0b85a97d-4ad6219f7d8so7732766f8f.0
-        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 15:15:07 -0800 (PST)
+	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=vO02KLo7
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20260707; t=1795821306; x=1796426106; darn=vger.kernel.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=U1M+MDeqlkODjZ50qKjXMO75f40J30DxxF3l7NYSGEM=;
-        b=WDrBk4z39jTSJg7fP1LZv5pSAmcolbmVo4wwWMjjlFQboYBu3wN5rJ9GYnYJV50K3+
-         tkw+jwH1lJXR7gVV/OBT9/yk7tTAiZrdu2ajb+eYT+UVhWfUsEfp6iR0FSExSHMDzvsZ
-         3fpjMgMby8qPK4rdWEnPxtHr3jKM0uthso6MfAww0lrr5k/+C3OtKtXfdvcLi7gHPltW
-         qCeMSaWpCWUuLbQVELMCkcXgultuZ6nRhj58FRGzZaFMWHaLx3Tjc30C/hZ5vAlCSiMn
-         7dF5c687gdpqCnnInSFJs2GpiUdsUfdCYGv9dUppGS+08fFr1MS5RebwLf1K2w2KKf8y
-         FyPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1795821306; x=1796426106;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=U1M+MDeqlkODjZ50qKjXMO75f40J30DxxF3l7NYSGEM=;
-        b=vF5BzvUCeOil5DAklnSgAvFQkuwH2aX7NbA1g/fQU7vP+z7Ug9sFTEd0lMODvWQuML
-         3NfSZNcHsrB+b35Q4xc186DzcIxdFyUer/yIgxsqIZuNNM9IKAuPDU7hB9Kwscgr4fEP
-         Naq7qRDNbxziyVJZ+e/4QU8kgVAr35QHVmhD0bUR/wgrz+LbGFbaVMIrOweIqWaSMuYK
-         7PcNzSg2UhNDlWy5pdEcjC2uGqfyCHQnDodOKljWkp48pR8CrlZXuK55dZe81CHEtGh7
-         J28p7s7zRz3vMeHc79crjcr0Ptv3aCgsrY9OJ/46YJKv9WZoUKSKRhtqayAEPB9UpefE
-         FTjQ==
-X-Gm-Message-State: APuU4Z9AvfW/aJ/pbRjyyhcuKA7HxmnLCxK9GcR6PX8diI3kQD04ohwA
-	xrav3WGcUR4gSjU39+U8mYLFdRo17DgwCW3tQnL8HHbaxIbjPKYgXAL1
-X-Gm-Gg: AZFdTZc7hhS7bEzJMqIPiFjANAln7yaJQ6tjhDofgWyZcY8DaNdyTsK5Dg0kQHzsofx
-	oRGSnblpNO1ziQ/Lk/r7DUg/dAg3QLishLdxFnck00vst0n1T0PLB/jGCmrK8Ec8Cny1ovRB9Hx
-	yzx5pdWF/844F0ZIxUwnQVnEddJBGzk+vXliwPrCG1f45snL25UhRrof9wHrmeb2I7dxNUFhRXh
-	lVkds830Rh5TCVwAXr81/+82Ul3gpv0jjKfVPwp6flf/VWjAfh2sBvSazV29gZRWJqDVLD+BTx9
-	Id8gE301Ntc/+owJs5FtMnlm3t1rfD7VvDBYxd5dPRIGEkJKsOQ6kdk92YmGzEOVQ+6aWIo+ybp
-	2rtmwxMo9InMAvok5kOTHRn9WAYXoXWculDE6nwyji7md/YexPxH0sfyqzUAFQPGbQ0YOwkWbUS
-	tGJLXuzT78rOVHAPxm46GXPxQ1Aiq/sZDD9m+HsvF2uiWYkBeUT1ukAFE7Kq6hji6pqWnRNWL7L
-	od4Nv17tRpSFXNSNs52I/Fxv+GvsF884QX0jxfhqH8g3bDlLIxKH5rXSHFQQr20ECkEcAHtMFvU
-	aqApl8vzhnxnH5mPpWvzHd2f7QY=
-X-Received: by 2002:a05:6000:178f:b0:4bb:c85e:d565 with SMTP id ffacd0b85a97d-4bbc86e17b5mr14733028f8f.55.1795821305534;
-        Fri, 27 Nov 2026 15:15:05 -0800 (PST)
-Received: from flare5 ([212.58.121.92])
-        by smtp.gmail.com with ESMTPSA id ffacd0b85a97d-4ab6a67fe48sm45269880f8f.23.2026.11.27.15.14.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 27 Nov 2026 15:15:03 -0800 (PST)
-From: Stanislav Aleksandrov <lightofmysoul@gmail.com>
-To: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>,
-	Bjorn Andersson <andersson@kernel.org>,
-	Konrad Dybcio <konradybcio@kernel.org>,
-	Abel Vesa <abelvesa@kernel.org>,
-	Rob Herring <robh@kernel.org>,
-	Krzysztof Kozlowski <krzk+dt@kernel.org>,
-	Conor Dooley <conor+dt@kernel.org>,
-	Robert Marko <robimarko@gmail.com>,
-	Guru Das Srinagesh <linux@gurudas.dev>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Radu Rendec <radu@rendec.net>,
-	Will Deacon <will@kernel.org>,
-	Robin Murphy <robin.murphy@arm.com>,
-	"Joerg Roedel (AMD)" <joro@8bytes.org>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Wesley Cheng <wesley.cheng@oss.qualcomm.com>,
-	Vinod Koul <vkoul@kernel.org>,
-	Neil Armstrong <neil.armstrong@linaro.org>,
-	Manivannan Sadhasivam <mani@kernel.org>,
-	Alim Akhtar <alim.akhtar@samsung.com>,
-	Bart Van Assche <bvanassche@acm.org>,
-	Bean Huo <beanhuo@micron.com>,
-	Stanley Jhu <stanleyjhu@google.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	"David S. Miller" <davem@davemloft.net>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Amit Kucheria <amitk@kernel.org>,
-	Thara Gopinath <thara.gopinath@gmail.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	Georgi Djakov <djakov@kernel.org>,
-	Sibi Sankar <sibi.sankar@oss.qualcomm.com>,
-	Ulf Hansson <ulfh@kernel.org>
+	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
+	Message-ID:In-Reply-To:References:MIME-Version:
+	Content-Transfer-Encoding; bh=XHNSyP9vXiUABekrjWdiq3Cv7yHc1OpTTd
+	fPh3CIO9c=; b=vO02KLo7+e+v+hjpY1cqyiw6dzDCUArVlscqsVWwmXNTKBk1EQ
+	PmlvB4qyWlW6kAYLe+XSAvPOxpttprGInX5B8ks89WBmk2qT4OMatf7HyX8KwuNv
+	Xm34wLahJklqQDKYIvWu1JkEDmco+W7K44PBxeasX315wxYtjzA9ohmwk=
+Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.184.233])
+	by mailimap2024 (Coremail) with SMTP id 3pYKCgAXkTVRIgprEugEAQ--.1728S2;
+	Sat, 28 Nov 2026 08:37:39 +0800 (CST)
+From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+To: linux-media@vger.kernel.org
 Cc: linux-arm-msm@vger.kernel.org,
-	devicetree@vger.kernel.org,
-	linux-kernel@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	iommu@lists.linux.dev,
-	linux-usb@vger.kernel.org,
-	linux-phy@lists.infradead.org,
-	linux-scsi@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	linux-pm@vger.kernel.org
-Subject: Re: [PATCH v3 14/14] arm64: dts: qcom: Add Samsung Galaxy XR
-Date: Fri, 27 Nov 2026 23:14:45 +0000
-Message-ID: <20261127231445.3623202-1-lightofmysoul@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <87280d80-9047-405b-8dcc-11276d34d2dd@oss.qualcomm.com>
-References: <20261125-halliday-dts-v3-0-5c8311c0b70b@gmail.com> <20261125-halliday-dts-v3-14-5c8311c0b70b@gmail.com> <87280d80-9047-405b-8dcc-11276d34d2dd@oss.qualcomm.com>
+	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
+	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
+	Abhinav Kumar <abhinav.kumar@linux.dev>,
+	Bryan O'Donoghue <bod@kernel.org>,
+	Mauro Carvalho Chehab <mchehab@kernel.org>,
+	Hans Verkuil <hverkuil@kernel.org>,
+	Stefan Schmidt <stefan.schmidt@linaro.org>,
+	stable@vger.kernel.org
+Subject: [PATCH v2] media: iris: fill in a default colorspace for decoded formats
+Date: Sat, 28 Nov 2026 08:37:37 +0800
+Message-ID: <20261128003737.1300698-1-xiaqinghuan@mail.ustc.edu.cn>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
+References: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -139,29 +68,125 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID:3pYKCgAXkTVRIgprEugEAQ--.1728S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3JrW5XF1UCryxCw47GFWUtwb_yoW7GrWfpr
+	1Fk395ZF4UXr17AwsxJw4Fq3Z3ZayrWry3CrZrG3yUCFs8uw1rWryvkF13uayUJrnxA345
+	AF12yrZ8Can8A3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvKb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwV
+	C2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
+	Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJV
+	W8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka
+	0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
+	v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
+	1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
+	AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI
+	42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
+	VjvjDU0xZFpf9x07betCcUUUUU=
+X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2sHyZtdggA7sO
 
-On Fri, Nov 27, 2026 at 02:58:40PM +0100, Konrad Dybcio wrote:
-> Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+v4l2-compliance fails the format ioctls on the decoder because the capture
+and output colour fields are left at V4L2_COLORSPACE_DEFAULT:
 
-Thanks for the review.
+  fail: v4l2-test-formats.cpp(414): !colorspace
+  fail: v4l2-test-formats.cpp(537): testColorspace(...)
 
-I've implemented support for almost all of the hardware in my
-local branch and I have found that the headset exists in multiple
-revisions.
+A decoder cannot know the stream's colours before it parses a frame, but the
+format still has to round-trip a valid, self-consistent set. Default to
+BT.709 limited range and keep the value when the client passes
+V4L2_COLORSPACE_DEFAULT back on S_FMT/TRY_FMT, so G_FMT -> S_FMT stays
+idempotent. The description parsed from the bitstream is still reported
+through the source-change path once it is known.
 
-So, I'd like to make a split:
+Tested on a Snapdragon 8 Elite (SM8750) tablet with vpu35 firmware:
+v4l2-compliance -d /dev/video17 loses the eight format/colour failures and
+decoding is unchanged (H.264 and HEVC both decode with framemd5 identical to
+the software decoder).
 
-rename: halliday-samsung-xrvst2.dts -> halliday-samsung-xrvst2.dtsi
-add: halliday-samsung-xrvst2-rev22.dts
-add: halliday-samsung-xrvst2-rev25.dts
+This is v2 of 2/3 of the series. Two patches are withdrawn:
 
-The .dts files will initially contain only compatibles.
-The real differences between the revisions are the DMIC drive
-strength, the display panels and their supply voltage, so the files
-will be 'empty' until I send my sound and display series.
+- 1/3 "media: iris: report a platform bus_info prefix" is a duplicate of
+  commit 1facae9bc3c1 ("media: iris: Fix bus_info prefix in
+  VIDIOC_QUERYCAP", Vishnu Reddy, 2026-09-29, Fixes: 94ef75095d5e,
+  Cc: stable@vger.kernel.org), which is already in mainline. My tree predates
+  it, which is why I still saw the failure; sorry for the noise, please drop
+  1/3.
 
-Is it OK if I send the split in a v4, or is it better
-to do it in a follow-up?
+- 3/3 "media: iris: seed the crop rectangle when only CAPTURE is formatted"
+  does not apply to mainline anymore: in v7.4-rc3 iris_vdec_s_fmt() seeds
+  inst->crop from the user format in both switch branches
+  (iris_vdec.c:271-274 and :309-312), so a CAPTURE-only S_FMT no longer
+  leaves a 0x0 crop. Dropped.
 
-Best regards,
-Stanislav
+AI assistance was used to prepare this change; I reviewed every line, and all
+measurements above are mine.
+
+The *_DEFAULT initialisers themselves predate this: they came with
+38fc8beaba55 ("media: iris: implement reqbuf ioctl with vb2_queue_setup"), which
+brought iris_vdec.c in.  The ioctl path that stores and returns them untouched
+is b530b95de22c, so that is the tag below.
+
+Fixes: b530b95de22c ("media: iris: implement s_fmt, g_fmt and try_fmt ioctls")
+Cc: stable@vger.kernel.org
+Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+---
+
+ drivers/media/platform/qcom/iris/iris_vdec.c | 25 +++++++++++++++++++++----
+ 1 file changed, 21 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/media/platform/qcom/iris/iris_vdec.c b/drivers/media/platform/qcom/iris/iris_vdec.c
+index 0dd33ff447bb..2238ef1a2794 100644
+--- a/drivers/media/platform/qcom/iris/iris_vdec.c
++++ b/drivers/media/platform/qcom/iris/iris_vdec.c
+@@ -37,6 +37,10 @@ int iris_vdec_inst_init(struct iris_inst *inst)
+ 	f->fmt.pix_mp.plane_fmt[0].bytesperline = 0;
+ 	f->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_INPUT);
+ 	f->fmt.pix_mp.field = V4L2_FIELD_NONE;
++	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_REC709;
++	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_709;
++	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_709;
++	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_LIM_RANGE;
+ 	inst->buffers[BUF_INPUT].min_count = iris_vpu_buf_count(inst, BUF_INPUT);
+ 	inst->buffers[BUF_INPUT].size = f->fmt.pix_mp.plane_fmt[0].sizeimage;
+ 
+@@ -49,10 +53,10 @@ int iris_vdec_inst_init(struct iris_inst *inst)
+ 	f->fmt.pix_mp.plane_fmt[0].bytesperline = ALIGN(DEFAULT_WIDTH, 128);
+ 	f->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_OUTPUT);
+ 	f->fmt.pix_mp.field = V4L2_FIELD_NONE;
+-	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_DEFAULT;
+-	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_DEFAULT;
+-	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_DEFAULT;
+-	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_DEFAULT;
++	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_REC709;
++	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_709;
++	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_709;
++	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_LIM_RANGE;
+ 	inst->buffers[BUF_OUTPUT].min_count = iris_vpu_buf_count(inst, BUF_OUTPUT);
+ 	inst->buffers[BUF_OUTPUT].size = f->fmt.pix_mp.plane_fmt[0].sizeimage;
+ 	inst->frame_rate = MAXIMUM_FPS;
+@@ -207,6 +211,19 @@ int iris_vdec_try_fmt(struct iris_inst *inst, struct v4l2_format *f)
+ 	if (pixmp->field == V4L2_FIELD_ANY)
+ 		pixmp->field = V4L2_FIELD_NONE;
+ 
++	/*
++	 * A decoder cannot know the colour description of the stream before it
++	 * has parsed a frame, but the format has to be self-consistent and
++	 * must round-trip: keep the defaults when the client passes
++	 * V4L2_COLORSPACE_DEFAULT back instead of clearing them.
++	 */
++	if (pixmp->colorspace == V4L2_COLORSPACE_DEFAULT) {
++		pixmp->colorspace = V4L2_COLORSPACE_REC709;
++		pixmp->xfer_func = V4L2_XFER_FUNC_709;
++		pixmp->ycbcr_enc = V4L2_YCBCR_ENC_709;
++		pixmp->quantization = V4L2_QUANTIZATION_LIM_RANGE;
++	}
++
+ 	pixmp->num_planes = 1;
+ 
+ 	return 0;
+
+-- 
+2.53.0
+
