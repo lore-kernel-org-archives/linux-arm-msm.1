@@ -1,74 +1,76 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.87
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=162.62.57.210
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795876546;
-	b=qOx1iy05JxrXv4CbbQPMaO1YFmirlrE3bs6XYfYWUL0vWkOKNh2F4WzyY7nsIg4M8xJN
-	 2s3qz4Qb79WtDUiDmz33M+x6ns72XoDN6ar/2ktdIK8rHIpZjDoDg7uvbFH7HdVMOpB6m
-	 M11SgH9o0UCdcgChzgm/eEWy86Bi5/YLDPiHc6aKpLTAN6XwBHTdoSK1XIK99vZJBDFkI
-	 3K+xnc73mzI6yPbvaNjZehemUmP++OVSLqOjCn0Q0IKSwvNMWPb/QL7/Q01jbf/oLY3Vj
-	 s17axLl69up0CaBB9lzGDtrCKUKnYhnhK3Kox4xKcnrIrKbrxVQk2rJHEBc33SY+muw==
+	t=1795876683;
+	b=aqIq8A2JFdkgXOIxVXpG6913AvkO12hAhsZcfP7Hf47tOR5rap70rr2GT1D+PrPFsj6m
+	 meVU3QV7YoH9XCTyS4eO+A7BQjej7en1nbq55W7EnrnQ1c6UyHNoIm0l1V58nLo2zMkeq
+	 unBwitONNhqEzOHXCt1n6PwhXMmMqqV7TyBVI/zkJebCRFWtWfd/N4nvrPiUk37Lh6Zki
+	 XMzJAiMcmoez9ce/OTNDLQYtXDoFADGhafaZRrEc3ssuV/kU7YH294L6pItgGjd0RGRJx
+	 IefIZP5VZUI9nE7s6cZ0AXkXBb1PnOYwz7/XGYWtEpCXaCo2nV0YUNymuCcWoYWdmdQ==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795876546;
+	a=rsa-sha256; c=relaxed/relaxed; t=1795876683;
 	h=DMARC-Filter:DKIM-Signature:Received:X-QQ-mid:Message-ID:
 	 X-QQ-XMAILINFO:X-QQ-XMRINFO:From:To:Cc:Subject:Date:X-OQ-MSGID:
-	 X-Mailer:Content-Type:Content-Transfer-Encoding:MIME-Version;
-	bh=/erwlKU4Qt5qlsYt+hD47EAu/kfrXvbGjQdsXs1DRRI=;
-	b=d904Mdh6H68vf8rdiiGydqPSrQvQW1ThfGmyD4llJAIkrxz7AqtKqzYJoxEDTDWBmojz
-	 b/Wib/0kNl8yO7GAYb8zfT0aN446NoGivFGBbvVfYshGW60HMZcYbID7tC0ch3PCdGACk
-	 HccRc5qkFaPrjnIWHGaiTokyK9YrYew1n8z29YaF8HN9fuDKTMFg6Ihu8Ds+tP+mCq+Ex
-	 zdvmb/1jnnTM8oiV1JrqzLvlsVm4e4GpDepnjx4r+7yLzNM7S6K0n6/7l7eo1qAV2oRIf
-	 BW0k/nZFPW/boJU7zE3MDguEBsQPORB6R4KrJN3qdnE1hr9w0A3vnPzGrooI6caamWw==
+	 In-Reply-To:References:Content-Type:Content-Transfer-Encoding:
+	 MIME-Version;
+	bh=bclc+UrCWkqE/Q6i9Fo0k4c7+1YBHLWtEqXI4UaXYkg=;
+	b=eD7+4Hc20sFpMdP5Et1mdD9g43yUE2GY+DjG8mGSZKsczv73V4rtmSB589tXh/ogjzJR
+	 nhezHNqJudjvu7PDR69sxKTTd/OvMwLOvBSQcOhFOYXyMEG9cRRtyczaJfg2HJGT8j20n
+	 uIg8gOYf7pgpxOqt4195vsNK/IPgSJeUL/vXj8bErJyrEihQy2EpX+Ts8prDb+50BsjNh
+	 rmmCaQrdA8+zuAj1VGGqfNT3Aam8h8W4KJoFxMixDTRGLptykgJUWluLg3WyS2UdVxwNd
+	 JbPveaR/VYpVTKD6DxpgRvU4PSaIq5aSfq+Dceql3IXNjGGPlSigYgAh90MZaoj5PrQ==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
 	dmarc=pass header.from=qq.com;
 	spf=pass smtp.mailfrom=qq.com;
-	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=VUY2wBNc;
-	arc=none smtp.remote-ip=162.62.57.87
-Received: from out162-62-57-87.mail.qq.com (out162-62-57-87.mail.qq.com [162.62.57.87])
+	dkim=pass header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=KHPAdh2r;
+	arc=none smtp.remote-ip=162.62.57.210
+Received: from out162-62-57-210.mail.qq.com (out162-62-57-210.mail.qq.com [162.62.57.210])
 	(using TLSv1.2 with cipher ECDHE-ECDSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4F419606A31C
-	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 14:35:43 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 4F419606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 558B6606A31C
+	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 14:38:00 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 558B6606A31C
 Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=qq.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=VUY2wBNc
+	dkim=pass (1024-bit key, unprotected) header.d=qq.com header.i=@qq.com header.a=rsa-sha256 header.s=s201512 header.b=KHPAdh2r
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
-	t=1795876533; bh=/erwlKU4Qt5qlsYt+hD47EAu/kfrXvbGjQdsXs1DRRI=;
-	h=From:To:Cc:Subject:Date;
-	b=VUY2wBNc/YAUXNqwPc8kjJOmFk5sYt3zJNqw/dlXax3UDIxuM1qczDwpazUOOcvA+
-	 UTbsf4t3F5L5ltDuyiHrTuNqczTfa2nx8VhQevuMvsVmLBxDNtMkYUNuF6lPPhHf5G
-	 j2rYTbfnb4a49y0WdVAEm5/eWk1Y0bvzXNfe8MWU=
-Received: from PhorusPC.localdomain ([112.43.31.17])
-	by newxmesmtplogicsvrsza73-0.qq.com (NewEsmtp) with SMTP
-	id 8DFB9E06; Sat, 28 Nov 2026 22:35:31 +0800
-X-QQ-mid: xmsmtpt1795876531t9h3pnkbg
-Message-ID: <tencent_5ACF8B20776C5AA9A1C5D37C67600532AB08@qq.com>
-X-QQ-XMAILINFO: MBHEkxMsYPCYZ9dLnjPj1Rv6dND3vQgIg5c5uuKSR+38MBs1zEVodlsBCpS/Uh
-	 B4WLQAHZoDwdJDDDZ2eiJ+KD7UIqwF/fMrrtkSgH7kItfGC6o4mVZt7y5nJakywFaSZ7wn2he1Wv
-	 E53ONqh7OIZb25IXWzi0n+4nXCYIgHOVWyZRnXbsNJ6G7FpM78xdUwJT+bfdsmkNoPf1fSj8VBGu
-	 2P6SnncW8Rx3JA0UQMIbNOCb3b5ZbEnOUe+L3CZzKAuw4FP/ImRp5LADx1Dlb9mm+3hEsM3ojwm0
-	 2s5RoHDOLg36bnSe4WjbO4TtZx8M7nNvnv6ESa++ZkI0X9nFxuC9MFgWja0KNZ3IF33/lCf8wSVJ
-	 vWuKKbr4gSqlb52wmEYZVB1h8kVZYGQIF/3tfFbForUIeuxeh+SdLPH9Rq308kBcV5AaixjEqW/U
-	 eVRQUQxpFshjsdVKrfiysXPGp2BU+aJfBNOIDQFlCW49qfVVKaSyXI2/dnNo+tNc+NfVCYyShi4s
-	 uBfsE7i94WjNyyDdO6ke+ZAqgVdCNkbDJw1DAf4UbF+Zy6Or0pyDs/QzzI5nOR5ldXwyKFYCQiVZ
-	 5PIy6pI6kVom3HsUol+I/KI8lC/f/yJQ8krslMkS7A41FungnpwaTVy4OMpx2ywLlOYCzQOyS7sB
-	 3lCuh9cQqaup2qmteh4LqV/SkshnTJ+q74Uyp40SMHQRARNfin86Ly+lwn0lZi6eSnLNGzZkZlrU
-	 a1MR+Z030UdYxqSFsDq15XU7xs1ey/1Gwvn0aA8o3j0vc0rsX+bRMzwIz3vniESxclvCso0geUlZ
-	 6/tAWoNuQyh1AJQxmTCBXmKFsjp0La450MRnsgWpVIl54cOLHzcM2Iq8hn0TfdjTKIz1kn5QxmyC
-	 YRAdlbX6a5jdCMcDR2DnrHykJaHQ0TW47jJJYoKqSxpsZV8RTvBxC5oljA6X0DB71h8h1JFG8uc8
-	 dSTQ4kTAkl66+9GMYv2Nmc1rS0k9L/fMhfkIchqbSHemc3akRf5FAeYvWf564wwwOKksrJoSGCPl
-	 fhh3Rg8d/Okc5G+QCs2dhMXgaNeXxXFiWP/ss5iVyb0goe5SUpDqOJW+Rm6vUiU9PtiE/be1PwP/
-	 1SkaZNMxu/A9ogWE8=
-X-QQ-XMRINFO: MSVp+SPm3vtSI1QTLgDHQqIV1w2oNKDqfg==
+	t=1795876671; bh=bclc+UrCWkqE/Q6i9Fo0k4c7+1YBHLWtEqXI4UaXYkg=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References;
+	b=KHPAdh2rb4+IOAVNMd9VH50dEKcjQitArIy8URBMKAFvd0beJwvmO9Yd5am7RWm5l
+	 WXYrfiebgfxmrDBp9BEr5mHQ8cBtT5KAcptm27iwmpWwbcxS0K9hWSiWDdTR4JuhM6
+	 kopx0AVZhEvuh+K4sJFjOvhSjIo46lF54PmB+Bt8=
+Received: from PhorusPC.localdomain ([112.43.30.154])
+	by newxmesmtplogicsvrszb51-1.qq.com (NewEsmtp) with SMTP
+	id 971218A4; Sat, 28 Nov 2026 22:37:49 +0800
+X-QQ-mid: xmsmtpt1795876669t02ax0wpo
+Message-ID: <tencent_0D8198B109A402150BF10D834DC9F43E530A@qq.com>
+X-QQ-XMAILINFO: NhUkPfKlCtQwkJCi+Lg/LDyB/T8w+uYckg5P70wZYbQ4u0hzMg29TY6ypgdGPo
+	 7ohV0yC8Eyz539sy9QPTM4PD+BdptKT6ArKuFyfThzbowSoiANpVvyMlJY1elW67RBwtKPcqS8NV
+	 3oAbLqqYGJNuaAKBiF1Piuq3J3j2cQ84LnBcaku4uvlXWwX4cmxxbOU0qZye8jZWr4N67KLrrnsJ
+	 Pwhr1gyvYXr5dElIZ/JibSpdcULp2HZrJXV7UeU8OrakSWNpdbYkJ1F7gDwGFIxgH2zZuZUMwqep
+	 6S31x2UmYsXC3tVPaXS54VLBdZLV6yPuFvE8CLFrcCNl3QkKzfMfmEU+12woWIk66OaXt+LgwIRI
+	 GCYK5+xgqXOQN1fmDydzpjuPZdXrYebeK8cUUvyw31WBsRhM60zvswEzFoWNymHa4z5sahbqXIfH
+	 oSy7XVMo5fa6quZqelWEnh5eAPh0egSXuspLcc+QWmw9xkKGVLGkh9xncGlst5fy/YF0tbOYuR6n
+	 wIrPHuEy9eGxDqOn/Gb7A9OZNXF0CqduvWx4bUDtKhEeyt0gQ87bIWKEpLmckMzWY6qcCcWAJuw2
+	 YlZOIp08DfZugPA7NXNCqHbP1fWOChY1VXQPBcL3h1JmlO0zBn7F4dNuVdTCwUwdex0lcdto2W13
+	 5xfI7r4BJ+5BM2BXly1pyvIL8xwuW/b9rTewyMnpOtlKOtmNjKj34GuVwZnwuZd73Cb3oDdHjDsd
+	 T1XQfXHADNkEb4a4arZPz8AgLz0P9tgsGfsG3Ei9Jre2/kE2Ci0DpFNKrJrOPq5TfvUQynA9w4tV
+	 PlScHgyy+x/iXsSKDa6dxckbU02j3+E1elDvP7LgpgW/VdTvbTtzPNpKhaouKslufAau9Yhcywe9
+	 aoV26zYLrzuFdaRV7AZconBKSsufkqtGgpSXTFlZk290eh5Xduj7pBa3lxFXHM/FliA+z/bBHl5d
+	 7akdBlt1qcFKjjvJk+aq6p6lcHVH3i2tBojY55gDYjGEVvH0+oixusYgneJ5p9cqmzuPjSDeCPuW
+	 U83fLjIWSYTllbSVnWZkZciLmZVhcpa/mx75oHyjWaxpAfrGjmhOpg1SaDW7creyfQC5uacdMUZz
+	 w5ULQeS9RC54Ns8yMiPneoH7JODVwUiBIKxvCv
+X-QQ-XMRINFO: NyFYKkN4Ny6FuXrnB5Ye7Aabb3ujjtK+gg==
 From: Zhixiang Yu <littleyuer666@qq.com>
-To: dri-devel@lists.freedesktop.org
-Cc: linux-arm-msm@vger.kernel.org,
- Dmitry Baryshkov <dmitry.baryshkov@linaro.org>,
- Abhinav Kumar <quic_abhinavk@quicinc.com>
-Subject: [PATCH] drm/msm/dsi: use the DSC 1.2 RC table for 1.2 panels
-Date: Sat, 28 Nov 2026 22:35:17 +0800
-X-OQ-MSGID: <179587651736.1390.6674853883021858176@qq.com>
-X-Mailer: smtp-send (script)
+To:
+ Dmitry Baryshkov <lumag@kernel.org>, Abhinav Kumar <abhinav.kumar@linux.dev>
+Cc: dri-devel@lists.freedesktop.org, linux-arm-msm@vger.kernel.org
+Subject: Re: [PATCH] drm/msm/dsi: use the DSC 1.2 RC table for 1.2 panels
+ (resend with the current maintainer addresses)
+Date: Sat, 28 Nov 2026 22:37:34 +0800
+X-OQ-MSGID: <179587665445.1408.12490717564230529329@qq.com>
+In-Reply-To: <tencent_5ACF8B20776C5AA9A1C5D37C67600532AB08@qq.com>
+References: <tencent_5ACF8B20776C5AA9A1C5D37C67600532AB08@qq.com>
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 X-Mailing-List: linux-arm-msm@vger.kernel.org
@@ -80,6 +82,16 @@ List-Unsubscribe: <mailto:linux-arm-msm+unsubscribe@vger.kernel.org>
 List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
+
+Hi,
+
+the original submission went to the lists but the CCs used the retired
+quicinc.com address, and it bounced. The patch is in the archives here:
+
+  https://lore.kernel.org/dri-devel/tencent_5ACF8B20776C5AA9A1C5D37C67600532A=
+B08@qq.com/
+
+Nothing else changed; the body below is the same patch. Sorry for the noise.
 
 dsi_populate_dsc_params() always programs the pre-SCR (DSC 1.1)
 rate-control parameters.  A panel that advertises DSC 1.2 needs the
