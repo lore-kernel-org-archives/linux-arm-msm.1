@@ -1,63 +1,93 @@
-Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=202.38.64.46
+Authentication-Results: smtp.subspace.kernel.org; arc=none smtp.remote-ip=74.125.224.52
 ARC-Seal: i=1; d=subspace.kernel.org; s=arc20261015; a=rsa-sha256; cv=none;
-	t=1795826271;
-	b=EfqBadBxOfUpNZgAg5RHBuofR55P79W85NrUv9eOPJmuLw02jQCxMeYV4F1x0nqCybTF
-	 Ad8mE9ifnue01KcTKUmfUFarw+3GFzZL91zrCJn/n/YWokjkouCiRCLLWaFLJCzJKs1D6
-	 sWU7dE8C1ygzfVn/1EdZncdycmW3gU15NnZ0WGf8j7DEpIRDu3E1WLffark2M2HStPFgi
-	 OTDojBtpC6o4ZO0P1LTSsmr+D8/PZxQNlfzwMW4MJOGDBhLqiNLDMsw7g7URGr/jsYkbP
-	 ngBk6SAM0Eck29QBp6Ug+n7HeQqn2DyPlo5xc5yiXpTRF1FOnF9OmsxyKhlSH8wpV1g==
+	t=1795829095;
+	b=ZtIn2AAiwW/D5bkSVfCt1DBs8+UAtT5qpSFCl6iHHu8NOaFCpifCJGLRA9BkT4qpYXuU
+	 v9ZOnKJGMUAGPBKOCVkv9a9lfMmoGPcR2wBdvXMPe37O8LCE9W3AbyeFv85Z5C5uY52+e
+	 fp7L0E4L5J/kN84WiHwBPIs+t0JnFxIGOCrKkjKK7fEJ00pZNh5fV5oHRbCLdKYnJXzzu
+	 r3704K++9YBoC4XPbHT1X+c/JI+H8hiBM9kVzonSScAk566aFj58ZRmIA676/cQ2AXDvF
+	 czix5q5kkIR5jdM6R3nKF+kiELZOltguUnAld3DiYCsvViut2FYx1BtKAHi1tiGZZQg==
 ARC-Message-Signature: i=1; d=subspace.kernel.org; s=arc20261015;
-	a=rsa-sha256; c=relaxed/relaxed; t=1795826271;
-	h=DMARC-Filter:DKIM-Signature:Received:From:To:Cc:Subject:Date:
-	 Message-ID:X-Mailer:In-Reply-To:References:MIME-Version:
-	 Content-Transfer-Encoding:X-CM-TRANSID:X-Coremail-Antispam:
-	 X-CM-SenderInfo;
-	bh=XHNSyP9vXiUABekrjWdiq3Cv7yHc1OpTTdfPh3CIO9c=;
-	b=hFpun7QtcLY26026x2A4CqWLJtTyqYhsNCFfkybz2Blvnyhz0S4mlAuXgZpgE+9jJyuL
-	 XXiU1hhODDBKCF0B1ruqvZWJsRe4Of3GWlBb6o0fGxdrTTy/nbcxuLdcpF7x4S3CQ3945
-	 /XxGc17d23qSfbYunt+VJ1FKC0+MDds5RlIwNZdytXvBY5eaOz4aFmwaz19Fi4LDk3B2s
-	 rEA1J7Hb8573Va9SLYZWnhuAuzBe9RbzGWd6qmkh4sDSl1k9Zkpa+y5VBXAWLfRk6vpBA
-	 0twDIBgpbsOvwk0g+C4tyoZDGh3osZlbUNBzwXLvn3EwAu0F3VkUiyDDY+O2z7gvYrQ==
+	a=rsa-sha256; c=relaxed/relaxed; t=1795829095;
+	h=DMARC-Filter:Received:DKIM-Signature:X-Google-DKIM-Signature:
+	 X-Gm-Message-State:X-Gm-Gg:X-Received:Received:From:To:Cc:Subject:
+	 Date:Message-ID:X-Mailer:MIME-Version:Content-Transfer-Encoding;
+	bh=OWNGxbponyKfeyRlTE7MEjwwreM5am00CUo8E20vsbk=;
+	b=lv2pwmMutWzmkzTqHxsrfbtnENITLRFOPdjLOCVictwWOVUUDQtUGPQcCGlrMqyPy+ta
+	 +h1rSrQ1VcLG/58ElfPHj2X4N9BY1kVPNqMLf8TzIIiJkgiDKrJmYIDAVpbmIyoB/Rm6F
+	 uJdh9rGenBTGcLwdMWIBHjBuqNjH2vbXyLnEEvx0JtYf6IGb1lc9F43gSAqB2xSKYfj4j
+	 CoQSZmqH35HhcGnwXQEQq47B7gi+um5SCCWfBqScFhkgMkFD3o8aA7KyAJVStRVZaNMdG
+	 04ZOG8IVTR7D+5wHLGL+7qOjBMPr+uXmEu8iE4q1QuYe9SZB3jopyHZTrURefV3QZQA==
 ARC-Authentication-Results: i=1; smtp.subspace.kernel.org; 
-	dmarc=pass header.from=mail.ustc.edu.cn;
-	spf=pass smtp.mailfrom=mail.ustc.edu.cn;
-	dkim=pass header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=vO02KLo7;
-	arc=none smtp.remote-ip=202.38.64.46
-Received: from ustc.edu.cn (smtp.ustc.edu.cn [202.38.64.46])
-	by smtp.subspace.kernel.org (Postfix) with ESMTP id 86698606A31C;
-	Sat, 28 Nov 2026 00:37:47 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org 86698606A31C
-Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=quarantine dis=none) header.from=mail.ustc.edu.cn
-Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=mail.ustc.edu.cn
+	dmarc=pass header.from=gmail.com;
+	spf=pass smtp.mailfrom=gmail.com;
+	dkim=pass header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ksQFYsod;
+	arc=none smtp.remote-ip=74.125.224.52
+Received: from mail-yx1-f52.google.com (mail-yx1-f52.google.com [74.125.224.52])
+	(using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+	 key-exchange X25519 server-signature ECDSA (prime256v1) server-digest SHA256)
+	(No client certificate requested)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC362606A31E
+	for <linux-arm-msm@vger.kernel.org>; Sat, 28 Nov 2026 01:24:54 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.4.2 smtp.subspace.kernel.org EC362606A31E
+Authentication-Results: smtp.subspace.kernel.org; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: smtp.subspace.kernel.org; spf=pass smtp.mailfrom=gmail.com
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=mail.ustc.edu.cn header.i=@mail.ustc.edu.cn header.a=rsa-sha256 header.s=dkim header.b=vO02KLo7
+	dkim=pass (2048-bit key) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20260707 header.b=ksQFYsod
+Received: by mail-yx1-f52.google.com with SMTP id 956f58d0204a3-67c6a0abc2eso9086160d50.0
+        for <linux-arm-msm@vger.kernel.org>; Fri, 27 Nov 2026 17:24:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=mail.ustc.edu.cn; s=dkim; h=Received:From:To:Cc:Subject:Date:
-	Message-ID:In-Reply-To:References:MIME-Version:
-	Content-Transfer-Encoding; bh=XHNSyP9vXiUABekrjWdiq3Cv7yHc1OpTTd
-	fPh3CIO9c=; b=vO02KLo7+e+v+hjpY1cqyiw6dzDCUArVlscqsVWwmXNTKBk1EQ
-	PmlvB4qyWlW6kAYLe+XSAvPOxpttprGInX5B8ks89WBmk2qT4OMatf7HyX8KwuNv
-	Xm34wLahJklqQDKYIvWu1JkEDmco+W7K44PBxeasX315wxYtjzA9ohmwk=
-Received: from xuqianhui.tail7a2807.ts.net (unknown [114.214.184.233])
-	by mailimap2024 (Coremail) with SMTP id 3pYKCgAXkTVRIgprEugEAQ--.1728S2;
-	Sat, 28 Nov 2026 08:37:39 +0800 (CST)
-From: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
-To: linux-media@vger.kernel.org
+        d=gmail.com; s=20260707; t=1795829094; x=1796433894; darn=vger.kernel.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=OWNGxbponyKfeyRlTE7MEjwwreM5am00CUo8E20vsbk=;
+        b=ksQFYsodPDGdp7EnIkIthOcdhW3Ho6POpCgmWo06HcHx7CM2uDECQE6JLgFOtFX+uS
+         wwiNCleRKgX/0hRnp0SzYPzS0vEq7xewx5ThO3Nd4c+jc927eTCYOYV9i87wQ3s7QX9g
+         gM4oteXd7fQNqEZ4XqviJ7RFBjejJgM9Z85Rs6YeLXmlaquJawaGoZNglCJzagobxWXL
+         PNh6IzvM0AaX47sndHCfGkEGT06zcmJIk1HumtzWpSVgwl4qDlcHJpPcTfVgSiawlJCK
+         8nQ3kPQdEIAr4/VK0Y/pvLGwi/31bJjkTNaNezz3wQfoUfik/dcCkg50LN670OhAON0l
+         Ld3g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1795829094; x=1796433894;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=OWNGxbponyKfeyRlTE7MEjwwreM5am00CUo8E20vsbk=;
+        b=x03WUkHvFPQp9V3778BDZBpedVGDAjJZarNvAp0GvzlTnYPlsuKD5WpjBjkpT84Tkx
+         6uD9ZJjMJ2AeJAwksuxffAHy0NYn3YnmBjN1bvUcjVA2eYoF7KUMrORkmXCSIXoKz6mA
+         eegd2ulmM9xi7mVpLhKGZwJciPSGa1b48JgyEc8wUbnqas2zw2Dd5kU4KZMi88OI5dwT
+         kElWLCpAJ4WBYeEyCCAZBIba1zB5dg5i/22i7T7uwycAzamW0lTQBrJacC0lV0bYEqqD
+         /HdWSDcJJfAwNltPsTmAoh+bMePdpALoHzfPLw/8e7gQxKqImwMYlTHrGwka/qO+jfa1
+         h0qA==
+X-Gm-Message-State: APuU4Z/eEOtAXLFWlEHdUENCscmU17m7Y8RaeETCigSFc1uN96VmytQk
+	JhV6TIgazG6o1lBh3ks0mtFLk90XbcDOFvZG9OBiOoosF6mrpBf7WPgh
+X-Gm-Gg: AZFdTZeSwkVuGxJ6oEZZKwG0HH6NHJrCU2eUqnSEDkoCFl4wBNz1h8W8y+ReD5nv0M6
+	jj7sZTl499Ev/vizyGlt/+onfuIeG2aO0dPMwhVzsSMmq87C+VS8/9Go9Z+g9iWOo+HUAmr33+r
+	ubu8sgr9Mb6PuLI4Oh5UVAyAI9OHTgsrZT+raLcZ8ooEQH42RX2wLUOUd9PdUhwog2K57JcRnsi
+	IUldCye0l+sVtoBUjL4eKpoqiRP/lzf+z5yxRtWE+Mo4x3WKWtEiSJ+w1q4Gt+IfOVzxedbft32
+	cuz1506viwsYi8dqsLD9sN0xKLtCc5zzPuutG7Qu0DZQ/FyINWWNsJ3CfcWr6w2O2rFUffVeARp
+	WBCLIPqTWzYn+xlMI8JtaJIA9Tb0jQAg1Iip3QpvYtwD/DboIkKERy9ZvswB6QoKqqb1M7b8OjD
+	OYL37kxmnSl1lBSdOpixYzgNxKJRfON91jVn7XjDEFhWXolbwuS52+ZrdAqlHQNLjfpTomoUisQ
+	EXx8Vs0cFVXlWObWX7CHP7nzlxZbecWgffT19QBYm02EdTx5ktlZOrWTlCGoV0NRfmD1puLanL2
+	/uj34Hk+Pe0HnxDBYqEiABaD6Z2+/djPv22L5hM=
+X-Received: by 2002:a05:690e:4504:10b0:67d:c165:7f0c with SMTP id 956f58d0204a3-67df44555e5mr6440765d50.54.1795829093954;
+        Fri, 27 Nov 2026 17:24:53 -0800 (PST)
+Received: from WillzDenali.tail339aa4.ts.net ([2600:1702:7a80:3c5e::c81])
+        by smtp.gmail.com with ESMTPSA id 956f58d0204a3-67df33105fesm11921499d50.7.2026.11.27.17.24.53
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 27 Nov 2026 17:24:53 -0800 (PST)
+From: turbinebmw <turbine.bmw@gmail.com>
+To: Sebastian Reichel <sre@kernel.org>,
+	linux-pm@vger.kernel.org
 Cc: linux-arm-msm@vger.kernel.org,
-	Vikash Garodia <vikash.garodia@oss.qualcomm.com>,
-	Dikshita Agarwal <dikshita.agarwal@oss.qualcomm.com>,
-	Abhinav Kumar <abhinav.kumar@linux.dev>,
-	Bryan O'Donoghue <bod@kernel.org>,
-	Mauro Carvalho Chehab <mchehab@kernel.org>,
-	Hans Verkuil <hverkuil@kernel.org>,
-	Stefan Schmidt <stefan.schmidt@linaro.org>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] media: iris: fill in a default colorspace for decoded formats
-Date: Sat, 28 Nov 2026 08:37:37 +0800
-Message-ID: <20261128003737.1300698-1-xiaqinghuan@mail.ustc.edu.cn>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
-References: <20261127152024.2149804-1-xiaqinghuan@mail.ustc.edu.cn>
+	linux-kernel@vger.kernel.org,
+	Brandon Williams <turbine.bmw@gmail.com>,
+	Val Packett <val@packett.cool>,
+	Fenglin Wu <fenglin.wu@oss.qualcomm.com>,
+	Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Subject: [PATCH] power: supply: qcom_battmgr: treat a start threshold of 0 as none
+Date: Fri, 27 Nov 2026 20:24:49 -0500
+Message-ID: <20261128012449.323479-1-turbine.bmw@gmail.com>
+X-Mailer: git-send-email 2.56.1
 X-Mailing-List: linux-arm-msm@vger.kernel.org
 List-Id: <linux-arm-msm.vger.kernel.org>
 List-Post: <mailto:linux-arm-msm@vger.kernel.org>
@@ -68,125 +98,108 @@ List-Owner: <mailto:linux-arm-msm+owner@vger.kernel.org>
 Precedence: list
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:3pYKCgAXkTVRIgprEugEAQ--.1728S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3JrW5XF1UCryxCw47GFWUtwb_yoW7GrWfpr
-	1Fk395ZF4UXr17AwsxJw4Fq3Z3ZayrWry3CrZrG3yUCFs8uw1rWryvkF13uayUJrnxA345
-	AF12yrZ8Can8A3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvKb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwV
-	C2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVAC
-	Y4xI64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJV
-	W8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IYc2Ij64vIr41lFIxGxcIEc7CjxVA2Y2ka
-	0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7
-	v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF
-	1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIx
-	AIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI
-	42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxh
-	VjvjDU0xZFpf9x07betCcUUUUU=
-X-CM-SenderInfo: 50ld1x5qjk3t3q6ptxnoox23vfohv3gofq/1tbiAREDB2sHyZtdggA7sO
 
-v4l2-compliance fails the format ioctls on the decoder because the capture
-and output colour fields are left at V4L2_COLORSPACE_DEFAULT:
+From: Brandon Williams <turbine.bmw@gmail.com>
 
-  fail: v4l2-test-formats.cpp(414): !colorspace
-  fail: v4l2-test-formats.cpp(537): testColorspace(...)
+UPower turns a charge limit off by writing 0 to
+charge_control_start_threshold and 100 to charge_control_end_threshold.
+Since commit 8809980fdc8a ("power: supply: qcom_battmgr: clamp charge
+control thresholds") the driver raises the 0 to
+CHARGE_CTRL_START_THR_MIN, so the firmware is told to charge to 100%
+but resume only below 50%. A battery that the limit had stopped at its
+end threshold, say 80%, then stays at "Not charging" until it drains
+below 50%, and turning the limit off appears to do nothing.
 
-A decoder cannot know the stream's colours before it parses a frame, but the
-format still has to round-trip a valid, self-consistent set. Default to
-BT.709 limited range and keep the value when the client passes
-V4L2_COLORSPACE_DEFAULT back on S_FMT/TRY_FMT, so G_FMT -> S_FMT stays
-idempotent. The description parsed from the bitstream is still reported
-through the source-change path once it is known.
+Disabling charge control through the request's enable bit was tried
+and reverted, as the firmware did not behave as expected with it.
+Instead, take a start threshold of 0 to mean that there is none: keep
+the end threshold and use the smallest step, CHARGE_CTRL_DELTA_SOC, so
+that charging resumes as soon as the level drops below it. The start
+sent to the firmware stays within [50, 95], as the end threshold is at
+least 55. The start is remembered as 0, so a following end threshold
+write keeps the small step, whichever order userspace writes them in.
 
-Tested on a Snapdragon 8 Elite (SM8750) tablet with vpu35 firmware:
-v4l2-compliance -d /dev/video17 loses the eight format/colour failures and
-decoding is unchanged (H.264 and HEVC both decode with framemd5 identical to
-the software decoder).
+Tested on a Microsoft Surface Pro 11 (X1E80100) with UPower 1.91.5: with
+the battery held at 80% on a 75-80 window, turning the limit off set
+95-100 and the battery charged at once; turning it back on restored
+75-80.
 
-This is v2 of 2/3 of the series. Two patches are withdrawn:
-
-- 1/3 "media: iris: report a platform bus_info prefix" is a duplicate of
-  commit 1facae9bc3c1 ("media: iris: Fix bus_info prefix in
-  VIDIOC_QUERYCAP", Vishnu Reddy, 2026-09-29, Fixes: 94ef75095d5e,
-  Cc: stable@vger.kernel.org), which is already in mainline. My tree predates
-  it, which is why I still saw the failure; sorry for the noise, please drop
-  1/3.
-
-- 3/3 "media: iris: seed the crop rectangle when only CAPTURE is formatted"
-  does not apply to mainline anymore: in v7.4-rc3 iris_vdec_s_fmt() seeds
-  inst->crop from the user format in both switch branches
-  (iris_vdec.c:271-274 and :309-312), so a CAPTURE-only S_FMT no longer
-  leaves a 0x0 crop. Dropped.
-
-AI assistance was used to prepare this change; I reviewed every line, and all
-measurements above are mine.
-
-The *_DEFAULT initialisers themselves predate this: they came with
-38fc8beaba55 ("media: iris: implement reqbuf ioctl with vb2_queue_setup"), which
-brought iris_vdec.c in.  The ioctl path that stores and returns them untouched
-is b530b95de22c, so that is the tag below.
-
-Fixes: b530b95de22c ("media: iris: implement s_fmt, g_fmt and try_fmt ioctls")
-Cc: stable@vger.kernel.org
-Signed-off-by: Qianhui Xu <xiaqinghuan@mail.ustc.edu.cn>
+Link: https://gitlab.freedesktop.org/upower/upower/-/issues/327
+Fixes: 8809980fdc8a ("power: supply: qcom_battmgr: clamp charge control thresholds")
+Cc: Val Packett <val@packett.cool>
+Cc: Fenglin Wu <fenglin.wu@oss.qualcomm.com>
+Cc: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Brandon Williams <turbine.bmw@gmail.com>
 ---
+Based on sre/linux-power-supply for-next. Hardware-tested as a backport
+to 7.3.6 (the same logic laid out with a goto, on top of a local change
+that returns the request status like ffce9bb777f2); a userspace harness
+running both versions' setters over 120000 random threshold writes gave
+identical firmware requests and sysfs values. Compile-tested with W=1.
 
- drivers/media/platform/qcom/iris/iris_vdec.c | 25 +++++++++++++++++++++----
- 1 file changed, 21 insertions(+), 4 deletions(-)
+This keeps the 50% floor Fenglin explained in the thread on Val's series
+and does not use the enable bit, whose removal is 8e8856396b54.
 
-diff --git a/drivers/media/platform/qcom/iris/iris_vdec.c b/drivers/media/platform/qcom/iris/iris_vdec.c
-index 0dd33ff447bb..2238ef1a2794 100644
---- a/drivers/media/platform/qcom/iris/iris_vdec.c
-+++ b/drivers/media/platform/qcom/iris/iris_vdec.c
-@@ -37,6 +37,10 @@ int iris_vdec_inst_init(struct iris_inst *inst)
- 	f->fmt.pix_mp.plane_fmt[0].bytesperline = 0;
- 	f->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_INPUT);
- 	f->fmt.pix_mp.field = V4L2_FIELD_NONE;
-+	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_REC709;
-+	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_709;
-+	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_709;
-+	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_LIM_RANGE;
- 	inst->buffers[BUF_INPUT].min_count = iris_vpu_buf_count(inst, BUF_INPUT);
- 	inst->buffers[BUF_INPUT].size = f->fmt.pix_mp.plane_fmt[0].sizeimage;
+ drivers/power/supply/qcom_battmgr.c | 43 +++++++++++++++++++----------
+ 1 file changed, 29 insertions(+), 14 deletions(-)
+
+diff --git a/drivers/power/supply/qcom_battmgr.c b/drivers/power/supply/qcom_battmgr.c
+index 0789303..45bd1ff 100644
+--- a/drivers/power/supply/qcom_battmgr.c
++++ b/drivers/power/supply/qcom_battmgr.c
+@@ -762,21 +762,36 @@ static int qcom_battmgr_set_charge_start_threshold(struct qcom_battmgr *battmgr,
+ 	u32 target_soc, delta_soc;
+ 	int ret;
  
-@@ -49,10 +53,10 @@ int iris_vdec_inst_init(struct iris_inst *inst)
- 	f->fmt.pix_mp.plane_fmt[0].bytesperline = ALIGN(DEFAULT_WIDTH, 128);
- 	f->fmt.pix_mp.plane_fmt[0].sizeimage = iris_get_buffer_size(inst, BUF_OUTPUT);
- 	f->fmt.pix_mp.field = V4L2_FIELD_NONE;
--	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_DEFAULT;
--	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_DEFAULT;
--	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_DEFAULT;
--	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_DEFAULT;
-+	f->fmt.pix_mp.colorspace = V4L2_COLORSPACE_REC709;
-+	f->fmt.pix_mp.xfer_func = V4L2_XFER_FUNC_709;
-+	f->fmt.pix_mp.ycbcr_enc = V4L2_YCBCR_ENC_709;
-+	f->fmt.pix_mp.quantization = V4L2_QUANTIZATION_LIM_RANGE;
- 	inst->buffers[BUF_OUTPUT].min_count = iris_vpu_buf_count(inst, BUF_OUTPUT);
- 	inst->buffers[BUF_OUTPUT].size = f->fmt.pix_mp.plane_fmt[0].sizeimage;
- 	inst->frame_rate = MAXIMUM_FPS;
-@@ -207,6 +211,19 @@ int iris_vdec_try_fmt(struct iris_inst *inst, struct v4l2_format *f)
- 	if (pixmp->field == V4L2_FIELD_ANY)
- 		pixmp->field = V4L2_FIELD_NONE;
- 
-+	/*
-+	 * A decoder cannot know the colour description of the stream before it
-+	 * has parsed a frame, but the format has to be self-consistent and
-+	 * must round-trip: keep the defaults when the client passes
-+	 * V4L2_COLORSPACE_DEFAULT back instead of clearing them.
-+	 */
-+	if (pixmp->colorspace == V4L2_COLORSPACE_DEFAULT) {
-+		pixmp->colorspace = V4L2_COLORSPACE_REC709;
-+		pixmp->xfer_func = V4L2_XFER_FUNC_709;
-+		pixmp->ycbcr_enc = V4L2_YCBCR_ENC_709;
-+		pixmp->quantization = V4L2_QUANTIZATION_LIM_RANGE;
-+	}
+-	start_soc = clamp(start_soc, CHARGE_CTRL_START_THR_MIN, CHARGE_CTRL_START_THR_MAX);
+-
+-	/*
+-	 * If the new start threshold is larger than the old end threshold,
+-	 * move the end threshold one step (DELTA_SOC) after the new start
+-	 * threshold.
+-	 */
+-	if (start_soc > battmgr->info.charge_ctrl_end) {
+-		target_soc = start_soc + CHARGE_CTRL_DELTA_SOC;
+-		target_soc = min_t(u32, target_soc, CHARGE_CTRL_END_THR_MAX);
+-		delta_soc = target_soc - start_soc;
+-		delta_soc = min_t(u32, delta_soc, CHARGE_CTRL_DELTA_SOC);
++	if (start_soc <= 0) {
++		/*
++		 * A start threshold of 0 means there is none: charging resumes
++		 * as soon as the level drops below the end threshold. Userspace
++		 * writes it, with an end threshold of 100, to turn the limit
++		 * off. Use the smallest step below the end threshold, which
++		 * keeps the start within the firmware's range, and remember 0
++		 * so that a following end threshold write keeps that step.
++		 */
++		start_soc = 0;
++		target_soc = battmgr->info.charge_ctrl_end ?: CHARGE_CTRL_END_THR_MAX;
++		delta_soc = CHARGE_CTRL_DELTA_SOC;
+ 	} else {
+-		target_soc =  battmgr->info.charge_ctrl_end;
+-		delta_soc = battmgr->info.charge_ctrl_end - start_soc;
++		start_soc = clamp(start_soc, CHARGE_CTRL_START_THR_MIN,
++				  CHARGE_CTRL_START_THR_MAX);
 +
- 	pixmp->num_planes = 1;
++		/*
++		 * If the new start threshold is larger than the old end
++		 * threshold, move the end threshold one step (DELTA_SOC)
++		 * after the new start threshold.
++		 */
++		if (start_soc > battmgr->info.charge_ctrl_end) {
++			target_soc = start_soc + CHARGE_CTRL_DELTA_SOC;
++			target_soc = min_t(u32, target_soc, CHARGE_CTRL_END_THR_MAX);
++			delta_soc = target_soc - start_soc;
++			delta_soc = min_t(u32, delta_soc, CHARGE_CTRL_DELTA_SOC);
++		} else {
++			target_soc =  battmgr->info.charge_ctrl_end;
++			delta_soc = battmgr->info.charge_ctrl_end - start_soc;
++		}
+ 	}
  
- 	return 0;
-
+ 	mutex_lock(&battmgr->lock);
+base-commit: 4f9bf356cbfb8aa6e73b1d05e182445723a4bb49
 -- 
-2.53.0
+2.56.1
 
